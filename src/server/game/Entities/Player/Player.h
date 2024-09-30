@@ -1729,6 +1729,7 @@ class Player : public Unit, public GridObject<Player>
         Item* EquipNewItem(uint16 pos, uint32 item, bool update, int32 randomPropertyId = 0, std::vector<uint32> const& bonusListIDs = std::vector<uint32>(), uint32 context = 0, bool isRefunde = false);
         Item* EquipItem(uint16 pos, Item* pItem, bool update);
         void AutoUnequipOffhandIfNeed(bool force = false);
+        void UpdateTitansGrip();
         void EquipChildItem(uint8 parentBag, uint8 parentSlot, Item* parentItem);
         void AutoUnequipChildItem(Item* parentItem);
         bool StoreNewItemInBestSlots(uint32 item_id, uint32 item_count, bool not_loading = true, std::vector<uint32> const& bonusListIDs = std::vector<uint32>());
