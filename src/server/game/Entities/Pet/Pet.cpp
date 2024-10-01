@@ -739,6 +739,7 @@ void Pet::GivePetLevel(uint8 level)
     }
 
     InitStatsForLevel(level);
+    InitLevelupSpellsForLevel();
 }
 
 bool Pet::CreateBaseAtCreature(Creature* creature)

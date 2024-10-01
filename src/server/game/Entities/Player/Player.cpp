@@ -3908,7 +3908,7 @@ void Player::GiveLevel(uint8 level)
     SetCreateHealth(0);
     SetCreateMana(basemana);
 
-    InitTalentForLevel();
+    //InitTalentForLevel();
     InitTaxiNodesForLevel();
 
     LearnSpecializationSpells();
