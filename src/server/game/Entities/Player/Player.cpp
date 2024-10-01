@@ -13040,7 +13040,6 @@ Item* Player::GetWeaponForAttack(WeaponAttackType attackType, bool useable /*= f
         item = GetUseableItemByPos(INVENTORY_SLOT_BAG_0, slot);
     else
         item = GetItemByPos(INVENTORY_SLOT_BAG_0, slot);
-
     if (!item || item->GetTemplate()->GetClass() != ITEM_CLASS_WEAPON)
         return NULL;
 
@@ -30116,7 +30115,7 @@ void Player::LearnDefaultSkills()
         learnSpell(68976, true);
         learnSpell(68978, true);
         learnSpell(68992, true);
-        learnSpell(68996, true);// Check this for worgen!!
+        learnSpell(68996, true);
         learnSpell(94293, true);
     }
 }
@@ -30912,34 +30911,21 @@ void Player::AddItemDurations(Item* item)
     }
 }
 
-// Fix offhand being unequipped!!
 void Player::AutoUnequipOffhandIfNeed(bool force /*= false*/)
 {
     Item* offItem = GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
     if (!offItem)
-    {
-        UpdateTitansGrip();
         return;
-    }
 
      // unequip offhand weapon if player doesn't have dual wield anymore
-    if (!CanDualWield() && (offItem->GetTemplate()->GetInventoryType() == INVTYPE_WEAPONOFFHAND || offItem->GetTemplate()->GetInventoryType() == INVTYPE_WEAPON))
+    if (!CanDualWield()
+        && ((offItem->GetTemplate()->GetInventoryType() == INVTYPE_WEAPONOFFHAND && !(offItem->GetTemplate()->GetFlags3() & ITEM_FLAG3_ALWAYS_ALLOW_DUAL_WIELD))
+            || offItem->GetTemplate()->GetInventoryType() == INVTYPE_WEAPON))
         force = true;
-
-    // unequip offhand weapon if player main hand weapon is a polearm or staff or fishing pole
-    if (Item* mhWeapon = GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND))
-        if (ItemTemplate const* mhWeaponProto = mhWeapon->GetTemplate())
-            if (mhWeaponProto->GetSubClass() == ITEM_SUBCLASS_WEAPON_POLEARM ||
-                mhWeaponProto->GetSubClass() == ITEM_SUBCLASS_WEAPON_STAFF ||
-                mhWeaponProto->GetSubClass() == ITEM_SUBCLASS_WEAPON_FISHING_POLE)
-                force = true;
 
     // need unequip offhand for 2h-weapon without TitanGrip (in any from hands)
      if (!force && (CanTitanGrip() || (offItem->GetTemplate()->GetInventoryType() != INVTYPE_2HWEAPON && !IsTwoHandUsed())))
-     {
-         UpdateTitansGrip();
-         return;
-     }
+        return;
 
     ItemPosCountVec off_dest;
     uint8 off_msg = CanStoreItem(NULL_BAG, NULL_SLOT, off_dest, offItem, false);
@@ -30960,16 +30946,6 @@ void Player::AutoUnequipOffhandIfNeed(bool force /*= false*/)
 
         CharacterDatabase.CommitTransaction(trans);
     }
-    UpdateTitansGrip();
-}
-
-void Player::UpdateTitansGrip()
-{
-    // 10% damage reduce if 2x2h weapons are used
-    if (!CanTitanGrip())
-        RemoveAurasDueToSpell(49152);
-    else if (Aura* aur = GetAura(49152))
-        aur->RecalculateAmountOfEffects();
 }
 
 bool Player::HasItemFitToSpellRequirements(SpellInfo const* spellInfo, Item const* ignoreItem) const
