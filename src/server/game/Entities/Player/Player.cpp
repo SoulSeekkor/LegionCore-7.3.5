@@ -3861,10 +3861,10 @@ void Player::GiveLevel(uint8 level)
     if (level == oldLevel)
         return;
 
-    /*for (uint8 i = 0; i < INVENTORY_SLOT_BAG_END; ++i)
+    for (uint8 i = 0; i < INVENTORY_SLOT_BAG_END; ++i)
         if (Item* item = m_items[i])
             if (CanUseAttackType(GetAttackBySlot(i)))
-                _ApplyItemMods(item, i, false);*/
+                _ApplyItemMods(item, i, false);
 
     PlayerLevelInfo info;
     sObjectMgr->GetPlayerLevelInfo(getRace(), getClass(), level, &info);
@@ -12487,7 +12487,7 @@ uint8 Player::FindEquipSlot(ItemTemplate const* proto, uint32 slot, bool swap) c
 
             // suggest offhand slot only if know dual wielding
             // (this will be replace mainhand weapon at auto equip instead unwonted "you don't known dual wielding" ...
-            if (CanDualWield() || proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_WARGLAIVES || proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_FIST_WEAPON)
+            if (CanDualWield() || proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_WARGLAIVES)
                 slots[1] = EQUIPMENT_SLOT_OFFHAND;
             break;
         }
@@ -12547,7 +12547,7 @@ uint8 Player::FindEquipSlot(ItemTemplate const* proto, uint32 slot, bool swap) c
             break;
         case INVTYPE_WEAPONMAINHAND:
             slots[0] = EQUIPMENT_SLOT_MAINHAND;
-            if (proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_WARGLAIVES || proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_FIST_WEAPON)
+            if (proto->GetSubClass() == ITEM_SUBCLASS_WEAPON_WARGLAIVES)
                 slots[1] = EQUIPMENT_SLOT_OFFHAND;
             break;
         case INVTYPE_WEAPONOFFHAND:
