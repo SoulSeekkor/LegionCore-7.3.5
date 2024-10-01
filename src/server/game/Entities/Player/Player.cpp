@@ -3897,9 +3897,9 @@ void Player::GiveLevel(uint8 level)
   
     SetLevel(level);
     
-    UpdateSkillsForLevel();
-    LearnDefaultSkills();
-    LearnDefaultSpells();
+    //UpdateSkillsForLevel();
+    //LearnDefaultSkills();
+    //LearnDefaultSpells();
 
     // save base values (bonuses already included in stored stats
     for (uint8 i = STAT_STRENGTH; i < MAX_STATS; ++i)
