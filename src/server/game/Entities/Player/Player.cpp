@@ -3972,15 +3972,9 @@ void Player::GiveLevel(uint8 level)
 
 void Player::InitTalentForLevel()
 {
-    uint8 level = getLevel();
-    if (level < 10)
-        ResetTalentSpecialization();
-
     uint8 talentPointsForLevel = CalculateTalentsPoints();
 
-    if (level < 15)
-        ResetTalents(true);
-    else
+    if (talentPointsForLevel > 0)
     {
         for (uint8 t = talentPointsForLevel; t < MAX_TALENT_TIERS; ++t)
             for (uint8 c = 0; c < MAX_TALENT_COLUMNS; ++c)
