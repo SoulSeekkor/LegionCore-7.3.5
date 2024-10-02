@@ -11726,7 +11726,7 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
         m_session->DoLootRelease(lguid);
 
     Loot* loot = NULL;
-    Loot* lootPesonal = NULL;
+    Loot* lootPersonal = NULL;
     PermissionTypes permission = ALL_PERMISSION;
     ItemQualities groupThreshold = ITEM_QUALITY_POOR;
 
@@ -11747,7 +11747,7 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
         if (go->GetGOInfo()->type == GAMEOBJECT_TYPE_GARRISON_SHIPMENT)
             return;
 
-        lootPesonal = &personalLoot[guid];
+        lootPersonal = &personalLoot[guid];
         loot = &go->loot;
 
         bool personal = go->IsPersonal();
@@ -11770,23 +11770,23 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
             {
                 if(personal)
                 {
-                    TC_LOG_DEBUG(LOG_FILTER_LOOT, "Player::SendLoot DungeonEncounter %i dungeonEncounterID %i", go->GetGOInfo()->chest.DungeonEncounter, lootPesonal->dungeonEncounterID);
+                    TC_LOG_DEBUG(LOG_FILTER_LOOT, "Player::SendLoot DungeonEncounter %i dungeonEncounterID %i", go->GetGOInfo()->chest.DungeonEncounter, lootPersonal->dungeonEncounterID);
 
-                    if (!lootPesonal->dungeonEncounterID) // This loot generate in Unit::GeneratePersonalLoot
+                    if (!lootPersonal->dungeonEncounterID) // This loot generate in Unit::GeneratePersonalLoot
                     {
-                        lootPesonal->clear();
-                        lootPesonal->personal = true;
-                        lootPesonal->objType = 3;
+                        lootPersonal->clear();
+                        lootPersonal->personal = true;
+                        lootPersonal->objType = 3;
                         if(PersonalLootData const* plData = sObjectMgr->GetPersonalLootData(go->GetEntry()))
                         {
-                            lootPesonal->chance = plData->chance;
-                            lootPesonal->isBoss = true;
+                            lootPersonal->chance = plData->chance;
+                            lootPersonal->isBoss = true;
                         }
-                        lootPesonal->FillLoot(lootid, LootTemplates_Gameobject, this, true, false, go);
+                        lootPersonal->FillLoot(lootid, LootTemplates_Gameobject, this, true, false, go);
 
                         uint32 mingold = go->GetGOInfo()->MinGold;
                         uint32 maxgold = go->GetGOInfo()->MaxGold;
-                        lootPesonal->generateMoneyLoot(mingold, maxgold, GetMap()->IsDungeon());
+                        lootPersonal->generateMoneyLoot(mingold, maxgold, GetMap()->IsDungeon());
                     }
                 }
                 else
@@ -11992,7 +11992,7 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
             return;
         }
 
-        lootPesonal = &personalLoot[guid];
+        lootPersonal = &personalLoot[guid];
         loot = &creature->loot;
 
         if (loot_type == LOOT_PICKPOCKETING)
@@ -12010,8 +12010,8 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
                     // Generate extra money for pick pocket loot
                     const uint32 a = urand(0, creature->getLevelForTarget(this)/2);
                     const uint32 b = urand(0, getLevelForTarget(creature)/2);
-                    lootPesonal->gold = uint32(10 * (a + b) * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1)  ? 1.0f : sWorld->getRate(RATE_DROP_MONEY)));
-                    sLootMgr->AddLoot(lootPesonal);
+                    lootPersonal->gold = uint32(10 * (a + b) * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1)  ? 1.0f : sWorld->getRate(RATE_DROP_MONEY)));
+                    sLootMgr->AddLoot(lootPersonal);
                 }
                 permission = OWNER_PERMISSION;
             }
@@ -12176,16 +12176,16 @@ void Player::SendLoot(ObjectGuid guid, LootType loot_type, bool AoeLoot, uint8 p
             SendDirectMessage(WorldPackets::Loot::NullSMsg(SMSG_AE_LOOT_TARGET_ACK).Write());
 
         // Personal loot
-        if (lootPesonal)
+        if (lootPersonal)
         {
             WorldPackets::Loot::LootResponse packetPers;
-            packetPers.LootObj = lootPesonal->GetGUID();
+            packetPers.LootObj = lootPersonal->GetGUID();
             packetPers.AcquireReason = loot_type;
             packetPers.Owner = guid;
             packetPers.AELooting = true;
-            lootPesonal->BuildLootResponse(packetPers, this, ALL_PERMISSION, groupThreshold);
+            lootPersonal->BuildLootResponse(packetPers, this, ALL_PERMISSION, groupThreshold);
             SendDirectMessage(packetPers.Write());
-            lootPesonal->isOpen = true;
+            lootPersonal->isOpen = true;
             SendDirectMessage(WorldPackets::Loot::NullSMsg(SMSG_AE_LOOT_TARGET_ACK).Write());
         }
     }
