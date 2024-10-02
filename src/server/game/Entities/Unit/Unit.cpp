@@ -973,6 +973,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
         // Signal to pets that their owner was attacked
         Pet* pet = victim->ToPlayer()->GetPet();
 
+        // TODO Might need to fix here if pet is passive it should NOT attack!
         if (pet && pet->isAlive())
             pet->AI()->OwnerDamagedBy(this);
     }

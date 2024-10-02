@@ -22511,6 +22511,7 @@ bool Player::LoadFromDB(ObjectGuid guid, SQLQueryHolder *holder)
 
 bool Player::isAllowedToLoot(const Creature* creature)
 {
+    // TODO Fix IsDamageEnoughForLootingAndReward() check!
     if (!creature->isDead() || !creature->IsDamageEnoughForLootingAndReward())
         return false;
 
