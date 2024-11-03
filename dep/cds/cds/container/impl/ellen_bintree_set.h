@@ -85,7 +85,7 @@ namespace cds { namespace container {
         @anchor cds_container_EllenBinTreeSet_less
         <b>Predicate requirements</b>
 
-        \p Traits::less, \p Traits::compare and other predicates using with member fuctions should accept at least parameters
+        \p Traits::less, \p Traits::compare and other predicates using with member functions should accept at least parameters
         of type \p T and \p Key in any combination.
         For example, for \p Foo struct with \p std::string key field the appropiate \p less functor is:
         \code

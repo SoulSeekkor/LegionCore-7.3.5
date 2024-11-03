@@ -78,7 +78,7 @@ namespace cds { namespace container {
         @anchor cds_container_EllenBinTreeSet_rcu_less
         <b>Predicate requirements</b>
 
-        opt::less, opt::compare and other predicates using with member fuctions should accept at least parameters
+        opt::less, opt::compare and other predicates using with member functions should accept at least parameters
         of type \p T and \p Key in any combination.
         For example, for \p Foo struct with \p std::string key field the appropiate \p less functor is:
         \code
