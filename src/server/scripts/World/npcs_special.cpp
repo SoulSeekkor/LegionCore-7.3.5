@@ -5002,9 +5002,14 @@ class npc_riggle_bassbait : public CreatureScript
         QuestMenu& questMenu = pPlayer->PlayerTalkClass->GetQuestMenu();
 
         if (pCreature->AI()->GetData(DATA_CHECK) < QuestMaxCount)
+        {
             questMenu.AddMenuItem(QUEST_ID, 4);
-
-        pPlayer->SEND_GOSSIP_MENU(6421, pCreature->GetGUID());
+            pPlayer->SEND_GOSSIP_MENU(7614, pCreature->GetGUID());
+        }
+        else
+        {
+            pPlayer->SEND_GOSSIP_MENU(7714, pCreature->GetGUID());
+        }
 
         return true;
     }
