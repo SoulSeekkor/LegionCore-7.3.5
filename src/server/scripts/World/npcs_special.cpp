@@ -4989,7 +4989,11 @@ enum MiscData
     
     DATA_CHECK          = 0,
     
-    QuestMaxCount       = 50
+    QuestMaxCount       = 50,
+
+    GOSSIP_EVENT_ACTIVE = 7614,
+
+    GOSSIP_EVENT_OVER   = 7714
 };
 
 class npc_riggle_bassbait : public CreatureScript
@@ -4999,16 +5003,17 @@ class npc_riggle_bassbait : public CreatureScript
 
     bool OnGossipHello(Player* pPlayer, Creature* pCreature) override
     {
-        QuestMenu& questMenu = pPlayer->PlayerTalkClass->GetQuestMenu();
+        //QuestMenu& questMenu = pPlayer->PlayerTalkClass->GetQuestMenu();
+        if (pCreature->isQuestGiver())
+            pPlayer->PrepareQuestMenu(pCreature->GetGUID());
 
         if (pCreature->AI()->GetData(DATA_CHECK) < QuestMaxCount)
         {
-            questMenu.AddMenuItem(QUEST_ID, 4);
-            pPlayer->SEND_GOSSIP_MENU(7614, pCreature->GetGUID());
+            pPlayer->SEND_GOSSIP_MENU(GOSSIP_EVENT_ACTIVE, pCreature->GetGUID());
         }
         else
         {
-            pPlayer->SEND_GOSSIP_MENU(7714, pCreature->GetGUID());
+            pPlayer->SEND_GOSSIP_MENU(GOSSIP_EVENT_OVER, pCreature->GetGUID());
         }
 
         return true;
@@ -5018,17 +5023,17 @@ class npc_riggle_bassbait : public CreatureScript
     {
         npc_riggle_bassbaitAI(Creature* creature) : ScriptedAI(creature) 
         {
-            count = 0;
+            RewardedCount = 0;
             StartEvent = true;
         }
 
-        uint32 count;
+        uint32 RewardedCount;
         bool StartEvent;
 
         uint32 GetData(uint32 type) const override
         {
             if (type == DATA_CHECK)
-                return count;
+                return RewardedCount;
             return 0;
         }
 
@@ -5043,14 +5048,17 @@ class npc_riggle_bassbait : public CreatureScript
 
         void OnQuestReward(Player* player, Quest const* quest) override
         {
-            ++count;
-            // player->CreateConversation(3904);
-            // me->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER);
+            ++RewardedCount;
+
+            if (RewardedCount >= QuestMaxCount)
+                me->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER);
+
+            //player->CreateConversation(3904);
         }
 
         void OnStartQuest(Player* player, Quest const* /*quest*/) override
         {
-            player->CreateConversation(3904);
+            //player->CreateConversation(3904);
         }
     };
 
