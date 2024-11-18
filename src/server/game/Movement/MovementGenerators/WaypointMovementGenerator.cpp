@@ -309,10 +309,10 @@ bool WaypointMovementGenerator<Creature>::GetResetPos(Creature&, float& x, float
     return true;
 }
 
-void WaypointMovementGenerator<Creature>::Pause(uint32 /*timer*/)
+void WaypointMovementGenerator<Creature>::Pause(uint32 timer)
 {
     stalled = true;
-    i_nextMoveTime.Reset(1);
+    i_nextMoveTime.Reset(timer);
 }
 
 void WaypointMovementGenerator<Creature>::Resume(uint32 /*overrideTimer/*/)
