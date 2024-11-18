@@ -49,6 +49,7 @@
 #include "MovementPackets.h"
 #include "MoveSpline.h"
 #include "MoveSplineInit.h"
+#include "MovementGenerator.h"
 #include "ObjectAccessor.h"
 #include "ObjectMgr.h"
 #include "ObjectVisitors.hpp"
@@ -18523,6 +18524,26 @@ void Unit::StopMoving()
     // Update position using old spline
     UpdateSplinePosition(true);
     Movement::MoveSplineInit(*this).Stop();
+}
+
+void Unit::PauseMovement(uint32 timer /* = 0*/, uint8 slot /* = 0*/)
+{
+    if (slot >= MAX_MOTION_SLOT)
+        return;
+
+    if (MovementGenerator* movementGenerator = GetMotionMaster()->GetMotionSlot(slot))
+        movementGenerator->Pause(timer);
+
+    StopMoving();
+}
+
+void Unit::ResumeMovement(uint32 timer /* = 0*/, uint8 slot /* = 0*/)
+{
+    if (slot >= MAX_MOTION_SLOT)
+        return;
+
+    if (MovementGenerator* movementGenerator = GetMotionMaster()->GetMotionSlot(slot))
+        movementGenerator->Resume(timer);
 }
 
 void Unit::SendMovementFlagUpdate(bool self /*= false*/)

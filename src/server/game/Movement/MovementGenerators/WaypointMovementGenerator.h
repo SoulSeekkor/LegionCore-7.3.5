@@ -55,8 +55,8 @@ class WaypointMovementGenerator<Creature> : public MovementGeneratorMedium< Crea
     public PathMovementBase<Creature, WaypointPath const*>
 {
     public:
-        WaypointMovementGenerator(uint32 _path_id = 0, bool _repeating = true, float _randomMoveX = 0, float _randomMoveY = 0, bool _forceTPToStart = false)
-            : i_nextMoveTime(0), m_isArrivalDone(false), path_id(_path_id), repeating(_repeating), goBack(false), randomMoveX(_randomMoveX), randomMoveY(_randomMoveY), forceTPToStart(_forceTPToStart)  { }
+        WaypointMovementGenerator(uint32 _path_id = 0, bool _repeating = true, bool _stalled = false, float _randomMoveX = 0, float _randomMoveY = 0, bool _forceTPToStart = false)
+            : i_nextMoveTime(0), m_isArrivalDone(false), path_id(_path_id), repeating(_repeating), stalled(_stalled), goBack(false), randomMoveX(_randomMoveX), randomMoveY(_randomMoveY), forceTPToStart(_forceTPToStart)  { }
         ~WaypointMovementGenerator() { i_path = nullptr; }
         void DoInitialize(Creature &);
         void DoFinalize(Creature &);
@@ -97,6 +97,7 @@ class WaypointMovementGenerator<Creature> : public MovementGeneratorMedium< Crea
         bool m_isArrivalDone;
         uint32 path_id;
         bool repeating;
+        bool stalled;
         bool goBack;
         float randomMoveX;
         float randomMoveY;

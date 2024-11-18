@@ -67,6 +67,10 @@ void WaypointMovementGenerator<Creature>::DoFinalize(Creature &creature)
 
 void WaypointMovementGenerator<Creature>::DoReset(Creature &creature)
 {
+    if (stalled)
+    {
+        return;
+    }
     creature.AddUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
     StartMoveNow(creature);
 }
@@ -247,6 +251,11 @@ bool WaypointMovementGenerator<Creature>::DoUpdate(Creature &creature, const uin
 {
     // Waypoint movement can be switched on/off
     // This is quite handy for escort quests and other stuff
+    if (stalled)
+    {
+        Stop(1000);
+        return true;
+    }
     if (creature.HasUnitState(UNIT_STATE_NOT_MOVE))
     {
         creature.ClearUnitState(UNIT_STATE_ROAMING_MOVE);
@@ -298,6 +307,17 @@ bool WaypointMovementGenerator<Creature>::GetResetPos(Creature&, float& x, float
     const WaypointData* node = i_path->at(i_currentNode);
     x = node->x; y = node->y; z = node->z;
     return true;
+}
+
+void WaypointMovementGenerator<Creature>::Pause(uint32 /*timer*/)
+{
+    stalled = true;
+    i_nextMoveTime.Reset(1);
+}
+
+void WaypointMovementGenerator<Creature>::Resume(uint32 /*overrideTimer/*/)
+{
+    stalled = false;
 }
 
 

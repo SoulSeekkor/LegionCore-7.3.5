@@ -1561,6 +1561,8 @@ class Unit : public WorldObject
         bool SetHover(bool enable);
         bool SetCollision(bool disable);
 
+        MotionMaster* GetMotionMaster() { return i_motionMaster; }
+
         void SetInFront(Unit const* target);
         void SetFacingTo(float ori);
         void SetFacingTo(Unit const* target);
@@ -2193,6 +2195,8 @@ class Unit : public WorldObject
 
         bool IsStopped() const { return !(HasUnitState(UNIT_STATE_MOVING)); }
         void StopMoving();
+        virtual void PauseMovement(uint32 timer = 0, uint8 slot = 0); // timer in ms
+        void ResumeMovement(uint32 timer = 0, uint8 slot = 0);
 
         void AddUnitMovementFlag(uint32 f) { m_movementInfo.AddMovementFlag(f); }
         void RemoveUnitMovementFlag(uint32 f) { m_movementInfo.RemoveMovementFlag(f); }

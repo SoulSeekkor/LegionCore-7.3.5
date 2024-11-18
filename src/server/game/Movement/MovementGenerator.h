@@ -42,6 +42,11 @@ class MovementGenerator
 
         virtual void unitSpeedChanged() { }
 
+        // timer in ms
+        virtual void Pause(uint32 /* timer = 0*/) {}
+        // timer in ms
+        virtual void Resume(uint32 /* overrideTimer = 0*/) {}
+
         // used by Evade code for select point to evade with expected restart default movement
         virtual bool GetResetPosition(Unit &, float& /*x*/, float& /*y*/, float& /*z*/) { return false; }
 };

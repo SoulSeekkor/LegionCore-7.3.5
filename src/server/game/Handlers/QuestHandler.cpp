@@ -84,8 +84,10 @@ void WorldSession::HandleQuestGiverHello(WorldPackets::Quest::QuestGiverHello& p
     // remove fake death
     if (GetPlayer()->HasUnitState(UNIT_STATE_DIED))
         GetPlayer()->RemoveAurasByType(SPELL_AURA_FEIGN_DEATH);
+
     // Stop the npc if moving
-    creature->StopMoving();
+    creature->PauseMovement(13000);
+    creature->SetHomePosition(creature->GetPosition());
 
     if (sScriptMgr->OnGossipHello(_player, creature))
         return;
@@ -713,7 +715,7 @@ uint32 WorldSession::getDialogStatus(Player* player, Object* questgiver, uint32 
             break;
         }
         default:
-            //its imposible, but check ^)
+            // it's imposible, but check
             TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Warning: GetDialogStatus called for unexpected type %u", questgiver->GetTypeId());
             return DIALOG_STATUS_NONE;
     }
