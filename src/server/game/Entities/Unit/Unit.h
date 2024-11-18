@@ -1561,8 +1561,6 @@ class Unit : public WorldObject
         bool SetHover(bool enable);
         bool SetCollision(bool disable);
 
-        MotionMaster* GetMotionMaster() { return i_motionMaster; }
-
         void SetInFront(Unit const* target);
         void SetFacingTo(float ori);
         void SetFacingTo(Unit const* target);
