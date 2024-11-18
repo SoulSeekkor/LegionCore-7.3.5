@@ -62,6 +62,8 @@ class WaypointMovementGenerator<Creature> : public MovementGeneratorMedium< Crea
         void DoFinalize(Creature &);
         void DoReset(Creature &);
         bool DoUpdate(Creature &, const uint32 &diff);
+        void Pause(uint32 timer/* = 0*/);
+        void Resume(uint32 overrideTimer/* = 0*/);
 
         void MovementInform(Creature &);
 
