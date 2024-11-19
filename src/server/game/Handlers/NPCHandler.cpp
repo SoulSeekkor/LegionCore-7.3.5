@@ -296,6 +296,7 @@ void WorldSession::HandleGossipHelloOpcode(WorldPackets::NPC::Hello& packet)
 
     player->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_TALK);
 
+    // Check here?
     if (unit->isArmorer() || unit->isCivilian() || unit->isQuestGiver() || unit->isServiceProvider() || unit->isGuard())
         unit->StopMoving();
 
