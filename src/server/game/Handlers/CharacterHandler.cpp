@@ -760,7 +760,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         if (Guild* guild = sGuildMgr->GetGuildById(pCurrChar->GetGuildId()))
             pCurrChar->SetGuildLevel(guild->GetLevel());
     }
-    else if (pCurrChar->GetGuildId())                        // clear guild related fields in case wrong data about non existed membership
+    else if (pCurrChar->GetGuildId())                        // clear guild related fields in case wrong data about non-existent membership
     {
         pCurrChar->SetInGuild(UI64LIT(0));
         pCurrChar->SetRank(0);

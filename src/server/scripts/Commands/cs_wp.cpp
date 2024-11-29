@@ -405,7 +405,7 @@ public:
                 handler->PSendSysMessage("%s%s%u|r", "|cff00ff00", "Wp Event: Waypoint script removed: ", id);
             }
             else
-                handler->PSendSysMessage("|cffff33ffWp Event: ERROR: you have selected a non existing script: %u|r", id);
+                handler->PSendSysMessage("|cffff33ffWp Event: ERROR: you have selected a non-existent script: %u|r", id);
 
             return true;
         }
@@ -474,7 +474,7 @@ public:
 
             if (!result)
             {
-                handler->SendSysMessage("|cffff33ffERROR: You have selected an non existing waypoint script guid.|r");
+                handler->SendSysMessage("|cffff33ffERROR: You have selected an non-existent waypoint script guid.|r");
                 return true;
             }
 

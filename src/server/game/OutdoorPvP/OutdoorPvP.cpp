@@ -920,7 +920,7 @@ OutdoorGraveyard* OutdoorPvP::GetGraveyardById(uint32 id)
     {
         if (m_GraveyardList[id])
             return m_GraveyardList[id];
-        TC_LOG_TRACE(LOG_FILTER_BATTLEFIELD, "OutdoorPvP::GetGraveyardById Id:%u not existed", id);
+        TC_LOG_TRACE(LOG_FILTER_BATTLEFIELD, "OutdoorPvP::GetGraveyardById Id:%u non-existent", id);
     }
     else
         TC_LOG_TRACE(LOG_FILTER_BATTLEFIELD, "OutdoorPvP::GetGraveyardById Id:%u cant be found", id);

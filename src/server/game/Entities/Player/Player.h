@@ -1922,7 +1922,13 @@ class Player : public Unit, public GridObject<Player>
         {
             if (!quest)
                  return getLevel();
-            return quest->Level > 0 ? quest->Level : std::min<int32>(getLevel(), quest->MaxScalingLevel);
+
+            uint32 questLevel = quest->GetScaledQuestLevel(getLevel(), GetZoneId());
+
+            if (questLevel == 0)
+                questLevel = quest->Level > 0 ? quest->Level : std::min<int32>(getLevel(), quest->MaxScalingLevel);
+
+            return questLevel;
         }
 
         void PrepareAreaQuest(uint32 area);

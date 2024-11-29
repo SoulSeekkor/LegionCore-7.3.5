@@ -238,7 +238,7 @@ void BattlegroundEyeOfTheStorm::_CheckSomeoneLeftPoint()
                 if (!player)
                 {
                     TC_LOG_ERROR(LOG_FILTER_BATTLEGROUND, "BattlegroundEyeOfTheStorm:_CheckSomeoneLeftPoint Player (GUID: %u) not found!", _playersNearPoint[i][j].GetCounter());
-                    //move not existed player to "free space" - this will cause many error showing in log, but it is a very important bug
+                    //move non-existent player to "free space" - this will cause many error showing in log, but it is a very important bug
                     _playersNearPoint[EY_POINTS_MAX].push_back(_playersNearPoint[i][j]);
                     _playersNearPoint[i].erase(_playersNearPoint[i].begin() + j);
                     continue;

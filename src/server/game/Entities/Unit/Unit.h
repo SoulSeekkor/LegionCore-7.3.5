@@ -412,12 +412,12 @@ enum TriggerCastFlags
 
 enum UnitMods
 {
-    UNIT_MOD_STAT_STRENGTH,                                 // UNIT_MOD_STAT_STRENGTH..UNIT_MOD_STAT_INTELLECT must be in existed order, it's accessed by index values of Stats enum.
+    UNIT_MOD_STAT_STRENGTH,                                 // UNIT_MOD_STAT_STRENGTH..UNIT_MOD_STAT_INTELLECT must be in existing order, it's accessed by index values of Stats enum.
     UNIT_MOD_STAT_AGILITY,
     UNIT_MOD_STAT_STAMINA,
     UNIT_MOD_STAT_INTELLECT,
     UNIT_MOD_HEALTH,
-    UNIT_MOD_MANA,                                          // UNIT_MOD_MANA..UNIT_MOD_RUNIC_POWER must be in existed order, it's accessed by index values of Powers enum.
+    UNIT_MOD_MANA,                                          // UNIT_MOD_MANA..UNIT_MOD_RUNIC_POWER must be in existing order, it's accessed by index values of Powers enum.
     UNIT_MOD_RAGE,
     UNIT_MOD_FOCUS,
     UNIT_MOD_ENERGY,
@@ -437,7 +437,7 @@ enum UnitMods
     UNIT_MOD_FURY,
     UNIT_MOD_PAIN,
     UNIT_MOD_MAX_POWERS,
-    UNIT_MOD_ARMOR,                                         // UNIT_MOD_ARMOR..UNIT_MOD_RESISTANCE_ARCANE must be in existed order, it's accessed by index values of SpellSchools enum.
+    UNIT_MOD_ARMOR,                                         // UNIT_MOD_ARMOR..UNIT_MOD_RESISTANCE_ARCANE must be in existing order, it's accessed by index values of SpellSchools enum.
     UNIT_MOD_RESISTANCE_HOLY,
     UNIT_MOD_RESISTANCE_FIRE,
     UNIT_MOD_RESISTANCE_NATURE,
@@ -1216,6 +1216,9 @@ class Unit : public WorldObject
         bool isAnySummons() const;
         bool CanVehicleAI() const;
 
+        uint8 GetMinLevel() const;
+        uint8 GetMaxLevel() const;
+        bool HasLevelScaling() const;
         uint8 getLevel() const;
         uint8 GetEffectiveLevel() const;
         uint8 getLevelForTarget(WorldObject const* target) const override;
@@ -2460,6 +2463,11 @@ class Unit : public WorldObject
         uint32 _castCount;
         uint32 _eventCount;
         uint32 _functionCount;
+
+
+        // Loaded from reference_zone_level table
+        uint8 _minZoneLevel;
+        uint8 _maxZoneLevel;
 
     protected:
         explicit Unit (bool isWorldObject);

@@ -429,7 +429,7 @@ void PoolGroup<GameObject>::Spawn1Object(PoolObject* obj)
         
         sObjectMgr->AddGameobjectToGrid(obj->guid, data);
         // Spawn if necessary (loaded grids only)
-        // this base map checked as non-instanced and then only existed
+        // this base map checked as non-instanced and then only existing
         Map* map = sMapMgr->CreateBaseMap(data->mapid);
         // We use current coords to unspawn, not spawn coords since creature can have changed grid
         if (!map->Instanceable() && map->IsGridLoaded(data->posX, data->posY))
@@ -648,7 +648,7 @@ void PoolMgr::LoadFromDB()
                 CreatureData const* data = sObjectMgr->GetCreatureData(guid);
                 if (!data)
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_creature` has a non existing creature spawn (GUID: " UI64FMTD ") defined for pool id (%u), skipped.", guid, pool_id);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_creature` has a non-existent creature spawn (GUID: " UI64FMTD ") defined for pool id (%u), skipped.", guid, pool_id);
                     continue;
                 }
                 auto it = mPoolTemplate.find(pool_id);
@@ -705,7 +705,7 @@ void PoolMgr::LoadFromDB()
                 GameObjectData const* data = sObjectMgr->GetGOData(guid);
                 if (!data)
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_gameobject` has a non existing gameobject spawn (GUID: " UI64FMTD ") defined for pool id (%u), skipped.", guid, pool_id);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_gameobject` has a non-existent gameobject spawn (GUID: " UI64FMTD ") defined for pool id (%u), skipped.", guid, pool_id);
                     //WorldDatabase.PExecute("delete from `pool_gameobject` WHERE `guid` = " UI64FMTD "", guid);
                     continue;
                 }
@@ -871,7 +871,7 @@ void PoolMgr::LoadFromDB()
                 Quest const* quest = sQuestDataStore->GetQuestTemplate(entry);
                 if (!quest)
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_quest` has a non existing quest template (Entry: %u) defined for pool id (%u), skipped.", entry, pool_id);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "`pool_quest` has a non-existent quest template (Entry: %u) defined for pool id (%u), skipped.", entry, pool_id);
                     continue;
                 }
 

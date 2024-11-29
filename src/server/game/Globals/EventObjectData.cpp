@@ -152,7 +152,7 @@ void EventObjectDataStoreMgr::LoadEventObjects()
 
         if (!sMapStore.LookupEntry(data.mapid))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadEventObjects >> Table `eventobject` have eventobject (GUID: " UI64FMTD ") that spawned at not existed map (Id: %u), skipped.", guid, data.mapid);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadEventObjects >> Table `eventobject` have eventobject (GUID: " UI64FMTD ") that spawned at non-existent map (Id: %u), skipped.", guid, data.mapid);
             continue;
         }
 

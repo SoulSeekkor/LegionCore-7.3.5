@@ -329,7 +329,7 @@ void GameEventMgr::LoadFromDB()
             {
                 if (!sHolidaysStore.LookupEntry(pGameEvent.holiday_id))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "`game_event` game event id (%i) have not existed holiday id %u.", event_id, pGameEvent.holiday_id);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "`game_event` game event id (%i) have non-existent holiday id %u.", event_id, pGameEvent.holiday_id);
                     pGameEvent.holiday_id = HOLIDAY_NONE;
                 }
             }
@@ -1370,7 +1370,7 @@ void GameEventMgr::GameEventSpawn(int16 event_id)
 
             sObjectMgr->AddGameobjectToGrid(itr, data);
             // Spawn if necessary (loaded grids only)
-            // this base map checked as non-instanced and then only existed
+            // this base map checked as non-instanced and then only existing
             MapEntry const* entry = sMapStore.LookupEntry(data->mapid);
             if (!entry)
                 continue;

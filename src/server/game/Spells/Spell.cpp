@@ -4128,7 +4128,7 @@ void Spell::cast(bool skipCheck)
 
     volatile uint32 spellid = m_spellInfo->Id;
 
-    // update pointers base at GUIDs to prevent access to non-existed already object
+    // update pointers base at GUIDs to prevent access to already non-existent object
     UpdatePointers();
 
     // cancel at lost explicit target during cast

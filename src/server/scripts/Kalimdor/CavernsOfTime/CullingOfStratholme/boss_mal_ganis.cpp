@@ -35,7 +35,7 @@ enum Spells
     H_SPELL_SLEEP                               = 58849,
     SPELL_VAMPIRIC_TOUCH                        = 52723, //Heals the caster for half the damage dealt by a melee attack.
     SPELL_MAL_GANIS_KILL_CREDIT                 = 58124, // Quest credit
-    SPELL_KILL_CREDIT                           = 58630  // Non-existing spell as encounter credit, created in spell_dbc
+    SPELL_KILL_CREDIT                           = 58630  // non-existent spell as encounter credit, created in spell_dbc
 };
 
 enum Yells

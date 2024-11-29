@@ -249,7 +249,7 @@ bool GameObject::Create(ObjectGuid::LowType guidlow, uint32 name_id, Map* map, u
     GameObjectTemplate const* goinfo = sObjectMgr->GetGameObjectTemplate(name_id);
     if (!goinfo)
     {
-        TC_LOG_ERROR(LOG_FILTER_SQL, "Gameobject (GUID: %u Entry: %u) not created: non-existing entry in `gameobject_template`. Map: %u (X: %f Y: %f Z: %f)", guidlow, name_id, map->GetId(), pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ());
+        TC_LOG_ERROR(LOG_FILTER_SQL, "Gameobject (GUID: %u Entry: %u) not created: Non-existent entry in `gameobject_template`. Map: %u (X: %f Y: %f Z: %f)", guidlow, name_id, map->GetId(), pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ());
         return false;
     }
 
@@ -262,7 +262,7 @@ bool GameObject::Create(ObjectGuid::LowType guidlow, uint32 name_id, Map* map, u
 
     if (goinfo->type >= MAX_GAMEOBJECT_TYPE)
     {
-        TC_LOG_ERROR(LOG_FILTER_SQL, "Gameobject (GUID: %u Entry: %u) not created: non-existing GO type '%u' in `gameobject_template`. It will crash client if created.", guidlow, name_id, goinfo->type);
+        TC_LOG_ERROR(LOG_FILTER_SQL, "Gameobject (GUID: %u Entry: %u) not created: Non-existent GO type '%u' in `gameobject_template`. It will crash client if created.", guidlow, name_id, goinfo->type);
         return false;
     }
 
@@ -621,7 +621,7 @@ void GameObject::Update(uint32 diff)
                     }
                     else                                        // environmental trap
                     {
-                        // environmental damage spells already have around enemies targeting but this not help in case not existed GO casting support
+                        // environmental damage spells already have around enemies targeting but this not help in case non-existent GO casting support
                         // affect only players
                         Player* player = nullptr;
                         Trinity::AnyPlayerInObjectRangeCheck checker(this, radius);

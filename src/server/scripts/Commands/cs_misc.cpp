@@ -2634,7 +2634,7 @@ public:
         std::string subject = msgSubject;
         std::string text    = msgText;
 
-        // from console show not existed sender
+        // from console show non-existent sender
         MailSender sender(MAIL_NORMAL, handler->GetSession() ? handler->GetSession()->GetPlayer()->GetGUID().GetGUIDLow() : 0, MAIL_STATIONERY_GM);
 
         //- TODO: Fix poor design
@@ -2732,7 +2732,7 @@ public:
             }
         }
 
-        // from console show not existed sender
+        // from console show non-existent sender
         MailSender sender(MAIL_NORMAL, handler->GetSession() ? handler->GetSession()->GetPlayer()->GetGUID().GetGUIDLow() : 0, MAIL_STATIONERY_GM);
 
         // fill mail
@@ -2792,7 +2792,7 @@ public:
         std::string subject = msgSubject;
         std::string text    = msgText;
 
-        // from console show not existed sender
+        // from console show non-existent sender
         MailSender sender(MAIL_NORMAL, handler->GetSession() ? handler->GetSession()->GetPlayer()->GetGUID().GetGUIDLow() : 0, MAIL_STATIONERY_GM);
 
         SQLTransaction trans = CharacterDatabase.BeginTransaction();

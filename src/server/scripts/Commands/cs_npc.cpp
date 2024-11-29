@@ -488,7 +488,7 @@ public:
         return true;
     }
 
-    //change level of creature or pet
+    // change level of creature or pet
     static bool HandleNpcSetLevelCommand(ChatHandler* handler, const char* args)
     {
         if (!*args)
@@ -521,8 +521,8 @@ public:
         }
         else
         {
-            creature->SetMaxHealth(100 + 30*lvl);
-            creature->SetHealth(100 + 30*lvl);
+            creature->SetMaxHealth(100 + 30 * lvl);
+            creature->SetHealth(100 + 30 * lvl);
             creature->SetLevel(lvl);
             creature->SaveToDB();
         }
@@ -975,8 +975,8 @@ public:
                     ss_flags << "SpecialInfo ";
                 if (dynamicFlags & UNIT_DYNFLAG_REFER_A_FRIEND)
                     ss_flags << "ReferFriend ";
-                if (dynamicFlags & UNIT_DYNFLAG_DISABLE_SAME_INTARACT)
-                    ss_flags << "DisableSameIntaract";
+                if (dynamicFlags & UNIT_DYNFLAG_DISABLE_SAME_INTERACT)
+                    ss_flags << "DisableSameInteract";
             }
             else
                 ss_flags << "0";
@@ -984,7 +984,9 @@ public:
             handler->PSendSysMessage("DynamicFlags: %s", ss_flags.str().c_str());
         }
 
-        handler->PSendSysMessage(LANG_NPCINFO_LEVEL, target->getLevel());
+        handler->PSendSysMessage("Level: %u, Effective: %u", target->getLevel(), target->GetEffectiveLevel());
+        handler->PSendSysMessage("Scale Min: %u, Scale Max: %u", target->ScaleLevelMin, target->ScaleLevelMax);
+        handler->PSendSysMessage("Zone Min: %u, Zone Max: %u", target->_minZoneLevel, target->_maxZoneLevel);
         handler->PSendSysMessage(LANG_NPCINFO_HEALTH, target->GetCreateHealth(), target->GetMaxHealth(), target->GetHealth());
         handler->PSendSysMessage(LANG_NPCINFO_FLAGS, target->getFaction());
         handler->PSendSysMessage(LANG_COMMAND_RAWPAWNTIMES, defRespawnDelayStr.c_str(), curRespawnDelayStr.c_str());
@@ -1276,7 +1278,7 @@ public:
             }
         }
 
-        // now lowguid is low guid really existed creature
+        // now lowguid is low guid really existing creature
         // and creature point (maybe) to this creature or NULL
 
         MovementGeneratorType move_type;

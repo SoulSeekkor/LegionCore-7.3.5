@@ -701,7 +701,7 @@ void MotionMaster::MoveTaxiFlight(uint32 path, uint32 pathnode)
         }
         else
         {
-            TC_LOG_ERROR(LOG_FILTER_GENERAL, "%s attempt taxi to (not existed Path %u node %u)",
+            TC_LOG_ERROR(LOG_FILTER_GENERAL, "%s attempt taxi to (non-existent Path %u node %u)",
                 _owner->GetName(), path, pathnode);
         }
     }

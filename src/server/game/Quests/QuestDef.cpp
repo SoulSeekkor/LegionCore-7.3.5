@@ -19,6 +19,7 @@
 #include "QuestDef.h"
 #include "Player.h"
 #include "World.h"
+#include "MapManager.h"
 #include "QuestPackets.h"
 #include "DatabaseEnv.h"
 #include "GameTables.h"
@@ -264,50 +265,37 @@ void Quest::LoadQuestObjectiveVisualEffect(Field* fields)
     }
 }
 
-uint32 Quest::XPValue(Player* player) const
+uint32 Quest::XPValue(Player* player, uint32 zoneId) const
 {
     if (player)
     {
-        int32 playerLevel = std::min(uint32(player->getLevel()), uint32(MaxScalingLevel));
-        int32 questLevel = playerLevel;
-
-        // make sure that quest level does not go below the minimum required level for the quest!
-        if (questLevel < Level && Level != -1)
-            questLevel = Level;
+        int32 questLevel = GetScaledQuestLevel(player->getLevel(), zoneId);
 
         auto xpentry = sQuestXPStore.LookupEntry(questLevel);
         if (!xpentry || RewardXPDifficulty >= 10)
             return 0;
 
-        auto multiplier = 1.0f;
-        if (questLevel != playerLevel)
-            multiplier = sXpGameTable.GetRow(std::min(playerLevel, questLevel))->Divisor / sXpGameTable.GetRow(playerLevel)->Divisor;
-
-        auto diffFactor = 2 * (questLevel - playerLevel) + 20;
+        auto diffFactor = 2 * (questLevel - player->getLevel()) + 20;
         if (diffFactor < 1)
             diffFactor = 1;
         else if (diffFactor > 10)
             diffFactor = 10;
 
-        uint32 xp = diffFactor * xpentry->Difficulty[RewardXPDifficulty] * RewardXPMultiplier / 10 * multiplier;
+        uint32 xp = diffFactor * xpentry->Difficulty[RewardXPDifficulty] * RewardXPMultiplier / 10;
         if (!IsDaily())
         {
             uint32 expLevel = GetMaxLevelForExpansion(player->GetMap()->GetEntry()->ExpansionID);
 
             switch (player->GetZoneId())
             {
-                // Mount Hyjal
-                case 616:
-                // Twilight Highlands
-                case 4922:
-                // Uldum
-                case 5034:
-                // Deepholm
-                case 5042:
-                // Vashj'ir
+                case 616:  // Mount Hyjal
                 case 4815:  // Kelp'thar Forest
+                case 4922:  // Twilight Highlands
+                case 5034:  // Uldum
+                case 5042:  // Deepholm
                 case 5144:  // Shimmering Expanse
                 case 5145:  // Abyssal Depths
+                case 5146:  // Vashj'ir
                     expLevel = GetMaxLevelForExpansion(Expansions::EXPANSION_CATACLYSM);
                     break;
             }
@@ -324,21 +312,33 @@ uint32 Quest::XPValue(Player* player) const
     return 0;
 }
 
-uint32 Quest::MoneyValue(uint8 playerLevel) const
+uint32 Quest::MoneyValue(uint8 playerLevel, uint32 zoneId) const
 {
-    if (QuestMoneyRewardEntry const* money = sQuestMoneyRewardStore.LookupEntry(GetScaledQuestLevel(playerLevel)))
+    if (QuestMoneyRewardEntry const* money = sQuestMoneyRewardStore.LookupEntry(GetScaledQuestLevel(playerLevel, zoneId)))
         return money->Difficulty[RewardMoneyDifficulty] * RewardMoneyMultiplier;
     
     return 0;
 }
 
-uint32 Quest::GetScaledQuestLevel(uint8 playerLevel) const
+uint32 Quest::GetScaledQuestLevel(uint8 playerLevel, uint32 zoneId) const
 {
-    uint32 scaledLevel = std::min(uint32(playerLevel), uint32(MaxScalingLevel));
+    uint32 minQuestLevel = uint32(Level);
+    uint32 maxQuestLevel = uint32(MaxScalingLevel);
+
+    if (zoneId > 0)
+    {
+        if (ZoneLevelEntry const* entry = sMapMgr->GetZoneLevelEntry(zoneId))
+        {
+            minQuestLevel = entry->minLevel;
+            maxQuestLevel = entry->maxLevel;
+        }
+    }
+
+    uint32 scaledLevel = std::min(uint32(playerLevel), maxQuestLevel);
 
     // make sure that quest level does not go below the minimum required level for the quest!
-    if (scaledLevel < Level && Level != -1)
-        scaledLevel = Level;
+    if (scaledLevel < minQuestLevel && minQuestLevel != -1)
+        scaledLevel = minQuestLevel;
 
     return scaledLevel;
 }

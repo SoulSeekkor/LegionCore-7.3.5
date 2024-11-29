@@ -150,13 +150,13 @@ void CreatureTextMgr::LoadCreatureTexts()
 
         if (temp.BroadcastTextID && !sBroadcastTextStore.LookupEntry(temp.BroadcastTextID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "CreatureTextMgr: Entry %u, Group %u, Id %u in table `creature_text` has non-existing or incompatible BroadcastTextID %u.", temp.entry, temp.group, temp.id, temp.BroadcastTextID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "CreatureTextMgr: Entry %u, Group %u, Id %u in table `creature_text` has non-existent or incompatible BroadcastTextID %u.", temp.entry, temp.group, temp.id, temp.BroadcastTextID);
             temp.BroadcastTextID = 0;
         }
 
         if (temp.SpellID && !sSpellMgr->GetSpellInfo(temp.SpellID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "CreatureTextMgr: Entry %u, Group %u, Id %u in table `creature_text` has non-existing or incompatible SpellID %u.", temp.entry, temp.group, temp.id, temp.SpellID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "CreatureTextMgr: Entry %u, Group %u, Id %u in table `creature_text` has non-existent or incompatible SpellID %u.", temp.entry, temp.group, temp.id, temp.SpellID);
             temp.SpellID = 0;
         }
 

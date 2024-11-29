@@ -100,7 +100,7 @@ void RealmList::LoadBuildInfo()
 void RealmList::UpdateRealm(Battlenet::RealmHandle const& id, uint32 build, std::string const& name, boost::asio::ip::address const& address, boost::asio::ip::address const& localAddr, boost::asio::ip::address const& localSubmask, uint16 port, uint8 icon, RealmFlags flag, uint8 timezone, AccountTypes allowedSecurityLevel, float population)
 {
     std::lock_guard<std::recursive_mutex> guard(i_RealmList_lock);
-    // Create new if not exist or update existed
+    // Create new if not exist or update existing
     Realm& realm = _realms[id];
 
     realm.Id = id;

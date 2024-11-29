@@ -178,7 +178,7 @@ bool MapManager::CanPlayerEnter(uint32 mapid, Player* player, bool loginCheck)
 
     Difficulty targetDifficulty = player->GetDifficultyID(entry);
     
-    MapDifficultyEntry const* mapDiff = sDB2Manager.GetMapDifficultyData(entry->ID, targetDifficulty); //The player has a heroic mode and tries to enter into instance which has no a heroic mode
+    MapDifficultyEntry const* mapDiff = sDB2Manager.GetMapDifficultyData(entry->ID, targetDifficulty); // The player has a heroic mode and tries to enter into instance which has no a heroic mode
     if (!mapDiff)
     {
         // Send aborted message for dungeons
@@ -458,6 +458,44 @@ void MapManager::InitInstanceIds()
 uint32 MapManager::GenerateInstanceId()
 {
     return _nextInstanceId++;
+}
+
+void MapManager::LoadZoneLevelMap()
+{
+    uint32 oldMSTime = getMSTime();
+
+    QueryResult result = WorldDatabase.Query("SELECT zoneId, minLevel, maxLevel FROM reference_zone_level ORDER BY zoneId DESC");
+
+    if (!result)
+    {
+        TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, ">> Loaded 0 Zone Level definitions. DB table `reference_zone_level` is empty.");
+
+        return;
+    }
+
+    _zoneLevelStore.rehash(result->GetRowCount());
+
+    uint32 count = 0;
+    do
+    {
+        Field* fields = result->Fetch();
+        uint32 zoneId = fields[0].GetUInt32();
+
+        ZoneLevelEntry& zoneEntry = _zoneLevelStore[zoneId];
+
+        zoneEntry.zoneId = zoneId;
+        zoneEntry.minLevel = fields[1].GetUInt8();
+        zoneEntry.maxLevel = fields[2].GetUInt8();
+
+        ++count;
+    } while (result->NextRow());
+
+    TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %u Zone Level definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+}
+
+ZoneLevelEntry const* MapManager::GetZoneLevelEntry(uint32 zoneId)
+{
+    return Trinity::Containers::MapGetValuePtr(_zoneLevelStore, zoneId);
 }
 
 void MapManager::FindSessionInAllMaps(uint32 accId, ChatHandler* handler)

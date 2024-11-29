@@ -639,7 +639,7 @@ bool InstanceScript::CheckRequiredBosses(uint32 /*bossId*/, uint32 entry, Player
     if (m_DisabledMask & (1 << entry))
         return false;
 
-    if (auto aiinstdata = sObjectMgr->GetCreatureAIInstaceData(entry))
+    if (auto aiinstdata = sObjectMgr->GetCreatureAIInstanceData(entry))
         if (aiinstdata->bossidactivete != 0 && GetBossState(aiinstdata->bossidactivete) != DONE)
             return false;
 

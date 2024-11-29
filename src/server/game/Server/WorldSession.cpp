@@ -195,7 +195,7 @@ void WorldSession::SendPacket(WorldPacket const* packet, bool forced /*= false*/
     ServerOpcodeHandler const* handler = opcodeTable[static_cast<OpcodeServer>(opcode)];
     if (!handler)
     {
-        TC_LOG_ERROR(LOG_FILTER_GENERAL, "Prevented sending of opcode %u with non existing handler to %s", opcode, GetPlayerName().c_str());
+        TC_LOG_ERROR(LOG_FILTER_GENERAL, "Prevented sending of opcode %u with non-existent handler to %s", opcode, GetPlayerName().c_str());
         return;
     }
 

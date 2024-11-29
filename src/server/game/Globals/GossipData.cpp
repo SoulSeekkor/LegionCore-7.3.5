@@ -68,13 +68,13 @@ void GossipDataStoreMgr::LoadGossipMenu()
 
         if (!sObjectMgr->GetNpcText(gMenu.TextID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu Entry %u are using non-existing TextID %u", gMenu.Entry, gMenu.TextID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu Entry %u are using non-existent TextID %u", gMenu.Entry, gMenu.TextID);
             continue;
         }
 
         if (gMenu.FriendshipFactionID && !sFriendshipReputationStore.LookupEntry(gMenu.FriendshipFactionID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu Entry %u are using non-existing FriendshipFactionID %u", gMenu.Entry, gMenu.FriendshipFactionID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu Entry %u are using non-existent FriendshipFactionID %u", gMenu.Entry, gMenu.FriendshipFactionID);
             gMenu.FriendshipFactionID = 0;
         }
 
@@ -149,19 +149,19 @@ void GossipDataStoreMgr::LoadGossipMenuItems()
 
         if (gMenuItem.ActionPoiID && !sQuestDataStore->GetPointOfInterest(gMenuItem.ActionPoiID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu_option for menu %u, id %u use non-existing action_poi_id %u, ignoring", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.ActionPoiID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table gossip_menu_option for menu %u, id %u use non-existent action_poi_id %u, ignoring", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.ActionPoiID);
             gMenuItem.ActionPoiID = 0;
         }
 
         if (gMenuItem.OptionBroadcastTextID && !sBroadcastTextStore.LookupEntry(gMenuItem.OptionBroadcastTextID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gossip_menu_option` for menu %u, id %u has non-existing or incompatible OptionBroadcastTextId %u, ignoring.", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.OptionBroadcastTextID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gossip_menu_option` for menu %u, id %u has non-existent or incompatible OptionBroadcastTextId %u, ignoring.", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.OptionBroadcastTextID);
             gMenuItem.OptionBroadcastTextID = 0;
         }
 
         if (gMenuItem.BoxBroadcastTextID && !sBroadcastTextStore.LookupEntry(gMenuItem.BoxBroadcastTextID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gossip_menu_option` for menu %u, id %u has non-existing or incompatible BoxBroadcastTextID %u, ignoring.", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.BoxBroadcastTextID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gossip_menu_option` for menu %u, id %u has non-existent or incompatible BoxBroadcastTextID %u, ignoring.", gMenuItem.MenuID, gMenuItem.OptionIndex, gMenuItem.BoxBroadcastTextID);
             gMenuItem.BoxBroadcastTextID = 0;
         }
 

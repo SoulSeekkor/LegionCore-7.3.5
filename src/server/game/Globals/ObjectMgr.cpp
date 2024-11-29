@@ -681,7 +681,7 @@ void ObjectMgr::CheckCreatureTemplateWDB(CreatureTemplate* cInfo)
             CreatureDisplayInfoEntry const* displayEntry = sCreatureDisplayInfoStore.LookupEntry(sObjectMgr->GetCreatureDisplay(cInfo->Modelid[i]));
             if (!displayEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) lists non-existing Modelid[0] id (%i), this can crash the client.", cInfo->Entry, cInfo->Modelid[i]);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) lists non-existent Modelid[0] id (%i), this can crash the client.", cInfo->Entry, cInfo->Modelid[i]);
                 cInfo->Modelid[i] = 0;
             }
             else if (!displayScaleEntry)
@@ -713,7 +713,7 @@ void ObjectMgr::CheckCreatureTemplateWDB(CreatureTemplate* cInfo)
         if (cInfo->KillCredit[k])
             if (!GetCreatureTemplate(cInfo->KillCredit[k]))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) lists non-existing creature entry %u in `KillCredit%d`.", cInfo->Entry, cInfo->KillCredit[k], k + 1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) lists non-existent creature entry %u in `KillCredit%d`.", cInfo->Entry, cInfo->KillCredit[k], k + 1);
                 cInfo->KillCredit[k] = 0;
             }
 
@@ -1048,7 +1048,7 @@ void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
     {
         FactionTemplateEntry const* factionTemplate = sFactionTemplateStore.LookupEntry(cInfo->faction);
         if (!factionTemplate)
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has non-existing faction template (%u).", cInfo->Entry, cInfo->faction);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has non-existent faction template (%u).", cInfo->Entry, cInfo->faction);
     }
 
     if (!cInfo->unit_class || ((1 << (cInfo->unit_class-1)) & CLASSMASK_ALL_CREATURES) == 0)
@@ -1107,7 +1107,7 @@ void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
         VehicleEntry const* vehId = sVehicleStore.LookupEntry(cInfo->VehicleId);
         if (!vehId)
         {
-             TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has a non-existing VehicleId (%u). This *WILL* cause the client to freeze!", cInfo->Entry, cInfo->VehicleId);
+             TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has a non-existent VehicleId (%u). This *WILL* cause the client to freeze!", cInfo->Entry, cInfo->VehicleId);
              const_cast<CreatureTemplate*>(cInfo)->VehicleId = 0;
         }
     }
@@ -1117,7 +1117,7 @@ void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
         if (cInfo->spells[j] && !sSpellMgr->GetSpellInfo(cInfo->spells[j]))
         {
             WorldDatabase.PExecute("UPDATE creature_template SET spell%d = 0 WHERE entry = %u", j+1, cInfo->Entry);
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has non-existing Spell%d (%u), set to 0.", cInfo->Entry, j+1, cInfo->spells[j]);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Creature (Entry: %u) has non-existent Spell%d (%u), set to 0.", cInfo->Entry, j+1, cInfo->spells[j]);
             const_cast<CreatureTemplate*>(cInfo)->spells[j] = 0;
         }
     }
@@ -1449,7 +1449,7 @@ void ObjectMgr::LoadCreatureModelInfo()
         CreatureDisplayInfoEntry const* creatureDisplay = sCreatureDisplayInfoStore.LookupEntry(displayId);
         if (!creatureDisplay)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has model for not existed display id (%u).", displayId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has model for non-existent display id (%u).", displayId);
             //WorldDatabase.PExecute("DELETE FROM creature_model_info WHERE DisplayID = %u", displayId);
             continue;
         }
@@ -1471,14 +1471,14 @@ void ObjectMgr::LoadCreatureModelInfo()
 
         if (modelInfo.displayId_other_gender && !sCreatureDisplayInfoStore.LookupEntry(modelInfo.displayId_other_gender))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has not existed alt.gender model (%u) for existed display id (%u).", modelInfo.displayId_other_gender, displayId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has non-existent alt.gender model (%u) for existing display id (%u).", modelInfo.displayId_other_gender, displayId);
             //WorldDatabase.PExecute("UPDATE creature_model_info SET DisplayID_Other_Gender = 0 WHERE DisplayID = %u", displayId);
             modelInfo.displayId_other_gender = 0;
         }
 
         if (modelInfo.hostileId && !sCreatureDisplayInfoStore.LookupEntry(modelInfo.hostileId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has not existed alt.hostileId model (%u) for existed display id (%u).", modelInfo.hostileId, displayId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_model_info` has non-existent alt.hostileId model (%u) for existing display id (%u).", modelInfo.hostileId, displayId);
             modelInfo.hostileId = 0;
         }
 
@@ -1756,21 +1756,21 @@ void ObjectMgr::LoadTempSummons()
             case SUMMONER_TYPE_CREATURE:
                 if (!GetCreatureTemplate(summonerId))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non existing entry %u for creature summoner type, skipped.", summonerId);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non-existent entry %u for creature summoner type, skipped.", summonerId);
                     continue;
                 }
                 break;
             case SUMMONER_TYPE_GAMEOBJECT:
                 if (!GetGameObjectTemplate(summonerId))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non existing entry %u for gameobject summoner type, skipped.", summonerId);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non-existent entry %u for gameobject summoner type, skipped.", summonerId);
                     continue;
                 }
                 break;
             case SUMMONER_TYPE_MAP:
                 if (!sMapStore.LookupEntry(summonerId))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non existing entry %u for map summoner type, skipped.", summonerId);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has summoner with non-existent entry %u for map summoner type, skipped.", summonerId);
                     continue;
                 }
                 break;
@@ -1784,7 +1784,7 @@ void ObjectMgr::LoadTempSummons()
 
         if (!GetCreatureTemplate(data.entry))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has creature in group [Summoner ID: %u, Summoner Type: %u, Group ID: %u] with non existing creature entry %u, skipped.", summonerId, summonerType, group, data.entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_summon_groups` has creature in group [Summoner ID: %u, Summoner Type: %u, Group ID: %u] with non-existent creature entry %u, skipped.", summonerId, summonerType, group, data.entry);
             continue;
         }
 
@@ -1828,7 +1828,7 @@ void ObjectMgr::LoadCreatures()
     uint32 oldMSTime = getMSTime();
 
     //                                                      0            1      2      3        4           5           6           7           8            9            10            11
-    QueryResult result = WorldDatabase.Query("SELECT creature.guid, id, map, zoneId, areaId, modelid, equipment_id, position_x, position_y, position_z, orientation, spawntimesecs, spawndist, "
+    QueryResult result = WorldDatabase.Query("SELECT creature.guid, id, map, creature.zoneId, areaId, modelid, equipment_id, position_x, position_y, position_z, orientation, spawntimesecs, spawndist, "
     //        12            13         14          15           16        17         18          19             20                21                   22                    23                    24
         "currentwaypoint, curhealth, curmana, MovementType, spawnMask, phaseMask, eventEntry, pool_entry, creature.npcflag, creature.npcflag2, creature.unit_flags, creature.unit_flags3, creature.dynamicflags, "
     //           25                26          27       28		   29	    30		    31               32
@@ -1865,7 +1865,7 @@ void ObjectMgr::LoadCreatures()
         CreatureTemplate const* cInfo = GetCreatureTemplate(entry);
         if (!cInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature` has creature (GUID: " UI64FMTD ") with non existing creature entry %u, skipped.", guid, entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature` has creature (GUID: " UI64FMTD ") with non-existent creature entry %u, skipped.", guid, entry);
             continue;
         }
 
@@ -1946,7 +1946,7 @@ void ObjectMgr::LoadCreatures()
         MapEntry const* mapEntry = sMapStore.LookupEntry(data.mapid);
         if (!mapEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature` have creature (GUID: " UI64FMTD ") that spawned at not existed map (Id: %u), skipped.", guid, data.mapid);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature` have creature (GUID: " UI64FMTD ") that spawned at non-existent map (Id: %u), skipped.", guid, data.mapid);
             continue;
         }
 
@@ -2398,7 +2398,7 @@ void ObjectMgr::LoadGameobjects()
         GameObjectTemplate const* gInfo = GetGameObjectTemplate(entry);
         if (!gInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD ") with non existing gameobject entry %u, skipped.", guid, entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD ") with non-existent gameobject entry %u, skipped.", guid, entry);
             continue;
         }
 
@@ -2443,7 +2443,7 @@ void ObjectMgr::LoadGameobjects()
         MapEntry const* mapEntry = sMapStore.LookupEntry(data.mapid);
         if (!mapEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD " Entry: %u) spawned on a non-existed map (Id: %u), skip", guid, data.id, data.mapid);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD " Entry: %u) spawned on a non-existent map (Id: %u), skip", guid, data.id, data.mapid);
             continue;
         }
 
@@ -2462,7 +2462,7 @@ void ObjectMgr::LoadGameobjects()
 
         if (data.spawntimesecs == 0 && gInfo->IsDespawnAtAction())
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD " Entry: %u) with `spawntimesecs` (0) value, but the gameobejct is marked as despawnable at action.", guid, data.id);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `gameobject` has gameobject (GUID: " UI64FMTD " Entry: %u) with `spawntimesecs` (0) value, but the gameobject is marked as despawnable at action.", guid, data.id);
         }
 
         data.animprogress   = fields[14].GetUInt8();
@@ -3534,7 +3534,7 @@ void ObjectMgr::LoadPlayerInfo()
         // Fill gaps and check integrity
         for (uint8 race = 0; race < MAX_RACES; ++race)
         {
-            // skip non existed races
+            // skip non-existent races
             if (!sChrRacesStore.LookupEntry(race))
                 continue;
 
@@ -4831,7 +4831,7 @@ void ObjectMgr::SetHighestGuids()
     if (result = CharacterDatabase.Query("SELECT MAX(guid) FROM item_instance"))
         _itemGuidGenerator.Set((*result)[0].GetUInt64() + 1);
 
-    // Cleanup other tables from not existed guids ( >= _hiItemGuid)
+    // Cleanup other tables from non-existent guids ( >= _hiItemGuid)
     CharacterDatabase.PExecute("DELETE FROM character_inventory WHERE item >= '%u'", _itemGuidGenerator.GetNextAfterMaxUsed());      // One-time query
     CharacterDatabase.PExecute("DELETE FROM mail_items WHERE item_guid >= '%u'", _itemGuidGenerator.GetNextAfterMaxUsed());          // One-time query
     CharacterDatabase.PExecute("DELETE FROM auctionhouse WHERE itemguid >= '%u'", _itemGuidGenerator.GetNextAfterMaxUsed());         // One-time query
@@ -5660,7 +5660,7 @@ void ObjectMgr::LoadReputationOnKill()
         if (!GetCreatureTemplate(creature_id))
         {
             WorldDatabase.PExecute("DELETE FROM creature_onkill_reputation WHERE creature_id = %u", creature_id);
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_onkill_reputation` have data for not existed creature entry (%u), skipped", creature_id);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_onkill_reputation` have data for non-existent creature entry (%u), skipped", creature_id);
             continue;
         }
 
@@ -6376,7 +6376,7 @@ void ObjectMgr::LoadMailLevelRewards()
 
         if (!GetCreatureTemplate(senderEntry))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `mail_level_reward` have not existed sender creature entry (%u) for level %u that invalid not include any player races, ignoring.", senderEntry, level);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `mail_level_reward` have non-existent sender creature entry (%u) for level %u that invalid not include any player races, ignoring.", senderEntry, level);
             continue;
         }
 
@@ -6397,7 +6397,7 @@ void ObjectMgr::AddSpellToTrainer(uint32 entry, uint32 spell, uint32 spellCost, 
     CreatureTemplate const* cInfo = GetCreatureTemplate(entry);
     if (!cInfo)
     {
-        TC_LOG_ERROR(LOG_FILTER_SQL, "Table `npc_trainer` contains an entry for a non-existing creature template (Entry: %u), ignoring", entry);
+        TC_LOG_ERROR(LOG_FILTER_SQL, "Table `npc_trainer` contains an entry for a non-existent creature template (Entry: %u), ignoring", entry);
         return;
     }
 
@@ -6410,7 +6410,7 @@ void ObjectMgr::AddSpellToTrainer(uint32 entry, uint32 spell, uint32 spellCost, 
     SpellInfo const* spellinfo = sSpellMgr->GetSpellInfo(spell);
     if (!spellinfo)
     {
-        TC_LOG_ERROR(LOG_FILTER_SQL, "Table `npc_trainer` contains an entry (Entry: %u) for a non-existing spell (Spell: %u), ignoring", entry, spell);
+        TC_LOG_ERROR(LOG_FILTER_SQL, "Table `npc_trainer` contains an entry (Entry: %u) for a non-existent spell (Spell: %u), ignoring", entry, spell);
         //WorldDatabase.PExecute("DELETE FROM `npc_trainer` WHERE entry = %u and spell = %u", entry, spell);
         return;
     }
@@ -7005,7 +7005,7 @@ bool ObjectMgr::IsVendorItemValid(uint32 vendor_entry, uint32 id, int32 maxcount
         if (player)
             ChatHandler(player).SendSysMessage(LANG_COMMAND_VENDORSELECTION);
         else
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `(game_event_)npc_vendor` have data for not existed creature template (Entry: %u), ignore", vendor_entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `(game_event_)npc_vendor` have data for non-existent creature template (Entry: %u), ignore", vendor_entry);
         return false;
     }
 
@@ -7032,7 +7032,7 @@ bool ObjectMgr::IsVendorItemValid(uint32 vendor_entry, uint32 id, int32 maxcount
             ChatHandler(player).PSendSysMessage(LANG_ITEM_NOT_FOUND, id, type);
         else
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `(game_event_)npc_vendor` for Vendor (Entry: %u) have in item list non-existed item (%u, type %u), ignore", vendor_entry, id, type);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `(game_event_)npc_vendor` for Vendor (Entry: %u) have in item list non-existent item (%u, type %u), ignore", vendor_entry, id, type);
             //WorldDatabase.PExecute("DELETE FROM npc_vendor WHERE entry = %u and item = %u", vendor_entry, id);
         }
         return false;
@@ -8100,7 +8100,7 @@ void ObjectMgr::LoadDisplayChoiceData()
             auto choice = Trinity::Containers::MapGetValuePtr(_playerChoices, choiceId);
             if (!choice)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response` references non-existing ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response` references non-existent ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
                 continue;
             }
 
@@ -8130,14 +8130,14 @@ void ObjectMgr::LoadDisplayChoiceData()
             auto choice = Trinity::Containers::MapGetValuePtr(_playerChoices, choiceId);
             if (!choice)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existing ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existent ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
                 continue;
             }
 
             auto responseItr = std::find_if(choice->Responses.begin(), choice->Responses.end(), [responseId](PlayerChoiceResponse const& playerChoiceResponse) { return playerChoiceResponse.ResponseId == responseId; });
             if (responseItr == choice->Responses.end())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existing ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existent ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
                 continue;
             }
 
@@ -8157,19 +8157,19 @@ void ObjectMgr::LoadDisplayChoiceData()
 
             if (reward->TitleId && !sCharTitlesStore.LookupEntry(reward->TitleId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existing Title %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existent Title %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
                 reward->TitleId = 0;
             }
 
             if (reward->PackageId && !sDB2Manager.GetQuestPackageItems(reward->PackageId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existing QuestPackage %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existent QuestPackage %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
                 reward->PackageId = 0;
             }
 
             if (reward->SkillLineId && !sSkillLineStore.LookupEntry(reward->SkillLineId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existing SkillLine %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward` references non-existent SkillLine %d for ChoiceId %d, ResponseId: %d, set to 0", reward->TitleId, choiceId, responseId);
                 reward->SkillLineId = 0;
                 reward->SkillPointCount = 0;
             }
@@ -8195,26 +8195,26 @@ void ObjectMgr::LoadDisplayChoiceData()
             auto choice = Trinity::Containers::MapGetValuePtr(_playerChoices, choiceId);
             if (!choice)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existing ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existent ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
                 continue;
             }
 
             auto responseItr = std::find_if(choice->Responses.begin(), choice->Responses.end(), [responseId](PlayerChoiceResponse const& playerChoiceResponse) { return playerChoiceResponse.ResponseId == responseId; });
             if (responseItr == choice->Responses.end())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existing ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existent ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
                 continue;
             }
 
             if (!responseItr->Reward)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existing player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existent player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
                 continue;
             }
 
             if (!GetItemTemplate(itemId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existing item %u for ChoiceId %d, ResponseId: %d, skipped", itemId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_item` references non-existent item %u for ChoiceId %d, ResponseId: %d, skipped", itemId, choiceId, responseId);
                 continue;
             }
 
@@ -8237,26 +8237,26 @@ void ObjectMgr::LoadDisplayChoiceData()
             auto choice = Trinity::Containers::MapGetValuePtr(_playerChoices, choiceId);
             if (!choice)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existing ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existent ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
                 continue;
             }
 
             auto responseItr = std::find_if(choice->Responses.begin(), choice->Responses.end(), [responseId](PlayerChoiceResponse const& playerChoiceResponse) { return playerChoiceResponse.ResponseId == responseId; });
             if (responseItr == choice->Responses.end())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existing ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existent ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
                 continue;
             }
 
             if (!responseItr->Reward)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existing player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existent player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
                 continue;
             }
 
             if (!sCurrencyTypesStore.LookupEntry(currencyId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existing currency %u for ChoiceId %d, ResponseId: %d, skipped", currencyId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_currency` references non-existent currency %u for ChoiceId %d, ResponseId: %d, skipped", currencyId, choiceId, responseId);
                 continue;
             }
 
@@ -8279,26 +8279,26 @@ void ObjectMgr::LoadDisplayChoiceData()
             auto choice = Trinity::Containers::MapGetValuePtr(_playerChoices, choiceId);
             if (!choice)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existing ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existent ChoiceId: %d (ResponseId: %d), skipped", choiceId, responseId);
                 continue;
             }
 
             auto responseItr = std::find_if(choice->Responses.begin(), choice->Responses.end(), [responseId](PlayerChoiceResponse const& playerChoiceResponse) { return playerChoiceResponse.ResponseId == responseId; });
             if (responseItr == choice->Responses.end())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existing ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existent ResponseId: %d for ChoiceId %d, skipped", responseId, choiceId);
                 continue;
             }
 
             if (!responseItr->Reward)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existing player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existent player choice reward for ChoiceId %d, ResponseId: %d, skipped", choiceId, responseId);
                 continue;
             }
 
             if (!sFactionStore.LookupEntry(factionId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existing faction %u for ChoiceId %d, ResponseId: %d, skipped", factionId, choiceId, responseId);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_response_reward_faction` references non-existent faction %u for ChoiceId %d, ResponseId: %d, skipped", factionId, choiceId, responseId);
                 continue;
             }
 
@@ -8329,7 +8329,7 @@ void ObjectMgr::LoadPlayerChoicesLocale()
 
             if (!GetPlayerChoice(choiceId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existing ChoiceId: %d for locale %s, skipped", choiceId, localeName.c_str());
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existent ChoiceId: %d for locale %s, skipped", choiceId, localeName.c_str());
                 continue;
             }
 
@@ -8361,14 +8361,14 @@ void ObjectMgr::LoadPlayerChoicesLocale()
             auto itr = _playerChoiceLocales.find(choiceId);
             if (itr == _playerChoiceLocales.end())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existing ChoiceId: %d for ResponseId %d locale %s, skipped", choiceId, responseId, localeName.c_str());
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existent ChoiceId: %d for ResponseId %d locale %s, skipped", choiceId, responseId, localeName.c_str());
                 continue;
             }
 
             auto playerChoice = ASSERT_NOTNULL(GetPlayerChoice(choiceId));
             if (!playerChoice->GetResponse(responseId))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existing ResponseId: %d for ChoiceId %d locale %s, skipped", responseId, choiceId, localeName.c_str());
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `playerchoice_locale` references non-existent ResponseId: %d for ChoiceId %d locale %s, skipped", responseId, choiceId, localeName.c_str());
                 continue;
             }
 

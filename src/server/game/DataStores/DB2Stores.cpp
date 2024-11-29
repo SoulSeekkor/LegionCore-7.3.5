@@ -1755,7 +1755,7 @@ void DB2Manager::InitDB2CustomStores()
         sTaxiPathNodesByPath[entry->PathID][entry->NodeIndex] = entry;
 
     // Initialize global taxinodes mask
-    // include existed nodes that have at least single not spell base (scripted) path
+    // include existing nodes that have at least single not spell base (scripted) path
     {
         if (sTaxiNodesStore.GetNumRows())
         {

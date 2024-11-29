@@ -639,7 +639,7 @@ void BattlegroundMgr::CreateInitialBattlegrounds()
             data.TeamStartLoc[TEAM_ALLIANCE].SetPosition(start->Loc);
         else if (!MS::Battlegrounds::IsRandomGeneratedBg(data.bgTypeId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battleground_template` for id %u have non-existed WorldSafeLocs.dbc id %u in field `AllianceStartLoc`. BG not created.", data.bgTypeId, startId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battleground_template` for id %u have non-existent WorldSafeLocs.dbc id %u in field `AllianceStartLoc`. BG not created.", data.bgTypeId, startId);
             continue;
         }
 
@@ -648,7 +648,7 @@ void BattlegroundMgr::CreateInitialBattlegrounds()
             data.TeamStartLoc[TEAM_HORDE].SetPosition(start->Loc);
         else if (!MS::Battlegrounds::IsRandomGeneratedBg(data.bgTypeId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battleground_template` for id %u have non-existed WorldSafeLocs.dbc id %u in field `HordeStartLoc`. BG not created.", data.bgTypeId, startId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battleground_template` for id %u have non-existent WorldSafeLocs.dbc id %u in field `HordeStartLoc`. BG not created.", data.bgTypeId, startId);
             continue;
         }
 
@@ -796,7 +796,7 @@ void BattlegroundMgr::LoadBattleMastersEntry()
         uint32 bgTypeId = fields[1].GetUInt32();
         if (!sBattlemasterListStore.LookupEntry(bgTypeId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battlemaster_entry` contain entry %u for not existed battleground type %u, ignored.", entry, bgTypeId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `battlemaster_entry` contain entry %u for non-existent battleground type %u, ignored.", entry, bgTypeId);
             continue;
         }
 

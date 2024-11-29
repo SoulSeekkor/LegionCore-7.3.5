@@ -4555,7 +4555,7 @@ enum UnitDynFlags
     UNIT_DYNFLAG_TAPPED                     = 0x0010, // Lua_UnitIsTapped
     UNIT_DYNFLAG_SPECIALINFO                = 0x0020,
     UNIT_DYNFLAG_REFER_A_FRIEND             = 0x0040,
-    UNIT_DYNFLAG_DISABLE_SAME_INTARACT      = 0x0080  // Example: seat on friend mount
+    UNIT_DYNFLAG_DISABLE_SAME_INTERACT      = 0x0080  // Example: seat on friend mount
 };
 
 enum CorpseDynFlags

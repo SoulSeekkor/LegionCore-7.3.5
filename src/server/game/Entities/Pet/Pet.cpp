@@ -1307,13 +1307,13 @@ bool TempSummon::addSpell(uint32 spellId, ActiveStates active /*= ACT_DECIDE*/, 
         // do pet spell book cleanup
         if (state == PETSPELL_UNCHANGED)                    // spell load case
         {
-            TC_LOG_DEBUG(LOG_FILTER_PETS, "Pet::addSpell: Non-existed in SpellStore spell #%u request, deleting for all pets in `pet_spell`.", spellId);
+            TC_LOG_DEBUG(LOG_FILTER_PETS, "Pet::addSpell: Non-existent in SpellStore spell #%u request, deleting for all pets in `pet_spell`.", spellId);
             PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_PET_SPELL);
             stmt->setUInt32(0, spellId);
             CharacterDatabase.Execute(stmt);
         }
         else
-            TC_LOG_DEBUG(LOG_FILTER_PETS, "Pet::addSpell: Non-existed in SpellStore spell #%u request.", spellId);
+            TC_LOG_DEBUG(LOG_FILTER_PETS, "Pet::addSpell: Non-existent in SpellStore spell #%u request.", spellId);
 
         return false;
     }

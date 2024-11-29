@@ -221,7 +221,7 @@ bool AchievementCriteriaData::IsValid(CriteriaEntry const* criteria)
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_CREATURE:
             if (!creature.id || !sObjectMgr->GetCreatureTemplate(creature.id))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_CREATURE (%u) has non-existing creature id in value1 (%u), ignored.",
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_CREATURE (%u) has non-existent creature id in value1 (%u), ignored.",
                     criteria->ID, criteria->Type, dataType, creature.id);
                 return false;
             }
@@ -229,13 +229,13 @@ bool AchievementCriteriaData::IsValid(CriteriaEntry const* criteria)
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE:
             if (classRace.class_id && ((1 << (classRace.class_id - 1)) & CLASSMASK_ALL_PLAYABLE) == 0)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (%u) has non-existing class in value1 (%u), ignored.",
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (%u) has non-existent class in value1 (%u), ignored.",
                     criteria->ID, criteria->Type, dataType, classRace.class_id);
                 return false;
             }
             if (classRace.race_id && ((1 << (classRace.race_id - 1)) & RACEMASK_ALL_PLAYABLE) == 0)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (%u) has non-existing race in value2 (%u), ignored.",
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_T_PLAYER_CLASS_RACE (%u) has non-existent race in value2 (%u), ignored.",
                     criteria->ID, criteria->Type, dataType, classRace.race_id);
                 return false;
             }
@@ -358,13 +358,13 @@ bool AchievementCriteriaData::IsValid(CriteriaEntry const* criteria)
             }
             if (classRace.class_id && ((1 << (classRace.class_id - 1)) & CLASSMASK_ALL_PLAYABLE) == 0)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (%u) has non-existing class in value1 (%u), ignored.",
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (%u) has non-existent class in value1 (%u), ignored.",
                     criteria->ID, criteria->Type, dataType, classRace.class_id);
                 return false;
             }
             if (classRace.race_id && ((1 << (classRace.race_id - 1)) & RACEMASK_ALL_PLAYABLE) == 0)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (%u) has non-existing race in value2 (%u), ignored.",
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` (Entry: %u Type: %u) for data type ACHIEVEMENT_CRITERIA_DATA_TYPE_S_PLAYER_CLASS_RACE (%u) has non-existent race in value2 (%u), ignored.",
                     criteria->ID, criteria->Type, dataType, classRace.race_id);
                 return false;
             }
@@ -1006,8 +1006,8 @@ void AchievementMgr<Player>::LoadFromDB(PreparedQueryResult achievementResult, P
             CriteriaTreeEntry const* criteriaTree = sCriteriaTreeStore.LookupEntry(char_criteria_id);
             if (!criteriaTree)
             {
-                // we will remove not existed criteriaTree for all characters
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteriaTree %u data removed from table `character_achievement_progress`.", char_criteria_id);
+                // we will remove non-existent criteriaTree for all characters
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteriaTree %u data removed from table `character_achievement_progress`.", char_criteria_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, char_criteria_id);
@@ -1018,8 +1018,8 @@ void AchievementMgr<Player>::LoadFromDB(PreparedQueryResult achievementResult, P
             Criteria const* criteria = sAchievementMgr->GetCriteria(criteriaTree->CriteriaID);
             if (!criteria)
             {
-                // we will remove not existed criteria for all characters
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteria %u data removed from table `character_achievement_progress`.", char_criteria_id);
+                // we will remove non-existent criteria for all characters
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteria %u data removed from table `character_achievement_progress`.", char_criteria_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, char_criteria_id);
@@ -1088,8 +1088,8 @@ void AchievementMgr<Player>::LoadFromDB(PreparedQueryResult achievementResult, P
             CriteriaTreeEntry const* criteriaTree = sCriteriaTreeStore.LookupEntry(acc_criteria_id);
             if (!criteriaTree)
             {
-                // we will remove not existed criteria for all accounts
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteria %u data removed from table `account_achievement_progress`.", acc_criteria_id);
+                // we will remove non-existent criteria for all accounts
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteria %u data removed from table `account_achievement_progress`.", acc_criteria_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_ACC_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, acc_criteria_id);
@@ -1100,8 +1100,8 @@ void AchievementMgr<Player>::LoadFromDB(PreparedQueryResult achievementResult, P
             Criteria const* criteria = sAchievementMgr->GetCriteria(criteriaTree->CriteriaID);
             if (!criteria)
             {
-                // we will remove not existed criteria for all accounts
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteria %u data removed from table `account_achievement_progress`.", acc_criteria_id);
+                // we will remove non-existent criteria for all accounts
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteria %u data removed from table `account_achievement_progress`.", acc_criteria_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_ACC_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, acc_criteria_id);
@@ -1209,8 +1209,8 @@ void AchievementMgr<Guild>::LoadFromDB(PreparedQueryResult achievementResult, Pr
             CriteriaTreeEntry const* criteriaTree = sCriteriaTreeStore.LookupEntry(guild_criteriaTree_id);
             if (!criteriaTree)
             {
-                // we will remove not existed criteria for all guilds
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteria %u data removed from table `guild_achievement_progress`.", guild_criteriaTree_id);
+                // we will remove non-existent criteria for all guilds
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteria %u data removed from table `guild_achievement_progress`.", guild_criteriaTree_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GUILD_INVALID_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, guild_criteriaTree_id);
@@ -1221,8 +1221,8 @@ void AchievementMgr<Guild>::LoadFromDB(PreparedQueryResult achievementResult, Pr
             Criteria const* criteria = sAchievementMgr->GetCriteria(criteriaTree->CriteriaID);
             if (!criteria)
             {
-                // we will remove not existed criteria for all guilds
-                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement criteria %u data removed from table `guild_achievement_progress`.", guild_criteriaTree_id);
+                // we will remove non-existent criteria for all guilds
+                TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement criteria %u data removed from table `guild_achievement_progress`.", guild_criteriaTree_id);
 
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GUILD_INVALID_ACHIEV_PROGRESS_CRITERIA);
                 stmt->setUInt32(0, guild_criteriaTree_id);
@@ -4846,7 +4846,7 @@ void AchievementGlobalMgr::LoadAchievementCriteriaData()
 
         if (!criteria)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` has data for non-existing criteria (Entry: %u), ignore.", criteria_id);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `achievement_criteria_data` has data for non-existent criteria (Entry: %u), ignore.", criteria_id);
             WorldDatabase.PExecute("DELETE FROM `achievement_criteria_data` WHERE criteria_id = %u", criteria_id);
             continue;
         }
@@ -4905,7 +4905,7 @@ void AchievementGlobalMgr::LoadCompletedAchievements()
         if (!achievement)
         {
             // Remove non existent achievements from all characters
-            TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existing achievement %u data removed from table `character_achievement`.", achievementId);
+            TC_LOG_ERROR(LOG_FILTER_ACHIEVEMENTSYS, "Non-existent achievement %u data removed from table `character_achievement`.", achievementId);
 
             PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_ACHIEVMENT);
 
@@ -5081,7 +5081,7 @@ void AchievementGlobalMgr::LoadRewardLocales()
 
         if (m_achievementRewardVector[entry] == nullptr)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `locales_achievement_reward` (Entry: %u) has locale strings for non-existing achievement reward.", entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `locales_achievement_reward` (Entry: %u) has locale strings for non-existent achievement reward.", entry);
             continue;
         }
 

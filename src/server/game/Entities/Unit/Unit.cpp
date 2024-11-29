@@ -375,6 +375,9 @@ playerDamageTaken_(), npcDamageTaken_()
     _castCount = 0;
     _eventCount = 0;
     _functionCount = 0;
+
+    _minZoneLevel = 0;
+    _maxZoneLevel = 0;
 }
 
 ////////////////////////////////////////////////////////////
@@ -7085,7 +7088,7 @@ bool Unit::HandleHasteAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
 
     if (!sSpellMgr->GetSpellInfo(triggered_spell_id))
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleHasteAuraProc: Spell %u has non-existing triggered spell %u", hasteSpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleHasteAuraProc: Spell %u has non-existent triggered spell %u", hasteSpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -7155,7 +7158,7 @@ bool Unit::HandleSpellCritChanceAuraProc(Unit* victim, DamageInfo* /*dmgInfoProc
 
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existing triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existent triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -10135,7 +10138,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
     SpellInfo const* triggerEntry = sSpellMgr->GetSpellInfo(triggered_spell_id);
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleDummyAuraProc: Spell %u has non-existing triggered spell %u", dummySpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleDummyAuraProc: Spell %u has non-existent triggered spell %u", dummySpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -10187,7 +10190,7 @@ bool Unit::HandleObsModEnergyAuraProc(Unit* victim, DamageInfo* /*dmgInfoProc*/,
     // Try handle unknown trigger spells
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleObsModEnergyAuraProc: Spell %u has non-existing triggered spell %u", dummySpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleObsModEnergyAuraProc: Spell %u has non-existent triggered spell %u", dummySpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -10255,7 +10258,7 @@ bool Unit::HandleModDamagePctTakenAuraProc(Unit* victim, DamageInfo* dmgInfoProc
     {
         if(SpellProcTriggered(victim, dmgInfoProc, triggeredByAura, procSpell, procFlags, procEx, cooldown))
             return true;
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleModDamagePctTakenAuraProc: Spell %u has non-existing triggered spell %u", dummySpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleModDamagePctTakenAuraProc: Spell %u has non-existent triggered spell %u", dummySpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -16692,7 +16695,7 @@ bool Unit::HandleStatModifier(UnitMods unitMod, UnitModifierType modifierType, f
 {
     if (unitMod >= UNIT_MOD_END || modifierType >= MODIFIER_TYPE_END)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "ERROR in HandleStatModifier(): non-existing UnitMods or wrong UnitModifierType!");
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "ERROR in HandleStatModifier(): Non-existent UnitMods or wrong UnitModifierType!");
         return false;
     }
 
@@ -16791,7 +16794,7 @@ float Unit::GetModifierValue(UnitMods unitMod, UnitModifierType modifierType) co
 {
     if (unitMod >= UNIT_MOD_END || modifierType >= MODIFIER_TYPE_END)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "attempt to access non-existing modifier value from UnitMods!");
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "attempt to access non-existent modifier value from UnitMods!");
         return 0.0f;
     }
 
@@ -16805,7 +16808,7 @@ float Unit::GetTotalAuraModValue(UnitMods unitMod) const
 {
     if (unitMod >= UNIT_MOD_END)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "attempt to access non-existing UnitMods in GetTotalAuraModValue()!");
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "attempt to access non-existent UnitMods in GetTotalAuraModValue()!");
         return 0.0f;
     }
 
@@ -25541,7 +25544,7 @@ bool Unit::HandleCastWhileWalkingAuraProc(Unit* victim, DamageInfo* /*dmgInfoPro
 
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existing triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existent triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -25594,7 +25597,7 @@ bool Unit::HandleSpellModAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEff
     SpellInfo const* triggerEntry = sSpellMgr->GetSpellInfo(triggered_spell_id);
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existing triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existent triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -25631,7 +25634,7 @@ bool Unit::HandleIgnoreAurastateAuraProc(Unit* victim, DamageInfo* /*dmgInfoProc
 
     if (!triggerEntry)
     {
-        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existing triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
+        TC_LOG_ERROR(LOG_FILTER_UNITS, "Unit::HandleSpellCritChanceAuraProc: Spell %u has non-existent triggered spell %u", triggeredByAuraSpell->Id, triggered_spell_id);
         return false;
     }
 
@@ -27405,6 +27408,57 @@ void Unit::SetMinItemLevel(uint16 ilvl)
     SetUInt32Value(UNIT_FIELD_MIN_ITEM_LEVEL, ilvl);
 }
 
+uint8 Unit::GetMinLevel() const
+{
+    uint8 minLevel = _minZoneLevel;
+
+    if (minLevel == 0)
+    {
+        if (Creature const* creature = ToCreature())
+        {
+            minLevel = creature->ScaleLevelMin;
+
+            if (minLevel == 0)
+            {
+                if (CreatureTemplate const* cInfo = creature->GetCreatureTemplate())
+                {
+                    minLevel = cInfo->minlevel;
+                }
+            }
+        }
+    }
+
+    return minLevel;
+}
+
+uint8 Unit::GetMaxLevel() const
+{
+    uint8 maxLevel = _maxZoneLevel;
+
+    if (maxLevel == 0)
+    {
+        if (Creature const* creature = ToCreature())
+        {
+            maxLevel = creature->ScaleLevelMax;
+
+            if (maxLevel == 0)
+            {
+                if (CreatureTemplate const* cInfo = creature->GetCreatureTemplate())
+                {
+                    maxLevel = cInfo->maxlevel;
+                }
+            }
+        }
+    }
+
+    return maxLevel;
+}
+
+bool Unit::HasLevelScaling() const
+{
+    return GetMinLevel() > 0 && GetMaxLevel() > 0;
+}
+
 uint8 Unit::getLevel() const
 {
     return uint8(GetUInt32Value(UNIT_FIELD_LEVEL));
@@ -27424,8 +27478,8 @@ uint8 Unit::getLevelForTarget(WorldObject const* target) const
 
     int32 level = GetEffectiveLevel();
     int32 levelTarget = unit->GetEffectiveLevel();
-    int32 levelMin = creature->ScaleLevelMin;
-    int32 levelMax = creature->ScaleLevelMax;
+    int32 levelMin = GetMinLevel();
+    int32 levelMax = GetMaxLevel();
 
     // if (creature->isWorldBoss())
         // level = unit->GetEffectiveLevel() + sWorld->getIntConfig(CONFIG_WORLD_BOSS_LEVEL_DIFF);
@@ -27466,8 +27520,8 @@ uint8 Unit::getLevelForXPReward(Player const* player) const
 
     uint8 playerLevel = player->getLevel();
     int32 level = GetEffectiveLevel();
-    int32 levelMin = creature->ScaleLevelMin;
-    int32 levelMax = creature->ScaleLevelMax;
+    int32 levelMin = GetMinLevel();
+    int32 levelMax = GetMaxLevel();
 
     CreatureTemplate const* cInfo = creature->GetCreatureTemplate();
 
@@ -27514,7 +27568,7 @@ uint64 Unit::GetHealth(Unit* victim) const
     if (!victim || !creature)
         return GetHealth();
 
-    if (!creature->ScaleLevelMin || !creature->ScaleLevelMax)
+    if (!HasLevelScaling())
         return GetHealth();
 
     uint8 level = getLevelForTarget(victim);
@@ -27535,7 +27589,7 @@ uint64 Unit::GetMaxHealth(Unit* victim) const
     if (!victim || !creature)
         return GetMaxHealth();
 
-    if (!creature->ScaleLevelMin || !creature->ScaleLevelMax)
+    if (!HasLevelScaling())
         return GetMaxHealth();
 
     uint8 level = getLevelForTarget(victim);
@@ -27552,7 +27606,7 @@ uint32 Unit::GetArmor(Unit* victim) const
     if (!victim || !creature)
         return GetArmor();
 
-    if (!creature->ScaleLevelMin || !creature->ScaleLevelMax)
+    if (!HasLevelScaling())
         return GetArmor();
 
     uint8 level = getLevelForTarget(victim);
@@ -27572,7 +27626,7 @@ void Unit::SetHealthScal(uint64 val, Unit* victim, uint32 spellId)
         return;
     }
 
-    if (!creature->ScaleLevelMin || !creature->ScaleLevelMax)
+    if (!HasLevelScaling())
     {
         SetHealth(val, spellId);
         return;

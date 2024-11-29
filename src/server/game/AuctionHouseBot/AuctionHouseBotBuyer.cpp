@@ -233,7 +233,7 @@ bool AuctionBotBuyer::RollBidChance(BuyerItemInfo const* ahInfo, Item const* ite
 }
 
 // Removes items from EligibleItems that we shouldnt buy or bid on
-// The last existed time on them should be older than now
+// The last existing time on them should be older than now
 void AuctionBotBuyer::PrepareListOfEntry(BuyerConfiguration& config)
 {
     // now - 5 seconds to leave out all old entries but keep the ones just updated a moment ago

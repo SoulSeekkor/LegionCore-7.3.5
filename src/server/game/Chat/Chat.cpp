@@ -354,9 +354,9 @@ bool ChatHandler::SetDataForCommandInTable(std::vector<ChatCommand>& table, char
     if (!cmd.empty())
     {
         if (&table == &getCommandTable())
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have not existed command '%s', skip.", cmd.c_str());
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have non-existent command '%s', skip.", cmd.c_str());
         else
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have not existed subcommand '%s' in command '%s', skip.", cmd.c_str(), fullcommand.c_str());
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `command` have non-existent subcommand '%s' in command '%s', skip.", cmd.c_str(), fullcommand.c_str());
     }
 
     return false;

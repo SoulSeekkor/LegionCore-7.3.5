@@ -484,14 +484,14 @@ void GarrisonMgr::LoadMissionsQuestLink()
 
         if (!sGarrMissionStore.LookupEntry(missionID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing sGarrMissionStore missionID %u was referenced in `mission_quest_link`.", missionID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent sGarrMissionStore missionID %u was referenced in `mission_quest_link`.", missionID);
             continue;
         }
 
         uint32 quest_id = fields[0].GetUInt32();
         if (!sQuestDataStore->GetQuestTemplate(quest_id))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing quest %u was referenced in `mission_quest_link`.", quest_id);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent quest %u was referenced in `mission_quest_link`.", quest_id);
             continue;
         }
         _quest_mission_link_store[quest_id] = missionID;
@@ -522,14 +522,14 @@ void GarrisonMgr::LoadPlotFinalizeGOInfo()
         
         if (!sGarrPlotInstanceStore.LookupEntry(garrPlotInstanceId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrPlotInstance.db2 entry %u was referenced in `garrison_plot_finalize_info`.", garrPlotInstanceId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrPlotInstance.db2 entry %u was referenced in `garrison_plot_finalize_info`.", garrPlotInstanceId);
             continue;
         }
 
         GameObjectTemplate const* goTemplate = sObjectMgr->GetGameObjectTemplate(hordeGameObjectId);
         if (!goTemplate)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing gameobject_template entry %u was referenced in `garrison_plot_finalize_info`.`hordeGameObjectId` for garrPlotInstanceId %u goID %u.", hordeGameObjectId, garrPlotInstanceId, hordeGameObjectId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent gameobject_template entry %u was referenced in `garrison_plot_finalize_info`.`hordeGameObjectId` for garrPlotInstanceId %u goID %u.", hordeGameObjectId, garrPlotInstanceId, hordeGameObjectId);
             continue;
         }
 
@@ -542,7 +542,7 @@ void GarrisonMgr::LoadPlotFinalizeGOInfo()
         goTemplate = sObjectMgr->GetGameObjectTemplate(allianceGameObjectId);
         if (!goTemplate)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing gameobject_template entry %u was referenced in `garrison_plot_finalize_info`.`allianceGameObjectId` for garrPlotInstanceId %u goID %u.", allianceGameObjectId, garrPlotInstanceId, allianceGameObjectId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent gameobject_template entry %u was referenced in `garrison_plot_finalize_info`.`allianceGameObjectId` for garrPlotInstanceId %u goID %u.", allianceGameObjectId, garrPlotInstanceId, allianceGameObjectId);
             continue;
         }
 
@@ -583,14 +583,14 @@ void GarrisonMgr::LoadFollowerClassSpecAbilities()
 
         if (!sGarrClassSpecStore.LookupEntry(classSpecId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrClassSpec.db2 entry %u was referenced in `garrison_follower_class_spec_abilities` by row (%u, %u).", classSpecId, classSpecId, abilityId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrClassSpec.db2 entry %u was referenced in `garrison_follower_class_spec_abilities` by row (%u, %u).", classSpecId, classSpecId, abilityId);
             continue;
         }
 
         GarrAbilityEntry const* ability = sGarrAbilityStore.LookupEntry(abilityId);
         if (!ability)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrAbility.db2 entry %u was referenced in `garrison_follower_class_spec_abilities` by row (%u, %u).", abilityId, classSpecId, abilityId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrAbility.db2 entry %u was referenced in `garrison_follower_class_spec_abilities` by row (%u, %u).", abilityId, classSpecId, abilityId);
             continue;
         }
 
@@ -631,20 +631,20 @@ void GarrisonMgr::LoadBuildingSpawnNPC()
         CreatureTemplate const* cInfo = sObjectMgr->GetCreatureTemplate(entry);
         if (!cInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_building_creature` has creature with non existing creature entry %u, skipped.", entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_building_creature` has creature with non-existent creature entry %u, skipped.", entry);
             continue;
         }
 
         if (!sGarrPlotInstanceStore.LookupEntry(garrPlotInstanceId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrPlotInstance.db2 entry %u was referenced in `garrison_building_creature`.", garrPlotInstanceId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrPlotInstance.db2 entry %u was referenced in `garrison_building_creature`.", garrPlotInstanceId);
             continue;
         }
 
         //! BuildID = 0 - empty build spawn.
         if (BuildID && !sGarrBuildingStore.LookupEntry(BuildID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrBuilding.db2 entry %u was referenced in `garrison_building_creature`.", BuildID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrBuilding.db2 entry %u was referenced in `garrison_building_creature`.", BuildID);
             continue;
         }
 
@@ -693,7 +693,7 @@ void GarrisonMgr::LoadBuildingSpawnGo()
         auto templ = sObjectMgr->GetGameObjectTemplate(entry);
         if (!templ)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_building_gameobject` has go with non existing go entry %u, skipped.", entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_building_gameobject` has go with non-existent go entry %u, skipped.", entry);
             continue;
         }
 
@@ -708,14 +708,14 @@ void GarrisonMgr::LoadBuildingSpawnGo()
 
         if (!sGarrPlotInstanceStore.LookupEntry(garrPlotInstanceId))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrPlotInstance.db2 entry %u was referenced in `garrison_building_gameobject`.", garrPlotInstanceId);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrPlotInstance.db2 entry %u was referenced in `garrison_building_gameobject`.", garrPlotInstanceId);
             continue;
         }
 
         //! BuildID = 0 - empty build spawn.
         if (BuildID && !sGarrBuildingStore.LookupEntry(BuildID))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing GarrBuilding.db2 entry %u was referenced in `garrison_building_gameobject`.", BuildID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent GarrBuilding.db2 entry %u was referenced in `garrison_building_gameobject`.", BuildID);
             continue;
         }
 
@@ -770,7 +770,7 @@ void GarrisonMgr::LoadMissionLine()
         GarrMissionEntry const* missionEntry = sGarrMissionStore.LookupEntry(missionID);
         if (!missionEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing sGarrMissionStore missionID %u was referenced in `garrison_mission_line`.", missionID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent sGarrMissionStore missionID %u was referenced in `garrison_mission_line`.", missionID);
             continue;
         }
 
@@ -778,14 +778,14 @@ void GarrisonMgr::LoadMissionLine()
 
         if (NextMission && !NextMissionEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing sGarrMissionStore missionID %u was referenced in `garrison_mission_line`.", NextMission);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent sGarrMissionStore missionID %u was referenced in `garrison_mission_line`.", NextMission);
             continue;
         }
 
         GarrFollowerEntry const* followerEntry = sGarrFollowerStore.LookupEntry(ReqGarrFollowerID);
         if (ReqGarrFollowerID && !followerEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing sGarrFollowerStore ReqGarrFollowerID %u was referenced in `garrison_mission_line`.", ReqGarrFollowerID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent sGarrFollowerStore ReqGarrFollowerID %u was referenced in `garrison_mission_line`.", ReqGarrFollowerID);
             continue;
         }
 
@@ -842,7 +842,7 @@ void GarrisonMgr::LoadShipment()
         CreatureTemplate const* cInfo = sObjectMgr->GetCreatureTemplate(data.NpcEntry);
         if (!cInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_shipment` has creature with non existing creature entry %u, skipped.", data.NpcEntry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_shipment` has creature with non-existent creature entry %u, skipped.", data.NpcEntry);
             continue;
         }
 
@@ -850,7 +850,7 @@ void GarrisonMgr::LoadShipment()
         {
             if (!sCharShipmentStore.LookupEntry(data.ShipmentID))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing CharShipment.db2 entry %u was referenced in `garrison_shipment`.", data.ShipmentID);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent CharShipment.db2 entry %u was referenced in `garrison_shipment`.", data.ShipmentID);
                 continue;
             }
         }
@@ -858,7 +858,7 @@ void GarrisonMgr::LoadShipment()
         CharShipmentContainerEntry const* shipmentConteinerEntry = sCharShipmentContainerStore.LookupEntry(data.ContainerID);
         if (!shipmentConteinerEntry)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existing CharShipmentContainer.db2 entry %u was referenced in `garrison_shipment`.", data.ContainerID);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Non-existent CharShipmentContainer.db2 entry %u was referenced in `garrison_shipment`.", data.ContainerID);
             continue;
         }
         data.cEntry = shipmentConteinerEntry;
@@ -901,7 +901,7 @@ void GarrisonMgr::LoadTradeSkill()
         CreatureTemplate const* cInfo = sObjectMgr->GetCreatureTemplate(npc);
         if (!cInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_tradeskill` has creature with non existing creature entry %u, skipped.", npc);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Table `garrison_tradeskill` has creature with non-existent creature entry %u, skipped.", npc);
             continue;
         }
 

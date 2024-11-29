@@ -493,7 +493,7 @@ void WorldSession::HandleAuctionRemoveItem(WorldPackets::AuctionHouse::AuctionRe
         }
         else
         {
-            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Auction id: %u got non existing item (item guid : %u)!", auction->Id, auction->itemGUIDLow);
+            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "Auction id: %u got non-existent item (item guid : %u)!", auction->Id, auction->itemGUIDLow);
             SendAuctionCommandResult(nullptr, AUCTION_CANCEL, ERR_AUCTION_DATABASE_ERROR);
             return;
         }

@@ -494,9 +494,6 @@ struct RepSpilloverTemplate
     uint32 faction_rank[MAX_SPILLOVER_FACTIONS];
 };
 
-
-
-
 struct ScenarioPOIPoint
 {
     int32 x;
@@ -742,8 +739,8 @@ class ObjectMgr
         void LoadCreatureAIInstance();
         void LoadCreatureActionData();
         void LoadDisplayChoiceData();
-    void LoadPlayerChoicesLocale();
-    void LoadLinkedRespawn();
+        void LoadPlayerChoicesLocale();
+        void LoadLinkedRespawn();
         bool SetCreatureLinkedRespawn(ObjectGuid::LowType const& guid, ObjectGuid::LowType const& linkedGuid);
         void LoadCreatureAddons();
         void LoadCreatureModelInfo();
@@ -851,7 +848,7 @@ class ObjectMgr
             return &_creatureDataStore;
         }
 
-        CreatureAIInstance const* GetCreatureAIInstaceData(uint32 entry) const
+        CreatureAIInstance const* GetCreatureAIInstanceData(uint32 entry) const
         {
             return Trinity::Containers::MapGetValuePtr(_creatureAIInstance, entry);
         }

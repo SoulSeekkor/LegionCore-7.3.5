@@ -1940,14 +1940,14 @@ bool ConditionMgr::isSourceTypeValid(Condition* cond)
         case CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
             if (!sQuestDataStore->GetQuestTemplate(cond->SourceEntry))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_SOURCE_TYPE_QUEST_ACCEPT specifies non-existing quest (%u), skipped", cond->SourceEntry);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_SOURCE_TYPE_QUEST_ACCEPT specifies non-existent quest (%u), skipped", cond->SourceEntry);
                 return false;
             }
             break;
         case CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
             if (!sQuestDataStore->GetQuestTemplate(cond->SourceEntry))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK specifies non-existing quest (%u), skipped", cond->SourceEntry);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK specifies non-existent quest (%u), skipped", cond->SourceEntry);
                 return false;
             }
             break;
@@ -2080,13 +2080,13 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sSpellMgr->GetSpellInfo(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura condition has non existing spell (Id: %d), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura condition has non-existent spell (Id: %d), skipped", cond->ConditionValue1);
                 return false;
             }
 
             if (cond->ConditionValue2 > EFFECT_2)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura condition has non existing effect index (%u) (must be 0..2), skipped", cond->ConditionValue2);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura condition has non-existent effect index (%u) (must be 0..2), skipped", cond->ConditionValue2);
                 return false;
             }
             if (cond->ConditionValue3)
@@ -2098,7 +2098,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             ItemTemplate const* proto = sObjectMgr->GetItemTemplate(cond->ConditionValue1);
             if (!proto)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Item condition has non existing item (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Item condition has non-existent item (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2114,7 +2114,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             ItemTemplate const* proto = sObjectMgr->GetItemTemplate(cond->ConditionValue1);
             if (!proto)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "ItemEquipped condition has non existing item (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "ItemEquipped condition has non-existent item (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2129,7 +2129,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             AreaTableEntry const* areaEntry = sAreaTableStore.LookupEntry(cond->ConditionValue1);
             if (!areaEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "ZoneID condition has non existing area (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "ZoneID condition has non-existent area (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2150,7 +2150,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             FactionEntry const* factionEntry = sFactionStore.LookupEntry(cond->ConditionValue1);
             if (!factionEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Reputation condition has non existing faction (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Reputation condition has non-existent faction (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             if (cond->ConditionValue3)
@@ -2176,7 +2176,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             SkillLineEntry const* pSkill = sSkillLineStore.LookupEntry(cond->ConditionValue1);
             if (!pSkill)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Skill condition specifies non-existing skill (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Skill condition specifies non-existent skill (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2198,7 +2198,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sQuestDataStore->GetQuestTemplate(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existing quest (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existent quest (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2213,7 +2213,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             Quest const* quest = sQuestDataStore->GetQuestTemplate(cond->ConditionValue1);
             if (!quest)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existing quest (%u), skipped (objective_done)", cond->ConditionValue1 );
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existent quest (%u), skipped (objective_done)", cond->ConditionValue1 );
                 return false;
             }
 
@@ -2226,7 +2226,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
                         found = true;
                 }
                 if (!found)
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existing quest (%d) non existen objective %d, skipped", cond->ConditionValue1, cond->ConditionValue2);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Quest condition specifies non-existent quest (%d) non existen objective %d, skipped", cond->ConditionValue1, cond->ConditionValue2);
             }
             break;
         }
@@ -2235,7 +2235,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             AreaTableEntry const* areaEntry = sDB2Manager.FindAreaEntry(cond->ConditionValue1);
             if (!areaEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Area explored condition specifies non-existing area (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Area explored condition specifies non-existent area (%u), skipped", cond->ConditionValue1);
                 return false;
             }   
         }
@@ -2245,14 +2245,14 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
 
             if (cond->ConditionValue1 >= events.size())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "ActiveEvent condition has non existing event id (%u), skipped max arr. size %u", cond->ConditionValue1, events.size());
+                TC_LOG_ERROR(LOG_FILTER_SQL, "ActiveEvent condition has non-existent event id (%u), skipped max arr. size %u", cond->ConditionValue1, events.size());
                 return false;
             }
 
             const GameEventData d = events[cond->ConditionValue1];
             if (!d.isValid())
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "ActiveEvent condition has non existing event id (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "ActiveEvent condition has non-existent event id (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2267,7 +2267,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             AchievementEntry const* achievement = sAchievementStore.LookupEntry(cond->ConditionValue1);
             if (!achievement)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Achivement condition has non existing achivement id (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Achivement condition has non-existent achivement id (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2281,7 +2281,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!(cond->ConditionValue1 & CLASSMASK_ALL_PLAYABLE))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Class condition has non existing classmask (%u), skipped", cond->ConditionValue1 & ~CLASSMASK_ALL_PLAYABLE);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Class condition has non-existent classmask (%u), skipped", cond->ConditionValue1 & ~CLASSMASK_ALL_PLAYABLE);
                 return false;
             }
 
@@ -2295,7 +2295,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!(cond->ConditionValue1 & RACEMASK_ALL_PLAYABLE))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Race condition has non existing racemask (%u), skipped", cond->ConditionValue1 & ~RACEMASK_ALL_PLAYABLE);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Race condition has non-existent racemask (%u), skipped", cond->ConditionValue1 & ~RACEMASK_ALL_PLAYABLE);
                 return false;
             }
 
@@ -2323,7 +2323,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             MapEntry const* me = sMapStore.LookupEntry(cond->ConditionValue1);
             if (!me)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Map condition has non existing map (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Map condition has non-existent map (%u), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2337,7 +2337,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sSpellMgr->GetSpellInfo(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Spell condition has non existing spell (Id: %d), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Spell condition has non-existent spell (Id: %d), skipped", cond->ConditionValue1);
                 return false;
             }
 
@@ -2378,7 +2378,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sObjectMgr->GetCreatureTemplate(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "NearCreature condition has non existing creature template entry (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "NearCreature condition has non-existent creature template entry (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             if (cond->ConditionValue3)
@@ -2389,7 +2389,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sObjectMgr->GetGameObjectTemplate(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "NearGameObject condition has non existing gameobject template entry (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "NearGameObject condition has non-existent gameobject template entry (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             if (cond->ConditionValue3)
@@ -2403,14 +2403,14 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
                 case TYPEID_UNIT:
                     if (cond->ConditionValue2 && !sObjectMgr->GetCreatureTemplate(cond->ConditionValue2))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "ObjectEntry condition has non existing creature template entry  (%u), skipped", cond->ConditionValue2);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "ObjectEntry condition has non-existent creature template entry  (%u), skipped", cond->ConditionValue2);
                         return false;
                     }
                     break;
                 case TYPEID_GAMEOBJECT:
                     if (cond->ConditionValue2 && !sObjectMgr->GetGameObjectTemplate(cond->ConditionValue2))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "ObjectEntry condition has non existing game object template entry  (%u), skipped", cond->ConditionValue2);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "ObjectEntry condition has non-existent game object template entry  (%u), skipped", cond->ConditionValue2);
                         return false;
                     }
                     break;
@@ -2543,7 +2543,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sWorld->getWorldState(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "World state condition has non existing world state in value1 (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "World state condition has non-existent world state in value1 (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             if (cond->ConditionValue3)
@@ -2563,7 +2563,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             CharTitlesEntry const* titleEntry = sCharTitlesStore.LookupEntry(cond->ConditionValue1);
             if (!titleEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Title condition has non existing title in value1 (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Title condition has non-existent title in value1 (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             break;
@@ -2572,7 +2572,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             {
                 if (cond->ConditionValue1 >= (UI64LIT(1) << MAX_DIFFICULTY))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_SQL, "Map Difficulty condition has non existing map difficulty in value1 (%u), skipped", cond->ConditionValue1);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Map Difficulty condition has non-existent map difficulty in value1 (%u), skipped", cond->ConditionValue1);
                     return false;
                 }
                 break;
@@ -2588,7 +2588,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             AchievementEntry const* achievement = sAchievementStore.LookupEntry(cond->ConditionValue1);
             if (!achievement)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "AchievementEntry has non existing realm first achivement id (%u), skipped.", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "AchievementEntry has non-existent realm first achivement id (%u), skipped.", cond->ConditionValue1);
                 return false;
             }
             break;
@@ -2612,7 +2612,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             }
             if (!valid)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "StandState has non-existing stand state (%u,%u), skipped.", cond->ConditionValue1, cond->ConditionValue2);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "StandState has non-existent stand state (%u,%u), skipped.", cond->ConditionValue1, cond->ConditionValue2);
                 return false;
             }
             break;
@@ -2622,7 +2622,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             GarrTalentEntry const* entry = sGarrTalentStore.LookupEntry(cond->ConditionValue1);
             if (!entry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_CLASS_HALL_ADVANCEMENT has non-existing class hall tallentID  - %u, skipped.", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "CONDITION_CLASS_HALL_ADVANCEMENT has non-existent class hall talentID  - %u, skipped.", cond->ConditionValue1);
                 return false;
             }
             break;
@@ -2633,7 +2633,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             CurrencyTypesEntry const * currencyEntry = sCurrencyTypesStore.LookupEntry(cond->ConditionValue1);
             if (!currencyEntry)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Currency condition has non existing currency (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Currency condition has non-existent currency (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             break;
@@ -2643,7 +2643,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
             ItemTemplate const* proto = sObjectMgr->GetItemTemplate(cond->ConditionValue1);
             if (!proto)
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Item condition has non existing item (%u), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Item condition has non-existent item (%u), skipped", cond->ConditionValue1);
                 return false;
             }
             break;
@@ -2652,7 +2652,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         {
             if (!sSpellMgr->GetSpellInfo(cond->ConditionValue1))
             {
-                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura (CONDITION_GET_AMOUNT_STACK_AURA) condition has non existing spell (Id: %d), skipped", cond->ConditionValue1);
+                TC_LOG_ERROR(LOG_FILTER_SQL, "Aura (CONDITION_GET_AMOUNT_STACK_AURA) condition has non-existent spell (Id: %d), skipped", cond->ConditionValue1);
                 return false;
             }
             break;

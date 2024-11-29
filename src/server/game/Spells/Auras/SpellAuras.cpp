@@ -962,7 +962,7 @@ void Aura::_UnapplyForTarget(Unit* target, Unit* caster, AuraApplicationPtr aura
     if (caster && caster->IsPlayer())
     {
         if (GetSpellInfo()->HasAttribute(SPELL_ATTR0_DISABLED_WHILE_ACTIVE))
-            // note: item based cooldowns and cooldown spell mods with charges ignored (unknown existed cases)
+            // note: item based cooldowns and cooldown spell mods with charges ignored (unknown existing cases)
             caster->ToPlayer()->SendCooldownEvent(GetSpellInfo());
     }
 

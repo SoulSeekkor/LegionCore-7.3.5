@@ -283,7 +283,7 @@ void Group::LoadMemberFromDB(ObjectGuid::LowType guidLow, uint8 memberFlags, uin
     MemberSlot member;
     member.Guid = ObjectGuid::Create<HighGuid::Player>(guidLow);
 
-    // skip non-existed member
+    // skip non-existent member
     if (!ObjectMgr::GetPlayerNameByGUID(member.Guid, member.Name))
     {
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GROUP_MEMBER);
@@ -718,7 +718,7 @@ bool Group::AddMysteryMember(ObjectGuid::LowType guidLow, std::string Name, uint
     MemberSlot member;
     member.Guid = ObjectGuid::Create<HighGuid::Player>(guidLow);
 
-    // skip non-existed member
+    // skip non-existent member
     if (!ObjectMgr::GetPlayerNameByGUID(member.Guid, member.Name))
     {
         PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GROUP_MEMBER);

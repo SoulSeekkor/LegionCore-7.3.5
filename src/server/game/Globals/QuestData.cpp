@@ -455,7 +455,7 @@ void QuestDataStoreMgr::LoadQuests()
         return;
     }
 
-    // create multimap previous quest for each existed quest
+    // create multimap previous quest for each existing quest
     // some quests can have many previous maps set by NextQuestID in previous quest
     // for example set of race quests can lead to single not race specific quest
     do
@@ -648,7 +648,7 @@ void QuestDataStoreMgr::LoadQuests()
 
             uint32 questId = fields[2].GetUInt32();
 
-            // Do not throw error here because error for non existing quest is thrown while loading quest objectives. we do not need duplication
+            // Do not throw error here because error for non-existent quest is thrown while loading quest objectives. we do not need duplication
             auto itr = _questTemplates.find(questId);
             if (itr != _questTemplates.end())
                 itr->second->LoadQuestObjectiveVisualEffect(fields);
@@ -867,7 +867,7 @@ void QuestDataStoreMgr::LoadQuests()
                     qinfo->SetSpecialFlag(QUEST_SPECIAL_FLAGS_DELIVER);
                     if (!sObjectMgr->GetItemTemplate(obj.ObjectID))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing item entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent item entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
                         //WorldDatabase.PExecute("delete from `quest_objectives` WHERE `ObjectId` = %u and `QuestID` = %u and type = 1", obj.ObjectID, qinfo->GetQuestId());
                     }
                     break;
@@ -879,13 +879,13 @@ void QuestDataStoreMgr::LoadQuests()
                             const_cast<CreatureTemplate*>(cInfo)->QuestPersonalLoot = true;
                     }
                     else
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing creature entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, uint32(obj.ObjectID));
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent creature entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, uint32(obj.ObjectID));
                     break;
                 case QUEST_OBJECTIVE_GAMEOBJECT:
                     qinfo->SetSpecialFlag(QUEST_SPECIAL_FLAGS_KILL | QUEST_SPECIAL_FLAGS_CAST);
                     if (!sObjectMgr->GetGameObjectTemplate(obj.ObjectID))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing gameobject entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, uint32(obj.ObjectID));
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent gameobject entry %u, quest can't be done.", qinfo->GetQuestId(), obj.ID, uint32(obj.ObjectID));
                         //WorldDatabase.PExecute("delete from `quest_objectives` WHERE `ObjectId` = %u and `QuestID` = %u and type = 2", obj.ObjectID, qinfo->GetQuestId());
                     }
                     break;
@@ -895,7 +895,7 @@ void QuestDataStoreMgr::LoadQuests()
                 case QUEST_OBJECTIVE_MIN_REPUTATION:
                 case QUEST_OBJECTIVE_MAX_REPUTATION:
                     if (!sFactionStore.LookupEntry(obj.ObjectID))
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing faction id %u", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent faction id %u", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
                     break;
                 case QUEST_OBJECTIVE_PLAYERKILLS:
                     qinfo->SetSpecialFlag(QUEST_SPECIAL_FLAGS_PLAYER_KILL);
@@ -907,7 +907,7 @@ void QuestDataStoreMgr::LoadQuests()
                 case QUEST_OBJECTIVE_CURRENCY:
                     if (!sCurrencyTypesStore.LookupEntry(obj.ObjectID))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing currency %u", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent currency %u", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
                         //WorldDatabase.PExecute("delete from `quest_objectives` WHERE `ObjectId` = %u and `QuestID` = %u and type = 4", obj.ObjectID, qinfo->GetQuestId());
                     }
                     if (obj.Amount <= 0)
@@ -926,7 +926,7 @@ void QuestDataStoreMgr::LoadQuests()
                     if (sAreaTriggerStore.LookupEntry(uint32(obj.ObjectID)))
                         sAreaTriggerDataStore->AddDataToQuestAreatriggerStore(qinfo->Id, obj.ObjectID);
                     else if (obj.ObjectID != -1)
-                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non existing areatrigger id %d", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
+                        TC_LOG_ERROR(LOG_FILTER_SQL, "LoadQuests() >> Quest %u objective %u has non-existent areatrigger id %d", qinfo->GetQuestId(), obj.ID, obj.ObjectID);
                     break;
                 case QUEST_OBJECTIVE_MONEY:
                 case QUEST_OBJECTIVE_DEFEATBATTLEPET:
@@ -1476,7 +1476,7 @@ void QuestDataStoreMgr::LoadGameobjectQuestRelations()
     {
         GameObjectTemplate const* goInfo = sObjectMgr->GetGameObjectTemplate(itr->first);
         if (!goInfo)
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectQuestRelations() >> Table `gameobject_queststarter` have data for not existed gameobject entry (%u) and existed quest %u", itr->first, itr->second);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectQuestRelations() >> Table `gameobject_queststarter` have data for non-existent gameobject entry (%u) and existing quest %u", itr->first, itr->second);
         else if (goInfo->type != GAMEOBJECT_TYPE_QUESTGIVER)
         {
             TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectQuestRelations() >> Table `gameobject_queststarter` have data gameobject entry (%u) for quest %u, but GO is not GAMEOBJECT_TYPE_QUESTGIVER", itr->first, itr->second);
@@ -1493,7 +1493,7 @@ void QuestDataStoreMgr::LoadGameobjectInvolvedRelations()
     {
         GameObjectTemplate const* goInfo = sObjectMgr->GetGameObjectTemplate(itr->first);
         if (!goInfo)
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectInvolvedRelations() >> Table `gameobject_questender` have data for not existed gameobject entry (%u) and existed quest %u", itr->first, itr->second);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectInvolvedRelations() >> Table `gameobject_questender` have data for non-existent gameobject entry (%u) and existing quest %u", itr->first, itr->second);
         else if (goInfo->type != GAMEOBJECT_TYPE_QUESTGIVER)
         {
             TC_LOG_ERROR(LOG_FILTER_SQL, "LoadGameobjectInvolvedRelations() >>  Table `gameobject_questender` have data gameobject entry (%u) for quest %u, but GO is not GAMEOBJECT_TYPE_QUESTGIVER", itr->first, itr->second);
@@ -1512,7 +1512,7 @@ void QuestDataStoreMgr::LoadCreatureQuestRelations()
     {
         CreatureTemplate const* cInfo = sObjectMgr->GetCreatureTemplate(itr->first);
         if (!cInfo)
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadCreatureQuestRelations() >> Table `creature_queststarter` have data for not existed creature entry (%u) and existed quest %u", itr->first, itr->second);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadCreatureQuestRelations() >> Table `creature_queststarter` have data for non-existent creature entry (%u) and existing quest %u", itr->first, itr->second);
         //else if (!(cInfo->npcflag & UNIT_NPC_FLAG_QUESTGIVER))
         //    TC_LOG_ERROR(LOG_FILTER_SQL, "LoadCreatureQuestRelations() >> Table `creature_queststarter` has creature entry (%u) for quest %u, but npcflag does not include UNIT_NPC_FLAG_QUESTGIVER", itr->first, itr->second);
     }
@@ -1524,7 +1524,7 @@ void QuestDataStoreMgr::LoadAreaQuestRelations()
 
     for (QuestRelations::iterator itr = _areaQuestRelations.begin(); itr != _areaQuestRelations.end(); ++itr)
         if (!sAreaTableStore.LookupEntry(itr->first))
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadAreaQuestRelations() >> Table `area_questrelation` have data for not existed area entry (%u) and existed quest %u", itr->first, itr->second);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadAreaQuestRelations() >> Table `area_questrelation` have data for non-existent area entry (%u) and existing quest %u", itr->first, itr->second);
 }
 
 void QuestDataStoreMgr::LoadCreatureInvolvedRelations()
@@ -1535,7 +1535,7 @@ void QuestDataStoreMgr::LoadCreatureInvolvedRelations()
     {
         CreatureTemplate const* cInfo = sObjectMgr->GetCreatureTemplate(itr->first);
         if (!cInfo)
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadCreatureInvolvedRelations() >> Table `creature_questender` have data for not existed creature entry (%u) and existed quest %u", itr->first, itr->second);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadCreatureInvolvedRelations() >> Table `creature_questender` have data for non-existent creature entry (%u) and existing quest %u", itr->first, itr->second);
         //else if (!(cInfo->npcflag & UNIT_NPC_FLAG_QUESTGIVER))
         //    TC_LOG_ERROR(LOG_FILTER_SQL, "Table `creature_questender` has creature entry (%u) for quest %u, but npcflag does not include UNIT_NPC_FLAG_QUESTGIVER", itr->first, itr->second);
     

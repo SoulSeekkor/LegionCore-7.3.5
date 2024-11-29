@@ -136,7 +136,7 @@ public:
                 info.name       = fields[1].GetString();
                 info.accountId  = fields[2].GetUInt32();
 
-                // account name will be empty for not existed account
+                // account name will be empty for non-existent account
                 AccountMgr::GetName(info.accountId, info.accountName);
                 info.deleteDate = time_t(fields[3].GetUInt32());
                 foundList.push_back(info);
@@ -172,11 +172,11 @@ public:
 
             if (!handler->GetSession())
                 handler->PSendSysMessage(LANG_CHARACTER_DELETED_LIST_LINE_CONSOLE,
-                itr->Guid.GetGUIDLow(), itr->name.c_str(), itr->accountName.empty() ? "<Not existed>" : itr->accountName.c_str(),
+                itr->Guid.GetGUIDLow(), itr->name.c_str(), itr->accountName.empty() ? "<non-existent>" : itr->accountName.c_str(),
                     itr->accountId, dateStr.c_str());
             else
                 handler->PSendSysMessage(LANG_CHARACTER_DELETED_LIST_LINE_CHAT,
-                itr->Guid.GetGUIDLow(), itr->name.c_str(), itr->accountName.empty() ? "<Not existed>" : itr->accountName.c_str(),
+                itr->Guid.GetGUIDLow(), itr->name.c_str(), itr->accountName.empty() ? "<non-existent>" : itr->accountName.c_str(),
                     itr->accountId, dateStr.c_str());
         }
 
@@ -566,7 +566,7 @@ public:
 
         if (newCharName.empty())
         {
-            // Drop not existed account cases
+            // Drop non-existent account cases
             for (DeletedInfoList::iterator itr = foundList.begin(); itr != foundList.end(); ++itr)
                 HandleCharacterDeletedRestoreHelper(*itr, handler);
         }

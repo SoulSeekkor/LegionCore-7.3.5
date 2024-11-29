@@ -1556,7 +1556,7 @@ ObjectGuid const& Object::GetGuidValue(uint16 index) const
 
 bool Object::PrintIndexError(uint32 index, bool set) const
 {
-    TC_LOG_ERROR(LOG_FILTER_GENERAL, "Attempt %s non-existed value field: %u (count: %u) for object typeid: %u type mask: %u", set ? "set value to" : "get value from", index, m_valuesCount, GetTypeId(), m_objectType);
+    TC_LOG_ERROR(LOG_FILTER_GENERAL, "Attempt %s non-existent value field: %u (count: %u) for object typeid: %u type mask: %u", set ? "set value to" : "get value from", index, m_valuesCount, GetTypeId(), m_objectType);
 
     // ASSERT must fail after function call
     return false;

@@ -76,7 +76,7 @@ void ConversationDataStoreMgr::LoadConversations()
 
         if (!hasData || !isActor && !isCreature)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "ConversationDataStoreMgr::LoadConversations() >> Table `conversation` has conversation (GUID: " UI64FMTD ") with non existing conversation data %u, skipped.", guid, entry);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "ConversationDataStoreMgr::LoadConversations() >> Table `conversation` has conversation (GUID: " UI64FMTD ") with non-existent conversation data %u, skipped.", guid, entry);
             continue;
         }
 
@@ -132,7 +132,7 @@ void ConversationDataStoreMgr::LoadConversations()
 
         if (!sMapStore.LookupEntry(data.mapid))
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadConversations >> Table `conversation` have conversation (GUID: " UI64FMTD ") that spawned at not existed map (Id: %u), skipped.", guid, data.mapid);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "LoadConversations >> Table `conversation` have conversation (GUID: " UI64FMTD ") that spawned at non-existent map (Id: %u), skipped.", guid, data.mapid);
             continue;
         }
 

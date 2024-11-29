@@ -4540,7 +4540,7 @@ void Spell::EffectEnchantItemTmp(SpellEffIndex effIndex)
 
     if (!sSpellItemEnchantmentStore.LookupEntry(enchant_id))
     {
-        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Spell %u Effect %u (SPELL_EFFECT_ENCHANT_ITEM_TEMPORARY) have not existed enchanting id %u ", m_spellInfo->Id, effIndex, enchant_id);
+        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "Spell %u Effect %u (SPELL_EFFECT_ENCHANT_ITEM_TEMPORARY) have non-existent enchanting id %u ", m_spellInfo->Id, effIndex, enchant_id);
         return;
     }
 

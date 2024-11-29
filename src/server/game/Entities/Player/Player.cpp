@@ -4735,14 +4735,14 @@ bool Player::AddTalent(TalentEntry const* talent, uint8 index, bool learning)
         // do character spell book cleanup (all characters)
         if (!IsInWorld() && !learning)                       // spell load case
         {
-            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existed in SpellStore spell #%u request, deleting for all characters in `character_spell`.", talent->SpellID);
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existent in SpellStore spell #%u request, deleting for all characters in `character_spell`.", talent->SpellID);
 
             PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_TALENT);
             stmt->setUInt32(0, talent->ID);
             CharacterDatabase.Execute(stmt);
         }
         else
-            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existed in SpellStore spell #%u request.", talent->SpellID);
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existent in SpellStore spell #%u request.", talent->SpellID);
 
         return false;
     }
@@ -4820,13 +4820,13 @@ bool Player::addSpell(uint32 spellId, bool active, bool learning, bool dependent
         // do character spell book cleanup (all characters)
         if (!IsInWorld() && !learning)                       // spell load case
         {
-            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existed in SpellStore spell #%u request, deleting for all characters in `character_spell`.", spellId);
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existent in SpellStore spell #%u request, deleting for all characters in `character_spell`.", spellId);
             PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_INVALID_SPELL);
             stmt->setUInt32(0, spellId);
             CharacterDatabase.Execute(stmt);
         }
         else
-            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existed in SpellStore spell #%u request.", spellId);
+            TC_LOG_DEBUG(LOG_FILTER_SPELLS_AURAS, "Player::addSpell: Non-existent in SpellStore spell #%u request.", spellId);
 
         return false;
     }
@@ -6546,7 +6546,7 @@ TrainerSpellState Player::GetTrainerSpellState(TrainerSpell const* trainer_spell
  */
 void Player::DeleteFromDB(ObjectGuid playerguid, uint32 accountId, bool updateRealmChars, bool deleteFinally)
 {
-    // for not existed account avoid update realm
+    // for non-existent account avoid update realm
     if (accountId == 0)
         updateRealmChars = false;
 
@@ -7651,7 +7651,7 @@ void Player::HandleBaseModValue(BaseModGroup modGroup, BaseModType modType, floa
 {
     if (modGroup >= BASEMOD_END || modType >= MOD_END)
     {
-        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "ERROR in HandleBaseModValue(): non existed BaseModGroup of wrong BaseModType!");
+        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "ERROR in HandleBaseModValue(): Non-existent BaseModGroup of wrong BaseModType!");
         return;
     }
 
@@ -7687,7 +7687,7 @@ float Player::GetBaseModValue(BaseModGroup modGroup, BaseModType modType) const
 {
     if (modGroup >= BASEMOD_END || modType > MOD_END)
     {
-        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "trial to access non existed BaseModGroup or wrong BaseModType!");
+        TC_LOG_ERROR(LOG_FILTER_SPELLS_AURAS, "trial to access non-existent BaseModGroup or wrong BaseModType!");
         return 0.0f;
     }
 
@@ -8482,7 +8482,7 @@ bool Player::addActionButton(uint8 button, uint32 action, uint8 type, ActionButt
     if (!IsActionButtonDataValid(button, action, type))
         return false;
 
-    // it create new button (NEW state) if need or return existed
+    // it create new button (NEW state) if need or return existing
     m_actionButtons.erase(button);
     m_actionButtons.emplace(button, ActionButton(action, type, state));
 
@@ -13681,7 +13681,7 @@ InventoryResult Player::CanStoreItem_InBag(uint8 bag, ItemPosCountVec &dest, Ite
     if (bag == skip_bag)
         return EQUIP_ERR_WRONG_BAG_TYPE;
 
-    // skip not existed bag or self targeted bag
+    // skip non-existent bag or self targeted bag
     Bag* pBag = GetBagByPos(bag);
     if (!pBag || pBag == pSrcItem)
         return EQUIP_ERR_WRONG_BAG_TYPE;
@@ -14628,7 +14628,7 @@ InventoryResult Player::CanUnequipItem(uint16 pos, bool swap) const
 
     Item* pItem = GetItemByPos(pos);
 
-    // Applied only to existed equipped item
+    // Applied only to existing equipped item
     if (!pItem)
         return EQUIP_ERR_OK;
     
@@ -16144,7 +16144,7 @@ void Player::MoveItemToInventory(ItemPosCountVec const& dest, Item* pItem, bool 
     if (!pLastItem)
         return;
 
-    // only set if not merged to existed stack (pItem can be deleted already but we can compare pointers any way)
+    // only set if not merged to existing stack (pItem can be deleted already but we can compare pointers any way)
     if (pLastItem == pItem)
     {
         // update owner for last item (this can be original item with wrong owner
@@ -16739,7 +16739,7 @@ void Player::SplitItem(uint16 src, uint16 dst, uint32 count)
         return;
     }
 
-    // not let split more existed items (can be only at cheating)
+    // not let split more existing items (can be only at cheating)
     if (pSrcItem->GetCount() < count)
     {
         SendEquipError(EQUIP_ERR_TOO_FEW_TO_SPLIT, pSrcItem);
@@ -19268,7 +19268,7 @@ int32 Player::GetQuestMoneyReward(Quest const* quest) const
     if (quest->RewardMoney < 0)
         return quest->RewardMoney;
 
-    return quest->MoneyValue(getLevel()) * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1)  ? 1.0f : sWorld->getRate(RATE_DROP_MONEY));
+    return quest->MoneyValue(getLevel(), GetZoneId()) * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1)  ? 1.0f : sWorld->getRate(RATE_DROP_MONEY));
 }
 
 uint32 Player::GetQuestXPReward(Quest const* quest)
@@ -19750,13 +19750,15 @@ bool Player::SatisfyQuestSkill(Quest const* qInfo, bool msg) const
 
 bool Player::SatisfyQuestLevel(Quest const* qInfo, bool msg)
 {
-    if (getLevel() < qInfo->MinLevel)
+    uint32 scaledLevel = qInfo->GetScaledQuestLevel(getLevel(), GetZoneId());
+
+    if (getLevel() < scaledLevel)
     {
         if (msg)
             SendCanTakeQuestResponse(INVALIDREASON_QUEST_FAILED_LOW_LEVEL, qInfo);
         return false;
     }
-    if (qInfo->MaxLevel > 0 && getLevel() > qInfo->MaxLevel)
+    if (scaledLevel > 0 && getLevel() > scaledLevel)
     {
         if (msg)
             SendCanTakeQuestResponse(INVALIDREASON_DONT_HAVE_REQ, qInfo, "level"); // There doesn't seem to be a specific response for too high player level
@@ -23662,7 +23664,7 @@ void Player::_LoadMail()
 
             if (m->mailTemplateId && !sMailTemplateStore.LookupEntry(m->mailTemplateId))
             {
-                TC_LOG_ERROR(LOG_FILTER_PLAYER, "Player::_LoadMail - Mail (%u) have not existed MailTemplateId (%u), remove at load", m->messageID, m->mailTemplateId);
+                TC_LOG_ERROR(LOG_FILTER_PLAYER, "Player::_LoadMail - Mail (%u) have non-existent MailTemplateId (%u), remove at load", m->messageID, m->mailTemplateId);
                 m->mailTemplateId = 0;
             }
 
@@ -24344,12 +24346,12 @@ void Player::_LoadBoundInstances(PreparedQueryResult result)
             MapEntry const* mapEntry = sMapStore.LookupEntry(mapId);
             if (!mapEntry || !mapEntry->IsDungeon())
             {
-                TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to not existed or not dungeon map %d", GetName(), GetGUIDLow(), mapId);
+                TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to non-existent or not dungeon map %d", GetName(), GetGUIDLow(), mapId);
                 deleteInstance = true;
             }
             else if (difficulty >= MAX_DIFFICULTY)
             {
-                TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to not existed difficulty %d instance for map %u", GetName(), GetGUIDLow(), difficulty, mapId);
+                TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to non-existent difficulty %d instance for map %u", GetName(), GetGUIDLow(), difficulty, mapId);
                 deleteInstance = true;
             }
             else if ((resetTime + MONTH) <= time(NULL) && !Extended)
@@ -24359,7 +24361,7 @@ void Player::_LoadBoundInstances(PreparedQueryResult result)
                 MapDifficultyEntry const* mapDiff = sDB2Manager.GetMapDifficultyData(mapId, Difficulty(difficulty));
                 if (!mapDiff)
                 {
-                    TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to not existed difficulty %d instance for map %u", GetName(), GetGUIDLow(), difficulty, mapId);
+                    TC_LOG_ERROR(LOG_FILTER_PLAYER, "_LoadBoundInstances: player %s(%d) has bind to non-existent difficulty %d instance for map %u", GetName(), GetGUIDLow(), difficulty, mapId);
                     deleteInstance = true;
                 }
                 else if (!perm && group)
@@ -29046,7 +29048,7 @@ void Player::UpdatePotionCooldown(Spell* spell)
     // Call not from spell cast, send cooldown event for item spells if no in combat
     if (!spell)
     {
-        // spell/item pair let set proper cooldown (except not existed charged spell cooldown spellmods for potions)
+        // spell/item pair let set proper cooldown (except non-existent charged spell cooldown spellmods for potions)
         if (ItemTemplate const* proto = sObjectMgr->GetItemTemplate(m_lastPotionId))
             for (ItemEffectEntry const* effectData : proto->Effects)
                 if (effectData->TriggerType == ITEM_SPELLTRIGGER_ON_USE)

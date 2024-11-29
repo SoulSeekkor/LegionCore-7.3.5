@@ -394,7 +394,7 @@ class Quest
         void LoadQuestObjective(Field* fields);
         void LoadQuestObjectiveVisualEffect(Field* fields);
 
-        uint32 XPValue(Player* player) const;
+        uint32 XPValue(Player* player, uint32 zoneId = 0) const;
 
         bool HasFlag(uint32 flag) const { return (Flags & flag) != 0; }
         void SetFlag(uint32 flag) { Flags |= flag; }
@@ -405,8 +405,8 @@ class Quest
         // table data accessors:
         uint32 GetQuestId() const { return Id; }
         QuestObjectives const& GetObjectives() const { return Objectives; };
-        uint32 MoneyValue(uint8 playerLevel) const;
-        uint32 GetScaledQuestLevel(uint8 playerLevel) const;
+        uint32 MoneyValue(uint8 playerLevel, uint32 zoneId = 0) const;
+        uint32 GetScaledQuestLevel(uint8 playerLevel, uint32 zoneId) const;
         uint32 GetRewMoneyMaxLevel() const; // use in XP calculation at client
         bool   IsRepeatable() const { return (SpecialFlags & QUEST_SPECIAL_FLAGS_REPEATABLE) != 0; }
         bool   IsAutoAccept() const;

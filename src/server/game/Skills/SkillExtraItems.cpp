@@ -79,7 +79,7 @@ void LoadSkillExtraItemTable()
         uint32 requiredSpecialization = fields[1].GetUInt32();
         if (!sSpellMgr->GetSpellInfo(requiredSpecialization))
         {
-            TC_LOG_ERROR(LOG_FILTER_GENERAL, "Skill specialization %u have not existed required specialization spell id %u in `skill_extra_item_template`!", spellId, requiredSpecialization);
+            TC_LOG_ERROR(LOG_FILTER_GENERAL, "Skill specialization %u have non-existent required specialization spell id %u in `skill_extra_item_template`!", spellId, requiredSpecialization);
             continue;
         }
 

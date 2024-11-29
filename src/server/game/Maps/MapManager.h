@@ -26,9 +26,19 @@
 class WorldLocation;
 class ChatHandler;
 
+struct ZoneLevelEntry
+{
+    uint32 zoneId = 0;
+    uint8 minLevel = 0;
+    uint8 maxLevel = 0;
+};
+
 class MapManager
 {
     typedef std::vector<Map*> MapMapType;
+
+    typedef std::unordered_map<uint32, ZoneLevelEntry> ZoneLevelContainer;
+    ZoneLevelContainer _zoneLevelStore;
 
     MapManager();
     ~MapManager();
@@ -86,6 +96,9 @@ class MapManager
         Map* FindBaseMap(uint32 mapId) const { return i_maps[mapId]; }
         std::vector<std::thread*> _mapThreads;
         uint16 _mapCount;
+
+        void LoadZoneLevelMap();
+        ZoneLevelEntry const* GetZoneLevelEntry(uint32 zoneId);
 
     private:
 

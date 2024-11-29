@@ -257,7 +257,7 @@ class InstanceScript : public ZoneScript
         BossBoundaryMap const* GetBossBoundary(uint32 id) const;
 
         // Achievement criteria additional requirements check
-        // NOTE: not use this if same can be checked existed requirement types from AchievementCriteriaRequirementType
+        // NOTE: not use this if same can be checked existing requirement types from AchievementCriteriaRequirementType
         virtual bool CheckAchievementCriteriaMeet(uint32 /*criteria_id*/, Player const* /*source*/, Unit const* /*target*/ = nullptr, uint32 /*miscvalue1*/ = 0);
 
         // Checks boss requirements (one boss required to kill other)
