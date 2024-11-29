@@ -420,6 +420,54 @@ void QuestDataStoreMgr::LoadQuestRelations()
     LoadCreatureInvolvedRelations();
 }
 
+void QuestDataStoreMgr::LoadQuestZoneMap()
+{
+    uint32 oldMSTime = getMSTime();
+
+    QueryResult result = WorldDatabase.Query(
+        "SELECT DISTINCT quest, zoneId FROM ( "
+            "SELECT creature_queststarter.quest, creature.zoneId "
+            "FROM creature_queststarter "
+                "INNER JOIN creature ON creature.id = creature_queststarter.id "
+            "UNION ALL "
+            "SELECT gameobject_queststarter.quest, gameobject.zoneId "
+            "FROM gameobject_queststarter "
+                "INNER JOIN gameobject ON gameobject.id = gameobject_queststarter.id "
+        ") sq "
+        "ORDER BY quest, zoneId "
+    );
+
+    if (!result)
+    {
+        TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, ">> Loaded 0 Quest Zone Mapping definitions.");
+
+        return;
+    }
+
+    _zoneQuestMappingStore.rehash(result->GetRowCount());
+
+    uint32 count = 0;
+    do
+    {
+        Field* fields = result->Fetch();
+        uint32 questId = fields[0].GetUInt32();
+
+        ZoneQuestMappingEntry& zoneEntry = _zoneQuestMappingStore[questId];
+
+        zoneEntry.quest = questId;
+        zoneEntry.zoneId = fields[1].GetUInt8();
+
+        ++count;
+    } while (result->NextRow());
+
+    TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded %u Quest Zone Mapping definitions in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+}
+
+ZoneQuestMappingEntry const* QuestDataStoreMgr::GetQuestZoneMappingEntry(uint32 questId)
+{
+    return Trinity::Containers::MapGetValuePtr(_zoneQuestMappingStore, questId);
+}
+
 void QuestDataStoreMgr::LoadQuests()
 {
     for (auto itr : _questTemplates)

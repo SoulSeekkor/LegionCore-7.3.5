@@ -175,6 +175,12 @@ struct PointOfInterest
     std::string icon_name;
 };
 
+struct ZoneQuestMappingEntry
+{
+    uint32 quest;
+    uint32 zoneId;
+};
+
 typedef std::map<uint8, std::vector<WorldQuestTemplate>> WorldQuestTemplateMap;
 typedef std::map<uint8, std::vector<WorldQuestUpdate>> WorldQuestUpdateMap;
 typedef std::map<uint32 /*ZoneID*/, std::set<WorldQuestUpdate const*>> WorldQuestUpdateSet;
@@ -200,6 +206,9 @@ typedef std::unordered_map<uint32, PointOfInterest> PointOfInterestContainer;
 
 class QuestDataStoreMgr
 {
+    typedef std::unordered_map<uint32, ZoneQuestMappingEntry> ZoneQuestMappingContainer;
+    ZoneQuestMappingContainer _zoneQuestMappingStore;
+
     QuestDataStoreMgr();
     ~QuestDataStoreMgr();
 
@@ -258,6 +267,9 @@ public:
     ExclusiveQuestGroups mExclusiveQuestGroups;
     uint32 WorldLegionInvasionZoneID = 0;
     std::atomic<bool> needWait;
+
+    void LoadQuestZoneMap();
+    ZoneQuestMappingEntry const* GetQuestZoneMappingEntry(uint32 questId);
 
 private:
     void LoadAreaQuestRelations();

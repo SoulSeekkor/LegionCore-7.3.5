@@ -1682,6 +1682,9 @@ void World::SetInitialWorldSettings()
     TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Zone Level Data...");
     sMapMgr->LoadZoneLevelMap();
 
+    TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Quest Zone Mapping Data...");
+    sQuestDataStore->LoadQuestZoneMap();
+
     TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Loading Script Names...");
     sObjectMgr->LoadScriptNames();
 

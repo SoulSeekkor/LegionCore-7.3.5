@@ -28,9 +28,9 @@ class ChatHandler;
 
 struct ZoneLevelEntry
 {
-    uint32 zoneId = 0;
-    uint8 minLevel = 0;
-    uint8 maxLevel = 0;
+    uint32 zoneId;
+    uint8 minLevel;
+    uint8 maxLevel;
 };
 
 class MapManager
