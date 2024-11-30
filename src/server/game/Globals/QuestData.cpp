@@ -537,6 +537,7 @@ void QuestDataStoreMgr::LoadQuests()
                 newQuest->Level = levelEntry->minLevel;
                 newQuest->MinLevel = levelEntry->minLevel;
                 newQuest->MaxScalingLevel = levelEntry->maxLevel;
+                TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "LoadQuests() >> Adjusted min level to %u and max level to %u for quest id %u.", newQuest->MinLevel, newQuest->MaxScalingLevel, newQuest->GetQuestId());
             }
         }
     } while (result->NextRow());
