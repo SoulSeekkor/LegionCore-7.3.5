@@ -518,6 +518,8 @@ void PlayerMenu::SendQuestQueryResponse(uint32 questId) const
     packet.Info.RewardXPMultiplier = quest->RewardXPMultiplier;
     packet.Info.RewardMoneyMultiplier = quest->RewardMoneyMultiplier;
 
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "SendQuestQueryResponse() >> Sent quest info of min level %u and max level %u for quest id %u.", packet.Info.QuestMinLevel, packet.Info.QuestMaxScalingLevel, packet.Info.QuestID);
+
     if (!quest->HasFlag(QUEST_FLAGS_HIDDEN_REWARDS))
         packet.Info.RewardMoney = quest->RewardMoney < 0 ? quest->RewardMoney : _session->GetPlayer()->GetQuestMoneyReward(quest);
 
