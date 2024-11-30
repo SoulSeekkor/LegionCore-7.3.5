@@ -456,7 +456,7 @@ void QuestDataStoreMgr::LoadQuestZoneMap()
         ZoneQuestMappingEntry& zoneEntry = _zoneQuestMappingStore[questId];
 
         zoneEntry.quest = questId;
-        zoneEntry.zoneId = fields[1].GetUInt8();
+        zoneEntry.zoneId = fields[1].GetUInt32();
 
         ++count;
     } while (result->NextRow());
