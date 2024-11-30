@@ -534,9 +534,9 @@ void QuestDataStoreMgr::LoadQuests()
         {
             if (ZoneLevelEntry const* levelEntry = sMapMgr->GetZoneLevelEntry(questEntry->zoneId))
             {
-                newQuest.Level = levelEntry->minLevel;
-                newQuest.MinLevel = levelEntry->minLevel;
-                newQuest.MaxScalingLevel = levelEntry->maxLevel;
+                newQuest->Level = levelEntry->minLevel;
+                newQuest->MinLevel = levelEntry->minLevel;
+                newQuest->MaxScalingLevel = levelEntry->maxLevel;
             }
         }
     } while (result->NextRow());
