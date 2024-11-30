@@ -1333,7 +1333,7 @@ void InstanceScript::LogCompletedEncounter(bool success)
         _logData.Rosters.push_back(data);
     });
 
-    sLog->OutPveEncounter(_logData.Serealize().c_str());
+    sLog->OutPveEncounter(_logData.Serialize().c_str());
 
     _logData = {};
 }

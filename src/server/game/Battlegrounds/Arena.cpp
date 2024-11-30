@@ -320,7 +320,7 @@ void Arena::EndBattleground(uint32 winner)
             }
         }
 
-        sLog->OutPveEncounter(_logData.Serealize().c_str());
+        sLog->OutPveEncounter(_logData.Serialize().c_str());
         _logData = {};
     }
 

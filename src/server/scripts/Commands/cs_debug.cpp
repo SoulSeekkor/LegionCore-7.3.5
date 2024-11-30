@@ -2290,7 +2290,7 @@ public:
         //rooster.ItemLevel = player->GetAverageItemLevelEquipped();
         //data.Rosters.push_back(rooster);
 
-        //TC_LOG_ERROR(LOG_FILTER_GENERAL, " %s ", data.Serealize().c_str());
+        //TC_LOG_ERROR(LOG_FILTER_GENERAL, " %s ", data.Serialize().c_str());
         return true;
     }
 
