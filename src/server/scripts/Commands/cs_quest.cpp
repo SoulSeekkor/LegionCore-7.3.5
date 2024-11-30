@@ -286,18 +286,18 @@ public:
 
         switch (player->GetQuestStatus(entry))
         {
-        case QUEST_STATUS_INCOMPLETE:
-            handler->PSendSysMessage(600025, entry, player->GetName());
-            break;
-        case QUEST_STATUS_COMPLETE:
-            handler->PSendSysMessage(600026, entry, player->GetName());
-            break;
-        case QUEST_STATUS_REWARDED:
-            handler->PSendSysMessage(600027, entry, player->GetName());
-            break;
-        case QUEST_STATUS_NONE:
-            handler->PSendSysMessage(600028, player->GetName(), entry);
-            break;
+            case QUEST_STATUS_INCOMPLETE:
+                handler->PSendSysMessage(600025, entry, player->GetName(), quest->Level, quest->MinLevel, quest->MaxLevel, quest->MaxScalingLevel, quest->GetScaledQuestLevel(player->getLevel(), player->GetZoneId());
+                break;
+            case QUEST_STATUS_COMPLETE:
+                handler->PSendSysMessage(600026, entry, player->GetName(), quest->Level, quest->MinLevel, quest->MaxLevel, quest->MaxScalingLevel, quest->GetScaledQuestLevel(player->getLevel(), player->GetZoneId());
+                break;
+            case QUEST_STATUS_REWARDED:
+                handler->PSendSysMessage(600027, entry, player->GetName(), quest->Level, quest->MinLevel, quest->MaxLevel, quest->MaxScalingLevel, quest->GetScaledQuestLevel(player->getLevel(), player->GetZoneId());
+                break;
+            case QUEST_STATUS_NONE:
+                handler->PSendSysMessage(600028, player->GetName(), entry, quest->Level, quest->MinLevel, quest->MaxLevel, quest->MaxScalingLevel, quest->GetScaledQuestLevel(player->getLevel(), player->GetZoneId());
+                break;
         }
         return true;
     }
