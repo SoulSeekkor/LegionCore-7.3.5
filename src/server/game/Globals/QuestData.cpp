@@ -20,6 +20,7 @@
 #include "DatabaseEnv.h"
 #include "GameEventMgr.h"
 #include "ObjectMgr.h"
+#include "MapManager.h"
 #include "DisableMgr.h"
 #include "AreaTriggerData.h"
 #include "PoolMgr.h"
@@ -525,6 +526,17 @@ void QuestDataStoreMgr::LoadQuests()
             {
                 if (!newQuest->IsWorld())
                     _questAreaTaskStore[areaId].insert(newQuest);
+            }
+        }
+
+        // Update quest to scale with the zone if possible
+        if (ZoneQuestMappingEntry const* questEntry = GetQuestZoneMappingEntry(newQuest->GetQuestId()))
+        {
+            if (ZoneLevelEntry const* levelEntry = sMapMgr->GetZoneLevelEntry(questEntry->zoneId))
+            {
+                newQuest.Level = levelEntry->minLevel;
+                newQuest.MinLevel = levelEntry->minLevel;
+                newQuest.MaxScalingLevel = levelEntry->maxLevel;
             }
         }
     } while (result->NextRow());
