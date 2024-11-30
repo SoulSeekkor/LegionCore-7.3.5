@@ -190,7 +190,9 @@ void Quest::LoadQuestOfferReward(Field* fields)
 
 void Quest::LoadQuestTemplateAddon(Field* fields)
 {
-    MaxLevel = fields[1].GetUInt8();
+    if (MaxLevel == 0)
+        MaxLevel = fields[1].GetUInt8();
+
     AllowableClasses = fields[2].GetUInt32();
     SourceSpellID = fields[3].GetUInt32();
     PrevQuestID = fields[4].GetInt32();
