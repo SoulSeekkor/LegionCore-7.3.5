@@ -516,7 +516,7 @@ void WorldSession::LogoutPlayer(bool Save)
         }
 
         _player->SetDelete();
-        _player->SetChangeMap(false); // If not disable crash on clear evecnt function
+        _player->SetChangeMap(false); // If not disable crash on clear event function
 
         // finish pending transfers before starting the logout
         if (_player->IsBeingTeleportedFar())

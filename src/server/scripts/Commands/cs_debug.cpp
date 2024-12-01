@@ -2079,7 +2079,7 @@ public:
             player = handler->GetSession()->GetPlayer();
 
         player->AddAura(SPELL_PRINCIPLES_OF_WAR, player);
-        player->EnablePvpRules(false);
+        player->EnablePvPRules(false);
         return true;
     }
 

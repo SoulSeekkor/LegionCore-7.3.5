@@ -1477,7 +1477,7 @@ void Player::Update(uint32 p_time)
 
     CheckDuelDistance();
 
-    UpdateAfkReport(now);
+    UpdateAFKReport(now);
 
     if (isCharmed())
         if (Unit* charmer = GetCharmer())
@@ -1648,8 +1648,8 @@ void Player::Update(uint32 p_time)
         {
 			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
 			{
-				if (!HasPvpRulesEnabled())
-					EnablePvpRules(false);
+				if (!HasPvPRulesEnabled())
+					EnablePvPRules(false);
 			}
 			else 
 			{
@@ -1660,11 +1660,11 @@ void Player::Update(uint32 p_time)
 
 				if (map->IsBattlegroundOrArena())
 				{
-					if (!HasPvpStatsScalingEnabled() || !HasPvpRulesEnabled() || !hasTemplate)
+					if (!HasPvpStatsScalingEnabled() || !HasPvPRulesEnabled() || !hasTemplate)
 					{
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
 						AddAura(SPELL_PRINCIPLES_OF_WAR, this);
-						EnablePvpRules(false);
+						EnablePvPRules(false);
 					}
 				}
 				else if (map->IsDungeon())
@@ -1674,7 +1674,7 @@ void Player::Update(uint32 p_time)
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY);
 					}
-					if (HasPvpRulesEnabled())
+					if (HasPvPRulesEnabled())
 					{
 						RemoveAurasDueToSpell(SPELL_PVP_RULES_ENABLED);
 					}
@@ -4129,7 +4129,7 @@ void Player::TogglePvpStatsScaling(bool enable)
     {
         RemoveAurasDueToSpell(SPELL_PVP_STATS_TEMPLATE);
         RemoveAurasDueToSpell(SPELL_DISABLE_ITEM_EFFECTS_IN_PVP);
-        DisablePvpRules(false);
+        DisablePvPRules(false);
         SetCrowdControlSpellId(0);
     }
 
@@ -4142,17 +4142,17 @@ bool Player::HasPvpStatsScalingEnabled() const
     return _pvpStatsScalingEnabled;
 }
 
-bool Player::HasPvpRulesTimer() const
+bool Player::HasPvPRulesTimer() const
 {
     return _pvpRulesTimer;
 }
 
-void Player::SetPvpRulesTimer(bool enable)
+void Player::SetPvPRulesTimer(bool enable)
 {
     _pvpRulesTimer = enable;
 }
 
-bool Player::IsAreaThatActivatesPvpTalents(uint32 areaID) const
+bool Player::IsAreaThatActivatesPvPTalents(uint32 areaID) const
 {
     if (InBattleground())
         return true;
@@ -4165,21 +4165,21 @@ bool Player::IsAreaThatActivatesPvpTalents(uint32 areaID) const
         if (const_cast<Player*>(this)->InFFAPvPArea())
             return true;
 
-        if (!area->ActivatesPvpTalents())
+        if (!area->ActivatesPvPTalents())
             if (area->ParentAreaID)
-                return IsAreaThatActivatesPvpTalents(area->ParentAreaID);
+                return IsAreaThatActivatesPvPTalents(area->ParentAreaID);
 
-        return area->ActivatesPvpTalents();
+        return area->ActivatesPvPTalents();
     }
 
     return false;
 }
 
-void Player::EnablePvpRules(bool recalcItems /*= true*/)
+void Player::EnablePvPRules(bool recalcItems /*= true*/)
 {
-    if (HasPvpRulesEnabled())
+    if (HasPvPRulesEnabled())
     {
-        if (HasPvpRulesTimer())
+        if (HasPvPRulesTimer())
         {
             if (Aura* aura = GetAura(SPELL_PVP_RULES_ENABLED))
             {
@@ -4201,17 +4201,17 @@ void Player::EnablePvpRules(bool recalcItems /*= true*/)
     AddAura(SPELL_PVP_RULES_ENABLED, this);
 
     if (!HasSpell(195710))
-        CastSpell(this, 208682, true); //Learn Gladiator's Medallion
+        CastSpell(this, 208682, true); // Learn Gladiator's Medallion
 
-    // for (std::pair<ObjectGuid, uint32> ArtIt : AllArtifacts)
-        // if (Item* artifact = GetItemByGuid(ArtIt.first))
-        // {
-            // _ApplyItemBonuses(artifact, artifact->GetSlot(), false);
-            // _ApplyItemBonuses(artifact, artifact->GetSlot(), true);
-            // // for (uint8 slot = SOCK_ENCHANTMENT_SLOT; slot <= SOCK_ENCHANTMENT_SLOT_3; ++slot)
-                // // if (uint32 enchantmentID = artifact->GetEnchantmentId(EnchantmentSlot(slot)))
-                    // // artifact->ApplyArtifactPowerEnchantmentBonuses(EnchantmentSlot(slot), enchantmentID, false, this);
-        // }
+    //for (std::pair<ObjectGuid, uint32> ArtIt : AllArtifacts)
+        //if (Item* artifact = GetItemByGuid(ArtIt.first))
+        //{
+            //_ApplyItemBonuses(artifact, artifact->GetSlot(), false);
+            //_ApplyItemBonuses(artifact, artifact->GetSlot(), true);
+            // //for (uint8 slot = SOCK_ENCHANTMENT_SLOT; slot <= SOCK_ENCHANTMENT_SLOT_3; ++slot)
+                // //if (uint32 enchantmentID = artifact->GetEnchantmentId(EnchantmentSlot(slot)))
+                    // //artifact->ApplyArtifactPowerEnchantmentBonuses(EnchantmentSlot(slot), enchantmentID, false, this);
+        //}
 
     if (Aura* aura = GetAura(SPELL_PVP_RULES_ENABLED))
     {
@@ -4220,25 +4220,25 @@ void Player::EnablePvpRules(bool recalcItems /*= true*/)
     }
 }
 
-void Player::DisablePvpRules(bool recalcItems /*= true*/, bool checkZone/* = true*/)
+void Player::DisablePvPRules(bool recalcItems /*= true*/, bool checkZone/* = true*/)
 {
-    if ((checkZone && IsAreaThatActivatesPvpTalents(GetCurrentAreaID())) || 
+    if ((checkZone && IsAreaThatActivatesPvPTalents(GetCurrentAreaID())) || 
 		(sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110))
         return;
 
-    // for (std::pair<ObjectGuid, uint32> ArtIt : AllArtifacts)
-        // if (Item* artifact = GetItemByGuid(ArtIt.first))
-        // {
-            // _ApplyItemBonuses(artifact, artifact->GetSlot(), false);
-            // _ApplyItemBonuses(artifact, artifact->GetSlot(), true);
-            // // for (uint8 slot = SOCK_ENCHANTMENT_SLOT; slot <= SOCK_ENCHANTMENT_SLOT_3; ++slot)
-                // // if (uint32 enchantmentID = artifact->GetEnchantmentId(EnchantmentSlot(slot)))
-                    // // artifact->ApplyArtifactPowerEnchantmentBonuses(EnchantmentSlot(slot), enchantmentID, true, this);
-        // }
+    //for (std::pair<ObjectGuid, uint32> ArtIt : AllArtifacts)
+        //if (Item* artifact = GetItemByGuid(ArtIt.first))
+        //{
+            //_ApplyItemBonuses(artifact, artifact->GetSlot(), false);
+            //_ApplyItemBonuses(artifact, artifact->GetSlot(), true);
+            // //for (uint8 slot = SOCK_ENCHANTMENT_SLOT; slot <= SOCK_ENCHANTMENT_SLOT_3; ++slot)
+                // //if (uint32 enchantmentID = artifact->GetEnchantmentId(EnchantmentSlot(slot)))
+                    // //artifact->ApplyArtifactPowerEnchantmentBonuses(EnchantmentSlot(slot), enchantmentID, true, this);
+        //}
 
     if (!GetCombatTimer())
     {
-        if (!HasPvpRulesEnabled())
+        if (!HasPvPRulesEnabled())
             return;
 
         if (HasAura(SPELL_PVP_RULES_ENABLED))
@@ -4261,7 +4261,7 @@ void Player::DisablePvpRules(bool recalcItems /*= true*/, bool checkZone/* = tru
         aura->SetDuration(aura->GetSpellInfo()->GetMaxDuration());
 }
 
-bool Player::HasPvpRulesEnabled()
+bool Player::HasPvPRulesEnabled()
 {
     for (auto const& v : *GetPvPTalentMap(GetActiveTalentGroup()))
         if (v.second != PLAYERSPELL_REMOVED && HasSpell(v.first))
@@ -6951,7 +6951,7 @@ void Player::DeleteOldCharacters(uint32 keepDays)
 */
 void Player::BuildPlayerRepop()
 {
-    WorldPackets::Misc::PreRessurect packet;
+    WorldPackets::Misc::PreResurrect packet;
     packet.PlayerGUID = GetGUID();
     SendDirectMessage(packet.Write());
 
@@ -6984,20 +6984,20 @@ void Player::BuildPlayerRepop()
     SetHealth(1);
 
     SetWaterWalking(true);
-    if (!GetSession()->isLogingOut())
+    if (!GetSession()->isLoggingOut())
         SetRooted(false);
 
     // BG - remove insignia related
     RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_SKINNABLE);
 
-//    SendCorpseReclaimDelay();
+    //SendCorpseReclaimDelay();
 
     // to prevent cheating
     corpse->ResetGhostTime();
 
-    StopMirrorTimers();                                     //disable timers(bars)
+    StopMirrorTimers();                                     // disable timers (bars)
 
-    SetFloatValue(UNIT_FIELD_BOUNDING_RADIUS, float(1.0f));   //see radius of death player?
+    SetFloatValue(UNIT_FIELD_BOUNDING_RADIUS, float(1.0f));   // see radius of death player?
 
     // set and clear other
     SetMiscStandValue(UNIT_BYTE1_FLAG_ALWAYS_STAND);
@@ -7101,7 +7101,7 @@ void Player::KillPlayer()
 
     SetRooted(true);
 
-    StopMirrorTimers();                                     //disable timers(bars)
+    StopMirrorTimers();                                     // disable timers (bars)
 
     setDeathState(CORPSE);
     //SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_IN_PVP);
@@ -7153,7 +7153,7 @@ void Player::CreateCorpse()
         flags |= CORPSE_FLAG_SKINNABLE;                      // to be able to remove insignia
     if (IsFFAPvP())
         flags |= CORPSE_FLAG_FFA_PVP;
-    if (HasAura(261228)) //Argus: phase 4 - IsAllowingRelease
+    if (HasAura(261228)) // Argus: phase 4 - IsAllowingRelease
         flags |= CORPSE_FLAG_HIDE_MODEL;
 
     corpse->SetUInt32Value(CORPSE_FIELD_FLAGS, flags);
@@ -7226,7 +7226,7 @@ void Player::DurabilityLossAll(double percent, bool inventory, bool withMods)
 
 void Player::DurabilityLoss(Item* item, double percent)
 {
-    if (!item || item->IsSturdiness())
+    if (!item || item->HasSturdiness())
         return;
 
     uint32 pMaxDurability = item->GetUInt32Value(ITEM_FIELD_MAX_DURABILITY);
@@ -7267,7 +7267,7 @@ void Player::DurabilityPointsLossAll(int32 points, bool inventory)
 
 void Player::DurabilityPointsLoss(Item* item, int32 points)
 {
-    if (!item || item->IsSturdiness())
+    if (!item || item->HasSturdiness())
         return;
 
     if (HasAuraType(SPELL_AURA_PREVENT_DURABILITY_LOSS))
@@ -10104,15 +10104,15 @@ void Player::UpdateArea(uint32 newArea)
 
 	if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
 	{
-		if (!HasPvpRulesEnabled())
-			EnablePvpRules(false);
+		if (!HasPvPRulesEnabled())
+			EnablePvPRules(false);
 	}
 	else
 	{
-		if (IsAreaThatActivatesPvpTalents(newArea))
-			EnablePvpRules(!InArena() && !InBattleground());
+		if (IsAreaThatActivatesPvPTalents(newArea))
+			EnablePvPRules(!InArena() && !InBattleground());
 		else
-			DisablePvpRules(true, false);
+			DisablePvPRules(true, false);
 	}
 
     PrepareAreaQuest(newArea);
@@ -10383,8 +10383,8 @@ void Player::DuelComplete(DuelCompleteType type)
         SendMessageToSet(duelWinner.Write(), true);
     }
 
-    DisablePvpRules();
-    dueler->DisablePvpRules();
+    DisablePvPRules();
+    dueler->DisablePvPRules();
 
     sScriptMgr->OnPlayerDuelEnd(dueler, this, type);
 
@@ -10571,7 +10571,7 @@ void Player::_ApplyItemBonuses(Item* item, uint8 slot, bool apply)
         if (statType == -1)
             continue;
  
-        int32 val = item->GetItemStatValue(i, HasPvpRulesEnabled());
+        int32 val = item->GetItemStatValue(i, HasPvPRulesEnabled());
         if (val == 0)
             continue;
 
@@ -10813,7 +10813,7 @@ void Player::_ApplyWeaponDamage(uint8 slot, Item* item, bool apply)
 
     float minDamage = 0.0f;
     float maxDamage = 0.0f;
-    proto->GetDamage(item->GetItemLevel(GetEffectiveLevel(), HasPvpRulesEnabled()), minDamage, maxDamage);
+    proto->GetDamage(item->GetItemLevel(GetEffectiveLevel(), HasPvPRulesEnabled()), minDamage, maxDamage);
 
     if (minDamage > 0)
     {
@@ -26354,8 +26354,8 @@ void Player::SendResetInstanceFailed(ResetFailedReason reason, uint32 mapID) con
 /***              Update timers                        ***/
 /*********************************************************/
 
-///checks the 15 afk reports per 5 minutes limit
-void Player::UpdateAfkReport(time_t currTime)
+///checks the 15 AFK reports per 5 minutes limit
+void Player::UpdateAFKReport(time_t currTime)
 {
     if (m_bgData.BgAfkReportedTimer <= currTime)
     {
@@ -26736,7 +26736,7 @@ void Player::Whisper(std::string const& text, uint32 language, ObjectGuid receiv
         ChatHandler(this).SendSysMessage(LANG_COMMAND_WHISPERON);
     }
 
-    // announce to player that player he is whispering to is afk
+    // announce to player that player he is whispering to is AFK
     if (rPlayer->isAFK())
         ChatHandler(this).PSendSysMessage(LANG_PLAYER_AFK, rPlayer->GetName(), rPlayer->afkMsg.c_str());
 
@@ -27486,7 +27486,7 @@ bool Player::ActivateTaxiPathTo(std::vector<uint32> const& nodes, Creature* npc 
     }
 
     // not let cheating with start flight in time of logout process || while in combat || has type state: stunned || has type state: root
-    if (GetSession()->isLogingOut() || isInCombat() || HasUnitState(UNIT_STATE_STUNNED) || HasUnitState(UNIT_STATE_ROOT))
+    if (GetSession()->isLoggingOut() || isInCombat() || HasUnitState(UNIT_STATE_STUNNED) || HasUnitState(UNIT_STATE_ROOT))
     {
         GetSession()->SendActivateTaxiReply(ERR_TAXIPLAYERBUSY);
         return false;
@@ -27659,7 +27659,7 @@ bool Player::ShortTaxiPathTo(TaxiNodesEntry const* from, TaxiNodesEntry const* t
     }
 
     // not let cheating with start flight in time of logout process || while in combat || has type state: stunned || has type state: root
-    if (GetSession()->isLogingOut() || isInCombat() || HasUnitState(UNIT_STATE_STUNNED) || HasUnitState(UNIT_STATE_ROOT))
+    if (GetSession()->isLoggingOut() || isInCombat() || HasUnitState(UNIT_STATE_STUNNED) || HasUnitState(UNIT_STATE_ROOT))
     {
         GetSession()->SendActivateTaxiReply(ERR_TAXIPLAYERBUSY);
         return false;
@@ -29316,7 +29316,7 @@ bool Player::CanJoinToBattleground(uint8 pvpIternalType) const
     }
 }
 
-bool Player::CanReportAfkDueToLimit()
+bool Player::CanReportAFKDueToLimit()
 {
     // a player can complain about 15 people per 5 minutes
     if (m_bgData.BgAfkReportedCount++ >= 15)
@@ -29325,32 +29325,32 @@ bool Player::CanReportAfkDueToLimit()
     return true;
 }
 
-void Player::ReportedAfkBy(Player* reporter)
+void Player::ReportedAFKBy(Player* reporter)
 {
-    WorldPackets::Battleground::ReportPvPPlayerAFKResult reportAfkResult;
-    reportAfkResult.Offender = GetGUID();
+    WorldPackets::Battleground::ReportPvPPlayerAFKResult reportAFKResult;
+    reportAFKResult.Offender = GetGUID();
     Battleground* bg = GetBattleground();
     if (!bg || bg != reporter->GetBattleground() || GetTeam() != reporter->GetTeam() || bg->GetStatus() != STATUS_IN_PROGRESS)
     {
-        reporter->SendDirectMessage(reportAfkResult.Write());
+        reporter->SendDirectMessage(reportAFKResult.Write());
         return;
     }
 
-    if (m_bgData.BgAfkReporter.find(reporter->GetGUIDLow()) == m_bgData.BgAfkReporter.end() && !HasAura(43680) && !HasAura(SPELL_BG_AURA_PLAYER_INACTIVE) && reporter->CanReportAfkDueToLimit())
+    if (m_bgData.BgAfkReporter.find(reporter->GetGUIDLow()) == m_bgData.BgAfkReporter.end() && !HasAura(43680) && !HasAura(SPELL_BG_AURA_PLAYER_INACTIVE) && reporter->CanReportAFKDueToLimit())
     {
         m_bgData.BgAfkReporter.insert(reporter->GetGUIDLow());
         if (m_bgData.BgAfkReporter.size() >= 3)
         {
             CastSpell(this, 43680, true);
-            reportAfkResult.NumBlackMarksOnOffender = m_bgData.BgAfkReporter.size();
-            reportAfkResult.NumPlayersIHaveReported = reporter->m_bgData.BgAfkReportedCount;
-            reportAfkResult.Result = WorldPackets::Battleground::ReportPvPPlayerAFKResult::PVP_REPORT_AFK_SUCCESS;
+            reportAFKResult.NumBlackMarksOnOffender = m_bgData.BgAfkReporter.size();
+            reportAFKResult.NumPlayersIHaveReported = reporter->m_bgData.BgAfkReportedCount;
+            reportAFKResult.Result = WorldPackets::Battleground::ReportPvPPlayerAFKResult::PVP_REPORT_AFK_SUCCESS;
 
             m_bgData.BgAfkReporter.clear();
         }
     }
 
-    reporter->SendDirectMessage(reportAfkResult.Write());
+    reporter->SendDirectMessage(reportAFKResult.Write());
 }
 
 WorldLocation Player::GetStartPosition() const
@@ -33343,7 +33343,7 @@ bool Player::LearnPvpTalent(uint16 talentID)
         return false;
     }
 
-    if (HasPvpRulesEnabled())
+    if (HasPvPRulesEnabled())
     {
         if (talentInfo->OverrideSpellID)
             AddOverrideSpell(talentInfo->OverrideSpellID, talentInfo->SpellID);

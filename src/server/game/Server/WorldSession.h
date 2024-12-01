@@ -1107,7 +1107,7 @@ class WorldSession
         void SetInQueue(bool state) { m_inQueue = state; }
 
         /// Is the user engaged in a log out process?
-        bool isLogingOut() const { return _logoutTime || m_playerLogout; }
+        bool isLoggingOut() const { return _logoutTime || m_playerLogout; }
 
         /// Engage the logout process for the user
         void LogoutRequest(time_t requestTime)

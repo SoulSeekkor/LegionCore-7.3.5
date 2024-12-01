@@ -2232,13 +2232,13 @@ class Player : public Unit, public GridObject<Player>
         void RemoveAllPvPTalent(bool isDelete = true);
         void TogglePvpTalents(bool enable);
         void TogglePvpStatsScaling(bool enable);
-        bool IsAreaThatActivatesPvpTalents(uint32 areaID) const;
-        void EnablePvpRules(bool recalcItems = true);
-        void DisablePvpRules(bool recalcItems = true, bool checkZone = true);
-        bool HasPvpRulesEnabled();
+        bool IsAreaThatActivatesPvPTalents(uint32 areaID) const;
+        void EnablePvPRules(bool recalcItems = true);
+        void DisablePvPRules(bool recalcItems = true, bool checkZone = true);
+        bool HasPvPRulesEnabled();
         bool HasPvpStatsScalingEnabled() const;
-        bool HasPvpRulesTimer() const;
-        void SetPvpRulesTimer(bool enable);
+        bool HasPvPRulesTimer() const;
+        void SetPvPRulesTimer(bool enable);
         bool GetCustomPvPMods(float& val, uint32 type, uint32 specID) const;
         void CalcPvPTemplate(AuraType auratype, float& templateMod, float& otherMod, std::function<bool(AuraEffect const*)> const& predicate);
 
@@ -2385,7 +2385,7 @@ class Player : public Unit, public GridObject<Player>
         void UpdateAreaDependentAuras(uint32 area_id);    // subzones
         void UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId);
 
-        void UpdateAfkReport(time_t currTime);
+        void UpdateAFKReport(time_t currTime);
         void UpdatePvPFlag(time_t currTime);
         void UpdateContestedPvP(uint32 currTime);
         void SetContestedPvPTimer(int32 newTime) {m_contestedPvPTimer = newTime;}
@@ -2798,8 +2798,8 @@ class Player : public Unit, public GridObject<Player>
 
         void LeaveBattleground(bool teleportToEntryPoint = true);
         bool CanJoinToBattleground(uint8 pvpIternalType) const;
-        bool CanReportAfkDueToLimit();
-        void ReportedAfkBy(Player* reporter);
+        bool CanReportAFKDueToLimit();
+        void ReportedAFKBy(Player* reporter);
         void ClearAfkReports() { m_bgData.BgAfkReporter.clear(); }
 
         bool GetBGAccessByLevel(uint16 bgTypeId) const;

@@ -426,7 +426,7 @@ class Item : public Object
         Player* GetOwner()const;
 
         ItemBondingType GetBonding() const;
-        bool IsSturdiness() const;
+        bool HasSturdiness() const;
         void SetBinding(bool val);
         bool IsSoulBound() const;
 

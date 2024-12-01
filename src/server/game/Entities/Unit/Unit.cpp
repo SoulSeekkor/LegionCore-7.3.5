@@ -7288,7 +7288,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
 									aura->SetDuration(aura->GetMaxDuration());
 								else
 									plr->AddAura(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY, plr);
-								plr->EnablePvpRules(false);
+								plr->EnablePvPRules(false);
 								return true;
 							}
 						}
@@ -7822,7 +7822,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
                 case 134732: // Battle Fatigue
                 {
                     if (Player* plr = ToPlayer())
-                        if ((plr->InArena() || plr->InRBG()) && plr->HasPvpRulesEnabled())
+                        if ((plr->InArena() || plr->InRBG()) && plr->HasPvPRulesEnabled())
                             return false;
 
                     if (Unit* owner = victim->GetOwner())
@@ -12856,12 +12856,12 @@ uint32 Unit::SpellDamageBonusDone(Unit* victim, SpellInfo const* spellProto, uin
 bool Unit::CanPvPScalar()
 {
     if (Player* player = ToPlayer())
-        if (player->HasPvpRulesEnabled())
+        if (player->HasPvPRulesEnabled())
             return true;
 
     if (Unit* owner = GetAnyOwner())
         if (Player* player = owner->ToPlayer())
-            if (player->HasPvpRulesEnabled())
+            if (player->HasPvPRulesEnabled())
                 return true;
 
     return false;
@@ -14739,13 +14739,13 @@ void Unit::SetInCombatState(Unit* enemy, bool PvP)
 		{
 			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && player->getLevel() >= 110)
 			{
-				if (!player->HasPvpRulesEnabled())
-					player->EnablePvpRules(false);
+				if (!player->HasPvPRulesEnabled())
+					player->EnablePvPRules(false);
 			}
 			else
 			{
 				if (PvP)
-					player->EnablePvpRules();
+					player->EnablePvPRules();
 			}
 		}
 
@@ -14822,9 +14822,9 @@ void Unit::ClearInCombat()
         {
             plr->UpdatePotionCooldown();
 
-            if (plr->HasPvpRulesEnabled())
+            if (plr->HasPvPRulesEnabled())
             {
-                if (!plr->HasPvpStatsScalingEnabled() && !plr->GetUInt32Value(PLAYER_FIELD_DUEL_TEAM) && !plr->IsAreaThatActivatesPvpTalents(plr->GetCurrentAreaID()))
+                if (!plr->HasPvpStatsScalingEnabled() && !plr->GetUInt32Value(PLAYER_FIELD_DUEL_TEAM) && !plr->IsAreaThatActivatesPvPTalents(plr->GetCurrentAreaID()))
                 {
                     if (Aura* aura = GetAura(SPELL_PVP_RULES_ENABLED))
                     {
@@ -14832,7 +14832,7 @@ void Unit::ClearInCombat()
 
                         aura->SetMaxDuration(maxDur);
                         aura->SetDuration(maxDur);
-                        plr->SetPvpRulesTimer(true);
+                        plr->SetPvPRulesTimer(true);
                     }
                 }
             }

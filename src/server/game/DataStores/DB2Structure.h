@@ -342,7 +342,7 @@ struct AreaTableEntry
     int32       UwIntroSound;
 
     bool IsSanctuary() const;
-    bool ActivatesPvpTalents() const;
+    bool ActivatesPvPTalents() const;
 };
 
 // FileOptions: None

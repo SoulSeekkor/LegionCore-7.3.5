@@ -52,15 +52,15 @@ void WorldSession::HandleDuelResponse(WorldPackets::Duel::DuelResponse& packet)
 
 			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && _player->getLevel() >= 110 && dueler->getLevel() >= 110)
 			{
-				if (!_player->HasPvpRulesEnabled())
-					_player->EnablePvpRules(false);
-				if (!dueler->HasPvpRulesEnabled())
-					dueler->EnablePvpRules(false);
+				if (!_player->HasPvPRulesEnabled())
+					_player->EnablePvPRules(false);
+				if (!dueler->HasPvPRulesEnabled())
+					dueler->EnablePvPRules(false);
 			}
 			else
 			{
-				_player->EnablePvpRules();
-				dueler->EnablePvpRules();
+				_player->EnablePvPRules();
+				dueler->EnablePvPRules();
 			}
         }
         else

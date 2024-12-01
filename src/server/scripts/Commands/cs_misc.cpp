@@ -2820,7 +2820,7 @@ public:
             return false;
 
         ///- Check that he is not logging out.
-        if (player->GetSession()->isLogingOut())
+        if (player->GetSession()->isLoggingOut())
         {
             handler->SendSysMessage(LANG_PLAYER_NOT_FOUND);
             handler->SetSentErrorMessage(true);

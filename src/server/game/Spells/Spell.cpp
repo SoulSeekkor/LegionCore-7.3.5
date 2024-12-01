@@ -3198,13 +3198,13 @@ SpellMissInfo Spell::DoSpellHitOnUnit(Unit* unit, uint32 effectMask, bool scaleA
                 {
                     if (Player* plr = unit->ToPlayer())
                     {
-                        if (plr->HasPvpRulesEnabled())
+                        if (plr->HasPvPRulesEnabled())
                             isPvP = true;
                     }
                     else if (Unit* owner = unit->GetOwner())
                     {
                         if (plr = owner->ToPlayer())
-                            if (plr->HasPvpRulesEnabled())
+                            if (plr->HasPvPRulesEnabled())
                                 isPvP = true;
                     }
                 }

@@ -9414,7 +9414,7 @@ void AuraEffect::HandleAuraPvpTalents(AuraApplication const* auraApp, uint8 mode
         }
 
         plr->SendOperationsAfterDelay(OAD_RECALC_PVP_BP);
-        plr->SetPvpRulesTimer(false);
+        plr->SetPvPRulesTimer(false);
     }
 }
 

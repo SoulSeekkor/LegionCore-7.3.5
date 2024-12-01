@@ -38,7 +38,7 @@ void WorldSession::SendBfEntered(uint64 queueID, bool relocated, bool onOffense)
 void WorldSession::HandleReportPvPPlayerAFK(WorldPackets::Battleground::ReportPvPPlayerAFK& packet)
 {
     if (Player* reportedPlayer = ObjectAccessor::FindPlayer(packet.Offender))
-        reportedPlayer->ReportedAfkBy(_player);
+        reportedPlayer->ReportedAFKBy(_player);
 }
 
 void WorldSession::HandleSetCemetryPreferrence(WorldPackets::Battleground::SetCemetryPreferrence& /*packet*/)

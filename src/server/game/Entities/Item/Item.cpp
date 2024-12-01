@@ -995,7 +995,7 @@ ItemBondingType Item::GetBonding() const
     return _bonusData.Bonding;
 }
 
-bool Item::IsSturdiness() const
+bool Item::HasSturdiness() const
 {
     return _bonusData.HasSturdiness;
 }

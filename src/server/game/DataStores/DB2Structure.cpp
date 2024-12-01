@@ -29,7 +29,7 @@ bool AreaTableEntry::IsSanctuary() const
     return (Flags[0] & AREA_FLAG_SANCTUARY) != 0;
 }
 
-bool AreaTableEntry::ActivatesPvpTalents() const
+bool AreaTableEntry::ActivatesPvPTalents() const
 {
     return (!IsSanctuary() && (Flags[0] & (AREA_FLAG_ARENA | AREA_FLAG_WINTERGRASP)) != 0) || ID == 5095 /*Tol Barad*/;
 }

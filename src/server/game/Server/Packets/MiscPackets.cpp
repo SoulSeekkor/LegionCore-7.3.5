@@ -194,7 +194,7 @@ WorldPacket const* WorldPackets::Misc::DeathReleaseLoc::Write()
     return &_worldPacket;
 }
 
-WorldPacket const* WorldPackets::Misc::PreRessurect::Write()
+WorldPacket const* WorldPackets::Misc::PreResurrect::Write()
 {
     _worldPacket << PlayerGUID;
 

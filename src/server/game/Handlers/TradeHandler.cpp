@@ -613,7 +613,7 @@ void WorldSession::HandleInitiateTrade(WorldPackets::Trade::InitiateTrade& packe
         return;
     }
 
-    if (isLogingOut())
+    if (isLoggingOut())
     {
         info.Status = TRADE_STATUS_LOGGING_OUT;
         SendTradeStatus(info);
@@ -670,7 +670,7 @@ void WorldSession::HandleInitiateTrade(WorldPackets::Trade::InitiateTrade& packe
         return;
     }
 
-    if (pOther->GetSession()->isLogingOut())
+    if (pOther->GetSession()->isLoggingOut())
     {
         info.Status = TRADE_STATUS_TARGET_LOGGING_OUT;
         SendTradeStatus(info);
