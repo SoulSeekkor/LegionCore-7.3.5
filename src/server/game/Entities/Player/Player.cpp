@@ -31422,21 +31422,21 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                 if (!sConditionMgr->IsPlayerMeetingCondition(this, questTask->ConditionID))
                     continue;
 
-                // if (questTask->WorldStateExpressionID)
-                // {
-                    // auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
-                    // if (!expressionEntry || !expressionEntry->Eval(this))
-                        // continue;
-                // }
+                //if (questTask->WorldStateExpressionID)
+                //{
+                    //auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
+                    //if (!expressionEntry || !expressionEntry->Eval(this))
+                        //continue;
+                //}
 
                 if (questTask->FiltMinSkillID && GetSkillValue(questTask->FiltMinSkillID) < questTask->FiltMinSkillValue)
                     continue;
 
-                if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
-                    continue;
+                //if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
+                    //continue;
 
-                if (questTask->FiltMaxLevel != -1 && getLevel() > questTask->FiltMaxLevel)
-                    continue;
+                //if (questTask->FiltMaxLevel != -1 && getLevel() > questTask->FiltMaxLevel)
+                    //continue;
 
                 bool needQuest = false;
                 bool canStart = true;
@@ -31543,11 +31543,11 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                 if (questTask->FiltMinSkillID && GetSkillValue(questTask->FiltMinSkillID) < questTask->FiltMinSkillValue)
                     continue;
 
-                if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
-                    continue;
+                //if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
+                    //continue;
 
-                if (questTask->FiltMaxLevel != -1 && getLevel() > questTask->FiltMaxLevel)
-                    continue;
+                //if (questTask->FiltMaxLevel != -1 && getLevel() > questTask->FiltMaxLevel)
+                    //continue;
 
                 if (questTask->FiltRaces &&  (questTask->FiltRaces & getRaceMask()) == 0)
                     continue;
