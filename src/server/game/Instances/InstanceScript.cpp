@@ -821,11 +821,11 @@ void InstanceScript::UpdatePhasing()
         {
             player->AddDelayedEvent(100, [player, step]() -> void
             {
-                PhaseUpdateData phaseUdateData;
-                phaseUdateData.AddConditionType(CONDITION_INSTANCE_INFO);
+                PhaseUpdateData phaseUpdateData;
+                phaseUpdateData.AddConditionType(CONDITION_INSTANCE_INFO);
                 if (step >= 0)
-                    phaseUdateData.AddScenarioUpdate(step);
-                player->GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+                    phaseUpdateData.AddScenarioUpdate(step);
+                player->GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
             });
         }
     });

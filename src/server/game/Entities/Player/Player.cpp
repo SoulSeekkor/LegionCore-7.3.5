@@ -290,14 +290,14 @@ m_achievementMgr(sf::safe_ptr<AchievementMgr<Player>>(this))
     m_canTitanGrip = false;
 
     m_temporaryUnsummonedPetNumber = 0;
-    //cache for UNIT_FIELD_CREATED_BY_SPELL to allow
-    //returning reagents for temporarily removed pets
-    //when dying/logging out
+    // cache for UNIT_FIELD_CREATED_BY_SPELL to allow
+    // returning reagents for temporarily removed pets
+    // when dying/logging out
     m_oldpetspell = 0;
     m_lastpetnumber = 0;
     m_LastPetEntry = 0;
 
-    ////////////////////Rest System/////////////////////
+    //////////////////// Rest System /////////////////////
     time_inn_enter=0;
     inn_pos_mapid=0;
     inn_pos_x=0;
@@ -305,9 +305,9 @@ m_achievementMgr(sf::safe_ptr<AchievementMgr<Player>>(this))
     inn_pos_z=0;
     m_rest_bonus=0;
     rest_type=REST_TYPE_NO;
-    ////////////////////Rest System/////////////////////
+    //////////////////// Rest System /////////////////////
 
-    //kill honor sistem
+    // honor kill system
     m_flushKills = false;
     m_saveKills = false;
 
@@ -467,12 +467,12 @@ Player::~Player()
     for (uint8 i = 0; i < PLAYER_SLOTS_COUNT; ++i)
         delete m_items[i];
 
-    //all mailed items should be deleted, also all mail should be deallocated
+    // all mailed items should be deleted, also all mail should be deallocated
     for (PlayerMails::iterator itr = m_mail.begin(); itr != m_mail.end(); ++itr)
         delete *itr;
 
     for (ItemMap::iterator iter = mMitems.begin(); iter != mMitems.end(); ++iter)
-        delete iter->second;                                //if item is duplicated... then server may crash ... but that item should be deallocated
+        delete iter->second;                                // if item is duplicated... then server may crash ... but that item should be deallocated
 
     delete PlayerTalkClass;
 
@@ -3943,9 +3943,9 @@ void Player::GiveLevel(uint8 level)
 
     AddDelayedEvent(100, [this]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddConditionType(CONDITION_LEVEL);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddConditionType(CONDITION_LEVEL);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
     });
 
     // Refer-A-Friend
@@ -19187,16 +19187,16 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
     uint32 qtime = 0;
     if (quest->HasSpecialFlag(QUEST_SPECIAL_FLAGS_TIMED))
     {
-        uint32 limittime = quest->LimitTime;
+        uint32 limitTime = quest->LimitTime;
 
         // shared timed quest
         if (questGiver && questGiver->IsPlayer())
             if (QuestStatusData* statusData = questGiver->ToPlayer()->getQuestStatus(quest->GetQuestId()))
-                limittime = statusData->Timer / IN_MILLISECONDS;
+                limitTime = statusData->Timer / IN_MILLISECONDS;
 
         AddTimedQuest(quest_id);
-        status_q.Timer = limittime * IN_MILLISECONDS;
-        qtime = static_cast<uint32>(time(NULL)) + limittime;
+        status_q.Timer = limitTime * IN_MILLISECONDS;
+        qtime = static_cast<uint32>(time(NULL)) + limitTime;
     }
     else
         status_q.Timer = 0;
@@ -19207,7 +19207,7 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
 
     m_achievementMgr->StartTimedAchievement(CRITERIA_TIMED_TYPE_ITEM, quest_id);
 
-    //starting initial quest script
+    // starting initial quest script
     if (questGiver && quest->StartScript)
         GetMap()->ScriptsStart(sQuestStartScripts, quest->StartScript, questGiver, this);
 
@@ -19221,9 +19221,9 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
 
     AddDelayedEvent(100, [this, quest_id]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddQuestUpdate(quest_id);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddQuestUpdate(quest_id);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
         UpdateForQuestWorldObjects();
     });
 }
@@ -19621,9 +19621,9 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
 
     AddDelayedEvent(100, [this, quest_id]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddQuestUpdate(quest_id);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddQuestUpdate(quest_id);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
     });
 
     // update area quests
@@ -20308,9 +20308,9 @@ void Player::SetQuestStatus(uint32 quest_id, QuestStatus status)
 
     AddDelayedEvent(100, [this, quest_id]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddQuestUpdate(quest_id);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddQuestUpdate(quest_id);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
         UpdateForQuestWorldObjects();
     });
 }
@@ -20332,9 +20332,9 @@ void Player::RemoveActiveQuest(uint32 quest_id)
 
     AddDelayedEvent(100, [this, quest_id]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddQuestUpdate(quest_id);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddQuestUpdate(quest_id);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
     });
 }
 
@@ -20347,9 +20347,9 @@ void Player::RemoveRewardedQuest(uint32 quest_id)
 
         AddDelayedEvent(100, [this, quest_id]() -> void
         {
-            PhaseUpdateData phaseUdateData;
-            phaseUdateData.AddQuestUpdate(quest_id);
-            GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+            PhaseUpdateData phaseUpdateData;
+            phaseUpdateData.AddQuestUpdate(quest_id);
+            GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
         });
     }
 
@@ -21906,8 +21906,8 @@ bool Player::LoadFromDB(ObjectGuid guid, SQLQueryHolder *holder)
     TC_LOG_DEBUG(LOG_FILTER_PLAYER_LOADING, "Load Basic value of player %s is: ", m_name.c_str());
     outDebugValues();
 
-    //Need to call it to initialize m_team (m_team can be calculated from race)
-    //Other way is to saves m_team into characters table.
+    // Need to call it to initialize m_team (m_team can be calculated from race)
+    // Other way is to saves m_team into characters table.
     setFactionForRace(getRace());
 
     // load home bind and check in same time class/race pair, it used later for restore broken positions
@@ -22016,7 +22016,7 @@ bool Player::LoadFromDB(ObjectGuid guid, SQLQueryHolder *holder)
 
             m_bgData.BgTypeID = currentBg->GetTypeID();
 
-            //join player to battleground group
+            // join player to battleground group
             currentBg->EventPlayerLoggedIn(this);
             currentBg->AddOrSetPlayerToCorrectBgGroup(this, m_bgData.BgTeam);
 
@@ -22047,7 +22047,7 @@ bool Player::LoadFromDB(ObjectGuid guid, SQLQueryHolder *holder)
             m_bgData.BgInstanceID = 0;
         }
     }
-    // currently we do not support transport in bg and in world, because guid is dinamyc and after restart server guis have new value
+    // currently we do not support transport in bg and in world, because guid is dinamyc and after restart server guids have new value
     else if (transLowGUID)
     {
         /*ObjectGuid transGUID = ObjectGuid::Create<HighGuid::Transport>(transLowGUID);
@@ -23714,7 +23714,7 @@ void Player::_LoadQuestStatus(PreparedQueryResult result)
                 if ((*m_QuestStatusVector)[quest_id])
                     continue;
 
-                if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) //check account quest
+                if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) // check account quest
                     continue;
 
                 // find or create
@@ -23890,7 +23890,7 @@ void Player::_LoadDailyQuestStatus(PreparedQueryResult result)
             if (!quest)
                 continue;
 
-            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) //check account quest
+            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) // check account quest
                 continue;
 
             if (quest->IsDFQuest())
@@ -23934,7 +23934,7 @@ void Player::_LoadWeeklyQuestStatus(PreparedQueryResult result)
             if (!quest)
                 continue;
 
-            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) //check account quest
+            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) // check account quest
                 continue;
 
             if (m_weeklyquests.find(quest_id) != m_weeklyquests.end())
@@ -23967,7 +23967,7 @@ void Player::_LoadSeasonalQuestStatus(PreparedQueryResult result)
             if (!quest)
                 continue;
 
-            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) //check account quest
+            if (quest->QuestInfoID != QUEST_INFO_ACCOUNT && guid != GetGUIDLow()) // check account quest
                 continue;
 
             if (m_seasonalquests.find(quest_id) != m_seasonalquests.end())
@@ -34070,9 +34070,9 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
 
     AddDelayedEvent(100, [this]() -> void
     {
-        PhaseUpdateData phaseUdateData;
-        phaseUdateData.AddConditionType(CONDITION_SPEC_ID);
-        GetPhaseMgr().NotifyConditionChanged(phaseUdateData);
+        PhaseUpdateData phaseUpdateData;
+        phaseUpdateData.AddConditionType(CONDITION_SPEC_ID);
+        GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
     });
 
     AddDelayedEvent(500, [this]() -> void
@@ -35281,7 +35281,7 @@ void Player::SetQuestUpdate(uint32 quest_id)
         }
     }
 
-    //! multy bound support. If one bound spellID has fited requirements - no need remove aura.
+    //! multi bound support. If one bound spellID fits requirements - no need remove aura.
     for (auto data : remove)
     {
         auto i = apply.find(data.first);
