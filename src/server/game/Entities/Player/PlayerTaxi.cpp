@@ -168,7 +168,7 @@ void PlayerTaxi::AppendTaximaskTo(WorldPackets::Taxi::ShowTaxiNodes& data, bool 
 
             if (node->ConditionID)
             {
-                if ((node->Flags & TAXI_NODE_FLAG_UNK2) && !sPlayerConditionStore.LookupEntry(node->ConditionID)) //TAXI_NODE_FLAG_UNK2 not use if condition not found in db2
+                if ((node->Flags & TAXI_NODE_FLAG_UNK2) && !sPlayerConditionStore.LookupEntry(node->ConditionID)) // TAXI_NODE_FLAG_UNK2 not use if condition not found in db2
                     continue;
                 if (!sConditionMgr->IsPlayerMeetingCondition(player, node->ConditionID))
                     continue;
@@ -178,15 +178,15 @@ void PlayerTaxi::AppendTaximaskTo(WorldPackets::Taxi::ShowTaxiNodes& data, bool 
             switch (node->ID)
             {
                 case 1985: // 1944
-                    // if (player->GetCurrentZoneID() != 8574) // Krokuun
+                    //if (player->GetCurrentZoneID() != 8574) // Krokuun
                         landNodes = false;
                     break;
                 case 1986: // 1987
-                    // if (player->GetCurrentZoneID() != 8701) // Mac'Aree
+                    //if (player->GetCurrentZoneID() != 8701) // Mac'Aree
                         landNodes = false;
                     break;
                 case 1987: // 1994
-                    // if (player->GetCurrentZoneID() != 8899) // Antoran Wastes
+                    //if (player->GetCurrentZoneID() != 8899) // Antoran Wastes
                         landNodes = false;
                     break;
             }

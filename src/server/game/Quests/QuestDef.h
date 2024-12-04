@@ -265,7 +265,7 @@ enum QuestFlagsEx
     QUEST_FLAGS_EX_DISALLOW_PLAYER_AS_QUESTGIVER                        = 0x0000008,
     QUEST_FLAGS_EX_DISPLAY_CLASS_CHOICE_REWARDS                         = 0x0000010,
     QUEST_FLAGS_EX_DISPLAY_SPEC_CHOICE_REWARDS                          = 0x0000020,
-    QUEST_FLAGS_EX_REMOVE_FROM_LOG_ON_PERIDOIC_RESET                    = 0x0000040,
+    QUEST_FLAGS_EX_REMOVE_FROM_LOG_ON_PERIODIC_RESET                    = 0x0000040,
     QUEST_FLAGS_EX_ACCOUNT_LEVEL_QUEST                                  = 0x0000080,
     QUEST_FLAGS_EX_LEGENDARY_QUEST                                      = 0x0000100,
     QUEST_FLAGS_EX_NO_GUILD_XP                                          = 0x0000200,

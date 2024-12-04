@@ -31400,7 +31400,7 @@ void Player::UpdateAreaDependentAuras(uint32 newArea)
 
 void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
 {
-    // TC_LOG_DEBUG(LOG_FILTER_WORLD_QUEST, "UpdateAreaQuestTasks newAreaId %u oldAreaId %u", newAreaId, oldAreaId);
+    //TC_LOG_DEBUG(LOG_FILTER_WORLD_QUEST, "UpdateAreaQuestTasks newAreaId %u oldAreaId %u", newAreaId, oldAreaId);
 
     std::list<uint32> questAdd;
 
@@ -31422,12 +31422,12 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                 if (!sConditionMgr->IsPlayerMeetingCondition(this, questTask->ConditionID))
                     continue;
 
-                // if (questTask->WorldStateExpressionID)
-                // {
-                    // auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
-                    // if (!expressionEntry || !expressionEntry->Eval(this))
-                        // continue;
-                // }
+                //if (questTask->WorldStateExpressionID)
+                //{
+                    //auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
+                    //if (!expressionEntry || !expressionEntry->Eval(this))
+                        //continue;
+                //}
 
                 if (questTask->FiltMinSkillID && GetSkillValue(questTask->FiltMinSkillID) < questTask->FiltMinSkillValue)
                     continue;
@@ -31450,7 +31450,7 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                             canStart = false;
 
                 //if (questTask->StartItem && !HasAura(questTask->StartItem))
-                //    continue;
+                    //continue;
 
                 if (needQuest && !canStart)
                     continue;
@@ -31510,7 +31510,7 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
     {
         for (Quest const* quest : *qInfo)
         {
-            // TC_LOG_DEBUG(LOG_FILTER_WORLD_QUEST, "UpdateAreaQuestTasks GetQuestId %u", quest->GetQuestId());
+            //TC_LOG_DEBUG(LOG_FILTER_WORLD_QUEST, "UpdateAreaQuestTasks GetQuestId %u", quest->GetQuestId());
 
             if (FindQuestSlot(quest->GetQuestId()) < MAX_QUEST_LOG_SIZE)
             {
@@ -31533,12 +31533,12 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                 if (!sConditionMgr->IsPlayerMeetingCondition(this, questTask->ConditionID))
                     continue;
 
-                // if (questTask->WorldStateExpressionID)
-                // {
-                    // auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
-                    // if (!expressionEntry || !expressionEntry->Eval(this))
-                        // continue;
-                // }
+                //if (questTask->WorldStateExpressionID)
+                //{
+                    //auto expressionEntry = sWorldStateExpressionStore.LookupEntry(questTask->WorldStateExpressionID);
+                    //if (!expressionEntry || !expressionEntry->Eval(this))
+                        //continue;
+                //}
 
                 if (questTask->FiltMinSkillID && GetSkillValue(questTask->FiltMinSkillID) < questTask->FiltMinSkillValue)
                     continue;
@@ -31567,7 +31567,7 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                             canStart = false;
 
                 //if (questTask->StartItem && !HasAura(questTask->StartItem))
-                //    continue;
+                    //continue;
 
                 if (needQuest && !canStart)
                     continue;

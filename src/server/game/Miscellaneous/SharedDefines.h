@@ -4144,7 +4144,7 @@ enum CreatureTypeFlags2
     CREATURE_TYPEFLAGS_2_UNK9           = 0x00000100,
     CREATURE_TYPEFLAGS_2_UNK10          = 0x00000200,
     CREATURE_TYPEFLAGS_2_UNK11          = 0x00000400,
-    CREATURE_TYPEFLAGS_2_UNK12          = 0x00000800, // May be skaling level?
+    CREATURE_TYPEFLAGS_2_UNK12          = 0x00000800, // May be scaling level?
     CREATURE_TYPEFLAGS_2_UNK13          = 0x00001000,
 };
 

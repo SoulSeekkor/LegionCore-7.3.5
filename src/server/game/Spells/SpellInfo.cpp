@@ -692,7 +692,7 @@ float SpellEffectInfo::CalcValue(Unit const* caster, float const* bp, Unit const
                 break;
         }
 
-        // if (caster->ToPlayer() && caster->ToPlayer()->HasPvpRulesEnabled())
+        // if (caster->ToPlayer() && caster->ToPlayer()->HasPvPRulesEnabled())
             // if (PvPMultiplier)
                 // amount *= PvPMultiplier;
     }
