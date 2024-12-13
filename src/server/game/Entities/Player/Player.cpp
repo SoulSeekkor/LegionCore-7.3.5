@@ -458,7 +458,7 @@ m_achievementMgr(sf::safe_ptr<AchievementMgr<Player>>(this))
 
 Player::~Player()
 {
-    // it must be unloaded already in PlayerLogout and accessed only for loggined player
+    // it must be unloaded already in PlayerLogout and accessed only for logged in player
     //m_social = NULL;
 
     delete _cheatData;
@@ -1382,7 +1382,7 @@ void Player::HandleSobering()
     SetDrunkValue(drunk);
 }
 
-DrunkenState Player::GetDrunkenstateByValue(uint8 value)
+DrunkenState Player::GetDrunkenStateByValue(uint8 value)
 {
     if (value >= 90)
         return DRUNKEN_SMASHED;
@@ -1396,7 +1396,7 @@ DrunkenState Player::GetDrunkenstateByValue(uint8 value)
 void Player::SetDrunkValue(uint8 newDrunkValue, uint32 itemId /*= 0*/)
 {
     bool isSobering = newDrunkValue < GetDrunkValue();
-    uint32 oldDrunkenState = GetDrunkenstateByValue(GetDrunkValue());
+    uint32 oldDrunkenState = GetDrunkenStateByValue(GetDrunkValue());
     if (newDrunkValue > 100)
         newDrunkValue = 100;
 
@@ -1410,7 +1410,7 @@ void Player::SetDrunkValue(uint8 newDrunkValue, uint32 itemId /*= 0*/)
     else if (!HasAuraType(SPELL_AURA_MOD_FAKE_INEBRIATE) && !newDrunkValue)
         m_invisibilityDetect.DelFlag(INVISIBILITY_DRUNK);
 
-    uint32 newDrunkenState = GetDrunkenstateByValue(newDrunkValue);
+    uint32 newDrunkenState = GetDrunkenStateByValue(newDrunkValue);
     SetByteValue(PLAYER_FIELD_BYTES_3, PLAYER_BYTES_3_OFFSET_INEBRIATION, newDrunkValue);
     UpdateObjectVisibility();
 
@@ -1655,12 +1655,12 @@ void Player::Update(uint32 p_time)
 			{
 				bool hasTemplate = HasAura(SPELL_PRINCIPLES_OF_WAR);
 
-				if (hasTemplate && !HasPvpStatsScalingEnabled() || !hasTemplate && HasPvpStatsScalingEnabled())
+				if (hasTemplate && !HasPvPStatsScalingEnabled() || !hasTemplate && HasPvPStatsScalingEnabled())
 					sWorld->AddPvPMysticCount(); // for debug
 
 				if (map->IsBattlegroundOrArena())
 				{
-					if (!HasPvpStatsScalingEnabled() || !HasPvPRulesEnabled() || !hasTemplate)
+					if (!HasPvPStatsScalingEnabled() || !HasPvPRulesEnabled() || !hasTemplate)
 					{
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
 						AddAura(SPELL_PRINCIPLES_OF_WAR, this);
@@ -1669,7 +1669,7 @@ void Player::Update(uint32 p_time)
 				}
 				else if (map->IsDungeon())
 				{
-					if (HasPvpStatsScalingEnabled())
+					if (HasPvPStatsScalingEnabled())
 					{
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
 						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY);
@@ -4137,7 +4137,7 @@ void Player::TogglePvpStatsScaling(bool enable)
     RecalcArenaAuras(enable);
 }
 
-bool Player::HasPvpStatsScalingEnabled() const
+bool Player::HasPvPStatsScalingEnabled() const
 {
     return _pvpStatsScalingEnabled;
 }
@@ -7745,7 +7745,7 @@ void Player::UpdateRating(CombatRating cr)
     float amount = m_baseRatingValue[cr];
     float otherMod = 0.f;
 
-    if (HasPvpStatsScalingEnabled() && (cr != CR_PARRY && cr != CR_DODGE && cr != CR_BLOCK))
+    if (HasPvPStatsScalingEnabled() && (cr != CR_PARRY && cr != CR_DODGE && cr != CR_BLOCK))
     {
         switch (cr)
         {
@@ -7878,7 +7878,7 @@ void Player::UpdateItemLevels()
     SetFloatValue(PLAYER_FIELD_AVG_ITEM_LEVEL + PlayerAvgItemLevelOffsets::NonPvPAvgItemLevel, GetAverageItemLevelTotalWithOrWithoutPvPBonus(false));
     SetFloatValue(PLAYER_FIELD_AVG_ITEM_LEVEL + PlayerAvgItemLevelOffsets::PvPAvgItemLevel, GetAverageItemLevelTotalWithOrWithoutPvPBonus(true));
 
-    if (HasPvpStatsScalingEnabled())
+    if (HasPvPStatsScalingEnabled())
     {
         SendUpdateStat(USM_ALL);
         SendUpdateCR(CR_PVP_UPDATE_MASK);
@@ -11013,7 +11013,7 @@ void Player::ApplyEquipSpell(SpellInfo const* spellInfo, Item* item, bool apply,
         if (GetSession()->PlayerLogout())
             return;
 
-        if (HasPvpStatsScalingEnabled() && !isArtifact)
+        if (HasPvPStatsScalingEnabled() && !isArtifact)
             return;
 
         // Cannot be used in this stance/form
@@ -11664,7 +11664,7 @@ void Player::RescaleAllItemsIfNeeded(bool keepHPPct /*= false*/)
 
     if (!arts.empty())
     {
-        bool hasPvpScaling = HasPvpStatsScalingEnabled();
+        bool hasPvpScaling = HasPvPStatsScalingEnabled();
 
         for (auto itr : arts)
         {
@@ -17747,7 +17747,7 @@ void Player::ApplyEnchantment(Item* item, EnchantmentSlot slot, bool apply, bool
                     {
                         if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(enchant_spell_id))
                         {
-                            if (apply && (!HasPvpStatsScalingEnabled() || spellInfo->HasAttribute(SPELL_ATTR2_PRESERVE_ENCHANT_IN_ARENA)))
+                            if (apply && (!HasPvPStatsScalingEnabled() || spellInfo->HasAttribute(SPELL_ATTR2_PRESERVE_ENCHANT_IN_ARENA)))
                             {
                                 float basepoints = 0;
                                 // Random Property Exist - try found basepoints for spell (basepoints depends from item suffix factor)
@@ -18651,8 +18651,8 @@ void Player::PrepareQuestMenu(ObjectGuid guid)
     }
     else
     {
-        //we should obtain map pointer from GetMap() in 99% of cases. Special case
-        //only for quests which cast teleport spells on player
+        // we should obtain map pointer from GetMap() in 99% of cases. Special case
+        // only for quests which cast teleport spells on player
         Map* _map = IsInWorld() ? GetMap() : sMapMgr->FindMap(GetMapId(), GetInstanceId());
         ASSERT(_map);
         GameObject* pGameObject = _map->GetGameObject(guid);
@@ -19294,8 +19294,8 @@ uint32 Player::GetQuestXPReward(Quest const* quest)
 
 void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, bool announce, uint32 packItemId)
 {
-    //this THING should be here to protect code from quest, which cast on player far teleport as a reward
-    //should work fine, cause far teleport will be executed in Player::Update()
+    // this THING should be here to protect code from quest, which cast on player far teleport as a reward
+    // should work fine, cause far teleport will be executed in Player::Update()
     SetCanDelayTeleport(true);
 
     uint32 quest_id = quest->GetQuestId();
@@ -19431,12 +19431,12 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
 
     int32 moneyRew = 0;
 
-    if (quest->GetRewMoneyMaxLevel() < 0)
-        quest->GetRewMoneyMaxLevel();
+    if (quest->GetRewardMoneyMaxLevel() < 0)
+        quest->GetRewardMoneyMaxLevel();
     else if (getLevel() < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
         GiveXP(XP, nullptr);
     else
-        moneyRew = int32(quest->GetRewMoneyMaxLevel() * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1) ? 1.0f: sWorld->getRate(RATE_DROP_MONEY)));
+        moneyRew = int32(quest->GetRewardMoneyMaxLevel() * (GetMap()->IsDungeon() && sWorld->getBoolConfig(CONFIG_DROP_DUNGEON_ONLY_X1) ? 1.0f: sWorld->getRate(RATE_DROP_MONEY)));
 
     // Give player extra money if GetRewMoney > 0 and get ReqMoney if negative
     if (GetQuestMoneyReward(quest))
@@ -19542,7 +19542,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     }
 
     if (quest->IsRated())
-        PvpRatedQuestReward(quest_id);
+        PvPRatedQuestReward(quest_id);
 
     if (quest->IsEmissary())
     {
@@ -20494,7 +20494,7 @@ void Player::SetQuestCompletedBit(uint32 questBit, bool completed)
     ApplyModFlag(PLAYER_FIELD_QUEST_COMPLETED + ((questBit - 1) >> 5), 1 << ((questBit - 1) & 31), completed);
 }
 
-bool Player::IsQuestBitFlaged(uint32 questBit) const
+bool Player::IsQuestBitFlagged(uint32 questBit) const
 {
     if (!questBit)
         return false;
@@ -20546,7 +20546,7 @@ void Player::AreaExploredOrEventHappens(uint32 questId)
     }
 }
 
-//not used in Trinityd, function for external script library
+// not used in Trinityd, function for external script library
 void Player::GroupEventHappens(uint32 questId, WorldObject const* pEventObject)
 {
     if (Group* group = GetGroup())
@@ -32950,7 +32950,7 @@ void Player::HandleFall(MovementInfo const& movementInfo)
         //Safe fall, fall height reduction
         int32 safe_fall = GetTotalAuraModifier(SPELL_AURA_SAFE_FALL);
 
-        float damageperc = (0.018f*(z_diff-safe_fall)-0.2426f) * GetTotalAuraMultiplier(SPELL_AURA_MOD_FALL_DAMAGE);
+        float damageperc = (0.018f * (z_diff - safe_fall) - 0.2426f) * GetTotalAuraMultiplier(SPELL_AURA_MOD_FALL_DAMAGE);
 
         if (damageperc > 0)
         {
@@ -33261,7 +33261,7 @@ bool Player::LearnTalent(uint32 talentId)
     return true;
 }
 
-bool Player::LearnPvpTalent(uint16 talentID)
+bool Player::LearnPvPTalent(uint16 talentID)
 {
     WorldPackets::Talent::LearnPvPTalentFailed failed;
     failed.PvPTalent.SpecID = GetUInt32Value(PLAYER_FIELD_CURRENT_SPEC_ID);
@@ -35625,7 +35625,7 @@ void Player::SendPvpRatedStats()
     SendDirectMessage(ratedInfo.Write());
 }
 
-void Player::PvpRatedQuestReward(uint32 quest_id)
+void Player::PvPRatedQuestReward(uint32 quest_id)
 {
     PvpRewardTypes type = PvpReward_Skirmish;
     auto bracketType = 0;
@@ -36938,7 +36938,7 @@ void Player::UnLockThirdSocketIfNeed(Item* item)
         return;
 
     uint32 bonusID = unlock->ItemBonusListID;
-    uint32 questID = GetQuestForUnLockThirdSocket();
+    uint32 questID = GetQuestForUnlockThirdSocket();
 
 
     if (item->GetTotalPurchasedArtifactPowers() > 35 && !item->GetModifier(ITEM_MODIFIER_ARTIFACT_TIER) && sWorld->getBoolConfig(CONFIG_ARTIFACT_TIER_ENABLE))
@@ -38326,7 +38326,7 @@ void Player::ClearWorldQuest()
     m_worldquests.clear();
 }
 
-uint32 Player::GetQuestForUnLockThirdSocket()
+uint32 Player::GetQuestForUnlockThirdSocket()
 {
     uint32 questID = 0;
 
@@ -38643,7 +38643,7 @@ void Player::PrintPlayerSize()
     ChatHandler(this).PSendSysMessage("Player All size %u", size);
 }
 
-uint32 Player::GetQuestForUnLockSecondTier()
+uint32 Player::GetQuestForUnlockSecondTier()
 {
     uint32 questID = 0;
 
@@ -39236,7 +39236,7 @@ void Player::RescaleAllForTimeWalk(uint32 level, uint32 ilevelMax, uint32 ilevel
 
         if (!arts.empty())
         {
-            bool hasPvpScaling = HasPvpStatsScalingEnabled();
+            bool hasPvpScaling = HasPvPStatsScalingEnabled();
 
             for (auto itr : arts)
             {

@@ -691,7 +691,7 @@ class spell_dru_travel_form_speed_increase : public AuraScript
         {
             if (Player* plr = caster->ToPlayer())
             {
-                if (!plr->HasPvpStatsScalingEnabled())
+                if (!plr->HasPvPStatsScalingEnabled())
                 {
                     if (AuraEffect const* eff = caster->GetAuraEffect(236012, EFFECT_0)) // Malorne's Swiftness (Feral)
                     {

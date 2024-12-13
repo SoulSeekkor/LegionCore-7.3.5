@@ -1648,7 +1648,7 @@ public:
             {
                 if (!player->isGameMaster())
                 {
-                    uint32 questId = player->GetQuestForUnLockSecondTier();
+                    uint32 questId = player->GetQuestForUnlockSecondTier();
                     if (!questId || player->GetQuestStatus(questId) != QUEST_STATUS_INCOMPLETE) // Prevent complete art in other spec
                     {
                         ChatHandler(player).PSendSysMessage("Error: You need quest %u", questId);

@@ -523,7 +523,7 @@ void PlayerMenu::SendQuestQueryResponse(uint32 questId) const
 
     packet.Info.RewardMoneyDifficulty = quest->RewardMoneyDifficulty;
     packet.Info.RewardMoneyMultiplier = quest->RewardMoneyMultiplier;
-    packet.Info.RewardBonusMoney = quest->GetRewMoneyMaxLevel();
+    packet.Info.RewardBonusMoney = quest->GetRewardMoneyMaxLevel();
     for (uint8 i = 0; i < QUEST_REWARD_DISPLAY_SPELL_COUNT; ++i)
         packet.Info.RewardDisplaySpell[i] = quest->RewardDisplaySpell[i];
 

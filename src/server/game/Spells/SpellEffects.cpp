@@ -7935,7 +7935,7 @@ void Spell::EffectActivateSpec(SpellEffIndex /*effIndex*/)
             break;
     }
 
-    if (player->HasPvpStatsScalingEnabled())
+    if (player->HasPvPStatsScalingEnabled())
     {
         if (Aura* statTemplate = player->GetAura(SPELL_PVP_STATS_TEMPLATE))
             statTemplate->RecalculateAmountOfEffects(true);
@@ -8666,21 +8666,21 @@ void Spell::EffectBonusLoot(SpellEffIndex effIndex)
         case 240041:
             if (roll_chance_i(15))
             {
-                player->PvpRatedQuestReward(44891);
+                player->PvPRatedQuestReward(44891);
                 return;
             }
             break;
         case 240047:
             if (roll_chance_i(15))
             {
-                player->PvpRatedQuestReward(44908);
+                player->PvPRatedQuestReward(44908);
                 return;
             }
             break;
         case 240051:
             if (roll_chance_i(15))
             {
-                player->PvpRatedQuestReward(44909);
+                player->PvPRatedQuestReward(44909);
                 return;
             }
             break;

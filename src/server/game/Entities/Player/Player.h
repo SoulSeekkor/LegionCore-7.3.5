@@ -1996,7 +1996,7 @@ class Player : public Unit, public GridObject<Player>
         void SetSpecialCriteriaComplete(uint16 slot, uint8 StorageIndex);
 
         void SetQuestCompletedBit(uint32 questBit, bool completed);
-        bool IsQuestBitFlaged(uint32 questBit) const;
+        bool IsQuestBitFlagged(uint32 questBit) const;
 
         uint16 GetReqKillOrCastCurrentCount(uint32 quest_id, int32 entry);
         void AreaExploredOrEventHappens(uint32 questId);
@@ -2225,7 +2225,7 @@ class Player : public Unit, public GridObject<Player>
         void ResetTalentSpecialization();
 
         // PvP talents
-        bool LearnPvpTalent(uint16 talentID);
+        bool LearnPvPTalent(uint16 talentID);
         bool AddPvPTalent(PvpTalentEntry const* talent, uint8 index);
         bool HasPvPTalent(uint32 spellID) const;
         void RemovePvPTalent(uint32 spellID, uint8 group, bool isDelete = true, bool sendMessage = true);
@@ -2236,7 +2236,7 @@ class Player : public Unit, public GridObject<Player>
         void EnablePvPRules(bool recalcItems = true);
         void DisablePvPRules(bool recalcItems = true, bool checkZone = true);
         bool HasPvPRulesEnabled();
-        bool HasPvpStatsScalingEnabled() const;
+        bool HasPvPStatsScalingEnabled() const;
         bool HasPvPRulesTimer() const;
         void SetPvPRulesTimer(bool enable);
         bool GetCustomPvPMods(float& val, uint32 type, uint32 specID) const;
@@ -2680,7 +2680,7 @@ class Player : public Unit, public GridObject<Player>
 
         void SetDrunkValue(uint8 newDrunkValue, uint32 itemId = 0);
 
-        static DrunkenState GetDrunkenstateByValue(uint8 value);
+        static DrunkenState GetDrunkenStateByValue(uint8 value);
 
         uint32 GetDeathTimer() const { return m_deathTimer; }
         uint32 GetCorpseReclaimDelay(bool pvp) const;
@@ -3174,7 +3174,7 @@ class Player : public Unit, public GridObject<Player>
         Bracket* getBracket(uint8 slot) const;
         std::tuple<uint32, uint32> GetItemDataForRatedQuest(uint32 bracketType);
         void SendPvpRatedStats();
-        void PvpRatedQuestReward(uint32 quest_id);
+        void PvPRatedQuestReward(uint32 quest_id);
         std::vector<uint32> GetPvPRewardItem(uint32& itemID, uint8 type, uint32 rating, bool elit, uint32 needLevel);
         void GetPvPRatingAndLevel(PvpReward* reward, uint8 type, uint32& rating, uint32& needLevel, bool elit);
         void GetPvPRatingAndLevelOld(PvpReward* reward, uint8 type, uint32& rating, uint32& needLevel, bool elit);
@@ -3194,8 +3194,8 @@ class Player : public Unit, public GridObject<Player>
         CollectionMgr* GetCollectionMgr() const { return _collectionMgr; }
         void AddNonVisibleItemToCollect();
         void UnLockThirdSocketIfNeed(Item* item);
-        uint32 GetQuestForUnLockThirdSocket();
-        uint32 GetQuestForUnLockSecondTier();
+        uint32 GetQuestForUnlockThirdSocket();
+        uint32 GetQuestForUnlockSecondTier();
 
         void ScheduleDelayedOperation(uint32 operation);
 

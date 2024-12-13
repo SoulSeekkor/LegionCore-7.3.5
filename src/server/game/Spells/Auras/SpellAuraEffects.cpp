@@ -691,7 +691,7 @@ float AuraEffect::CalculateAmount(Unit* caster)
             {
                 if (Player* plr = caster->ToPlayer())
                 {
-                    if (plr->HasPvpStatsScalingEnabled())
+                    if (plr->HasPvPStatsScalingEnabled())
                         amount = 0;
                 }
             }
@@ -1274,7 +1274,7 @@ float AuraEffect::CalculateAmount(Unit* caster)
     {
         if (Player* plr = caster->ToPlayer())
         {
-            if (plr->HasPvpStatsScalingEnabled() && m_spellInfo->HasAttribute(SPELL_ATTR8_NOT_IN_BG_OR_ARENA))
+            if (plr->HasPvPStatsScalingEnabled() && m_spellInfo->HasAttribute(SPELL_ATTR8_NOT_IN_BG_OR_ARENA))
                 m_amount_mod = 0.0f;
             if ((plr->InRBG() || plr->InArena()) && m_spellInfo->HasAttribute(SPELL_ATTR4_NOT_USABLE_IN_ARENA_OR_RATED_BG))
                 m_amount_mod = 0.0f;

@@ -514,7 +514,7 @@ namespace WorldPackets
     namespace Talent
     {
         class LearnTalent;
-        class LearnPvpTalents;
+        class LearnPvPTalents;
     }
 
     namespace Trade
@@ -1566,7 +1566,7 @@ class WorldSession
 
         void HandleConfirmRespecWipe(WorldPackets::Misc::ConfirmRespecWipe& packet);
         void HandleLearnTalent(WorldPackets::Talent::LearnTalent& packet);
-        void HandleLearnPvpTalents(WorldPackets::Talent::LearnPvpTalents& packet);
+        void HandleLearnPvPTalents(WorldPackets::Talent::LearnPvPTalents& packet);
 
         void HandleQuestGiverStatusQuery(WorldPackets::Quest::QuestGiverStatusQuery& packet);
         void HandleQuestGiverStatusMultipleQuery(WorldPackets::Quest::QuestGiverStatusMultipleQuery& packet);

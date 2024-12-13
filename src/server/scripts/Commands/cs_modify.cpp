@@ -1473,7 +1473,7 @@ public:
             return false;
 
         target->SetFloatValue(PLAYER_FIELD_AVG_ITEM_LEVEL + PlayerAvgItemLevelOffsets::EquippedAvgItemLevel, amount);
-        if (target->HasPvpStatsScalingEnabled())
+        if (target->HasPvPStatsScalingEnabled())
         {
             target->SendUpdateStat(USM_ALL);
             target->SendUpdateCR(CR_PVP_UPDATE_MASK);

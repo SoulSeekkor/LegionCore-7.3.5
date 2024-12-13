@@ -47,7 +47,7 @@ void WorldPackets::Talent::LearnTalent::Read()
         _worldPacket >> talent;
 }
 
-void WorldPackets::Talent::LearnPvpTalents::Read()
+void WorldPackets::Talent::LearnPvPTalents::Read()
 {
     TalentIDs.resize(_worldPacket.ReadBits(6));
     for (uint16& talent : TalentIDs)

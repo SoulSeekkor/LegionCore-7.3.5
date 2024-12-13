@@ -58,10 +58,10 @@ namespace WorldPackets
             Array<uint16, MAX_TALENT_TIERS> Talents;
         };
 
-        class LearnPvpTalents final : public ClientPacket
+        class LearnPvPTalents final : public ClientPacket
         {
         public:
-            LearnPvpTalents(WorldPacket&& packet) : ClientPacket(CMSG_LEARN_PVP_TALENTS, std::move(packet)) { }
+            LearnPvPTalents(WorldPacket&& packet) : ClientPacket(CMSG_LEARN_PVP_TALENTS, std::move(packet)) { }
 
             void Read() override;
 

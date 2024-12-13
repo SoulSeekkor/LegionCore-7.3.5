@@ -407,7 +407,7 @@ class Quest
         QuestObjectives const& GetObjectives() const { return Objectives; };
         uint32 MoneyValue(uint8 playerLevel, uint32 zoneId = 0) const;
         uint32 GetScaledQuestLevel(uint8 playerLevel, uint32 zoneId) const;
-        uint32 GetRewMoneyMaxLevel() const; // use in XP calculation at client
+        uint32 GetRewardMoneyMaxLevel() const; // use in XP calculation at client
         bool   IsRepeatable() const { return (SpecialFlags & QUEST_SPECIAL_FLAGS_REPEATABLE) != 0; }
         bool   IsAutoAccept() const;
         bool   IsAutoComplete() const;

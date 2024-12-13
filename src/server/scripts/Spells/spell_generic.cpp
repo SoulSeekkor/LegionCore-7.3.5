@@ -4630,7 +4630,7 @@ class spell_gen_artificial_stamina : public SpellScriptLoader
                 if (!_player)
                     return;
 
-                if (_player->HasPvpStatsScalingEnabled())
+                if (_player->HasPvPStatsScalingEnabled())
                 {
                     amount = 0;
                     return;
@@ -4825,7 +4825,7 @@ class spell_gen_artificial_threat : public AuraScript
         if (!_player)
             return;
 
-        if (_player->HasPvpStatsScalingEnabled())
+        if (_player->HasPvPStatsScalingEnabled())
         {
             amount = 0;
             return;

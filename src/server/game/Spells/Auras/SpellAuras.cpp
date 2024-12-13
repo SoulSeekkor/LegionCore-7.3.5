@@ -833,7 +833,7 @@ m_procCharges(0), m_stackAmount(stackAmount ? stackAmount: 1), m_diffMode(caster
     {
         if (Player* plr = m_owner->ToPlayer())
         {
-            if (plr->HasPvpStatsScalingEnabled())
+            if (plr->HasPvPStatsScalingEnabled())
             {
                 if (m_maxDuration > 5000)
                     SetAuraAttribute(AURA_ATTR_DRINK_ARENA_DELAY);

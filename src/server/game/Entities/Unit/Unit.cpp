@@ -14824,7 +14824,7 @@ void Unit::ClearInCombat()
 
             if (plr->HasPvPRulesEnabled())
             {
-                if (!plr->HasPvpStatsScalingEnabled() && !plr->GetUInt32Value(PLAYER_FIELD_DUEL_TEAM) && !plr->IsAreaThatActivatesPvPTalents(plr->GetCurrentAreaID()))
+                if (!plr->HasPvPStatsScalingEnabled() && !plr->GetUInt32Value(PLAYER_FIELD_DUEL_TEAM) && !plr->IsAreaThatActivatesPvPTalents(plr->GetCurrentAreaID()))
                 {
                     if (Aura* aura = GetAura(SPELL_PVP_RULES_ENABLED))
                     {

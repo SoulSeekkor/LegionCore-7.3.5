@@ -192,7 +192,7 @@ float Player::GetTotalStatValue(Stats stat)
     float value = 0.f;
     float otherMod = 0.f;
 
-    if (HasPvpStatsScalingEnabled())
+    if (HasPvPStatsScalingEnabled())
     {
         CalcPvPTemplate(SPELL_AURA_MOD_STAT, value, otherMod, [stat](AuraEffect const* aurEff) -> bool
         {
@@ -859,7 +859,7 @@ void Player::UpdateArmor()
 
     float value = 0.f;
 
-    if (!HasPvpStatsScalingEnabled())
+    if (!HasPvPStatsScalingEnabled())
     {
         value = GetModifierValue(unitMod, BASE_VALUE); // base armor (from items)
         value += GetModifierValue(unitMod, TOTAL_VALUE);
@@ -1049,7 +1049,7 @@ void Player::CalculateMinMaxDamage(WeaponAttackType attType, bool normalized, bo
     float weaponMinDamage = 1.f;
     float weaponMaxDamage = 1.f;
 
-    if (HasPvpStatsScalingEnabled())
+    if (HasPvPStatsScalingEnabled())
     {
         if (Item* pItem = GetItemByPos(INVENTORY_SLOT_BAG_0, slot))
         {

@@ -430,7 +430,7 @@ bool AchievementCriteriaData::Meets(uint32 criteria_id, AchievementCachePtr cach
                 return false;
             return cachePtr->target.Team == team.team;
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_S_DRUNK:
-            return Player::GetDrunkenstateByValue(cachePtr->DrunkValue) >= DrunkenState(drunk.state);
+            return Player::GetDrunkenStateByValue(cachePtr->DrunkValue) >= DrunkenState(drunk.state);
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_HOLIDAY:
             return IsHolidayActive(HolidayIds(holiday.id));
         case ACHIEVEMENT_CRITERIA_DATA_TYPE_BG_LOSS_TEAM_SCORE:

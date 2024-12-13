@@ -30,11 +30,11 @@ void WorldSession::HandleLearnTalent(WorldPackets::Talent::LearnTalent& packet)
             player->SendTalentsInfoData(false);
 }
 
-void WorldSession::HandleLearnPvpTalents(WorldPackets::Talent::LearnPvpTalents& packet)
+void WorldSession::HandleLearnPvPTalents(WorldPackets::Talent::LearnPvPTalents& packet)
 {
     Player* player = GetPlayer();
     for (auto talentId : packet.TalentIDs)
-        if (player->LearnPvpTalent(talentId))
+        if (player->LearnPvPTalent(talentId))
             player->SendTalentsInfoData(false);
 }
 

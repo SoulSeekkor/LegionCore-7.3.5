@@ -192,7 +192,7 @@ void Manager::OnWorldObjectAppear(T const* target)
     auto type = GetDefaultVignetteTypeFromWorldObject(target);
 
     if (auto trackingQuest = GetTrackingQuestIdFromWorldObject(target))
-        if (!_owner->IsQuestBitFlaged(sDB2Manager.GetQuestUniqueBitFlag(trackingQuest)))
+        if (!_owner->IsQuestBitFlagged(sDB2Manager.GetQuestUniqueBitFlag(trackingQuest)))
             type = GetTrackingVignetteTypeFromWorldObject(target);
 
     if (CanSeeVignette(target, vignetteEntry->ID))

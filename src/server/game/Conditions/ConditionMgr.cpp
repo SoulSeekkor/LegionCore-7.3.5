@@ -294,7 +294,7 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
         case CONDITION_DRUNKENSTATE:
         {
             if (Player* player = object->ToPlayer())
-                condMeets = static_cast<uint32>(Player::GetDrunkenstateByValue(player->GetDrunkValue())) >= ConditionValue1;
+                condMeets = static_cast<uint32>(Player::GetDrunkenStateByValue(player->GetDrunkValue())) >= ConditionValue1;
             break;
         }
         case CONDITION_NEAR_CREATURE:
