@@ -90,7 +90,7 @@ void WorldSession::HandleBattlemasterJoin(WorldPackets::Battleground::Join& pack
     
     if (!packet.JoinAsGroup )
     {
-        if (player->isUsingLfg())
+        if (player->isUsingLFG())
         {
             WorldPackets::Battleground::BattlefieldStatusFailed battlefieldStatus;
             sBattlegroundMgr->BuildBattlegroundStatusFailed(&battlefieldStatus, bg, player, 0, MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_LFG_CANT_USE_BATTLEGROUND);
@@ -621,7 +621,7 @@ void WorldSession::JoinBracket(uint8 bracketType, uint8 rolesMask /*= ROLES_DEFA
     }
     else
     {
-        if (player->isUsingLfg())
+        if (player->isUsingLFG())
         {
             WorldPackets::Battleground::BattlefieldStatusFailed battlefieldStatus;
             sBattlegroundMgr->BuildBattlegroundStatusFailed(&battlefieldStatus, bg, player, 0, MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_LFG_CANT_USE_BATTLEGROUND);
@@ -782,7 +782,7 @@ void WorldSession::HandleJoinSkirmish(WorldPackets::Battleground::JoinSkirmish& 
 
     if (!packet.JoinAsGroup)
     {
-        if (player->isUsingLfg())
+        if (player->isUsingLFG())
         {
             WorldPackets::Battleground::BattlefieldStatusFailed battlefieldStatus;
             sBattlegroundMgr->BuildBattlegroundStatusFailed(&battlefieldStatus, bg, player, 0, MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_LFG_CANT_USE_BATTLEGROUND);
@@ -841,7 +841,7 @@ void WorldSession::HandleJoinSkirmish(WorldPackets::Battleground::JoinSkirmish& 
             if (!member)
                 continue;
 
-            if (member->isUsingLfg())
+            if (member->isUsingLFG())
             {
                 WorldPackets::Battleground::BattlefieldStatusFailed battlefieldStatus;
                 sBattlegroundMgr->BuildBattlegroundStatusFailed(&battlefieldStatus, bg, member, 0, MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_LFG_CANT_USE_BATTLEGROUND);

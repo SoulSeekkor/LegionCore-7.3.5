@@ -2143,7 +2143,7 @@ uint8 Group::CanJoinBattlegroundQueue(Battleground const* bgOrTemplate, uint8 bg
         if (!member->HasFreeBattlegroundQueueId())
             return MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_BATTLEGROUND_TOO_MANY_QUEUES;        // not blizz-like
 
-        if (member->isUsingLfg())
+        if (member->isUsingLFG())
             return MS::Battlegrounds::GroupJoinBattlegroundResult::ERR_LFG_CANT_USE_BATTLEGROUND;
     }
 

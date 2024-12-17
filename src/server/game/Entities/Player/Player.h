@@ -2978,7 +2978,7 @@ class Player : public Unit, public GridObject<Player>
         void SetAtLoginFlag(AtLoginFlags f) { m_atLoginFlags |= f; }
         void RemoveAtLoginFlag(AtLoginFlags flags, bool persist = false);
 
-        bool isUsingLfg();
+        bool isUsingLFG();
         bool CanKickFromChallenge();
         void SetLfgBonusFaction(uint32 factionId);
         uint32 GetLfgBonusFaction() const;
