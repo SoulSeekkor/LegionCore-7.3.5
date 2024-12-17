@@ -1828,7 +1828,7 @@ class WorldSession
         void HandleBattlePetDeletePetCheat(WorldPackets::BattlePet::BattlePetGuidRead& packet);
         void HandlePetBattleRequestPVP(WorldPackets::BattlePet::RequestPVP& packet);
         void HandleReplaceFrontPet(WorldPackets::BattlePet::ReplaceFrontPet& packet);
-        void HanldeQueueProposeMatchResult(WorldPackets::BattlePet::QueueProposeMatchResult& packet);
+        void HandleQueueProposeMatchResult(WorldPackets::BattlePet::QueueProposeMatchResult& packet);
         void HandleLeaveQueue(WorldPackets::BattlePet::LeaveQueue& packet);
         void SendBattlePetUpdates(BattlePet* pet = nullptr, bool add = false);
         void SendBattlePetTrapLevel();

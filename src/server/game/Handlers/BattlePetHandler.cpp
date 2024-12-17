@@ -755,7 +755,7 @@ void WorldSession::HandlePetBattleRequestPVP(WorldPackets::BattlePet::RequestPVP
     opposant->GetSession()->SendPetBattlePvPChallenge(battleRequest);
 }
 
-void WorldSession::HanldeQueueProposeMatchResult(WorldPackets::BattlePet::QueueProposeMatchResult& packet)
+void WorldSession::HandleQueueProposeMatchResult(WorldPackets::BattlePet::QueueProposeMatchResult& packet)
 {
     if (!sWorld->getBoolConfig(CONFIG_PET_BATTLES))
         return;

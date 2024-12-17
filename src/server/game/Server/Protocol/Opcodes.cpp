@@ -679,7 +679,7 @@ void OpcodeTable::Initialize()
     DEFINE_HANDLER(CMSG_PET_ACTION,                                         STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandlePetAction);
     DEFINE_HANDLER(CMSG_PET_BATTLE_FINAL_NOTIFY,                            STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandlePetBattleFinalNotify);
     DEFINE_HANDLER(CMSG_PET_BATTLE_INPUT,                                   STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandlePetBattleInput);
-    DEFINE_HANDLER(CMSG_PET_BATTLE_QUEUE_PROPOSE_MATCH_RESULT,              STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HanldeQueueProposeMatchResult);
+    DEFINE_HANDLER(CMSG_PET_BATTLE_QUEUE_PROPOSE_MATCH_RESULT,              STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandleQueueProposeMatchResult);
     DEFINE_HANDLER(CMSG_PET_BATTLE_QUIT_NOTIFY,                             STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandlePetBattleQuitNotify);
     DEFINE_HANDLER(CMSG_PET_BATTLE_REPLACE_FRONT_PET,                       STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandleReplaceFrontPet);
     DEFINE_HANDLER(CMSG_PET_BATTLE_REQUEST_PVP,                             STATUS_LOGGEDIN,  PROCESS_THREADUNSAFE, &WorldSession::HandlePetBattleRequestPVP);
