@@ -18806,6 +18806,7 @@ bool Player::CanSeeStartQuest(Quest const* quest)
 
 bool Player::CanTakeQuest(Quest const* quest, bool msg)
 {
+    return true;
     return !DisableMgr::IsDisabledFor(DISABLE_TYPE_QUEST, quest->GetQuestId(), this) 
         && SatisfyQuestStatus(quest, msg) && SatisfyQuestExclusiveGroup(quest, msg)
         && SatisfyQuestClass(quest, msg) && SatisfyQuestRace(quest, msg) && SatisfyQuestLevel(quest, msg)
@@ -31432,11 +31433,11 @@ void Player::UpdateAreaQuestTasks(uint32 newAreaId, uint32 oldAreaId)
                 if (questTask->FiltMinSkillID && GetSkillValue(questTask->FiltMinSkillID) < questTask->FiltMinSkillValue)
                     continue;
 
-                if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
+                /*if (questTask->FiltMinLevel != -1 && getLevel() < questTask->FiltMinLevel)
                     continue;
 
                 if (questTask->FiltMaxLevel != -1 && getLevel() > questTask->FiltMaxLevel)
-                    continue;
+                    continue;*/
 
                 bool needQuest = false;
                 bool canStart = true;
