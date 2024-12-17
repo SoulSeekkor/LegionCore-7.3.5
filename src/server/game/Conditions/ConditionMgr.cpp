@@ -3170,11 +3170,11 @@ bool ConditionMgr::IsPlayerMeetingCondition(Unit* unit, PlayerConditionEntry con
             return false;
     }
 
-    if (player && condition->MinExpansionLevel != -1 && player->GetSession()->Expansion() < condition->MinExpansionLevel)
+    /*if (player && condition->MinExpansionLevel != -1 && player->GetSession()->Expansion() < condition->MinExpansionLevel)
         return false;
 
     if (player && condition->MaxExpansionLevel != -1 && player->GetSession()->Expansion() > condition->MaxExpansionLevel)
-        return false;
+        return false;*/
 
     // if (player && condition->WorldStateExpressionID)
     // {
@@ -3183,9 +3183,9 @@ bool ConditionMgr::IsPlayerMeetingCondition(Unit* unit, PlayerConditionEntry con
             // return false;
     // }
 
-    if (player && condition->MinExpansionLevel != -1 && condition->MinExpansionTier != -1 && !player->isGameMaster()
+    /*if (player && condition->MinExpansionLevel != -1 && condition->MinExpansionTier != -1 && !player->isGameMaster()
         && ((condition->MinExpansionLevel == CURRENT_EXPANSION) && condition->MinExpansionTier > 0) || condition->MinExpansionLevel > CURRENT_EXPANSION)
-        return false;
+        return false;*/
 
     if (condition->PhaseID && !unit->HasPhaseId(condition->PhaseID))
         return false;
