@@ -9372,7 +9372,7 @@ void Player::ModifyCurrencyFlag(uint32 id, uint8 flag)
         _currencyStorage[id].state = PLAYERCURRENCY_CHANGED;
 }
 
-void Player::SendPvpRewards()
+void Player::SendPvPRewards()
 {
     bool isAlliance = GetTeam() == ALLIANCE;
     WorldPackets::Battleground::RequestPVPRewardsResponse rewardsResponse;
@@ -15455,7 +15455,7 @@ Item* Player::StoreNewItem(ItemPosCountVec const& dest, uint32 itemID, bool upda
         AddDelayedEvent(3000, [this, itemGUID]() -> void
         {
             if (Item* item = GetItemByGuid(itemGUID))
-                UnLockThirdSocketIfNeed(item);
+                UnlockThirdSocketIfNeed(item);
         });
     }
 
@@ -22936,7 +22936,7 @@ void Player::_LoadInventory(PreparedQueryResult result, PreparedQueryResult arti
                     AddDelayedEvent(3000, [this, itemGUID]() -> void
                     {
                         if (Item* item = GetItemByGuid(itemGUID))
-                            UnLockThirdSocketIfNeed(item);
+                            UnlockThirdSocketIfNeed(item);
                     });
                 }
  
@@ -29867,7 +29867,7 @@ void Player::SendInitialPacketsBeforeAddToMap(bool login)
         initialSetup.ServerExpansionLevel = CURRENT_EXPANSION;
         SendDirectMessage(initialSetup.Write());
 
-        SendPvpRatedStats();
+        SendPvPRatedStats();
     }
 
     // First obj create should be with dynamic data
@@ -35604,7 +35604,7 @@ std::tuple<uint32, uint32> Player::GetItemDataForRatedQuest(uint32 bracketType)
     return data;
 }
 
-void Player::SendPvpRatedStats()
+void Player::SendPvPRatedStats()
 {
     WorldPackets::Battleground::RatedInfo ratedInfo;
     for (uint8 i = MS::Battlegrounds::BracketType::Arena2v2; i < MS::Battlegrounds::BracketType::Max; ++i)
@@ -36911,7 +36911,7 @@ void Player::AddNonVisibleItemToCollect()
     }
 }
 
-void Player::UnLockThirdSocketIfNeed(Item* item)
+void Player::UnlockThirdSocketIfNeed(Item* item)
 {
     // Artifact Knowledge
     if (getLevel() == MAX_LEVEL)
@@ -37617,12 +37617,12 @@ uint32 Player::GetUnlockedPetBattleSlot()
     return 0;
 }
 
-void Player::UnsummonCurrentBattlePetIfAny(bool p_Unvolontary)
+void Player::UnsummonCurrentBattlePetIfAny(bool p_Unvoluntary)
 {
     if (!_battlePetSummon)
         return;
 
-    if (!p_Unvolontary)
+    if (!p_Unvoluntary)
         _lastSummonedBattlePet = 0;
 
     if (Creature* pet = GetSummonedBattlePet())

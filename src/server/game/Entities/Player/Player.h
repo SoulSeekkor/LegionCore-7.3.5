@@ -1756,7 +1756,7 @@ class Player : public Unit, public GridObject<Player>
 
         /// send full data about all currencies to client
         void SendCurrencies();
-        void SendPvpRewards();
+        void SendPvPRewards();
         /// return count of currency witch has plr
         uint32 GetCurrency(uint32 id) const;
         uint32 GetCurrencyOnWeek(uint32 id) const;
@@ -3173,7 +3173,7 @@ class Player : public Unit, public GridObject<Player>
 
         Bracket* getBracket(uint8 slot) const;
         std::tuple<uint32, uint32> GetItemDataForRatedQuest(uint32 bracketType);
-        void SendPvpRatedStats();
+        void SendPvPRatedStats();
         void PvPRatedQuestReward(uint32 quest_id);
         std::vector<uint32> GetPvPRewardItem(uint32& itemID, uint8 type, uint32 rating, bool elit, uint32 needLevel);
         void GetPvPRatingAndLevel(PvpReward* reward, uint8 type, uint32& rating, uint32& needLevel, bool elit);
@@ -3193,7 +3193,7 @@ class Player : public Unit, public GridObject<Player>
         /*********************************************************/
         CollectionMgr* GetCollectionMgr() const { return _collectionMgr; }
         void AddNonVisibleItemToCollect();
-        void UnLockThirdSocketIfNeed(Item* item);
+        void UnlockThirdSocketIfNeed(Item* item);
         uint32 GetQuestForUnlockThirdSocket();
         uint32 GetQuestForUnlockSecondTier();
 

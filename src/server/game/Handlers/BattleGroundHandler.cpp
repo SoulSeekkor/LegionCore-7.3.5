@@ -671,7 +671,7 @@ void WorldSession::HandleJoinRatedBattleground(WorldPackets::Battleground::JoinR
 
 void WorldSession::HandleRequestRatedInfo(WorldPackets::Battleground::NullCmsg& /*packet*/)
 {
-    GetPlayer()->SendPvpRatedStats();
+    GetPlayer()->SendPvPRatedStats();
 }
 
 void WorldSession::HandleRequestPvpOptions(WorldPackets::Battleground::NullCmsg& /*packet*/)
@@ -688,7 +688,7 @@ void WorldSession::HandleRequestPvpOptions(WorldPackets::Battleground::NullCmsg&
 
 void WorldSession::HandleRequestPvpReward(WorldPackets::Battleground::RequestPVPRewards& /*packet*/)
 {
-    GetPlayer()->SendPvpRewards();
+    GetPlayer()->SendPvPRewards();
 }
 
 //! This is const data used for calc some field for SMSG_RATED_BATTLEFIELD_INFO 
