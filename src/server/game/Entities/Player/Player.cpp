@@ -1655,7 +1655,7 @@ void Player::Update(uint32 p_time)
 			{
 				bool hasTemplate = HasAura(SPELL_PRINCIPLES_OF_WAR);
 
-				if ((hasTemplate && !HasPvpStatsScalingEnabled()) || (!hasTemplate && HasPvpStatsScalingEnabled()))
+				if ((hasTemplate && !HasPvPStatsScalingEnabled()) || (!hasTemplate && HasPvPStatsScalingEnabled()))
 					sWorld->AddPvPMysticCount(); // for debug
 
 				if (map->IsBattlegroundOrArena())
