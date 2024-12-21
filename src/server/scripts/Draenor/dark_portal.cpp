@@ -265,7 +265,7 @@ public:
         {
         }
 
-        void Reset()
+        void Reset() override
         {
             if (me->getVictim() || me->IsInEvadeMode())
                 return;
@@ -770,7 +770,7 @@ public:
             SPELL_CREDIT = 168182,
         };
 
-        void Reset()
+        void Reset() override
         {
             if (me->getVictim() || me->IsInEvadeMode())
                 return;
@@ -805,7 +805,7 @@ public:
             damage /= 2;
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             std::list<Player*> lList;
             me->GetPlayerListInGrid(lList, 200.0f);
@@ -1098,7 +1098,7 @@ public:
             
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_3, ObjectGuid::Empty);
         }
@@ -1117,7 +1117,7 @@ public:
             events.RescheduleEvent(EVENT_SHELL, 8000);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             UpdateVictim();
 

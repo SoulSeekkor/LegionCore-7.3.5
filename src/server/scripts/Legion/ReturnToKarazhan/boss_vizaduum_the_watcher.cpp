@@ -279,7 +279,7 @@ public:
         {
             if (type == WAYPOINT_MOTION_TYPE)
             {
-                if (id == 6 && healthPct || id == 7 && !healthPct)
+                if ((id == 6 && healthPct) || (id == 7 && !healthPct))
                 {
                     if (id == 6 && healthPct)
                         evadePhase = 2;

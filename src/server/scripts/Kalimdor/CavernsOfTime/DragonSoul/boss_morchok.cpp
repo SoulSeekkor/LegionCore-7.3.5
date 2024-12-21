@@ -111,7 +111,7 @@ class boss_morchok: public CreatureScript
                 pKohcrom = NULL;
             }
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
                 
@@ -135,7 +135,7 @@ class boss_morchok: public CreatureScript
                 me->SetObjectScale(1.0f);
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 Talk(SAY_AGGRO);
 
@@ -162,7 +162,7 @@ class boss_morchok: public CreatureScript
                 instance->SetBossState(DATA_MORCHOK, IN_PROGRESS);
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
 
@@ -173,7 +173,7 @@ class boss_morchok: public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_SAFE);
             }
 
-            void SetGUID(ObjectGuid const& guid, int32 type)
+            void SetGUID(ObjectGuid const& guid, int32 type) override
             {
                 if (type == DATA_GUID_1)
                     _stompguid1 = guid;
@@ -181,7 +181,7 @@ class boss_morchok: public CreatureScript
                     _stompguid2 = guid;
             }
 
-            ObjectGuid GetGUID(int32 type)
+            ObjectGuid GetGUID(int32 type) override
             {
                 if (type == DATA_GUID_1)
                     return _stompguid1;
@@ -191,7 +191,7 @@ class boss_morchok: public CreatureScript
                 return ObjectGuid::Empty;
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 BossAI::JustSummoned(summon);
                 if (summon->GetEntry() == NPC_KOHCROM)
@@ -201,7 +201,7 @@ class boss_morchok: public CreatureScript
                     summon->SetHealth(me->GetHealth());
                 }
             }
-            void KilledUnit(Unit* victim)
+            void KilledUnit(Unit* victim) override
             {
                 if (victim && victim->GetTypeId() == TYPEID_PLAYER)
                     Talk(SAY_KILL);
@@ -220,7 +220,7 @@ class boss_morchok: public CreatureScript
                 return 0;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;

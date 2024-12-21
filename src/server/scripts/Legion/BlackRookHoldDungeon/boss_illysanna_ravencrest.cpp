@@ -445,7 +445,7 @@ struct npc_illysanna_commandir : public ScriptedAI
         events.ScheduleEvent(EVENT_2, 12000);
     }        
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
 	{
         ScriptedAI::EnterEvadeMode();
         me->SetReactState(REACT_AGGRESSIVE);
@@ -515,7 +515,7 @@ struct npc_brh_boulder : public ScriptedAI
         me->SetReactState(REACT_PASSIVE);
     }
 
-    void Reset()
+    void Reset() override
     {
         DoCast(me, SPELL_BOULDER_EXPLODE_AT, true);
     }
@@ -543,7 +543,7 @@ struct npc_brh_wyrmtongue_scavenger : public ScriptedAI
     uint32 indigestionTimer = 0;
     uint32 hyperactiveTimer = 0;
 
-    void Reset()
+    void Reset() override
     {
         fixateGUID.Clear();
         me->SetReactState(REACT_AGGRESSIVE);

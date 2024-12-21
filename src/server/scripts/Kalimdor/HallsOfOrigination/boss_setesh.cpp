@@ -120,7 +120,7 @@ struct boss_setesh : public BossAI
         Talk(SAY_KILL);
     }
 
-    void JustDied(Unit* /*who*/)
+    void JustDied(Unit* /*who*/) override
     {
         _JustDied();
 

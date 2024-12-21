@@ -319,7 +319,7 @@ struct npc_goroth_ember_stalker : public ScriptedAI
         me->SetDisplayId(11686);
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void DoAction(int32 const action) override
     {
@@ -346,7 +346,7 @@ struct npc_goroth_ember_stalker : public ScriptedAI
         }
     }
 
-    void UpdateAI(uint32 diff) {}
+    void UpdateAI(uint32 diff) override {}
 };
 
 //116976
@@ -364,7 +364,7 @@ struct npc_goroth_infernal_spike : public ScriptedAI
         me->CastSpellDelay(me, SPELL_INFERNAL_SPIKE_AT, false, 500);
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void SpellHit(Unit* caster, SpellInfo const* spell) override
     {
@@ -401,7 +401,7 @@ struct npc_goroth_infernal_spike : public ScriptedAI
         me->DespawnOrUnsummon(1000);
     }
 
-    void UpdateAI(uint32 diff) {}
+    void UpdateAI(uint32 diff) override {}
 };
 
 //117931
@@ -418,9 +418,9 @@ struct npc_goroth_lava_stalker : public ScriptedAI
         me->CastSpellDelay(me, SPELL_FEL_PERIODIC_TRIGGER, true, 7000);
     }
 
-    void Reset() {}
+    void Reset() override {}
 
-    void UpdateAI(uint32 diff) {}
+    void UpdateAI(uint32 diff) override {}
 };
 
 //119950
@@ -441,9 +441,9 @@ struct npc_goroth_brimstone_infernal : public ScriptedAI
         felTimer = 12000; //Need correct time!
     }
 
-    void Reset() {}
+    void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/)
+    void EnterCombat(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
     }
@@ -453,7 +453,7 @@ struct npc_goroth_brimstone_infernal : public ScriptedAI
         instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
     }
 
-    void UpdateAI(uint32 diff)
+    void UpdateAI(uint32 diff) override
     {
         if (!UpdateVictim())
             return;

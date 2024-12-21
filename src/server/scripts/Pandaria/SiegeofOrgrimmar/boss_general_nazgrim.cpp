@@ -692,7 +692,7 @@ public:
         ObjectGuid plGuid;
         bool visible;
 
-        void Reset()
+        void Reset() override
         {
             me->setPowerType(POWER_ENERGY);
             me->SetMaxPower(POWER_ENERGY, 100);
@@ -734,7 +734,7 @@ public:
             }
         }
 
-        void DamageDealt(Unit* doneTo, uint32& damage, DamageEffectType damagetype)
+        void DamageDealt(Unit* doneTo, uint32& damage, DamageEffectType damagetype) override
         {
             if (!visible)
             {
@@ -745,7 +745,7 @@ public:
             }
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {         
             if (!visible)
             {
@@ -757,17 +757,17 @@ public:
             }
 
             if (attacker->GetGUID() != plGuid)
-                me->getThreatManager().addThreat(attacker, NULL);
+                me->getThreatManager().addThreat(attacker, 0);
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (Player* pl = GetPlayerTarget())
                 pl->RemoveAurasDueToSpell(SPELL_ASSASINS_MARK);
             me->DespawnOrUnsummon();
         }
         
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -917,7 +917,7 @@ public:
         SummonList summon;
         ObjectGuid targetGuid;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             targetGuid.Clear();
@@ -950,7 +950,7 @@ public:
             }
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == POINT_MOTION_TYPE)
             {
@@ -963,14 +963,14 @@ public:
             }
         }
         
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (Unit* target = GetTarget())
                 target->RemoveAurasDueToSpell(SPELL_HUNTERS_MARK);
             me->DespawnOrUnsummon();
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;

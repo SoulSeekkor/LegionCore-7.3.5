@@ -156,7 +156,7 @@ class boss_warlord_zonozz: public CreatureScript
                 phaseCount = 0;
             }
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
 
@@ -168,7 +168,7 @@ class boss_warlord_zonozz: public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BLACK_BLOOD_OF_GORATH);
             }
 
-            void MoveInLineOfSight(Unit* who)
+            void MoveInLineOfSight(Unit* who) override
             {
                 if (bIntro)
                     return;
@@ -184,7 +184,7 @@ class boss_warlord_zonozz: public CreatureScript
                 bIntro = true;
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 if (instance->GetBossState(DATA_MORCHOK) != DONE)
                 {
@@ -222,7 +222,7 @@ class boss_warlord_zonozz: public CreatureScript
                             trash->SetInCombatWithZone();
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
 
@@ -232,7 +232,7 @@ class boss_warlord_zonozz: public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BLACK_BLOOD_OF_GORATH);
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 BossAI::JustSummoned(summon);
 
@@ -256,7 +256,7 @@ class boss_warlord_zonozz: public CreatureScript
                 }
             }
 
-            void SummonedCreatureDies(Creature* summon, Unit* killer)
+            void SummonedCreatureDies(Creature* summon, Unit* killer) override
             {
                 BossAI::SummonedCreatureDies(summon, killer);
 
@@ -273,7 +273,7 @@ class boss_warlord_zonozz: public CreatureScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_ACHIEVE)
                     bAchieve = (bool)data;
@@ -302,7 +302,7 @@ class boss_warlord_zonozz: public CreatureScript
                 return 0;
             }
 
-            void KilledUnit(Unit* victim)
+            void KilledUnit(Unit* victim) override
             {
                 if (victim && victim->GetTypeId() == TYPEID_PLAYER)
                 {
@@ -311,7 +311,7 @@ class boss_warlord_zonozz: public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;

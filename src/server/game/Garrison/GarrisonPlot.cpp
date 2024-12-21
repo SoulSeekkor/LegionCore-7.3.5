@@ -129,7 +129,7 @@ GameObject* Plot::CreateGameObject(Map* map, GarrisonFactionIndex faction, Garri
                 if (GarrisonMgr::getFirstMap(map->GetId()) != data.mapid)
                     continue;
 
-                if (data.building && !BuildingInfo.PacketInfo || (BuildingInfo.PacketInfo && BuildingInfo.PacketInfo->Active == data.building))
+                if ((data.building && !BuildingInfo.PacketInfo) || (BuildingInfo.PacketInfo && BuildingInfo.PacketInfo->Active == data.building))
                     continue;
 
                 entry = data.id;
@@ -170,7 +170,7 @@ GameObject* Plot::CreateGameObject(Map* map, GarrisonFactionIndex faction, Garri
                 if (GarrisonMgr::getFirstMap(map->GetId()) != data.mapid)
                     continue;
 
-                if (data.building && !BuildingInfo.PacketInfo || (BuildingInfo.PacketInfo && BuildingInfo.PacketInfo->Active == data.building))
+                if ((data.building && !BuildingInfo.PacketInfo) || (BuildingInfo.PacketInfo && BuildingInfo.PacketInfo->Active == data.building))
                     continue;
 
                 entry = data.id;

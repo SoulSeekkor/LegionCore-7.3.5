@@ -3238,7 +3238,7 @@ class Player : public Unit, public GridObject<Player>
         void SetAdvancedCombatLogging(bool enabled) { _advancedCombatLoggingEnabled = enabled; }
 
         // client version server check and helpers
-        void SendVersionMismatchWarinings();
+        void SendVersionMismatchWarnings();
 
         uint32 GetGoVisualQuestData(GameObject const* go, uint32 field) const;
 

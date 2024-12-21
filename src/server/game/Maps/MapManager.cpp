@@ -570,7 +570,7 @@ void MapManager::LogInfoAllMaps()
                     worldObjectCount += instance->GetAllWorldObjectOnMap().size();
 
             if (maps.size() > 10) // Only actual instance
-                sLog->outMapInfo("LogInfoAllMaps mapId %u instanceCount %u worldObjectCount: %u.", i, maps.size(), worldObjectCount);
+                sLog->outMapInfo("LogInfoAllMaps mapId %u instanceCount " UI64FMTDX " worldObjectCount: %u.", i, maps.size(), worldObjectCount);
         }
     }
 }

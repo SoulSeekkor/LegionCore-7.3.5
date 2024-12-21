@@ -169,7 +169,7 @@ extern int main(int argc, char **argv)
     uint32 pid = 0;
     if (!pidFile.empty())
     {
-        if (pid = CreatePIDFile(pidFile))
+        if ((pid = CreatePIDFile(pidFile)))
             TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "Daemon PID: %u\n", pid);
         else
         {
@@ -250,7 +250,7 @@ extern int main(int argc, char **argv)
     if (networkThreads <= 0)
     {
         TC_LOG_ERROR(LOG_FILTER_GENERAL, "Network.Threads must be greater than 0");
-        return false;
+        return 1;
     }
 
     sWorldSocketMgr.StartNetwork(_ioService, worldListener, worldPort, networkThreads);

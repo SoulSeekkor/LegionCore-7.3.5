@@ -815,11 +815,11 @@ void OutdoorPvPAshran::HandlePlayerEnterArea(ObjectGuid guid, uint32 areaID)
         });
     }
 
-    if (areaID == AshranHordeBase && player->GetTeamId() == TEAM_HORDE || areaID == AshranAllianceBase && player->GetTeamId() == TEAM_ALLIANCE)
+    if ((areaID == AshranHordeBase && player->GetTeamId() == TEAM_HORDE) || (areaID == AshranAllianceBase && player->GetTeamId() == TEAM_ALLIANCE))
         player->CastSpell(player, SpellHoldYourGround, true);
-    else if (areaID == EmberfallTowerAreaID && player->GetTeamId() == TEAM_HORDE || areaID == ArchmageOverwatchAreaID && player->GetTeamId() == TEAM_ALLIANCE)
+    else if ((areaID == EmberfallTowerAreaID && player->GetTeamId() == TEAM_HORDE) || (areaID == ArchmageOverwatchAreaID && player->GetTeamId() == TEAM_ALLIANCE))
         player->CastSpell(player, SpellTowerDefense, true);
-    else if (areaID == VolrathsAdvanceAreaID && player->GetTeamId() == TEAM_HORDE || areaID == TrembladesVanguardAreaID && player->GetTeamId() == TEAM_ALLIANCE)
+    else if ((areaID == VolrathsAdvanceAreaID && player->GetTeamId() == TEAM_HORDE) || (areaID == TrembladesVanguardAreaID && player->GetTeamId() == TEAM_ALLIANCE))
         player->CastSpell(player, SpellStandFast, true);
 }
 
@@ -2122,8 +2122,8 @@ WorldSafeLocsEntry const* OutdoorPvPAshran::GetClosestGraveyard(Player* player)
             if (m_GraveYard)
             {
                 uint8 l_State = m_GraveYard->GetGraveyardState();
-                if (l_State == ControlNeutral || l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE ||
-                    l_State == ControlHorde && l_TeamID != TEAM_HORDE)
+                if (l_State == ControlNeutral || (l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE) ||
+                    (l_State == ControlHorde && l_TeamID != TEAM_HORDE))
                     continue;
             }
         }
@@ -2132,8 +2132,8 @@ WorldSafeLocsEntry const* OutdoorPvPAshran::GetClosestGraveyard(Player* player)
             if (OPvPCapturePoint_Middle* l_CapturePoint = m_ControlPoints[ArchmageOverwatch])
             {
                 uint32 l_State = l_CapturePoint->GetBattleFaction();
-                if (l_State == ControlNeutral || l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE ||
-                    l_State == ControlHorde && l_TeamID != TEAM_HORDE)
+                if (l_State == ControlNeutral || (l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE) ||
+                    (l_State == ControlHorde && l_TeamID != TEAM_HORDE))
                     continue;
             }
         }
@@ -2142,8 +2142,8 @@ WorldSafeLocsEntry const* OutdoorPvPAshran::GetClosestGraveyard(Player* player)
             if (OPvPCapturePoint_Middle* l_CapturePoint = m_ControlPoints[EmberfallTower])
             {
                 uint32 l_State = l_CapturePoint->GetBattleFaction();
-                if (l_State == ControlNeutral || l_State == ControlHorde && l_TeamID != TEAM_HORDE ||
-                    l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE)
+                if (l_State == ControlNeutral || (l_State == ControlHorde && l_TeamID != TEAM_HORDE) ||
+                    (l_State == ControlAlliance && l_TeamID != TEAM_ALLIANCE))
                     continue;
             }
         }

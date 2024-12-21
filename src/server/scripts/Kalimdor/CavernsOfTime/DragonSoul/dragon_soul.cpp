@@ -1196,17 +1196,21 @@ class npc_dragon_soul_teleport : public CreatureScript
                 {
                     case NPC_TRAVEL_TO_WYRMREST_BASE:
                         if (instance->GetBossState(DATA_MORCHOK) == DONE)
+                        {
                             if (pCreature->GetPositionZ() > 50.0f && pCreature->GetPositionZ() < 100.0f)
                                 pPlayer->NearTeleportTo(portalsPos[0].GetPositionX(), portalsPos[0].GetPositionY(), portalsPos[0].GetPositionZ(), portalsPos[0].GetOrientation());
                             else if (pCreature->GetPositionZ() < 50.0f || pCreature->GetPositionZ() > 100.0f)
                                 pPlayer->NearTeleportTo(portalsPos[10].GetPositionX(), portalsPos[10].GetPositionY(), portalsPos[10].GetPositionZ(), portalsPos[10].GetOrientation());
+                        }
                         break;
                     case NPC_TRAVEL_TO_WYRMREST_TEMPLE:
                         if (instance->GetBossState(DATA_MORCHOK) == DONE)
+                        {
                             if (pCreature->GetPositionZ() < -200.0f)
                                 pPlayer->NearTeleportTo(portalsPos[1].GetPositionX(), portalsPos[1].GetPositionY(), portalsPos[1].GetPositionZ(), portalsPos[1].GetOrientation());
                             else
                                 pPlayer->NearTeleportTo(portalsPos[2].GetPositionX(), portalsPos[2].GetPositionY(), portalsPos[2].GetPositionZ(), portalsPos[2].GetOrientation());
+                        }
                         break;
                     case NPC_VALEERA:
                         if (instance->GetBossState(DATA_MORCHOK) == DONE)
@@ -1311,20 +1315,26 @@ class npc_dragon_soul_thrall : public CreatureScript
             {
                 events.Reset();
                 if (InstanceScript* instance = me->GetInstanceScript())
+                {
                     if (instance->GetBossState(DATA_ULTRAXION) == DONE)
                         return;
                     else if (instance->GetData(DATA_ULTRAXION_TRASH) == DONE)
                         me->AI()->DoAction(ACTION_LOAD_TRASH);
                     else if (instance->GetData(DATA_DRAGON_SOUL_EVENT) == DONE)
                         me->AI()->DoAction(ACTION_LOAD_EVENT);
+                }
 
                 if (InstanceScript* instance = me->GetInstanceScript())
+                {
                     if (instance->GetBossState(DATA_ULTRAXION) != DONE && instance->GetData(DATA_DRAGON_SOUL_EVENT) == DONE)
+                    {
                         if (Creature* DragonSoul = me->FindNearestCreature(NPC_THE_DRAGON_SOUL, 300.0f))
                         {
                             DragonSoul->RemoveAurasDueToSpell(SPELL_DRAGON_SOUL_COSMETIC);
                             DragonSoul->CastSpell(DragonSoul, SPELL_DRAGON_SOUL_COSMETIC);
                         }
+                    }
+                }
             }
 
             void DoAction(const int32 action)
@@ -1690,10 +1700,12 @@ class npc_dragon_soul_deathwing_event : public CreatureScript
                         break;
                     case POINT_EVENT_1:
                         if (InstanceScript* instance = me->GetInstanceScript())
-                            if (instance->GetData(DATA_ULTRAXION_TRASH)==IN_PROGRESS)
+                        {
+                            if (instance->GetData(DATA_ULTRAXION_TRASH) == IN_PROGRESS)
                                 events.ScheduleEvent(EVENT_DEATHWING_INTRO_1, 1000);
-                            else if (instance->GetData(DATA_ULTRAXION_TRASH)==DONE)
+                            else if (instance->GetData(DATA_ULTRAXION_TRASH) == DONE)
                                 events.ScheduleEvent(EVENT_DEATHWING_INTRO_3, 1000);
+                        }
                         break;
                     case POINT_LAST:
                         me->SetVisible(false);
@@ -1814,7 +1826,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
             }
 
-            void Reset()
+            void Reset() override
             {
                 if (me->isDead())
                     return;
@@ -1846,7 +1858,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 me->CastSpell(me, SPELL_TEMPERAMENT);
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 if (me->GetReactState() == REACT_PASSIVE)
                 {
@@ -1872,14 +1884,14 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 events.ScheduleEvent(EVENT_ASSAULTER_BREATH, urand(20000, 30000));
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 me->GetMotionMaster()->Clear();
                 me->GetMotionMaster()->MoveFall();
                 instance->SetData(DATA_DRAGONS_COUNT, 0);
             }
 
-            void SpellHit(Unit* caster, SpellInfo const* spell)
+            void SpellHit(Unit* caster, SpellInfo const* spell) override
             {
                 if (spell->HasEffect(SPELL_EFFECT_ATTACK_ME) || spell->HasAura(SPELL_AURA_MOD_TAUNT))
                 {
@@ -1888,7 +1900,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 }
             }
 
-            void MovementInform(uint32 type, uint32 point)
+            void MovementInform(uint32 type, uint32 point) override
             {
                 if (type != POINT_MOTION_TYPE || point != POINT_ASSAULTER)
                     return;
@@ -1902,7 +1914,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 DoCastAOE(SPELL_TWLIGHT_FLAMES_CHANNEL);
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 const action) override
             {
                 if (action == ACTION_START_ASSAULT)
                 {
@@ -1952,7 +1964,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 }
             }
 
-            ObjectGuid GetGUID(int32 type = 0)
+            ObjectGuid GetGUID(int32 type = 0) override
             {
                 return stalkerGUID;
             }
@@ -1964,7 +1976,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 return 0;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 events.Update(diff);
                 switch (events.ExecuteEvent())

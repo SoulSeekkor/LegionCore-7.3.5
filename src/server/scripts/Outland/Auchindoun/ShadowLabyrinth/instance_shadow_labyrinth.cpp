@@ -44,7 +44,7 @@ class instance_shadow_labyrinth : public InstanceMapScript
                 FelOverseerCount      = 0;
             }
 
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -67,7 +67,7 @@ class instance_shadow_labyrinth : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* go)
+            void OnGameObjectCreate(GameObject* go) override
             {
                 switch (go->GetEntry())
                 {
@@ -80,7 +80,7 @@ class instance_shadow_labyrinth : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectRemove(GameObject* go)
+            void OnGameObjectRemove(GameObject* go) override
             {
                 switch (go->GetEntry())
                 {
@@ -93,7 +93,7 @@ class instance_shadow_labyrinth : public InstanceMapScript
                 }
             }
 
-            void OnUnitDeath(Unit* unit)
+            void OnUnitDeath(Unit* unit) override
             {
                 Creature* creature = unit->ToCreature();
                 if (!creature)
@@ -122,7 +122,7 @@ class instance_shadow_labyrinth : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {

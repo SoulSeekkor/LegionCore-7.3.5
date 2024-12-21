@@ -172,7 +172,7 @@ class boss_lord_meljarak : public CreatureScript
 
             void DoAction(const int32 action)
             {
-                if (IsHeroic() && action == 1 || !IsHeroic() && action > 1)
+                if ((IsHeroic() && action == 1) || (!IsHeroic() && action > 1))
                     return;
 
                 switch (action)

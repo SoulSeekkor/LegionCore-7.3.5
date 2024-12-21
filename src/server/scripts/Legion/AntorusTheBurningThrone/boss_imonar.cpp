@@ -184,7 +184,7 @@ struct boss_imonar : BossAI
             berserkTimer = 480 * IN_MILLISECONDS;
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         BossAI::EnterEvadeMode();
         SetFlyMode(false);

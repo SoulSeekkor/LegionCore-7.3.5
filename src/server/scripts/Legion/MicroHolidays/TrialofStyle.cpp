@@ -333,7 +333,7 @@ struct npc_atheris_voguesong : ScriptedAI
         }
     }
 
-    void MovementInform(uint32 type, uint32 data)
+    void MovementInform(uint32 type, uint32 data) override
     {
         if (type == POINT_MOTION_TYPE)
         {
@@ -1095,7 +1095,7 @@ struct npc_nastasia_flairwatcher : ScriptedAI
         }
     }
 
-    void MovementInform(uint32 type, uint32 data)
+    void MovementInform(uint32 type, uint32 data) override
     {
         if (type == POINT_MOTION_TYPE)
         {
@@ -1313,7 +1313,7 @@ public:
 
         void Initialize() override {}
 
-        void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet)
+        void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet) override
         {
             packet.Worldstates.emplace_back(static_cast<WorldStates>(13692), 0);
             packet.Worldstates.emplace_back(static_cast<WorldStates>(13448), 0);

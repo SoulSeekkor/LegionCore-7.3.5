@@ -63,7 +63,7 @@ class instance_molten_core : public InstanceMapScript
                 _summonedExecutus = false;
             }
 
-            void OnPlayerEnter(Player* /*player*/)
+            void OnPlayerEnter(Player* /*player*/) override
             {
                 if (_executusSchedule)
                 {
@@ -72,7 +72,7 @@ class instance_molten_core : public InstanceMapScript
                 }
             }
 
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -87,7 +87,7 @@ class instance_molten_core : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* go)
+            void OnGameObjectCreate(GameObject* go) override
             {
                 switch (go->GetEntry())
                 {
@@ -99,7 +99,7 @@ class instance_molten_core : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_RAGNAROS_ADDS)
                 {
@@ -121,7 +121,7 @@ class instance_molten_core : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -134,7 +134,7 @@ class instance_molten_core : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            bool SetBossState(uint32 bossId, EncounterState state)
+            bool SetBossState(uint32 bossId, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(bossId, state))
                     return false;
@@ -176,7 +176,7 @@ class instance_molten_core : public InstanceMapScript
                         summon->AI()->DoAction(ACTION_START_RAGNAROS_ALT);
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -187,7 +187,7 @@ class instance_molten_core : public InstanceMapScript
                 return saveStream.str();
             }
 
-            void Load(char const* data)
+            void Load(char const* data) override
             {
                 if (!data)
                 {

@@ -706,9 +706,11 @@ struct boss_helya : public BossAI
                     events.RescheduleEvent(EVENT_P1_SUBMERGED_END, 15000);
                     break;
                 case EVENT_P1_SUBMERGED_END:
+                {
                     submerged = false;
                     OpenNewPool(true);
-                    DoTeleportTo(2933.5f, 961.79f, 512.38f, 4.71f);
+                    float pos[4] = { 2933.5f, 961.79f, 512.38f, 4.71f };
+                    DoTeleportTo(pos);
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NOT_ATTACKABLE_1);
                     me->RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_PREVENT_SELECT_NPC);
                     DoCast(me, SPELL_TRANSFORM, true);
@@ -721,6 +723,7 @@ struct boss_helya : public BossAI
                     events.RescheduleEvent(EVENT_CORRUPTED_BELLOW, 15000);
                     events.RescheduleEvent(EVENT_P2_SUBMERGED_START, 70000);
                     break;
+                }
                 case EVENT_P2_SUBMERGED_START: //In Phase 2
                     submerged = true;
                     me->InterruptNonMeleeSpells(false);

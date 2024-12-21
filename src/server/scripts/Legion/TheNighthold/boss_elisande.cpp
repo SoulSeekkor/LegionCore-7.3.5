@@ -243,7 +243,7 @@ struct boss_elisande : BossAI
         RemoveDebuffPlayers();
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         Talk(SAY_EVADE);
         BossAI::EnterEvadeMode();
@@ -1545,8 +1545,10 @@ class spell_elisande_recursion : public SpellScript
         if (auto target = GetHitUnit())
         {
             if (target->IsCreature())
+            {
                 if (Aura* aura = target->GetAura(SPELL_DELPHURIC_BEAM))
                     aura->RefreshDuration();
+            }
             else if (target->IsPlayer())
             {
                 Unit::AuraApplicationMap& appliedAuras = target->GetAppliedAuras();

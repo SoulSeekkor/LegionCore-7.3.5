@@ -191,7 +191,7 @@ struct npc_chens : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -286,7 +286,7 @@ struct npc_scgnottz : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -381,7 +381,7 @@ struct npc_lin_cloudwalker : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -477,7 +477,7 @@ struct npc_rungle : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -572,7 +572,7 @@ struct npc_zang_cloudwalker : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -667,7 +667,7 @@ struct npc_hemet_nesingwary : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -762,7 +762,7 @@ struct npc_emi_lan : ScriptedAI
             guidList.push_back(owner->GetGUID());
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == 1)
             guidList.remove(guid);
@@ -917,7 +917,7 @@ struct npc_chens_balloon : ScriptedAI
         events.RescheduleEvent(EVENT_1, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -1097,7 +1097,7 @@ struct npc_scgnottz_ballon : ScriptedAI
         events.RescheduleEvent(EVENT_2, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -1291,7 +1291,7 @@ struct npc_cloudwalker_express_mop : ScriptedAI
         events.RescheduleEvent(EVENT_1, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -1507,7 +1507,7 @@ struct npc_sky_chariot : ScriptedAI
         events.RescheduleEvent(EVENT_1, 3000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -1700,7 +1700,7 @@ struct npc_cloudwalker_express : ScriptedAI
         events.RescheduleEvent(EVENT_1, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -1958,7 +1958,7 @@ struct npc_the_killemjaro : ScriptedAI
         events.RescheduleEvent(EVENT_1, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;
@@ -2145,7 +2145,7 @@ struct npc_emi_lans_skylounge : ScriptedAI
         events.RescheduleEvent(EVENT_1, 2000);
     }
 
-    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply)
+    void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
     {
         if (!who)
             return;

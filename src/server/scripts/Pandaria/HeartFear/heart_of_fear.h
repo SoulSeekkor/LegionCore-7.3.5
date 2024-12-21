@@ -100,4 +100,4 @@ enum eGameObjects
     GO_EMPRESS_COCOON = 213277,
 };
 
-#endif HEARTOFFEAR
+#endif // HEARTOFFEAR

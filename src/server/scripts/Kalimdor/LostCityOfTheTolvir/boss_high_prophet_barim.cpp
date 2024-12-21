@@ -606,7 +606,7 @@ struct npc_harbinger_of_darkness : public ScriptedAI
             barim->AI()->EnterEvadeMode();
     }
 
-    void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType /*dmgType*/)
+    void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType /*dmgType*/) override
     {
         if (damage >= me->GetHealth())
         {
@@ -844,7 +844,7 @@ class spell_copy_melee_weapon : public AuraScript
 
     uint32 uiTargetDefaultWeapon;
 
-    bool Load()
+    bool Load() override
     {
         uiTargetDefaultWeapon = 0;
         return true;

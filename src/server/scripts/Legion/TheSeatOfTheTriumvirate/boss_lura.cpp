@@ -522,6 +522,7 @@ public:
                     walker->AI()->Talk(0);
 
                 if (Creature* alleria = me->FindNearestCreature(NPC_LURA_ALLERIA, 100.0f, true))
+                {
                     if (!alleria->HasUnitState(UNIT_STATE_CASTING))
                         alleria->CastSpell(me, SPELL_CLOSE_PORTAL);
                     else
@@ -529,8 +530,9 @@ public:
                         me->AddDelayedEvent(7000, [this] {
                             if (Creature* alleria = me->FindNearestCreature(NPC_LURA_ALLERIA, 100.0f, true))
                                 alleria->CastSpell(me, SPELL_CLOSE_PORTAL);
-                        });
+                            });
                     }
+                }
             }
         }
     };

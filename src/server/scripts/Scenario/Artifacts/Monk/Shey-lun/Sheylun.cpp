@@ -601,10 +601,12 @@ public:
                 {
                     case EVENT_1:
                         if (me->getVictim()->GetTypeId() == TYPEID_PLAYER)
+                        {
                             if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1, 60.0f, false))
                                 me->CastSpell(target, 204779);
                             else
                                 DoCast(204779);
+                        }
                         events.RescheduleEvent(EVENT_1, 21000); // 204779
                         break;
                     case EVENT_2:

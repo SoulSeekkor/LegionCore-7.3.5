@@ -187,8 +187,8 @@ bool Garrison::LoadFromDB(PreparedQueryResult const& garrison, PreparedQueryResu
             _followerActivationsRemainingToday = fields[1].GetUInt32();
             _lastResTaken = fields[2].GetUInt32();
 
-            if (siteLevel->GarrSiteID == SITE_ID_GARRISON_ALLIANCE && _owner->GetTeam() == HORDE ||
-                siteLevel->GarrSiteID == SITE_ID_GARRISON_HORDE && _owner->GetTeam() == ALLIANCE)
+            if ((siteLevel->GarrSiteID == SITE_ID_GARRISON_ALLIANCE && _owner->GetTeam() == HORDE) ||
+                (siteLevel->GarrSiteID == SITE_ID_GARRISON_HORDE && _owner->GetTeam() == ALLIANCE))
             {
                 siteLevel = sGarrSiteLevelStore.LookupEntry(getSiteLevelIdById(_owner->GetTeam(), siteLevel->GarrLevel));
 
@@ -2427,7 +2427,7 @@ uint32 Garrison::GetMissionSuccessChance(Mission* mission, GarrMissionEntry cons
                             if (l_W != l_Y)
                             {
                                 auto followerEntry = sGarrFollowerStore.LookupEntry(missionFollowers[l_W]->PacketInfo.GarrFollowerID);
-                                if (followerEntry && (followerEntry->HordeCreatureID == abilityEffectEntry->ActionRace) || (followerEntry->AllianceCreatureID == abilityEffectEntry->ActionRace))
+                                if ((followerEntry && followerEntry->HordeCreatureID == abilityEffectEntry->ActionRace) || followerEntry->AllianceCreatureID == abilityEffectEntry->ActionRace)
                                 {
                                     canProc = true;
                                     break;
@@ -2935,7 +2935,7 @@ void Garrison::SendShipmentInfo(ObjectGuid const& guid)
 
     //SMSG_GET_SHIPMENT_INFO_RESPONSE
     WorldPackets::Garrison::GetShipmentInfoResponse shipmentResponse;
-    shipmentResponse.Success = shipment && (plot || shipment->cEntry->GarrTypeID == GARRISON_TYPE_CLASS_ORDER) && (!questID || questID && _owner->GetQuestStatus(questID) != QUEST_STATUS_NONE);
+    shipmentResponse.Success = shipment && (plot || shipment->cEntry->GarrTypeID == GARRISON_TYPE_CLASS_ORDER) && (!questID || (questID && _owner->GetQuestStatus(questID) != QUEST_STATUS_NONE));
 
     //! placeholder for check is allowed shipment.
     uint32 sh = shipment->ShipmentID;

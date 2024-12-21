@@ -1229,7 +1229,7 @@ class spell_highmaul_caustic_energy : public AuraScript
 
                     if (InstanceScript* instance = target->GetInstanceScript())
                     {
-                        if (boss = Creature::GetCreature(*target, instance->GetGuidData(Koragh)))
+                        if ((boss = Creature::GetCreature(*target, instance->GetGuidData(Koragh))))
                         {
                             if (boss->IsAIEnabled)
                             {

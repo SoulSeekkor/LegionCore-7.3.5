@@ -651,11 +651,11 @@ class spell_mage_icicle : public AuraScript
 
     ObjectGuid iceLanceTarget;
 
-    bool Load()
+    bool Load() override
     {
         if (Unit* caster = GetCaster())
         {
-            if (iceLanceTarget = caster->GetAnyDataContainer().GetValue<ObjectGuid>("IceLanceTarget", ObjectGuid::Empty))
+            if ((iceLanceTarget = caster->GetAnyDataContainer().GetValue<ObjectGuid>("IceLanceTarget", ObjectGuid::Empty)))
                 return true;
         }
         return false;

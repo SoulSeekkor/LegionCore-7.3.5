@@ -302,7 +302,7 @@ struct go_army_training_chests : public GameObjectAI
     bool despawn = false;
     bool justTalk = false;
 
-    bool GossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/)
+    bool GossipSelect(Player* player, uint32 /*sender*/, uint32 /*action*/) override
     {
         if (justTalk)
             return false;

@@ -501,8 +501,10 @@ public:
         {
             summons.Summon(summon);
             if (summon->GetEntry() == 67487)
+            {
                 if (Unit* owner = me->GetAnyOwner())
                     summon->AI()->AttackStart(owner);
+            }
             else if (summon->GetEntry() == 67500)
                 summon->SetReactState(REACT_PASSIVE);
         }

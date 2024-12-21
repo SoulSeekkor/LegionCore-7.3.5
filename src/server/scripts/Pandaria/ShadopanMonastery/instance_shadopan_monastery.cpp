@@ -199,6 +199,7 @@ public:
                             HandleGameObject(snowdriftEntranceGuid,  true);
                             break;
                         }
+                        default: break;
                     }
                     break;
                 }
@@ -233,6 +234,7 @@ public:
                             HandleGameObject(snowdriftExitGuid,     true);
                             HandleGameObject(shaEntranceGuid,       true);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -252,6 +254,7 @@ public:
                             HandleGameObject(shaEntranceGuid,   true);
                             HandleGameObject(shaExitGuid,       true);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -259,32 +262,33 @@ public:
                 {
                     switch (state)
                     {
-                    case IN_PROGRESS:
-                        DoAddAuraOnPlayers(SPELL_HATE);
-                        break;
-                    case NOT_STARTED:
-                    case FAIL:
-                        instance->ApplyOnEveryPlayer([&](Player* player)
-                        {
-                            player->RemoveAurasDueToSpell(SPELL_HATE);
-                            player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE);
-                            player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE_VISUAL);
-                        });
-                        break;
-                    case DONE:
-                        if (auto chest = instance->GetGameObject(zhuchestGuid))
-                            chest->SetRespawnTime(604800);
+                        case IN_PROGRESS:
+                            DoAddAuraOnPlayers(SPELL_HATE);
+                            break;
+                        case NOT_STARTED:
+                        case FAIL:
+                            instance->ApplyOnEveryPlayer([&](Player* player)
+                            {
+                                player->RemoveAurasDueToSpell(SPELL_HATE);
+                                player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE);
+                                player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE_VISUAL);
+                            });
+                            break;
+                        case DONE:
+                            if (auto chest = instance->GetGameObject(zhuchestGuid))
+                                chest->SetRespawnTime(604800);
                         
-                        instance->ApplyOnEveryPlayer([&](Player* player)
-                        {
-                            if (player->HasAura(SPELL_HAZE_OF_HATE))
-                                player->CastSpell(player, SPELL_ACHIEVEMENT_CHECK, true);
+                            instance->ApplyOnEveryPlayer([&](Player* player)
+                            {
+                                if (player->HasAura(SPELL_HAZE_OF_HATE))
+                                    player->CastSpell(player, SPELL_ACHIEVEMENT_CHECK, true);
 
-                            player->RemoveAurasDueToSpell(SPELL_HATE);
-                            player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE);
-                            player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE_VISUAL);
-                        });
-                        break;
+                                player->RemoveAurasDueToSpell(SPELL_HATE);
+                                player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE);
+                                player->RemoveAurasDueToSpell(SPELL_HAZE_OF_HATE_VISUAL);
+                            });
+                            break;
+                        default: break;
                     }
                     break;
                 }

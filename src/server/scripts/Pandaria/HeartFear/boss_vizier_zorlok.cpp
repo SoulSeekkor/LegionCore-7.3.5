@@ -232,8 +232,7 @@ class boss_vizier_zorlok : public CreatureScript
                         if (me->IsWithinMeleeRange(me->getVictim()))
                             me->InterruptSpell(CURRENT_CHANNELED_SPELL);
 
-                if (HealthBelowPct(80) && !flycount ||
-                    HealthBelowPct(60) && flycount == 1)
+                if ((HealthBelowPct(80) && !flycount) || (HealthBelowPct(60) && flycount == 1))
                 {
                     flycount++;
                     FlyControl(true);

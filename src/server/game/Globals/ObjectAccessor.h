@@ -40,6 +40,9 @@ class EventObject;
 
 static uint32 const INCREMENT_COUNTER = 5000000;
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundefined-var-template"
+
 template <class T>
 class HashMapHolder
 {
@@ -138,7 +141,7 @@ public:
 
 private:
 
-    //Non instanceable only static
+    // Non-instanceable only static
     HashMapHolder() { _checkLock = false; _size = 0; }
 
     static sf::contention_free_shared_mutex< > i_lock;
@@ -314,6 +317,8 @@ private:
     Player2CorpsesMapType i_player2corpse;
     std::recursive_mutex i_corpseLock;
 };
+
+#pragma GCC diagnostic pop
 
 #define sObjectAccessor ObjectAccessor::instance()
 

@@ -521,9 +521,9 @@ struct boss_helya_tov : BossAI
             break;
         case SpellOrbOfCorruption:
         {
-            if (me->GetMap() && (me->GetMap()->GetSpawnMode() == DIFFICULTY_NORMAL_RAID) || (me->GetMap()->GetSpawnMode() == DIFFICULTY_LFR_RAID))
+            if ((me->GetMap() && me->GetMap()->GetSpawnMode() == DIFFICULTY_NORMAL_RAID) || me->GetMap()->GetSpawnMode() == DIFFICULTY_LFR_RAID)
                 count = 2;
-            else if (me->GetMap() && (me->GetMap()->GetSpawnMode() == DIFFICULTY_MYTHIC_RAID) || (me->GetMap()->GetSpawnMode() == DIFFICULTY_HEROIC_RAID))
+            else if ((me->GetMap() && me->GetMap()->GetSpawnMode() == DIFFICULTY_MYTHIC_RAID) || me->GetMap()->GetSpawnMode() == DIFFICULTY_HEROIC_RAID)
                 count = 3;
 
             std::list<Player*> playerList;
@@ -549,9 +549,9 @@ struct boss_helya_tov : BossAI
         }
         case SpellOrbOfCorrosion:
         {
-            if (me->GetMap() && (me->GetMap()->GetSpawnMode() == DIFFICULTY_NORMAL_RAID) || (me->GetMap()->GetSpawnMode() == DIFFICULTY_LFR_RAID))
+            if ((me->GetMap() && me->GetMap()->GetSpawnMode() == DIFFICULTY_NORMAL_RAID) || me->GetMap()->GetSpawnMode() == DIFFICULTY_LFR_RAID)
                 count = 2;
-            else if (me->GetMap() && (me->GetMap()->GetSpawnMode() == DIFFICULTY_MYTHIC_RAID) || (me->GetMap()->GetSpawnMode() == DIFFICULTY_HEROIC_RAID))
+            else if ((me->GetMap() && me->GetMap()->GetSpawnMode() == DIFFICULTY_MYTHIC_RAID) || me->GetMap()->GetSpawnMode() == DIFFICULTY_HEROIC_RAID)
                 count = 3;
 
             std::list<Player*> playerList;

@@ -1577,7 +1577,7 @@ public:
             _EnterCombat();
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {        
             Talk(5);
             CreatureAI::EnterEvadeMode();
@@ -2170,7 +2170,7 @@ public:
         uint32 timer_for_energy{};
         ObjectGuid targetGUID{};
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             events.RescheduleEvent(EVENT_1, 100);
@@ -2212,7 +2212,7 @@ public:
             }
         }
         
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;

@@ -196,6 +196,7 @@ void BattlegroundSeethingShore::PostUpdateImpl(uint32 diff)
 
     if (GetStatus() == STATUS_IN_PROGRESS)
         for (uint8 i = 0; i < 2; ++i)
+        {
             if (m_boxesTimers[i] <= diff)
             {
                 m_boxesTimers[i] = urand(180, 300) * 1000;
@@ -213,6 +214,7 @@ void BattlegroundSeethingShore::PostUpdateImpl(uint32 diff)
             }
             else
                 m_boxesTimers[i] -= diff;
+        }
 }
 
 void BattlegroundSeethingShore::TeleportToStart(Player * player)

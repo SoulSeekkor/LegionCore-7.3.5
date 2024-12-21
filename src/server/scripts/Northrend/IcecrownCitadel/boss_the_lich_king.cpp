@@ -2034,9 +2034,9 @@ class npc_spirit_bomb : public CreatureScript
             {
                 Unit* curVictim;
                 float destX, destY, destZ;
-                if(curVictim = SelectTarget(SELECT_TARGET_RANDOM, 1))
+                if ((curVictim = SelectTarget(SELECT_TARGET_RANDOM, 1)))
                     curVictim->GetPosition(destX, destY, destZ);
-                else if(curVictim = SelectTarget(SELECT_TARGET_RANDOM, 0))
+                else if ((curVictim = SelectTarget(SELECT_TARGET_RANDOM, 0)))
                     curVictim->GetPosition(destX, destY, destZ);
                 else
                     me->GetPosition(destX, destY, destZ);

@@ -619,7 +619,7 @@ bool Player::SolveResearchProject(uint32 spellId, SpellCastTargets& targets)
 
     bool gmCast = isGameMaster();
 
-    if (!entry || !HasResearchProject(entry->ID) && !gmCast)
+    if (!entry || (!HasResearchProject(entry->ID) && !gmCast))
         return false;
 
     ResearchBranchEntry const* branch = nullptr;

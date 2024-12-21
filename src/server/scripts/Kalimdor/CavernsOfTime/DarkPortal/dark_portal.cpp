@@ -90,7 +90,7 @@ public:
         bool Life50;
         bool Life25;
 
-        void Reset()
+        void Reset() override
         {
             SpellCorrupt_Timer = 0;
 
@@ -105,7 +105,7 @@ public:
             DoCast(me, SPELL_PORTAL_RUNE, true);
         }
 
-        void MoveInLineOfSight(Unit* who)
+        void MoveInLineOfSight(Unit* who) override
         {
             if (!instance)
                 return;
@@ -139,7 +139,7 @@ public:
             }
         }
 
-        void SpellHit(Unit* /*caster*/, const SpellInfo* spell)
+        void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override
         {
             if (SpellCorrupt_Timer)
                 return;
@@ -151,7 +151,7 @@ public:
                 SpellCorrupt_Timer = 3000;
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (killer->GetEntry() == me->GetEntry())
                 return;
@@ -230,7 +230,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!instance)
                 return;

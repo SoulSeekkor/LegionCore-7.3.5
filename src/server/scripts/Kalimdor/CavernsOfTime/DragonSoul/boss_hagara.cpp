@@ -376,7 +376,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 crystalCount = 0;
             }
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
 
@@ -406,7 +406,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_WATERY_ENTRENCHMENT);
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 Talk(SAY_AGGRO);
 
@@ -429,7 +429,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 instance->SetBossState(DATA_HAGARA, IN_PROGRESS);
             }
 
-            void DoAction(const int32 action)
+            void DoAction(const int32 action) override
             {
                 if (action == ACTION_START_EVENT && !bEvent && !bEventDone)
                 {
@@ -453,7 +453,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 return 0;
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
 
@@ -462,13 +462,13 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_WATERY_ENTRENCHMENT);
             }
 
-            void KilledUnit(Unit* victim)
+            void KilledUnit(Unit* victim) override
             {
                 if (victim && victim->GetTypeId() == TYPEID_PLAYER)
                     Talk(SAY_KILL);
             }
 
-            void SummonedCreatureDies(Creature* summon, Unit* /*killer*/)
+            void SummonedCreatureDies(Creature* summon, Unit* /*killer*/) override
             {
                 if (!bEvent)
                     return;
@@ -527,7 +527,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim() && !bEvent)
                     return;
@@ -792,6 +792,7 @@ class boss_hagara_the_stormbinder: public CreatureScript
                                         if (Creature* pCronductor = me->SummonCreature(NPC_CRYSTAL_CONDUCTOR, crystalconductorPos[i]))
                                             pCronductor->CastSpell(me, SPELL_CRYSTALLINE_TETHER_2);
                                     break;
+                                default: break;
                             }
                             
                             me->SummonCreature(NPC_BOUND_LIGHTNING_ELEMENTAL, circlePos[0][3]);
@@ -1627,7 +1628,7 @@ class npc_hagara_the_stormbinder_crystal_conductor : public CreatureScript
                 bOverloaded = false;
             }
 
-            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo)
+            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo) override
             {
                 if ((spellInfo->Id == SPELL_OVERLOAD_2 || spellInfo->Id == SPELL_LIGHTNING_CONDUIT_DUMMY_1) && !bOverloaded)
                 {
@@ -1654,7 +1655,7 @@ class npc_hagara_the_stormbinder_crystal_conductor : public CreatureScript
                 return 0;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 events.Update(diff);
 

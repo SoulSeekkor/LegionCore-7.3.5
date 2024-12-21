@@ -3203,7 +3203,7 @@ SpellMissInfo Spell::DoSpellHitOnUnit(Unit* unit, uint32 effectMask, bool scaleA
                     }
                     else if (Unit* owner = unit->GetOwner())
                     {
-                        if (plr = owner->ToPlayer())
+                        if ((plr = owner->ToPlayer()))
                             if (plr->HasPvPRulesEnabled())
                                 isPvP = true;
                     }
@@ -4271,7 +4271,7 @@ void Spell::cast(bool skipCheck)
 						if (Unit* target = playerCaster->GetSelectedUnit())
 							for (Unit::ControlList::iterator itr = playerCaster->m_Controlled.begin(); itr != playerCaster->m_Controlled.end(); ++itr)
 								if (Creature* creature = ObjectAccessor::GetCreatureOrPetOrVehicle(*playerCaster, *itr))
-									if (creature->IsAIEnabled && ((creature->isPet() || creature->m_isHati) && creature->HasReactState(REACT_HELPER)) || creature->GetEntry() == 69791 || creature->GetEntry() == 69792)
+									if ((creature->IsAIEnabled && ((creature->isPet() || creature->m_isHati) && creature->HasReactState(REACT_HELPER))) || creature->GetEntry() == 69791 || creature->GetEntry() == 69792)
 									{
 										creature->ClearUnitState(UNIT_STATE_MELEE_ATTACKING);
 										creature->AI()->AttackStart(target);
@@ -4802,7 +4802,7 @@ uint64 Spell::handle_delayed(uint64 t_offset)
 
     uint32 _mss = GetMSTimeDiffToNow(_ss);
     if (_mss > 250)
-        sLog->outDiff("Spell::handle_delayed Caster %u entry %u SpellId %u wait %ums GOTargetInfo %u TargetInfo %u",
+        sLog->outDiff("Spell::handle_delayed Caster %u entry %u SpellId %u wait %ums GOTargetInfo " UI64FMTDX " TargetInfo " UI64FMTDX,
             m_caster->GetGUIDLow(), m_caster->GetEntry(), m_spellInfo->Id, _mss, m_UniqueGOTargetInfo.size(), m_UniqueTargetInfo.size());
 
     // All targets passed - need finish phase
@@ -9292,7 +9292,7 @@ bool SpellEvent::Execute(uint64 e_time, uint32 p_time)
 
     uint32 _mss = GetMSTimeDiffToNow(_ss);
     if (_mss > 250)
-        sLog->outDiff("SpellEvent::Execute: Caster %u entry %u SpellId %u wait %ums diff %u TargetCount %u", m_Spell->GetCaster()->GetGUIDLow(), m_Spell->GetCaster()->GetEntry(), m_Spell->m_spellInfo->Id, _mss, p_time, m_Spell->GetTargetCount());
+        sLog->outDiff("SpellEvent::Execute: Caster %u entry %u SpellId %u wait %ums diff %u TargetCount " UI64FMTDX, m_Spell->GetCaster()->GetGUIDLow(), m_Spell->GetCaster()->GetEntry(), m_Spell->m_spellInfo->Id, _mss, p_time, m_Spell->GetTargetCount());
 
     m_Spell->GetCaster()->m_Events.AddEvent(this, e_time + 1, false);
     return false;

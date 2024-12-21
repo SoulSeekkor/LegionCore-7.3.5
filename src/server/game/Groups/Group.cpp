@@ -315,7 +315,7 @@ void Group::ChangeFlagEveryoneAssistant(bool apply)
 
 void Group::ChangeFlagGuildGroup(bool apply)
 {
-    if (!apply && !IsGuildGroup() || apply && IsGuildGroup())
+    if ((!apply && !IsGuildGroup()) || (apply && IsGuildGroup()))
         return;
 
     if (apply)
@@ -784,8 +784,6 @@ bool Group::RemoveMember(ObjectGuid const& guid, bool /*disbandInfo*/, RemoveMet
     // {
         // m_Functions.AddFunction([this, guid, method, kicker, reason]() -> void
         // {
-            // if (!this)
-                // return;
             // RemoveMemberQueue(guid, method, kicker, reason);
         // }, m_Functions.CalculateTime(10));
     // }
@@ -859,7 +857,7 @@ bool Group::RemoveMemberQueue(ObjectGuid const& guid, RemoveMethod const& method
         }
 
         // Reevaluate group enchanter if the leaving player had enchanting skill or the player is offline
-        if (player && player->GetSkillValue(SKILL_ENCHANTING) || !player)
+        if ((player && player->GetSkillValue(SKILL_ENCHANTING)) || !player)
             ResetMaxEnchantingLevel();
 
         // Remove player from loot rolls
@@ -920,7 +918,7 @@ bool Group::RemoveMemberQueue(ObjectGuid const& guid, RemoveMethod const& method
         {
             Player* leader = ObjectAccessor::FindPlayer(GetLeaderGUID());
             uint32 mapId = sLFGMgr->GetDungeonMapId(GetGUID());
-            if (!mapId || !leader || leader->isAlive() && leader->GetMapId() != mapId)
+            if (!mapId || !leader || (leader->isAlive() && leader->GetMapId() != mapId))
             {
                 Disband();
                 return false;
@@ -1785,7 +1783,7 @@ void Group::SendUpdateToPlayer(ObjectGuid playerGUID, MemberSlot* slot /*= nullp
         auto dungeon = sLFGMgr->GetLFGDungeon(sLFGMgr->GetDungeon(m_guid, true), player->GetTeam());
         auto lfgState = sLFGMgr->GetState(m_guid, QueueId);
         uint8 flags = 0;
-        if (lfgState == lfg::LFG_STATE_FINISHED_DUNGEON || dungeon && dungeon->dbc->Flags & LFG_FLAG_NON_BACKFILLABLE)
+        if (lfgState == lfg::LFG_STATE_FINISHED_DUNGEON || (dungeon && dungeon->dbc->Flags & LFG_FLAG_NON_BACKFILLABLE))
             flags |= 2;
 
         partyUpdate.LfgInfos = boost::in_place();
@@ -1850,7 +1848,7 @@ void Group::BroadcastAddonMessagePacket(WorldPacket const* packet, std::string c
     for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
     {
         Player* player = itr->getSource();
-        if (!player || !player->CanContact() || ignore && player->GetGUID() == ignore || ignorePlayersInBGRaid && player->GetGroup() != this)
+        if (!player || !player->CanContact() || (ignore && player->GetGUID() == ignore) || (ignorePlayersInBGRaid && player->GetGroup() != this))
             continue;
 
         if (WorldSession* session = player->GetSession())
@@ -2283,7 +2281,7 @@ void Group::ResetInstances(uint8 method, bool isRaid, bool isLegacy, Player* Sen
     {
         InstanceSave* instanceSave = itr->second.save;
         const MapEntry* entry = sMapStore.LookupEntry(itr->first);
-        if (!entry || entry->IsRaid() != isRaid || !instanceSave->CanReset() && method != INSTANCE_RESET_GROUP_DISBAND)
+        if (!entry || entry->IsRaid() != isRaid || (!instanceSave->CanReset() && method != INSTANCE_RESET_GROUP_DISBAND))
         {
             ++itr;
             continue;

@@ -60,7 +60,7 @@ public:
         bool   AchievManyWhelpsHandleIt;
         bool   AchievSheDeepBreathMore;
 
-        void Initialize()
+        void Initialize() override
         {
             memset(&Encounter, 0, sizeof(Encounter));
 
@@ -73,7 +73,7 @@ public:
             EruptTimer = 0;
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -83,7 +83,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             if ((go->GetGOInfo()->displayId == 4392 || go->GetGOInfo()->displayId == 4472) && go->GetGOInfo()->trap.spell == 17731)
             {
@@ -105,7 +105,7 @@ public:
             }
         }
 
-        void OnGameObjectRemove(GameObject* go)
+        void OnGameObjectRemove(GameObject* go) override
         {
             if ((go->GetGOInfo()->displayId == 4392 || go->GetGOInfo()->displayId == 4472) && go->GetGOInfo()->trap.spell == 17731)
             {
@@ -145,7 +145,7 @@ public:
             FloorEruptionGUID[1].erase(floorEruptedGUID);
         }
 
-        void SetData(uint32 Type, uint32 Data)
+        void SetData(uint32 Type, uint32 Data) override
         {
             switch (Type)
             {
@@ -178,7 +178,7 @@ public:
                 SaveToDB();
         }
 
-        void SetGuidData(uint32 Type, ObjectGuid Data)
+        void SetGuidData(uint32 Type, ObjectGuid Data) override
         {
             switch (Type)
             {
@@ -201,7 +201,7 @@ public:
             return 0;
         }
 
-        ObjectGuid GetGuidData(uint32 Data) const
+        ObjectGuid GetGuidData(uint32 Data) const override
         {
             switch (Data)
             {
@@ -212,7 +212,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void Update(uint32 Diff)
+        void Update(uint32 Diff) override
         {
             if (GetData(DATA_ONYXIA) == IN_PROGRESS)
             {
@@ -242,7 +242,7 @@ public:
             }
         }
 
-        bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target*/ = NULL, uint32 /*miscvalue1*/ = 0)
+        bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target*/ = NULL, uint32 /*miscvalue1*/ = 0) override
         {
             switch (criteria_id)
             {

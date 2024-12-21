@@ -125,10 +125,12 @@ public:
             if (!justSawByPlayer)
             {
                 if (me->GetEntry() == 119133)
+                {
                     if (me->IsWithinDistInMap(who, 40.0f))
                         instance->onScenarionNextStep(20); // custom
                     else
                         return;
+                }
                 
                 justSawByPlayer = true;
                 

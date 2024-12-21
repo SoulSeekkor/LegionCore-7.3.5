@@ -1068,7 +1068,7 @@ public:
             EVENT_SHADOW_KICK_STUN  = 4,
         };
 
-        void Reset()
+        void Reset() override
         {
             // This particular entry is also spawned on an other event
             if (me->GetAreaId() != 5849) // Cavern areaid
@@ -1088,7 +1088,7 @@ public:
             playerGuid = guid;
         }
         
-        void DamageTaken(Unit* attacker, uint32& damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32& damage, DamageEffectType dmgType) override
         {
             if (me->HealthBelowPctDamaged(10, damage))
             {
@@ -1108,7 +1108,7 @@ public:
             }
         }
 
-        void KilledUnit(Unit* victim)
+        void KilledUnit(Unit* victim) override
         {
             if (victim->GetTypeId() == TYPEID_PLAYER)
             {
@@ -1119,7 +1119,7 @@ public:
             }
         }
         
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
             
@@ -1657,7 +1657,7 @@ public:
             EVENT_WATER_SPOUT_DESPAWN   = 5,
         };
 
-        void Reset()
+        void Reset() override
         {
             _events.Reset();
             actualPlace = 0;
@@ -1690,7 +1690,7 @@ public:
             return me->GetMap()->GetCreature(waterSpoutGUID);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             _events.Update(diff);
 

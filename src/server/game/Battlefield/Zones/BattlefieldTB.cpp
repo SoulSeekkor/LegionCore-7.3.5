@@ -469,6 +469,7 @@ void BattlefieldTB::OnBattleEnd(bool endbytimer)
                                 plr->CastSpell(plr, SPELL_TB_VICTORY_REWARD_HORDE, true);
                                 IncrementQuest(plr, 28884, true);
                             break;
+                            default: break;
                         }
                         if (m_Data32[BATTLEFIELD_TB_DATA_DESTROYED] == 0)
                             plr->CastSpell(plr, SPELL_TB_TOL_BARAD_TOWER_DEFENDED, true);
@@ -483,6 +484,7 @@ void BattlefieldTB::OnBattleEnd(bool endbytimer)
                             case TEAM_HORDE:
                                 IncrementQuest(plr, 28884, true);
                             break;
+                            default: break;
                         }
                         plr->CastSpell(plr, SPELL_TB_LOOSER_REWARD, true);
                         plr->RepopAtGraveyard();

@@ -112,7 +112,7 @@ struct boss_varimathras : BossAI
         }); 
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         BossAI::EnterEvadeMode();
         instance->SetData(DATA_COSMETIC_TORMENT, 5); //Disable

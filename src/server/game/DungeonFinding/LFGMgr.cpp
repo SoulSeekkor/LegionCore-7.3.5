@@ -566,7 +566,7 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons)
                     break;
             }
 
-            if (isDungeon && isRaid || isDungeon && isScenario || isRaid && isScenario)
+            if ((isDungeon && isRaid) || (isDungeon && isScenario) || (isRaid && isScenario))
                 joinData.result = LFG_JOIN_INTERNAL_ERROR;
 
             switch (entry->dbc->TypeID)
@@ -1793,8 +1793,11 @@ void LFGMgr::FinishDungeon(ObjectGuid gguid, const uint32 dungeonId)
             if (data.reward->bonusQuestId)
             {
                 if (CTARewardStore[guid] && player->GetGroup() && (player->GetGroup()->GetLfgRoles(guid) & ~PLAYER_ROLE_LEADER) == CTARewardStore[guid])
-                    if (quest = sQuestDataStore->GetQuestTemplate(data.reward->bonusQuestId))
+                {
+                    quest = sQuestDataStore->GetQuestTemplate(data.reward->bonusQuestId);
+                    if (quest)
                         player->RewardQuest(quest, 0, nullptr, false);
+                }
 
                 SetEligibleForCTAReward(guid, 0);
             }
@@ -2890,7 +2893,8 @@ bool LfgReward::RewardPlayer(Player* player, LFGDungeonData const* randomDungeon
     {
         done = true;
 
-        if (quest = sQuestDataStore->GetQuestTemplate(otherQuest))
+        quest = sQuestDataStore->GetQuestTemplate(otherQuest);
+        if (quest)
             player->AddDelayedEvent(100, [player, quest] () -> void { if (player) player->RewardQuest(quest, 0, nullptr, false); });
     }
 

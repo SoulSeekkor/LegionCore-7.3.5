@@ -19,7 +19,7 @@ struct npc_odyn_after_kill_helya : ScriptedAI
         DoCast(SpellOdynTeleport);
     }
 
-    void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo)
+    void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo) override
     {
         if (spellInfo->Id == SpellOdynTeleportTrigger)
             me->CreateConversation(CONV_INTRO);
@@ -58,7 +58,7 @@ public:
         if (player->isInCombat())
             return true;
 
-        if (graveyardId = 5827)
+        if (graveyardId == 5827)
             if (WorldSafeLocsEntry const* entry = sWorldSafeLocsStore.LookupEntry(graveyardId))
                 player->TeleportTo(entry->MapID, entry->Loc.X, entry->Loc.Y, entry->Loc.Z, entry->Loc.O * M_PI / 180.0f);
 
@@ -83,7 +83,7 @@ public:
         if (player->isInCombat())
             return true;
 
-        if (graveyardId = 5828)
+        if (graveyardId == 5828)
             if (WorldSafeLocsEntry const* entry = sWorldSafeLocsStore.LookupEntry(graveyardId))
                 player->TeleportTo(entry->MapID, entry->Loc.X, entry->Loc.Y, entry->Loc.Z, entry->Loc.O * M_PI / 180.0f);
 
@@ -128,7 +128,7 @@ public:
         uint16 checkOnProc;
         uint16 checkOnRemove;
 
-        bool Load()
+        bool Load() override
         {
             checkOnProc = 1000;
             checkOnRemove = 1000;

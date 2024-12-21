@@ -495,7 +495,7 @@ class boss_madness_of_deathwing : public CreatureScript
                 m_chromaticChampionCreditCriteria = 0;
             }
 
-            void AttackStart(Unit* target)
+            void AttackStart(Unit* target) override
             {
                 if (!target)
                     return;
@@ -504,13 +504,13 @@ class boss_madness_of_deathwing : public CreatureScript
                     DoStartNoMovement(target);
             }
 
-            void Reset()
+            void Reset() override
             {
                 m_chromaticChampionCreditCriteria = 0;
                 events.Reset();
             }
 
-            void IsSummonedBy(Unit* /*owner*/)
+            void IsSummonedBy(Unit* /*owner*/) override
             {
                 instance->SetBossState(DATA_MADNESS, IN_PROGRESS);
                 events.ScheduleEvent(EVENT_BERSERK, 900000);
@@ -518,14 +518,14 @@ class boss_madness_of_deathwing : public CreatureScript
                 events.ScheduleEvent(EVENT_CHECK_ARMS, 500);
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 BossAI::JustSummoned(summon);
                 if (me->HasAura(SPELL_BERSERK))
                     summon->CastSpell(summon, SPELL_BERSERK, true);
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_ASSAULT_PLATFORM)
                 {
@@ -552,7 +552,7 @@ class boss_madness_of_deathwing : public CreatureScript
                 return criteria == m_chromaticChampionCreditCriteria;
             }
 
-            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo)
+            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo) override
             {
                 if (spellInfo->Id == SPELL_AGONIZING_PAIN)
                 {
@@ -570,7 +570,7 @@ class boss_madness_of_deathwing : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;
@@ -1695,7 +1695,7 @@ class npc_madness_of_deathwing_blistering_tentacle : public CreatureScript
 
             SpellMissInfo SpellHitResult(Unit* attacker, SpellInfo const* spell, Spell const* spellInstance)
             {
-                return (attacker && attacker->GetEntry() == NPC_ALEXSTRASZA_DRAGON || !spellInstance || spellInstance && spellInstance->m_targets.GetUnitTarget() == me) ? SPELL_MISS_NONE : SPELL_MISS_MISS;
+                return ((attacker && attacker->GetEntry() == NPC_ALEXSTRASZA_DRAGON) || !spellInstance || (spellInstance && spellInstance->m_targets.GetUnitTarget() == me)) ? SPELL_MISS_NONE : SPELL_MISS_MISS;
             }
         };
 };
@@ -2119,6 +2119,7 @@ class npc_madness_of_deathwing_deathwing : public CreatureScript
                             case DIFFICULTY_25_HC:
                                 instance->DoRespawnGameObject(instance->GetGuidData(DATA_ELEM_FRAGMENT_25H), DAY);
                                 break;
+                            default: break;
                         }
                         return;
                     }

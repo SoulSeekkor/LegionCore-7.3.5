@@ -1223,7 +1223,7 @@ struct npc_eonar_trash_generic : public ScriptedAI
 
     void Reset() override {}
 
-    void JustDied(Unit* /*killer*/)
+    void JustDied(Unit* /*killer*/) override
     {
         me->SetLootRecipient(NULL);
     }

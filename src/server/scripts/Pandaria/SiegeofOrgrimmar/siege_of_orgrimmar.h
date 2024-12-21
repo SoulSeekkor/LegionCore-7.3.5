@@ -710,4 +710,4 @@ static uint8 vehSlotForMeasures(uint32 entry)
     }
     return 0;
 }
-#endif SIEGEOFORGRIMMAR
+#endif // SIEGEOFORGRIMMAR

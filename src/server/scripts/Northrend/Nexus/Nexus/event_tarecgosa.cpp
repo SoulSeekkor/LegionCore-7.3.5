@@ -194,7 +194,7 @@ public:
             me->SetFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP | UNIT_NPC_FLAG_QUESTGIVER);
         }
 
-        void MovementInform(uint32 type, uint32 data)
+        void MovementInform(uint32 type, uint32 data) override
         {
             if (type == POINT_MOTION_TYPE)
             {
@@ -218,7 +218,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

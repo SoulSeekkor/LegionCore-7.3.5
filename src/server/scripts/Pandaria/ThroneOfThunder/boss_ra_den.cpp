@@ -338,7 +338,10 @@ class npc_corrupted_sphere : public CreatureScript
 
             void Reset()
             {
-                newx, lastx, newy, lasty = 0;
+                newx = 0;
+                lastx = 0;
+                newy = 0;
+                lasty = 0;
                 events.RescheduleEvent(EVENT_MOVING, 1000);
             }
 

@@ -437,7 +437,7 @@ public:
             // Increases the damage of all Sanctum Sentries within 10 yards by 30%
             if (CheckTimer < uiDiff)
             {
-                uint8 aura = NULL;
+                uint8 aura = 0;
                 std::list<Creature*> Sanctum;
                 GetCreatureListWithEntryInGrid(Sanctum, me, NPC_SANCTUM_SENTRY, 10.0f);
                 for(std::list<Creature*>::iterator itr = Sanctum.begin(); itr != Sanctum.end(); ++itr)

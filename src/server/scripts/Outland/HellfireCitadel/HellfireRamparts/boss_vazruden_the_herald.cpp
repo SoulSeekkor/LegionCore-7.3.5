@@ -317,7 +317,7 @@ class boss_vazruden_the_herald : public CreatureScript
                 UnsummonAdds();
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 damage = 0;
             }

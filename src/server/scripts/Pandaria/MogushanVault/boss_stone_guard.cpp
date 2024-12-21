@@ -426,7 +426,7 @@ class boss_generic_guardian : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_ANIM_SIT);
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 summons.Summon(summon);
             }
@@ -745,13 +745,13 @@ class spell_jasper_chains : public SpellScriptLoader
             PrepareAuraScript(spell_jasper_chains_AuraScript);
             ObjectGuid playerLinkedGuid;
 
-            bool Load()
+            bool Load() override
             {
                 playerLinkedGuid.Clear();
                 return true;
             }
 
-            void SetGuid(uint32 type, ObjectGuid const& guid)
+            void SetGuid(uint32 type, ObjectGuid const& guid) override
             {
                 playerLinkedGuid = guid;
             }

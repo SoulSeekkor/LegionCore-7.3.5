@@ -325,8 +325,7 @@ void BattlegroundQueue::RemovePlayer(ObjectGuid guid, bool decreaseInvitedCount)
 {
     AddDelayedEvent(10, [=]() -> void
     {
-        if (this)
-            RemovePlayerQueue(guid, decreaseInvitedCount);
+        RemovePlayerQueue(guid, decreaseInvitedCount);
     });
 }
 
@@ -1180,7 +1179,7 @@ void BattlegroundQueue::BattlegroundQueueUpdate(uint32 /*diff*/, uint16 bgTypeId
         next = itr;
         ++next;
 
-        if ((*itr)->IsBattleground() && ((*itr)->GetTypeID(true) == bgTypeId || (bgTypeId == MS::Battlegrounds::BattlegroundTypeId::BattlegroundRandom && !(*itr)->IsBrawl()) && (*itr)->GetTypeID(true) != MS::Battlegrounds::BattlegroundTypeId::BattlegroundDeathMatch)
+        if ((*itr)->IsBattleground() && ((*itr)->GetTypeID(true) == bgTypeId || ((bgTypeId == MS::Battlegrounds::BattlegroundTypeId::BattlegroundRandom && !(*itr)->IsBrawl()) && (*itr)->GetTypeID(true) != MS::Battlegrounds::BattlegroundTypeId::BattlegroundDeathMatch))
         && (*itr)->GetMinLevel() == bracket_MinLevel && (*itr)->GetStatus() > STATUS_WAIT_QUEUE && (*itr)->GetStatus() < STATUS_WAIT_LEAVE)
         {
             auto bg = *itr;

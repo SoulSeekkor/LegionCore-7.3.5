@@ -64,7 +64,7 @@ public:
         //other
         uint8 stormUnleashed;
         
-        void Initialize()
+        void Initialize() override
         {
             SetBossNumber(7);
             LoadDoorData(doorData);
@@ -104,12 +104,12 @@ public:
             stormUnleashed = 0;
         }
 
-        void OnPlayerLeave(Player* player)
+        void OnPlayerLeave(Player* player) override
         {
             DoRemoveAurasDueToSpellOnPlayers(126159);
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             { 
@@ -173,7 +173,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -223,7 +223,7 @@ public:
             }
         }
 
-        bool SetBossState(uint32 id, EncounterState state)
+        bool SetBossState(uint32 id, EncounterState state) override
         {
             if (!InstanceScript::SetBossState(id, state))
                 return false;
@@ -250,6 +250,7 @@ public:
                             for (std::vector<ObjectGuid>::const_iterator guid = vizierarenadoorGuids.begin(); guid != vizierarenadoorGuids.end(); guid++)
                                 HandleGameObject(*guid, false);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -268,6 +269,7 @@ public:
                         case IN_PROGRESS:
                             HandleGameObject(vizierexdoorGuid, false);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -290,6 +292,7 @@ public:
                             for (std::vector<ObjectGuid>::const_iterator guid = garaloncdoorGuids.begin(); guid != garaloncdoorGuids.end(); guid++)
                                 HandleGameObject(*guid, false);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -325,6 +328,7 @@ public:
                             for (std::vector<ObjectGuid>::const_iterator guids = garalonexdoorGuids.begin(); guids != garalonexdoorGuids.end(); guids++)
                                 HandleGameObject(*guids, true);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -345,7 +349,8 @@ public:
                             DoRemoveAurasDueToSpellOnPlayers(122516);
                             HandleGameObject(unsokendoorGuid, true);
                             HandleGameObject(unsokexdoorGuid, true);
-                        break;
+                            break;
+                        default: break;
                     }
                     break;
                 }
@@ -353,20 +358,21 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                        DoRemoveAurasDueToSpellOnPlayers(123713);
-                        break;
-                    case DONE:
-                        HandleGameObject(unsokexdoorGuid, true);
-                        DoRemoveAurasDueToSpellOnPlayers(123713);
-                        break;
-                    case IN_PROGRESS:
-                        DoRemoveAurasDueToSpellOnPlayers(123713);
-                        HandleGameObject(unsokexdoorGuid, false);
-                        break;
-                    case FAIL:
-                        DoRemoveAurasDueToSpellOnPlayers(123713);
-                        break;
+                        case NOT_STARTED:
+                            DoRemoveAurasDueToSpellOnPlayers(123713);
+                            break;
+                        case DONE:
+                            HandleGameObject(unsokexdoorGuid, true);
+                            DoRemoveAurasDueToSpellOnPlayers(123713);
+                            break;
+                        case IN_PROGRESS:
+                            DoRemoveAurasDueToSpellOnPlayers(123713);
+                            HandleGameObject(unsokexdoorGuid, false);
+                            break;
+                        case FAIL:
+                            DoRemoveAurasDueToSpellOnPlayers(123713);
+                            break;
+                        default: break;
                     }
                     break;
                 }
@@ -374,7 +380,7 @@ public:
             return true;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -449,7 +455,7 @@ public:
             return 0;
         }
 
-        void CreatureDies(Creature* cre, Unit* /*killer*/)
+        void CreatureDies(Creature* cre, Unit* /*killer*/) override
         {
             switch (cre->GetEntry())
             {
@@ -471,7 +477,7 @@ public:
             }
         }
 
-        void OnCreatureRemove(Creature* cre)
+        void OnCreatureRemove(Creature* cre) override
         {
             switch (cre->GetEntry())
             {
@@ -514,14 +520,14 @@ public:
             return true;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             std::ostringstream saveStream;
             saveStream << GetBossSaveData() << " ";
             return saveStream.str();
         }
 
-        void Load(const char* data)
+        void Load(const char* data) override
         {
             std::istringstream loadStream(LoadBossState(data));
             uint32 buff;

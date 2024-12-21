@@ -145,9 +145,9 @@ WrongPass.Logging = 0
 #
 #                     ".;/path/to/unix_socket;username;password;database" - (use Unix sockets on
 #                                                                           Unix/Linux)
-#        Default:     "127.0.0.1;3306;root;admin;auth"
+#        Default:     "127.0.0.1;3306;root;admin;legioncore_auth"
 
-LoginDatabaseInfo = "127.0.0.1;3306;root;admin;auth"
+LoginDatabaseInfo = "127.0.0.1;3306;root;admin;legioncore_auth"
 
 #
 #    LoginDatabase.WorkerThreads

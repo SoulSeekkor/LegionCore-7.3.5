@@ -180,10 +180,12 @@ public:
             if (who->IsPlayer())
             {                
                 if (InstanceScript* instance = me->GetInstanceScript())
+                {
                     if (instance->getScenarionStep() == 6)
                         me->GetMotionMaster()->MovePath(9859007, false);
                     else if (instance->getScenarionStep() == 8)
                         me->GetMotionMaster()->MovePath(9859008, false);
+                }
             }
         }
         

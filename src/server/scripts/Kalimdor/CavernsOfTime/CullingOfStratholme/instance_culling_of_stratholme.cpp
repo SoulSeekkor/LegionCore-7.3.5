@@ -70,7 +70,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 _lastTimer = 1500000;
             }
 
-            bool IsEncounterInProgress() const
+            bool IsEncounterInProgress() const override
             {
                 for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
                     if (_encounterState[i] == IN_PROGRESS)
@@ -79,7 +79,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 return false;
             }
 
-            void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet)
+            void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet) override
             {
                 if (_crateCount < 5)
                 {
@@ -91,7 +91,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 packet.Worldstates.emplace_back(WorldStates::WORLDSTATE_TIME_GUARDIAN_SHOW, 0);
             }
 
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -130,7 +130,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* go)
+            void OnGameObjectCreate(GameObject* go) override
             {
                 switch (go->GetEntry())
                 {
@@ -154,7 +154,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 switch (type)
                 {
@@ -336,7 +336,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                     SaveToDB();
             }
 
-            uint32 GetData(uint32 type) const
+            uint32 GetData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -390,7 +390,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            void Update(uint32 diff)
+            void Update(uint32 diff) override
             {
                 if(GetData(DATA_ZOMBIEFEST) == IN_PROGRESS)
                 {
@@ -414,7 +414,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 }
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -426,7 +426,7 @@ class instance_culling_of_stratholme : public InstanceMapScript
                 return saveStream.str();
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

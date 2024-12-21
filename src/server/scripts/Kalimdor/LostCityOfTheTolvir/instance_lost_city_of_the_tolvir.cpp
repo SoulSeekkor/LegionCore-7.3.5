@@ -33,7 +33,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
             uint32 uiUpdateTimer;
             bool BosesIsDone;
 
-            void Initialize()
+            void Initialize() override
             {
                 memset(&Encounter, 0, sizeof(Encounter));
                 memset(&uiTunnelGUID, 0, sizeof(uiTunnelGUID));
@@ -63,7 +63,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                         tunnel->SetVisible(true);
             }
 
-            void Update(uint32 diff)
+            void Update(uint32 diff) override
             {
                 if (BosesIsDone)
                 {
@@ -80,7 +80,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                     }
             }
 
-            bool IsEncounterInProgress() const
+            bool IsEncounterInProgress() const override
             {
                 for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
                     if (Encounter[i] == IN_PROGRESS) return true;
@@ -88,7 +88,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 return false;
             }
 
-            void OnGameObjectCreate(GameObject* go)
+            void OnGameObjectCreate(GameObject* go) override
             {
                 if (go->GetEntry() == SIAMAT_PLATFORM)
                 {
@@ -97,7 +97,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 }
             }
 
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -130,7 +130,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 }
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -150,7 +150,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 return Encounter[type];
             }
 
-            void SetGuidData(uint32 type, ObjectGuid data)
+            void SetGuidData(uint32 type, ObjectGuid data) override
             {
                 switch (type)
                 {
@@ -163,7 +163,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 Encounter[type] = data;
 
@@ -180,7 +180,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                     SaveToDB();
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -196,7 +196,7 @@ class instance_lost_city_of_the_tolvir : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(char const* in)
+            void Load(char const* in) override
             {
                 if (!in)
                 {

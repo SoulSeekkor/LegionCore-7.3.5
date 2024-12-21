@@ -1,6 +1,6 @@
 #include "throne_of_the_four_winds.h"
 
-#define ENCOUNTERS 2
+#define ENCOUNTERS 4
 
 class instance_throne_of_the_four_winds : public InstanceMapScript
 {
@@ -24,7 +24,7 @@ public:
 
         ObjectGuid uiAlakir;
 
-        void Initialize()
+        void Initialize() override
         {
             uiAnshal.Clear();
             uiNezir.Clear();
@@ -35,9 +35,9 @@ public:
                 Encounter[i] = NOT_STARTED;
         }
 
-        void OnPlayerEnter(Player* player) {}
+        void OnPlayerEnter(Player* player) override {}
 
-        bool IsEncounterInProgress() const
+        bool IsEncounterInProgress() const override
         {
             for (uint8 i = 0; i < ENCOUNTERS; ++i)
             {
@@ -47,7 +47,7 @@ public:
             return false;
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -66,7 +66,7 @@ public:
             }
         }
 
-        ObjectGuid GetGuidData(uint32 identifier) const
+        ObjectGuid GetGuidData(uint32 identifier) const override
         {
             switch (identifier)
             {
@@ -82,7 +82,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -90,12 +90,18 @@ public:
                     if (data == DONE)
                     {
                         if (Creature* Anshal = instance->GetCreature(uiAnshal))
-                        if (Creature* Nezir = instance->GetCreature(uiNezir))
-                        if (Creature* Rohash = instance->GetCreature(uiRohash))
-                            if (!Anshal->isInCombat() && !Nezir->isInCombat() && !Rohash->isInCombat())
-                                Encounter[0] = data;
-                            else
-                                return;
+                        {
+                            if (Creature* Nezir = instance->GetCreature(uiNezir))
+                            {
+                                if (Creature* Rohash = instance->GetCreature(uiRohash))
+                                {
+                                    if (!Anshal->isInCombat() && !Nezir->isInCombat() && !Rohash->isInCombat())
+                                        Encounter[0] = data;
+                                    else
+                                        return;
+                                }
+                            }
+                        }
                     }
                     Encounter[0] = data;
                     break;
@@ -144,7 +150,7 @@ public:
             return 0;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             OUT_SAVE_INST_DATA;
 
@@ -157,7 +163,7 @@ public:
             return str_data;
         }
 
-        void Load(const char* in)
+        void Load(const char* in) override
         {
             if (!in)
             {

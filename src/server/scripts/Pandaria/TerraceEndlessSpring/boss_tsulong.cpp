@@ -205,7 +205,7 @@ public:
         int32 healtoreduce;
         int32 currenthealth;
 
-        void Reset()
+        void Reset() override
         {
             _Reset();
             events.Reset();
@@ -240,6 +240,7 @@ public:
                 }
             }
         }
+
         void EventReset()
         {
             events.CancelEvent(EVENT_SPAWN_SUNBEAM);
@@ -249,14 +250,16 @@ public:
             events.CancelEvent(EVENT_SUMMON_UNSTABLE_SHA);
             events.CancelEvent(EVENT_EMBODIED_TERROR);
         }
-        void JustReachedHome()
+
+        void JustReachedHome() override
         {
             _JustReachedHome();
 
             if (pInstance)
                 pInstance->SetBossState(DATA_TSULONG, FAIL);
         }
-        void KilledUnit(Unit* who)
+
+        void KilledUnit(Unit* who) override
         {
             if (who->GetTypeId() == TYPEID_PLAYER)
             {
@@ -272,13 +275,13 @@ public:
             }
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             currenthealth = me->GetHealth();
             dayhealth = me->GetMaxHealth() - me->GetHealth();
         }
 
-        void EnterCombat(Unit* attacker)
+        void EnterCombat(Unit* attacker) override
         {
             if (pInstance)
             {
@@ -306,20 +309,23 @@ public:
             events.ScheduleEvent(EVENT_NIGHTMARE, 15 * IN_MILLISECONDS, 0, PHASE_NIGHT);
             events.ScheduleEvent(EVENT_BERSERK, 480 * IN_MILLISECONDS);
         }
-        void JustSummoned(Creature* summon)
+
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
         }
-        void SummonedCreatureDespawn(Creature* summon)
+
+        void SummonedCreatureDespawn(Creature* summon) override
         {
             summons.Despawn(summon);
         }
+
         void RegeneratePower(Powers power, float& value) override
         {
             if (power != POWER_ENERGY)
                 return;
 
-            if (phase == PHASE_DAY || phase == PHASE_NIGHT && me->isInCombat())
+            if (phase == PHASE_DAY || (phase == PHASE_NIGHT && me->isInCombat()))
             {
                 // Sha of Fear regenerates 6 energy every 2s (15 energy for 5s)
                 if (phase == PHASE_NIGHT)
@@ -336,7 +342,8 @@ public:
                 me->SetInt32Value(UNIT_FIELD_POWER, val);
             }
         }
-        void MoveInLineOfSight(Unit* who)
+
+        void MoveInLineOfSight(Unit* who) override
         {
             if (who && who->IsInWorld() && who->GetTypeId() != TYPEID_PLAYER)
             {
@@ -359,7 +366,8 @@ public:
                 }
             }
         }
-        void JustDied(Unit* killer)
+
+        void JustDied(Unit* killer) override
         {
             if (pInstance)
             {
@@ -398,7 +406,8 @@ public:
                 }
             }
         }
-        void DoAction(const int32 action)
+
+        void DoAction(const int32 action) override
         {
             if (action == ACTION_START_TSULONG_WAYPOINT)
             {
@@ -517,7 +526,8 @@ public:
                 me->m_Events.AddEvent(new TsulongDespawner(me), me->m_Events.CalculateTime(5000));
             }
         }
-        void MovementInform(uint32 type, uint32 id)
+
+        void MovementInform(uint32 type, uint32 id) override
         {
             if (type != POINT_MOTION_TYPE)
                 return;
@@ -537,6 +547,7 @@ public:
                     break;
             }
         }
+
         void DespawnCreaturesInArea(uint32 entry, WorldObject* object)
         {
             std::list<Creature*> creatures;
@@ -547,7 +558,8 @@ public:
             for (std::list<Creature*>::iterator iter = creatures.begin(); iter != creatures.end(); ++iter)
                 (*iter)->DespawnOrUnsummon();
         }
-        void UpdateAI(const uint32 diff)
+
+        void UpdateAI(const uint32 diff) override
         {
             events.Update(diff);
             
@@ -866,10 +878,8 @@ public:
             creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL | UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
             creature->CastSpell(creature, SPELL_SUNBEAM_DUMMY, true);
         }
-        void UpdateAI(uint32 const diff)
-        {
-            
-        }
+
+        void UpdateAI(uint32 const diff) {}
     };
 
     CreatureAI* GetAI(Creature* creature) const
@@ -968,6 +978,7 @@ public:
                 me->SetHealth(929610);
             }
         }
+
         void MoveTowardTsulong()
         {
             if (MotionMaster* motion = me->GetMotionMaster())
@@ -1033,6 +1044,7 @@ public:
                 me->SetHealth(3339009);
             }
         }
+
         void JustDied(Unit* killer)
         {
             // summon fright spawns
@@ -1048,6 +1060,7 @@ public:
                 tsulon->GetAI()->DoAction(ACTION_SPAWN_EMBODIED);
             }
         }
+
         void UpdateAI(uint32 const diff)
         {
             if (terrorize <= diff)

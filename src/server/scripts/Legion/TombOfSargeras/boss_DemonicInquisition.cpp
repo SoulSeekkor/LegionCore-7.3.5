@@ -502,10 +502,12 @@ public:
                 return;
 
             if (target->GetDistance2d(6403.13f, -935.55f) <= 30.0f)
+            {
                 if (target->isAlive())
                     target->ToPlayer()->TeleportTo(target->GetMapId(), 6401.96f, -795.64f, 3020.17f, 0.01f, TELE_TO_SEAMLESS);
                 else
                     target->NearTeleportTo(6401.96f, -795.64f, 3020.17f, 0.01f);
+            }
 
             target->RemoveAurasDueToSpell(SPELL_BELAC_PRISONER);
         }

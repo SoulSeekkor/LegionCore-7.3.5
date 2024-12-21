@@ -102,7 +102,7 @@ struct boss_rokmora : public BossAI
         }
     }
 
-    void SpellFinishCast(const SpellInfo* spell)
+    void SpellFinishCast(const SpellInfo* spell) override
     {
         switch (spell->Id)
         {
@@ -207,7 +207,7 @@ struct npc_nl_tarspitter_lurker : public ScriptedAI
 
     EventMap events;
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
         me->SetReactState(REACT_AGGRESSIVE);
@@ -279,7 +279,7 @@ struct npc_nl_vileshard_hulk : public ScriptedAI
 
     EventMap events;
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
     }
@@ -296,7 +296,7 @@ struct npc_nl_vileshard_hulk : public ScriptedAI
         events.RescheduleEvent(EVENT_3, 15000);
     }
 
-    void SpellFinishCast(const SpellInfo* spell)
+    void SpellFinishCast(const SpellInfo* spell) override
     {
         if ((spell->Id == 226296) || (spell->Id == 226304))
         {

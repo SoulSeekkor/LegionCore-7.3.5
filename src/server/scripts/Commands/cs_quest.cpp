@@ -298,6 +298,7 @@ public:
             case QUEST_STATUS_NONE:
                 handler->PSendSysMessage(600028, player->GetName(), entry, quest->Level, quest->MinLevel, quest->MaxLevel, quest->MaxScalingLevel, quest->GetScaledQuestLevel(player->getLevel(), player->GetZoneId()));
                 break;
+            default: break;
         }
         return true;
     }

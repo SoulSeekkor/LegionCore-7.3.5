@@ -762,7 +762,7 @@ struct npc_sasszine_sarukel : public ScriptedAI
 
     void Reset() override {}
 
-    void DoAction(int32 const actionID)
+    void DoAction(int32 const actionID) override
     {
         if (actionID == ACTION_1)
         {

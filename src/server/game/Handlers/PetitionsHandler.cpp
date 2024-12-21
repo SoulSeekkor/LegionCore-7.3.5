@@ -492,7 +492,7 @@ void WorldSession::HandleTurnInPetition(WorldPackets::Petition::TurnInPetition& 
 
     stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_PETITION_SIGNATURE);
     stmt->setUInt64(0, packet.Item.GetCounter());
-    if (result = CharacterDatabase.Query(stmt))
+    if ((result = CharacterDatabase.Query(stmt)))
         signatures = uint8(result->GetRowCount());
 
     if (signatures < sWorld->getIntConfig(CONFIG_MIN_PETITION_SIGNS))

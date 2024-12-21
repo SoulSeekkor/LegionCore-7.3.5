@@ -66,7 +66,7 @@ class instance_terrace_of_endless_spring : public InstanceMapScript
             ObjectGuid wallOfLeiShisVortexGuid;
             ObjectGuid leiShisVortexGuid;
 
-            void Initialize()
+            void Initialize() override
             {
                 SetBossNumber(DATA_MAX_BOSS_DATA);
 
@@ -74,7 +74,7 @@ class instance_terrace_of_endless_spring : public InstanceMapScript
                 introDone                   = false;
             }
 
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -113,7 +113,7 @@ class instance_terrace_of_endless_spring : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* go)
+            void OnGameObjectCreate(GameObject* go) override
             {
                 switch (go->GetEntry())
                 {
@@ -134,7 +134,7 @@ class instance_terrace_of_endless_spring : public InstanceMapScript
                 }
             }
 
-            bool SetBossState(uint32 id, EncounterState state)
+            bool SetBossState(uint32 id, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(id, state))
                     return false;
@@ -148,7 +148,7 @@ class instance_terrace_of_endless_spring : public InstanceMapScript
                 return true;
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 switch (type)
                 {

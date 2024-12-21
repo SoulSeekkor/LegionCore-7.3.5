@@ -178,7 +178,7 @@ public:
         void Reset() override {}
         void EnterCombat(Unit* /*who*/) override {}
 
-        void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/)
+        void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/) override
         {
             if (done_by && done_by->IsPlayer())
                 if (me->GetHealth() <= damage)
@@ -266,7 +266,7 @@ public:
         void Reset() override {}
         void EnterCombat(Unit* /*who*/) override {}
 
-        void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/)
+        void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/) override
         {
             if (done_by->IsPlayer())
                 if (me->GetHealth() <= damage)
@@ -381,7 +381,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_floonAI (creature);
     }
@@ -530,7 +530,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_isla_starmaneAI(creature);
     }
@@ -661,7 +661,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_akunoAI(creature);
     }
@@ -689,7 +689,7 @@ public:
             }
         }
 
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             summon->AI()->AttackStart(me);
         }

@@ -348,7 +348,7 @@ public:
         }
     };
 
-    GameObjectAI* GetAI(GameObject* go) const
+    GameObjectAI* GetAI(GameObject* go) const override
     {
         return new go_acherus_soul_prisonAI(go);
     }
@@ -391,7 +391,7 @@ class npc_death_knight_initiate : public CreatureScript
 public:
     npc_death_knight_initiate() : CreatureScript("npc_death_knight_initiate") { }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action)
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*sender*/, uint32 action) override
     {
         player->PlayerTalkClass->ClearMenus();
         if (action == GOSSIP_ACTION_INFO_DEF)
@@ -435,7 +435,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_death_knight_initiateAI(creature);
     }
@@ -992,7 +992,7 @@ public:
         uint32 IntroPhase;
         ObjectGuid carGUID;
 
-        void Reset()
+        void Reset() override
         {
             carGUID.Clear();
             IntroTimer = 0;
@@ -1044,7 +1044,7 @@ public:
             SetDespawnAtFar(false);
         }
 
-        void WaypointReached(uint32 waypointId)
+        void WaypointReached(uint32 waypointId) override
         {
             switch (waypointId)
             {
@@ -1075,7 +1075,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (IntroPhase)
             {
@@ -1158,7 +1158,7 @@ public:
             if (uiType != POINT_MOTION_TYPE && uiPointId == 0)
                 return;
 
-                char * text = "The Eye of Acherus is in your control";
+                char const *text = "The Eye of Acherus is in your control";
                 me->MonsterTextEmote(text, me->GetGUID(), true);
                 me->CastSpell(me, 51890, true);
                 //me->RemoveUnitMovementFlag(MOVEMENTFLAG_FLYING);
@@ -1174,7 +1174,7 @@ public:
                     //me->CastSpell(me, 70889, true);
                     //me->CastSpell(me, 51892, true);
                     //me->SetPhaseMask(3, false);
-                    char * text = "The Eye of Acherus launches towards its destination";
+                    char const *text = "The Eye of Acherus launches towards its destination";
                     me->MonsterTextEmote(text, me->GetGUID(), true);
                     me->SetSpeed(MOVE_FLIGHT, 6.4f,true);
                     me->AddUnitMovementFlag(MOVEMENTFLAG_FLYING);

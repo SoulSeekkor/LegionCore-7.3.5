@@ -939,7 +939,7 @@ void StaticTransport::Update(uint32 diff)
     if (!transportPeriod)
         return;
 
-    if (isMapObject && GetGoState() != GO_STATE_TRANSPORT_ACTIVE || !IsMoving())
+    if ((isMapObject && GetGoState() != GO_STATE_TRANSPORT_ACTIVE) || !IsMoving())
         return;
 
     if (GetGoState() == GO_STATE_TRANSPORT_ACTIVE)

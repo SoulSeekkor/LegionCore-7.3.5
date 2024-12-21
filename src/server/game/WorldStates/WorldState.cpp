@@ -45,7 +45,7 @@ bool WorldState::IsGlobal() const
     return Type == WorldStatesData::Types::World ||
     Type == WorldStatesData::Types::Weekly ||
     Type == WorldStatesData::Types::Event ||
-    Type == WorldStatesData::Types::Custom && HasFlag(WorldStatesData::Flags::CustomX) && HasFlag(WorldStatesData::Flags::CustomGlobal);
+    (Type == WorldStatesData::Types::Custom && HasFlag(WorldStatesData::Flags::CustomX) && HasFlag(WorldStatesData::Flags::CustomGlobal));
 }
 
 void WorldState::Initialize()

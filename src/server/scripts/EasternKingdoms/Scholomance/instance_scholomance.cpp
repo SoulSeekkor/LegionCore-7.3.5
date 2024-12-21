@@ -69,7 +69,7 @@ public:
         ObjectGuid door7Guid;
         ObjectGuid lastdoorGuid;
 
-        void Initialize()
+        void Initialize() override
         {
             SetBossNumber(5);
             //Creature
@@ -90,7 +90,7 @@ public:
             lastdoorGuid.Clear();
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -112,7 +112,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -149,7 +149,7 @@ public:
             HandleGameObject(doorGuid, true);
         }
         
-        bool SetBossState(uint32 id, EncounterState state)
+        bool SetBossState(uint32 id, EncounterState state) override
         {
             if (!InstanceScript::SetBossState(id, state))
                 return false;
@@ -160,16 +160,17 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                        HandleGameObject(doorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(doorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(doorGuid, true);
-                        HandleGameObject(door2Guid, true);
-                        break;
+                        case NOT_STARTED:
+                            HandleGameObject(doorGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            HandleGameObject(doorGuid, false);
+                            break;
+                        case DONE:
+                            HandleGameObject(doorGuid, true);
+                            HandleGameObject(door2Guid, true);
+                            break;
+                        default: break;
                     }
                 }
                 break;
@@ -177,16 +178,17 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                        HandleGameObject(door2Guid, true);
-                        break;
-                    case IN_PROGRESS: 
-                        HandleGameObject(door2Guid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(door2Guid, true);
-                        HandleGameObject(door3Guid, true);
-                        break;
+                        case NOT_STARTED:
+                            HandleGameObject(door2Guid, true);
+                            break;
+                        case IN_PROGRESS: 
+                            HandleGameObject(door2Guid, false);
+                            break;
+                        case DONE:
+                            HandleGameObject(door2Guid, true);
+                            HandleGameObject(door3Guid, true);
+                            break;
+                        default: break;
                     }
                 }
                 break;
@@ -194,17 +196,18 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                        HandleGameObject(door3Guid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(door3Guid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(door3Guid, true);
-                        HandleGameObject(door4Guid, true);
-                        HandleGameObject(door5Guid, true);
-                        break;
+                        case NOT_STARTED:
+                            HandleGameObject(door3Guid, true);
+                            break;
+                        case IN_PROGRESS:
+                            HandleGameObject(door3Guid, false);
+                            break;
+                        case DONE:
+                            HandleGameObject(door3Guid, true);
+                            HandleGameObject(door4Guid, true);
+                            HandleGameObject(door5Guid, true);
+                            break;
+                        default: break;
                     }
                 }
                 break;
@@ -212,17 +215,18 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                        HandleGameObject(door5Guid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(door5Guid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(door5Guid, true);
-                        HandleGameObject(door6Guid, true);
-                        HandleGameObject(door7Guid, true);
-                        break;
+                        case NOT_STARTED:
+                            HandleGameObject(door5Guid, true);
+                            break;
+                        case IN_PROGRESS:
+                            HandleGameObject(door5Guid, false);
+                            break;
+                        case DONE:
+                            HandleGameObject(door5Guid, true);
+                            HandleGameObject(door6Guid, true);
+                            HandleGameObject(door7Guid, true);
+                            break;
+                        default: break;
                     }
                 }
                 break;
@@ -230,13 +234,14 @@ public:
                 {
                     switch (state)
                     {
-                    case NOT_STARTED:
-                    case DONE:
-                        HandleGameObject(lastdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(lastdoorGuid, false);
-                        break;
+                        case NOT_STARTED:
+                        case DONE:
+                            HandleGameObject(lastdoorGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            HandleGameObject(lastdoorGuid, false);
+                            break;
+                        default: break;
                     }
                 }                
                 break;
@@ -245,7 +250,7 @@ public:
             return true;
         }
 
-        ObjectGuid GetGuidData(uint32 type) const
+        ObjectGuid GetGuidData(uint32 type) const override
         {
             switch (type)
             {
@@ -264,14 +269,14 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void SetData(uint32 type, uint32 data){}
+        void SetData(uint32 type, uint32 data) override {}
 
         uint32 GetData(uint32 type) const override
         {
             return 0;
         }
 
-        void Update(uint32 diff) 
+        void Update(uint32 diff) override
         {
             // Challenge
             InstanceScript::Update(diff);

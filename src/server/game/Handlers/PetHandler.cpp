@@ -89,7 +89,7 @@ void WorldSession::HandlePetAction(WorldPackets::PetPackets::PetAction& packet)
             Unit* unit = ObjectAccessor::GetUnit(*GetPlayer(), guid);
             if (!unit)
                 continue;
-            if ((unit->GetEntry() == pet->GetEntry() || unit->ToCreature() && unit->ToCreature()->m_isHati) && unit->isAlive())
+            if ((unit->GetEntry() == pet->GetEntry() || (unit->ToCreature() && unit->ToCreature()->m_isHati)) && unit->isAlive())
             {
                 if (unit->ToCreature())
                 {

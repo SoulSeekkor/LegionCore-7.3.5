@@ -255,7 +255,7 @@ class boss_sinestra : public CreatureScript
             Creature* pOrb2;
             uint8 eggs;
 
-            void Reset()
+            void Reset() override
             {
                 summons.DespawnAll();
                 events.Reset();
@@ -281,7 +281,7 @@ class boss_sinestra : public CreatureScript
                 instance->SetBossState(DATA_SINESTRA, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* attacker)
+            void EnterCombat(Unit* attacker) override
             {
                 if (instance)
                 {
@@ -322,7 +322,7 @@ class boss_sinestra : public CreatureScript
                 instance->SetBossState(DATA_SINESTRA, IN_PROGRESS);
             }
 
-            void DoAction(const int32 action)
+            void DoAction(const int32 action) override
             {
                 if (action == ACTION_EGG)
                 {
@@ -343,7 +343,7 @@ class boss_sinestra : public CreatureScript
                 }
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 Talk(SAY_SINESTRA_DEATH);
 
@@ -354,19 +354,19 @@ class boss_sinestra : public CreatureScript
                 instance->SetBossState(DATA_SINESTRA, DONE);
             }
             
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 summons.Summon(summon);
                 if (me->isInCombat())
                     summon->SetInCombatWithZone();
             }
 
-            void SummonedCreatureDespawn(Creature* summon)
+            void SummonedCreatureDespawn(Creature* summon) override
             {
                 summons.Despawn(summon);
             }
 
-            void KilledUnit(Unit* who)
+            void KilledUnit(Unit* who) override
             {
                 Talk(SAY_SINESTRA_KILL);
             }
@@ -381,7 +381,7 @@ class boss_sinestra : public CreatureScript
                 return 0;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;

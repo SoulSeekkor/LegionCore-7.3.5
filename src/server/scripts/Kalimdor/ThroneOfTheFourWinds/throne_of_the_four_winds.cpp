@@ -43,7 +43,7 @@ public:
 
     struct npc_slipstream_raidAI : public ScriptedAI
     {
-        npc_slipstream_raidAI(Creature* creature) : ScriptedAI(creature), isActive(true), linkedSlipstreamObject(NULL), linkedBoss(NULL), isUltimate(NULL)
+        npc_slipstream_raidAI(Creature* creature) : ScriptedAI(creature), isActive(true), linkedSlipstreamObject(NULL), linkedBoss(NULL), isUltimate(false)
         {
             creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL | UNIT_FLAG_NOT_SELECTABLE);
 

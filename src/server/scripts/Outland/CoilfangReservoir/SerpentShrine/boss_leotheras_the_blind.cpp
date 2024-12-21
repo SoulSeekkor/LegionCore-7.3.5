@@ -95,7 +95,7 @@ public:
                 victimGUID = guid;
         }
 
-        ObjectGuid GetGUID(int32 id/* = 0 */)
+        ObjectGuid GetGUID(int32 id/* = 0 */) override
         {
             if (id == INNER_DEMON_VICTIM)
                 return victimGUID;
@@ -269,7 +269,7 @@ public:
                     SpellBinderGUID[i] = binder->GetGUID();
             }
         }
-        void MoveInLineOfSight(Unit* who)
+        void MoveInLineOfSight(Unit* who) override
         {
             if (me->HasAura(AURA_BANISH))
                 return;

@@ -946,7 +946,7 @@ PetBattle::~PetBattle()
 {
     for (size_t i = 0; i < MAX_PETBATTLE_TEAM; ++i)
     {
-        if (BattleType == PETBATTLE_TYPE_PVE && i != PETBATTLE_PVE_TEAM_ID || BattleType != PETBATTLE_TYPE_PVE)
+        if ((BattleType == PETBATTLE_TYPE_PVE && i != PETBATTLE_PVE_TEAM_ID) || BattleType != PETBATTLE_TYPE_PVE)
             for (uint32 petID = 0; petID < MAX_PETBATTLE_SLOTS; petID++)
                 if (Pets[petID])
                     Pets[petID] = std::shared_ptr<BattlePetInstance>();

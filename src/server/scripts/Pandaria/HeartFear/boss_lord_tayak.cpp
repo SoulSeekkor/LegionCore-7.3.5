@@ -378,6 +378,7 @@ class npc_tempest_slash : public CreatureScript
             {
                 DoCast(me, SPELL_TEMPEST_SLASH_DMG, true);
                 if (summoner->ToCreature())
+                {
                     if (Unit* target = summoner->ToCreature()->AI()->SelectTarget(SELECT_TARGET_RANDOM, 1, 0.0f, true))
                     {
                         Position pos;
@@ -386,6 +387,7 @@ class npc_tempest_slash : public CreatureScript
                     }
                     else if (!target)
                         events.ScheduleEvent(EVENT_1, 1000);
+                }
             }
 
             void FillCirclePath(Position const& centerPos, float radius, float z, Movement::PointsArray& path)

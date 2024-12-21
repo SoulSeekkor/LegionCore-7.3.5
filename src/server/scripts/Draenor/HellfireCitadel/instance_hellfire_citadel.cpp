@@ -27,7 +27,7 @@ public:
             return 0;
         }
 
-        ObjectGuid GetGuidData(uint32 type) const
+        ObjectGuid GetGuidData(uint32 type) const override
         {
             return ObjectGuid::Empty;
         }

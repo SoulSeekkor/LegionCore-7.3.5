@@ -554,7 +554,7 @@ class spell_feed_moonkin_hatchling : public AuraScript
 
     uint16 timer;
 
-    bool Load()
+    bool Load() override
     {
         timer = 2000;
         return true;

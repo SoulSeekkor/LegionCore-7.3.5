@@ -48,7 +48,7 @@ public:
         ObjectGuid HarlanGUID;
         ObjectGuid KoeglerGUID;
 
-        void Initialize()
+        void Initialize() override
         {
             LoadDoorData(doorData);
             BraunGUID.Clear();
@@ -56,7 +56,7 @@ public:
             KoeglerGUID.Clear();
         }
 
-        bool SetBossState(uint32 type, EncounterState state)
+        bool SetBossState(uint32 type, EncounterState state) override
         {
             if (!InstanceScript::SetBossState(type, state))
                 return false;
@@ -64,7 +64,7 @@ public:
             return true;
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -77,7 +77,7 @@ public:
             }
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -93,7 +93,7 @@ public:
             }
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             /*switch (type)
             {
@@ -102,7 +102,7 @@ public:
             }*/
         }
 
-        ObjectGuid GetGuidData(uint32 type) const
+        ObjectGuid GetGuidData(uint32 type) const override
         {
             switch (type)
             {
@@ -121,7 +121,7 @@ public:
             return 0;
         }
 
-        void Update(uint32 diff) 
+        void Update(uint32 diff) override
         {
             // Challenge
             InstanceScript::Update(diff);

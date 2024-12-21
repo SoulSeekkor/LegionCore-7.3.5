@@ -57,7 +57,7 @@ struct boss_grand_vizier_ertan : public BossAI
     void Reset() override
     {
         _Reset();
-        memset(_vortexes, NULL, sizeof(_vortexes));
+        memset(_vortexes, 0, sizeof(_vortexes));
         me->SetReactState(REACT_AGGRESSIVE);
         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
     }

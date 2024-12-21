@@ -193,6 +193,7 @@ public:
                                     if (!egg->isAlive())
                                         egg->Respawn();
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -218,8 +219,7 @@ public:
                     if (data == DONE)
                         HandleGameObject(IlgynothDoorGUID, true);
                     break;
-                default:
-                    break;
+                default: break;
             }
         }
 

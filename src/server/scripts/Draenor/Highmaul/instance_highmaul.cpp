@@ -514,7 +514,7 @@ public:
             }
         }
 
-        ObjectGuid GetGuidData(uint32 type) const
+        ObjectGuid GetGuidData(uint32 type) const override
         {
             /* switch (type)
             {
@@ -572,7 +572,7 @@ public:
             return true;
         }
 
-        void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet)
+        void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet) override
         {
             packet.Worldstates.emplace_back(IronBomberEnable, 0);
             packet.Worldstates.emplace_back(IronBomberRemaining, 0);

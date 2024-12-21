@@ -1178,17 +1178,17 @@ public:
         EventMap events;
         bool done;
 
-        void Reset()
+        void Reset() override
         {
             done = false;
         }
 
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             events.RescheduleEvent(EVENT_DINO_MENDING, 5000);
         }
 
-        void OnInterruptCast(Unit* /*caster*/, uint32 spellId, uint32 curSpellID, uint32 /*schoolMask*/)
+        void OnInterruptCast(Unit* /*caster*/, uint32 spellId, uint32 curSpellID, uint32 /*schoolMask*/) override
         {
             if (curSpellID == SPELL_DINO_MENDING)
                 events.RescheduleEvent(EVENT_DINO_MENDING, 5000);
@@ -1201,7 +1201,7 @@ public:
                     horridon->AI()->DoAction(ACTION_ACHIEVE_FAIL);
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (HealthBelowPct(50) && !done)
             {
@@ -1217,7 +1217,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

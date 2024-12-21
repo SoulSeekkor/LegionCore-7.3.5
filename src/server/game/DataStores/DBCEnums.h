@@ -1243,6 +1243,7 @@ enum BattlePetSpeciesFlags
 
 enum PvpScalingEffectTypes
 {
+    DUMMY_PLACEHOLDER                               = 0,
     ATTACK_POWER_FOR_ATTACKER                       = 1,
     WEAPON_ILEVEL_OFFSET_ADDITIVE_MAX_LEVEL_ONLY    = 2,
     MOD_DAMAGE_DONE_OVERRIDE                        = 3,

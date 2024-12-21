@@ -4875,7 +4875,7 @@ public:
         return true;
     }
 
-    void HandleGameEventStart(uint32 eventId)
+    void HandleGameEventStart(uint32 eventId) override
     {
         for (auto& id : zonesByEvents[eventId])
             m_timersPerZone[id] = 1;

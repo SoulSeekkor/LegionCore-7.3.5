@@ -762,7 +762,7 @@ struct npc_en_venomous_spider : public ScriptedAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void SpellFinishCast(const SpellInfo* spell)
+    void SpellFinishCast(const SpellInfo* spell) override
     {
         if (spell->Id == 226070)
         {

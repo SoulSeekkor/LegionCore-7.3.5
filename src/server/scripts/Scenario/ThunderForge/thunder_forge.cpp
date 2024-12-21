@@ -959,7 +959,7 @@ public:
             {
                 case NPC_SHA_FIEND:
                     point = urand(0, 12);
-                    if (sha = me->SummonCreature(NPC_SHA_FIEND, shaFiendPositions[point], TEMPSUMMON_DEAD_DESPAWN))
+                    if ((sha = me->SummonCreature(NPC_SHA_FIEND, shaFiendPositions[point], TEMPSUMMON_DEAD_DESPAWN)))
                         sha->AddAura(SPELL_SMALL_SHA_FIXATE, target);
                     break;
                 case NPC_SHA_BEAST:

@@ -406,7 +406,7 @@ m_achievementMgr(sf::safe_ptr<AchievementMgr<Player>>(this))
     m_clientCheckDelay = 15000;
     m_clientKickDelay = 0;
 
-    memset(_voidStorageItems, NULL, sizeof(_voidStorageItems));
+    memset(_voidStorageItems, 0, sizeof(_voidStorageItems));
 
     m_PetSlots.resize(PET_SLOT_LAST, 0);
     realmTransferid = 0;
@@ -1655,7 +1655,7 @@ void Player::Update(uint32 p_time)
 			{
 				bool hasTemplate = HasAura(SPELL_PRINCIPLES_OF_WAR);
 
-				if (hasTemplate && !HasPvPStatsScalingEnabled() || !hasTemplate && HasPvPStatsScalingEnabled())
+				if ((hasTemplate && !HasPvpStatsScalingEnabled()) || (!hasTemplate && HasPvpStatsScalingEnabled()))
 					sWorld->AddPvPMysticCount(); // for debug
 
 				if (map->IsBattlegroundOrArena())
@@ -1809,7 +1809,7 @@ void Player::Update(uint32 p_time)
     {
         if (m_clientCheckDelay < p_time)
         {
-            SendVersionMismatchWarinings();
+            SendVersionMismatchWarnings();
             if (!m_clientKickDelay)
                 m_clientKickDelay = 25000;
             m_clientCheckDelay = 11000;
@@ -2817,7 +2817,10 @@ void Player::ProcessDelayedOperations()
             uint8 teamID = battle->Teams[PETBATTLE_TEAM_1]->OwnerGuid == GetGUID() ? PETBATTLE_TEAM_1 : PETBATTLE_TEAM_2;
 
             PetBattleRequest request;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdynamic-class-memaccess"
             memcpy(&request, &battle->PvPMatchMakingRequest, sizeof(PetBattleRequest)); //@TODO check that
+#pragma GCC diagnostic pop
 
             auto& matchMakingRequest = battle->PvPMatchMakingRequest;
 
@@ -3488,7 +3491,7 @@ bool Player::InvisibleStatusMapRequirements()
 {
     if (Map* pMap = GetMap())
     {
-        if (pMap->GetId() != 0 && pMap->GetId() != 1 && !pMap->IsBattleArena() || pMap->IsDungeon())
+        if ((pMap->GetId() != 0 && pMap->GetId() != 1 && !pMap->IsBattleArena()) || pMap->IsDungeon())
         {
             SendInvisibleStatusMsg(4);
             return false;
@@ -4096,7 +4099,7 @@ void Player::TogglePvpTalents(bool enable)
         if (!pvpTalentInfo)
             continue;
 
-        if (enable && v.second != PLAYERSPELL_REMOVED || sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME))
+        if ((enable && v.second != PLAYERSPELL_REMOVED) || sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME))
         {
             if (pvpTalentInfo->OverrideSpellID)
                 AddOverrideSpell(pvpTalentInfo->OverrideSpellID, pvpTalentInfo->SpellID);
@@ -5205,8 +5208,8 @@ bool Player::addSpell(uint32 spellId, bool active, bool learning, bool dependent
         // not ranked skills
         for (SkillLineAbilityMap::const_iterator _spell_idx = skill_bounds.first; _spell_idx != skill_bounds.second; ++_spell_idx)
         {
-            UpdateAchievementCriteria(CRITERIA_TYPE_LEARN_SKILL_LINE, _spell_idx->second->SkillLine, mSkillSpellCount[_spell_idx->second->SkillLine], 0, NULL, this);
-            UpdateAchievementCriteria(CRITERIA_TYPE_LEARN_SKILLLINE_SPELLS, _spell_idx->second->SkillLine, mSkillSpellCount[_spell_idx->second->SkillLine], 0, NULL, this);
+            UpdateAchievementCriteria(CRITERIA_TYPE_LEARN_SKILL_LINE, _spell_idx->second->SkillLine, mSkillSpellCount[_spell_idx->second->SkillLine], 0, NULL, true);
+            UpdateAchievementCriteria(CRITERIA_TYPE_LEARN_SKILLLINE_SPELLS, _spell_idx->second->SkillLine, mSkillSpellCount[_spell_idx->second->SkillLine], 0, NULL, true);
         }
         UpdateAchievementCriteria(CRITERIA_TYPE_LEARN_SPELL, spellId);
     }
@@ -5901,8 +5904,7 @@ void Player::TakeSpellCharge(SpellInfo const* spellInfo)
             {
                 AddDelayedEvent(_delay, [this]() -> void
                 {
-                    if (this)
-                        CastSpell(this, 243241, true);
+                    CastSpell(this, 243241, true);
                 });
             }
             break;
@@ -7663,6 +7665,7 @@ void Player::HandleBaseModValue(BaseModGroup modGroup, BaseModType modType, floa
         case PCT_MOD:
             ApplyPercentModFloatVar(m_auraBaseMod[modGroup][modType], amount, apply);
             break;
+        default: break;
     }
 
     switch (modGroup)
@@ -10501,7 +10504,7 @@ void Player::_ApplyItemMods(Item* item, uint8 slot, bool apply)
     else
         AddDelayedEvent(100, [=]() -> void
         {
-            if (this && item)
+            if (item)
                 _ApplyOrRemoveItemEquipDependentAuras(item->GetGUID(), true);
         });
 
@@ -10952,7 +10955,7 @@ bool Player::CheckItemEquipDependentSpell(SpellInfo const* spellInfo, ObjectGuid
                             if (spellInfo->EquippedItemSubClassMask == 0 || (spellInfo->EquippedItemSubClassMask & (1 << checkItemTemplate->GetSubClass())))
                                 resemblance++;
 
-            if (onlyDual && resemblance > 1 || !onlyDual && resemblance > 0)
+            if ((onlyDual && resemblance > 1) || (!onlyDual && resemblance > 0))
                 return true;
 
             break;
@@ -19685,7 +19688,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
         UpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_QUESTS_IN_ZONE, quest_id, quest->QuestSortID, quest->QuestInfoID);
     UpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_QUEST_COUNT);
     UpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_QUEST, quest_id, quest->QuestInfoID);
-    UpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_QUESTS_COUNT, 1, 0, 0, NULL, this);
+    UpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_QUESTS_COUNT, 1, 0, 0, NULL, true);
 
     SetQuestCompletedBit(sDB2Manager.GetQuestUniqueBitFlag(quest_id), true);
 
@@ -20605,8 +20608,7 @@ void Player::ItemAddedQuestCheck(uint32 entry, uint32 count)
     
     AddDelayedEvent(100, [=]() -> void
     {
-        if (this)
-            UpdateForQuestWorldObjects();
+        UpdateForQuestWorldObjects();
     });
 }
 
@@ -20652,8 +20654,7 @@ void Player::ItemRemovedQuestCheck(uint32 entry, uint32 count)
    
     AddDelayedEvent(100, [=]() -> void
     {
-        if (this)
-            UpdateForQuestWorldObjects();
+        UpdateForQuestWorldObjects();
     });
 }
 
@@ -20674,7 +20675,8 @@ void Player::KilledMonsterCredit(uint32 entry, ObjectGuid guid /*= ObjectGuid::E
     Creature* killed = NULL;
     if (!guid.IsEmpty())
     {
-        if (killed = GetMap()->GetCreature(guid))
+        killed = GetMap()->GetCreature(guid);
+        if (killed)
         {
             if (killed->GetEntry())
                 real_entry = killed->GetEntry();
@@ -20972,8 +20974,8 @@ void Player::CurrencyChanged(uint32 currencyID, int32 change)
 {
     if (currencyID == 1325)
     {
-        uint32 AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE) + change;
-        sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE, AllianceScore);
+        uint32 AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE) + change;
+        sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE, AllianceScore);
     }
 
     if (currencyID == 1324)
@@ -28425,7 +28427,7 @@ bool Player::BuyItemFromVendorSlot(ObjectGuid vendorguid, uint32 vendorslot, uin
 
     uint64 extGold = crItem->Money;
     uint64 price = 0;
-    if (extGold || crItem->IsGoldRequired(pProto) && pProto->GetBuyPrice() > 0) // assume price cannot be negative (do not know why it is int32)
+    if (extGold || (crItem->IsGoldRequired(pProto) && pProto->GetBuyPrice() > 0)) // assume price cannot be negative (do not know why it is int32)
     {
         extGold = (extGold ? extGold : pProto->GetBuyPrice());
 
@@ -28770,8 +28772,7 @@ void Player::AddSpellAndCategoryCooldowns(SpellInfo const* spellInfo, uint32 ite
                     int32 delay = (cooldownTime - curTime) * IN_MILLISECONDS;
                     AddDelayedEvent(delay, [this]() -> void
                     {
-                        if (this)
-                            CastSpell(this, 243241, true);
+                        CastSpell(this, 243241, true);
                     });
                 }
                 break;
@@ -33094,6 +33095,7 @@ void Player::UpdateAchievementCriteria(CriteriaTypes type, uint32 miscValue1 /*=
                     m_killPoints += 4.0f;
                 break;
             }
+            default: break;
         }
     }
 
@@ -36773,11 +36775,9 @@ void Player::AchieveCriteriaCredit(uint32 criteriaID)
     }
 }
 
-void Player::SendVersionMismatchWarinings()
+void Player::SendVersionMismatchWarnings()
 {
-    char buff[2048];
-    sprintf(buff, GetSession()->GetTrinityString(LANG_CLIENT_VERSION_MISMATCH_MESSAGE));
-    sWorld->SendServerMessage(SERVER_MSG_STRING, buff);
+    sWorld->SendServerMessage(SERVER_MSG_STRING, GetSession()->GetTrinityString(LANG_CLIENT_VERSION_MISMATCH_MESSAGE));
 
     GetSession()->SendNotification(LANG_CLIENT_VERSION_MISMATCH_MESSAGE_NOTIFY);
 }
@@ -36981,7 +36981,8 @@ void Player::UnlockThirdSocketIfNeed(Item* item)
         if (bonusListID == bonusID)
             return;
 
-    if (unlock = sDB2Manager.GetArtifactUnlock(item->GetTemplate()->GetArtifactID()))
+    unlock = sDB2Manager.GetArtifactUnlock(item->GetTemplate()->GetArtifactID());
+    if (unlock)
         if (sConditionMgr->IsPlayerMeetingCondition(this, unlock->PlayerConditionID))
             item->AddBonuses(bonusID);
 }

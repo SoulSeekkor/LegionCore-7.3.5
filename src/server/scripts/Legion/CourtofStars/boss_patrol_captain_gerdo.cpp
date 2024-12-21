@@ -347,14 +347,20 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (event)
+            {
                 if (talk < 4)
+                {
                     if (timer <= diff)
                     {
                         if (owner)
                             Talk(talk, owner->GetGUID());
                         talk++;
                         timer = 16000;
-                    } else timer -= diff;
+                    }
+                    else
+                        timer -= diff;
+                }
+            }
         }
         
     };

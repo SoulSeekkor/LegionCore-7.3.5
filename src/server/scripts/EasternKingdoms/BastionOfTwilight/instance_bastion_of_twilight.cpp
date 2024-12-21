@@ -45,13 +45,13 @@ public:
             memset(m_uiDialogs, 0, sizeof(m_uiDialogs));
         }
 
-        void OnPlayerEnter(Player* player)
+        void OnPlayerEnter(Player* player) override
         {
             if (!uiTeamInInstance)
                 uiTeamInInstance = player->GetTeam();
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             if (!uiTeamInInstance)
             {
@@ -93,7 +93,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* pGo)
+        void OnGameObjectCreate(GameObject* pGo) override
         {
             switch (pGo->GetEntry())
             {
@@ -139,7 +139,7 @@ public:
             }
         }
 
-        ObjectGuid GetGuidData(uint32 identifier) const
+        ObjectGuid GetGuidData(uint32 identifier) const override
         {
             switch (identifier)
             {
@@ -193,7 +193,7 @@ public:
             return 0;
         }
 
-        bool SetBossState(uint32 type, EncounterState state)
+        bool SetBossState(uint32 type, EncounterState state) override
         {
             if (!InstanceScript::SetBossState(type, state))
                 return false;
@@ -221,7 +221,7 @@ public:
             return true;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -263,7 +263,7 @@ public:
             }
         }
 
-        bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const
+        bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const override
         {
             if (player && player->isGameMaster())
                 return true;
@@ -300,7 +300,7 @@ public:
             return saveStream.str();
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             OUT_SAVE_INST_DATA;
 
@@ -315,7 +315,7 @@ public:
             return str_data;
         }
 
-        void Load(const char* in)
+        void Load(const char* in) override
         {
             if (!in)
             {

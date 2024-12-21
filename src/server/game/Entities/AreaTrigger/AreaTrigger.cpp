@@ -339,7 +339,7 @@ bool AreaTrigger::CreateAreaTrigger(ObjectGuid::LowType guidlow, uint32 triggerE
 
     _ai->CalculateDuration(_duration);
 
-    if (info && (GetCustomEntry() == 13251 && (caster && caster->IsCreature() && caster->GetEntry() != 116407) || info->Id == 233530)) //! Hack!!!, because it is so stupid and don't work else
+    if (info && ((GetCustomEntry() == 13251 && (caster && caster->IsCreature() && caster->GetEntry() != 116407)) || info->Id == 233530)) //! Hack!!!, because it is so stupid and don't work else
         _canMove = false;
 
     // culculate destination point
@@ -808,7 +808,7 @@ void AreaTrigger::DoAction(Unit* unit, ActionInfo& action)
         // return;
 
     // do not process depleted actions
-    if (!caster || !unit || !action.charges && action.action->maxCharges)
+    if (!caster || !unit || (!action.charges && action.action->maxCharges))
         return;
 
 #ifdef WIN32
@@ -1319,7 +1319,7 @@ void AreaTrigger::DoActionLeave(ActionInfo& action)
         // return;
 
     // do not process depleted actions
-    if (!caster || !action.charges && action.action->maxCharges)
+    if (!caster || (!action.charges && action.action->maxCharges))
         return;
 
 #ifdef WIN32
@@ -2140,16 +2140,16 @@ bool AreaTrigger::CheckValidateTargets(Unit* unit, AreaTriggerActionMoment /*act
             if (!_ai->IsValidTarget(_caster, unit, action.action->moment))
                 continue;
 
-        if (action.action->hasAura > 0 && !unit->HasAura(action.action->hasAura)
-            || action.action->hasAura2 > 0 && !unit->HasAura(action.action->hasAura2)
-            || action.action->hasAura3 > 0 && !unit->HasAura(action.action->hasAura3))
+        if ((action.action->hasAura > 0 && !unit->HasAura(action.action->hasAura))
+            || (action.action->hasAura2 > 0 && !unit->HasAura(action.action->hasAura2))
+            || (action.action->hasAura3 > 0 && !unit->HasAura(action.action->hasAura3)))
         {
             // TC_LOG_DEBUG(LOG_FILTER_AREATRIGGER, "CheckValidateTargets aura > 0 unit %s", unit->GetGUID().ToString().c_str());
             continue;
         }
-        if (action.action->hasAura < 0 && unit->HasAura(abs(action.action->hasAura))
-            || action.action->hasAura2 < 0 && unit->HasAura(abs(action.action->hasAura2))
-            || action.action->hasAura3 < 0 && unit->HasAura(abs(action.action->hasAura3)))
+        if ((action.action->hasAura < 0 && unit->HasAura(abs(action.action->hasAura)))
+            || (action.action->hasAura2 < 0 && unit->HasAura(abs(action.action->hasAura2)))
+            || (action.action->hasAura3 < 0 && unit->HasAura(abs(action.action->hasAura3))))
         {
             // TC_LOG_DEBUG(LOG_FILTER_AREATRIGGER, "CheckValidateTargets aura < 0 unit %s", unit->GetGUID().ToString().c_str());
             continue;

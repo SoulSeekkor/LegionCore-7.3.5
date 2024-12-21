@@ -260,7 +260,7 @@ public:
                 damage = 0;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             //If creature has no target
             if (!UpdateVictim())
@@ -864,7 +864,7 @@ public:
             tSeek = urand(1000, 2000);
         }
 
-        void DamageTaken(Unit* who, uint32& damage, DamageEffectType /*dmgType*/)
+        void DamageTaken(Unit* who, uint32& damage, DamageEffectType /*dmgType*/) override
         {
             if (who->GetTypeId() == TYPEID_PLAYER)
             {
@@ -934,7 +934,7 @@ public:
                 damage = 0;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (tSeek <= diff)
             {
@@ -1120,7 +1120,7 @@ public:
                     switch (urand(0, 2)) // Perform one of 3 random attacks
                     {
                         case 0: // Do Left Hook
-                            if (me->GetOrientation() > 2.0f && me->GetOrientation() < 3.0f || me->GetOrientation() > 5.0f && me->GetOrientation() < 6.0f) 
+                            if ((me->GetOrientation() > 2.0f && me->GetOrientation() < 3.0f) || (me->GetOrientation() > 5.0f && me->GetOrientation() < 6.0f)) 
                             {
                                 if (auto victim = me->getVictim())
                                     DoCast(victim, SPELL_LEFT_HOOK, true);
@@ -1438,7 +1438,7 @@ public:
         uint32 WaypointId, willCastEnrage, tEnrage, CommonWPCount;
         bool Run, Loc1, Loc2, Jump, Combat;
 
-        void Reset()
+        void Reset() override
         {
             Run = Loc1 = Loc2 = Combat = Jump = false;
             WaypointId          = 0;
@@ -1446,7 +1446,7 @@ public:
             willCastEnrage      = urand(0, 1);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (me->GetPositionX() == -1618.86f && me->GetPositionY() == 1505.68f) // I was spawned in location 1 on NW Rooftop
             {
@@ -1772,7 +1772,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_josiah_avery_p2AI (creature);
     }
@@ -2377,9 +2377,9 @@ public:
         uint32 krennansay;
         bool PlayerOn, KrennanOn;
 
-        void AttackStart(Unit* /*who*/) {}
-        void EnterCombat(Unit* /*who*/) {}
-        void EnterEvadeMode() {}
+        void AttackStart(Unit* /*who*/) override {}
+        void EnterCombat(Unit* /*who*/) override {}
+        void EnterEvadeMode() override {}
 
         void Reset()override
         {
@@ -2431,7 +2431,7 @@ public:
                player->FailQuest(QUEST_SAVE_KRENNAN_ARANAS);
         }
 
-        void OnCharmed(bool /*apply*/)
+        void OnCharmed(bool /*apply*/) override
         {
         }
 
@@ -2484,9 +2484,9 @@ public:
         bool Say, Move, Cast, KrennanDead;
         uint32 SayTimer;
 
-        void AttackStart(Unit* /*who*/) {}
-        void EnterCombat(Unit* /*who*/) {}
-        void EnterEvadeMode() {}
+        void AttackStart(Unit* /*who*/) override {}
+        void EnterCombat(Unit* /*who*/) override {}
+        void EnterEvadeMode() override {}
 
         void Reset() override
         {
@@ -2728,7 +2728,7 @@ public:
                     Start(false, true, who->GetGUID());
         }
 
-        void WaypointReached(uint32 i)
+        void WaypointReached(uint32 i) override
         {
             Vehicle *pVehicle = me->GetVehicleKit();
             Player* player = GetPlayerForEscort();
@@ -3016,9 +3016,9 @@ public:
 
         bool PlayerOn;
 
-        void AttackStart(Unit* /*who*/) {}
-        void EnterCombat(Unit* /*who*/) {}
-        void EnterEvadeMode() {}
+        void AttackStart(Unit* /*who*/) override {}
+        void EnterCombat(Unit* /*who*/) override {}
+        void EnterEvadeMode() override {}
 
         void Reset() override
         {
@@ -3032,7 +3032,7 @@ public:
                 PlayerOn = true;
 
                 if (apply)
-                    Start(false, true, who->GetGUID(), NULL, NULL, true);
+                    Start(false, true, who->GetGUID(), NULL, false, true);
             }
         }
 
@@ -3054,7 +3054,7 @@ public:
 
         void OnCharmed(bool /*apply*/) override {}
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             npc_escortAI::UpdateAI(diff);
 

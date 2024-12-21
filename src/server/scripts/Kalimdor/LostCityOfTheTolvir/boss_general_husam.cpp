@@ -443,7 +443,7 @@ struct npc_bad_intentios_target : public ScriptedAI
     uint32 uiExitTimer;
     bool Passenger;
 
-    void Reset()
+    void Reset() override
     {
         uiExitTimer = 1000;
         Passenger = false;

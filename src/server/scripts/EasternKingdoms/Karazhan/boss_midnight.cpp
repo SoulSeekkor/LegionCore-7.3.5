@@ -104,7 +104,7 @@ public:
                 pMidnight->Kill(pMidnight);
         }
 
-        void UpdateAI(uint32 diff);
+        void UpdateAI(uint32 diff) override;
 
         void SpellHit(Unit* /*source*/, const SpellInfo* spell) override
         {
@@ -153,7 +153,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;

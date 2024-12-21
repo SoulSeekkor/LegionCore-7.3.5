@@ -247,14 +247,14 @@ struct npc_glaidalis_nightmare_abomination : public ScriptedAI
     ObjectGuid targetGUID;
     uint32 fixateTimer = 0;
 
-    void Reset() {}
+    void Reset() override {}
     
     void IsSummonedBy(Unit* summoner) override
     {
         fixateTimer = 2000;
     }
 
-    void JustDied(Unit* /*killer*/)
+    void JustDied(Unit* /*killer*/) override
     {
         me->CastSpell(me, SPELL_NIGHTMARE_DEATH, true);
     }
@@ -268,7 +268,7 @@ struct npc_glaidalis_nightmare_abomination : public ScriptedAI
         }
     }
 
-    void UpdateAI(uint32 diff)
+    void UpdateAI(uint32 diff) override
     {
         if (!UpdateVictim())
             return;

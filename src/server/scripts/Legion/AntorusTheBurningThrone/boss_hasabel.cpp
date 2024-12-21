@@ -538,7 +538,7 @@ struct npc_hasabel_gateways : public ScriptedAI
     bool catastrophicActive = false;
     uint32 catastrophicTimer = 0;
 
-    void Reset() {}
+    void Reset() override {}
 
     void IsSummonedBy(Unit* summoner) override
     {
@@ -751,7 +751,7 @@ struct npc_hasabel_guards : public ScriptedAI
         Talk(SAY_GUARD_DEATH);
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
 

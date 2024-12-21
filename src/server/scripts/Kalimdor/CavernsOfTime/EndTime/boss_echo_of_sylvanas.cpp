@@ -344,13 +344,13 @@ struct npc_echo_of_sylvanas_risen_ghoul : public ScriptedAI
         events.ScheduleEvent(EVENT_MOVE_GHOUL, 2000);
     }
 
-    void SetGUID(ObjectGuid const& guid, int32 type)
+    void SetGUID(ObjectGuid const& guid, int32 type) override
     {
         if (type == DATA_GUID)
             _guid = guid;
     }
 
-    ObjectGuid GetGUID(int32 type)
+    ObjectGuid GetGUID(int32 type) override
     {
         if (type == DATA_GUID)
             return _guid;

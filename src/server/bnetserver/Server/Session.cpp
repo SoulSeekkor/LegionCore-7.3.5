@@ -705,3 +705,5 @@ std::string Battlenet::Session::GetClientInfo() const
 
     return stream.str();
 }
+
+#pragma pack(pop)

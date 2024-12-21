@@ -159,7 +159,7 @@ public:
             instance->UpdatePhasing();
         }
 
-        void KilledUnit(Unit* unit)
+        void KilledUnit(Unit* unit) override
         {
             if (unit->IsPlayer())
                 Talk(SAY_KILL);

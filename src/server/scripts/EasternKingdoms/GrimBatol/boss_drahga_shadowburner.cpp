@@ -110,7 +110,7 @@ struct boss_drahga_shadowburner : public BossAI
             damage = 0;
     }
 
-    void SummonedCreatureDespawn(Creature* summon)
+    void SummonedCreatureDespawn(Creature* summon) override
     {
         summons.Despawn(summon);
     }

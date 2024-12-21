@@ -48,13 +48,13 @@ class instance_end_time : public InstanceMapScript
                 second_echo = Trinity::Containers::SelectRandomContainerElement(echo_list);
             }
 
-            void OnPlayerEnter(Player* pPlayer)
+            void OnPlayerEnter(Player* pPlayer) override
             {
                 if (!uiTeamInInstance)
                     uiTeamInInstance = pPlayer->GetTeam();
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch (pGo->GetEntry())
                 {
@@ -81,7 +81,7 @@ class instance_end_time : public InstanceMapScript
                 }
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 switch (pCreature->GetEntry())
                 {
@@ -103,7 +103,7 @@ class instance_end_time : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 type,uint32 data)
+            void SetData(uint32 type,uint32 data) override
             {
                 switch(type)
                 {
@@ -188,7 +188,7 @@ class instance_end_time : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -203,7 +203,7 @@ class instance_end_time : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -233,13 +233,13 @@ class instance_end_time : public InstanceMapScript
                 return true;
             }
 
-            void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet)
+            void FillInitialWorldStates(WorldPackets::WorldState::InitWorldStates& packet) override
             {
                 packet.Worldstates.emplace_back(WorldStates::WORLDSTATE_SHOW_FRAGMENTS, jaina_event == IN_PROGRESS);
                 packet.Worldstates.emplace_back(WorldStates::WORLDSTATE_FRAGMENTS_COLLECTED, uiFragmentsCollected);
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -259,7 +259,7 @@ class instance_end_time : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

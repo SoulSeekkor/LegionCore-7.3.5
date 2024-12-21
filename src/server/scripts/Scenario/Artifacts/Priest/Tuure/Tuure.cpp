@@ -423,7 +423,7 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
             events.SetPhase(PHASE_COMBAT);
             events.RescheduleEvent(EVENT_1, 8000, 0, PHASE_COMBAT); // 211480
-         //   events.RescheduleEvent(EVENT_2, 25000, 0, PHASE_COMBAT); // rephase 211186 + 211190    
+            //events.RescheduleEvent(EVENT_2, 25000, 0, PHASE_COMBAT); // rephase 211186 + 211190    
             if (Creature* targ = me->FindNearestCreature(106134, 100.0f, true))
                 targ->AI()->AttackStart(me);
         }
@@ -469,7 +469,7 @@ public:
 
                         me->SetReactState(REACT_PASSIVE);
                         me->CastSpell(tppos[point].GetPositionX(), tppos[point].GetPositionY(), tppos[point].GetPositionZ(), 211190);
-                        me->GetMotionMaster()->MoveJump(tppos[point].GetPositionX(), tppos[point].GetPositionY(), tppos[point++].GetPositionZ(), 15, 15);
+                        me->GetMotionMaster()->MoveJump(tppos[point].GetPositionX(), tppos[point].GetPositionY(), tppos[point].GetPositionZ(), 15, 15);
                         events.RescheduleEvent(EVENT_2, 25000, 0, PHASE_COMBAT); // rephase 211186 + 211190  
                         events.SetPhase(PHASE_REPHASE);
                         events.RescheduleEvent(EVENT_3, 2000, 0, PHASE_REPHASE);

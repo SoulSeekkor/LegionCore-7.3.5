@@ -179,9 +179,11 @@ void Battleground::Update(uint32 diff)
                 //_ProcessPlayerPositionBroadcast(Milliseconds(diff));
                 _ProcessRessurect(diff);
                 if (sBattlegroundMgr->GetPrematureFinishTime() && 
-                ((GetPlayersCountByTeam(ALLIANCE) < GetMinPlayersPerTeam() || GetPlayersCountByTeam(HORDE) < GetMinPlayersPerTeam()) && GetMapId() != 1101 || // if one team has smaller players, that need and not DM
-                 GetMapId() == 1101 && GetBattlegroundScoreMap().size() < GetMinPlayersPerTeam()))   // or DM and summary players smaller that summary need
+                    (((GetPlayersCountByTeam(ALLIANCE) < GetMinPlayersPerTeam() || GetPlayersCountByTeam(HORDE) < GetMinPlayersPerTeam()) && GetMapId() != 1101) || // if one team has smaller players, that need and not DM
+                    (GetMapId() == 1101 && GetBattlegroundScoreMap().size() < GetMinPlayersPerTeam())))   // or DM and summary players smaller that summary need
+                {
                     _ProcessProgress(diff);
+                }
                 else if (m_PrematureCountDown)
                     m_PrematureCountDown = false;
             }

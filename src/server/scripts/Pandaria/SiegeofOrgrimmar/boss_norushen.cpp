@@ -552,7 +552,7 @@ public:
         ObjectGuid bhGuid;
         float dist;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
         }
@@ -567,13 +567,13 @@ public:
             }
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -628,7 +628,7 @@ public:
         ObjectGuid bhbaseGuid;
         float dist;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
         }
@@ -643,24 +643,24 @@ public:
             }
         }
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == EFFECT_MOTION_TYPE || type == POINT_MOTION_TYPE)
                 if (pointId == 1)
                     events.RescheduleEvent(EVENT_UPDATE_POINT, 100);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

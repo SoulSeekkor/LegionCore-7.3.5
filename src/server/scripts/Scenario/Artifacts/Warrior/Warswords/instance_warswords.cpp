@@ -197,23 +197,27 @@ public:
                 return;
 
             if (!jump)
+            {
                 if (outrotimer <= diff)
                 {
-                    Map::PlayerList const &PlList = instance->GetPlayers();
+                    Map::PlayerList const& PlList = instance->GetPlayers();
 
                     if (PlList.isEmpty())
                         return;
 
                     for (Map::PlayerList::const_iterator i = PlList.begin(); i != PlList.end(); ++i)
+                    {
                         if (Player* player = i->getSource())
                         {
                             player->CastSpell(3386.46f, 1406.94f, 68.94f, 205744);
                             player->CreateConversation(838);
                         }
+                    }
                     jump = true;
                 }
                 else
                     outrotimer -= diff;
+            }
         }
     };
 };

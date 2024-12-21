@@ -446,7 +446,7 @@ class WorldObject : public Object, public WorldLocation
 
         virtual void Update (uint32 /*time_diff*/) { }
 
-        void Clear();
+        void Clear() override;
 
         void Relocate(float x, float y, float z, float orientation) override;
         void Relocate(float x, float y, float z) override;
@@ -456,7 +456,7 @@ class WorldObject : public Object, public WorldLocation
 
         void SetOrientation(float orientation);
 
-        virtual void RemoveFromWorld();
+        virtual void RemoveFromWorld() override;
 
         void GetNearPoint2D(float &x, float &y, float distance, float absAngle, bool allowObjectSize = true) const;
         void GetNearPoint2D(Position &pos, float distance, float angle, bool allowObjectSize = true) const;

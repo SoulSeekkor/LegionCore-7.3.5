@@ -54,13 +54,13 @@ class instance_firelands : public InstanceMapScript
                 gameobjectPortals.clear();
             }
 
-            void OnPlayerEnter(Player* pPlayer)
+            void OnPlayerEnter(Player* pPlayer) override
             {
                 if (!uiTeamInInstance)
                     uiTeamInInstance = pPlayer->GetTeam();
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 switch (pCreature->GetEntry())
                 {
@@ -96,7 +96,7 @@ class instance_firelands : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch (pGo->GetEntry())
                 {
@@ -134,7 +134,7 @@ class instance_firelands : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_RHYOLITH_HEALTH_SHARED)
                     uiRhyolithHealth = data;
@@ -174,7 +174,7 @@ class instance_firelands : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -191,7 +191,7 @@ class instance_firelands : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -224,7 +224,7 @@ class instance_firelands : public InstanceMapScript
                 return true;
             }
 
-            bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const
+            bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const override
             {
                 if (player && player->GetSession() && AccountMgr::IsGMAccount(player->GetSession()->GetSecurity()))
                     return true;
@@ -256,7 +256,7 @@ class instance_firelands : public InstanceMapScript
                 return true;
             }
 
-            void ProcessEvent(WorldObject* /*source*/, uint32 eventId)
+            void ProcessEvent(WorldObject* /*source*/, uint32 eventId) override
             {
                 switch (eventId)
                 {
@@ -273,7 +273,7 @@ class instance_firelands : public InstanceMapScript
                 }
             }
 
-            void Update(uint32 diff)
+            void Update(uint32 diff) override
             {
                 if (bEvent)
                 {
@@ -287,7 +287,7 @@ class instance_firelands : public InstanceMapScript
                 }
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -302,7 +302,7 @@ class instance_firelands : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

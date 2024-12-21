@@ -165,7 +165,7 @@ protected:
 
         uint32 _ms = GetMSTimeDiffToNow(_s);
         if (_ms > 250)
-            sLog->outDiff("NetworkThread::Update: Diff - %ums _sockets %u", _ms, _sockets.size());
+            sLog->outDiff("NetworkThread::Update: Diff - %ums _sockets " UI64FMTDX, _ms, _sockets.size());
     }
 
 private:

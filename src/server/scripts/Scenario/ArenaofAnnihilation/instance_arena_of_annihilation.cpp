@@ -81,6 +81,7 @@ public:
                             if (Creature* gurgthock = instance->GetCreature(GetGuidData(NPC_GURGTHOCK)))
                                 gurgthock->AI()->Talk(SAY_SCAR_SHELL_END);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -96,6 +97,7 @@ public:
                             if (Creature* gurgthock = instance->GetCreature(GetGuidData(NPC_GURGTHOCK)))
                                 gurgthock->AI()->Talk(SAY_JOLGRUM_END);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -111,6 +113,7 @@ public:
                             if (Creature* gurgthock = instance->GetCreature(GetGuidData(NPC_GURGTHOCK)))
                                 gurgthock->AI()->Talk(SAY_LIUYANG_END);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -126,6 +129,7 @@ public:
                             if (Creature* gurgthock = instance->GetCreature(GetGuidData(NPC_GURGTHOCK)))
                                 gurgthock->AI()->Talk(SAY_CHAGAN_END);
                             break;
+                        default: break;
                     }
                     break;
                 }

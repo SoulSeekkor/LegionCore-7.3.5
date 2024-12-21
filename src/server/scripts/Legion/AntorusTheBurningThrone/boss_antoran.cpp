@@ -556,7 +556,7 @@ struct boss_antoran_high_command_generic : ScriptedAI
             summoner->GetAI()->DoAction(ACTION_ENCOUNTERS_RESTART);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         fThreat = victim->HasAura(SPELL_PSYCHIC_ASSAULT) ? 0.0f : (fThreat ? fThreat : fThreat + 1.0f);
     }
@@ -672,7 +672,7 @@ struct npc_command_capsules : VehicleAI
 
     void IsSummonedBy(Unit* summoner) override {}
 
-    void Reset() {}
+    void Reset() override {}
 
     void CalcExitVehiclePos(Position & pos) override
     {
@@ -803,7 +803,7 @@ struct npc_command_entropic_mine : ScriptedAI
         findPlayerTimer = 2000;
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void SpellHit(Unit* caster, SpellInfo const* spell) override
     {
@@ -872,9 +872,9 @@ struct npc_command_reinforcements : ScriptedAI
         checkTimer = 500;
     }
 
-    void Reset() {}
+    void Reset() override {}
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         fThreat = victim->HasAura(SPELL_PSYCHIC_ASSAULT) ? 0.0f : (fThreat ? fThreat : fThreat + 1.0f);
     }
@@ -955,7 +955,7 @@ struct npc_command_legion_cruiser : ScriptedAI
         me->CastSpell(me, SPELL_CRUISER_FUSILLADE);
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void SpellFinishCast(const SpellInfo* spell) override
     {
@@ -1013,7 +1013,7 @@ struct npc_command_felshield_emitter : ScriptedAI
 
     void IsSummonedBy(Unit* summoner) override {}
 
-    void Reset() {}
+    void Reset() override {}
 
     void OnSpellClick(Unit* clicker) override
     {
@@ -1084,7 +1084,7 @@ struct npc_command_disruptor_beacon : ScriptedAI
         fieldTimer = 3000;
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void UpdateAI(uint32 diff) override
     {
@@ -1121,7 +1121,7 @@ struct npc_command_screaming_shrike : ScriptedAI
         checkTimer = 1000;
     }
 
-    void Reset() {}
+    void Reset() override {}
 
     void MovementInform(uint32 type, uint32 id) override
     {

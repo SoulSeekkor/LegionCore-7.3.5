@@ -79,7 +79,7 @@ struct boss_harbaron : public BossAI
             events.RescheduleEvent(EVENT_NETHER_RIP, 13000);
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         DespawnSouls();
         BossAI::EnterEvadeMode();

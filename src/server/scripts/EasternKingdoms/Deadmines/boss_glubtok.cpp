@@ -87,7 +87,7 @@ class boss_glubtok : public CreatureScript
                 me->SetReactState(REACT_AGGRESSIVE);
             }
 
-            void InitializeAI()
+            void InitializeAI() override
             {
                 if (!instance || static_cast<InstanceMap*>(me->GetMap())->GetScriptId() != sObjectMgr->GetScriptId(DMScriptName))
                     me->IsAIEnabled = false;
@@ -115,7 +115,7 @@ class boss_glubtok : public CreatureScript
                 Talk(SAY_DEATH);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;

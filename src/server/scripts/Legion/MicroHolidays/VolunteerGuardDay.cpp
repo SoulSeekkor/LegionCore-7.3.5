@@ -70,84 +70,83 @@ struct npc_city_invader : public ScriptedAI
     {
         switch (randomClass)
         {
-        case WARRIOR:
-            if (auto victim = me->getVictim())
-                DoCast(victim, 22120, true);
+            case WARRIOR:
+                if (auto victim = me->getVictim())
+                    DoCast(victim, 22120, true);
 
-            me->SetDisplayId(RAND(65252, 65262));
-            SetEquipmentSlots(false, 107367, 0, EQUIP_NO_CHANGE);
-            events.RescheduleEvent(EVENT_1, 5000); // charge
-            events.RescheduleEvent(EVENT_2, 15000); // Demoralizing Shout
-            events.RescheduleEvent(EVENT_3, 7000); // Hamstring
-            events.RescheduleEvent(EVENT_4, 3000); // Heroic Strike
-            events.RescheduleEvent(EVENT_5, 20000); // Sunder Armor
-            events.RescheduleEvent(EVENT_6, 6000); // Molter Strike
-            events.RescheduleEvent(EVENT_7, 4000); // Slam
-            break;
-        case PALADIN:
-            me->SetDisplayId(RAND(68104, 68105));
-            SetEquipmentSlots(false, 108923, 0, EQUIP_NO_CHANGE);
+                me->SetDisplayId(RAND(65252, 65262));
+                SetEquipmentSlots(false, 107367, 0, EQUIP_NO_CHANGE);
+                events.RescheduleEvent(EVENT_1, 5000); // charge
+                events.RescheduleEvent(EVENT_2, 15000); // Demoralizing Shout
+                events.RescheduleEvent(EVENT_3, 7000); // Hamstring
+                events.RescheduleEvent(EVENT_4, 3000); // Heroic Strike
+                events.RescheduleEvent(EVENT_5, 20000); // Sunder Armor
+                events.RescheduleEvent(EVENT_6, 6000); // Molter Strike
+                events.RescheduleEvent(EVENT_7, 4000); // Slam
+                break;
+            case PALADIN:
+                me->SetDisplayId(RAND(68104, 68105));
+                SetEquipmentSlots(false, 108923, 0, EQUIP_NO_CHANGE);
 
-            DoCast(79976);
-            DoCast(79977);
-            events.RescheduleEvent(EVENT_19, 1000);
-            events.RescheduleEvent(EVENT_20, 2000);
-            events.RescheduleEvent(EVENT_21, 5000);
-            break;
-        case PRIEST:
-            me->SetDisplayId(RAND(65430, 17882));
-            SetEquipmentSlots(false, 28738, 0, EQUIP_NO_CHANGE);
+                DoCast(79976);
+                DoCast(79977);
+                events.RescheduleEvent(EVENT_19, 1000);
+                events.RescheduleEvent(EVENT_20, 2000);
+                events.RescheduleEvent(EVENT_21, 5000);
+                break;
+            case PRIEST:
+                me->SetDisplayId(RAND(65430, 17882));
+                SetEquipmentSlots(false, 28738, 0, EQUIP_NO_CHANGE);
 
-            DoCast(16592);
-            events.RescheduleEvent(EVENT_13, 1000);
-            events.RescheduleEvent(EVENT_14, 3500);
-            events.RescheduleEvent(EVENT_15, 6000);
-            break;
-        case SHAMAN:
-            me->SetDisplayId(RAND(75302, 65023));
-            SetEquipmentSlots(false, 126320, 126334, EQUIP_NO_CHANGE);
+                DoCast(16592);
+                events.RescheduleEvent(EVENT_13, 1000);
+                events.RescheduleEvent(EVENT_14, 3500);
+                events.RescheduleEvent(EVENT_15, 6000);
+                break;
+            case SHAMAN:
+                me->SetDisplayId(RAND(75302, 65023));
+                SetEquipmentSlots(false, 126320, 126334, EQUIP_NO_CHANGE);
 
-            DoCast(19514);
-            events.RescheduleEvent(EVENT_8, 2000);
-            events.RescheduleEvent(EVENT_9, 7000);
-            events.RescheduleEvent(EVENT_10, 5000);
-            events.RescheduleEvent(EVENT_11, 10000);
-            break;
-        case MAGE:
-            me->SetDisplayId(RAND(65253, 65441));
-            SetEquipmentSlots(false, 126324, 0, EQUIP_NO_CHANGE);
+                DoCast(19514);
+                events.RescheduleEvent(EVENT_8, 2000);
+                events.RescheduleEvent(EVENT_9, 7000);
+                events.RescheduleEvent(EVENT_10, 5000);
+                events.RescheduleEvent(EVENT_11, 10000);
+                break;
+            case MAGE:
+                me->SetDisplayId(RAND(65253, 65441));
+                SetEquipmentSlots(false, 126324, 0, EQUIP_NO_CHANGE);
 
-            events.RescheduleEvent(EVENT_16, 1000);
-            events.RescheduleEvent(EVENT_17, 2000);
-            events.RescheduleEvent(EVENT_18, 10000);
-            break;
-        case WARLOCK:
-            me->SetDisplayId(65255);
-            SetEquipmentSlots(false, 115865, 0, EQUIP_NO_CHANGE);
+                events.RescheduleEvent(EVENT_16, 1000);
+                events.RescheduleEvent(EVENT_17, 2000);
+                events.RescheduleEvent(EVENT_18, 10000);
+                break;
+            case WARLOCK:
+                me->SetDisplayId(65255);
+                SetEquipmentSlots(false, 115865, 0, EQUIP_NO_CHANGE);
 
-            DoCast(79954);
-            events.RescheduleEvent(EVENT_22, 1000);
-            events.RescheduleEvent(EVENT_23, 4000);
-            break;
-        case DRUID:
-            me->SetDisplayId(RAND(68114, 65413));
-            SetEquipmentSlots(false, 64632, 0, EQUIP_NO_CHANGE);
+                DoCast(79954);
+                events.RescheduleEvent(EVENT_22, 1000);
+                events.RescheduleEvent(EVENT_23, 4000);
+                break;
+            case DRUID:
+                me->SetDisplayId(RAND(68114, 65413));
+                SetEquipmentSlots(false, 64632, 0, EQUIP_NO_CHANGE);
 
-            DoCast(19030);
-            DoCast(me, 79833, true);
-            events.RescheduleEvent(EVENT_12, 2000);
-            break;
-        case DK:
-            me->SetDisplayId(29818);
-            SetEquipmentSlots(false, 41261, 0, EQUIP_NO_CHANGE);
+                DoCast(19030);
+                DoCast(me, 79833, true);
+                events.RescheduleEvent(EVENT_12, 2000);
+                break;
+            case DK:
+                me->SetDisplayId(29818);
+                SetEquipmentSlots(false, 41261, 0, EQUIP_NO_CHANGE);
 
-            DoCast(79891);
-            events.RescheduleEvent(EVENT_24, 1000);
-            events.RescheduleEvent(EVENT_25, 2000);
-            events.RescheduleEvent(EVENT_26, 2500);
-            break;
-        default: 0;
-            break;
+                DoCast(79891);
+                events.RescheduleEvent(EVENT_24, 1000);
+                events.RescheduleEvent(EVENT_25, 2000);
+                events.RescheduleEvent(EVENT_26, 2500);
+                break;
+            default: break;
         }
     }
 
@@ -180,124 +179,123 @@ struct npc_city_invader : public ScriptedAI
                 {
                     switch (me->GetCurrentZoneID())
                     {
-                    case 1637:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
-                        {
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                        case 1637:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127100);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127100);
-                        }
-                        break;
-                    case 1497:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
-                        {
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 1497:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127135);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127135);
-                        }
-                        break;
-                    case 1638:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
-                        {
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 1638:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127134);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127134);
-                        }
-                        break;
-                    case 3487:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
-                        {
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 3487:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_4))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
-                            }
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
 
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127136);
-                        }
-                        break;
-                    default: 0;
-                        break;
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127136);
+                            }
+                            break;
+                        default: break;
                     }
 
                     if (me->GetAreaId() == 7333)
@@ -335,124 +333,123 @@ struct npc_city_invader : public ScriptedAI
                 {
                     switch (me->GetCurrentZoneID())
                     {
-                    case 1519:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
-                        {
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                        case 1519:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127138);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127138);
-                        }
-                        break;
-                    case 1537:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
-                        {
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 1537:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127139);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127139);
-                        }
-                        break;
-                    case 1657:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
-                        {
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
-                                if (aurEff4->GetAmount() > 0)
-                                    aurEff4->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 1657:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff4 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
+                                    if (aurEff4->GetAmount() > 0)
+                                        aurEff4->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
+
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127140);
                             }
-
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127140);
-                        }
-                        break;
-                    case 3557:
-                        if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
-                        {
-                            if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
-                                if (aurEff1->GetAmount() > 0)
-                                    aurEff1->SetAmount(0);
-                            if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
-                                if (aurEff3->GetAmount() > 0)
-                                    aurEff3->SetAmount(0);
-                            if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
-                                if (aurEff2->GetAmount() > 0)
-                                    aurEff2->SetAmount(0);
-                            if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
-                                if (aurEff5->GetAmount() > 0)
-                                    aurEff5->SetAmount(0);
-
-                            if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                            break;
+                        case 3557:
+                            if (AuraEffect* aurEff = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_4))
                             {
-                                bp0 += aurEff0->GetAmount() + 1;
-                                aurEff0->SetAmount(bp0);
-                                bp0 = 0.f;
-                            }
+                                if (AuraEffect* aurEff1 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_1))
+                                    if (aurEff1->GetAmount() > 0)
+                                        aurEff1->SetAmount(0);
+                                if (AuraEffect* aurEff3 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_3))
+                                    if (aurEff3->GetAmount() > 0)
+                                        aurEff3->SetAmount(0);
+                                if (AuraEffect* aurEff2 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_2))
+                                    if (aurEff2->GetAmount() > 0)
+                                        aurEff2->SetAmount(0);
+                                if (AuraEffect* aurEff5 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_ALLIANCE, EFFECT_5))
+                                    if (aurEff5->GetAmount() > 0)
+                                        aurEff5->SetAmount(0);
 
-                            bp += aurEff->GetAmount() + 1;
-                            aurEff->SetAmount(bp);
-                            bp = 0.f;
-                            SendWorldTextToOwner(_guid, 127141);
-                        }
-                        break;
-                    default: 0;
-                        break;
+                                if (AuraEffect* aurEff0 = player->GetAuraEffect(SPELL_VOLUNTEER_CITY_GUARD_HORDE, EFFECT_0))
+                                {
+                                    bp0 += aurEff0->GetAmount() + 1;
+                                    aurEff0->SetAmount(bp0);
+                                    bp0 = 0.f;
+                                }
+
+                                bp += aurEff->GetAmount() + 1;
+                                aurEff->SetAmount(bp);
+                                bp = 0.f;
+                                SendWorldTextToOwner(_guid, 127141);
+                            }
+                            break;
+                        default: break;
                     }
 
                     if (me->GetAreaId() == 7332)
@@ -504,111 +501,111 @@ struct npc_city_invader : public ScriptedAI
         {
             switch (eventId)
             {
-            case EVENT_1:
-                DoCast(11971);
-                events.RescheduleEvent(EVENT_1, 25000);
-                break;
-            case EVENT_2:
-                DoCast(13730);
-                events.RescheduleEvent(EVENT_2, 35000);
-                break;
-            case EVENT_3:
-                DoCast(9080);
-                events.RescheduleEvent(EVENT_3, 15000);
-                break;
-            case EVENT_4:
-                DoCast(57846);
-                events.RescheduleEvent(EVENT_4, 8000);
-                break;
-            case EVENT_5:
-                DoCast(11971);
-                events.RescheduleEvent(EVENT_5, 30000);
-                break;
-            case EVENT_6:
-                DoCast(32736);
-                events.RescheduleEvent(EVENT_6, 10000);
-                break;
-            case EVENT_7:
-                DoCast(79881);
-                events.RescheduleEvent(EVENT_7, 5000);
-                break;
-            case EVENT_8:
-                DoCast(79913);
-                events.RescheduleEvent(EVENT_8, 6000);
-                break;
-            case EVENT_9:
-                DoCast(33844);
-                events.RescheduleEvent(EVENT_9, 20000);
-                break;
-            case EVENT_10:
-                DoCast(79890);
-                events.RescheduleEvent(EVENT_10, 12000);
-                break;
-            case EVENT_11:
-                DoCast(79886);
-                events.RescheduleEvent(EVENT_11, 10000);
-                break;
-            case EVENT_12:
-                DoCast(48562);
-                events.RescheduleEvent(EVENT_12, 3000);
-                break;
-            case EVENT_13:
-                DoCast(16568);
-                events.RescheduleEvent(EVENT_13, 5000);
-                break;
-            case EVENT_14:
-                DoCast(11639);
-                events.RescheduleEvent(EVENT_14, 15000);
-                break;
-            case EVENT_15:
-                DoCast(13860);
-                events.RescheduleEvent(EVENT_15, 4000);
-                break;
-            case EVENT_16:
-                DoCast(34447);
-                events.RescheduleEvent(EVENT_16, 3500);
-                break;
-            case EVENT_17:
-                DoCast(79868);
-                events.RescheduleEvent(EVENT_17, 3500);
-                break;
-            case EVENT_18:
-                DoCast(me, 21655, true);
-                events.RescheduleEvent(EVENT_18, 10000);
-                break;
-            case EVENT_19:
-                DoCast(me, 79966, true);
-                events.RescheduleEvent(EVENT_19, 8000);
-                break;
-            case EVENT_20:
-                DoCast(79964);
-                events.RescheduleEvent(EVENT_20, 4000);
-                break;
-            case EVENT_21:
-                DoCast(79970);
-                events.RescheduleEvent(EVENT_21, 3000);
-                break;
-            case EVENT_22:
-                if (auto victim = me->getVictim())
-                    DoCast(victim, 79930, true);
-                events.RescheduleEvent(EVENT_22, 15000);
-                break;
-            case EVENT_23:
-                DoCast(79932);
-                events.RescheduleEvent(EVENT_23, 3000);
-                break;
-            case EVENT_24:
-                DoCast(me, 79887, true);
-                events.RescheduleEvent(EVENT_24, 10000);
-                break;
-            case EVENT_25:
-                DoCast(79903);
-                events.RescheduleEvent(EVENT_25, 4000);
-                break;
-            case EVENT_26:
-                DoCast(79903);
-                events.RescheduleEvent(EVENT_26, 2000);
-                break;
+                case EVENT_1:
+                    DoCast(11971);
+                    events.RescheduleEvent(EVENT_1, 25000);
+                    break;
+                case EVENT_2:
+                    DoCast(13730);
+                    events.RescheduleEvent(EVENT_2, 35000);
+                    break;
+                case EVENT_3:
+                    DoCast(9080);
+                    events.RescheduleEvent(EVENT_3, 15000);
+                    break;
+                case EVENT_4:
+                    DoCast(57846);
+                    events.RescheduleEvent(EVENT_4, 8000);
+                    break;
+                case EVENT_5:
+                    DoCast(11971);
+                    events.RescheduleEvent(EVENT_5, 30000);
+                    break;
+                case EVENT_6:
+                    DoCast(32736);
+                    events.RescheduleEvent(EVENT_6, 10000);
+                    break;
+                case EVENT_7:
+                    DoCast(79881);
+                    events.RescheduleEvent(EVENT_7, 5000);
+                    break;
+                case EVENT_8:
+                    DoCast(79913);
+                    events.RescheduleEvent(EVENT_8, 6000);
+                    break;
+                case EVENT_9:
+                    DoCast(33844);
+                    events.RescheduleEvent(EVENT_9, 20000);
+                    break;
+                case EVENT_10:
+                    DoCast(79890);
+                    events.RescheduleEvent(EVENT_10, 12000);
+                    break;
+                case EVENT_11:
+                    DoCast(79886);
+                    events.RescheduleEvent(EVENT_11, 10000);
+                    break;
+                case EVENT_12:
+                    DoCast(48562);
+                    events.RescheduleEvent(EVENT_12, 3000);
+                    break;
+                case EVENT_13:
+                    DoCast(16568);
+                    events.RescheduleEvent(EVENT_13, 5000);
+                    break;
+                case EVENT_14:
+                    DoCast(11639);
+                    events.RescheduleEvent(EVENT_14, 15000);
+                    break;
+                case EVENT_15:
+                    DoCast(13860);
+                    events.RescheduleEvent(EVENT_15, 4000);
+                    break;
+                case EVENT_16:
+                    DoCast(34447);
+                    events.RescheduleEvent(EVENT_16, 3500);
+                    break;
+                case EVENT_17:
+                    DoCast(79868);
+                    events.RescheduleEvent(EVENT_17, 3500);
+                    break;
+                case EVENT_18:
+                    DoCast(me, 21655, true);
+                    events.RescheduleEvent(EVENT_18, 10000);
+                    break;
+                case EVENT_19:
+                    DoCast(me, 79966, true);
+                    events.RescheduleEvent(EVENT_19, 8000);
+                    break;
+                case EVENT_20:
+                    DoCast(79964);
+                    events.RescheduleEvent(EVENT_20, 4000);
+                    break;
+                case EVENT_21:
+                    DoCast(79970);
+                    events.RescheduleEvent(EVENT_21, 3000);
+                    break;
+                case EVENT_22:
+                    if (auto victim = me->getVictim())
+                        DoCast(victim, 79930, true);
+                    events.RescheduleEvent(EVENT_22, 15000);
+                    break;
+                case EVENT_23:
+                    DoCast(79932);
+                    events.RescheduleEvent(EVENT_23, 3000);
+                    break;
+                case EVENT_24:
+                    DoCast(me, 79887, true);
+                    events.RescheduleEvent(EVENT_24, 10000);
+                    break;
+                case EVENT_25:
+                    DoCast(79903);
+                    events.RescheduleEvent(EVENT_25, 4000);
+                    break;
+                case EVENT_26:
+                    DoCast(79903);
+                    events.RescheduleEvent(EVENT_26, 2000);
+                    break;
             }
         }
         DoMeleeAttackIfReady();
@@ -622,7 +619,7 @@ class spell_volunteer_city_guard : public AuraScript
 
     uint16 timer;
 
-    bool Load()
+    bool Load() override
     {
         timer = 30000;
         return true;

@@ -547,9 +547,9 @@ public:
         EventMap events;
         ObjectGuid feedGuid;
 
-        void Reset(){}
+        void Reset() override {}
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -579,19 +579,19 @@ public:
             }
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == POINT_MOTION_TYPE)
                 events.RescheduleEvent(EVENT_EAT, 250);
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (Creature* incubate = me->FindNearestCreature(NPC_INCUBATER, 30.0f, true))
                 incubate->CastSpell(me->GetPositionX(), me->GetPositionY(), me->GetPositionZ(), SPELL_FEATHER_AT, true);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

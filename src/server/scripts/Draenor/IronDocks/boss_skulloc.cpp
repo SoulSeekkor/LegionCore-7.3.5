@@ -355,7 +355,7 @@ public:
                     DoCast(turret, SPELL_RIDE_VEHICLE, false);
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             boss_encounter_skulloc::JustDied(NULL);
 
@@ -366,7 +366,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;

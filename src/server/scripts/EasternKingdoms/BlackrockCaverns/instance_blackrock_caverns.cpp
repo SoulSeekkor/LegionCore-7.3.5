@@ -25,7 +25,7 @@ public:
         ObjectGuid uiLordObsidiusGUID;
         ObjectGuid m_uiPortalGUID[4];
 
-        void Initialize()
+        void Initialize() override
         {
              uiRomoggGUID.Clear();
              uiCorlaGUID.Clear();
@@ -36,7 +36,7 @@ public:
                  m_uiPortalGUID[i].Clear();
         }
 
-        void OnCreatureCreate(Creature* pCreature)
+        void OnCreatureCreate(Creature* pCreature) override
         {
             switch(pCreature->GetEntry())
             {
@@ -58,7 +58,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* pGo)
+        void OnGameObjectCreate(GameObject* pGo) override
         {
             switch(pGo->GetEntry())
             {
@@ -93,7 +93,7 @@ public:
             }
         }
 
-        ObjectGuid GetGuidData(uint32 data) const
+        ObjectGuid GetGuidData(uint32 data) const override
         {
             switch(data)
             {
@@ -111,7 +111,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch(type)
             {
@@ -161,7 +161,7 @@ public:
             return 0;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             OUT_SAVE_INST_DATA;
 
@@ -174,7 +174,7 @@ public:
             return str_data;
         }
 
-        void Load(const char* in)
+        void Load(const char* in) override
         {
             if (!in)
             {

@@ -2737,7 +2737,7 @@ void Spell::EffectHealPct(SpellEffIndex effIndex)
                 if ((*i)->GetMiscValue() == 11)
                     if ((*i)->GetAmount() == m_spellInfo->Id)
                     {
-                        (*i)->SetAmount(NULL);
+                        (*i)->SetAmount(0);
                         resetHeal = false;
                     }
 
@@ -2855,8 +2855,8 @@ void Spell::EffectHealthLeech(SpellEffIndex effIndex)
         float critMod = 2.f;
         bool isCrit = IsCritForTarget(unitTarget);
 
-        if ((m_caster->IsPlayer() || m_caster->HasUnitTypeMask(UNIT_MASK_CREATED_BY_PLAYER)) &&
-            unitTarget->IsPlayer() || unitTarget->HasUnitTypeMask(UNIT_MASK_CREATED_BY_PLAYER))
+        if (((m_caster->IsPlayer() || m_caster->HasUnitTypeMask(UNIT_MASK_CREATED_BY_PLAYER)) &&
+            unitTarget->IsPlayer()) || unitTarget->HasUnitTypeMask(UNIT_MASK_CREATED_BY_PLAYER))
             critMod = 1.5f;
 
         uint64 healthGain = isCrit ? damage * critMod : damage;
@@ -3531,8 +3531,8 @@ void Spell::EffectOpenLock(SpellEffIndex effIndex)
             gameObjTarget->UseDoorOrButton(0, false, player);
             player->GetMap()->ScriptsStart(sGameObjectScripts, gameObjTarget->GetDBTableGUIDLow(), player, gameObjTarget);
         }
-        else if (gameObjTarget->GetGOInfo()->type == GAMEOBJECT_TYPE_GOOBER && sOutdoorPvPMgr->HandleOpenGo(player, gameObjTarget->GetGUID()) ||
-            gameObjTarget->GetGOInfo()->type == GAMEOBJECT_TYPE_NEW_FLAG_DROP && sOutdoorPvPMgr->HandleOpenGo(player, gameObjTarget->GetGUID()))
+        else if ((gameObjTarget->GetGOInfo()->type == GAMEOBJECT_TYPE_GOOBER && sOutdoorPvPMgr->HandleOpenGo(player, gameObjTarget->GetGUID())) ||
+            (gameObjTarget->GetGOInfo()->type == GAMEOBJECT_TYPE_NEW_FLAG_DROP && sOutdoorPvPMgr->HandleOpenGo(player, gameObjTarget->GetGUID())))
             return;
 
         lockId = goInfo->GetLockId();
@@ -4883,7 +4883,7 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
                 normalized = true;
                 break;
             case SPELL_EFFECT_WEAPON_PERCENT_DAMAGE:
-                if (!calcAllEffects && effIndex == j + 1 || calcAllEffects)
+                if ((!calcAllEffects && effIndex == j + 1) || calcAllEffects)
                     weaponDamagePercentMod += m_spellInfo->GetEffect(j, m_diffMode)->CalcValue(_caster, nullptr, unitTarget, m_CastItem, false, nullptr, GetComboPoints()) / 100.0f;
                     //weaponDamagePercentMod += CalculateDamage(j, unitTarget) / 100.0f;
                 break;
@@ -8027,7 +8027,7 @@ void Spell::EffectGiveCurrency(SpellEffIndex effIndex)
 
     // log Veiled Argunite and Wakening Essence currency
     if (currencyID == 1508 || currencyID == 1533)
-        sLog->outWarden("Player %s (GUID: %u) adds a currency value %u (%u) from spell %u", unitTarget->ToPlayer()->GetName(), unitTarget->ToPlayer()->GetGUIDLow(), amount, currencyID, m_spellInfo->Id);
+        sLog->outWarden("Player %s (GUID: %u) adds a currency value %f (%u) from spell %u", unitTarget->ToPlayer()->GetName(), unitTarget->ToPlayer()->GetGUIDLow(), amount, currencyID, m_spellInfo->Id);
 }
 
 void Spell::EffectCastButtons(SpellEffIndex effIndex)
@@ -8703,13 +8703,13 @@ void Spell::EffectBonusLoot(SpellEffIndex effIndex)
             loot->_itemContext = m_caster->GetMap()->GetDifficultyLootItemContext(false, m_caster->getLevel() == MAX_LEVEL, false);
             if (lootId >= 254773 && lootId <= 254794) // For token 910, have other TreeMod
                 loot->_itemContext = 43;
-            if (lootId >= 242842 && lootId <= 242864 || lootId == 243074) // For token 880, have other TreeMod
+            if ((lootId >= 242842 && lootId <= 242864) || lootId == 243074) // For token 880, have other TreeMod
             {
                 loot->_itemContext = 43;
                 loot->_needLevel = 880;
             }
 
-            if (lootId >= 240485 && lootId <= 240518 || lootId == 262946) // For legendary token
+            if ((lootId >= 240485 && lootId <= 240518) || lootId == 262946) // For legendary token
                 loot->_isLegendaryLoot = true;
             break;
         case 438: // Bonus loot from boss
@@ -9585,7 +9585,7 @@ void Spell::EffectObliterateItem(SpellEffIndex /*effIndex*/)
         ItemPosCountVec dest;
         if (player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, itemId, addCount) == EQUIP_ERR_OK)
         {
-            if (item = player->StoreNewItem(dest, itemId, true))
+            if ((item = player->StoreNewItem(dest, itemId, true)))
             {
                 player->SendNewItem(item, addCount, true, false, true);
                 //player->SendDisplayToast(itemId, ToastType::ITEM, false, addCount, DisplayToastMethod::ITEM, 0, item);

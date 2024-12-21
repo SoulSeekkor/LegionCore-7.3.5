@@ -132,8 +132,11 @@ asm						\
 
 /* The return code for realtime-signals.  */
 RESTORE (restore_rt, __NR_rt_sigreturn)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundefined-internal"
 void restore_rt (void) asm ("__restore_rt")
   __attribute__ ((visibility ("hidden")));
+#pragma GCC diagnostic pop
 
 #  define INIT_SEGV						\
 do								\

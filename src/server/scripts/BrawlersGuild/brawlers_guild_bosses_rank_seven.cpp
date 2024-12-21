@@ -127,17 +127,21 @@ public:
         void EnterCombat(Unit* /*who*/) override
         {
             if (Unit* unit = me->GetAnyOwner())
-            if (Player* owner = unit->ToPlayer())
-                if (owner->GetTeamId() == TEAM_ALLIANCE)
+            {
+                if (Player* owner = unit->ToPlayer())
                 {
-                    for (uint8 i = 0; i < 4; ++i)
-                        me->SummonCreature(totems[i], totems_A[i].GetPositionX(), totems_A[i].GetPositionY(), totems_A[i].GetPositionZ(), 0.0f);
+                    if (owner->GetTeamId() == TEAM_ALLIANCE)
+                    {
+                        for (uint8 i = 0; i < 4; ++i)
+                            me->SummonCreature(totems[i], totems_A[i].GetPositionX(), totems_A[i].GetPositionY(), totems_A[i].GetPositionZ(), 0.0f);
+                    }
+                    else
+                    {
+                        for (uint8 i = 0; i < 4; ++i)
+                            me->SummonCreature(totems[i], totems_H[i].GetPositionX(), totems_H[i].GetPositionY(), totems_H[i].GetPositionZ(), 0.0f);
+                    }
                 }
-                else
-                {
-                    for (uint8 i = 0; i < 4; ++i)
-                        me->SummonCreature(totems[i], totems_H[i].GetPositionX(), totems_H[i].GetPositionY(), totems_H[i].GetPositionZ(), 0.0f);
-                }
+            }
         }     
 
         void JustSummoned(Creature* summon) override

@@ -136,7 +136,7 @@ public:
             }
         }
 
-        void SummonedCreatureDies(Creature* summon, Unit* /*killer*/)
+        void SummonedCreatureDies(Creature* summon, Unit* /*killer*/) override
         {
             if (summon->GetEntry() == NPC_ENCHANTED_BROODLING_I || summon->GetEntry() == NPC_VICIOUS_MANAFANG_I)
             {

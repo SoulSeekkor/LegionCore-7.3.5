@@ -65,7 +65,7 @@ class boss_iron_qon : public CreatureScript
             InstanceScript* instance;
             bool achieve;
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
                 ResetMaunt();
@@ -105,14 +105,14 @@ class boss_iron_qon : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 me->AddAura(SPELL_RISING_ANGER, me);
                 events.RescheduleEvent(EVENT_FIST_SMASH, 15000);
                 achieve = true;
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
                 if (achieve)
@@ -125,7 +125,7 @@ class boss_iron_qon : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                     return;

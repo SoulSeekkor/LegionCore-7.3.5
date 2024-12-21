@@ -641,13 +641,13 @@ class npc_lord_rhyolith_right_foot : public CreatureScript
                 hitsTimer = 1000;
             }
 
-            void Reset()
+            void Reset() override
             {
                 memset(m_hits, 0, sizeof(m_hits));
                 hitsTimer = 1000;
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 if (Creature* pRhyolith = me->FindNearestCreature(NPC_RHYOLITH, 300.0f))
                     DoZoneInCombat(pRhyolith);
@@ -662,7 +662,7 @@ class npc_lord_rhyolith_right_foot : public CreatureScript
                 return 0;
             }
 
-            void DamageTaken(Unit* who, uint32 &damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* who, uint32 &damage, DamageEffectType dmgType) override
             {
                 if (!me || !me->isAlive())
                     return;
@@ -676,7 +676,7 @@ class npc_lord_rhyolith_right_foot : public CreatureScript
                     instance->SetData(DATA_RHYOLITH_HEALTH_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;
@@ -744,13 +744,13 @@ class npc_lord_rhyolith_left_foot : public CreatureScript
                 hitsTimer = 1000;
             }
 
-            void Reset()
+            void Reset() override
             {
                 memset(m_hits, 0, sizeof(m_hits));
                 hitsTimer = 1000;
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 if (Creature* pRhyolith = me->FindNearestCreature(NPC_RHYOLITH, 300.0f))
                     DoZoneInCombat(pRhyolith);
@@ -765,7 +765,7 @@ class npc_lord_rhyolith_left_foot : public CreatureScript
                 return 0;
             }
 
-            void DamageTaken(Unit* who, uint32 &damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* who, uint32 &damage, DamageEffectType dmgType) override
             {
                 if (!me || !me->isAlive())
                     return;
@@ -779,7 +779,7 @@ class npc_lord_rhyolith_left_foot : public CreatureScript
                     instance->SetData(DATA_RHYOLITH_HEALTH_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;

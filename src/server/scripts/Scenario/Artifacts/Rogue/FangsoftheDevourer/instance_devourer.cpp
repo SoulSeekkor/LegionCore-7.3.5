@@ -79,6 +79,7 @@ public:
         void Update(uint32 diff) override
         {
             if (getScenarionStep() == 7)
+            {
                 if (outrotimer <= diff)
                 {
                     if (!trashGUIDconteiner.empty())
@@ -89,7 +90,9 @@ public:
                         }
                     outrotimer = 2000;
                 }
-                else outrotimer -= diff;
+                else
+                    outrotimer -= diff;
+            }
         }
     };
 };

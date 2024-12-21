@@ -107,6 +107,7 @@ public:
                             if (Creature* skulloc = instance->GetCreature(skullocGUIDconteiner[NPC_SKULLOC]))
                                 skulloc->CastSpell(skulloc, SPELL_IRON_DOCKS_BANTER_5, true);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -130,6 +131,7 @@ public:
                         }
                         case DONE:
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -153,6 +155,7 @@ public:
 
                             DoUpdateAchievementCriteria(CRITERIA_TYPE_COMPLETE_DUNGEON_ENCOUNTER, 1754);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -262,7 +265,7 @@ public:
             return saveStream.str();
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             OUT_SAVE_INST_DATA;
 

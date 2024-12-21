@@ -167,7 +167,7 @@ class npc_woi_controller : public CreatureScript
                 PushAddArray();
             }
 
-            void JustSummoned(Creature* summoned)
+            void JustSummoned(Creature* summoned) override
             {
                 summons.Summon(summoned);
             }
@@ -379,7 +379,7 @@ class boss_generic_imperator : public CreatureScript
                 listStrike = { 0, 1, 2, 3 };
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void EnterCombat(Unit* /*who*/) override
             {
                 DoCast(me, SPELL_ENERGIZE_REGEN, true);
 
@@ -569,7 +569,7 @@ class mob_woi_add_generic : public CreatureScript
                 }
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 if (me->GetMap()->IsHeroic())
                     DoCast(me, SPELL_SUMMON_TITAN_SPARK, true);
@@ -681,12 +681,12 @@ class npc_emperor_terracotta_boss : public CreatureScript
 
             void Reset() override {}
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 damage = 0;
             }
 
-            void SpellHit(Unit* caster, const SpellInfo* spell)
+            void SpellHit(Unit* caster, const SpellInfo* spell) override
             {
                 switch (spell->Id)
                 {
@@ -704,7 +704,7 @@ class npc_emperor_terracotta_boss : public CreatureScript
                 }
             }
 
-            void SpellHitTarget(Unit* target, const SpellInfo* spell)
+            void SpellHitTarget(Unit* target, const SpellInfo* spell) override
             {
                 switch (spell->Id)
                 {
@@ -761,7 +761,7 @@ class npc_emperor_titan_spark : public CreatureScript
 
             void Reset() override {}
             
-            void IsSummonedBy(Unit* summoner)
+            void IsSummonedBy(Unit* summoner) override
             {
                 active = false;
                 explosion = false;
@@ -769,7 +769,7 @@ class npc_emperor_titan_spark : public CreatureScript
                 events.RescheduleEvent(EVENT_1, 3000); //Active
             }
 
-            void SpellHitTarget(Unit* target, const SpellInfo* spell)
+            void SpellHitTarget(Unit* target, const SpellInfo* spell) override
             {
                 if (spell->Id == SPELL_FOCALISED_ENERGY)
                 {
@@ -780,7 +780,7 @@ class npc_emperor_titan_spark : public CreatureScript
                     events.RescheduleEvent(EVENT_2, 1000); //Despawn
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (damage >= me->GetHealth())
                 {
@@ -854,7 +854,7 @@ class spell_eperor_energizing_smash : public SpellScriptLoader
 
             uint8 stacks;
 
-            bool Load()
+            bool Load() override
             {
                 stacks = 0;
                 return true;

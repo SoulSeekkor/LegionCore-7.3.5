@@ -482,7 +482,7 @@ struct npc_tichonrius_fel_spire : ScriptedAI
                     }
                     
                     auto at = me->GetAreaObject(SPELL_FEL_SPIRE_AT);
-                    if (at && at->GetAffectedPlayers()->size() > ceil(playerCount / 4) || despawn)
+                    if ((at && at->GetAffectedPlayers()->size() > ceil(playerCount / 4)) || despawn)
                     {
                         _castTimer = 0;
                         me->RemoveAurasDueToSpell(SPELL_FEL_SPIRE_TICK_AT);

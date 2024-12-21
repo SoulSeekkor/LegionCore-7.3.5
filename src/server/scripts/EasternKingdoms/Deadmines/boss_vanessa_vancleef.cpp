@@ -135,7 +135,7 @@ class boss_vanessa_vancleef : public CreatureScript
                     me->SetVisible(false);
             }
 
-            void InitializeAI()
+            void InitializeAI() override
             {
                 if (!instance || static_cast<InstanceMap*>(me->GetMap())->GetScriptId() != sObjectMgr->GetScriptId(DMScriptName))
                     me->IsAIEnabled = false;
@@ -294,7 +294,7 @@ class npc_vanessa_vancleef_vanessa_sitting : public CreatureScript
                 instance = me->GetInstanceScript();
             }
 
-            void InitializeAI()
+            void InitializeAI() override
             {
                 if (!instance || static_cast<InstanceMap*>(me->GetMap())->GetScriptId() != sObjectMgr->GetScriptId(DMScriptName))
                     me->IsAIEnabled = false;

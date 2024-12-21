@@ -648,19 +648,8 @@ public:
                     break;
                 case EVENT_PREPARE_TO_MIST:
                 {
-                    switch (rotatedirection)
+                    if (rotatedirection) // right
                     {
-                    case 0:       //left
-                        for (uint8 b = 11; b > 8; b--)
-                        {
-                            if (Creature* lce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[b]))
-                            {
-                                crosseyelist.push_back(lce->GetGUID());
-                                lce->CastSpell(lce, SPELL_MAZE_COLLECTED);
-                            }
-                        }
-                        break;
-                    case 1:       //right
                         for (uint8 n = 0; n < 3; n++)
                         {
                             if (Creature* rce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[n]))
@@ -669,8 +658,19 @@ public:
                                 rce->CastSpell(rce, SPELL_MAZE_COLLECTED);
                             }
                         }
-                        break;
                     }
+                    else // left
+                    {
+                        for (uint8 b = 11; b > 8; b--)
+                        {
+                            if (Creature* lce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[b]))
+                            {
+                                crosseyelist.push_back(lce->GetGUID());
+                                lce->CastSpell(lce, SPELL_MAZE_COLLECTED);
+                            }
+                        }
+                    }
+
                     events.RescheduleEvent(EVENT_CREATE_MIST, 2000);
                     break;
                 }
@@ -679,25 +679,8 @@ public:
                     std::list<Creature*>swaplist;
                     swaplist.clear();
 
-                    switch (rotatedirection)
+                    if (rotatedirection)
                     {
-                    case 0:
-                        for (uint8 b = 0; b < 9; b++)
-                        {
-                            if (Creature* lce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[b]))
-                            {
-                                swaplist.push_back(lce);
-                                lce->AI()->SetData(DATA_CREATE_MIST, 1000 + b * 650);
-                            }
-                        }
-                        if (!swaplist.empty())
-                        {
-                            swaplist.reverse();
-                            for (std::list<Creature*>::const_iterator itr = swaplist.begin(); itr != swaplist.end(); itr++)
-                                crosseyelist.push_back((*itr)->GetGUID());
-                        }
-                        break;
-                    case 1:
                         for (uint8 n = 11; n > 2; n--)
                         {
                             if (Creature* rce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[n]))
@@ -712,7 +695,23 @@ public:
                             for (std::list<Creature*>::const_iterator itr = swaplist.begin(); itr != swaplist.end(); itr++)
                                 crosseyelist.push_back((*itr)->GetGUID());
                         }
-                        break;
+                    }
+                    else
+                    {
+                        for (uint8 b = 0; b < 9; b++)
+                        {
+                            if (Creature* lce = me->SummonCreature(NPC_CROSS_EYE, triggerspawnpos[b]))
+                            {
+                                swaplist.push_back(lce);
+                                lce->AI()->SetData(DATA_CREATE_MIST, 1000 + b * 650);
+                            }
+                        }
+                        if (!swaplist.empty())
+                        {
+                            swaplist.reverse();
+                            for (std::list<Creature*>::const_iterator itr = swaplist.begin(); itr != swaplist.end(); itr++)
+                                crosseyelist.push_back((*itr)->GetGUID());
+                        }
                     }
                     break;
                 }
@@ -736,16 +735,15 @@ public:
 
                     uint32 timer = 0; //timer - open way in mist
                     uint32 data = 0;  //timer - close safe zone
-                    switch (rotatedirection)
+                    if (rotatedirection) // right
                     {
-                    case 0:      //left
-                        timer = nextmiststage <= 3 ? 2000 : 4000;
-                        data = nextmiststage <= 3 ? 4000 : 7000;
-                        break;
-                    case 1:      //right
                         timer = nextmiststage <= 3 ? 1000 : 4000;
                         data = nextmiststage < 3 ? 2500 : 5500;
-                        break;
+                    }
+                    else // left
+                    {
+                        timer = nextmiststage <= 3 ? 2000 : 4000;
+                        data = nextmiststage <= 3 ? 4000 : 7000;
                     }
                     events.RescheduleEvent(EVENT_OPEN_WAY_IN_MIST, timer);
                     if (Creature* lastcrosseye = me->GetCreature(*me, crosseyelist[lastmiststage]))
@@ -884,7 +882,7 @@ public:
         EventMap events;
         uint8 direction;
 
-        void Reset()
+        void Reset() override
         {
             direction = urand(0, 1);
             DoZoneInCombat(me, 100.0f);
@@ -892,11 +890,11 @@ public:
             events.RescheduleEvent(EVENT_START_MOVE, 250);
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
@@ -926,7 +924,7 @@ public:
             return 0;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -977,7 +975,7 @@ public:
         ObjectGuid targetGuid;
         uint8 direction;
 
-        void Reset()
+        void Reset() override
         {
             targetGuid.Clear();
             direction = urand(0, 1);
@@ -986,11 +984,11 @@ public:
             events.RescheduleEvent(EVENT_START_MOVE, 250);
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
@@ -1021,7 +1019,7 @@ public:
             return 0.0f;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -1081,15 +1079,15 @@ public:
         EventMap events;
         ObjectGuid targetGuid;
 
-        void Reset(){}
+        void Reset() override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_CREATE_CONE)
                 events.RescheduleEvent(EVENT_PREPARE_BEAM, 100);
@@ -1183,7 +1181,7 @@ public:
             }
         }
 
-        uint32 GetData(uint32 type) const
+        uint32 GetData(uint32 type) const override
         {
             if (type == DATA_IS_CONE_TARGET_CREATURE)
             {
@@ -1198,7 +1196,7 @@ public:
             return 0;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             //remove focus cone from trigger, and despawn him
             if (type == DATA_DESPAWN_CREATURE_CONE_TARGET)
@@ -1253,7 +1251,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -1370,7 +1368,7 @@ public:
         EventMap events;
         ObjectGuid colorblindeyeGuid;
 
-        void Reset(){}
+        void Reset() override {}
 
         void SetGUID(ObjectGuid const& guid, int32 id) override
         {
@@ -1381,13 +1379,13 @@ public:
             }
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

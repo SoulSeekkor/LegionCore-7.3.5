@@ -253,7 +253,7 @@ public:
             delete transport;
         }
 
-        void Initialize()
+        void Initialize() override
         {
             SetBossNumber(DATA_MAX);
             LoadDoorData(doorData);
@@ -379,7 +379,7 @@ public:
             packet.Worldstates.emplace_back(WorldStates::WS_KORKRON_CANNON_COUNT, CannonCount);
         }
 
-        void OnPlayerEnter(Player* player)
+        void OnPlayerEnter(Player* player) override
         {
             if (!TeamInInstance)
                 TeamInInstance = player->GetTeam();
@@ -410,7 +410,7 @@ public:
                 player->RemoveAurasDueToSpell(_toxinlist[n]);
         }
 
-        void OnPlayerLeave(Player* player)
+        void OnPlayerLeave(Player* player) override
         {
             for (uint8 n = 0; n < 30; ++n)
                 DoRemoveAurasDueToSpellOnPlayers(removelist[n]);
@@ -488,7 +488,7 @@ public:
             }
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -738,7 +738,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -948,7 +948,7 @@ public:
             return true;
         }
 
-        bool SetBossState(uint32 id, EncounterState state)
+        bool SetBossState(uint32 id, EncounterState state) override
         {
             //Privent overwrite state.
             if (GetBossState(id) == DONE)
@@ -959,431 +959,440 @@ public:
             
             switch (id)
             {
-            case DATA_IMMERSEUS:
-                if (state == DONE)
-                    if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
-                        bq->AI()->SetData(DATA_IMMERSEUS, DONE);
-                break;
-            case DATA_F_PROTECTORS:
-                if (state == DONE)
-                {
-                    HandleGameObject(fprotectorexdoorGUID, true);
-                    if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
-                        bq->AI()->SetData(DATA_F_PROTECTORS, DONE);
-                }
-                break;
-            case DATA_NORUSHEN:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
-                        HandleGameObject(*guid, true);
+                case DATA_IMMERSEUS:
+                    if (state == DONE)
+                        if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
+                            bq->AI()->SetData(DATA_IMMERSEUS, DONE);
                     break;
-                case IN_PROGRESS:
-                    for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
-                        HandleGameObject(*guid, false);
-                    break;
-                case DONE:
-                    for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
-                        HandleGameObject(*guid, true);
-                    if (Creature* norush = instance->GetCreature(GetGuidData(NPC_NORUSHEN)))
-                        norush->DespawnOrUnsummon();
-                    if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
-                        bq->DespawnOrUnsummon();
-                    break;
-                }
-                break;
-            }
-            case DATA_SHA_OF_PRIDE:
-                if (state == DONE)
-                {
-                    if (!instance->IsLfr())
-                        if (GameObject* pChest = instance->GetGameObject(chestShaVaultOfForbiddenTreasures))
-                            pChest->SetRespawnTime(pChest->GetRespawnDelay());
-                    if (GetData(DATA_GALAKRAS_PRE_EVENT) != IN_PROGRESS)
+                case DATA_F_PROTECTORS:
+                    if (state == DONE)
                     {
-                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                            Galakras->AI()->DoAction(ACTION_PRE_EVENT);
-                        SetData(DATA_GALAKRAS_PRE_EVENT, IN_PROGRESS);
-                    }
-                }
-                break;
-            case DATA_GALAKRAS:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    SetData(DATA_SOUTH_TOWER, NOT_STARTED);
-                    SetData(DATA_NORTH_TOWER, NOT_STARTED);
-                    SetData(DATA_DISABLE_ROPES, 0);
-                    STowerFull = false;
-                    STowerNull = false;
-                    NTowerFull = false;
-                    NTowerNull = false;
-                    if (GameObject* SouthDoor = instance->GetGameObject(GetGuidData(GO_SOUTH_DOOR)))
-                        SouthDoor->SetGoState(GO_STATE_READY);
-                    if (GameObject* NorthDoor = instance->GetGameObject(GetGuidData(GO_NORTH_DOOR)))
-                        NorthDoor->SetGoState(GO_STATE_READY);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                    {
-                        Galakras->AI()->Reset();
-                        Galakras->AI()->EnterEvadeMode();
+                        HandleGameObject(fprotectorexdoorGUID, true);
+                        if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
+                            bq->AI()->SetData(DATA_F_PROTECTORS, DONE);
                     }
                     break;
-                case IN_PROGRESS:
-                    if (Creature* JainaOrSylvana = instance->GetCreature(JainaOrSylvanaGUID))
-                        JainaOrSylvana->AI()->DoAction(ACTION_FRIENDLY_BOSS);
-                    if (Creature* VereesOrAethas = instance->GetCreature(VereesaOrAethasGUID))
-                        VereesOrAethas->AI()->DoAction(ACTION_FRIENDLY_BOSS);
-                    break;
-                default:
-                    break;
-                }
-                break;
-            }
-            case DATA_IRON_JUGGERNAUT:
-            {
-                switch (state)
+                case DATA_NORUSHEN:
                 {
-                case NOT_STARTED:
-                    if (Creature* ij = instance->GetCreature(ironjuggGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, ij);
-                    HandleGameObject(winddoorGuid, true);
-                    break;
-                case DONE:
-                    if (Creature* ij = instance->GetCreature(ironjuggGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, ij);
-                    HandleGameObject(winddoorGuid, true);
-                    HandleGameObject(orgrimmargateGuid, true);
-                    break;
-                case IN_PROGRESS:
-                    if (Creature* ij = instance->GetCreature(ironjuggGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, ij);
-                    HandleGameObject(winddoorGuid, false);
-                    break;
-                }
-                break;
-            }
-            case DATA_KORKRON_D_SHAMAN:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
-                        if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
-                            SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, shaman);
-                    HandleGameObject(orgrimmargate2Guid, true);
-                    break;
-                case DONE:
-                    for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
-                        if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
-                            SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, shaman);
-                    HandleGameObject(orgrimmargate2Guid, true);
-                    HandleGameObject(rustybarsGuid, true);
-                    break;
-                case IN_PROGRESS:
-                    for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
-                        if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
-                            SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, shaman);
-                    HandleGameObject(orgrimmargate2Guid, false);
-                    break;
-                }
-                break;
-            }
-            case DATA_GENERAL_NAZGRIM:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, nazgrim);
-                    HandleGameObject(nazgrimdoorGuid, true);
-                    break;
-                case IN_PROGRESS:
-                    if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, nazgrim);
-                    HandleGameObject(nazgrimdoorGuid, false);
-                    break;
-                case DONE:
-                    if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, nazgrim);
-                    HandleGameObject(nazgrimdoorGuid, true);
-                    HandleGameObject(nazgrimexdoorGuid, true);
-                    break;
-                }
-                break;
-            }
-            case DATA_MALKOROK:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
-                        HandleGameObject(*itr, true);
-                    break;
-                case IN_PROGRESS:
-                    for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
-                        HandleGameObject(*itr, false);
-                    break;
-                case DONE:
-                    for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
-                        HandleGameObject(*itr, true);
-                    break;
-                }
-                break;
-            }
-            case DATA_SPOILS_OF_PANDARIA:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    //Remove Combat
-                    for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
-                        if (Creature* npclever = instance->GetCreature(*itr))
-                            npclever->AI()->EnterEvadeMode();
-                    //Clear Frames
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Reset Spoils
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Reset All levers
-                    for (std::vector<ObjectGuid>::const_iterator itr = leverGuids.begin(); itr != leverGuids.end(); itr++)
+                    switch (state)
                     {
-                        if (GameObject* lever = instance->GetGameObject(*itr))
+                        case NOT_STARTED:
+                            for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
+                                HandleGameObject(*guid, true);
+                            break;
+                        case IN_PROGRESS:
+                            for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
+                                HandleGameObject(*guid, false);
+                            break;
+                        case DONE:
+                            for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
+                                HandleGameObject(*guid, true);
+                            if (Creature* norush = instance->GetCreature(GetGuidData(NPC_NORUSHEN)))
+                                norush->DespawnOrUnsummon();
+                            if (Creature* bq = instance->GetCreature(LorewalkerChoGUIDtmp))
+                                bq->DespawnOrUnsummon();
+                            break;
+                        default: break;
+                    }
+                    break;
+                }
+                case DATA_SHA_OF_PRIDE:
+                    if (state == DONE)
+                    {
+                        if (!instance->IsLfr())
+                            if (GameObject* pChest = instance->GetGameObject(chestShaVaultOfForbiddenTreasures))
+                                pChest->SetRespawnTime(pChest->GetRespawnDelay());
+                        if (GetData(DATA_GALAKRAS_PRE_EVENT) != IN_PROGRESS)
                         {
-                            lever->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                            lever->SetGoState(GO_STATE_READY);
-                            lever->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
+                            if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                                Galakras->AI()->DoAction(ACTION_PRE_EVENT);
+                            SetData(DATA_GALAKRAS_PRE_EVENT, IN_PROGRESS);
                         }
                     }
-                    //Close All Room's Gates
-                    for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
-                        HandleGameObject(*itr, false);
-                    //Close All Room's Doors
-                    for (std::vector<ObjectGuid>::const_iterator itr = irondoorGuids.begin(); itr != irondoorGuids.end(); itr++)
-                        HandleGameObject(*itr, false);
-                    //Reset All Boxes
-                    for (std::vector<ObjectGuid>::const_iterator itr = sopboxGuids.begin(); itr != sopboxGuids.end(); itr++)
+                    break;
+                case DATA_GALAKRAS:
+                {
+                    switch (state)
                     {
-                        if (GameObject* box = instance->GetGameObject(*itr))
-                        {
-                            box->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                            box->SetGoState(GO_STATE_READY);
-                            box->SetLootState(GO_READY);
-                            box->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
-                        }
+                        case NOT_STARTED:
+                            SetData(DATA_SOUTH_TOWER, NOT_STARTED);
+                            SetData(DATA_NORTH_TOWER, NOT_STARTED);
+                            SetData(DATA_DISABLE_ROPES, 0);
+                            STowerFull = false;
+                            STowerNull = false;
+                            NTowerFull = false;
+                            NTowerNull = false;
+                            if (GameObject* SouthDoor = instance->GetGameObject(GetGuidData(GO_SOUTH_DOOR)))
+                                SouthDoor->SetGoState(GO_STATE_READY);
+                            if (GameObject* NorthDoor = instance->GetGameObject(GetGuidData(GO_NORTH_DOOR)))
+                                NorthDoor->SetGoState(GO_STATE_READY);
+                            if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            {
+                                Galakras->AI()->Reset();
+                                Galakras->AI()->EnterEvadeMode();
+                            }
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* JainaOrSylvana = instance->GetCreature(JainaOrSylvanaGUID))
+                                JainaOrSylvana->AI()->DoAction(ACTION_FRIENDLY_BOSS);
+                            if (Creature* VereesOrAethas = instance->GetCreature(VereesaOrAethasGUID))
+                                VereesOrAethas->AI()->DoAction(ACTION_FRIENDLY_BOSS);
+                            break;
+                        default: break;
                     }
-                    HandleGameObject(spentdoorGuid, true);
-                    //Remove all buffs
-                    DoRemoveAurasDueToSpellOnPlayers(146068);
-                    DoRemoveAurasDueToSpellOnPlayers(146099);
-                    DoRemoveAurasDueToSpellOnPlayers(146141);
                     break;
-                case IN_PROGRESS:
-                    if (Creature* ssops = instance->GetCreature(npcssopsGuid))
-                        ssops->AI()->DoAction(ACTION_SSOPS_IN_PROGRESS);
-                    for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
-                        if (Creature* npclever = instance->GetCreature(*itr))
-                            npclever->AI()->DoZoneInCombat(npclever, 100.0f);
-                    HandleGameObject(spentdoorGuid, false);
+                }
+                case DATA_IRON_JUGGERNAUT:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            if (Creature* ij = instance->GetCreature(ironjuggGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, ij);
+                            HandleGameObject(winddoorGuid, true);
+                            break;
+                        case DONE:
+                            if (Creature* ij = instance->GetCreature(ironjuggGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, ij);
+                            HandleGameObject(winddoorGuid, true);
+                            HandleGameObject(orgrimmargateGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* ij = instance->GetCreature(ironjuggGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, ij);
+                            HandleGameObject(winddoorGuid, false);
+                            break;
+                        default: break;
+                    }
                     break;
-                case DONE:
-                    //Clear Frames
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Reset Spoils
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Remove Combat
-                    for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
-                        if (Creature* npclever = instance->GetCreature(*itr))
-                            npclever->AI()->EnterEvadeMode();
-                    //Open Room's Doors
-                    for (std::vector<ObjectGuid>::const_iterator itr = roomdoorGuids.begin(); itr != roomdoorGuids.end(); itr++)
-                        HandleGameObject(*itr, true);
+                }
+                case DATA_KORKRON_D_SHAMAN:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
+                                if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
+                                    SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, shaman);
+                            HandleGameObject(orgrimmargate2Guid, true);
+                            break;
+                        case DONE:
+                            for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
+                                if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
+                                    SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, shaman);
+                            HandleGameObject(orgrimmargate2Guid, true);
+                            HandleGameObject(rustybarsGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            for (uint32 n = NPC_WAVEBINDER_KARDRIS; n <= NPC_EARTHBREAKER_HAROMM; n++)
+                                if (Creature* shaman = instance->GetCreature(GetGuidData(n)))
+                                    SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, shaman);
+                            HandleGameObject(orgrimmargate2Guid, false);
+                            break;
+                        default: break;
+                    }
+                    break;
+                }
+                case DATA_GENERAL_NAZGRIM:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, nazgrim);
+                            HandleGameObject(nazgrimdoorGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, nazgrim);
+                            HandleGameObject(nazgrimdoorGuid, false);
+                            break;
+                        case DONE:
+                            if (Creature* nazgrim = instance->GetCreature(gnazgrimGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, nazgrim);
+                            HandleGameObject(nazgrimdoorGuid, true);
+                            HandleGameObject(nazgrimexdoorGuid, true);
+                            break;
+                        default: break;
+                    }
+                    break;
+                }
+                case DATA_MALKOROK:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
+                                HandleGameObject(*itr, true);
+                            break;
+                        case IN_PROGRESS:
+                            for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
+                                HandleGameObject(*itr, false);
+                            break;
+                        case DONE:
+                            for (std::vector<ObjectGuid>::const_iterator itr = malkorokfenchGuids.begin(); itr != malkorokfenchGuids.end(); itr++)
+                                HandleGameObject(*itr, true);
+                            break;
+                        default: break;
+                    }
+                    break;
+                }
+                case DATA_SPOILS_OF_PANDARIA:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            //Remove Combat
+                            for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
+                                if (Creature* npclever = instance->GetCreature(*itr))
+                                    npclever->AI()->EnterEvadeMode();
+                            //Clear Frames
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Reset Spoils
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Reset All levers
+                            for (std::vector<ObjectGuid>::const_iterator itr = leverGuids.begin(); itr != leverGuids.end(); itr++)
+                            {
+                                if (GameObject* lever = instance->GetGameObject(*itr))
+                                {
+                                    lever->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                                    lever->SetGoState(GO_STATE_READY);
+                                    lever->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
+                                }
+                            }
+                            //Close All Room's Gates
+                            for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
+                                HandleGameObject(*itr, false);
+                            //Close All Room's Doors
+                            for (std::vector<ObjectGuid>::const_iterator itr = irondoorGuids.begin(); itr != irondoorGuids.end(); itr++)
+                                HandleGameObject(*itr, false);
+                            //Reset All Boxes
+                            for (std::vector<ObjectGuid>::const_iterator itr = sopboxGuids.begin(); itr != sopboxGuids.end(); itr++)
+                            {
+                                if (GameObject* box = instance->GetGameObject(*itr))
+                                {
+                                    box->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                                    box->SetGoState(GO_STATE_READY);
+                                    box->SetLootState(GO_READY);
+                                    box->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
+                                }
+                            }
+                            HandleGameObject(spentdoorGuid, true);
+                            //Remove all buffs
+                            DoRemoveAurasDueToSpellOnPlayers(146068);
+                            DoRemoveAurasDueToSpellOnPlayers(146099);
+                            DoRemoveAurasDueToSpellOnPlayers(146141);
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* ssops = instance->GetCreature(npcssopsGuid))
+                                ssops->AI()->DoAction(ACTION_SSOPS_IN_PROGRESS);
+                            for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
+                                if (Creature* npclever = instance->GetCreature(*itr))
+                                    npclever->AI()->DoZoneInCombat(npclever, 100.0f);
+                            HandleGameObject(spentdoorGuid, false);
+                            break;
+                        case DONE:
+                            //Clear Frames
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Reset Spoils
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Remove Combat
+                            for (std::vector<ObjectGuid>::const_iterator itr = npcleverlistGuids.begin(); itr != npcleverlistGuids.end(); itr++)
+                                if (Creature* npclever = instance->GetCreature(*itr))
+                                    npclever->AI()->EnterEvadeMode();
+                            //Open Room's Doors
+                            for (std::vector<ObjectGuid>::const_iterator itr = roomdoorGuids.begin(); itr != roomdoorGuids.end(); itr++)
+                                HandleGameObject(*itr, true);
                     
-                    if (Creature* ssops = instance->GetCreature(npcssopsGuid))
-                        ssops->AI()->DoAction(ACTION_SSOPS_DONE);
+                            if (Creature* ssops = instance->GetCreature(npcssopsGuid))
+                                ssops->AI()->DoAction(ACTION_SSOPS_DONE);
 
-                    if (GameObject* _ssops = instance->GetGameObject(gossopsGuid))
-                        _ssops->Delete();
+                            if (GameObject* _ssops = instance->GetGameObject(gossopsGuid))
+                                _ssops->Delete();
 
-                    //Open All Gates (for safe)
-                    for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
-                        HandleGameObject(*itr, true);
+                            //Open All Gates (for safe)
+                            for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
+                                HandleGameObject(*itr, true);
 
-                    //Block interact with all boxes
-                    for (std::vector<ObjectGuid>::const_iterator itr = sopboxGuids.begin(); itr != sopboxGuids.end(); itr++)
-                        if (GameObject* box = instance->GetGameObject(*itr))
-                            box->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                            //Block interact with all boxes
+                            for (std::vector<ObjectGuid>::const_iterator itr = sopboxGuids.begin(); itr != sopboxGuids.end(); itr++)
+                                if (GameObject* box = instance->GetGameObject(*itr))
+                                    box->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
 
-                    DoRemoveAurasDueToSpellOnPlayers(SPELL_MOGU_RUNE_OF_POWER_AURA);
-                    HandleGameObject(spentdoorGuid, true);
-                    HandleGameObject(spexdoorGuid, true);
-                    //Remove all buffs
-                    DoRemoveAurasDueToSpellOnPlayers(146068);
-                    DoRemoveAurasDueToSpellOnPlayers(146099);
-                    DoRemoveAurasDueToSpellOnPlayers(146141);
+                            DoRemoveAurasDueToSpellOnPlayers(SPELL_MOGU_RUNE_OF_POWER_AURA);
+                            HandleGameObject(spentdoorGuid, true);
+                            HandleGameObject(spexdoorGuid, true);
+                            //Remove all buffs
+                            DoRemoveAurasDueToSpellOnPlayers(146068);
+                            DoRemoveAurasDueToSpellOnPlayers(146099);
+                            DoRemoveAurasDueToSpellOnPlayers(146141);
+                            break;
+                        case SPECIAL: //first room done, start second
+                            if (Creature* ssops = instance->GetCreature(npcssopsGuid))
+                                ssops->AI()->DoAction(ACTION_SSOPS_SECOND_ROOM);
+                            //Open Next Gates In Room
+                            for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
+                                if (GameObject* gate = instance->GetGameObject(*itr))
+                                    if (gate->GetEntry() == GO_ROOM_GATE || gate->GetEntry() == GO_ROOM_GATE3)
+                                        gate->SetGoState(GO_STATE_ACTIVE);
+                            //Clear Frames
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Reset Spoils
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    spoil->AI()->DoAction(ACTION_RESET);
+                            //Send Next Frames
+                            for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
+                                if (Creature* spoil = instance->GetCreature(*itr))
+                                    if (spoil->GetEntry() == NPC_MOGU_SPOILS || spoil->GetEntry() == NPC_MANTIS_SPOILS)
+                                        spoil->AI()->DoAction(ACTION_IN_PROGRESS);
+                            break;
+                        default: break;
+                    }
                     break;
-                case SPECIAL: //first room done, start second
-                    if (Creature* ssops = instance->GetCreature(npcssopsGuid))
-                        ssops->AI()->DoAction(ACTION_SSOPS_SECOND_ROOM);
-                    //Open Next Gates In Room
-                    for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
-                        if (GameObject* gate = instance->GetGameObject(*itr))
-                            if (gate->GetEntry() == GO_ROOM_GATE || gate->GetEntry() == GO_ROOM_GATE3)
-                                gate->SetGoState(GO_STATE_ACTIVE);
-                    //Clear Frames
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Reset Spoils
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoils2Guids.begin(); itr != spoils2Guids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            spoil->AI()->DoAction(ACTION_RESET);
-                    //Send Next Frames
-                    for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
-                        if (Creature* spoil = instance->GetCreature(*itr))
-                            if (spoil->GetEntry() == NPC_MOGU_SPOILS || spoil->GetEntry() == NPC_MANTIS_SPOILS)
-                                spoil->AI()->DoAction(ACTION_IN_PROGRESS);
+                }
+                case DATA_KLAXXI:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            RemoveDebuffFromPlayers();
+                            klaxxidiecount = 0;
+                            for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
+                                HandleGameObject(*itr, true);
+                            if (Creature* kc = instance->GetCreature(klaxxicontrollerGuid))
+                                kc->AI()->Reset();
+                            break;
+                        case IN_PROGRESS:
+                            for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
+                                HandleGameObject(*itr, false);
+                            break;
+                        case DONE:
+                            RemoveDebuffFromPlayers();
+                            if (Creature* kc = instance->GetCreature(klaxxicontrollerGuid))
+                                kc->AI()->DoAction(ACTION_KLAXXI_DONE);
+
+                            for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
+                            {
+                                if (Creature* klaxxi = instance->GetCreature(*itr))
+                                {
+                                    SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, klaxxi);
+                                    klaxxi->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
+                                }
+                            }
+
+                            for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
+                                HandleGameObject(*itr, true);
+                            break;
+                        default: break;
+                    }
                     break;
+                }
+                case DATA_THOK:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            for (std::vector<ObjectGuid>::const_iterator Itr = prisonerGuids.begin(); Itr != prisonerGuids.end(); Itr++)
+                            {
+                                if (Creature* p = instance->GetCreature(*Itr))
+                                {
+                                    if (!p->isAlive())
+                                        p->Respawn();
+                                    p->AI()->DoAction(ACTION_RESET);
+                                    p->NearTeleportTo(p->GetHomePosition().GetPositionX(), p->GetHomePosition().GetPositionY(), p->GetHomePosition().GetPositionZ(), p->GetHomePosition().GetOrientation());
+                                }
+                            }
+                            for (std::vector<ObjectGuid>::const_iterator itr = jaillistGuids.begin(); itr != jaillistGuids.end(); itr++)
+                            {
+                                if (GameObject* jail = instance->GetGameObject(*itr))
+                                {
+                                    jail->SetGoState(GO_STATE_READY);
+                                    jail->SetLootState(GO_READY);
+                                    jail->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
+                                }
+                            }
+                            if (Creature* thok = instance->GetCreature(thokGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, thok);
+                            HandleGameObject(thokentdoorGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* thok = instance->GetCreature(thokGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, thok);
+                            HandleGameObject(thokentdoorGuid, false);
+                            break;
+                        case DONE:
+                            if (Creature* thok = instance->GetCreature(thokGuid))
+                                SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, thok);
+                            HandleGameObject(thokentdoorGuid, true);
+                            break;
+                        default: break;
+                    }
+                    break;
+                }
+                case DATA_BLACKFUSE:
+                {
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            weaponsdone = 0;
+                            lastsuperheatweapon = 0;
+                            HandleGameObject(blackfuseentdoorGuid, true);
+                            break;
+                        case IN_PROGRESS:
+                            crawlerminenum = instance->Is25ManRaid() ? 7 : 3;
+                            HandleGameObject(blackfuseentdoorGuid, false);
+                            break;
+                        case DONE:
+                            HandleGameObject(blackfuseentdoorGuid, true);
+                            break;
+                        default: break;
+                    }
                 }
                 break;
-            }
-            case DATA_KLAXXI:
-            {
-                switch (state)
+                case DATA_GARROSH:
                 {
-                case NOT_STARTED:
-                    RemoveDebuffFromPlayers();
-                    klaxxidiecount = 0;
-                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
-                        HandleGameObject(*itr, true);
-                    if (Creature* kc = instance->GetCreature(klaxxicontrollerGuid))
-                        kc->AI()->Reset();
-                    break;
-                case IN_PROGRESS:
-                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
-                        HandleGameObject(*itr, false);
-                    break;
-                case DONE:
-                    RemoveDebuffFromPlayers();
-                    if (Creature* kc = instance->GetCreature(klaxxicontrollerGuid))
-                        kc->AI()->DoAction(ACTION_KLAXXI_DONE);
-
-                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
+                    switch (state)
                     {
-                        if (Creature* klaxxi = instance->GetCreature(*itr))
-                        {
-                            SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, klaxxi);
-                            klaxxi->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
-                        }
+                        case NOT_STARTED:
+                            garroshsoldiersGuids.clear();
+                            for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
+                                HandleGameObject(*itr, true);
+                            HandleGameObject(garroshentdoorGuid, true);
+                            SomeActionsAfterGarroshEvade();
+                            if (instance->IsHeroic())
+                                if (Creature* kgs = instance->GetCreature(korkrongunshipGuid))
+                                    kgs->AI()->DoAction(ACTION_RESET);
+                            break;
+                        case IN_PROGRESS:
+                            rycount = urand(0, 2);
+                            for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
+                                HandleGameObject(*itr, false);
+                            HandleGameObject(garroshentdoorGuid, false);
+                            break;
+                        case DONE:
+                            garroshsoldiersGuids.clear();
+                            for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
+                                HandleGameObject(*itr, true);
+                            HandleGameObject(garroshentdoorGuid, true);
+                            if (instance->IsHeroic())
+                                if (Creature* kgs = instance->GetCreature(korkrongunshipGuid))
+                                    kgs->AI()->DoAction(ACTION_RESET);
+                            break;
+                        default: break;
                     }
-
-                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxiarenagateGuid.begin(); itr != klaxxiarenagateGuid.end(); itr++)
-                        HandleGameObject(*itr, true);
-                    break;
                 }
                 break;
-            }
-            case DATA_THOK:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    for (std::vector<ObjectGuid>::const_iterator Itr = prisonerGuids.begin(); Itr != prisonerGuids.end(); Itr++)
-                    {
-                        if (Creature* p = instance->GetCreature(*Itr))
-                        {
-                            if (!p->isAlive())
-                                p->Respawn();
-                            p->AI()->DoAction(ACTION_RESET);
-                            p->NearTeleportTo(p->GetHomePosition().GetPositionX(), p->GetHomePosition().GetPositionY(), p->GetHomePosition().GetPositionZ(), p->GetHomePosition().GetOrientation());
-                        }
-                    }
-                    for (std::vector<ObjectGuid>::const_iterator itr = jaillistGuids.begin(); itr != jaillistGuids.end(); itr++)
-                    {
-                        if (GameObject* jail = instance->GetGameObject(*itr))
-                        {
-                            jail->SetGoState(GO_STATE_READY);
-                            jail->SetLootState(GO_READY);
-                            jail->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_IN_USE);
-                        }
-                    }
-                    if (Creature* thok = instance->GetCreature(thokGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, thok);
-                    HandleGameObject(thokentdoorGuid, true);
-                    break;
-                case IN_PROGRESS:
-                    if (Creature* thok = instance->GetCreature(thokGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, thok);
-                    HandleGameObject(thokentdoorGuid, false);
-                    break;
-                case DONE:
-                    if (Creature* thok = instance->GetCreature(thokGuid))
-                        SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, thok);
-                    HandleGameObject(thokentdoorGuid, true);
-                    break;
-                }
-                break;
-            }
-            case DATA_BLACKFUSE:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    weaponsdone = 0;
-                    lastsuperheatweapon = 0;
-                    HandleGameObject(blackfuseentdoorGuid, true);
-                    break;
-                case IN_PROGRESS:
-                    crawlerminenum = instance->Is25ManRaid() ? 7 : 3;
-                    HandleGameObject(blackfuseentdoorGuid, false);
-                    break;
-                case DONE:
-                    HandleGameObject(blackfuseentdoorGuid, true);
-                    break;
-                }
-            }
-            break;
-            case DATA_GARROSH:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    garroshsoldiersGuids.clear();
-                    for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
-                        HandleGameObject(*itr, true);
-                    HandleGameObject(garroshentdoorGuid, true);
-                    SomeActionsAfterGarroshEvade();
-                    if (instance->IsHeroic())
-                        if (Creature* kgs = instance->GetCreature(korkrongunshipGuid))
-                            kgs->AI()->DoAction(ACTION_RESET);
-                    break;
-                case IN_PROGRESS:
-                    rycount = urand(0, 2);
-                    for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
-                        HandleGameObject(*itr, false);
-                    HandleGameObject(garroshentdoorGuid, false);
-                    break;
-                case DONE:
-                    garroshsoldiersGuids.clear();
-                    for (std::vector<ObjectGuid>::const_iterator itr = garroshfenchGuids.begin(); itr != garroshfenchGuids.end(); ++itr)
-                        HandleGameObject(*itr, true);
-                    HandleGameObject(garroshentdoorGuid, true);
-                    if (instance->IsHeroic())
-                        if (Creature* kgs = instance->GetCreature(korkrongunshipGuid))
-                            kgs->AI()->DoAction(ACTION_RESET);
-                    break;
-                }
-            }
-            break;
             }
 
             if (state == DONE)
@@ -1400,542 +1409,546 @@ public:
             return true;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
-            case DATA_FIELD_OF_SHA:
-                ++EventfieldOfSha;
-                if (EventfieldOfSha >= 3)
-                {
-                    HandleGameObject(GetGuidData(GO_SHA_ENERGY_WALL), true);
-                    SaveToDB();
-                }
-                break;
-            case DATA_SHA_PRE_EVENT:
-                for (std::set<ObjectGuid>::iterator itr = shaSlgGUID.begin(); itr != shaSlgGUID.end(); ++itr)
-                    if (Creature* slg = instance->GetCreature(*itr))
-                        if (data == IN_PROGRESS)
-                            slg->AddAura(SPELL_SHA_VORTEX, slg);
-                        else
-                            slg->RemoveAura(SPELL_SHA_VORTEX);
-                break;
-            case DATA_SHA_OF_PRIDE:
-                if (data == DONE)
-                    for (std::vector<ObjectGuid>::iterator itr = PortalOrgrimmarGUID.begin(); itr != PortalOrgrimmarGUID.end(); ++itr)
-                        if (Creature* c = instance->GetCreature(*itr))
-                            c->SetVisible(true);
-                break;
-            case DATA_GALAKRAS_PRE_EVENT:
-            {
-                switch (data)
-                {
-                case IN_PROGRESS:
-                    ShowCannon = data;
-                    DoUpdateWorldState(WS_SHOW_KORKRON_CANNON, ShowCannon);
-                    break;
-                case DONE:
-                    ShowCannon = data;
-                    DoUpdateWorldState(WS_SHOW_KORKRON_CANNON, 0);
-                    DoUpdateWorldState(WS_KORKRON_CANNON_COUNT, 0);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                        Galakras->AI()->DoAction(ACTION_PRE_EVENT_FINISH);
-                    break;
-                }
-                break;
-            }
-            case DATA_GALAKRAS_PRE_EVENT_COUNT:
-            {
-                CannonCount = data;
-                DoUpdateWorldState(WS_KORKRON_CANNON_COUNT, CannonCount);
-
-                if (CannonCount > 7)
-                    CannonCount = 7;
-
-                if (CannonCount == 0)
-                    SetData(DATA_GALAKRAS_PRE_EVENT, DONE);
-                break;
-            }
-            case DATA_GALAKRAS:
-            {
-                if (data == DONE)
-                {
-                    if (TeamInInstance == HORDE)
-                        Events.RescheduleEvent(EVENT_FINISH_1_H, 3000);
-                    else
-                        Events.RescheduleEvent(EVENT_FINISH_1_A, 3000);
-                }
-                break;
-            }
-            case DATA_SOUTH_TOWER:
-            {
-                switch (data)
-                {
-                case IN_PROGRESS:
-                    ShowSouthTower = data;
-                    DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 1);
-                    if (instance->IsHeroic())
-                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                            Galakras->AI()->DoAction(ACTION_GRUNT_SOUTH);
-                    break;
-                case NOT_STARTED:
-                    ShowSouthTower = data;
-                    DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 0);
-                    DoUpdateWorldState(WS_SHOW_CAPTURE_SOUTH_TOWER, 0);
-                    DoUpdateWorldState(WS_SOUTH_TOWER, SouthTowerCount = 0);
-                    break;
-                case SPECIAL:
-                    ShowSouthTower = data;
-                    DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 0);
-                    DoUpdateWorldState(WS_SHOW_CAPTURE_SOUTH_TOWER, 1);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                        Galakras->AI()->DoAction(ACTION_GRUNT_SOUTH_FINISH);
-                    break;
-                }
-                break;
-            }
-            case DATA_NORTH_TOWER:
-            {
-                switch (data)
-                {
-                case IN_PROGRESS:
-                    ShowNorthTower = data;
-                    DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 1);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                        Galakras->AI()->DoAction(ACTION_GRUNT_NORTH);
-                    break;
-                case NOT_STARTED:
-                    ShowNorthTower = data;
-                    DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 0);
-                    DoUpdateWorldState(WS_SHOW_CAPTURE_NORTH_TOWER, 0);
-                    DoUpdateWorldState(WS_NORTH_TOWER, NorthTowerCount = 0);
-                    break;
-                case SPECIAL:
-                    ShowNorthTower = data;
-                    DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 0);
-                    DoUpdateWorldState(WS_SHOW_CAPTURE_NORTH_TOWER, 1);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                        Galakras->AI()->DoAction(ACTION_GRUNT_NORTH_FINISH);
-                    break;
-                }
-                break;
-            }
-            case DATA_SOUTH_COUNT:
-            {
-                SouthTowerCount = data;
-                if (SouthTowerCount < 0)
-                    SouthTowerCount = 0;
-                DoUpdateWorldState(WS_SOUTH_TOWER, SouthTowerCount);
-                DoUpdateWorldState(WS_CAPTURE_SOUTH_TOWER, SouthTowerCount);
-
-                if (SouthTowerCount >= 100 && !STowerFull)
-                {
-                    STowerFull = true;
-                    if (GameObject* SouthDoor = instance->GetGameObject(GetGuidData(GO_SOUTH_DOOR)))
-                        SouthDoor->SetGoState(GO_STATE_ACTIVE);
-                    if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
-                        Galakras->AI()->DoAction(ACTION_DEMOLITIONS_NORTH);
-                    if (Creature* STower = instance->GetCreature(GetGuidData(NPC_TOWER_SOUTH)))
-                        STower->AI()->DoAction(ACTION_TOWER_GUARDS);
-                    if (Creature* sDemo = instance->GetCreature(sExpertGUID))
-                        sDemo->AI()->DoAction(ACTION_DEMOLITIONS_COMPLETE);
-                    SetData(DATA_SOUTH_TOWER, SPECIAL);
-                    SetData(DATA_NORTH_TOWER, IN_PROGRESS);
-                }
-                if (SouthTowerCount == 0 && !STowerNull)
-                {
-                    STowerNull = true;
-                    SetData(DATA_SOUTH_TOWER, NOT_STARTED);
-                    if (Creature* STower = instance->GetCreature(GetGuidData(NPC_TOWER_SOUTH)))
-                        STower->AI()->DoAction(ACTION_TOWER_TURRET);
-                }
-                break;
-            }
-            case DATA_NORTH_COUNT:
-            {
-                NorthTowerCount = data;
-                if (NorthTowerCount < 0)
-                    NorthTowerCount = 0;
-                DoUpdateWorldState(WS_NORTH_TOWER, NorthTowerCount);
-                DoUpdateWorldState(WS_CAPTURE_NORTH_TOWER, NorthTowerCount);
-
-                if (NorthTowerCount >= 100 && !NTowerFull)
-                {
-                    NTowerFull = true;
-                    if (GameObject* NorthDoor = instance->GetGameObject(GetGuidData(GO_NORTH_DOOR)))
-                        NorthDoor->SetGoState(GO_STATE_ACTIVE);
-                    if (Creature* NTower = instance->GetCreature(GetGuidData(NPC_TOWER_NORTH)))
-                        NTower->AI()->DoAction(ACTION_TOWER_GUARDS);
-                    if (Creature* nDemo = instance->GetCreature(nExpertGUID))
-                        nDemo->AI()->DoAction(ACTION_DEMOLITIONS_COMPLETE);
-                    SetData(DATA_NORTH_TOWER, SPECIAL);
-                }
-                if (NorthTowerCount == 0 && !NTowerNull)
-                {
-                    NTowerNull = true;
-                    SetData(DATA_NORTH_TOWER, NOT_STARTED);
-                    if (Creature* NTower = instance->GetCreature(GetGuidData(NPC_TOWER_NORTH)))
-                        NTower->AI()->DoAction(ACTION_TOWER_TURRET);
-                }
-                break;
-            }
-            case DATA_ACTIVE_NORTH_ROPE:
-                if (GameObject* nrs = instance->GetGameObject(northropeskeinGuid))
-                    nrs->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                if (GameObject* nr = instance->GetGameObject(northropeGuid))
-                    nr->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                break;
-            case DATA_ACTIVE_SOUTH_ROPE:
-                if (GameObject* srs = instance->GetGameObject(southropeskeinGuid))
-                    srs->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                if (GameObject* sr = instance->GetGameObject(southropeGuid))
-                    sr->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                break;
-            case DATA_DISABLE_ROPES:
-                if (GameObject* nrs = instance->GetGameObject(northropeskeinGuid))
-                    nrs->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                if (GameObject* nr = instance->GetGameObject(northropeGuid))
-                    nr->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                if (GameObject* srs = instance->GetGameObject(southropeskeinGuid))
-                    srs->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                if (GameObject* sr = instance->GetGameObject(southropeGuid))
-                    sr->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                break;
-            case DATA_SOP_START:
-                //Open Gates In Room
-                for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
-                    if (GameObject* gate = instance->GetGameObject(*itr))
-                        if (gate->GetEntry() == GO_ROOM_GATE2 || gate->GetEntry() == GO_ROOM_GATE4)
-                            gate->SetGoState(GO_STATE_ACTIVE);
-                //Send Frames
-                for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
-                    if (Creature* spoil = instance->GetCreature(*itr))
-                        if (spoil->GetEntry() == NPC_MOGU_SPOILS2 || spoil->GetEntry() == NPC_MANTIS_SPOILS2)
-                            spoil->AI()->DoAction(ACTION_IN_PROGRESS);
-                break;
-            case DATA_KLAXXI_START:
-                for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
-                {
-                    if (Creature* klaxxi = instance->GetCreature(*itr))
+                case DATA_FIELD_OF_SHA:
+                    ++EventfieldOfSha;
+                    if (EventfieldOfSha >= 3)
                     {
-                        klaxxi->CastSpell(klaxxi, 146983, true); //Aura Enrage
-                        if (klaxxi->HasAura(143542))
-                            klaxxi->AI()->DoAction(ACTION_KLAXXI_IN_PROGRESS);
+                        HandleGameObject(GetGuidData(GO_SHA_ENERGY_WALL), true);
+                        SaveToDB();
                     }
-                }
-                break;
-            case DATA_BUFF_NEXT_KLAXXI:
-                if (klaxxidiecount < 6)
-                    if (Creature* klaxxi = instance->GetCreature(GetGuidData(bonusklaxxientry[klaxxidiecount])))
-                        klaxxi->CastSpell(klaxxi, 143542, true); //Ready to Fight 
-                break;
-            case DATA_INTRO_NEXT_KLAXXI:
-                if (klaxxidiecount < 6)
-                    if (Creature* klaxxi = instance->GetCreature(GetGuidData(bonusklaxxientry[klaxxidiecount])))
-                        klaxxi->AI()->DoAction(ACTION_KLAXXI_IN_PROGRESS);
-                klaxxidiecount++;
-                for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
-                    if (Creature* klaxxi = instance->GetCreature(*itr))
-                        if (klaxxi->isAlive() && klaxxi->isInCombat())
-                            klaxxi->CastSpell(klaxxi, 143483, true); //Paragons Purpose Heal
-                break;
-            case DATA_CLEAR_KLAXXI_LIST:
-                klaxxilist.clear();
-                break;
-            case DATA_SAFE_WEAPONS:
-                if (!dweaponGuids.empty())
-                {
-                    uint32 entry = 0;
-                    for (std::vector<ObjectGuid>::const_iterator itr = dweaponGuids.begin(); itr != dweaponGuids.end(); itr++)
+                    break;
+                case DATA_SHA_PRE_EVENT:
+                    for (std::set<ObjectGuid>::iterator itr = shaSlgGUID.begin(); itr != shaSlgGUID.end(); ++itr)
                     {
-                        if (Creature* dw = instance->GetCreature(*itr))
+                        if (Creature* slg = instance->GetCreature(*itr))
                         {
-                            if (dw->isAlive())
-                            {
-                                dw->AddAura(SPELL_ELECTROMAGNETIC_BARRIER, dw);
-                                dw->AddAura(SPELL_ELECTROMAGNETIC_BARRIER_V, dw);
-                                switch (dw->GetEntry())
-                                {
-                                case NPC_DISASSEMBLED_CRAWLER_MINE:
-                                    entry = NPC_BLACKFUSE_CRAWLER_MINE;
-                                    break;
-                                case NPC_DEACTIVATED_LASER_TURRET:
-                                    entry = NPC_ACTIVATED_LASER_TURRET;
-                                    break;
-                                case NPC_DEACTIVATED_ELECTROMAGNET:
-                                    entry = NPC_ACTIVATED_ELECTROMAGNET;
-                                    break;
-                                case NPC_DEACTIVATED_MISSILE_TURRET:
-                                    entry = NPC_ACTIVATED_MISSILE_TURRET;
-                                    break;
-                                }
-                                aweaponentry.push_back(entry);
-                                entry = 0;
-                            }
-                        }
-                    }
-
-                    if (instance->IsHeroic()) //superheat mechanic
-                    {
-                        if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
-                        {
-                            uint8 numwave = blackfuse->AI()->GetData(DATA_GET_WEAPON_WAVE_INDEX);
-                            if (!numwave && lastsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE)
-                            {
-                                bool find = false;
-                                for (std::vector<uint32>::const_iterator itr = aweaponentry.begin(); itr != aweaponentry.end(); itr++)
-                                {
-                                    if (*itr == NPC_ACTIVATED_LASER_TURRET)
-                                    {
-                                        find = true;
-                                        newsuperheatweapon = NPC_ACTIVATED_LASER_TURRET;
-                                        break;
-                                    }
-                                }
-                                if (!find)
-                                    newsuperheatweapon = NPC_BLACKFUSE_CRAWLER_MINE;
-                            }
+                            if (data == IN_PROGRESS)
+                                slg->AddAura(SPELL_SHA_VORTEX, slg);
                             else
-                            {
-                                uint8 num = 4;
-                                for (uint8 n = 0; n < 4; n++)
-                                    for (std::vector<uint32>::const_iterator itr = aweaponentry.begin(); itr != aweaponentry.end(); itr++)
-                                        if (weaponpriority[n] == (*itr) && (*itr) != lastsuperheatweapon)
-                                            if (n < num)
-                                                num = n;
-                                newsuperheatweapon = weaponpriority[num];
-                            }
+                                slg->RemoveAura(SPELL_SHA_VORTEX);
                         }
                     }
-
-                    if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
-                        blackfuse->CastSpell(blackfuse, SPELL_PROTECTIVE_FRENZY, true);
-                }
-                break;
-            case DATA_D_WEAPON_IN_DEST_POINT:
-                weaponsdone++;
-                if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
-                {
-                    if (weaponsdone == 2 && !aweaponentry.empty())
-                    {
-                        weaponsdone = 0;
-                        bool superheatmine = false;
-                        for (uint8 n = 0; n < 2; n++)
-                        {
-                            if (aweaponentry[n] == NPC_BLACKFUSE_CRAWLER_MINE)
-                            {
-                                for (uint8 b = crawlerminenum; b > 0; b--)
-                                {
-                                    if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n].GetPositionX() + float(b + 2), spawnaweaponpos[n].GetPositionY() + float(b + 2), spawnaweaponpos[n].GetPositionZ(), 0.0f))
-                                    {
-                                        aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                        aw->GetMotionMaster()->MoveCharge(destapos[n].GetPositionX() + float(b + 2), destapos[n].GetPositionY() + float(b + 2), destapos[n].GetPositionZ(), 10.0f, 1, false);
-                                    }
-                                }
-                                if (newsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE && !superheatmine)
-                                {
-                                    superheatmine = true;
-                                    for (uint8 m = 0; m < 2; m++)
-                                    {
-                                        if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n].GetPositionX() + float(m + 8), spawnaweaponpos[n].GetPositionY() + float(m + 8), spawnaweaponpos[n].GetPositionZ(), 0.0f))
-                                        {
-                                            aw->CastSpell(aw, SPELL_SUPERHEATED_CRAWLER_MINE, true);
-                                            aw->SetFloatValue(OBJECT_FIELD_SCALE, 2.0f);
-                                            aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                            aw->GetMotionMaster()->MoveCharge(destapos[m].GetPositionX() + float(m + 8), destapos[m].GetPositionY() + float(m + 8), destapos[m].GetPositionZ(), 10.0f, 1, false);
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n]))
-                                {
-                                    if (aw->GetEntry() == newsuperheatweapon)
-                                        aw->AI()->SetData(DATA_ACTIVE_SUPERHEAT, 0);
-                                    aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                    aw->GetMotionMaster()->MoveCharge(destapos[n].GetPositionX(), destapos[n].GetPositionY(), destapos[n].GetPositionZ(), 10.0f, 1, false);
-                                    if (aw->GetEntry() == NPC_ACTIVATED_LASER_TURRET)
-                                        laserturretGuid = aw->GetGUID();
-                                }
-                            }
-                        }
-                        lastsuperheatweapon = newsuperheatweapon;
-                        aweaponentry.clear();
-                        EjectPlayersFromConveyor();
-                    }
-                    else if (weaponsdone == 3 && aweaponentry.empty())
-                    {
-                        weaponsdone = 0;
-                        bool superheatmine = false;
-                        blackfuse->CastSpell(blackfuse, SPELL_ENERGIZED_DEFENSIVE_MATRIX, true);
-                        uint8 num = blackfuse->AI()->GetData(DATA_GET_WEAPON_WAVE_INDEX);
-                        num = !num ? 5 : --num;
-
-                        if (instance->IsHeroic()) //superheat mechanic
-                        {
-                            uint8 _num = 4;
-                            for (uint8 n = 0; n < 4; n++)
-                                for (uint8 b = 1; b < 6; b++)
-                                    if (weaponpriority[n] == _wavearray[num][b] && _wavearray[num][b] != lastsuperheatweapon)
-                                        if (n < _num)
-                                            _num = n;
-                            newsuperheatweapon = weaponpriority[_num];
-                        }
-
-                        for (uint8 n = 1; n < 4; n++)
-                        {
-                            if (_wavearray[num][n] == NPC_BLACKFUSE_CRAWLER_MINE)
-                            {
-                                for (uint8 b = crawlerminenum; b > 0; b--)
-                                {
-                                    if (Creature* weapon = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n - 1].GetPositionX() + float(b + 2), spawnaweaponpos[n - 1].GetPositionY() + float(b + 2), spawnaweaponpos[n - 1].GetPositionZ(), 0.0f))
-                                    {
-                                        weapon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                        weapon->GetMotionMaster()->MoveCharge(destapos[n - 1].GetPositionX() + float(b + 2), destapos[n - 1].GetPositionY() + float(b + 2), destapos[n - 1].GetPositionZ(), 10.0f, 1, false);
-                                    }
-                                }
-                                if (newsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE && !superheatmine)
-                                {
-                                    superheatmine = true;
-                                    for (uint8 m = 0; m < 2; m++)
-                                    {
-                                        if (Creature* aw = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n].GetPositionX() + float(m + 8), spawnaweaponpos[n].GetPositionY() + float(m + 8), spawnaweaponpos[n].GetPositionZ(), 0.0f))
-                                        {
-                                            aw->CastSpell(aw, SPELL_SUPERHEATED_CRAWLER_MINE, true);
-                                            aw->SetFloatValue(OBJECT_FIELD_SCALE, 2.0f);
-                                            aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                            aw->GetMotionMaster()->MoveCharge(destapos[m].GetPositionX() + float(m + 8), destapos[m].GetPositionY() + float(m + 8), destapos[m].GetPositionZ(), 10.0f, 1, false);
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (Creature* weapon = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n - 1]))
-                                {
-                                    if (weapon->GetEntry() == newsuperheatweapon)
-                                        weapon->AI()->SetData(DATA_ACTIVE_SUPERHEAT, 0);
-                                    weapon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                                    weapon->GetMotionMaster()->MoveCharge(destapos[n - 1].GetPositionX(), destapos[n - 1].GetPositionY(), destapos[n - 1].GetPositionZ(), 10.0f, 1, false);
-                                    if (weapon->GetEntry() == NPC_ACTIVATED_LASER_TURRET)
-                                        laserturretGuid = weapon->GetGUID();
-                                }
-                            }
-                        }
-                        lastsuperheatweapon = newsuperheatweapon;
-                        EjectPlayersFromConveyor();
-                    }
-                }
-                break;
-            case DATA_CRAWLER_MINE_READY:
-                crawlerminenum--;
-                if (!crawlerminenum)
-                {
-                    for (uint8 m = 0; m < crawlermineGuids.size(); m++)
-                        if (Creature* cm = instance->GetCreature(crawlermineGuids[m]))
-                            cm->AI()->SetData(DATA_CRAWLER_MINE_ENTERCOMBAT, uint32(m));
-                    crawlermineGuids.clear();
-                    crawlerminenum = instance->Is25ManRaid() ? 7 : 3;
-                }
-                break;
-            case DATA_OPEN_SOLDIER_FENCH:
-                for (std::vector<ObjectGuid>::const_iterator itr = soldierfenchGuids.begin(); itr != soldierfenchGuids.end(); itr++)
-                    DoUseDoorOrButton(*itr);
-                break;
-            case DATA_UPDATE_GARROSH_REALM:
-                rycount = rycount == 2 ? 0 : ++rycount;
-                break;
-            case DATA_FIRST_ENGENEER_DIED:
-                if (data && !engeneerGuids.empty())
-                {
-                    for (std::vector<ObjectGuid>::const_iterator itr = engeneerGuids.begin(); itr != engeneerGuids.end(); itr++)
-                        if (Creature* eng = instance->GetCreature(*itr))
-                            if (eng->isAlive())
-                                eng->AI()->DoAction(ACTION_FIRST_ENGENEER_DIED);
-                }
-                engeneerGuids.clear();
-                break;
-            case DATA_ACTION_SOLDIER:
-                if (!garroshsoldiersGuids.empty())
+                    break;
+                case DATA_SHA_OF_PRIDE:
+                    if (data == DONE)
+                        for (std::vector<ObjectGuid>::iterator itr = PortalOrgrimmarGUID.begin(); itr != PortalOrgrimmarGUID.end(); ++itr)
+                            if (Creature* c = instance->GetCreature(*itr))
+                                c->SetVisible(true);
+                    break;
+                case DATA_GALAKRAS_PRE_EVENT:
                 {
                     switch (data)
                     {
-                    case 0:
-                        for (std::vector<ObjectGuid>::const_iterator itr = garroshsoldiersGuids.begin(); itr != garroshsoldiersGuids.end(); itr++)
-                            if (Creature* soldier = instance->GetCreature(*itr))
-                                if (soldier->isAlive())
-                                    soldier->SetReactState(REACT_AGGRESSIVE);
+                    case IN_PROGRESS:
+                        ShowCannon = data;
+                        DoUpdateWorldState(WS_SHOW_KORKRON_CANNON, ShowCannon);
                         break;
-                    case 1:
-                        for (std::vector<ObjectGuid>::const_iterator itr = garroshsoldiersGuids.begin(); itr != garroshsoldiersGuids.end(); itr++)
-                            if (Creature* soldier = instance->GetCreature(*itr))
-                                if (soldier->isAlive())
-                                    soldier->StopAttack();
+                    case DONE:
+                        ShowCannon = data;
+                        DoUpdateWorldState(WS_SHOW_KORKRON_CANNON, 0);
+                        DoUpdateWorldState(WS_KORKRON_CANNON_COUNT, 0);
+                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            Galakras->AI()->DoAction(ACTION_PRE_EVENT_FINISH);
                         break;
                     }
+                    break;
                 }
-                break;
-            case DATA_RESET_REALM_OF_YSHAARJ:
-                ResetRealmOfYshaarj(true);
-                break;
-            case DATA_PLAY_FINAL_MOVIE:
-            {
-                uint32 spell = GetData(DATA_TEAM_IN_INSTANCE) == HORDE ? SPELL_HORDE : SPELL_ALLIANCE;
-                uint32 _achievemententry = GetData(DATA_TEAM_IN_INSTANCE) == HORDE ? 8680 : 8679; //Liberator of Orgrimmar : Conqueror of Orgrimmar
-                Map::PlayerList const& PlayerList = instance->GetPlayers();
-                if (!PlayerList.isEmpty())
+                case DATA_GALAKRAS_PRE_EVENT_COUNT:
                 {
-                    for (Map::PlayerList::const_iterator Itr = PlayerList.begin(); Itr != PlayerList.end(); ++Itr)
+                    CannonCount = data;
+                    DoUpdateWorldState(WS_KORKRON_CANNON_COUNT, CannonCount);
+
+                    if (CannonCount > 7)
+                        CannonCount = 7;
+
+                    if (CannonCount == 0)
+                        SetData(DATA_GALAKRAS_PRE_EVENT, DONE);
+                    break;
+                }
+                case DATA_GALAKRAS:
+                {
+                    if (data == DONE)
                     {
-                        if (Player* player = Itr->getSource())
+                        if (TeamInInstance == HORDE)
+                            Events.RescheduleEvent(EVENT_FINISH_1_H, 3000);
+                        else
+                            Events.RescheduleEvent(EVENT_FINISH_1_A, 3000);
+                    }
+                    break;
+                }
+                case DATA_SOUTH_TOWER:
+                {
+                    switch (data)
+                    {
+                    case IN_PROGRESS:
+                        ShowSouthTower = data;
+                        DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 1);
+                        if (instance->IsHeroic())
+                            if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                                Galakras->AI()->DoAction(ACTION_GRUNT_SOUTH);
+                        break;
+                    case NOT_STARTED:
+                        ShowSouthTower = data;
+                        DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 0);
+                        DoUpdateWorldState(WS_SHOW_CAPTURE_SOUTH_TOWER, 0);
+                        DoUpdateWorldState(WS_SOUTH_TOWER, SouthTowerCount = 0);
+                        break;
+                    case SPECIAL:
+                        ShowSouthTower = data;
+                        DoUpdateWorldState(WS_SHOW_SOUTH_TOWER, 0);
+                        DoUpdateWorldState(WS_SHOW_CAPTURE_SOUTH_TOWER, 1);
+                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            Galakras->AI()->DoAction(ACTION_GRUNT_SOUTH_FINISH);
+                        break;
+                    }
+                    break;
+                }
+                case DATA_NORTH_TOWER:
+                {
+                    switch (data)
+                    {
+                    case IN_PROGRESS:
+                        ShowNorthTower = data;
+                        DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 1);
+                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            Galakras->AI()->DoAction(ACTION_GRUNT_NORTH);
+                        break;
+                    case NOT_STARTED:
+                        ShowNorthTower = data;
+                        DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 0);
+                        DoUpdateWorldState(WS_SHOW_CAPTURE_NORTH_TOWER, 0);
+                        DoUpdateWorldState(WS_NORTH_TOWER, NorthTowerCount = 0);
+                        break;
+                    case SPECIAL:
+                        ShowNorthTower = data;
+                        DoUpdateWorldState(WS_SHOW_NORTH_TOWER, 0);
+                        DoUpdateWorldState(WS_SHOW_CAPTURE_NORTH_TOWER, 1);
+                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            Galakras->AI()->DoAction(ACTION_GRUNT_NORTH_FINISH);
+                        break;
+                    }
+                    break;
+                }
+                case DATA_SOUTH_COUNT:
+                {
+                    SouthTowerCount = data;
+                    if (SouthTowerCount < 0)
+                        SouthTowerCount = 0;
+                    DoUpdateWorldState(WS_SOUTH_TOWER, SouthTowerCount);
+                    DoUpdateWorldState(WS_CAPTURE_SOUTH_TOWER, SouthTowerCount);
+
+                    if (SouthTowerCount >= 100 && !STowerFull)
+                    {
+                        STowerFull = true;
+                        if (GameObject* SouthDoor = instance->GetGameObject(GetGuidData(GO_SOUTH_DOOR)))
+                            SouthDoor->SetGoState(GO_STATE_ACTIVE);
+                        if (Creature* Galakras = instance->GetCreature(GetGuidData(NPC_GALAKRAS)))
+                            Galakras->AI()->DoAction(ACTION_DEMOLITIONS_NORTH);
+                        if (Creature* STower = instance->GetCreature(GetGuidData(NPC_TOWER_SOUTH)))
+                            STower->AI()->DoAction(ACTION_TOWER_GUARDS);
+                        if (Creature* sDemo = instance->GetCreature(sExpertGUID))
+                            sDemo->AI()->DoAction(ACTION_DEMOLITIONS_COMPLETE);
+                        SetData(DATA_SOUTH_TOWER, SPECIAL);
+                        SetData(DATA_NORTH_TOWER, IN_PROGRESS);
+                    }
+                    if (SouthTowerCount == 0 && !STowerNull)
+                    {
+                        STowerNull = true;
+                        SetData(DATA_SOUTH_TOWER, NOT_STARTED);
+                        if (Creature* STower = instance->GetCreature(GetGuidData(NPC_TOWER_SOUTH)))
+                            STower->AI()->DoAction(ACTION_TOWER_TURRET);
+                    }
+                    break;
+                }
+                case DATA_NORTH_COUNT:
+                {
+                    NorthTowerCount = data;
+                    if (NorthTowerCount < 0)
+                        NorthTowerCount = 0;
+                    DoUpdateWorldState(WS_NORTH_TOWER, NorthTowerCount);
+                    DoUpdateWorldState(WS_CAPTURE_NORTH_TOWER, NorthTowerCount);
+
+                    if (NorthTowerCount >= 100 && !NTowerFull)
+                    {
+                        NTowerFull = true;
+                        if (GameObject* NorthDoor = instance->GetGameObject(GetGuidData(GO_NORTH_DOOR)))
+                            NorthDoor->SetGoState(GO_STATE_ACTIVE);
+                        if (Creature* NTower = instance->GetCreature(GetGuidData(NPC_TOWER_NORTH)))
+                            NTower->AI()->DoAction(ACTION_TOWER_GUARDS);
+                        if (Creature* nDemo = instance->GetCreature(nExpertGUID))
+                            nDemo->AI()->DoAction(ACTION_DEMOLITIONS_COMPLETE);
+                        SetData(DATA_NORTH_TOWER, SPECIAL);
+                    }
+                    if (NorthTowerCount == 0 && !NTowerNull)
+                    {
+                        NTowerNull = true;
+                        SetData(DATA_NORTH_TOWER, NOT_STARTED);
+                        if (Creature* NTower = instance->GetCreature(GetGuidData(NPC_TOWER_NORTH)))
+                            NTower->AI()->DoAction(ACTION_TOWER_TURRET);
+                    }
+                    break;
+                }
+                case DATA_ACTIVE_NORTH_ROPE:
+                    if (GameObject* nrs = instance->GetGameObject(northropeskeinGuid))
+                        nrs->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    if (GameObject* nr = instance->GetGameObject(northropeGuid))
+                        nr->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    break;
+                case DATA_ACTIVE_SOUTH_ROPE:
+                    if (GameObject* srs = instance->GetGameObject(southropeskeinGuid))
+                        srs->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    if (GameObject* sr = instance->GetGameObject(southropeGuid))
+                        sr->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    break;
+                case DATA_DISABLE_ROPES:
+                    if (GameObject* nrs = instance->GetGameObject(northropeskeinGuid))
+                        nrs->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    if (GameObject* nr = instance->GetGameObject(northropeGuid))
+                        nr->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    if (GameObject* srs = instance->GetGameObject(southropeskeinGuid))
+                        srs->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    if (GameObject* sr = instance->GetGameObject(southropeGuid))
+                        sr->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                    break;
+                case DATA_SOP_START:
+                    //Open Gates In Room
+                    for (std::vector<ObjectGuid>::const_iterator itr = roomgateGuids.begin(); itr != roomgateGuids.end(); itr++)
+                        if (GameObject* gate = instance->GetGameObject(*itr))
+                            if (gate->GetEntry() == GO_ROOM_GATE2 || gate->GetEntry() == GO_ROOM_GATE4)
+                                gate->SetGoState(GO_STATE_ACTIVE);
+                    //Send Frames
+                    for (std::vector<ObjectGuid>::const_iterator itr = spoilsGuids.begin(); itr != spoilsGuids.end(); itr++)
+                        if (Creature* spoil = instance->GetCreature(*itr))
+                            if (spoil->GetEntry() == NPC_MOGU_SPOILS2 || spoil->GetEntry() == NPC_MANTIS_SPOILS2)
+                                spoil->AI()->DoAction(ACTION_IN_PROGRESS);
+                    break;
+                case DATA_KLAXXI_START:
+                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
+                    {
+                        if (Creature* klaxxi = instance->GetCreature(*itr))
                         {
-                            if (AchievementEntry const* achievementEntry = sAchievementStore.LookupEntry(_achievemententry))
-                                if (!player->HasAchieved(_achievemententry))
-                                    player->CompletedAchievement(achievementEntry);
-                            player->CastSpell(player, spell, true);
+                            klaxxi->CastSpell(klaxxi, 146983, true); //Aura Enrage
+                            if (klaxxi->HasAura(143542))
+                                klaxxi->AI()->DoAction(ACTION_KLAXXI_IN_PROGRESS);
+                        }
+                    }
+                    break;
+                case DATA_BUFF_NEXT_KLAXXI:
+                    if (klaxxidiecount < 6)
+                        if (Creature* klaxxi = instance->GetCreature(GetGuidData(bonusklaxxientry[klaxxidiecount])))
+                            klaxxi->CastSpell(klaxxi, 143542, true); //Ready to Fight 
+                    break;
+                case DATA_INTRO_NEXT_KLAXXI:
+                    if (klaxxidiecount < 6)
+                        if (Creature* klaxxi = instance->GetCreature(GetGuidData(bonusklaxxientry[klaxxidiecount])))
+                            klaxxi->AI()->DoAction(ACTION_KLAXXI_IN_PROGRESS);
+                    klaxxidiecount++;
+                    for (std::vector<ObjectGuid>::const_iterator itr = klaxxilist.begin(); itr != klaxxilist.end(); itr++)
+                        if (Creature* klaxxi = instance->GetCreature(*itr))
+                            if (klaxxi->isAlive() && klaxxi->isInCombat())
+                                klaxxi->CastSpell(klaxxi, 143483, true); //Paragons Purpose Heal
+                    break;
+                case DATA_CLEAR_KLAXXI_LIST:
+                    klaxxilist.clear();
+                    break;
+                case DATA_SAFE_WEAPONS:
+                    if (!dweaponGuids.empty())
+                    {
+                        uint32 entry = 0;
+                        for (std::vector<ObjectGuid>::const_iterator itr = dweaponGuids.begin(); itr != dweaponGuids.end(); itr++)
+                        {
+                            if (Creature* dw = instance->GetCreature(*itr))
+                            {
+                                if (dw->isAlive())
+                                {
+                                    dw->AddAura(SPELL_ELECTROMAGNETIC_BARRIER, dw);
+                                    dw->AddAura(SPELL_ELECTROMAGNETIC_BARRIER_V, dw);
+                                    switch (dw->GetEntry())
+                                    {
+                                    case NPC_DISASSEMBLED_CRAWLER_MINE:
+                                        entry = NPC_BLACKFUSE_CRAWLER_MINE;
+                                        break;
+                                    case NPC_DEACTIVATED_LASER_TURRET:
+                                        entry = NPC_ACTIVATED_LASER_TURRET;
+                                        break;
+                                    case NPC_DEACTIVATED_ELECTROMAGNET:
+                                        entry = NPC_ACTIVATED_ELECTROMAGNET;
+                                        break;
+                                    case NPC_DEACTIVATED_MISSILE_TURRET:
+                                        entry = NPC_ACTIVATED_MISSILE_TURRET;
+                                        break;
+                                    }
+                                    aweaponentry.push_back(entry);
+                                    entry = 0;
+                                }
+                            }
+                        }
+
+                        if (instance->IsHeroic()) //superheat mechanic
+                        {
+                            if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
+                            {
+                                uint8 numwave = blackfuse->AI()->GetData(DATA_GET_WEAPON_WAVE_INDEX);
+                                if (!numwave && lastsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE)
+                                {
+                                    bool find = false;
+                                    for (std::vector<uint32>::const_iterator itr = aweaponentry.begin(); itr != aweaponentry.end(); itr++)
+                                    {
+                                        if (*itr == NPC_ACTIVATED_LASER_TURRET)
+                                        {
+                                            find = true;
+                                            newsuperheatweapon = NPC_ACTIVATED_LASER_TURRET;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                        newsuperheatweapon = NPC_BLACKFUSE_CRAWLER_MINE;
+                                }
+                                else
+                                {
+                                    uint8 num = 4;
+                                    for (uint8 n = 0; n < 4; n++)
+                                        for (std::vector<uint32>::const_iterator itr = aweaponentry.begin(); itr != aweaponentry.end(); itr++)
+                                            if (weaponpriority[n] == (*itr) && (*itr) != lastsuperheatweapon)
+                                                if (n < num)
+                                                    num = n;
+                                    newsuperheatweapon = weaponpriority[num];
+                                }
+                            }
+                        }
+
+                        if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
+                            blackfuse->CastSpell(blackfuse, SPELL_PROTECTIVE_FRENZY, true);
+                    }
+                    break;
+                case DATA_D_WEAPON_IN_DEST_POINT:
+                    weaponsdone++;
+                    if (Creature* blackfuse = instance->GetCreature(blackfuseGuid))
+                    {
+                        if (weaponsdone == 2 && !aweaponentry.empty())
+                        {
+                            weaponsdone = 0;
+                            bool superheatmine = false;
+                            for (uint8 n = 0; n < 2; n++)
+                            {
+                                if (aweaponentry[n] == NPC_BLACKFUSE_CRAWLER_MINE)
+                                {
+                                    for (uint8 b = crawlerminenum; b > 0; b--)
+                                    {
+                                        if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n].GetPositionX() + float(b + 2), spawnaweaponpos[n].GetPositionY() + float(b + 2), spawnaweaponpos[n].GetPositionZ(), 0.0f))
+                                        {
+                                            aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                            aw->GetMotionMaster()->MoveCharge(destapos[n].GetPositionX() + float(b + 2), destapos[n].GetPositionY() + float(b + 2), destapos[n].GetPositionZ(), 10.0f, 1, false);
+                                        }
+                                    }
+                                    if (newsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE && !superheatmine)
+                                    {
+                                        superheatmine = true;
+                                        for (uint8 m = 0; m < 2; m++)
+                                        {
+                                            if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n].GetPositionX() + float(m + 8), spawnaweaponpos[n].GetPositionY() + float(m + 8), spawnaweaponpos[n].GetPositionZ(), 0.0f))
+                                            {
+                                                aw->CastSpell(aw, SPELL_SUPERHEATED_CRAWLER_MINE, true);
+                                                aw->SetFloatValue(OBJECT_FIELD_SCALE, 2.0f);
+                                                aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                                aw->GetMotionMaster()->MoveCharge(destapos[m].GetPositionX() + float(m + 8), destapos[m].GetPositionY() + float(m + 8), destapos[m].GetPositionZ(), 10.0f, 1, false);
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (Creature* aw = blackfuse->SummonCreature(aweaponentry[n], spawnaweaponpos[n]))
+                                    {
+                                        if (aw->GetEntry() == newsuperheatweapon)
+                                            aw->AI()->SetData(DATA_ACTIVE_SUPERHEAT, 0);
+                                        aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                        aw->GetMotionMaster()->MoveCharge(destapos[n].GetPositionX(), destapos[n].GetPositionY(), destapos[n].GetPositionZ(), 10.0f, 1, false);
+                                        if (aw->GetEntry() == NPC_ACTIVATED_LASER_TURRET)
+                                            laserturretGuid = aw->GetGUID();
+                                    }
+                                }
+                            }
+                            lastsuperheatweapon = newsuperheatweapon;
+                            aweaponentry.clear();
+                            EjectPlayersFromConveyor();
+                        }
+                        else if (weaponsdone == 3 && aweaponentry.empty())
+                        {
+                            weaponsdone = 0;
+                            bool superheatmine = false;
+                            blackfuse->CastSpell(blackfuse, SPELL_ENERGIZED_DEFENSIVE_MATRIX, true);
+                            uint8 num = blackfuse->AI()->GetData(DATA_GET_WEAPON_WAVE_INDEX);
+                            num = !num ? 5 : --num;
+
+                            if (instance->IsHeroic()) //superheat mechanic
+                            {
+                                uint8 _num = 4;
+                                for (uint8 n = 0; n < 4; n++)
+                                    for (uint8 b = 1; b < 6; b++)
+                                        if (weaponpriority[n] == _wavearray[num][b] && _wavearray[num][b] != lastsuperheatweapon)
+                                            if (n < _num)
+                                                _num = n;
+                                newsuperheatweapon = weaponpriority[_num];
+                            }
+
+                            for (uint8 n = 1; n < 4; n++)
+                            {
+                                if (_wavearray[num][n] == NPC_BLACKFUSE_CRAWLER_MINE)
+                                {
+                                    for (uint8 b = crawlerminenum; b > 0; b--)
+                                    {
+                                        if (Creature* weapon = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n - 1].GetPositionX() + float(b + 2), spawnaweaponpos[n - 1].GetPositionY() + float(b + 2), spawnaweaponpos[n - 1].GetPositionZ(), 0.0f))
+                                        {
+                                            weapon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                            weapon->GetMotionMaster()->MoveCharge(destapos[n - 1].GetPositionX() + float(b + 2), destapos[n - 1].GetPositionY() + float(b + 2), destapos[n - 1].GetPositionZ(), 10.0f, 1, false);
+                                        }
+                                    }
+                                    if (newsuperheatweapon == NPC_BLACKFUSE_CRAWLER_MINE && !superheatmine)
+                                    {
+                                        superheatmine = true;
+                                        for (uint8 m = 0; m < 2; m++)
+                                        {
+                                            if (Creature* aw = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n].GetPositionX() + float(m + 8), spawnaweaponpos[n].GetPositionY() + float(m + 8), spawnaweaponpos[n].GetPositionZ(), 0.0f))
+                                            {
+                                                aw->CastSpell(aw, SPELL_SUPERHEATED_CRAWLER_MINE, true);
+                                                aw->SetFloatValue(OBJECT_FIELD_SCALE, 2.0f);
+                                                aw->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                                aw->GetMotionMaster()->MoveCharge(destapos[m].GetPositionX() + float(m + 8), destapos[m].GetPositionY() + float(m + 8), destapos[m].GetPositionZ(), 10.0f, 1, false);
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (Creature* weapon = blackfuse->SummonCreature(_wavearray[num][n], spawnaweaponpos[n - 1]))
+                                    {
+                                        if (weapon->GetEntry() == newsuperheatweapon)
+                                            weapon->AI()->SetData(DATA_ACTIVE_SUPERHEAT, 0);
+                                        weapon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+                                        weapon->GetMotionMaster()->MoveCharge(destapos[n - 1].GetPositionX(), destapos[n - 1].GetPositionY(), destapos[n - 1].GetPositionZ(), 10.0f, 1, false);
+                                        if (weapon->GetEntry() == NPC_ACTIVATED_LASER_TURRET)
+                                            laserturretGuid = weapon->GetGUID();
+                                    }
+                                }
+                            }
+                            lastsuperheatweapon = newsuperheatweapon;
+                            EjectPlayersFromConveyor();
+                        }
+                    }
+                    break;
+                case DATA_CRAWLER_MINE_READY:
+                    crawlerminenum--;
+                    if (!crawlerminenum)
+                    {
+                        for (uint8 m = 0; m < crawlermineGuids.size(); m++)
+                            if (Creature* cm = instance->GetCreature(crawlermineGuids[m]))
+                                cm->AI()->SetData(DATA_CRAWLER_MINE_ENTERCOMBAT, uint32(m));
+                        crawlermineGuids.clear();
+                        crawlerminenum = instance->Is25ManRaid() ? 7 : 3;
+                    }
+                    break;
+                case DATA_OPEN_SOLDIER_FENCH:
+                    for (std::vector<ObjectGuid>::const_iterator itr = soldierfenchGuids.begin(); itr != soldierfenchGuids.end(); itr++)
+                        DoUseDoorOrButton(*itr);
+                    break;
+                case DATA_UPDATE_GARROSH_REALM:
+                    rycount = rycount == 2 ? 0 : ++rycount;
+                    break;
+                case DATA_FIRST_ENGENEER_DIED:
+                    if (data && !engeneerGuids.empty())
+                    {
+                        for (std::vector<ObjectGuid>::const_iterator itr = engeneerGuids.begin(); itr != engeneerGuids.end(); itr++)
+                            if (Creature* eng = instance->GetCreature(*itr))
+                                if (eng->isAlive())
+                                    eng->AI()->DoAction(ACTION_FIRST_ENGENEER_DIED);
+                    }
+                    engeneerGuids.clear();
+                    break;
+                case DATA_ACTION_SOLDIER:
+                    if (!garroshsoldiersGuids.empty())
+                    {
+                        switch (data)
+                        {
+                        case 0:
+                            for (std::vector<ObjectGuid>::const_iterator itr = garroshsoldiersGuids.begin(); itr != garroshsoldiersGuids.end(); itr++)
+                                if (Creature* soldier = instance->GetCreature(*itr))
+                                    if (soldier->isAlive())
+                                        soldier->SetReactState(REACT_AGGRESSIVE);
+                            break;
+                        case 1:
+                            for (std::vector<ObjectGuid>::const_iterator itr = garroshsoldiersGuids.begin(); itr != garroshsoldiersGuids.end(); itr++)
+                                if (Creature* soldier = instance->GetCreature(*itr))
+                                    if (soldier->isAlive())
+                                        soldier->StopAttack();
+                            break;
+                        }
+                    }
+                    break;
+                case DATA_RESET_REALM_OF_YSHAARJ:
+                    ResetRealmOfYshaarj(true);
+                    break;
+                case DATA_PLAY_FINAL_MOVIE:
+                {
+                    uint32 spell = GetData(DATA_TEAM_IN_INSTANCE) == HORDE ? SPELL_HORDE : SPELL_ALLIANCE;
+                    uint32 _achievemententry = GetData(DATA_TEAM_IN_INSTANCE) == HORDE ? 8680 : 8679; //Liberator of Orgrimmar : Conqueror of Orgrimmar
+                    Map::PlayerList const& PlayerList = instance->GetPlayers();
+                    if (!PlayerList.isEmpty())
+                    {
+                        for (Map::PlayerList::const_iterator Itr = PlayerList.begin(); Itr != PlayerList.end(); ++Itr)
+                        {
+                            if (Player* player = Itr->getSource())
+                            {
+                                if (AchievementEntry const* achievementEntry = sAchievementStore.LookupEntry(_achievemententry))
+                                    if (!player->HasAchieved(_achievemententry))
+                                        player->CompletedAchievement(achievementEntry);
+                                player->CastSpell(player, spell, true);
+                            }
                         }
                     }
                 }
-            }
-            break;
-            case DATA_CHECK_DIED_PLAYER_IN_REALM_OF_YSHARRJ:
-                CheckPlayersDiedInRealOfYshaarj();
                 break;
-            case DATA_CLOSE_ZONE_NORUSHEN:
-                for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
-                    HandleGameObject(*guid, false);
-                break;
-            case DATA_CHECK_KDS_RESET_IS_DONE:
-                for (uint8 n = 0; n < 2; n++)
-                {
-                    Creature* kdsmaunt = instance->GetCreature(!n ? bloodclawGuid : darkfangGuid);
-                    if (!kdsmaunt)
-                        return;
-                    if (!kdsmaunt->isAlive() || kdsmaunt->isInCombat())
-                        return;
-                }
+                case DATA_CHECK_DIED_PLAYER_IN_REALM_OF_YSHARRJ:
+                    CheckPlayersDiedInRealOfYshaarj();
+                    break;
+                case DATA_CLOSE_ZONE_NORUSHEN:
+                    for (std::vector<ObjectGuid>::const_iterator guid = lightqGUIDs.begin(); guid != lightqGUIDs.end(); guid++)
+                        HandleGameObject(*guid, false);
+                    break;
+                case DATA_CHECK_KDS_RESET_IS_DONE:
+                    for (uint8 n = 0; n < 2; n++)
+                    {
+                        Creature* kdsmaunt = instance->GetCreature(!n ? bloodclawGuid : darkfangGuid);
+                        if (!kdsmaunt)
+                            return;
+                        if (!kdsmaunt->isAlive() || kdsmaunt->isInCombat())
+                            return;
+                    }
 
-                for (uint8 n = 0; n < 2; n++)
-                    if (Creature* kdsmaunt = instance->GetCreature(!n ? bloodclawGuid : darkfangGuid))
-                        kdsmaunt->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
-                break;
-            case DATA_PREPARE_REALM_OF_YSHAARJ:
-                switch (data)
-                {
-                case 0:
-                    ResetBuffOnEmbodiedDoubts();
+                    for (uint8 n = 0; n < 2; n++)
+                        if (Creature* kdsmaunt = instance->GetCreature(!n ? bloodclawGuid : darkfangGuid))
+                            kdsmaunt->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
                     break;
-                case 1:
-                    ResetBuffOnEmbodiedFears();
+                case DATA_PREPARE_REALM_OF_YSHAARJ:
+                    switch (data)
+                    {
+                    case 0:
+                        ResetBuffOnEmbodiedDoubts();
+                        break;
+                    case 1:
+                        ResetBuffOnEmbodiedFears();
+                        break;
+                    default:
+                        break;
+                    }
                     break;
-                default:
+                case DATA_KILL_PLAYERS_IN_MIND_CONTROL:
+                    KillPlayersInMindControl();
                     break;
-                }
-                break;
-            case DATA_KILL_PLAYERS_IN_MIND_CONTROL:
-                KillPlayersInMindControl();
-                break;
             }
         }
 
@@ -2269,7 +2282,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void CreatureDies(Creature* creature, Unit* /*killer*/)
+        void CreatureDies(Creature* creature, Unit* /*killer*/) override
         {
             switch (creature->GetEntry())
             {
@@ -2491,14 +2504,14 @@ public:
             return true;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             std::ostringstream saveStream;
             saveStream << "S O " << GetBossSaveData() << " " << EventfieldOfSha;
             return saveStream.str();
         }
 
-        void Load(const char* data)
+        void Load(const char* data) override
         {
             if (!data)
             {
@@ -2531,7 +2544,7 @@ public:
             OUT_LOAD_INST_DATA_COMPLETE;
         }
         
-        bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const
+        bool CheckRequiredBosses(uint32 bossId, uint32 entry, Player const* player = NULL) const override
         {
             if (player && AccountMgr::IsGMAccount(player->GetSession()->GetSecurity()))
                 return true;
@@ -2582,7 +2595,7 @@ public:
             return false;
         }
 
-        void Update(uint32 diff)
+        void Update(uint32 diff) override
         {
             Events.Update(diff);
 

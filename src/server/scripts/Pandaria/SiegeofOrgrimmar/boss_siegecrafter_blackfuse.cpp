@@ -238,7 +238,7 @@ public:
         uint8 laserwallmod[3];
         bool createconveyer;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             instance->SetBossState(DATA_BLACKFUSE, NOT_STARTED);
@@ -258,7 +258,7 @@ public:
             ClearConveyerArray();
         }
 
-        void JustSummoned(Creature* sum)
+        void JustSummoned(Creature* sum) override
         {
             summon.Summon(sum);
         }
@@ -286,7 +286,7 @@ public:
             }
         }
 
-        void JustReachedHome()
+        void JustReachedHome() override
         {
             reset = 5000;
         }
@@ -335,7 +335,7 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             _EnterCombat();
             Talk(SAY_PULL);
@@ -351,7 +351,7 @@ public:
                 seh->CastSpell(seh, SPELL_CREATE_CONVEYOR_TRIGGER);
         }
 
-        void KilledUnit(Unit* unit)
+        void KilledUnit(Unit* unit) override
         {
             if (unit->ToPlayer())
                 Talk(SAY_KILL_UNIT);
@@ -517,7 +517,7 @@ public:
             updatehmlaserwalls = 4000;
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             SpecialDespawnSummons();
             RemoveDebuffs();
@@ -537,7 +537,7 @@ public:
             return false;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (reset)
             {
@@ -936,7 +936,7 @@ public:
         bool done, superheat;
         std::vector<ObjectGuid>_sawbladelist;
 
-        void Reset()
+        void Reset() override
         {
             //fix problems with - SPELL_AURA_INTERFERE_TARGETTING
             switch (me->GetEntry())
@@ -952,11 +952,11 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             switch (me->GetEntry())
             {
@@ -981,7 +981,7 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             switch (me->GetEntry())
             {
@@ -1013,7 +1013,7 @@ public:
             }
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -1122,7 +1122,7 @@ public:
             return 0;
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == EFFECT_MOTION_TYPE || type == POINT_MOTION_TYPE)
             {
@@ -1332,7 +1332,7 @@ public:
             }
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_DESPAWN)
             {
@@ -1342,7 +1342,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -1516,17 +1516,17 @@ public:
         bool superheat;
         uint8 num;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             num = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (!me->GetMap()->IsHeroic())
                 damage = 0;
@@ -1534,7 +1534,7 @@ public:
                 damage = 0;
         }
 
-        void SpellHit(Unit* caster, SpellInfo const *spell)
+        void SpellHit(Unit* caster, SpellInfo const *spell) override
         {
             if (me->GetEntry() == NPC_SHOCKWAVE_MISSILE && spell->Id == SPELL_SHOCKWAVE_MISSILE_T_M)
             {
@@ -1543,7 +1543,7 @@ public:
             }
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             if (type == DATA_DESPAWN)
                 if (!superheat)
@@ -1607,7 +1607,7 @@ public:
             }
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == EFFECT_MOTION_TYPE || type == POINT_MOTION_TYPE)
                 if (pointId == 1)
@@ -1639,7 +1639,7 @@ public:
             }
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_DESPAWN)
             {
@@ -1649,7 +1649,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

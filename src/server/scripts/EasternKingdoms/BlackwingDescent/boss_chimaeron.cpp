@@ -320,6 +320,9 @@ public:
     };
 };
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Winvalid-source-encoding"
+
 #define GOSSIP_MENU_1 16565
 #define GOSSIP_OPTION_1 "I suppose you'll be needing a key for this cage? Wait, don't tell me. The horrific gibbering monster behind me ate it, right?"
 #define GOSSIP_OPTION_1_RU "Я полагаю, тебе нужен ключ от этой клетки? Погоди, ничего не говори. Невероятно ужасный монстр позади меня съел его, не так ли?"
@@ -593,3 +596,5 @@ void AddSC_boss_chimaeron()
     new spell_chimaeron_finkles_mixture();
     new achievement_full_of_sound_and_fury();
 }
+
+#pragma GCC diagnostic pop

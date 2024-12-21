@@ -311,4 +311,4 @@ enum eGameObjects
     GO_RA_DEN_ENT_DOOR      = 218555,
 };
 
-#endif THRONEOFTHUNDER
+#endif // THRONEOFTHUNDER

@@ -48,7 +48,7 @@ public:
             }
         }
         
-        ObjectGuid GetGuidData(uint32 identifier) const
+        ObjectGuid GetGuidData(uint32 identifier) const override
         {
             switch(identifier)
             {

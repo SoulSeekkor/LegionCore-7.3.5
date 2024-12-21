@@ -90,7 +90,7 @@ class instance_dragon_soul : public InstanceMapScript
                 isFallOfDeathwing = false;
             }
 
-            void OnPlayerEnter(Player* pPlayer)
+            void OnPlayerEnter(Player* pPlayer) override
             {
                 if (!uiTeamInInstance)
                     uiTeamInInstance = pPlayer->GetTeam();
@@ -130,7 +130,7 @@ class instance_dragon_soul : public InstanceMapScript
                     player->CastSpell(player, SPELL_PARACHUTE, true);
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 if (isLfr && !lfrSectionFound)
                 {
@@ -339,7 +339,7 @@ class instance_dragon_soul : public InstanceMapScript
                 }
             }
 
-            void OnCreatureRemove(Creature* pCreature)
+            void OnCreatureRemove(Creature* pCreature) override
             {
                 switch (pCreature->GetEntry())
                 {
@@ -367,7 +367,7 @@ class instance_dragon_soul : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 if (isLfr && !lfrSectionFound)
                 {
@@ -492,7 +492,7 @@ class instance_dragon_soul : public InstanceMapScript
                 }
             }
 
-            void OnUnitDeath(Unit* unit)
+            void OnUnitDeath(Unit* unit) override
             {
                 if (Player* player = unit->ToPlayer())
                 {
@@ -504,7 +504,7 @@ class instance_dragon_soul : public InstanceMapScript
                 }
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -545,7 +545,7 @@ class instance_dragon_soul : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {   
                 switch (type)
                 {
@@ -693,7 +693,7 @@ class instance_dragon_soul : public InstanceMapScript
                 return 0;
             }
 
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -761,7 +761,7 @@ class instance_dragon_soul : public InstanceMapScript
                                 ActivatePortal(Teleports);
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -776,7 +776,7 @@ class instance_dragon_soul : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {
@@ -836,7 +836,7 @@ class instance_dragon_soul : public InstanceMapScript
                 return isLfr && isFallOfDeathwing;
             }
             
-            bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target*/, uint32 /*miscvalue1*/)
+            bool CheckAchievementCriteriaMeet(uint32 criteria_id, Player const* /*source*/, Unit const* /*target*/, uint32 /*miscvalue1*/) override
             {
                 switch (criteria_id)
                 {

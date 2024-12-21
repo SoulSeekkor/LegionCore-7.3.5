@@ -54,8 +54,10 @@ std::string const& MembershipRequest::GetName() const
 {
     if (auto const& nameData = sWorld->GetCharacterInfo(_playerGUID))
         return nameData->Name;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wreturn-stack-address"
     return "";
+#pragma GCC diagnostic pop
 }
 
 uint8 MembershipRequest::GetGender() const

@@ -90,7 +90,7 @@ public:
         ObjectGuid MedivhGUID;
         uint8 CurrentRiftId;
 
-        void Initialize()
+        void Initialize() override
         {
             MedivhGUID.Clear();
             Clear();
@@ -117,7 +117,7 @@ public:
             DoUpdateWorldState(WorldStates::WORLD_STATE_BM_RIFT, 0);
         }
 
-        bool IsEncounterInProgress() const
+        bool IsEncounterInProgress() const override
         {
             if (const_cast<instance_dark_portal_InstanceMapScript*>(this)->GetData(TYPE_MEDIVH) == IN_PROGRESS)
                 return true;
@@ -125,7 +125,7 @@ public:
             return false;
         }
 
-        void OnPlayerEnter(Player* player)
+        void OnPlayerEnter(Player* player) override
         {
             if (GetData(TYPE_MEDIVH) == IN_PROGRESS)
                 return;
@@ -133,7 +133,7 @@ public:
             player->SendUpdateWorldState(WorldStates::WORLD_STATE_BM, 0);
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             if (creature->GetEntry() == C_MEDIVH)
                 MedivhGUID = creature->GetGUID();
@@ -165,7 +165,7 @@ public:
             }
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -259,7 +259,7 @@ public:
             return 0;
         }
 
-        ObjectGuid GetGuidData(uint32 data) const
+        ObjectGuid GetGuidData(uint32 data) const override
         {
             if (data == DATA_MEDIVH)
                 return MedivhGUID;
@@ -267,7 +267,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             OUT_SAVE_INST_DATA;
 
@@ -278,7 +278,7 @@ public:
             return saveStream.str();
         }
 
-        void Load(const char* in)
+        void Load(const char* in) override
         {
             if (!in)
             {
@@ -357,7 +357,7 @@ public:
             }
         }
 
-        void Update(uint32 diff)
+        void Update(uint32 diff) override
         {
             if (m_auiEncounter[1] != IN_PROGRESS)
                 return;

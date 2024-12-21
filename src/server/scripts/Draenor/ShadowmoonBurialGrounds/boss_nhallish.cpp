@@ -326,7 +326,7 @@ class spell_nhallish_soul_summon : public SpellScript
 
     uint8 soulCount;
 
-    bool Load()
+    bool Load() override
     {
         soulCount = 0;
         return true;

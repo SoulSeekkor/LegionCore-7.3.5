@@ -779,9 +779,6 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
 
     AddDelayedEvent(100, [=]() -> void
     {
-        if (!this)
-            return;
-
         auto player = GetPlayer();
         if (!player)
             return;
@@ -799,7 +796,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
         artifactKnowledgeFishingPole.KnowledgeLevel = 0;
         SendPacket(artifactKnowledgeFishingPole.Write());
 
-        //Show cinematic at the first time that player login
+        // Show cinematic at the first time that player login
         bool firstLogin = !player->getCinematic(); // it's needed below
         if (!player->getCinematic())
         {
@@ -830,7 +827,7 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder* holder)
                 }
         }
 
-        if (!player->GetMap()->AddPlayerToMap(player) || !player->GetMap()->IsGarrison() && !player->CheckInstanceLoginValid())
+        if (!player->GetMap()->AddPlayerToMap(player) || (!player->GetMap()->IsGarrison() && !player->CheckInstanceLoginValid()))
         {
             if (AreaTriggerStruct const* at = sAreaTriggerDataStore->GetGoBackTrigger(player->GetMapId()))
                 player->TeleportTo(at->target_mapId, at->target_X, at->target_Y, at->target_Z, player->GetOrientation());
@@ -1314,7 +1311,7 @@ void WorldSession::HandleCharCustomizeCallback(std::shared_ptr<WorldPackets::Cha
 
     PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHARACTER_NAME);
     stmt->setUInt64(0, lowGuid);
-    if (result = CharacterDatabase.Query(stmt))
+    if ((result = CharacterDatabase.Query(stmt)))
         TC_LOG_INFO(LOG_FILTER_CHARACTER, "Account: %d (IP: %s), Character[%s] (guid:%u) Customized to: %s", GetAccountId(), GetRemoteAddress().c_str(), result->Fetch()[0].GetString().c_str(), lowGuid, customizeInfo->CharName.c_str());
 
     SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -1653,7 +1650,7 @@ void WorldSession::HandleCharRaceOrFactionChange(WorldPackets::Character::CharRa
             // Reset guild
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_GUILD_MEMBER);
             stmt->setUInt64(0, lowGuid);
-            if (result = CharacterDatabase.Query(stmt))
+            if ((result = CharacterDatabase.Query(stmt)))
                 if (Guild* guild = sGuildMgr->GetGuildById((result->Fetch()[0]).GetUInt64()))
                     guild->DeleteMember(ObjectGuid::Create<HighGuid::Player>(lowGuid));
         }

@@ -364,7 +364,7 @@ public:
 
         bool ominous;
 
-        void Reset()
+        void Reset() override
         {
             me->setFaction(16);
 
@@ -405,7 +405,7 @@ public:
                 }
             }
         }
-        void MoveInLineOfSight(Unit* who)
+        void MoveInLineOfSight(Unit* who) override
         {
             if (who)
             {
@@ -419,7 +419,7 @@ public:
                 }
             }
         }
-        void JustReachedHome()
+        void JustReachedHome() override
         {
             _JustReachedHome();
             summons.DespawnEntry(NPC_TERROR_SPAWN);
@@ -430,7 +430,7 @@ public:
                 pInstance->SetBossState(DATA_SHA_OF_FEAR, FAIL);
         }
 
-        void EnterCombat(Unit* attacker)
+        void EnterCombat(Unit* attacker) override
         {
             if (pInstance)
             {
@@ -458,7 +458,7 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (pInstance)
             {
@@ -477,27 +477,27 @@ public:
                             player->CompletedAchievement(achievementEntry);
             }
         }
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             if (summon->GetEntry() == NPC_TERROR_SPAWN)
                 ++terrorCounter;
 
             summons.Summon(summon);
         }
-        void SpellHitTarget(Unit* target, SpellInfo const* spell)
+        void SpellHitTarget(Unit* target, SpellInfo const* spell) override
         {
             if (spell->Id == SPELL_CACKLE_CAST)
             {
             }
         }
-        void SummonedCreatureDespawn(Creature* summon)
+        void SummonedCreatureDespawn(Creature* summon) override
         {
             if (summon->GetEntry() == NPC_TERROR_SPAWN)
                 --terrorCounter;
 
             summons.Despawn(summon);
         }
-        void KilledUnit(Unit* who)
+        void KilledUnit(Unit* who) override
         {
             if (who->GetTypeId() == TYPEID_PLAYER)
             {
@@ -507,60 +507,60 @@ public:
                     Talk(TALK_SLAY);
             }
         }
-        void DoAction(const int32 action)
+        void DoAction(const int32 action) override
         {
             switch (action)
             {
-            case ACTION_SPAWN_TERROR:
-            {
-                if (!terrorCounter)
+                case ACTION_SPAWN_TERROR:
                 {
-                    me->CastSpell(spawnTerrorPos[0].GetPositionX(), spawnTerrorPos[0].GetPositionY(),
-                        spawnTerrorPos[0].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_01, true);
-                    me->CastSpell(spawnTerrorPos[1].GetPositionX(), spawnTerrorPos[1].GetPositionY(),
-                        spawnTerrorPos[1].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_02, true);
-                }
-                else
-                {
-                    me->CastSpell(spawnTerrorPos[2].GetPositionX(), spawnTerrorPos[2].GetPositionY(),
-                        spawnTerrorPos[2].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_03, true);
-                    me->CastSpell(spawnTerrorPos[3].GetPositionX(), spawnTerrorPos[3].GetPositionY(),
-                        spawnTerrorPos[3].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_04, true);
-                }
-                break;
-            }
-            case ACTION_SPAWN_CHENG:
-            {
-                if (ominous)
-                {
-                    ominous = false;
-                    me->SummonCreature(CHENG, cheng_kang.GetPositionX(), cheng_kang.GetPositionY(), cheng_kang.GetPositionZ(), cheng_kang.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
+                    if (!terrorCounter)
+                    {
+                        me->CastSpell(spawnTerrorPos[0].GetPositionX(), spawnTerrorPos[0].GetPositionY(),
+                            spawnTerrorPos[0].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_01, true);
+                        me->CastSpell(spawnTerrorPos[1].GetPositionX(), spawnTerrorPos[1].GetPositionY(),
+                            spawnTerrorPos[1].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_02, true);
+                    }
+                    else
+                    {
+                        me->CastSpell(spawnTerrorPos[2].GetPositionX(), spawnTerrorPos[2].GetPositionY(),
+                            spawnTerrorPos[2].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_03, true);
+                        me->CastSpell(spawnTerrorPos[3].GetPositionX(), spawnTerrorPos[3].GetPositionY(),
+                            spawnTerrorPos[3].GetPositionZ(), SPELL_CONJURE_TERROR_SPAWN_04, true);
+                    }
                     break;
                 }
-            }
-            case ACTION_SPAWN_YANG:
-            {
-                if (ominous)
+                case ACTION_SPAWN_CHENG:
                 {
-                    ominous = false;
-                    me->SummonCreature(YANG, julu_guoshi.GetPositionX(), julu_guoshi.GetPositionY(), julu_guoshi.GetPositionZ(), julu_guoshi.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
-                    break;
+                    if (ominous)
+                    {
+                        ominous = false;
+                        me->SummonCreature(CHENG, cheng_kang.GetPositionX(), cheng_kang.GetPositionY(), cheng_kang.GetPositionZ(), cheng_kang.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
+                        break;
+                    }
                 }
-            }
-            case ACTION_SPAWN_JULU:
-            {
-                if (ominous)
+                case ACTION_SPAWN_YANG:
                 {
-                    ominous = false;
-                    me->SummonCreature(JULU, yang_guoshi.GetPositionX(), yang_guoshi.GetPositionY(), yang_guoshi.GetPositionZ(), yang_guoshi.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
-                    break;
+                    if (ominous)
+                    {
+                        ominous = false;
+                        me->SummonCreature(YANG, julu_guoshi.GetPositionX(), julu_guoshi.GetPositionY(), julu_guoshi.GetPositionZ(), julu_guoshi.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
+                        break;
+                    }
                 }
-            }
-            default:
-                break;
+                case ACTION_SPAWN_JULU:
+                {
+                    if (ominous)
+                    {
+                        ominous = false;
+                        me->SummonCreature(JULU, yang_guoshi.GetPositionX(), yang_guoshi.GetPositionY(), yang_guoshi.GetPositionZ(), yang_guoshi.GetOrientation(), TEMPSUMMON_MANUAL_DESPAWN, 0);
+                        break;
+                    }
+                }
+                default:
+                    break;
             }
         }
-        void DamageDealt(Unit* /*victim*/, uint32& /*damage*/, DamageEffectType damageType)
+        void DamageDealt(Unit* /*victim*/, uint32& /*damage*/, DamageEffectType damageType) override
         {
             if (damageType == DIRECT_DAMAGE)
             {
@@ -581,7 +581,7 @@ public:
                 }
             }
         }
-        void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+        void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
         {
             if (!victim->HasAura(SPELL_CHAMPION_OF_LIGHT))
                 fThreat = 0;
@@ -622,7 +622,8 @@ public:
 
             me->SetInt32Value(UNIT_FIELD_POWER, val);
         }
-        void UpdateAI(const uint32 diff)
+
+        void UpdateAI(const uint32 diff) override
         {
             if (!UpdateVictim())
             {

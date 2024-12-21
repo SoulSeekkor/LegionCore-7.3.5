@@ -132,7 +132,7 @@ public:
 
         float getAwayHealthPct;
 
-        void Reset()
+        void Reset() override
         {
             _Reset();
             events.Reset();
@@ -161,14 +161,14 @@ public:
             me->RemoveAllAreaObjects();
         }
 
-        void JustReachedHome()
+        void JustReachedHome() override
         {
             _JustReachedHome();
 
             if (pInstance)
                 pInstance->SetBossState(DATA_LEI_SHI, FAIL);
         }
-        void SpellHitTarget(Unit* target, SpellInfo const* spell)
+        void SpellHitTarget(Unit* target, SpellInfo const* spell) override
         {
             if (spell->Id == SPELL_SPRAY)
             {
@@ -176,7 +176,7 @@ public:
                 events.ScheduleEvent(EVENT_SPRAY, 400);
             }
         }
-        void EnterCombat(Unit* attacker)
+        void EnterCombat(Unit* attacker) override
         {
             if (pInstance)
             {
@@ -201,7 +201,7 @@ public:
                 events.ScheduleEvent(EVENT_ENRAGE, 360000);
             }
         }
-        void SpellHit(Unit* caster, SpellInfo const* spell)
+        void SpellHit(Unit* caster, SpellInfo const* spell) override
         {
             if (!hidden)
                 return;
@@ -253,7 +253,7 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (pInstance)
             {
@@ -277,7 +277,7 @@ public:
                     me->SummonGameObject(GOB_LEI_SHI_CHEST_NORMAL, -1017.58f, -2882.01f, 19.639f, 1.530082f, 0.0f, 0.0f, 0.0f, 0.0f, 0);
             }
         }
-        void DoAction(const int32 action)
+        void DoAction(const int32 action) override
         {
             if (action == ACTION_ANIMATED_PROTECTOR_DIED)
             {
@@ -326,15 +326,15 @@ public:
                 events.ScheduleEvent(EVENT_SPRAY, 2000);
             }
         }
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
         }
-        void SummonedCreatureDespawn(Creature* summon)
+        void SummonedCreatureDespawn(Creature* summon) override
         {
             summons.Despawn(summon);
         }
-        void KilledUnit(Unit* who)
+        void KilledUnit(Unit* who) override
         {
             if (who->GetTypeId() == TYPEID_PLAYER)
                 Talk(TALK_SLAY);
@@ -382,7 +382,7 @@ public:
             }
 
         }
-        void UpdateAI(const uint32 diff)
+        void UpdateAI(const uint32 diff) override
         {
             events.Update(diff);
 

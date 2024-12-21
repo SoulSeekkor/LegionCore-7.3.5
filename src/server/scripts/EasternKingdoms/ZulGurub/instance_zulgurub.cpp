@@ -41,7 +41,7 @@ class instance_zulgurub : public InstanceMapScript
                 uiBosses        = 0;
             }
     
-            void OnCreatureCreate(Creature* creature)
+            void OnCreatureCreate(Creature* creature) override
             {
                 switch (creature->GetEntry())
                 {
@@ -77,7 +77,7 @@ class instance_zulgurub : public InstanceMapScript
                 }
             }
             
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch (pGo->GetEntry())
                 {
@@ -94,7 +94,7 @@ class instance_zulgurub : public InstanceMapScript
                 }
             }
 
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -114,7 +114,7 @@ class instance_zulgurub : public InstanceMapScript
                     return uiBosses;
                 return 0;
             }
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -144,7 +144,7 @@ class instance_zulgurub : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -155,7 +155,7 @@ class instance_zulgurub : public InstanceMapScript
                 return saveStream.str();
             }
 
-            void Load(char const* str)
+            void Load(char const* str) override
             {
                 if (!str)
                 {

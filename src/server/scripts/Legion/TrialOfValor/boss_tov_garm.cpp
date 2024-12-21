@@ -902,7 +902,7 @@ struct at_guardians_breath : AreaTriggerAI
             caster->GetAI()->DoAction(ACTION_3);
     }
 
-    void BeforeRemove(Unit* target)
+    void BeforeRemove(Unit* target) override
     {
         Unit* caster = at->GetCaster()->ToCreature();
         if (!caster || !target)

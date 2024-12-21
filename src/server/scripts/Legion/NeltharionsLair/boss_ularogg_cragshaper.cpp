@@ -116,7 +116,7 @@ struct boss_ularogg_cragshaper : public BossAI
         return find;
     }
 
-    void SpellFinishCast(const SpellInfo* spell)
+    void SpellFinishCast(const SpellInfo* spell) override
     {
         switch (spell->Id)
         {
@@ -348,7 +348,7 @@ struct npc_nl_understone_drummer : public ScriptedAI
     bool drumsCast = true;
     Position pos;
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
     }

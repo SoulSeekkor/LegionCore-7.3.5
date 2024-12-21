@@ -265,7 +265,7 @@ struct npc_isiset_astral_rain : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/)
+    void EnterCombat(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_ASTRAL_RAIN, urand(5000, 15000));
         events.ScheduleEvent(EVENT_ENTER_COMBAT, 2000);
@@ -472,7 +472,7 @@ struct npc_isiset_astral_familiar : public ScriptedAI
         events.ScheduleEvent(EVENT_ARCANE_BARRAGE, urand(3000, 7000));
     }
 
-    void JustDied(Unit* /*killer*/)
+    void JustDied(Unit* /*killer*/) override
     {
         me->DespawnOrUnsummon();
     }

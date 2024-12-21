@@ -2161,7 +2161,10 @@ public:
     static bool HandleDebugCrash(ChatHandler* handler, char const* args)
     {
         handler->PSendSysMessage("Kicking out server!");
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wnull-dereference"
         *(int*) 0 = 0;
+#pragma GCC diagnostic pop
         return true;
     }
 

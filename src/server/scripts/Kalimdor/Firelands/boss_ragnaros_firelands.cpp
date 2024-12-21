@@ -2205,7 +2205,7 @@ class npc_ragnaros_firelands_cloudburst : public CreatureScript
                 _clicks = (pCreature->GetMap()->Is25ManRaid() ? 3 : 1);
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_CLICKS)
                     _clicks = data;
@@ -2218,7 +2218,7 @@ class npc_ragnaros_firelands_cloudburst : public CreatureScript
                 return 0;
             }
 
-            void IsSummonedBy(Unit* /*who*/)
+            void IsSummonedBy(Unit* /*who*/) override
             {
                 DoCast(me, SPELL_CLOUDBURST_DUMMY, true);
                 me->SetFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);

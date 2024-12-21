@@ -437,7 +437,7 @@ struct npc_tos_engine_of_souls : ScriptedAI
             events.RescheduleEvent(EVENT_SPEAR_OF_ANGUISH, 20000);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         fThreat = victim->HasAura(SPELL_SPIRIT_REALM) ? 0.0f : (fThreat ? fThreat : fThreat + 1.0f);
     }
@@ -553,7 +553,7 @@ struct npc_tos_soul_queen_dejahna : ScriptedAI
             events.RescheduleEvent(EVENT_WITHER, 20000);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         fThreat = victim->HasAura(SPELL_SPIRIT_REALM) ? (fThreat ? fThreat : fThreat + 1.0f) : 0.0f;
     }
@@ -896,7 +896,7 @@ struct npc_tos_reanimated_templar : ScriptedAI
             me->SetStandState(UNIT_STAND_STATE_STAND);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         if (!mirror)
             fThreat = victim->HasAura(SPELL_SPIRIT_REALM) ? 0.0f : (fThreat ? fThreat : fThreat + 1.0f);
@@ -1001,7 +1001,7 @@ struct npc_tos_ghastly_bonewarden : ScriptedAI
             me->InterruptNonMeleeSpells(false);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         if (!mirror)
             fThreat = victim->HasAura(SPELL_SPIRIT_REALM) ? 0.0f : (fThreat ? fThreat : fThreat + 1.0f);
@@ -1115,7 +1115,7 @@ struct npc_tos_fallen_priestess : ScriptedAI
             me->InterruptNonMeleeSpells(false);
     }
 
-    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/)
+    void OnAddThreat(Unit* victim, float& fThreat, SpellSchoolMask /*schoolMask*/, SpellInfo const* /*threatSpell*/) override
     {
         if (!mirror)
             fThreat = victim->HasAura(SPELL_SPIRIT_REALM) ? (fThreat ? fThreat : fThreat + 1.0f) : 0.0f;

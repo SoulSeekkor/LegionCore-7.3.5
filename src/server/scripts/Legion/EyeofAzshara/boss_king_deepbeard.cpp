@@ -83,7 +83,7 @@ public:
             events.RescheduleEvent(EVENT_CALL_THE_SEAS, 20000);
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {
             DisableRotation(false, false);
             BossAI::EnterEvadeMode();
@@ -323,6 +323,7 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (moveActive)
+            {
                 if (randomMoveTimer <= diff)
                 {
                     moveActive = false;
@@ -334,10 +335,11 @@ public:
                     float z = me->GetHomePosition().GetPositionZ();
                     Trinity::NormalizeMapCoord(x);
                     Trinity::NormalizeMapCoord(y);
-    
+
                     me->GetMotionMaster()->MovePoint(1, x, y, z);
                 }
                 else randomMoveTimer -= diff;
+            }
 
             if (checkBossStateTimer <= diff)
             {

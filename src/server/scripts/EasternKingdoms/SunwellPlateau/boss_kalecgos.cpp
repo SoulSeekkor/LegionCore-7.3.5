@@ -306,7 +306,7 @@ public:
                     std::list<HostileReference*> &m_threatlist = me->getThreatManager().getThreatList();
                     GuidList targetList;
                     for (std::list<HostileReference*>::const_iterator itr = m_threatlist.begin(); itr!= m_threatlist.end(); ++itr)
-                        if ((*itr)->getTarget() && (*itr)->getTarget()->GetTypeId() == TYPEID_PLAYER && (isBanished || me->getVictim() && (*itr)->getTarget()->GetGUID() != me->getVictim()->GetGUID()) && !(*itr)->getTarget()->HasAura(AURA_SPECTRAL_EXHAUSTION) && (*itr)->getTarget()->GetPositionZ() > me->GetPositionZ()-5)
+                        if ((*itr)->getTarget() && (*itr)->getTarget()->GetTypeId() == TYPEID_PLAYER && (isBanished || (me->getVictim() && (*itr)->getTarget()->GetGUID() != me->getVictim()->GetGUID())) && !(*itr)->getTarget()->HasAura(AURA_SPECTRAL_EXHAUSTION) && (*itr)->getTarget()->GetPositionZ() > me->GetPositionZ()-5)
                             if (Unit* target = (*itr)->getTarget())
                                 targetList.push_back(target->GetGUID());
                     if (targetList.empty())

@@ -121,13 +121,16 @@ public:
             } else uiSummonGhoulsTimer -= diff;
 
             // Respawn risen zombies at town
-            if(!bTransformed)
+            if (!bTransformed)
+            {
                 if (uiRespawnZombiesTimer <= diff)
                 {
                     instance->SetData(DATA_TRANSFORM_CITIZENS, SPECIAL);
                     bTransformed = true;
                 }
-                else uiRespawnZombiesTimer -= diff;
+                else
+                    uiRespawnZombiesTimer -= diff;
+            }
 
             DoMeleeAttackIfReady();
         }

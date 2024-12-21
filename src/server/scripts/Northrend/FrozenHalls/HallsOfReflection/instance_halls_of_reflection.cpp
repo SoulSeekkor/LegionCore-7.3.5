@@ -266,10 +266,12 @@ public:
                     {
                         HandleGameObject(_arthasDoorGUID, true);
                         if (!_jainaOrSylvanasPart2GUID)
+                        {
                             if (_teamInInstance == ALLIANCE)
                                 instance->SummonCreature(NPC_JAINA_PART2, JainaSpawnPos2);
                             else
                                 instance->SummonCreature(NPC_SYLVANAS_PART2, SylvanasSpawnPos2);
+                        }
                     }
                     _frostwornGeneral = data;
                     break;
@@ -277,10 +279,12 @@ public:
                     if (data == NOT_STARTED)
                     {
                         if (!_jainaOrSylvanasPart2GUID)
+                        {
                             if (_teamInInstance == ALLIANCE)
                                 instance->SummonCreature(NPC_JAINA_PART2, JainaSpawnPos2);
                             else
                                 instance->SummonCreature(NPC_SYLVANAS_PART2, SylvanasSpawnPos2);
+                        }
                         //SetData(DATA_ESCAPE_EVENT, IN_PROGRESS);
                     }
                     else if (data == IN_PROGRESS)

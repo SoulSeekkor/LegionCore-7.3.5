@@ -451,6 +451,7 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (checkdies)
+            {
                 if (timerforcheck <= diff)
                 {
                     if (!me->FindNearestCreature(108216, 40.0f, true) && !me->FindNearestCreature(108217, 40.0f, true))
@@ -471,6 +472,7 @@ public:
                 }
                 else
                     timerforcheck -= diff;
+            }
 
             if (!UpdateVictim())
                 return;

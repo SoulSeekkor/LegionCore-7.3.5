@@ -847,7 +847,7 @@ public:
             summons.Summon(summon);
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             Reset();
         }

@@ -395,7 +395,7 @@ class boss_feng : public CreatureScript
                     (*itr)->DespawnOrUnsummon();
             }
 
-            void SpellHitTarget(Unit* target, const SpellInfo* spell)
+            void SpellHitTarget(Unit* target, const SpellInfo* spell) override
             {
                 if (spell->Id == SPELL_S_SHIELD_SUM_FRAGMENT)
                     target->CastSpell(target, 117717, true, 0, NULL, me->GetGUID()); //Sum Fragment
@@ -426,7 +426,7 @@ class boss_feng : public CreatureScript
                 }
             }
 
-            void SummonedCreatureDies(Creature* summon, Unit* /*killer*/)
+            void SummonedCreatureDies(Creature* summon, Unit* /*killer*/) override
             {
                 if (summon->GetEntry() == NPC_SOUL_FRAGMENT)
                 {
@@ -702,7 +702,7 @@ class npc_feng_soul_fragment : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
             }
     
-            void IsSummonedBy(Unit* summoner)
+            void IsSummonedBy(Unit* summoner) override
             {
                 if (Player* plr = me->FindNearestPlayer(5.0f))
                     plr->CastSpell(me, SPELL_CLONE_ME, true);

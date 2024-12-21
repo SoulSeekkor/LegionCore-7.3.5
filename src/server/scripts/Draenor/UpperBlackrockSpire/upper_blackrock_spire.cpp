@@ -89,7 +89,7 @@ public:
         uint32 EventFinalJenkins;
         ObjectGuid SonOfBeastGUID;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             me->SetReactState(REACT_PASSIVE);
@@ -108,13 +108,13 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*attacker*/)
+        void EnterCombat(Unit* /*attacker*/) override
         {
             Movement::MoveSplineInit init(*me);
             init.Stop();
         }
 
-        void JustDied(Unit* /*killer*/)
+        void JustDied(Unit* /*killer*/) override
         {
             if (instance)
             {
@@ -130,7 +130,7 @@ public:
             me->SummonCreature(NPC_SON_OF_THE_BEAST, 87.6401f, -553.402f, 111.009f, 2.62025f);
         }
 
-        void SpellHit(Unit* caster, SpellInfo const* spellInfo)
+        void SpellHit(Unit* caster, SpellInfo const* spellInfo) override
         {
             if (IsHeroic() && instance->GetBossState(DATA_KYRAK) == DONE)
             {
@@ -303,7 +303,7 @@ public:
             DoMeleeAttackIfReady();
         }
 
-        void MovementInform(uint32 type, uint32 id)
+        void MovementInform(uint32 type, uint32 id) override
         {
             switch (id)
             {
@@ -363,20 +363,20 @@ public:
         EventMap events;
         InstanceScript* instance;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             charging = false;
         }
 
-        void EnterCombat(Unit*)
+        void EnterCombat(Unit*) override
         {
             events.RescheduleEvent(EVENT_FIERY_CHARGE, 8000);
             events.RescheduleEvent(EVENT_FLAME_ERUPTION, 15000);
             events.RescheduleEvent(EVENT_TERRIFYING_ROAL, 20000);
         }
 
-        void JustDied(Unit*)
+        void JustDied(Unit*) override
         {
             if (!me)
                 return;

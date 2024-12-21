@@ -1705,7 +1705,7 @@ public:
         EventMap events;
         ObjectGuid charmedplGuid;
 
-        void Reset()
+        void Reset() override
         {
             if (!me->ToTempSummon())
             {
@@ -1720,14 +1720,14 @@ public:
             events.RescheduleEvent(EVENT_CAST, 6000);
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
         bool IsPlayerInMindControl(Player* pl)
         {
@@ -1736,7 +1736,7 @@ public:
             return false;
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

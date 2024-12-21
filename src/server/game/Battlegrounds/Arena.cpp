@@ -109,7 +109,7 @@ void Arena::AddPlayer(Player* player)
         pet->SetHealth(pet->GetMaxHealth());
         pet->RemoveAllAuras();
 
-        if (player->HasSpell(155228) || player->HasSpell(205024) || player->GetSpecializationId() == SPEC_MAGE_FIRE &&
+        if (player->HasSpell(155228) || player->HasSpell(205024) || player->GetSpecializationId() == SPEC_MAGE_FIRE ||
             player->GetSpecializationId() == SPEC_MAGE_ARCANE || player->GetSpecializationId() == SPEC_DK_BLOOD || player->GetSpecializationId() == SPEC_DK_FROST)
             player->RemovePet(pet);
     }

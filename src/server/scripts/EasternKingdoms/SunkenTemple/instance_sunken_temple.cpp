@@ -73,7 +73,7 @@ public:
         bool s5;
         bool s6;
 
-        void Initialize()
+        void Initialize() override
         {
             GOAtalaiStatue1.Clear();
             GOAtalaiStatue2.Clear();
@@ -93,7 +93,7 @@ public:
             s6 = false;
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -107,7 +107,7 @@ public:
             }
         }
 
-         virtual void Update(uint32 /*diff*/) // correct order goes form 1-6
+         virtual void Update(uint32 /*diff*/) override // correct order goes form 1-6
          {
              switch (State)
              {
@@ -187,7 +187,7 @@ public:
          }
          */
 
-         void SetData(uint32 type, uint32 data)
+         void SetData(uint32 type, uint32 data) override
          {
             if (type == EVENT_STATE)
                 State = data;

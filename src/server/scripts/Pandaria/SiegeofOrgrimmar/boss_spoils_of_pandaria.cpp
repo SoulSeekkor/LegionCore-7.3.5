@@ -554,7 +554,7 @@ public:
         uint8 newssc;               //
         uint8 lastssc;              //spirit summon count 
 
-        void Reset()
+        void Reset() override
         {
             newssc = 0;
             lastssc = 0; 
@@ -562,14 +562,14 @@ public:
             mspoilGuid.Clear();
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void JustSummoned(Creature* sum)
+        void JustSummoned(Creature* sum) override
         {
             summons.Summon(sum);
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -682,7 +682,7 @@ public:
             }
         }
         
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (instance)
             {
@@ -714,7 +714,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -732,11 +732,15 @@ public:
                     if (!pllist.empty())
                     {
                         for (std::list<Player*>::const_iterator itr = pllist.begin(); itr != pllist.end(); itr++)
+                        {
                             if (uint32((*itr)->GetPositionZ()) <= -280 && me->GetDistance(*itr) <= 55.0f)
+                            {
                                 if (!(*itr)->HasAura(SPELL_AURA_BAR))
                                     (*itr)->CastCustomSpell(SPELL_AURA_BAR, SPELLVALUE_BASE_POINT0, power, *itr, true);
                                 else
                                     (*itr)->SetPower(POWER_ALTERNATE, power, true);
+                            }
+                        }
 
                         //Send new power in frame
                         if (Creature* mspoil = me->GetCreature(*me, mspoilGuid))

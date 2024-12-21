@@ -218,7 +218,7 @@ public:
 
         void Reset() override {}
 
-        void IsSummonedBy(Unit* summoner)
+        void IsSummonedBy(Unit* summoner) override
         {
             summoner->CastSpell(me, SPELL_BREATH_OF_CORRUPTION_DMG, false);
         }

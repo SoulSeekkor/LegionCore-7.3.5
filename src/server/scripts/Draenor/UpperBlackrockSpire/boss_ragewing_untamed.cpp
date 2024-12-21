@@ -144,7 +144,7 @@ struct boss_ragewing_untamed : public BossAI
         }
     }
 
-    void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType /*dmgType*/)
+    void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType /*dmgType*/) override
     {
         if (damage >= me->GetHealth() && !groundPhase)
             damage = 0;

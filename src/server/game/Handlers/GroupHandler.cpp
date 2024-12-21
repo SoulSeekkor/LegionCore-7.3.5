@@ -71,7 +71,7 @@ void WorldSession::HandlePartyInvite(WorldPackets::Party::PartyInviteClient& pac
     }
 
     // can't group with
-    if (!c_player->isGameMaster() && !sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GROUP) && c_player->GetTeam() != player->GetTeam()  
+    if ((!c_player->isGameMaster() && !sWorld->getBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_GROUP) && c_player->GetTeam() != player->GetTeam())  
         || player->GetMapId() == 1101 || c_player->GetMapId() == 1101) // deathmatch
     {
         SendPartyResult(PARTY_OP_INVITE, packet.TargetName, ERR_PLAYER_WRONG_FACTION);

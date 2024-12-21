@@ -74,7 +74,7 @@ void ConversationDataStoreMgr::LoadConversations()
         bool isCreature = conversationCreature && !conversationCreature->empty();
         bool hasData = conversationData && !conversationData->empty();
 
-        if (!hasData || !isActor && !isCreature)
+        if (!hasData || (!isActor && !isCreature))
         {
             TC_LOG_ERROR(LOG_FILTER_SQL, "ConversationDataStoreMgr::LoadConversations() >> Table `conversation` has conversation (GUID: " UI64FMTD ") with non-existent conversation data %u, skipped.", guid, entry);
             continue;

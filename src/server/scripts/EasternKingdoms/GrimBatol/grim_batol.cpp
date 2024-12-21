@@ -538,13 +538,13 @@ class npc_azureborne_seer: public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*attacker*/)
+            void EnterCombat(Unit* /*attacker*/) override
             {
                 events.RescheduleEvent(EVENT_WARPED_TWILIGHT, urand(15000, 20000));
                 events.RescheduleEvent(EVENT_TWILIGHT_BOLT, urand(1000, 2000));
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!me->HasAura(SPELL_TWISTED_ARCANE_TRIGGER) && !me->HasAura(SPELL_TWISTED_ARCANE))
                 {
@@ -662,7 +662,7 @@ class npc_crimsonborne_guardian: public CreatureScript
                 events.RescheduleEvent(EVENT_CRIMSON_CHARGE, urand(3000, 5000));
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;
@@ -1437,7 +1437,7 @@ class npc_twilight_shadow_weaver : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*attacker*/)
+            void EnterCombat(Unit* /*attacker*/) override
             {
                 events.RescheduleEvent(EVENT_SHADOW_BOLT, urand(1000, 2000));
 

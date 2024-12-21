@@ -1397,7 +1397,7 @@ void Creature::SetReactState(ReactStates st, uint32 delay /*= 0*/)
     {
         AddDelayedCombat(delay, [this, st] () -> void
         {
-            if (this && isInCombat())
+            if (isInCombat())
                 m_reactState = st;
         });
     }
@@ -2713,7 +2713,7 @@ void Creature::ForcedDespawn(uint32 timeMSToDespawn /*= 0*/, Seconds const& forc
 
 void Creature::DespawnOrUnsummon(uint32 msTimeToDespawn /*= 0*/, Seconds const& forceRespawnTimer /*= 0*/)
 {
-    if (!this || m_despawn || !IsInWorld())
+    if (m_despawn || !IsInWorld())
         return;
 
     if (TempSummon* summon = this->ToTempSummon())
@@ -2868,7 +2868,7 @@ SpellInfo const* Creature::reachWithSpellCure(Unit* victim)
             if (spellInfo->EffectMask < uint32(1 << j))
                 break;
 
-            if ((spellInfo->Effects[j]->Effect == SPELL_EFFECT_HEAL))
+            if (spellInfo->Effects[j]->Effect == SPELL_EFFECT_HEAL)
             {
                 bcontinue = false;
                 break;

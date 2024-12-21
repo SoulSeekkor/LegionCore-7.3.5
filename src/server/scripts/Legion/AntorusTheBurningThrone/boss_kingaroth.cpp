@@ -287,7 +287,7 @@ struct boss_kingaroth : BossAI
         }
     }
 
-    void SummonedCreatureDies(Creature* summon, Unit* /*killer*/)
+    void SummonedCreatureDies(Creature* summon, Unit* /*killer*/) override
     {
         switch (summon->GetEntry())
         {

@@ -249,7 +249,7 @@ public:
                     CAST_PLR(Killed)->FailQuest(QUEST_SECOND_TRIAL);
         }
 
-        void JustDied(Unit* killer);
+        void JustDied(Unit* killer) override;
     };
 };
 
@@ -288,7 +288,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new master_kelerun_bloodmournAI (creature);
     }
@@ -452,7 +452,7 @@ public:
         return true;
     }
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_apprentice_mirvedaAI (creature);
     }

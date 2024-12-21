@@ -33,14 +33,14 @@ class AggressorAI : public CreatureAI
     public:
         explicit AggressorAI(Creature* c) : CreatureAI(c), m_checkTimer(0), CreatureTexts(nullptr), CreatureCombatTexts(nullptr) {}
 
-        void Reset();
-        void InitializeAI();
-        void UpdateAI(uint32);
-        void EnterCombat(Unit* who);
-        void JustDied(Unit* killer);
+        void Reset() override;
+        void InitializeAI() override;
+        void UpdateAI(uint32) override;
+        void EnterCombat(Unit* who) override;
+        void JustDied(Unit* killer) override;
         static int Permissible(const Creature*);
         void DoActionAI(uint32 diff, CreatureActionType type);
-        void MoveInLineOfSight(Unit*);
+        void MoveInLineOfSight(Unit*) override;
 
         void AddClientVisibility(ObjectGuid guid) override;
         void RemoveClientVisibility(ObjectGuid guid) override;

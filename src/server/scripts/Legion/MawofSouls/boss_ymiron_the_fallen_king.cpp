@@ -379,9 +379,9 @@ struct npc_ymiron_risen_warrior : public ScriptedAI
 
     EventMap events;
 
-    void Reset() {}
+    void Reset() override {}
 
-    void IsSummonedBy(Unit* summoner)
+    void IsSummonedBy(Unit* summoner) override
     {
         AddDelayedEvent(100, [=] () -> void
         {
@@ -414,13 +414,13 @@ struct npc_ymiron_risen_warrior : public ScriptedAI
         }
     }
 
-    void DoAction(int32 const actionId)
+    void DoAction(int32 const actionId) override
     {
         if (me->isAlive())
             me->Kill(me);
     }
 
-    void UpdateAI(uint32 diff)
+    void UpdateAI(uint32 diff) override
     {
         if (!UpdateVictim())
             return;
@@ -451,7 +451,7 @@ struct npc_ymiron_cursed_falke : public ScriptedAI
 
     bool flyEvent = false;
 
-    void Reset() 
+    void Reset() override
     {
         if (me->GetDistance(7248.78f, 7287.24f, 25.57f) < 25.0f)
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NON_ATTACKABLE);

@@ -353,7 +353,7 @@ public:
         float lasthppct;
         bool phase_two;
 
-        void Reset()
+        void Reset() override
         {
             _Reset();
             if (Creature* pp = me->GetCreature(*me, instance->GetGuidData(NPC_PUDDLE_POINT)))
@@ -381,7 +381,7 @@ public:
             maxpcount = 0;
         }
 
-        void JustSummoned(Creature* sum)
+        void JustSummoned(Creature* sum) override
         {
             switch (sum->GetEntry())
             {
@@ -395,7 +395,7 @@ public:
             summons.Summon(sum);
         }
 
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             _EnterCombat();
             berserk = 600000;
@@ -408,7 +408,7 @@ public:
                 events.RescheduleEvent(EVENT_SWELLING_CORRUPTION, 12000);
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -444,7 +444,7 @@ public:
                 return 0;
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth() && !phase_two)
             {
@@ -472,7 +472,7 @@ public:
                 damage = 0;
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             switch (action)
             {
@@ -523,7 +523,7 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             me->RemoveFlag(OBJECT_FIELD_DYNAMIC_FLAGS, UNIT_DYNFLAG_LOOTABLE);
             if (Creature* pp = me->GetCreature(*me, instance->GetGuidData(NPC_PUDDLE_POINT)))
@@ -545,7 +545,7 @@ public:
             BossAI::JustDied(killer);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!phase_two && !UpdateVictim())
                 return;
@@ -767,7 +767,7 @@ public:
         EventMap events;
         ObjectGuid ppGuid;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
         }
@@ -778,24 +778,24 @@ public:
                 ppGuid = guid;
         }
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void MovementInform(uint32 type, uint32 pointId)
+        void MovementInform(uint32 type, uint32 pointId) override
         {
             if (type == POINT_MOTION_TYPE)
                 if (pointId == 1)
                     events.RescheduleEvent(EVENT_UPDATE_POINT, 100);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 
@@ -1192,7 +1192,7 @@ public:
         EventMap events;
         ObjectGuid swirltargetGuid;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             swirltargetGuid.Clear();
@@ -1204,13 +1204,13 @@ public:
                 swirltargetGuid = guid;
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (damage >= me->GetHealth())
                 damage = 0;
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_LAUNCH_ROTATE)
             {
@@ -1219,11 +1219,11 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void EnterCombat(Unit* who) override {}
 
-        void EnterEvadeMode(){}
+        void EnterEvadeMode() override {}
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

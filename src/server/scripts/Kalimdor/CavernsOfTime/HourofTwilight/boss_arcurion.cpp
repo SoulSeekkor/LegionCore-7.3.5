@@ -121,7 +121,7 @@ class boss_arcurion : public CreatureScript
                 DoZoneInCombat();
             }
 
-            void SummonedCreatureDespawn(Creature* summon)
+            void SummonedCreatureDespawn(Creature* summon) override
             {
                 DeleteServitor(summon->GetGUID());
                 BossAI::SummonedCreatureDespawn(summon);

@@ -697,7 +697,7 @@ public:
         uint32 shadow_word_count;
         uint8 calamitycount;
 
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             ResetProtectors();
@@ -729,7 +729,7 @@ public:
                     (*itr)->DespawnOrUnsummon();
         }
 
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             DoZoneInCombat(me, 150.0f);
             CallOtherProtectors();
@@ -750,12 +750,12 @@ public:
             return 0;
         }
 
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (phase == PHASE_BATTLE && HealthBelowPct(66))
             {
@@ -780,7 +780,7 @@ public:
                 damage = 0;
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             switch (action)
             {
@@ -836,7 +836,7 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             if (killer != me)
                 SendDone();
@@ -847,7 +847,7 @@ public:
             instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
         }
 
-        void SetData(uint32 type, uint32 value)
+        void SetData(uint32 type, uint32 value) override
         {
             switch (type)
             {
@@ -865,7 +865,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -1134,7 +1134,7 @@ public:
         EventMap events;
         ObjectGuid _target;
 
-        void IsSummonedBy(Unit* summoner)
+        void IsSummonedBy(Unit* summoner) override
         {
             if (summoner->ToCreature() && summoner->GetEntry() == NPC_HE_SOFTFOOT)
             {
@@ -1176,12 +1176,12 @@ public:
             }
         }
 
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             RemoveShadowWeakness();
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

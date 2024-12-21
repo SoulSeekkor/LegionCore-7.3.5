@@ -193,11 +193,21 @@ public:
 
         bool isWipe()
         {
-            instance->ApplyOnEveryPlayer([&](Player* player)
+            Map::PlayerList const& PlayerList = instance->GetPlayers();
+
+            if (PlayerList.isEmpty())
+                return true;
+
+            for (Map::PlayerList::const_iterator Itr = PlayerList.begin(); Itr != PlayerList.end(); ++Itr)
             {
+                Player* player = Itr->getSource();
+
+                if (!player)
+                    continue;
+
                 if (player->isAlive() && !player->isGameMaster())
                     return false;
-            });
+            }
 
             return true;
         }
@@ -244,14 +254,14 @@ public:
                         {
                             if (randPos) // Zone 2 & 3
                             {
-                                if (launcher->GetPositionX() > center.GetPositionX() && launcher->GetPositionY() > center.GetPositionY()
-                                    || launcher->GetPositionX() < center.GetPositionX() && launcher->GetPositionY() < center.GetPositionY())
+                                if ((launcher->GetPositionX() > center.GetPositionX() && launcher->GetPositionY() > center.GetPositionY())
+                                    || (launcher->GetPositionX() < center.GetPositionX() && launcher->GetPositionY() < center.GetPositionY()))
                                     mustActivate = true;
                             }
                             else // Zone 1 & 4
                             {
-                                if (launcher->GetPositionX() > center.GetPositionX() && launcher->GetPositionY() < center.GetPositionY()
-                                    || launcher->GetPositionX() < center.GetPositionX() && launcher->GetPositionY() > center.GetPositionY())
+                                if ((launcher->GetPositionX() > center.GetPositionX() && launcher->GetPositionY() < center.GetPositionY())
+                                    || (launcher->GetPositionX() < center.GetPositionX() && launcher->GetPositionY() > center.GetPositionY()))
                                     mustActivate = true;
                             }
 

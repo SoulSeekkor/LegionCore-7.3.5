@@ -353,9 +353,9 @@ public:
         EventMap events;
         ObjectGuid targetGuid;
 
-        void Reset(){}
+        void Reset() override {}
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_EXPLOSE)
             {
@@ -374,7 +374,7 @@ public:
             events.RescheduleEvent(EVENT_ACTIVE, 3000);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             events.Update(diff);
 

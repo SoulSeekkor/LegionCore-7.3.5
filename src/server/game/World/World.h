@@ -603,25 +603,25 @@ enum RealmZone
 
 enum ServerWorldStates
 {
-    WS_CURRENCY_RESET_TIME              = 20001,                      // Next currency reset time
-    WS_WEEKLY_RESET_TIME                = 20002,                      // Next weekly reset time
-    WS_BG_DAILY_RESET_TIME              = 20003,                      // Next daily BG reset time
-    WS_AUTO_SERVER_RESTART_TIME         = 20005,                      // Next server restart time
-    WS_INSTANCE_DAILY_RESET_TIME        = 20006,                      // Next daily Instance restart time
-    WS_INSTANCE_HALF_WEEK_RESET_TIME    = 20007,                      // Next daily Instance restart time
-    WS_INSTANCE_WEEKLY_RESET_TIME       = 20008,                      // Next weekly Instance restart time
-    WS_CHALLENGE_KEY_RESET_TIME         = 20015,                      // Reset time for Challenge key
-    WS_CHALLENGE_AFFIXE1_RESET_TIME     = 20016,                      // Challenge Affixe 1
-    WS_CHALLENGE_AFFIXE2_RESET_TIME     = 20017,                      // Challenge Affixe 2
-    WS_CHALLENGE_AFFIXE3_RESET_TIME     = 20018,                      // Challenge Affixe 3
-    WS_WORLDQUEST_HOURLY_RESET_TIME     = 20019,                      // World quest every 6 hours reset time
-    WS_WORLDQUEST_DAILY_RESET_TIME      = 20020,                      // World quest every day reset time
-    WS_CHALLENGE_LAST_RESET_TIME        = 20021,                      // Last reset time for Challenge key
-    WS_BAN_WAVE_TIME                    = 20022,                      // Next banwave time
-    WS_CURRENT_ARTIFACT_KNOWLEDGE       = 20023,                      // Current Artifact Knowledge
-    WS_INVASION_POINT_RESET_TIME        = 20024,                      // World quest every 2 hours reset time
-    WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE = 20025,                      // Alliance Score for Holiday "Call of the Scarab".
-    WS_SCORE_CALL_OF_THE_SCARAB_HORDE   = 20026                       // Horde Score for Holiday "Call of the Scarab".
+    WS_CURRENCY_RESET_TIME               = 20001,                      // Next currency reset time
+    WS_WEEKLY_RESET_TIME                 = 20002,                      // Next weekly reset time
+    WS_BG_DAILY_RESET_TIME               = 20003,                      // Next daily BG reset time
+    WS_AUTO_SERVER_RESTART_TIME          = 20005,                      // Next server restart time
+    WS_INSTANCE_DAILY_RESET_TIME         = 20006,                      // Next daily Instance restart time
+    WS_INSTANCE_HALF_WEEK_RESET_TIME     = 20007,                      // Next daily Instance restart time
+    WS_INSTANCE_WEEKLY_RESET_TIME        = 20008,                      // Next weekly Instance restart time
+    WS_CHALLENGE_KEY_RESET_TIME          = 20015,                      // Reset time for Challenge key
+    WS_CHALLENGE_AFFIXE1_RESET_TIME      = 20016,                      // Challenge Affixe 1
+    WS_CHALLENGE_AFFIXE2_RESET_TIME      = 20017,                      // Challenge Affixe 2
+    WS_CHALLENGE_AFFIXE3_RESET_TIME      = 20018,                      // Challenge Affixe 3
+    WS_WORLDQUEST_HOURLY_RESET_TIME      = 20019,                      // World quest every 6 hours reset time
+    WS_WORLDQUEST_DAILY_RESET_TIME       = 20020,                      // World quest every day reset time
+    WS_CHALLENGE_LAST_RESET_TIME         = 20021,                      // Last reset time for Challenge key
+    WS_BAN_WAVE_TIME                     = 20022,                      // Next banwave time
+    WS_CURRENT_ARTIFACT_KNOWLEDGE        = 20023,                      // Current Artifact Knowledge
+    WS_INVASION_POINT_RESET_TIME         = 20024,                      // World quest every 2 hours reset time
+    WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE = 20025,                      // Alliance Score for Holiday "Call of the Scarab".
+    WS_SCORE_CALL_OF_THE_SCARAB_HORDE    = 20026                       // Horde Score for Holiday "Call of the Scarab".
 };
 
 /// Storage class for commands issued for delayed execution

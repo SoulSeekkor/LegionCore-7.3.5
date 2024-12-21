@@ -129,7 +129,7 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BANISH_IN_TIME_TIMER);
         }
 
-        void JustSummoned(Creature* summon)
+        void JustSummoned(Creature* summon) override
         {
             summons.Summon(summon);
         }

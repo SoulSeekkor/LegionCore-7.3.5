@@ -144,7 +144,7 @@ class boss_unsok : public CreatureScript
                 {
                     uint8 alterPower;
                     if (target->HasAura(SPELL_RESHAPE_LIFE_MORPH))
-                        if (alterPower = target->GetPower(POWER_ALTERNATE))
+                        if ((alterPower = target->GetPower(POWER_ALTERNATE)))
                         {
                             if (alterPower > 40)
                                 target->SetPower(POWER_ALTERNATE, alterPower - 40);
@@ -294,7 +294,7 @@ class npc_amber_monster : public CreatureScript
                     uint8 alterPower;
                     if (target->HasAura(SPELL_RESHAPE_LIFE_MORPH))
                     {
-                        if (alterPower = target->GetPower(POWER_ALTERNATE))
+                        if ((alterPower = target->GetPower(POWER_ALTERNATE)))
                         {
                             if (alterPower > 40)
                                 target->SetPower(POWER_ALTERNATE, alterPower - 40);

@@ -1552,11 +1552,11 @@ class spell_q30050_resuscitate: public SpellScriptLoader
                         else if(step > 24)
                             step -= 24;
                         else if(step > 18)
-                            step =- 18;
+                            step -= 18;
                         else if(step > 12)
-                            step =- 12;
+                            step -= 12;
                         else if(step > 6)
-                            step =- 6;
+                            step -= 6;
 
                         switch (step)
                         {

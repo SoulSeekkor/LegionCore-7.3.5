@@ -337,6 +337,7 @@ class boss_ultraxion: public CreatureScript
                     case DIFFICULTY_25_HC:
                         instance->DoRespawnGameObject(instance->GetGuidData(DATA_LESSER_CACHE_25H), DAY);
                         break;
+                    default: break;
                 }
 
                 me->DespawnOrUnsummon(3000);

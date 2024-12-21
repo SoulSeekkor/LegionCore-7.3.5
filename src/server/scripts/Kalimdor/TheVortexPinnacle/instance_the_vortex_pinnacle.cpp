@@ -21,7 +21,7 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
             ObjectGuid uiAsaadGUID;
             uint8 OrbsCount;
 
-            void Initialize()
+            void Initialize() override
             {
                 SetBossNumber(MAX_ENCOUNTER);
                 uiGrandVizierErtanGUID.Clear();
@@ -30,12 +30,12 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
                 OrbsCount = 0;
             }
 
-            void OnPlayerEnter(Player* player)
+            void OnPlayerEnter(Player* player) override
             {
                 player->SendUpdateWorldState(5649, OrbsCount);
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 switch(pCreature->GetEntry())
                 {
@@ -51,7 +51,7 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
                 }
             }
 
-            void SetData(uint32 data, uint32 value)
+            void SetData(uint32 data, uint32 value) override
             {
                 switch (data)
                 {
@@ -74,7 +74,7 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 identifier) const
+            ObjectGuid GetGuidData(uint32 identifier) const override
             {
                 switch(identifier)
                 {
@@ -88,7 +88,7 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -101,7 +101,7 @@ class instance_the_vortex_pinnacle : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

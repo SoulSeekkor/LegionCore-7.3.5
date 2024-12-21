@@ -475,13 +475,13 @@ public:
             std::list<Creature*> tornados;
             GetCreatureListWithEntryInGrid(tornados, me, me->GetEntry(), 40.0f);
 
-            if (!tornados.empty() && tornados.size() < 4)
+            //if (!tornados.empty() && tornados.size() < 4)
                 //me->SummonCreature(me->GetEntry(),me->GetPositionX() - (cos(me->GetOrientation())*2),me->GetPositionY() - (sin(me->GetOrientation())*2),me->GetPositionZ());
 
-                    if (me->GetEntry() == 48854)
-                        MoveSide = true; // west
-                    else
-                        MoveSide = false; // east
+            if (me->GetEntry() == 48854)
+                MoveSide = true; // west
+            else
+                MoveSide = false; // east
         }
 
         void UpdateAI(uint32 diff)
@@ -490,7 +490,7 @@ public:
             {
                 float distanceX = GetAlakir()->GetPositionX() > me->GetPositionX() ? GetAlakir()->GetPositionX() - me->GetPositionX() : me->GetPositionX() - GetAlakir()->GetPositionX();
                 float distanceY = GetAlakir()->GetPositionY() > me->GetPositionY() ? GetAlakir()->GetPositionY() - me->GetPositionY() : me->GetPositionY() - GetAlakir()->GetPositionY();
-                me->GetMotionMaster()->MovePoint(0, (distanceX < defaultDistX) ? me->GetPositionX() + MoveSide ? 1 : - 1 : me->GetPositionX(),(distanceY < defaultDistY) ? me->GetPositionY() + MoveSide ? 1 : - 1 : me->GetPositionY(),me->GetPositionZ());
+                me->GetMotionMaster()->MovePoint(0, (distanceX < defaultDistX) ? me->GetPositionX() + (MoveSide ? 1 : - 1) : me->GetPositionX(),(distanceY < defaultDistY) ? me->GetPositionY() + (MoveSide ? 1 : - 1) : me->GetPositionY(),me->GetPositionZ());
             }
         }
 

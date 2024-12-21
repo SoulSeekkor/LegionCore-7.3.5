@@ -85,7 +85,7 @@ char ** cli_completion(const char * text, int start, int /*end*/)
 
 int cli_hook_func(void)
 {
-#ifdef PLATFORM != TC_PLATFORM_APPLE
+#if PLATFORM != TC_PLATFORM_APPLE
        if (World::IsStopped())
            rl_done = 1;
 #endif
@@ -141,7 +141,7 @@ void CliThread()
     //TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "");
 #if PLATFORM != TC_PLATFORM_WINDOWS
     rl_attempted_completion_function = cli_completion;
-    #ifdef PLATFORM != TC_PLATFORM_APPLE
+    #if PLATFORM != TC_PLATFORM_APPLE
     rl_event_hook = cli_hook_func;
     #endif
 #endif

@@ -214,7 +214,7 @@ public:
             events.RescheduleEvent(EVENT_GHOSTSTRIKE_PRECAST, 20000);
         }
 
-        void KilledUnit(Unit* unit)
+        void KilledUnit(Unit* unit) override
         {
             if (unit->ToPlayer())
                 Talk(SAY_KILL);

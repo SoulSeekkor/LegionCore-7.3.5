@@ -2102,14 +2102,17 @@ public:
             }
             
             if (check)
+            {
                 if (timer <= diff)
                 {
                     check = false;
                     if (ow)
                         go->DestroyForPlayer(ow);
                     go->SetLootState(GO_JUST_DEACTIVATED);
-                } else
+                }
+                else
                     timer -= diff;
+            }
         }
         
         void IsSummonedBy(Unit* summoner)
@@ -2501,13 +2504,17 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (check)
+            {
                 if (timer <= diff)
                 {
                     Talk(1);
                     me->GetMotionMaster()->MovePoint(0, 1223.62f, 1649.79f, 101.29f);
                     me->DespawnOrUnsummon(4000);
                     check = false;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
         }
 
     };
@@ -2573,12 +2580,16 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (check)
+            {
                 if (timer <= diff)
                 {
                     me->GetMotionMaster()->MovePoint(0, 1223.62f, 1649.79f, 101.29f);
                     me->DespawnOrUnsummon(4000);
                     check = false;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
                 
             if (!UpdateVictim() || me->HasUnitState(UNIT_STATE_CASTING))
                 return;            
@@ -2658,18 +2669,26 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (check2)
+            {
                 if (timer <= diff)
                 {
                     DoCast(191454);
                     check2 = false;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
             if (check1)
+            {
                 if (timer <= diff)
                 {
                     DoCast(191568);
                     DoCast(198908);
                     check1 = false;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
         }
 
     };
@@ -2787,7 +2806,7 @@ public:
                     if (auto player = playerItr.getSource())
                         if (player->GetAreaId() == 7705)
                             if (me->GetDistance2d(player) <= 270.0f)
-                                if (player->GetQuestStatus(38766) == QUEST_STATE_COMPLETE)
+                                if (player->GetQuestStatus(38766) == QUEST_STATUS_COMPLETE)
                                     me->CastSpell(player, 191669);
 
                 timer = urand(5000, 10000);

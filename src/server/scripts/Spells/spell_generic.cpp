@@ -101,6 +101,7 @@ class spell_endurance_of_niuzao : public SpellScriptLoader
                 if (Unit* owner = GetUnitOwner())
                 {
                     if (Player* plr = owner->ToPlayer())
+                    {
                         if (dmgInfo.GetAbsorb() < owner->GetHealth() || owner->HasAura(148010) || !plr->isInTankSpec())
                         {
                             dmgInfo.AbsorbDamage(-(int32(absorbAmount)));
@@ -113,6 +114,7 @@ class spell_endurance_of_niuzao : public SpellScriptLoader
                             owner->AddAura(148010, owner);
                             owner->AddAura(148958, owner);
                         }
+                    }
                 }
             }
 
@@ -1995,6 +1997,7 @@ class spell_gen_mounted_charge: public SpellScriptLoader
                             }
                             break;
                         }
+                    default: break;
                 }
             }
 
@@ -3395,17 +3398,21 @@ public:
                     break;
                 case SPELL_SPEED_RAM_TROT:
                     if (pCaster->HasAura(SPELL_RAM_FATIGUE))
+                    {
                         if (pCaster->GetAura(SPELL_RAM_FATIGUE)->GetStackAmount() <= 2)
                             pCaster->RemoveAura(SPELL_RAM_FATIGUE);
                         else
                             pCaster->GetAura(SPELL_RAM_FATIGUE)->ModStackAmount(-2);
+                    }
                     break;
                 case SPELL_SPEED_RAM_NORMAL:
                     if (pCaster->HasAura(SPELL_RAM_FATIGUE))
+                    {
                         if (pCaster->GetAura(SPELL_RAM_FATIGUE)->GetStackAmount() <= 4)
                             pCaster->RemoveAura(SPELL_RAM_FATIGUE);
                         else
                             pCaster->GetAura(SPELL_RAM_FATIGUE)->ModStackAmount(-4);
+                    }
                     break;
             }
             if (pCaster->HasAura(SPELL_RAM_FATIGUE))
@@ -4659,7 +4666,7 @@ class spell_gen_artificial_stamina : public SpellScriptLoader
 static uint32 const _effects[] = 
 {
     ATTACK_POWER_FOR_ATTACKER,
-    NULL,
+    DUMMY_PLACEHOLDER,
     MOD_DAMAGE_DONE_OVERRIDE,
     MOD_POWER_REGEN_OVERRIDE,
     STRENGTH_MULTIPLICATIVE,
@@ -7455,7 +7462,7 @@ struct areatrigger_gen_at_misc : public AreaTriggerAI
         index = at->GetRealEntry() == 8210;
     }
 
-    bool CalculateSpline(Position const* pos, Position& startPos, Position& endPos, std::vector<Position>& path)
+    bool CalculateSpline(Position const* pos, Position& startPos, Position& endPos, std::vector<Position>& path) override
     {
         if (targetGUID)
         {

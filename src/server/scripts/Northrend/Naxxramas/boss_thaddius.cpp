@@ -409,7 +409,9 @@ public:
                     }
                     bChainReset = false;
                     uiChainTimer = 3*IN_MILLISECONDS;
-                } else uiChainTimer -= uiDiff;
+                }
+                else
+                    uiChainTimer -= uiDiff;
             }
 
             if (!UpdateVictim())
@@ -451,16 +453,22 @@ public:
             {
                 DoCast(me, RAID_MODE(SPELL_POWERSURGE, H_SPELL_POWERSURGE));
                 powerSurgeTimer = urand(15000, 20000);
-            } else powerSurgeTimer -= uiDiff;
+            }
+            else
+                powerSurgeTimer -= uiDiff;
 
             if (bSwitch)
+            {
                 if (uiIdleTimer <= uiDiff)
                 {
-                    if (Creature *pFeugen = me->GetCreature(*me, instance->GetGuidData(DATA_FEUGEN)))
+                    if (Creature* pFeugen = me->GetCreature(*me, instance->GetGuidData(DATA_FEUGEN)))
                         pFeugen->SetReactState(REACT_AGGRESSIVE);
                     me->SetReactState(REACT_AGGRESSIVE);
                     bSwitch = false;
-                } else uiIdleTimer -= uiDiff;
+                }
+                else
+                    uiIdleTimer -= uiDiff;
+            }
 
             if (me->GetDistance(homePosition) > 15)
             {
@@ -471,8 +479,11 @@ public:
                             pTesla->CastSpell(pTarget, SPELL_SHOCK, false);
                     uiShockTimer = 1*IN_MILLISECONDS;
                     bShock = true;
-                }else uiShockTimer -= uiDiff;
-            } else if (bShock)
+                }
+                else
+                    uiShockTimer -= uiDiff;
+            }
+            else if (bShock)
             {
                 bShock = false;
                 bChainReset = true;

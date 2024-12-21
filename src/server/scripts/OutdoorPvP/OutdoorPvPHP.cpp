@@ -101,11 +101,15 @@ void OutdoorPvPHP::HandlePlayerEnterZone(ObjectGuid guid, uint32 zone)
 
     // add buffs
     if (player->GetTeam() == ALLIANCE)
-        if (m_AllianceTowersControlled >=3)
+    {
+        if (m_AllianceTowersControlled >= 3)
             player->CastSpell(player, AllianceBuff, true);
+    }
     else
-        if (m_HordeTowersControlled >=3)
+    {
+        if (m_HordeTowersControlled >= 3)
             player->CastSpell(player, HordeBuff, true);
+    }
 
     OutdoorPvP::HandlePlayerEnterZone(guid, zone);
 }

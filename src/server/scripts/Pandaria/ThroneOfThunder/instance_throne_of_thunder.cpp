@@ -128,7 +128,7 @@ public:
         GuidVector acidraindGuids;
         GuidVector crimsonfogGuids;
         
-        void Initialize()
+        void Initialize() override
         {
             SetBossNumber(16);
             LoadDoorData(doorData);
@@ -243,7 +243,7 @@ public:
                 instance->SummonCreature(megaeraheadlist[n], megaeraspawnpos[n]);
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -411,7 +411,7 @@ public:
                     creature->CastSpell(creature, SPELL_SHADO_PAN_ONSLAUGHT, true);
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {    
             switch (go->GetEntry())
             {
@@ -577,305 +577,314 @@ public:
             DoRemoveAurasDueToSpellOnPlayers(SPELL_TORRENT_OF_ICE_T);
         }
 
-        bool SetBossState(uint32 id, EncounterState state)
+        bool SetBossState(uint32 id, EncounterState state) override
         {
             if (!InstanceScript::SetBossState(id, state))
                 return false;
 
             switch (id)
             {
-            case DATA_STORM_CALLER:
-                if (state == DONE)
-                    HandleGameObject(jinrokhpredoorGuid, true);
-                break;
-            case DATA_JINROKH:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        for (GuidVector::const_iterator guid = mogufontsGuids.begin(); guid != mogufontsGuids.end(); guid++)
-                            HandleGameObject(*guid, false);
-                        HandleGameObject(jinrokhentdoorGuid, true);
-                        SetData(DATA_RESET_MOGU_FONTS, 0);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(jinrokhentdoorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(jinrokhentdoorGuid, true);
-                        HandleGameObject(jinrokhexdoorGuid, true); 
-                        break;
-                    }
-                }
-                break;
-            case DATA_STORMBRINGER:
-                if (state == DONE)
-                    HandleGameObject(horridonpredoorGuid, true);
-                break;
-            case DATA_HORRIDON:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        ResetHorridonAddGates();
-                        HandleGameObject(horridonentdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        ResetHorridonAddGates();
-                        HandleGameObject(horridonentdoorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(horridonentdoorGuid, true);
-                        HandleGameObject(horridonexdoorGuid, true);
-                        break;
-                    }
-                }
-                break;
-            case DATA_COUNCIL_OF_ELDERS:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
-                            HandleGameObject(*guids, true);
-                        break;
-                    case IN_PROGRESS:
-                        for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
-                            HandleGameObject(*guids, false);
-                        break;
-                    case DONE:
-                        for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
-                            HandleGameObject(*guids, true);
-                        if (Creature* gs = instance->GetCreature(garajalsoulGuid))
-                            gs->DespawnOrUnsummon();
-                        HandleGameObject(councilexdoorGuid, true);
-                        HandleGameObject(councilex2doorGuid, true);
-                        break;
-                    }
-                }
-                break;
-            case DATA_TORTOS:
-                if (state == DONE)
-                {
-                    HandleGameObject(tortosexdoorGuid, true);
-                    HandleGameObject(tortosex2doorGuid, true);
-                }
-                break;
-            case DATA_MEGAERA:
-                switch (state)
-                {
-                case NOT_STARTED:
-                    if (Creature* megaera = instance->GetCreature(megaeraGuid))
-                        megaera->AI()->DoAction(ACTION_MEGAERA_RESET);
+                case DATA_STORM_CALLER:
+                    if (state == DONE)
+                        HandleGameObject(jinrokhpredoorGuid, true);
                     break;
-                case IN_PROGRESS:
-                    if (Creature* megaera = instance->GetCreature(megaeraGuid))
-                        megaera->AI()->DoAction(ACTION_MEGAERA_IN_PROGRESS);
-                    if (!megaeralist.empty())
-                        for (GuidVector::const_iterator itr = megaeralist.begin(); itr != megaeralist.end(); itr++)
-                            if (Creature* mh = instance->GetCreature(*itr))
-                                if (mh->GetEntry() == NPC_FLAMING_HEAD_MELEE || mh->GetEntry() == NPC_FROZEN_HEAD_MELEE || mh->GetEntry() == NPC_VENOMOUS_HEAD_MELEE)
-                                    SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, mh);        
-                    break;
-                case DONE:
-                    DespawnMegaeraSummons();
-                    if (Creature* megaera = instance->GetCreature(megaeraGuid))
+                case DATA_JINROKH:
                     {
-                        if (!megaeralist.empty())
-                            for (GuidVector::const_iterator itr = megaeralist.begin(); itr != megaeralist.end(); itr++)
-                                if (Creature* mh = instance->GetCreature(*itr))
-                                    mh->AI()->DoAction(ACTION_UNSUMMON);
-
-                        othermeleehead = 0;
-                        lastdiedhead_convert = 0;
-                        othermeleehead_convert = 0;
-                        megaeralist.clear();
-
-                        megaera->setFaction(35);
-                        if (!instance->IsLfr())
-                            if (GameObject* chest = megaera->SummonGameObject(218805, 6415.06f, 4527.67f, -209.1780f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 604800))
-                                chest->SetObjectScale(3.0f);
-                        megaera->Kill(megaera);
-                    }
-                    HandleGameObject(megaeraexdoorGuid, true);
-                    break;
-                case FAIL:
-                    if (!safedespawnmegaeratimer)
-                    {
-                        PrepareToUnsummonMegaera();
-                        DespawnMegaeraSummons();
-                        safedespawnmegaeratimer = 5000;
-                    }
-                    break;
-                default:
-                    break;
-                }
-                break;
-            case DATA_JI_KUN:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        nestnum = 0;
-                        HandleGameObject(megaeraexdoorGuid, true);
-                        break;
-                    case DONE:
-                        HandleGameObject(jikunexdoorGuid, true);
-                        for (GuidVector::const_iterator guid = jikunfeatherGuids.begin(); guid != jikunfeatherGuids.end(); guid++)
+                        switch (state)
                         {
-                            if (GameObject* feather = instance->GetGameObject(*guid))
-                            {
-                                feather->SetRespawnTime(604800);
-                                feather->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                            }
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = mogufontsGuids.begin(); guid != mogufontsGuids.end(); guid++)
+                                    HandleGameObject(*guid, false);
+                                HandleGameObject(jinrokhentdoorGuid, true);
+                                SetData(DATA_RESET_MOGU_FONTS, 0);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(jinrokhentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(jinrokhentdoorGuid, true);
+                                HandleGameObject(jinrokhexdoorGuid, true); 
+                                break;
+                            default: break;
                         }
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(megaeraexdoorGuid, false);
-                        for (GuidVector::const_iterator guid = jikunfeatherGuids.begin(); guid != jikunfeatherGuids.end(); guid++)
-                            if (GameObject* feather = instance->GetGameObject(*guid))
-                                feather->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                        break;
                     }
-                }
-                break;
-            case DATA_DURUMU:
-            {
-                switch (state)
-                {
-                case NOT_STARTED:
-                    HandleGameObject(durumucombatfench2Guid, false);
-                    HandleGameObject(durumucombatfenchGuid, false);
                     break;
-                case IN_PROGRESS:
-                    HandleGameObject(durumucombatfench2Guid, true);
-                    HandleGameObject(durumucombatfenchGuid, true);
+                case DATA_STORMBRINGER:
+                    if (state == DONE)
+                        HandleGameObject(horridonpredoorGuid, true);
                     break;
-                case DONE:
-                    HandleGameObject(durumuexdoorGuid, true);
-                    HandleGameObject(durumucombatfench2Guid, false);
-                    HandleGameObject(durumucombatfenchGuid, false);
-                    break;
-                }
-                break;
-            }
-            case DATA_PRIMORDIUS:
-                {
-                    switch (state)
+                case DATA_HORRIDON:
                     {
-                    case NOT_STARTED:
-                        HandleGameObject(primordiusentdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(primordiusentdoorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(primordiusentdoorGuid, true);
-                        HandleGameObject(primordiusexdoorGuid, true);
-                        break;
-                    }
-                }
-                break;
-            case DATA_DARK_ANIMUS:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        for (GuidVector::const_iterator guid = massiveanimagolemGuids.begin(); guid != massiveanimagolemGuids.end(); guid++)
+                        switch (state)
                         {
-                            if (Creature* mag = instance->GetCreature(*guid))
+                            case NOT_STARTED:
+                                ResetHorridonAddGates();
+                                HandleGameObject(horridonentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                ResetHorridonAddGates();
+                                HandleGameObject(horridonentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(horridonentdoorGuid, true);
+                                HandleGameObject(horridonexdoorGuid, true);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                case DATA_COUNCIL_OF_ELDERS:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
+                                    HandleGameObject(*guids, true);
+                                break;
+                            case IN_PROGRESS:
+                                for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
+                                    HandleGameObject(*guids, false);
+                                break;
+                            case DONE:
+                                for (GuidVector::const_iterator guids = councilentdoorGuids.begin(); guids != councilentdoorGuids.end(); guids++)
+                                    HandleGameObject(*guids, true);
+                                if (Creature* gs = instance->GetCreature(garajalsoulGuid))
+                                    gs->DespawnOrUnsummon();
+                                HandleGameObject(councilexdoorGuid, true);
+                                HandleGameObject(councilex2doorGuid, true);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                case DATA_TORTOS:
+                    if (state == DONE)
+                    {
+                        HandleGameObject(tortosexdoorGuid, true);
+                        HandleGameObject(tortosex2doorGuid, true);
+                    }
+                    break;
+                case DATA_MEGAERA:
+                    switch (state)
+                    {
+                        case NOT_STARTED:
+                            if (Creature* megaera = instance->GetCreature(megaeraGuid))
+                                megaera->AI()->DoAction(ACTION_MEGAERA_RESET);
+                            break;
+                        case IN_PROGRESS:
+                            if (Creature* megaera = instance->GetCreature(megaeraGuid))
+                                megaera->AI()->DoAction(ACTION_MEGAERA_IN_PROGRESS);
+                            if (!megaeralist.empty())
+                                for (GuidVector::const_iterator itr = megaeralist.begin(); itr != megaeralist.end(); itr++)
+                                    if (Creature* mh = instance->GetCreature(*itr))
+                                        if (mh->GetEntry() == NPC_FLAMING_HEAD_MELEE || mh->GetEntry() == NPC_FROZEN_HEAD_MELEE || mh->GetEntry() == NPC_VENOMOUS_HEAD_MELEE)
+                                            SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, mh);        
+                            break;
+                        case DONE:
+                            DespawnMegaeraSummons();
+                            if (Creature* megaera = instance->GetCreature(megaeraGuid))
                             {
-                                if (mag->isAlive() && mag->isInCombat())
-                                    mag->AI()->EnterEvadeMode();
-                                else if (!mag->isAlive())
+                                if (!megaeralist.empty())
+                                    for (GuidVector::const_iterator itr = megaeralist.begin(); itr != megaeralist.end(); itr++)
+                                        if (Creature* mh = instance->GetCreature(*itr))
+                                            mh->AI()->DoAction(ACTION_UNSUMMON);
+
+                                othermeleehead = 0;
+                                lastdiedhead_convert = 0;
+                                othermeleehead_convert = 0;
+                                megaeralist.clear();
+
+                                megaera->setFaction(35);
+                                if (!instance->IsLfr())
+                                    if (GameObject* chest = megaera->SummonGameObject(218805, 6415.06f, 4527.67f, -209.1780f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 604800))
+                                        chest->SetObjectScale(3.0f);
+                                megaera->Kill(megaera);
+                            }
+                            HandleGameObject(megaeraexdoorGuid, true);
+                            break;
+                        case FAIL:
+                            if (!safedespawnmegaeratimer)
+                            {
+                                PrepareToUnsummonMegaera();
+                                DespawnMegaeraSummons();
+                                safedespawnmegaeratimer = 5000;
+                            }
+                            break;
+                        default: break;
+                    }
+                    break;
+                case DATA_JI_KUN:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                nestnum = 0;
+                                HandleGameObject(megaeraexdoorGuid, true);
+                                break;
+                            case DONE:
+                                HandleGameObject(jikunexdoorGuid, true);
+                                for (GuidVector::const_iterator guid = jikunfeatherGuids.begin(); guid != jikunfeatherGuids.end(); guid++)
                                 {
-                                    mag->Respawn();
-                                    mag->GetMotionMaster()->MoveTargetedHome();
+                                    if (GameObject* feather = instance->GetGameObject(*guid))
+                                    {
+                                        feather->SetRespawnTime(604800);
+                                        feather->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                                    }
                                 }
-                            }
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(megaeraexdoorGuid, false);
+                                for (GuidVector::const_iterator guid = jikunfeatherGuids.begin(); guid != jikunfeatherGuids.end(); guid++)
+                                    if (GameObject* feather = instance->GetGameObject(*guid))
+                                        feather->SetFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                                break;
+                            default: break;
                         }
-                        HandleGameObject(danimusentdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        if (Creature* animus = instance->GetCreature(darkanimusGuid))
-                        {
-                            if (animus->isAlive() && !animus->isInCombat())
-                                animus->AI()->DoZoneInCombat(animus, 150.0f);
-                        }
-
-                        for (GuidVector::const_iterator guid = massiveanimagolemGuids.begin(); guid != massiveanimagolemGuids.end(); guid++)
-                        {
-                            if (Creature* mag = instance->GetCreature(*guid))
-                            {
-                                if (mag->isAlive() && !mag->isInCombat())
-                                    mag->AI()->DoZoneInCombat(mag, 150.0f);
-                            }
-                        }
-                        HandleGameObject(danimusentdoorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(danimusentdoorGuid, true);
-                        HandleGameObject(danimusexdoorGuid, true);
-                        break;
                     }
-                }
-                break;
-            case DATA_IRON_QON:
-                {
-                    switch (state)
-                    {
-                    case NOT_STARTED:
-                        HandleGameObject(ironqonentdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(ironqonentdoorGuid, false);
-                        break;
-                    case DONE:
-                        HandleGameObject(ironqonentdoorGuid, true);
-                        HandleGameObject(ironqonexdoorGuid, true);
-                        break;
-                    }
-                }
-                break;
-            case DATA_TWIN_CONSORTS:
+                    break;
+                case DATA_DURUMU:
                 {
                     switch (state)
                     {
                         case NOT_STARTED:
-                            for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            HandleGameObject(twinentdoorGuid, true);
+                            HandleGameObject(durumucombatfench2Guid, false);
+                            HandleGameObject(durumucombatfenchGuid, false);
                             break;
                         case IN_PROGRESS:
-                            for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
-                                HandleGameObject(*guid, false);
-                            HandleGameObject(twinentdoorGuid, false);
+                            HandleGameObject(durumucombatfench2Guid, true);
+                            HandleGameObject(durumucombatfenchGuid, true);
                             break;
                         case DONE:
-                            for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            HandleGameObject(twinentdoorGuid, true);
-                            HandleGameObject(twinexdoorGuid, true);
-                            break;                         
+                            HandleGameObject(durumuexdoorGuid, true);
+                            HandleGameObject(durumucombatfench2Guid, false);
+                            HandleGameObject(durumucombatfenchGuid, false);
+                            break;
+                        default: break;
                     }
+                    break;
                 }
-                break;
-            case DATA_RA_DEN:
-                {
-                    switch (state)
+                case DATA_PRIMORDIUS:
                     {
-                    case NOT_STARTED:
-                    case DONE:
-                        HandleGameObject(radenentdoorGuid, true);
-                        break;
-                    case IN_PROGRESS:
-                        HandleGameObject(radenentdoorGuid, false);
-                        break;
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                HandleGameObject(primordiusentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(primordiusentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(primordiusentdoorGuid, true);
+                                HandleGameObject(primordiusexdoorGuid, true);
+                                break;
+                            default: break;
+                        }
                     }
-                }
-                break;
-            default:
-                break;
+                    break;
+                case DATA_DARK_ANIMUS:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = massiveanimagolemGuids.begin(); guid != massiveanimagolemGuids.end(); guid++)
+                                {
+                                    if (Creature* mag = instance->GetCreature(*guid))
+                                    {
+                                        if (mag->isAlive() && mag->isInCombat())
+                                            mag->AI()->EnterEvadeMode();
+                                        else if (!mag->isAlive())
+                                        {
+                                            mag->Respawn();
+                                            mag->GetMotionMaster()->MoveTargetedHome();
+                                        }
+                                    }
+                                }
+                                HandleGameObject(danimusentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                if (Creature* animus = instance->GetCreature(darkanimusGuid))
+                                {
+                                    if (animus->isAlive() && !animus->isInCombat())
+                                        animus->AI()->DoZoneInCombat(animus, 150.0f);
+                                }
+
+                                for (GuidVector::const_iterator guid = massiveanimagolemGuids.begin(); guid != massiveanimagolemGuids.end(); guid++)
+                                {
+                                    if (Creature* mag = instance->GetCreature(*guid))
+                                    {
+                                        if (mag->isAlive() && !mag->isInCombat())
+                                            mag->AI()->DoZoneInCombat(mag, 150.0f);
+                                    }
+                                }
+                                HandleGameObject(danimusentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(danimusentdoorGuid, true);
+                                HandleGameObject(danimusexdoorGuid, true);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                case DATA_IRON_QON:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                HandleGameObject(ironqonentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(ironqonentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(ironqonentdoorGuid, true);
+                                HandleGameObject(ironqonexdoorGuid, true);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                case DATA_TWIN_CONSORTS:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                HandleGameObject(twinentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
+                                    HandleGameObject(*guid, false);
+                                HandleGameObject(twinentdoorGuid, false);
+                                break;
+                            case DONE:
+                                for (GuidVector::const_iterator guid = twinfencedoorGuids.begin(); guid != twinfencedoorGuids.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                HandleGameObject(twinentdoorGuid, true);
+                                HandleGameObject(twinexdoorGuid, true);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                case DATA_RA_DEN:
+                    {
+                        switch (state)
+                        {
+                            case NOT_STARTED:
+                            case DONE:
+                                HandleGameObject(radenentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(radenentdoorGuid, false);
+                                break;
+                            default: break;
+                        }
+                    }
+                    break;
+                default:
+                    break;
             }
            
             if (state == DONE && id != DATA_RA_DEN)
@@ -884,7 +893,7 @@ public:
             return true;
         }
 
-        void Update(uint32 diff)
+        void Update(uint32 diff) override
         {
             if (safedespawnmegaeratimer)
             {
@@ -922,7 +931,7 @@ public:
             go->SetGoState(GO_STATE_ACTIVE); */
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -1061,7 +1070,7 @@ public:
             }
         }
 
-        uint32 GetData(uint32 type) const
+        uint32 GetData(uint32 type) const override
         {
             switch (type)
             {
@@ -1114,7 +1123,7 @@ public:
             return 0;
         }
 
-        void CreatureDies(Creature* creature, Unit* /*killer*/)
+        void CreatureDies(Creature* creature, Unit* /*killer*/) override
         {
             switch (creature->GetEntry())
             {
@@ -1567,14 +1576,14 @@ public:
                 nestnum = 0;
         }
 
-        std::string GetSaveData()
+        std::string GetSaveData() override
         {
             std::ostringstream saveStream;
             saveStream << GetBossSaveData() << " ";
             return saveStream.str();
         }
 
-        void Load(const char* data)
+        void Load(const char* data) override
         {
             std::istringstream loadStream(LoadBossState(data));
             uint32 buff;

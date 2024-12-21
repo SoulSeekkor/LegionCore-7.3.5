@@ -174,7 +174,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
                 achieve = 0;
             }
 
-            void DoAction(const int32 action)
+            void DoAction(const int32 action) override
             {
                 switch (action)
                 {
@@ -225,7 +225,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
                 }
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_PLATES)
                 {
@@ -271,13 +271,13 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
                 return 0;
             }
 
-            void DamageTaken(Unit* /*who*/, uint32 &damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*who*/, uint32 &damage, DamageEffectType dmgType) override
             {
                 if (me->GetHealth() <= damage)
                     damage = 0;
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 events.Update(diff);
 
@@ -312,6 +312,7 @@ class npc_spine_of_deathwing_deathwing : public CreatureScript
                                         instance->SetData(DATA_SPAWN_GREATER_CHEST, DATA_GREATER_CACHE_25H);
                                         instance->DoCompleteAchievement(6115);
                                         break;
+                                    default: break;
                                 }
                                 instance->DoStartMovie(75);
                                 Map::PlayerList const &plrList = instance->instance->GetPlayers();
@@ -687,7 +688,7 @@ class npc_spine_of_deathwing_hideous_amalgamation : public CreatureScript
                 isExplode = false;
             }
 
-            void Reset()
+            void Reset() override
             {
                 events.Reset();
                 me->ApplySpellImmune(0, IMMUNITY_STATE, SPELL_AURA_MOD_TAUNT, false);
@@ -697,7 +698,7 @@ class npc_spine_of_deathwing_hideous_amalgamation : public CreatureScript
                         AttackStart(target);
             }
 
-            void DoAction(const int32 action)
+            void DoAction(const int32 action) override
             {
                 if (action == ACTION_ABSORB_BLOOD)
                 {
@@ -711,7 +712,7 @@ class npc_spine_of_deathwing_hideous_amalgamation : public CreatureScript
                 }
             }
 
-            void JustDied(Unit* /*who*/)
+            void JustDied(Unit* /*who*/) override
             {
                 if (IsHeroic())
                 {
@@ -754,13 +755,13 @@ class npc_spine_of_deathwing_hideous_amalgamation : public CreatureScript
                 return 0;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void EnterCombat(Unit* /*who*/) override
             {
                 if (IsHeroic())
                     events.ScheduleEvent(EVENT_BLOOD_CORRUPTION, urand(6000, 11000));
             }
 
-            void DamageTaken(Unit* /*who*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*who*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (me->GetHealth() <= damage)
                 {
@@ -779,7 +780,7 @@ class npc_spine_of_deathwing_hideous_amalgamation : public CreatureScript
                 }
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;
@@ -982,7 +983,7 @@ class npc_spine_of_deathwing_burning_tendons : public CreatureScript
                 isOpened = false;
             }
 
-            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo)
+            void SpellHit(Unit* /*who*/, const SpellInfo* spellInfo) override
             {
                 if (spellInfo->Id == SPELL_NUCLEAR_BLAST_SCRIPT && !isOpened)
                 {
@@ -1000,13 +1001,13 @@ class npc_spine_of_deathwing_burning_tendons : public CreatureScript
                 }
             }
 
-            void DamageTaken(Unit* /*who*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*who*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (!isOpened)
                     damage = 0;
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 if (type == DATA_POS)
                     pos = (uint8)data;
@@ -1019,12 +1020,12 @@ class npc_spine_of_deathwing_burning_tendons : public CreatureScript
                 return 0;
             }
 
-            void EnterEvadeMode()
+            void EnterEvadeMode() override
             {
                 return;
             }
 
-            void JustDied(Unit* /*who*/)
+            void JustDied(Unit* /*who*/) override
             {
                 DoCast(me, ((pos % 2) == 1) ? SPELL_PLATE_FLY_OFF_RIGHT : SPELL_PLATE_FLY_OFF_LEFT, true);
                 if (Creature* pDeathwing = me->FindNearestCreature(NPC_SPINE_OF_DEATHWING, 300.0f))
@@ -1034,7 +1035,7 @@ class npc_spine_of_deathwing_burning_tendons : public CreatureScript
                 me->DespawnOrUnsummon();
             }
 
-            void UpdateAI(uint32 diff) 
+            void UpdateAI(uint32 diff) override
             {
                 events.Update(diff);
 
@@ -1093,6 +1094,7 @@ class spell_spine_of_deathwing_roll_control_check : public SpellScriptLoader
                     case DIFFICULTY_25_HC:
                         min_diff = 6;
                         break;
+                    default: break;
                 }
                 if (targets.size() <= min_diff)
                     min_diff = targets.size() == 1 ? 1 : targets.size() / 2;

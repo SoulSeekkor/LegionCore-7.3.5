@@ -797,7 +797,7 @@ bool Loot::FillLoot(uint32 lootId, LootStore const& store, Player* lootOwner, bo
     if (go && isRareOrGo && go->InInstance())
         if (uint32 instanceId = go->GetInstanceId())
             if (Scenario* progress = sScenarioMgr->GetScenario(instanceId))
-                if (_challenge = progress->GetChallenge())
+                if ((_challenge = progress->GetChallenge()))
                     if (_challenge->_complete)
                         _itemContext = sChallengeMgr->GetLootTreeMod(_levelBonus, _challengeLevel, _challenge);
 
@@ -898,7 +898,7 @@ bool Loot::FillLoot(uint32 lootId, LootStore const& store, Player* lootOwner, bo
         }
     }
     // ... for nonGroup loot
-    else if (isOnlyQuest && (creature && creature->CanShared() || isBoss))
+    else if (isOnlyQuest && ((creature && creature->CanShared()) || isBoss))
     {
         GuidSet* savethreatlist = creature->GetSaveThreatList();
         // TC_LOG_DEBUG(LOG_FILTER_LOOT, "Loot::FillLoot isOnlyQuest && creature && creature->CanShared size %u", savethreatlist->size());
@@ -925,7 +925,7 @@ bool Loot::FillLoot(uint32 lootId, LootStore const& store, Player* lootOwner, bo
         FillNotNormalLootFor(lootOwner, true);
     }
 
-    if (!bonusLoot && (noGroup && personal || _challengeLevel && !isOploteChest) && !(_isEmissaryLoot || _isTokenLoot || _isItemLoot || _IsPvPLoot)) // Add looters to personal loot
+    if (!bonusLoot && ((noGroup && personal) || (_challengeLevel && !isOploteChest)) && !(_isEmissaryLoot || _isTokenLoot || _isItemLoot || _IsPvPLoot)) // Add looters to personal loot
         FillPersonalLootFor(lootOwner);
 
     if(lootId == 90406 || lootId == 90399 || lootId == 90397 || lootId == 90400 ||  lootId == 90398 || lootId == 90395 || lootId == 90401)
@@ -1722,7 +1722,7 @@ void Loot::AddLegendaryItemToDrop()
 
     if (uint32 itemID = sObjectMgr->GetRandomLegendaryItem(m_lootOwner))
     {
-        sLog->outWarden("Player %s on map %u with killpoints %f and chance %f looted legendary item %u from source: guid (high: " UI64FMTDX ", low: " UI64FMTDX ")", m_lootOwner->GetSession()->GetPlayerName(false).c_str(), m_lootOwner->GetMapId(), m_lootOwner->m_killPoints, chance, itemID, uint8(LootSourceGuid.GetHigh()), LootSourceGuid.GetLowPart());
+        sLog->outWarden("Player %s on map %u with killpoints %f and chance %f looted legendary item %u from source: guid (high: %u, low: " UI64FMTDX ")", m_lootOwner->GetSession()->GetPlayerName(false).c_str(), m_lootOwner->GetMapId(), m_lootOwner->m_killPoints, chance, itemID, uint8(LootSourceGuid.GetHigh()), LootSourceGuid.GetLowPart());
         LootStoreItem item = LootStoreItem(itemID, LOOT_ITEM_TYPE_ITEM, 0.0f, 0, 0, 1, 1);
         AddItem(item);
         m_lootOwner->m_killPoints = 0.0f;
@@ -1733,7 +1733,7 @@ void Loot::AddLegendaryItem()
 {
     if (uint32 itemID = sObjectMgr->GetRandomLegendaryItem(m_lootOwner))
     {
-        sLog->outWarden("Player %s on map %u with killpoints %f looted legendary item %u from source: guid (high: " UI64FMTDX ", low: " UI64FMTDX ")", m_lootOwner->GetSession()->GetPlayerName(false).c_str(), m_lootOwner->GetMapId(), m_lootOwner->m_killPoints, itemID, uint8(LootSourceGuid.GetHigh()), LootSourceGuid.GetLowPart());
+        sLog->outWarden("Player %s on map %u with killpoints %f looted legendary item %u from source: guid (high: %u, low: " UI64FMTDX ")", m_lootOwner->GetSession()->GetPlayerName(false).c_str(), m_lootOwner->GetMapId(), m_lootOwner->m_killPoints, itemID, uint8(LootSourceGuid.GetHigh()), LootSourceGuid.GetLowPart());
         LootStoreItem item = LootStoreItem(itemID, LOOT_ITEM_TYPE_ITEM, 0.0f, 0, 0, 1, 1);
         AddItem(item);
     }
@@ -3184,7 +3184,7 @@ void LootTemplate::ProcessChallengeChest(Loot& loot, uint32 lootId, Challenge* _
         for (auto const& item : ItemPossibleDrops)
         {
             loot.AddItem(item);
-            sLog->outWarden("Player %s on map %u looted item %u from: challenge chest (Level %u, LevelBonus %u, ChallengeFinishTime %u) allItemCount %u ItemPossibleDrops %u",
+            sLog->outWarden("Player %s on map %u looted item %u from: challenge chest (Level %u, LevelBonus %u, ChallengeFinishTime %u) allItemCount %u ItemPossibleDrops " UI64FMTDX,
             lootOwner->GetName(), lootOwner->GetMapId(), item.itemid, _challenge->GetChallengeLevel() - _challenge->GetLevelBonus(), _challenge->GetLevelBonus(), _challenge->GetChallengeTimer(), allItemCount, ItemPossibleDrops.size());
         }
     }

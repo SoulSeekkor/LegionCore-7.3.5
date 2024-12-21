@@ -48,14 +48,14 @@ class instance_zulaman : public InstanceMapScript
                 archaeologyQuestAura = 0;
             }
 
-            void OnPlayerEnter(Player* player)
+            void OnPlayerEnter(Player* player) override
             {
                 if (archaeologyQuestAura)
                     if (!player->HasAura(archaeologyQuestAura))
                         player->CastSpell(player, archaeologyQuestAura, true);
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 switch (pCreature->GetEntry())
                 {
@@ -100,7 +100,7 @@ class instance_zulaman : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch (pGo->GetEntry())
                 {
@@ -149,7 +149,7 @@ class instance_zulaman : public InstanceMapScript
                 }
             }
 
-            bool SetBossState(uint32 id, EncounterState state)
+            bool SetBossState(uint32 id, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(id, state))
                     return false;
@@ -199,7 +199,7 @@ class instance_zulaman : public InstanceMapScript
                 return true;
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 switch (type)
                 {
@@ -243,7 +243,7 @@ class instance_zulaman : public InstanceMapScript
                 }
             }
 
-            void Update(uint32 diff)
+            void Update(uint32 diff) override
             {
                 if (QuestMinute)
                 {
@@ -281,7 +281,7 @@ class instance_zulaman : public InstanceMapScript
                 }
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -292,7 +292,7 @@ class instance_zulaman : public InstanceMapScript
                 return ss.str();
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

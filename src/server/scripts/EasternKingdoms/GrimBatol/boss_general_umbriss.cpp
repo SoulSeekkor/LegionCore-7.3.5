@@ -75,7 +75,7 @@ struct boss_general_umbriss : public BossAI
         summons.DespawnAll();
     }
 
-    void KilledUnit(Unit* victim)
+    void KilledUnit(Unit* victim) override
     {
         if (!victim)
             return;

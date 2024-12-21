@@ -132,7 +132,7 @@ struct boss_skorpyron : BossAI
             go->SetByteValue(GAMEOBJECT_FIELD_BYTES_1, 0, 1);  // for next event. We need use it here, because event can be play not every time
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         me->RemoveAllAuras();
         RemoveAuras();

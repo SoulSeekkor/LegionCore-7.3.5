@@ -157,10 +157,11 @@ namespace Trinity
             Creature* creature = u->ToCreature();
             uint32 gain;
 
-            if (u->IsCreature() && (creature->isTotem() || creature->isPet() ||
-                creature->GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_NO_XP_AT_KILL) ||
+            if ((u->IsCreature() && (creature->isTotem() || creature->isPet() || creature->GetCreatureTemplate()->flags_extra & CREATURE_FLAG_EXTRA_NO_XP_AT_KILL)) ||
                 creature->GetCreatureTemplate()->Type == CREATURE_TYPE_CRITTER)
+            {
                 gain = 0;
+            }
             else
             {
                 gain = BaseGain(player->getLevel(), u->getLevelForXPReward(player));

@@ -5393,7 +5393,7 @@ public:
 
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_azsuna_allari_q37660AI(creature);
     }
@@ -5471,7 +5471,7 @@ public:
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_azsuna_stellagosa_q37862AI(creature);
     }
@@ -5588,7 +5588,7 @@ public:
         uint32 pointid;
         uint8 ridersdied = 0;
 
-        void Reset()
+        void Reset() override
         {
             checktimer = 2000;
             holyfire = urand(4000, 6000);
@@ -5786,7 +5786,7 @@ public:
 
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
 
             if (!UpdateVictim())
@@ -5872,7 +5872,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -5918,7 +5918,7 @@ public:
     {
         npc_dalaran_defender_barremAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void Reset()
+        void Reset() override
         {
             me->SetVisible(true);
             DoCast(209190);
@@ -6048,7 +6048,7 @@ public:
     {
         npc_azsuna_daglop_q38237AI(Creature* creature) : ScriptedAI(creature) {}
 
-        void Reset() {}
+        void Reset() override {}
 
         void IsSummonedBy(Unit* who) override
         {
@@ -6121,7 +6121,7 @@ public:
 
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_azsuna_daglop_q38237AI(creature);
     }
@@ -6166,7 +6166,7 @@ public:
 
         bool boarded;
 
-        void Reset() 
+        void Reset() override
         {
             ResetGrasp();
         }
@@ -6196,7 +6196,7 @@ public:
         }
     };
 
-    CreatureAI* GetAI(Creature* creature) const
+    CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_grasp_of_underking_questAI(creature);
     }
@@ -6527,7 +6527,7 @@ struct npc_molten_behemoth : public ScriptedAI
                 player->UpdateAchievementCriteria(CRITERIA_TYPE_BE_SPELL_TARGET, 101167);
     }
 
-    void Reset()
+    void Reset() override
     {
         stomp = urand(15000, 18000);
         stonethrow = urand(8000, 12000);
@@ -6601,7 +6601,7 @@ struct npc_flamewaker_sentinel : public ScriptedAI
         return 0;
     }
 
-    void Reset()
+    void Reset() override
     {
         slam = urand(8000, 12000);
         takePlayer = urand(15000, 18000);
@@ -6665,7 +6665,7 @@ struct npc_flamewaker_shaman : public ScriptedAI
             ++damaged;
     }
 
-    void Reset()
+    void Reset() override
     {
         flamewave = urand(8000, 12000);
         damaged = 0;
@@ -6822,7 +6822,7 @@ struct npc_iot_defence_crystal : public ScriptedAI
 
     uint16 timer = 1500;
 
-    void KilledUnit(Unit* unit)
+    void KilledUnit(Unit* unit) override
     {
         std::list<Player*> playerList;
         me->GetPlayerListInGrid(playerList, 8.0f);

@@ -70,15 +70,15 @@ LogsDir = "./Data/Logs"
 #                     ".;/path/to/unix_socket;username;password;database" - (use Unix sockets on
 #                                                                           Unix/Linux)
 #
-#        Default:     "127.0.0.1;3306;root;admin;auth"       - (LoginDatabaseInfo)
-#                     "127.0.0.1;3306;root;admin;characters" - (CharacterDatabaseInfo)
-#                     "127.0.0.1;3306;root;admin;hotfixes"   - (HotfixDatabaseInfo)
-#                     "127.0.0.1;3306;root;admin;world"      - (WorldDatabaseInfo)
+#        Default:     "127.0.0.1;3306;root;admin;legioncore_auth"       - (LoginDatabaseInfo)
+#                     "127.0.0.1;3306;root;admin;legioncore_characters" - (CharacterDatabaseInfo)
+#                     "127.0.0.1;3306;root;admin;legioncore_hotfixes"   - (HotfixDatabaseInfo)
+#                     "127.0.0.1;3306;root;admin;legioncore_world"      - (WorldDatabaseInfo)
 
-LoginDatabaseInfo     = "127.0.0.1;3306;root;admin;auth"
-CharacterDatabaseInfo = "127.0.0.1;3306;root;admin;characters"
-HotfixDatabaseInfo    = "127.0.0.1;3306;root;admin;hotfixes"
-WorldDatabaseInfo     = "127.0.0.1;3306;root;admin;world"
+LoginDatabaseInfo     = "127.0.0.1;3306;root;admin;legioncore_auth"
+CharacterDatabaseInfo = "127.0.0.1;3306;root;admin;legioncore_characters"
+HotfixDatabaseInfo    = "127.0.0.1;3306;root;admin;legioncore_hotfixes"
+WorldDatabaseInfo     = "127.0.0.1;3306;root;admin;legioncore_world"
 
 #
 #    LoginDatabase.WorkerThreads

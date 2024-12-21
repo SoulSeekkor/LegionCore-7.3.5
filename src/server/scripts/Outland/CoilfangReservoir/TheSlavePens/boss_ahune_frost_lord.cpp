@@ -55,7 +55,7 @@ public:
 
         EventMap events;
 
-        void Reset()
+        void Reset() override
         {
             Phase = 1;
             me->AddAura(45954, me);

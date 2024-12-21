@@ -402,7 +402,7 @@ struct boss_maiden_of_vigilance : BossAI
                 {
                     Unit* target = nullptr;
                     for (int8 i = 2; i >= 0; i--)
-                        if (target = SelectTarget(SELECT_TARGET_RANDOM, i))
+                        if ((target = SelectTarget(SELECT_TARGET_RANDOM, i)))
                             break;
 
                     if (!target)

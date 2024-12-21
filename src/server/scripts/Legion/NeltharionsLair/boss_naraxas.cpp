@@ -115,7 +115,7 @@ struct boss_naraxas : public BossAI
         events.RescheduleEvent(EVENT_CALL_ANGRY_CROWD, 4000);
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         BossAI::EnterEvadeMode();
 
@@ -326,7 +326,7 @@ struct npc_naraxas_wormspeaker_devout : public ScriptedAI
         events.RescheduleEvent(EVENT_1, 1000);
     }
 
-    void DoAction(int32 const actionId)
+    void DoAction(int32 const actionId) override
     {
         jumpIdx = actionId;
         me->SetHomePosition(speakerPos[jumpIdx+4]);

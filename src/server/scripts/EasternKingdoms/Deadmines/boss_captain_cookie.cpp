@@ -316,7 +316,7 @@ class npc_captain_cookie_bad_food : public CreatureScript
                 instance = pCreature->GetInstanceScript();
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 me->DespawnOrUnsummon();
             }

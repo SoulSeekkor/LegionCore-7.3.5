@@ -267,7 +267,7 @@ struct boss_high_botanist_telarn : BossAI
         }
     }
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         BossAI::EnterEvadeMode();
         RemoveAurasPlayers();
@@ -533,7 +533,7 @@ struct npc_nh_solarist_telarn : ScriptedAI
         });
     }
 
-    void Reset()
+    void Reset() override
     {
         events.Reset();
     }
@@ -771,7 +771,7 @@ struct npc_nh_arcanist_telarn : ScriptedAI
         });
     }
 
-    void Reset()
+    void Reset() override
     {
         events.Reset();
     }
@@ -974,7 +974,7 @@ struct npc_nh_naturalist_telarn : ScriptedAI
         });
     }
 
-    void Reset()
+    void Reset() override
     {
         events.Reset();
     }

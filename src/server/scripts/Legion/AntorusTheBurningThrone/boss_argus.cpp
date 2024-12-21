@@ -1179,7 +1179,7 @@ struct npc_argus_constellar_designate : ScriptedAI
             me->CastSpell(me, SPELL_INEVITABILITY, true);
     }
 
-    void DoAction(int32 const actionId)
+    void DoAction(int32 const actionId) override
     {
         switch (actionId)
         {
@@ -1795,7 +1795,7 @@ class spell_argus_titanforging_energize_periodic : public AuraScript
         if (!caster)
             return;
 
-        if (powerCount = caster->GetPower(caster->getPowerType()))
+        if ((powerCount = caster->GetPower(caster->getPowerType())))
             caster->SetPower(caster->getPowerType(), powerCount - 1);
     }
 

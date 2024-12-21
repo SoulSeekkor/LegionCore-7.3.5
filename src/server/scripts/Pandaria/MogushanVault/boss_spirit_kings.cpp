@@ -160,7 +160,7 @@ class boss_spirit_kings_controler : public CreatureScript
                 }
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 summons.Summon(summon);
             }
@@ -464,7 +464,7 @@ class boss_spirit_kings : public CreatureScript
                     con->AI()->DoAction(ACTION_SPIRIT_DONE);
             }
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 summons.Summon(summon);
             }
@@ -668,7 +668,7 @@ class mob_pinning_arrow : public CreatureScript
                 playerGuid.Clear();
             }
 
-            void SetGUID(ObjectGuid const& guid, int32 /*id*/ = 0)
+            void SetGUID(ObjectGuid const& guid, int32 /*id*/ = 0) override
             {
                 playerGuid = guid;
 
@@ -797,7 +797,7 @@ class npc_flanking_mogu : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
             }
 
-            void IsSummonedBy(Unit* summoner)
+            void IsSummonedBy(Unit* summoner) override
             {
                 me->RemoveAurasDueToSpell(SPELL_GHOST_VISUAL);
                 DoCast(SPELL_TRIGGER_ATTACK);

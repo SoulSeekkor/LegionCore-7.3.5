@@ -535,7 +535,7 @@ struct npc_aggramar_ember_of_taeshalach : ScriptedAI
 
     void Reset() override {}
 
-    void DoAction(int32 const actionId)
+    void DoAction(int32 const actionId) override
     {
         if (eruption)
             return;

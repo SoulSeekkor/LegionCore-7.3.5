@@ -358,7 +358,7 @@ public:
             Talk(2);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (AggroTimer)
             {
@@ -473,7 +473,7 @@ public:
             Talk(2);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (AggroTimer)
             {
@@ -1059,7 +1059,7 @@ public:
         bool SummonedRomulo;
         bool RomuloDead;
 
-        void Reset()
+        void Reset() override
         {
             RomuloGUID.Clear();
             Phase = PHASE_JULIANNE;
@@ -1082,7 +1082,7 @@ public:
             RomuloDead = false;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void EnterCombat(Unit* /*who*/) override {}
 
         void AttackStart(Unit* who) override
         {
@@ -1114,7 +1114,7 @@ public:
             }
         }
 
-        void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType dmgType);
+        void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType dmgType) override;
 
         void JustDied(Unit* /*killer*/) override
         {
@@ -1135,7 +1135,7 @@ public:
             Talk(3);
         }
 
-        void UpdateAI(uint32 diff);
+        void UpdateAI(uint32 diff) override;
     };
 
 };

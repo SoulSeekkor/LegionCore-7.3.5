@@ -380,62 +380,63 @@ public:
                 {
                     switch (type)
                     {
-                    case DATA_WORLDBREAKER:
-                        for (const auto& guid : introFirstBossGuids)
-                            if (Creature* cre = instance->GetCreature(guid))
-                                if (cre->GetEntry() == NPC_LIGHTFORGED_WIREFRAME_1 || cre->GetEntry() == NPC_EXARH_TURALION || cre->GetEntry() == NPC_TELEPORT_OF_LIGHTFORGED_1)
+                        case DATA_WORLDBREAKER:
+                            for (const auto& guid : introFirstBossGuids)
+                                if (Creature* cre = instance->GetCreature(guid))
+                                    if (cre->GetEntry() == NPC_LIGHTFORGED_WIREFRAME_1 || cre->GetEntry() == NPC_EXARH_TURALION || cre->GetEntry() == NPC_TELEPORT_OF_LIGHTFORGED_1)
+                                    {
+                                        cre->SetVisible(true);
+                                        cre->CastSpell(cre, SPELL_SPAWN);
+                                    }
+                            break;
+                        case DATA_FELHOUNDS:
+                            for (const auto& guid : secondBossOutro)
+                                if (auto cre = instance->GetCreature(guid))
+                                {
+                                    cre->SetVisible(true);
+                                    Position pos{};
+                                    cre->GetMotionMaster()->MovePoint(1, -3218.40f + frand(-10, 10), 10374.50f + frand(-10, 10), -155.47f);
+                                    if (cre->GetEntry() == NPC_LIGHTFORGED_WIREFRAME)
+                                        cre->AddDelayedEvent(14000, [cre]() -> void
+                                    {
+                                        cre->CastSpell(cre, SPELL_LIGHT_SHIELD);
+                                        cre->CastSpell(cre, 252787);
+                                    });
+                                }
+                            break;
+                        case DATA_ANTORAN:
+                            if (auto go = instance->GetGameObject(GetGuidData(GO_PORTAL_TO_ELUNARIES)))
+                                go->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
+                            break;
+                        case DATA_EONAR:
+                        {
+                            instance->ApplyOnEveryPlayer([&](Player* player)
+                            {
+                                instance->ToInstanceMap()->PermBindAllPlayers(player);
+                            });
+                            if (auto chest = instance->GetGameObject(GetGuidData(GO_EONAR_CACHE)))
+                                chest->SetRespawnTime(86400);
+                            break;
+                        }
+                        case DATA_KINGAROTH:
+                            for (auto& guid : mobsAfterKingaroth)
+                                if (auto cre = instance->GetCreature(guid))
                                 {
                                     cre->SetVisible(true);
                                     cre->CastSpell(cre, SPELL_SPAWN);
-                                }
-                        break;
-                    case DATA_FELHOUNDS:
-                        for (const auto& guid : secondBossOutro)
-                            if (auto cre = instance->GetCreature(guid))
-                            {
-                                cre->SetVisible(true);
-                                Position pos{};
-                                cre->GetMotionMaster()->MovePoint(1, -3218.40f + frand(-10, 10), 10374.50f + frand(-10, 10), -155.47f);
-                                if (cre->GetEntry() == NPC_LIGHTFORGED_WIREFRAME)
-                                    cre->AddDelayedEvent(14000, [cre]() -> void
-                                {
-                                    cre->CastSpell(cre, SPELL_LIGHT_SHIELD);
-                                    cre->CastSpell(cre, 252787);
-                                });
-                            }
-                        break;
-                    case DATA_ANTORAN:
-                        if (auto go = instance->GetGameObject(GetGuidData(GO_PORTAL_TO_ELUNARIES)))
-                            go->RemoveFlag(GAMEOBJECT_FIELD_FLAGS, GO_FLAG_NOT_SELECTABLE);
-                        break;
-                    case DATA_EONAR:
-                    {
-                        instance->ApplyOnEveryPlayer([&](Player* player)
-                        {
-                            instance->ToInstanceMap()->PermBindAllPlayers(player);
-                        });
-                        if (auto chest = instance->GetGameObject(GetGuidData(GO_EONAR_CACHE)))
-                            chest->SetRespawnTime(86400);
-                        break;
-                    }
-                    case DATA_KINGAROTH:
-                        for (auto& guid : mobsAfterKingaroth)
-                            if (auto cre = instance->GetCreature(guid))
-                            {
-                                cre->SetVisible(true);
-                                cre->CastSpell(cre, SPELL_SPAWN);
 
-                                if (cre->GetEntry() == NPC_IMPLOSIONS)
-                                    if (cre->GetPositionZ() >= 1876.0f)
-                                    {
-                                        cre->CastSpell(cre, 251052, true);
-                                        cre->DespawnOrUnsummon(urandms(8, 20));
-                                    }
-                            }
-                        break;
+                                    if (cre->GetEntry() == NPC_IMPLOSIONS)
+                                        if (cre->GetPositionZ() >= 1876.0f)
+                                        {
+                                            cre->CastSpell(cre, 251052, true);
+                                            cre->DespawnOrUnsummon(urandms(8, 20));
+                                        }
+                                }
+                            break;
                     }
                     break;
                 }
+                default: break;
             }
             return true;
         }

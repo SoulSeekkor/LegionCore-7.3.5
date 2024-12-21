@@ -412,7 +412,7 @@ static std::function<int32(Player const*, int32, int32)> WorldStateExpressionFun
         [](Player const* /*player*/, int32 holidayID, int32 arg2) -> int32
     {
         HolidaysEntry const* entry = sHolidaysStore.LookupEntry(holidayID);
-        if (!entry || arg2 > 0 && !entry->Duration[arg2])
+        if (!entry || (arg2 > 0 && !entry->Duration[arg2]))
             return 0;
 
         int l_ChoosedDuration = entry->Duration[arg2];

@@ -1346,6 +1346,7 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (check1)
+            {
                 if (timer <= diff)
                 {
                     if (Creature* t = me->FindNearestCreature(92986, 50.0f, true))
@@ -1353,14 +1354,21 @@ public:
                     check1 = false;
                     timer = 5000;
                     check2 = true;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
                 
             if (check2)
+            {
                 if (timer <= diff)
                 {
                     Talk(2);
                     check2 = false;
-                } else timer -= diff;
+                }
+                else
+                    timer -= diff;
+            }
         }
 
     };

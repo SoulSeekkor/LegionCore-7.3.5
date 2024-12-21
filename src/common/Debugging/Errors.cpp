@@ -87,6 +87,8 @@ void Abort(char const* file, int line, char const* function)
     exit(1);
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Winvalid-noreturn"
 void AbortHandler(int signum)
 {
     if (m_worldCrashChecker) // Prevent double dump if crash already run
@@ -105,7 +107,10 @@ void AbortHandler(int signum)
         exit(1);
     }
 }
+#pragma GCC diagnostic pop
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Winvalid-noreturn"
 void DumpHandler(int signum)
 {
     if (m_worldCrashChecker) // Prevent double dump if crash already run
@@ -124,5 +129,6 @@ void DumpHandler(int signum)
         exit(3);
     }
 }
+#pragma GCC diagnostic pop
 
 } // namespace Trinity

@@ -115,7 +115,9 @@ public:
         void UpdateAI(uint32 diff) override
         {
             if (event)
+            {
                 if (elisanda)
+                {
                     if (timer <= diff)
                     {
                         if (queue)
@@ -125,9 +127,9 @@ public:
                             elisanda->AI()->Talk(text);
                             text++;
                         }
-                        
-                        queue = (queue == true ? false : true); 
-                        
+
+                        queue = (queue == true ? false : true);
+
                         if (text < 2)
                             timer = 5000;
                         else
@@ -139,10 +141,15 @@ public:
                             if (Unit* target = me->FindNearestPlayer(30))
                                 me->AI()->AttackStart(target);
                         }
-                    } else timer -= diff;
+                    }
+                    else
+                        timer -= diff;
+                }
+            }
                     
                     
             if (checkrange)
+            {
                 if (checkrangetimer <= diff)
                 {
                     if (Unit* target = me->FindNearestPlayer(50))
@@ -155,8 +162,12 @@ public:
                             queue = true;
                             checkrange = false;
                         }
+
                     checkrangetimer = 1000;
-                } else checkrangetimer -= diff;
+                }
+                else
+                    checkrangetimer -= diff;
+            }
                 
             if (!UpdateVictim())
                 return;

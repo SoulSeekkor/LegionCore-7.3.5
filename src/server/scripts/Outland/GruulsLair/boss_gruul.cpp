@@ -254,7 +254,7 @@ class spell_gruul_shatter : public SpellScriptLoader
         {
             PrepareSpellScript(spell_gruul_shatter_SpellScript);
 
-            bool Validate(SpellInfo const* /*spell*/)
+            bool Validate(SpellInfo const* /*spell*/) override
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_STONED))
                     return false;

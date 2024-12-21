@@ -223,9 +223,11 @@ struct boss_siamat : public ScriptedAI
                 DoCast(SPELL_WAILING_WINDS);
 
                 if (Spell* spell = me->GetCurrentSpell(CURRENT_CHANNELED_SPELL))
+                {
                     if (SpellInfo const* spellInfo = spell->GetSpellInfo())
                         if (spellInfo->Id == SPELL_WAILING_WINDS_AURA)
                             events.ScheduleEvent(EVENT_WAILING_WINDS, 1000, 0, PHASE_WAILING_WINDS);
+                }
                 else
                 {
                     events.SetPhase(PHASE_SIAMAT);

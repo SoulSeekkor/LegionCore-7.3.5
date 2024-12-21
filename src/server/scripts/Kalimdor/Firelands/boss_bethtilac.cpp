@@ -152,7 +152,7 @@ class boss_bethtilac : public CreatureScript
                 return false;
             }
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
                 DespawnCreatures(NPC_CINDERWEB_SPINNER);
@@ -169,7 +169,7 @@ class boss_bethtilac : public CreatureScript
                 me->SetPower(POWER_MANA, 9000);
             }
 
-            void EnterCombat(Unit* attacker)
+            void EnterCombat(Unit* attacker) override
             {
                 uiPhase = 0;
                 uiCount = 0;
@@ -180,7 +180,7 @@ class boss_bethtilac : public CreatureScript
                 me->RemoveAurasByType(SPELL_AURA_MOD_TAUNT);
             }
 
-            void MovementInform(uint32 type, uint32 id)
+            void MovementInform(uint32 type, uint32 id) override
             {
                 if (type == POINT_MOTION_TYPE)
                     if (id == POINT_HIGH)
@@ -206,7 +206,7 @@ class boss_bethtilac : public CreatureScript
                 return 0;
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
                 DespawnCreatures(NPC_CINDERWEB_SPINNER);
@@ -215,7 +215,7 @@ class boss_bethtilac : public CreatureScript
                 AddSmoulderingAura(me);
             }
             
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim() || !CheckInArea(diff, 5764))
                     return;

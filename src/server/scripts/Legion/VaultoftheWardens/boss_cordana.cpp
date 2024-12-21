@@ -638,7 +638,7 @@ public:
         EventMap events;
         bool doorSpirit = false;
 
-        void Reset()
+        void Reset() override
         {
             if (doorSpirit)
                 instance->SetBossState(DATA_CORDANA_SPIRIT, NOT_STARTED);
@@ -651,7 +651,7 @@ public:
                 instance->SetBossState(DATA_CORDANA_SPIRIT, DONE);
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -690,7 +690,7 @@ public:
         npc_cordana_creepingAI(Creature* creature) : ScriptedAI(creature) {}
 
 
-        void Reset() 
+        void Reset() override
         {
             me->SetReactState(REACT_PASSIVE);
             DoCast(213628);
@@ -727,7 +727,7 @@ public:
             me->DespawnOrUnsummon();
         }
 
-        void UpdateAI(uint32 diff) {}
+        void UpdateAI(uint32 diff) override {}
     };
 
     CreatureAI* GetAI(Creature* creature) const

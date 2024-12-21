@@ -573,7 +573,7 @@ struct npc_artruis_Q12581 : public ScriptedAI
         }
     }
 
-    void DamageTaken(Unit* damager, uint32 &damage, DamageEffectType dmgType)
+    void DamageTaken(Unit* damager, uint32 &damage, DamageEffectType dmgType) override
     {
         if (me->HealthBelowPct(75) && !hp75)
         {

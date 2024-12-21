@@ -36,6 +36,9 @@ EndContentData */
 #include "CombatAI.h"
 #include "CreatureGroups.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Winvalid-source-encoding"
+
 /*######
 ## npc_arete
 ######*/
@@ -1975,3 +1978,5 @@ void AddSC_icecrown()
     new npc_tg_tirion_fordring();
     new npc_tg_helper();
 }
+
+#pragma GCC diagnostic pop

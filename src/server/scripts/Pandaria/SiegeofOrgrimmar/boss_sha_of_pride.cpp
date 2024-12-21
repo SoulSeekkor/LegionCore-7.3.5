@@ -432,18 +432,18 @@ public:
         EventMap events;
         bool start;
 
-        void Reset()
+        void Reset() override
         {
             start = false;
             _gift.clear();
         }
         
-        void JustRespawned()
+        void JustRespawned() override
         {
             start = true;
         }
         
-        void MoveInLineOfSight(Unit* who)
+        void MoveInLineOfSight(Unit* who) override
         {
             if (start)return;
             start = true;
@@ -452,7 +452,7 @@ public:
             Start(false, false);
         }
 
-        void SpellHit(Unit* /*caster*/, SpellInfo const* spell)
+        void SpellHit(Unit* /*caster*/, SpellInfo const* spell) override
         {
             if (spell->Id == SPELL_UNLEASHED)
             {
@@ -461,7 +461,7 @@ public:
             }
         }
 
-        void SpellHitTarget(Unit* target, SpellInfo const* spell)
+        void SpellHitTarget(Unit* target, SpellInfo const* spell) override
         {
             if (target->GetTypeId() != TYPEID_PLAYER || spell->Id != SPELL_GIFT_OF_THE_TITANS)
                 return;
@@ -474,7 +474,7 @@ public:
             _gift.erase(guid);
         }
 
-        void SetData(uint32 id, uint32 value)
+        void SetData(uint32 id, uint32 value) override
         {
             //event after killing all NPC_LINGERING_CORRUPTION. Appear of Sha.
             if (id == NPC_LINGERING_CORRUPTION)
@@ -505,7 +505,7 @@ public:
             }
         }
 
-        void WaypointReached(uint32 i)
+        void WaypointReached(uint32 i) override
         {
             switch(i)
             {
@@ -531,7 +531,7 @@ public:
             }
         }
 
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;

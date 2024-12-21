@@ -220,14 +220,14 @@ public:
                     switch (state)
                     {
                         case FAIL:
-                        {
-                            for (GuidVector::const_iterator guid = stoneGuardGUIDs.begin(); guid != stoneGuardGUIDs.end(); ++guid)
-                                if (Creature* stoneGuard = instance->GetCreature(*guid))
-                                    stoneGuard->AI()->DoAction(ACTION_FAIL);
+                            {
+                                for (GuidVector::const_iterator guid = stoneGuardGUIDs.begin(); guid != stoneGuardGUIDs.end(); ++guid)
+                                    if (Creature* stoneGuard = instance->GetCreature(*guid))
+                                        stoneGuard->AI()->DoAction(ACTION_FAIL);
 
-                            HandleGameObject(stoneentrdoorGuid, true);
-                        }
-                        break;
+                                HandleGameObject(stoneentrdoorGuid, true);
+                            }
+                            break;
                         case IN_PROGRESS:
                             HandleGameObject(stoneentrdoorGuid, false);
                             break;
@@ -235,6 +235,7 @@ public:
                             HandleGameObject(stoneexitdoorGuid, true);
                             HandleGameObject(stoneentrdoorGuid, true);
                             break;
+                        default: break;
                     }
                     break;
                 }
@@ -242,19 +243,20 @@ public:
                     {
                         switch (state)
                         {
-                        case NOT_STARTED:
-                            for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            break;
-                        case DONE:
-                            for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            HandleGameObject(fengexitdoorGuid, true);
-                            break;
-                        case IN_PROGRESS:
-                            for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, false);
-                            break;
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                break;
+                            case DONE:
+                                for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                HandleGameObject(fengexitdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                for (GuidVector::const_iterator guid = fengdoorGUIDs.begin(); guid != fengdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, false);
+                                break;
+                            default: break;
                         }
                         break;
                     }
@@ -262,19 +264,20 @@ public:
                     {
                         switch (state)
                         {
-                        case NOT_STARTED:
-                            for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            break;
-                        case IN_PROGRESS:
-                            for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, false);
-                            break;
-                        case DONE:
-                            for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            HandleGameObject(garajalexitdoorGuid, true);
-                            break;
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                break;
+                            case IN_PROGRESS:
+                                for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, false);
+                                break;
+                            case DONE:
+                                for (GuidVector::const_iterator guid = garajaldoorGUIDs.begin(); guid != garajaldoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                HandleGameObject(garajalexitdoorGuid, true);
+                                break;
+                            default: break;
                         }
                         break;
                     }
@@ -282,20 +285,21 @@ public:
                     {
                         switch (state)
                         {
-                        case NOT_STARTED:
-                            for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            break;
-                        case IN_PROGRESS:
-                            for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, false);
-                            break;
-                        case DONE:
-                            for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
-                                HandleGameObject(*guid, true);
-                            HandleGameObject(spiritexitdoorGuid, true);
-                            HandleGameObject(elegonentdoorGuid, true);
-                            break;
+                            case NOT_STARTED:
+                                for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                break;
+                            case IN_PROGRESS:
+                                for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, false);
+                                break;
+                            case DONE:
+                                for (GuidVector::const_iterator guid = kingsdoorGUIDs.begin(); guid != kingsdoorGUIDs.end(); guid++)
+                                    HandleGameObject(*guid, true);
+                                HandleGameObject(spiritexitdoorGuid, true);
+                                HandleGameObject(elegonentdoorGuid, true);
+                                break;
+                            default: break;
                         }
                     break;
                     }
@@ -303,16 +307,17 @@ public:
                     {
                         switch (state)
                         {
-                        case NOT_STARTED:
-                            HandleGameObject(elegonceldoorGuid, true);
-                            break;
-                        case IN_PROGRESS:
-                            HandleGameObject(elegonceldoorGuid, false);
-                            break;
-                        case DONE:
-                            HandleGameObject(elegonceldoorGuid, true);
-                            HandleGameObject(imperatorentdoorGuid, true);
-                            break;
+                            case NOT_STARTED:
+                                HandleGameObject(elegonceldoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(elegonceldoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(elegonceldoorGuid, true);
+                                HandleGameObject(imperatorentdoorGuid, true);
+                                break;
+                            default: break;
                         }
                         break;
                     }
@@ -320,15 +325,16 @@ public:
                     {
                         switch (state)
                         {
-                        case NOT_STARTED:
-                            HandleGameObject(imperatorentdoorGuid, true);
-                            break;
-                        case IN_PROGRESS:
-                            HandleGameObject(imperatorentdoorGuid, false);
-                            break;
-                        case DONE:
-                            HandleGameObject(imperatorentdoorGuid, true);
-                            break;
+                            case NOT_STARTED:
+                                HandleGameObject(imperatorentdoorGuid, true);
+                                break;
+                            case IN_PROGRESS:
+                                HandleGameObject(imperatorentdoorGuid, false);
+                                break;
+                            case DONE:
+                                HandleGameObject(imperatorentdoorGuid, true);
+                                break;
+                            default: break;
                         }
                         break;
                     }

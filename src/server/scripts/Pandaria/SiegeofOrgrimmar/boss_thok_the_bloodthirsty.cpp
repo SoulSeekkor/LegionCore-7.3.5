@@ -177,7 +177,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
             bool summonbat;
             bool summoneyti;
 
-            void Reset()
+            void Reset() override
             {
                 _Reset();
                 DespawnObjects();
@@ -206,12 +206,12 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 }
             }
 
-            void JustReachedHome()
+            void JustReachedHome() override
             {
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
             }
 
-            void OnInterruptCast(Unit* /*caster*/, uint32 spellId, uint32 curSpellID, uint32 /*schoolMask*/)
+            void OnInterruptCast(Unit* /*caster*/, uint32 spellId, uint32 curSpellID, uint32 /*schoolMask*/) override
             {
                 if (curSpellID == SPELL_DEAFENING_SCREECH)
                 {
@@ -233,7 +233,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
             }
 
             //Debug (for testing)
-            void SpellHit(Unit* caster, SpellInfo const *spell)
+            void SpellHit(Unit* caster, SpellInfo const *spell) override
             {
                 if (spell->Id == SPELL_BLOODIED && me->HasAura(SPELL_POWER_REGEN))
                 {
@@ -243,7 +243,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void EnterCombat(Unit* who) override
             {
                 _EnterCombat();
                 enrage = 600000;
@@ -280,7 +280,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 return 0;
             }
 
-            void DoAction(int32 const action)
+            void DoAction(int32 const action) override
             {
                 switch (action)
                 {
@@ -391,7 +391,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 }
             }
 
-            void MovementInform(uint32 type, uint32 pointId)
+            void MovementInform(uint32 type, uint32 pointId) override
             {
                 if (type == POINT_MOTION_TYPE)
                 {
@@ -407,7 +407,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 }
             }
 
-            void KilledUnit(Unit* unit)
+            void KilledUnit(Unit* unit) override
             {
                 if (phasetwo)
                     if (unit->ToPlayer())
@@ -415,7 +415,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                             DoAction(ACTION_FIXATE);
             }
 
-            void UpdateAI(uint32 diff)
+            void UpdateAI(uint32 diff) override
             {
                 if (!UpdateVictim())
                     return;
@@ -624,7 +624,7 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 return ObjectGuid::Empty;
             }
 
-            void JustDied(Unit* /*killer*/)
+            void JustDied(Unit* /*killer*/) override
             {
                 _JustDied();
                 DespawnObjects();

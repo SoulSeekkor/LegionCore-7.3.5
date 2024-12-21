@@ -383,7 +383,7 @@ struct npc_nl_understone_demolisher : public ScriptedAI
     EventMap events;
     uint32 healthPct = 70;
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
     }
@@ -475,7 +475,7 @@ struct npc_emberhusk_dominator : public ScriptedAI
 
     EventMap events;
 
-    void EnterEvadeMode()
+    void EnterEvadeMode() override
     {
         ScriptedAI::EnterEvadeMode();
     }

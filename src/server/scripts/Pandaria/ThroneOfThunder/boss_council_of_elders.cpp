@@ -153,7 +153,7 @@ struct council_of_eldersAI : public ScriptedAI
                 }
             }
         }
-        if (instance->GetBossState(DATA_COUNCIL_OF_ELDERS != NOT_STARTED))
+        if (instance->GetBossState(DATA_COUNCIL_OF_ELDERS) != NOT_STARTED)
         {
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_MARKED_SOUL);
             instance->SetBossState(DATA_COUNCIL_OF_ELDERS, NOT_STARTED);

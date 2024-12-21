@@ -275,11 +275,11 @@ struct boss_witherbark : public BossAI
                 events.RescheduleEvent(EVENT_AGITATED_WATER, 6000);
                 break;
             case EVENT_SUM_AQUEOUS:
-                if (aquaRand = urand(0, 3))
+                if ((aquaRand = urand(0, 3)))
                     me->CastSpell(aquaSummPos[aquaRand], SPELL_SUM_AQUEOUS_GLOBULE, true);
-                if (aquaRand = urand(4, 7))
+                if ((aquaRand = urand(4, 7)))
                     me->CastSpell(aquaSummPos[aquaRand], SPELL_SUM_AQUEOUS_GLOBULE, true);
-                if (aquaRand = urand(8, 11))
+                if ((aquaRand = urand(8, 11)))
                     me->CastSpell(aquaSummPos[aquaRand], SPELL_SUM_AQUEOUS_GLOBULE, true);
 
                 events.RescheduleEvent(EVENT_SUM_AQUEOUS, 15000, 0, STAGE_AQUEOUS);
@@ -360,7 +360,7 @@ struct npc_witherbark_aqueous_globule : public ScriptedAI
         }
     }
 
-    void UpdateAI(uint32 diff) {}
+    void UpdateAI(uint32 diff) override {}
 };
 
 //81638

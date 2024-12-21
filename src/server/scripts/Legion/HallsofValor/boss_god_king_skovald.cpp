@@ -881,10 +881,12 @@ class spell_skovald_aegis_remove : public SpellScriptLoader
                     return;
 
                 if (Unit* attacker = dmgInfo.GetAttacker())
+                {
                     if (attacker->GetDistance(GetCaster()) < 5.0f && GetCaster()->isInBack(attacker, M_PI * 0.8f))
                         absorbAmount = 0;
                     else
                         absorbAmount = dmgInfo.GetDamage();
+                }
             }
 
             void Register() override

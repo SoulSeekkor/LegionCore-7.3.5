@@ -2616,7 +2616,7 @@ class spell_item_slightly_chewed_insult_book : public SpellScript
             return;
 
         text = DB2Manager::GetBroadcastTextValue(entry, player->GetSession()->GetSessionDbLocaleIndex());
-        player->Yell(text, LANG_UNIVERSAL, NULL);
+        player->Yell(text, LANG_UNIVERSAL, false);
     }
 
     void Register() override
@@ -2641,7 +2641,7 @@ class spell_gamons_heroic_spirit : public SpellScript
             return;
 
         text = DB2Manager::GetBroadcastTextValue(entry, player->GetSession()->GetSessionDbLocaleIndex());
-        player->Yell(text, LANG_UNIVERSAL, NULL);
+        player->Yell(text, LANG_UNIVERSAL, false);
         player->PlayDistanceSound(38282, NULL);
     }
 
@@ -3639,7 +3639,7 @@ class spell_item_leystone_hoofplates : public AuraScript
 
     uint16 timer;
 
-    bool Load()
+    bool Load() override
     {
         timer = 2000;
         return true;
@@ -3652,8 +3652,10 @@ class spell_item_leystone_hoofplates : public AuraScript
             return;
 
         if (timer <= diff)
+        {
             if (caster->HasAura(182993) && caster->GetMapId() == 1220 && !caster->HasAura(233044))
                 caster->CastSpell(caster, 233044, false);
+        }
         else
             timer -= diff;
     }
@@ -3707,10 +3709,12 @@ class spell_item_demonsteel_stirrups : public AuraScript
             return;
 
         if (timer <= diff)
+        {
             if (caster->HasAura(209563) && caster->GetMapId() == 1220 && !caster->HasAura(233043))
                 caster->CastSpell(caster, 233043, false);
             else
                 timer -= diff;
+        }
     }
 
     void CalculateMaxDuration(int32& duration)

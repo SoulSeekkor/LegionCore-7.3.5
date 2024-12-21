@@ -168,7 +168,7 @@ class boss_elegon : public CreatureScript
                 ChangePhase(PHASE_ONE);
             }
 
-            void JustSummoned(Creature* summoned)
+            void JustSummoned(Creature* summoned) override
             {
                 summons.Summon(summoned);
 
@@ -222,7 +222,7 @@ class boss_elegon : public CreatureScript
                 }
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (HealthBelowPct(HealthPct) && !secondPhaseActive && !secondPhaseComplete)
                 {
@@ -469,12 +469,12 @@ class npc_celestial_protector : public CreatureScript
                 annihilation = false;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void EnterCombat(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_ARCING_ENERGY, 12000);
             }
 
-            void SpellHitTarget(Unit* target, const SpellInfo* spell)
+            void SpellHitTarget(Unit* target, const SpellInfo* spell) override
             {
                 if (spell->Id == SPELL_TOTAL_ANNIHILATION_DMG)
                     if (target->HasAura(SPELL_DESTABILIZED))
@@ -561,7 +561,7 @@ class npc_energy_charge : public CreatureScript
 
             void Reset() override {}
 
-            void IsSummonedBy(Unit* summoner)
+            void IsSummonedBy(Unit* summoner) override
             {
                 active = true;
 
@@ -572,7 +572,7 @@ class npc_energy_charge : public CreatureScript
                 }
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (damage >= me->GetHealth())
                 {
@@ -662,7 +662,7 @@ class npc_empyreal_focus : public CreatureScript
                     targetfocusGUID = caster->GetGUID();
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override
             {
                 if (damage >= me->GetHealth())
                 {
@@ -826,8 +826,8 @@ public:
         if (!plr)
             return false;
 
-        if (plr->HasAura(SPELL_VORTEX_VISIBILITY) && !_caster->HasAura(SPELL_VORTEX_VISIBILITY)
-            || !plr->HasAura(SPELL_VORTEX_VISIBILITY) && _caster->HasAura(SPELL_VORTEX_VISIBILITY))
+        if ((plr->HasAura(SPELL_VORTEX_VISIBILITY) && !_caster->HasAura(SPELL_VORTEX_VISIBILITY))
+            || (!plr->HasAura(SPELL_VORTEX_VISIBILITY) && _caster->HasAura(SPELL_VORTEX_VISIBILITY)))
             return true;
         
         return false;

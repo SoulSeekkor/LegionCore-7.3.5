@@ -232,7 +232,8 @@ public:
                             events.RescheduleEvent(EVENT_7 + urand(0, 2), 0.5 * IN_MILLISECONDS);
                             DoCast(SPELL_FIERY_BOULDER);
                             ++bouldersCounter;
-                        } else
+                        }
+                        else
                         {
                             bouldersCounter = 0;
                             events.RescheduleEvent(EVENT_4, 0.5 * IN_MILLISECONDS);
@@ -243,33 +244,42 @@ public:
                         {
                             instance->SetData(DATA_BOULDER_R, DONE);
                             me->SummonCreature(NPC_FIERY_BOULDER_RIGHT, rightBoulder[0]);
-                        } else if (instance->GetData(DATA_BOULDER_L) != DONE || instance->GetData(DATA_BOULDER_M) != DONE)
+                        }
+                        else if (instance->GetData(DATA_BOULDER_L) != DONE || instance->GetData(DATA_BOULDER_M) != DONE)
+                        {
                             if (urand(0, 1))
                                 events.RescheduleEvent(EVENT_8, 0.5 * IN_MILLISECONDS);
                             else
                                 events.RescheduleEvent(EVENT_9, 0.5 * IN_MILLISECONDS);
+                        }
                         break;
                     case EVENT_8: // {1, NPC_FIERY_BOULDER_LEFT, DATA_BOULDER_L}
                         if (instance->GetData(DATA_BOULDER_L) != DONE)
                         {
                             instance->SetData(DATA_BOULDER_L, DONE);
                             me->SummonCreature(NPC_FIERY_BOULDER_LEFT, leftBoulder[0]);
-                        } else if (instance->GetData(DATA_BOULDER_R) != DONE || instance->GetData(DATA_BOULDER_M) != DONE)
+                        }
+                        else if (instance->GetData(DATA_BOULDER_R) != DONE || instance->GetData(DATA_BOULDER_M) != DONE)
+                        {
                             if (urand(0, 1))
                                 events.RescheduleEvent(EVENT_7, 0.5 * IN_MILLISECONDS);
                             else
                                 events.RescheduleEvent(EVENT_9, 0.5 * IN_MILLISECONDS);
+                        }
                         break;
                     case EVENT_9: // {2, NPC_FIERY_BOULDER_MIDDLE, DATA_BOULDER_M}
                         if (instance->GetData(DATA_BOULDER_M) != DONE)
                         {
                             instance->SetData(DATA_BOULDER_M, DONE);
                             me->SummonCreature(NPC_FIERY_BOULDER_MIDDLE, middleBoulder[0]);
-                        } else if (instance->GetData(DATA_BOULDER_R) != DONE || instance->GetData(DATA_BOULDER_L) != DONE)
+                        }
+                        else if (instance->GetData(DATA_BOULDER_R) != DONE || instance->GetData(DATA_BOULDER_L) != DONE)
+                        {
                             if (urand(0, 1))
                                 events.RescheduleEvent(EVENT_7, 0.5 * IN_MILLISECONDS);
                             else
                                 events.RescheduleEvent(EVENT_8, 0.5 * IN_MILLISECONDS);
+                        }
                         break;
                     case EVENT_4:
                         if (burningSlagCounter < 6)
@@ -277,7 +287,8 @@ public:
                             events.RescheduleEvent(EVENT_4, 2 * IN_MILLISECONDS);
                             DoCast(SPELL_BURNING_SLAG); // should trigger SPELL_BURNING_SLAG_2
                             ++burningSlagCounter;
-                        } else
+                        }
+                        else
                         {
                             events.RescheduleEvent(EVENT_5, 10 * IN_MILLISECONDS);
                             burningSlagCounter = 0;

@@ -40,8 +40,8 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
             }
 
             uint32 update_worldstate;
-            uint32 CurrectAllianceScore{};
-            uint32 CurrectHordeScore{};
+            uint32 CurrentAllianceScore{};
+            uint32 CurrentHordeScore{};
             uint32 AllianceScore{};
             uint32 HordeScore{};
 
@@ -49,10 +49,10 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
             {
                 update_worldstate = 2000;
 
-                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
                 HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
-                CurrectAllianceScore = AllianceScore;
-                CurrectHordeScore = CurrectHordeScore;
+                CurrentAllianceScore = AllianceScore;
+                CurrentHordeScore = HordeScore;
             }
 
             void OnCreatureCreate(Creature* creature) override
@@ -80,7 +80,7 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
                 }
             }
 
-            bool SetBossState(uint32 bossId, EncounterState state)
+            bool SetBossState(uint32 bossId, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(bossId, state))
                     return false;
@@ -104,18 +104,18 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
                     {
                         instance->ApplyOnEveryPlayer([=](Player* player) -> void
                         {
-                            AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+                            AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
                             HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
 
-                            if (AllianceScore > CurrectAllianceScore)
+                            if (AllianceScore > CurrentAllianceScore)
                             {
-                                CurrectAllianceScore = AllianceScore;
+                                CurrentAllianceScore = AllianceScore;
                                 player->SendUpdateWorldState(static_cast<WorldStates>(12953), AllianceScore);
                             }
 
-                            if (HordeScore > CurrectHordeScore)
+                            if (HordeScore > CurrentHordeScore)
                             {
-                                CurrectHordeScore = AllianceScore;
+                                CurrentHordeScore = HordeScore;
                                 player->SendUpdateWorldState(static_cast<WorldStates>(12952), HordeScore);
                             }
                         });
@@ -125,7 +125,7 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
                     update_worldstate -= diff;
             }
 
-            ObjectGuid GetGuidData(uint32 type) const
+            ObjectGuid GetGuidData(uint32 type) const override
             {
                 switch (type)
                 {
@@ -146,7 +146,7 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -157,7 +157,7 @@ class instance_ruins_of_ahnqiraj : public InstanceMapScript
                 return saveStream.str();
             }
 
-            void Load(char const* data)
+            void Load(char const* data) override
             {
                 if (!data)
                 {

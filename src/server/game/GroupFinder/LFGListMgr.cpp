@@ -294,7 +294,7 @@ void LFGListMgr::ChangeApplicantStatus(LFGListEntry::LFGListApplicationEntry* ap
     switch (status)
     {
         case LFGListApplicationStatus::Invited:
-            if (!listEntry->ApplicationGroup->isRaidGroup() && GetMemberCountInGroupIncludingInvite(listEntry) >= 5 || player && CanQueueFor(listEntry, player) != LFGListStatus::None)
+            if ((!listEntry->ApplicationGroup->isRaidGroup() && GetMemberCountInGroupIncludingInvite(listEntry) >= 5) || (player && CanQueueFor(listEntry, player) != LFGListStatus::None))
                 break;
         case LFGListApplicationStatus::Applied:
             application->ResetTimeout();
@@ -316,7 +316,7 @@ void LFGListMgr::ChangeApplicantStatus(LFGListEntry::LFGListApplicationEntry* ap
                 SendLfgListApplicantGroupInviteResponse(application, player);
             break;
         case LFGListApplicationStatus::InviteAccepted:
-            if (!listEntry->ApplicationGroup->isRaidGroup() && GetMemberCountInGroupIncludingInvite(listEntry) >= 5 || CanQueueFor(listEntry, player) != LFGListStatus::None)
+            if ((!listEntry->ApplicationGroup->isRaidGroup() && GetMemberCountInGroupIncludingInvite(listEntry) >= 5) || CanQueueFor(listEntry, player) != LFGListStatus::None)
                 break;
 
             application->Listed = false;

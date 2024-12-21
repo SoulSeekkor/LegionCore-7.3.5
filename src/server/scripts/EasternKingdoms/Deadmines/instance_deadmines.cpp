@@ -47,13 +47,13 @@ class instance_deadmines : public InstanceMapScript
                 TeamInInstance = 0;
             };
 
-            void OnPlayerEnter(Player* player)
+            void OnPlayerEnter(Player* player) override
             {
                 if (!TeamInInstance)
                     TeamInInstance = player->GetTeam();
             }
 
-            void OnCreatureCreate(Creature *pCreature)
+            void OnCreatureCreate(Creature *pCreature) override
             {
                 if (!TeamInInstance)
                 {
@@ -122,7 +122,7 @@ class instance_deadmines : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch(pGo->GetEntry())
                 {
@@ -177,7 +177,7 @@ class instance_deadmines : public InstanceMapScript
                 unit->SendMessageToSet(WorldPackets::Misc::PlaySound(unit->GetGUID(), soundKitID).Write(), false);
             }
 
-            void SetData(uint32 type, uint32 data)
+            void SetData(uint32 type, uint32 data) override
             {
                 switch (type)
                 {
@@ -206,7 +206,7 @@ class instance_deadmines : public InstanceMapScript
                 return 0;
             }
 
-            ObjectGuid GetGuidData(uint32 data) const
+            ObjectGuid GetGuidData(uint32 data) const override
             {
                 switch (data)
                 {
@@ -224,7 +224,7 @@ class instance_deadmines : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
             
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -256,7 +256,7 @@ class instance_deadmines : public InstanceMapScript
                 return true;
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -269,7 +269,7 @@ class instance_deadmines : public InstanceMapScript
                 return str_data;
             }
 
-            void Load(const char* in)
+            void Load(const char* in) override
             {
                 if (!in)
                 {

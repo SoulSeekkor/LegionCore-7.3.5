@@ -283,6 +283,7 @@ public:
                             
                             break;
                         }
+                        default: break;
                     }
                     break;
                 case DATA_MEPHISTROTH:
@@ -361,7 +362,7 @@ public:
             return &loc_res_pla;
         }
         
-        ObjectGuid GetGuidData(uint32 type) const
+        ObjectGuid GetGuidData(uint32 type) const override
         {
             switch (type)
             {

@@ -154,7 +154,7 @@ class boss_laj : public CreatureScript
 
             void EnterCombat(Unit* /*who*/) override {}
 
-            void JustSummoned(Creature* summon)
+            void JustSummoned(Creature* summon) override
             {
                 if (summon && me->getVictim())
                     summon->AI()->AttackStart(SelectTarget(SELECT_TARGET_RANDOM, 0));

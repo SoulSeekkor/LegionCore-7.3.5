@@ -32,7 +32,7 @@ public:
 
         if (!sGameEventMgr->IsActiveEvent(EVENT_CALL_OF_THE_SCARAB))
         {
-            sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE, 0);
+            sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE, 0);
             sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE, 0);
             CharacterDatabase.PExecute("DELETE FROM character_currency WHERE currency in (1325,1324);");
             CharacterDatabase.PExecute("DELETE FROM character_queststatus_rewarded WHERE quest in (45785,45787);");
@@ -59,7 +59,7 @@ public:
         if (!player)
             return;
 
-        AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+        AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
         HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
 
         player->SendUpdateWorldState(static_cast<WorldStates>(12952), HordeScore);
@@ -86,18 +86,18 @@ public:
 
             ApplyOnEveryPlayerInZone([this](Player* player) -> void
             {
-                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
                 HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
 
-                if (AllianceScore > CurrectAllianceScore)
+                if (AllianceScore > CurrentAllianceScore)
                 {
-                    CurrectAllianceScore = AllianceScore;
+                    CurrentAllianceScore = AllianceScore;
                     player->SendUpdateWorldState(static_cast<WorldStates>(12953), AllianceScore);
                 }
 
-                if (HordeScore > CurrectHordeScore)
+                if (HordeScore > CurrentHordeScore)
                 {
-                    CurrectHordeScore = AllianceScore;
+                    CurrentHordeScore = HordeScore;
                     player->SendUpdateWorldState(static_cast<WorldStates>(12952), HordeScore);
                 }
             });
@@ -120,7 +120,7 @@ public:
             {
                 m_winner = 0;
 
-                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+                AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
                 HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
 
                 if (AllianceScore > HordeScore)
@@ -149,12 +149,12 @@ public:
                 if (sGameEventMgr->IsActiveEvent(EVENT_WINNER_TEAM))
                     sGameEventMgr->StopEvent(EVENT_WINNER_TEAM, true);
 
-                CurrectAllianceScore = 0;
-                CurrectHordeScore = 0;
+                CurrentAllianceScore = 0;
+                CurrentHordeScore = 0;
                 update_worldstate = 0;
                 HordeScore = 0;
                 AllianceScore = 0;
-                sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE, 0);
+                sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE, 0);
                 sWorld->setWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE, 0);
                 CharacterDatabase.PExecute("DELETE FROM character_currency WHERE currency in (1325,1324)");
                 ApplyOnEveryPlayerInZone([this](Player* player) -> void
@@ -183,18 +183,18 @@ public:
 
         m_stage = EVENT_ACTIVE;
         update_worldstate = 2000;
-        AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLINCE);
+        AllianceScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_ALLIANCE);
         HordeScore = sWorld->getWorldState(WS_SCORE_CALL_OF_THE_SCARAB_HORDE);
-        CurrectAllianceScore = AllianceScore;
-        CurrectHordeScore = CurrectHordeScore;
+        CurrentAllianceScore = AllianceScore;
+        CurrentHordeScore = HordeScore;
     }
 
 private:
     uint8 m_stage{};
     uint8 m_winner{};
     uint32 update_worldstate{};
-    uint32 CurrectAllianceScore{};
-    uint32 CurrectHordeScore{};
+    uint32 CurrentAllianceScore{};
+    uint32 CurrentHordeScore{};
     uint32 AllianceScore{};
     uint32 HordeScore{};
     bool b_winner = false;

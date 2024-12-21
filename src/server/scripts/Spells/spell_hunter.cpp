@@ -931,7 +931,7 @@ class areatrigger_at_steel_trap : public AreaTriggerScript
             }
         }
 
-        uint32 CallSpecialFunction(uint32 /*Num*/)
+        uint32 CallSpecialFunction(uint32 /*Num*/) override
         {
             return triggerTimer;
         }

@@ -868,7 +868,7 @@ public:
         uint16 checkOnProc;
         uint16 checkOnRemove;
 
-        bool Load()
+        bool Load() override
         {
             checkOnProc = 1000;
             checkOnRemove = 1000;

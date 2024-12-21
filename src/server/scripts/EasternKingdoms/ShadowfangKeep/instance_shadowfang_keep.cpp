@@ -38,7 +38,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                     teamInInstance = pPlayer->GetTeam();
             }
 
-            void OnCreatureCreate(Creature* pCreature)
+            void OnCreatureCreate(Creature* pCreature) override
             {
                 if (!teamInInstance)
                 {
@@ -84,7 +84,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                 }
             }
 
-            void OnGameObjectCreate(GameObject* pGo)
+            void OnGameObjectCreate(GameObject* pGo) override
             {
                 switch(pGo->GetEntry())
                 {
@@ -96,7 +96,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                 }
             }
 
-            bool SetBossState(uint32 type, EncounterState state)
+            bool SetBossState(uint32 type, EncounterState state) override
             {
                 if (!InstanceScript::SetBossState(type, state))
                     return false;
@@ -111,7 +111,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                 return 0;
             }
 
-            std::string GetSaveData()
+            std::string GetSaveData() override
             {
                 OUT_SAVE_INST_DATA;
 
@@ -122,7 +122,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                 return saveStream.str();
             }
 
-            ObjectGuid GetGuidData(uint32 data) const
+            ObjectGuid GetGuidData(uint32 data) const override
             {
                 switch (data)
                 {
@@ -135,7 +135,7 @@ class instance_shadowfang_keep : public InstanceMapScript
                 return ObjectGuid::Empty;
             }
 
-            void Load(const char* str)
+            void Load(const char* str) override
             {
                 if (!str)
                 {

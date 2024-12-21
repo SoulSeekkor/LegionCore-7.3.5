@@ -685,7 +685,7 @@ class spell_monk_purifying_brew: public SpellScript
                 if (Aura* aura = caster->GetAura(215479))
                     aura->SetDuration(aura->GetDuration() + dur);
                 else
-                    caster->AddAura(215479, caster, nullptr, NULL, dur);
+                    caster->AddAura(215479, caster, nullptr, 0, dur);
             }
         }
     }

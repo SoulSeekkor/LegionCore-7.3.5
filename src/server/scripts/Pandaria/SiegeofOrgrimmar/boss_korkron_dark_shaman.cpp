@@ -171,7 +171,7 @@ public:
         bool firstpull, firstattack;
         bool stage, stage2, stage3, stage4, stage5;
         
-        void Reset()
+        void Reset() override
         {
             events.Reset();
             summon.DespawnAll();
@@ -225,7 +225,7 @@ public:
             }
         }
 
-        void JustReachedHome()
+        void JustReachedHome() override
         {
             if (!firstpull)
                 SummonAndSeatOnMount(me->GetEntry());
@@ -252,7 +252,7 @@ public:
             instance->SetData(DATA_CHECK_KDS_RESET_IS_DONE, 0);
         }
         
-        void EnterCombat(Unit* who)
+        void EnterCombat(Unit* who) override
         {
             if (instance)
                 instance->SetBossState(DATA_KORKRON_D_SHAMAN, IN_PROGRESS);
@@ -276,7 +276,7 @@ public:
             events.RescheduleEvent(me->GetEntry() == NPC_WAVEBINDER_KARDRIS ? EVENT_FROSTSTORM_BOLT : EVENT_FROSTSTORM_STRIKE, 6000);
         }
 
-        void EnterEvadeMode()
+        void EnterEvadeMode() override
         {
             me->NearTeleportTo(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY(), me->GetHomePosition().GetPositionZ(), me->GetHomePosition().GetOrientation());
             ScriptedAI::EnterEvadeMode();
@@ -288,7 +288,7 @@ public:
             }
         }
 
-        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
+        void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
             if (attacker != me)
             {
@@ -405,7 +405,7 @@ public:
             }
         }
         
-        void JustDied(Unit* killer)
+        void JustDied(Unit* killer) override
         {
             summon.DespawnAll();
             DespawnAllSummons();
@@ -417,7 +417,7 @@ public:
             }
         }
         
-        void UpdateAI(uint32 diff)
+        void UpdateAI(uint32 diff) override
         {
             if (!UpdateVictim())
                 return;
@@ -616,7 +616,7 @@ public:
             DoMeleeAttackIfReady();
         }
 
-        void JustSummoned(Creature* sum)
+        void JustSummoned(Creature* sum) override
         {
             summon.Summon(sum);
             switch (sum->GetEntry())

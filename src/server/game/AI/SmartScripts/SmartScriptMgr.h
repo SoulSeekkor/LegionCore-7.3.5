@@ -686,7 +686,7 @@ struct SmartAction
             uint32 duration;
             uint32 attackinvoker;
             uint32 getphases;
-            uint32 summmonInNPCPosition;
+            uint32 summonInNPCPosition;
         } sumCreaturePV;
 
         struct

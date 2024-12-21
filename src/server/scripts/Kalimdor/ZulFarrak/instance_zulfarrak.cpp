@@ -116,7 +116,7 @@ public:
         uint32 addGroupSize;
         uint32 waypoint;
 
-        void Initialize()
+        void Initialize() override
         {
             GahzRillaEncounter = NOT_STARTED;
             ZumrahGUID.Clear();
@@ -133,7 +133,7 @@ public:
             waypoint = 0;
         }
 
-        void OnCreatureCreate(Creature* creature)
+        void OnCreatureCreate(Creature* creature) override
         {
             switch (creature->GetEntry())
             {
@@ -169,7 +169,7 @@ public:
             }
         }
 
-        void OnGameObjectCreate(GameObject* go)
+        void OnGameObjectCreate(GameObject* go) override
         {
             switch (go->GetEntry())
             {
@@ -189,7 +189,7 @@ public:
             return 0;
         }
 
-        ObjectGuid GetGuidData(uint32 data) const
+        ObjectGuid GetGuidData(uint32 data) const override
         {
             switch (data)
             {
@@ -211,7 +211,7 @@ public:
             return ObjectGuid::Empty;
         }
 
-        void SetData(uint32 type, uint32 data)
+        void SetData(uint32 type, uint32 data) override
         {
             switch (type)
             {
@@ -221,7 +221,7 @@ public:
             };
         }
 
-        virtual void Update(uint32 diff)
+        virtual void Update(uint32 diff) override
         {
             switch (PyramidPhase)
             {
@@ -242,7 +242,7 @@ public:
                         major_wave_Timer = 10000; //give players a few seconds before wave 2 starts to rebuff
                     }
                     else
-                        if (minor_wave_Timer<diff)
+                        if (minor_wave_Timer < diff)
                         {
                             SendAddsUpStairs(addGroupSize++);
                             minor_wave_Timer=10000;
@@ -251,7 +251,7 @@ public:
                             minor_wave_Timer -= diff;
                     break;
                 case PYRAMID_PRE_WAVE_2:
-                    if (major_wave_Timer<diff)
+                    if (major_wave_Timer < diff)
                     {
                         // beginning 2nd wave!
                         SpawnPyramidWave(2);
@@ -270,7 +270,7 @@ public:
                         major_wave_Timer = 5000; //give NPCs time to return to their home spots
                     }
                     else
-                        if (minor_wave_Timer<diff)
+                        if (minor_wave_Timer < diff)
                         {
                             SendAddsUpStairs(addGroupSize++);
                             minor_wave_Timer=10000;
@@ -279,7 +279,7 @@ public:
                             minor_wave_Timer -= diff;
                     break;
                 case PYRAMID_PRE_WAVE_3:
-                    if (major_wave_Timer<diff)
+                    if (major_wave_Timer < diff)
                     {
                         // move NPCs to bottom of stair
                         MoveNPCIfAlive(ENTRY_BLY, 1887.92f, 1228.179f, 9.98f, 4.78f);
@@ -358,8 +358,8 @@ public:
 
         void SendAddsUpStairs(uint32 count)
         {
-            //pop a add from list, send him up the stairs...
-            for (uint32 addCount = 0; addCount<count && !addsAtBase.empty(); addCount++)
+            // pop an add from list, send him up the stairs...
+            for (uint32 addCount = 0; addCount < count && !addsAtBase.empty(); addCount++)
             {
                 if (Creature* add = instance->GetCreature(*addsAtBase.begin()))
                 {

@@ -143,7 +143,7 @@ public:
             }
         }
 
-        void DoAction(int32 const action)
+        void DoAction(int32 const action) override
         {
             if (action == ACTION_COMPLETE)
                 achievecomplete = true;
@@ -546,7 +546,7 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            if ((!me->isInCombat()) && (instance->GetBossState(DATA_HARJATAN) == FAIL) || (!me->isInCombat()) && (instance->GetBossState(DATA_HARJATAN) == NOT_STARTED))
+            if ((!me->isInCombat() && instance->GetBossState(DATA_HARJATAN) == FAIL) || (!me->isInCombat() && instance->GetBossState(DATA_HARJATAN) == NOT_STARTED))
             {
                 if (EvadeTimer <= diff)
                 {
