@@ -2570,7 +2570,7 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond)
         }
         case CONDITION_SPAWNMASK:
             {
-                if (cond->ConditionValue1 >= (UI64LIT(1) << MAX_DIFFICULTY))
+                if ((uint64)cond->ConditionValue1 >= (UI64LIT(1) << MAX_DIFFICULTY))
                 {
                     TC_LOG_ERROR(LOG_FILTER_SQL, "Map Difficulty condition has non-existent map difficulty in value1 (%u), skipped", cond->ConditionValue1);
                     return false;
