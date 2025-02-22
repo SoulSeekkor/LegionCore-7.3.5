@@ -91,9 +91,6 @@ WorldPacket const* WorldPackets::Quest::QueryQuestInfoResponse::Write()
 
     if (Allow)
     {
-
-        TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "QueryQuestInfoResponse() >> Sending quest info packet containing level %u, min level %u and max scaled level %u for quest id %u with sort id %u.", Info.QuestLevel, Info.QuestMinLevel, Info.QuestMaxScalingLevel, Info.QuestID, Info.QuestSortID);
-
         _worldPacket << Info.QuestID;
         _worldPacket << Info.QuestType;
         _worldPacket << Info.QuestLevel;
