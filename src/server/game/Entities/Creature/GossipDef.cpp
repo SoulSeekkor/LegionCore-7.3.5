@@ -582,7 +582,7 @@ void PlayerMenu::SendQuestQueryResponse(uint32 questId) const
     packet.Info.QuestCompletionLog = questCompletionLog;
     packet.Info.AllowableRaces = quest->AllowableRaces;
     packet.Info.QuestRewardID = quest->QuestRewardID;
-    packet.Info.Expansion = quest->Expansion;
+    packet.Info.Expansion = 0;
 
     for (QuestObjective const& questObjective : quest->GetObjectives())
     {
