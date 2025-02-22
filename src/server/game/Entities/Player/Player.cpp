@@ -19149,6 +19149,8 @@ bool Player::CanRewardQuest(Quest const* quest, uint32 reward, bool msg, uint32 
 
 void Player::AddQuest(Quest const* quest, Object* questGiver)
 {
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "AddQuest() >> DEBUG 1");
+
     uint16 log_slot = FindQuestSlot(0);
 
     if (log_slot >= MAX_QUEST_LOG_SIZE) // Player does not have any free slot in the quest log
@@ -19162,6 +19164,8 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
 
     // check for repeatable quests status reset
     status_q.Status = QUEST_STATUS_INCOMPLETE;
+
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "AddQuest() >> DEBUG 2");
 
     GiveQuestSourceItem(quest);
     AdjustQuestReqItemCount(quest);
@@ -19204,6 +19208,8 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
     else
         status_q.Timer = 0;
 
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "AddQuest() >> DEBUG 3");
+
     SetQuestSlot(log_slot, quest_id, qtime);
 
     m_QuestStatusSave[quest_id] = QUEST_DEFAULT_SAVE_TYPE;
@@ -19217,6 +19223,8 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
     if (questGiver && questGiver->IsCreature())
         questGiver->ToCreature()->AI()->OnStartQuest(this, quest);
 
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "AddQuest() >> DEBUG 4");
+
     SetQuestUpdate(quest_id);
 
     // automatically complete objectives marked as bugged
@@ -19229,6 +19237,8 @@ void Player::AddQuest(Quest const* quest, Object* questGiver)
         GetPhaseMgr().NotifyConditionChanged(phaseUpdateData);
         UpdateForQuestWorldObjects();
     });
+
+    TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "AddQuest() >> DEBUG 5");
 }
 
 void Player::CompleteQuest(uint32 quest_id)
