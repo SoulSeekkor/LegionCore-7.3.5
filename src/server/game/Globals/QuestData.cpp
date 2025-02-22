@@ -512,6 +512,20 @@ void QuestDataStoreMgr::LoadQuests()
         Field* fields = result->Fetch();
 
         Quest* newQuest = new Quest(fields);
+
+        // Update quest to scale with the zone if possible
+        if (ZoneQuestMappingEntry const* questEntry = GetQuestZoneMappingEntry(newQuest->GetQuestId()))
+        {
+            if (ZoneLevelEntry const* levelEntry = sMapMgr->GetZoneLevelEntry(questEntry->zoneId))
+            {
+                newQuest->Level = levelEntry->minLevel;
+                newQuest->MinLevel = levelEntry->minLevel;
+                newQuest->MaxLevel = levelEntry->maxLevel;
+                newQuest->MaxScalingLevel = levelEntry->maxLevel;
+                TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "LoadQuests() >> Adjusted min level to %u and max level to %u for quest id %u in zone %u.", newQuest->MinLevel, newQuest->MaxScalingLevel, newQuest->GetQuestId(), questEntry->zoneId);
+            }
+        }
+
         if (_maxQuestId < newQuest->GetQuestId())
             _maxQuestId = newQuest->GetQuestId() + 1;
         if (_questVTemplates.size() <= _maxQuestId)
@@ -526,19 +540,6 @@ void QuestDataStoreMgr::LoadQuests()
             {
                 if (!newQuest->IsWorld())
                     _questAreaTaskStore[areaId].insert(newQuest);
-            }
-        }
-
-        // Update quest to scale with the zone if possible
-        if (ZoneQuestMappingEntry const* questEntry = GetQuestZoneMappingEntry(newQuest->GetQuestId()))
-        {
-            if (ZoneLevelEntry const* levelEntry = sMapMgr->GetZoneLevelEntry(questEntry->zoneId))
-            {
-                newQuest->Level = levelEntry->minLevel;
-                newQuest->MinLevel = levelEntry->minLevel;
-                newQuest->MaxLevel = levelEntry->maxLevel;
-                newQuest->MaxScalingLevel = levelEntry->maxLevel;
-                TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "LoadQuests() >> Adjusted min level to %u and max level to %u for quest id %u in zone %u.", newQuest->MinLevel, newQuest->MaxScalingLevel, newQuest->GetQuestId(), questEntry->zoneId);
             }
         }
     } while (result->NextRow());
