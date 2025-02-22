@@ -502,6 +502,8 @@ WorldPacket const* WorldPackets::Quest::QuestGiverQuestList::Write()
 
     for (GossipTextData const& gossip : GossipTexts)
     {
+        TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "QuestGiverQuestList() >> Sending quest containing level %u and max scaled level %u for quest id %u.", gossip.QuestLevel, gossip.QuestMaxScalingLevel, gossip.QuestID);
+
         _worldPacket << gossip.QuestID;
         _worldPacket << gossip.QuestType;
         _worldPacket << gossip.QuestLevel;
