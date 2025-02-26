@@ -389,22 +389,22 @@ void WorldSession::HandleReplaceFrontPet(WorldPackets::BattlePet::ReplaceFrontPe
 void WorldSession::HandlePetBattleRequestUpdate(WorldPackets::BattlePet::RequestUpdate& packet)
 {
     auto battleRequest = sPetBattleSystem->GetRequest(packet.TargetGUID);
-    auto opposant = ObjectAccessor::FindPlayer(packet.TargetGUID);
+    auto opponent = ObjectAccessor::FindPlayer(packet.TargetGUID);
 
-    if (!packet.Canceled && battleRequest && opposant)
+    if (!packet.Canceled && battleRequest && opponent)
     {
         _player->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PACIFIED | UNIT_FLAG_IMMUNE_TO_NPC); // Immuned only to NPC
-        opposant->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PACIFIED | UNIT_FLAG_IMMUNE_TO_NPC); // Immuned only to NPC
+        opponent->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PACIFIED | UNIT_FLAG_IMMUNE_TO_NPC); // Immuned only to NPC
 
         std::shared_ptr<BattlePetInstance> playerPets[MAX_PETBATTLE_SLOTS];
-        std::shared_ptr<BattlePetInstance> playerOpposantPets[MAX_PETBATTLE_SLOTS];
+        std::shared_ptr<BattlePetInstance> playerOpponentPets[MAX_PETBATTLE_SLOTS];
         size_t playerPetCount = 0;
-        size_t playerOpposantPetCount = 0;
+        size_t playerOpponentPetCount = 0;
 
         for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
         {
             playerPets[i] = nullptr;
-            playerOpposantPets[i] = nullptr;
+            playerOpponentPets[i] = nullptr;
         }
 
         _player->UpdateBattlePetCombatTeam();
@@ -426,52 +426,52 @@ void WorldSession::HandlePetBattleRequestUpdate(WorldPackets::BattlePet::Request
             ++playerPetCount;
         }
 
-        opposant->UpdateBattlePetCombatTeam();
-        auto petOpposantSlots = opposant->GetBattlePetCombatTeam();
+        opponent->UpdateBattlePetCombatTeam();
+        auto petOpponentSlots = opponent->GetBattlePetCombatTeam();
 
         for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
         {
-            if (!petOpposantSlots[i])
+            if (!petOpponentSlots[i])
                 continue;
 
-            if (playerOpposantPetCount >= MAX_PETBATTLE_SLOTS || playerOpposantPetCount >= _player->GetUnlockedPetBattleSlot())
+            if (playerOpponentPetCount >= MAX_PETBATTLE_SLOTS || playerOpponentPetCount >= _player->GetUnlockedPetBattleSlot())
                 break;
 
-            playerOpposantPets[playerOpposantPetCount] = std::make_shared<BattlePetInstance>();
-            playerOpposantPets[playerOpposantPetCount]->CloneFrom(petOpposantSlots[i]);
-            playerOpposantPets[playerOpposantPetCount]->Slot = playerOpposantPetCount;
-            playerOpposantPets[playerOpposantPetCount]->OriginalBattlePet = petOpposantSlots[i];
+            playerOpponentPets[playerOpponentPetCount] = std::make_shared<BattlePetInstance>();
+            playerOpponentPets[playerOpponentPetCount]->CloneFrom(petOpponentSlots[i]);
+            playerOpponentPets[playerOpponentPetCount]->Slot = playerOpponentPetCount;
+            playerOpponentPets[playerOpponentPetCount]->OriginalBattlePet = petOpponentSlots[i];
 
-            ++playerOpposantPetCount;
+            ++playerOpponentPetCount;
         }
 
-        if (!playerOpposantPetCount || !playerPetCount)
+        if (!playerOpponentPetCount || !playerPetCount)
         {
             _player->GetSession()->SendPetBattleRequestFailed(PETBATTLE_REQUEST_NO_PETS_IN_SLOT);
-            opposant->GetSession()->SendPetBattleRequestFailed(PETBATTLE_REQUEST_NO_PETS_IN_SLOT);
+            opponent->GetSession()->SendPetBattleRequestFailed(PETBATTLE_REQUEST_NO_PETS_IN_SLOT);
             sPetBattleSystem->RemoveRequest(packet.TargetGUID);
             return;
         }
 
         _player->GetSession()->SendPetBattleFinalizeLocation(battleRequest);
-        opposant->GetSession()->SendPetBattleFinalizeLocation(battleRequest);
+        opponent->GetSession()->SendPetBattleFinalizeLocation(battleRequest);
 
         _player->SetFacingTo(_player->GetAngle(&battleRequest->TeamPosition[PETBATTLE_TEAM_1]));
-        opposant->SetFacingTo(_player->GetAngle(&battleRequest->TeamPosition[PETBATTLE_TEAM_2]));
+        opponent->SetFacingTo(_player->GetAngle(&battleRequest->TeamPosition[PETBATTLE_TEAM_2]));
         _player->SetRooted(true);
-        opposant->SetRooted(true);
+        opponent->SetRooted(true);
 
         auto battle = sPetBattleSystem->CreateBattle();
 
-        battle->Teams[PETBATTLE_TEAM_1]->OwnerGuid = opposant->GetGUID();
-        battle->Teams[PETBATTLE_TEAM_1]->PlayerGuid = opposant->GetGUID();
+        battle->Teams[PETBATTLE_TEAM_1]->OwnerGuid = opponent->GetGUID();
+        battle->Teams[PETBATTLE_TEAM_1]->PlayerGuid = opponent->GetGUID();
         battle->Teams[PETBATTLE_TEAM_2]->OwnerGuid = _player->GetGUID();
         battle->Teams[PETBATTLE_TEAM_2]->PlayerGuid = _player->GetGUID();
 
         for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
         {
-            if (playerOpposantPets[i])
-                battle->AddPet(PETBATTLE_TEAM_1, playerOpposantPets[i]);
+            if (playerOpponentPets[i])
+                battle->AddPet(PETBATTLE_TEAM_1, playerOpponentPets[i]);
 
             if (playerPets[i])
                 battle->AddPet(PETBATTLE_TEAM_2, playerPets[i]);
@@ -481,7 +481,7 @@ void WorldSession::HandlePetBattleRequestUpdate(WorldPackets::BattlePet::Request
 
         // Launch battle
         _player->_petBattleId = battle->ID;
-        opposant->_petBattleId = battle->ID;
+        opponent->_petBattleId = battle->ID;
         battle->Begin();
 
         sPetBattleSystem->RemoveRequest(battleRequest->RequesterGuid);
@@ -491,14 +491,14 @@ void WorldSession::HandlePetBattleRequestUpdate(WorldPackets::BattlePet::Request
             if (playerPets[i])
                 playerPets[i] = std::shared_ptr<BattlePetInstance>();
 
-            if (playerOpposantPets[i])
-                playerOpposantPets[i] = std::shared_ptr<BattlePetInstance>();
+            if (playerOpponentPets[i])
+                playerOpponentPets[i] = std::shared_ptr<BattlePetInstance>();
         }
     }
     else
     {
-        if (opposant)
-            opposant->GetSession()->SendPetBattleRequestFailed(PETBATTLE_REQUEST_DECLINED);
+        if (opponent)
+            opponent->GetSession()->SendPetBattleRequestFailed(PETBATTLE_REQUEST_DECLINED);
         sPetBattleSystem->RemoveRequest(packet.TargetGUID);
     }
 }
@@ -729,22 +729,22 @@ void WorldSession::HandlePetBattleRequestPVP(WorldPackets::BattlePet::RequestPVP
         }
     }
 
-    auto opposant = ObjectAccessor::FindPlayer(packet.Battle.TargetGUID);
-    if (!opposant)
+    auto opponent = ObjectAccessor::FindPlayer(packet.Battle.TargetGUID);
+    if (!opponent)
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_TARGET_INVALID);
         sPetBattleSystem->RemoveRequest(battleRequest->RequesterGuid);
         return;
     }
 
-    if (opposant->_petBattleId)
+    if (opponent->_petBattleId)
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_IN_BATTLE);
         sPetBattleSystem->RemoveRequest(battleRequest->RequesterGuid);
         return;
     }
 
-    if (opposant->isInCombat())
+    if (opponent->isInCombat())
     {
         SendPetBattleRequestFailed(PETBATTLE_REQUEST_NOT_WHILE_IN_COMBAT);
         sPetBattleSystem->RemoveRequest(battleRequest->RequesterGuid);
@@ -752,7 +752,7 @@ void WorldSession::HandlePetBattleRequestPVP(WorldPackets::BattlePet::RequestPVP
     }
 
     battleRequest->IsPvPReady[PETBATTLE_TEAM_1] = true;
-    opposant->GetSession()->SendPetBattlePvPChallenge(battleRequest);
+    opponent->GetSession()->SendPetBattlePvPChallenge(battleRequest);
 }
 
 void WorldSession::HandleQueueProposeMatchResult(WorldPackets::BattlePet::QueueProposeMatchResult& packet)

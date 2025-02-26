@@ -343,9 +343,9 @@ void PetBattleSystem::Update(uint32 diff)
 
                             auto location = positions[urand(0, positions.size() - 1)];
                             std::shared_ptr<BattlePetInstance> playerPets[MAX_PETBATTLE_SLOTS];
-                            std::shared_ptr<BattlePetInstance> playerOpposantPets[MAX_PETBATTLE_SLOTS];
+                            std::shared_ptr<BattlePetInstance> playerOpponentPets[MAX_PETBATTLE_SLOTS];
                             size_t playerPetCount = 0;
-                            size_t playerOpposantPetCount = 0;
+                            size_t playerOpponentPetCount = 0;
 
                             auto battle = sPetBattleSystem->CreateBattle();
                             battle->PvPMatchMakingRequest.LocationResult = 0;
@@ -364,7 +364,7 @@ void PetBattleSystem::Update(uint32 diff)
                             for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
                             {
                                 playerPets[i] = nullptr;
-                                playerOpposantPets[i] = nullptr;
+                                playerOpponentPets[i] = nullptr;
                             }
 
                             // Load player pets
@@ -386,22 +386,22 @@ void PetBattleSystem::Update(uint32 diff)
                                 ++playerPetCount;
                             }
 
-                            auto petOpposantSlots = rightPlayer->GetBattlePetCombatTeam();
+                            auto petOpponentSlots = rightPlayer->GetBattlePetCombatTeam();
 
                             for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
                             {
-                                if (!petOpposantSlots[i])
+                                if (!petOpponentSlots[i])
                                     continue;
 
-                                if (playerOpposantPetCount >= MAX_PETBATTLE_SLOTS || playerOpposantPetCount >= rightPlayer->GetUnlockedPetBattleSlot())
+                                if (playerOpponentPetCount >= MAX_PETBATTLE_SLOTS || playerOpponentPetCount >= rightPlayer->GetUnlockedPetBattleSlot())
                                     break;
 
-                                playerOpposantPets[playerOpposantPetCount] = std::make_shared<BattlePetInstance>();
-                                playerOpposantPets[playerOpposantPetCount]->CloneFrom(petOpposantSlots[i]);
-                                playerOpposantPets[playerOpposantPetCount]->Slot = playerOpposantPetCount;
-                                playerOpposantPets[playerOpposantPetCount]->OriginalBattlePet = petOpposantSlots[i];
+                                playerOpponentPets[playerOpponentPetCount] = std::make_shared<BattlePetInstance>();
+                                playerOpponentPets[playerOpponentPetCount]->CloneFrom(petOpponentSlots[i]);
+                                playerOpponentPets[playerOpponentPetCount]->Slot = playerOpponentPetCount;
+                                playerOpponentPets[playerOpponentPetCount]->OriginalBattlePet = petOpponentSlots[i];
 
-                                ++playerOpposantPetCount;
+                                ++playerOpponentPetCount;
                             }
 
                             // Add player pets
@@ -415,8 +415,8 @@ void PetBattleSystem::Update(uint32 diff)
                                 if (playerPets[i])
                                     battle->AddPet(PETBATTLE_TEAM_1, playerPets[i]);
 
-                                if (playerOpposantPets[i])
-                                    battle->AddPet(PETBATTLE_TEAM_2, playerOpposantPets[i]);
+                                if (playerOpponentPets[i])
+                                    battle->AddPet(PETBATTLE_TEAM_2, playerOpponentPets[i]);
                             }
 
                             battle->BattleType = PETBATTLE_TYPE_PVP_MATCHMAKING;
