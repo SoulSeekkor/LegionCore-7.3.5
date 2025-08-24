@@ -1388,7 +1388,7 @@ struct WorldQuestInfo
 
 struct DeathMatchScore
 {
-	DeathMatchScore() : kills(0), deaths(0), damage(0), rating(0), matches(0), needSave(false), totalKills(0), selectedMorph(0){};
+    DeathMatchScore() : kills(0), deaths(0), damage(0), rating(0), matches(0), needSave(false), totalKills(0), selectedMorph(0){};
     uint32 kills;
     uint32 deaths;
     uint64 damage;
@@ -1920,13 +1920,21 @@ class Player : public Unit, public GridObject<Player>
 
         int32 GetQuestLevel(Quest const* quest) const
         {
+            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "GetQuestLevel DEBUG 1");
+
             if (!quest)
                  return getLevel();
 
+            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "GetQuestLevel DEBUG 2");
+
             uint32 questLevel = quest->GetScaledQuestLevel(getLevel(), GetZoneId());
+
+            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "GetQuestLevel DEBUG 3 questLevel is %u", questLevel);
 
             if (questLevel == 0)
                 questLevel = quest->Level > 0 ? quest->Level : std::min<int32>(getLevel(), quest->MaxScalingLevel);
+
+            TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "GetQuestLevel DEBUG 4 questLevel is %u, quest->Level is %u, getLevel() is %u, quest->MaxScalingLevel is %u", questLevel, quest->Level, getLevel(), quest->MaxScalingLevel);
 
             return questLevel;
         }
