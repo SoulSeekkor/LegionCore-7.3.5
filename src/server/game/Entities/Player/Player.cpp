@@ -23723,6 +23723,8 @@ void Player::_LoadQuestStatus(PreparedQueryResult result)
             Quest const* quest = sQuestDataStore->GetQuestTemplate(quest_id);
             if (quest)
             {
+                TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "_LoadQuestStatus ID=%u, Level=%u, MaxScalingLvl=%u, MinLvl=%u, SortID=%u", quest->GetQuestId(), quest->Level, quest->MaxScalingLevel, quest->MinLevel, quest->QuestSortID);
+
                 if ((*m_QuestStatusVector)[quest_id])
                     continue;
 
@@ -23762,6 +23764,7 @@ void Player::_LoadQuestStatus(PreparedQueryResult result)
                 //! q_status.Status == QUEST_STATUS_INCOMPLETE --> WTF? we should set SetQuestSlotState & add on slot it.
                 if (slot < MAX_QUEST_LOG_SIZE /*&& q_status.Status == QUEST_STATUS_INCOMPLETE*/ && quest->Type != QUEST_TYPE_TASK)
                 {
+                    TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "_LoadQuestStatus Set quest slot for ID %u", quest_id);
                     SetQuestSlot(slot, quest_id, uint32(quest_time)); // cast can't be helped
 
                     if (q_status.Status == QUEST_STATUS_COMPLETE)
