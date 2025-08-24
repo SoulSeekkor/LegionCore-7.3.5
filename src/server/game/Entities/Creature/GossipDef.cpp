@@ -498,6 +498,8 @@ void PlayerMenu::SendQuestQueryResponse(uint32 questId) const
 
     WorldPackets::Quest::QueryQuestInfoResponse packet;
 
+    TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "SendQuestQueryResponse ID=%u, Level=%u, MaxScalingLvl=%u, MinLvl=%u, SortID=%u", quest->GetQuestId(), quest->Level, quest->MaxScalingLevel, quest->MinLevel, quest->QuestSortID);
+
     packet.Allow = true;
     packet.QuestID = quest->GetQuestId();
 
