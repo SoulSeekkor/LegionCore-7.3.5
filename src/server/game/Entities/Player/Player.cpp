@@ -18809,7 +18809,7 @@ bool Player::CanSeeStartQuest(Quest const* quest)
 
 bool Player::CanTakeQuest(Quest const* quest, bool msg)
 {
-    return !DisableMgr::IsDisabledFor(DISABLE_TYPE_QUEST, quest->GetQuestId(), this) 
+    bool result = !DisableMgr::IsDisabledFor(DISABLE_TYPE_QUEST, quest->GetQuestId(), this) 
         && SatisfyQuestStatus(quest, msg) && SatisfyQuestExclusiveGroup(quest, msg)
         && SatisfyQuestClass(quest, msg) && SatisfyQuestRace(quest, msg) && SatisfyQuestLevel(quest, msg)
         && SatisfyQuestSkill(quest, msg) && SatisfyQuestReputation(quest, msg)
@@ -18818,6 +18818,11 @@ bool Player::CanTakeQuest(Quest const* quest, bool msg)
         && SatisfyQuestDay(quest, msg) && SatisfyQuestWeek(quest)
         && SatisfyQuestSeasonal(quest)
         && SatisfyQuestConditions(quest, msg);
+
+    if (!result)
+        TC_LOG_ERROR(LOG_FILTER_NETWORKIO, "CanTakeQuest returned false for quest ID=%u, Level=%u, MaxScalingLvl=%u, MinLvl=%u, SortID=%u, Msg=%s", quest->GetQuestId(), quest->Level, quest->MaxScalingLevel, quest->MinLevel, quest->QuestSortID, msg);
+
+    return result;
 }
 
 bool Player::CanAddQuest(Quest const* quest, bool msg)
