@@ -314,7 +314,7 @@ m_achievementMgr(sf::safe_ptr<AchievementMgr<Player>>(this))
     m_mailsLoaded = false;
     m_mailsUpdated = false;
     unReadMails = 0;
-    m_nextMailDelivereTime = 0;
+    m_nextMailDeliverTime = 0;
 
     m_itemUpdateQueueBlocked = false;
 
@@ -1439,13 +1439,13 @@ void Player::Update(uint32 p_time)
     m_isUpdate = true;
 
     // undelivered mail
-    if (m_nextMailDelivereTime && m_nextMailDelivereTime <= time(NULL))
+    if (m_nextMailDeliverTime && m_nextMailDeliverTime <= time(NULL))
     {
         SendNewMail();
         ++unReadMails;
 
         // It will be recalculate at mailbox open (for unReadMails important non-0 until mailbox open, it also will be recalculated)
-        m_nextMailDelivereTime = 0;
+        m_nextMailDeliverTime = 0;
     }
 
     // If this is set during update SetSpellModTakingSpell call is missing somewhere in the code
@@ -4702,14 +4702,14 @@ void Player::UpdateNextMailTimeAndUnreads()
     // calculate next delivery time (min. from non-delivered mails
     // and recalculate unReadMail
     time_t cTime = time(NULL);
-    m_nextMailDelivereTime = 0;
+    m_nextMailDeliverTime = 0;
     unReadMails = 0;
     for (PlayerMails::iterator itr = m_mail.begin(); itr != m_mail.end(); ++itr)
     {
         if ((*itr)->deliver_time > cTime)
         {
-            if (!m_nextMailDelivereTime || m_nextMailDelivereTime > (*itr)->deliver_time)
-                m_nextMailDelivereTime = (*itr)->deliver_time;
+            if (!m_nextMailDeliverTime || m_nextMailDeliverTime > (*itr)->deliver_time)
+                m_nextMailDeliverTime = (*itr)->deliver_time;
         }
         else if (((*itr)->checked & MAIL_CHECK_MASK_READ) == 0)
             ++unReadMails;
@@ -4725,8 +4725,8 @@ void Player::AddNewMailDeliverTime(time_t deliver_time)
     }
     else                                                    // not ready and no have ready mails
     {
-        if (!m_nextMailDelivereTime || m_nextMailDelivereTime > deliver_time)
-            m_nextMailDelivereTime = deliver_time;
+        if (!m_nextMailDeliverTime || m_nextMailDeliverTime > deliver_time)
+            m_nextMailDeliverTime = deliver_time;
     }
 }
 
@@ -21245,7 +21245,7 @@ void Player::SetQuestObjectiveData(Quest const* quest, QuestObjective const* obj
     if (status->Status == QUEST_STATUS_INCOMPLETE || status->Status == QUEST_STATUS_COMPLETE)
     {
         // Update quest fields
-        // Negative index  - hiden
+        // Negative index - hidden
         uint16 log_slot = FindQuestSlot(quest->GetQuestId());
         if (log_slot < MAX_QUEST_LOG_SIZE)
         {
@@ -21297,7 +21297,7 @@ void Player::UpdateQuestObjectiveData(Quest const* quest)
             continue;
 
         // Update quest fields
-        // Negative index  - hiden
+        // Negative index - hidden
         uint16 log_slot = FindQuestSlot(quest->GetQuestId());
         if (log_slot < MAX_QUEST_LOG_SIZE && obj.StorageIndex >= 0 /*&& (obj.Flags & QUEST_OBJECTIVE_FLAG_SEQUENCED) == 0*/ && obj.Type != QUEST_OBJECTIVE_COMPLETE_CRITERIA_TREE)
             SetQuestSlotCounter(log_slot, obj.StorageIndex, status->ObjectiveData[obj.StorageIndex]);
@@ -23641,7 +23641,7 @@ void Player::_LoadMailInit(PreparedQueryResult resultUnread, PreparedQueryResult
     // store nearest delivery time (it > 0 and if it < current then at next player update SendNewMaill will be called)
     //resultMails = CharacterDatabase.PQuery("SELECT MIN(deliver_time) FROM mail WHERE receiver = '%u' AND (checked & 1)=0", GUID_LOPART(playerGuid));
     if (resultDelivery)
-        m_nextMailDelivereTime = time_t((*resultDelivery)[0].GetUInt32());
+        m_nextMailDeliverTime = time_t((*resultDelivery)[0].GetUInt32());
 }
 
 void Player::_LoadMail()

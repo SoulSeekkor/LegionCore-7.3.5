@@ -584,7 +584,7 @@ void WorldSession::HandleGetMailList(WorldPackets::Mail::MailGetList& packet)
 
     SendPacket(response.Write());
 
-    // recalculate m_nextMailDelivereTime and unReadMails
+    // recalculate m_nextMailDeliverTime and unReadMails
     _player->UpdateNextMailTimeAndUnreads();
 }
 
