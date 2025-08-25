@@ -19623,7 +19623,7 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     else if (!quest->IsWorld() && !quest->IsEmissary())
     {
         m_RewardedQuests.insert(quest_id);
-        m_accuntQuests.insert(quest_id);
+        m_accountQuests.insert(quest_id);
         m_RewardedQuestsSave[quest_id] = QUEST_DEFAULT_SAVE_TYPE;
     }
     
@@ -23881,7 +23881,7 @@ void Player::_LoadAccountQuest(PreparedQueryResult result)
         do
         {
             Field* fields = result->Fetch();
-            m_accuntQuests.insert(fields[0].GetUInt32());
+            m_accountQuests.insert(fields[0].GetUInt32());
         }
         while (result->NextRow());
     }
@@ -37519,7 +37519,7 @@ bool Player::HasAccountQuest(uint32 quest_id) const
 {
     if (GetQuestRewardStatus(quest_id))
         return true;
-    return m_accuntQuests.find(quest_id) != m_accuntQuests.end();
+    return m_accountQuests.find(quest_id) != m_accountQuests.end();
 }
 
 bool Player::IsQuestDFRewarded(uint32 quest_id) const

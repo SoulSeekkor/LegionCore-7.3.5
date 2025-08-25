@@ -3346,7 +3346,7 @@ class Player : public Unit, public GridObject<Player>
         QuestStatusSaveMap m_QuestStatusSave;
 
         RewardedQuestSet m_RewardedQuests;
-        RewardedQuestSet m_accuntQuests;
+        RewardedQuestSet m_accountQuests;
         QuestStatusSaveMap m_RewardedQuestsSave;
 
         ObjectGuid m_divider;

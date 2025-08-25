@@ -4756,8 +4756,8 @@ TempSummon* Map::SummonCreature(uint32 entry, Position const& pos, SummonPropert
         }
     }
 
-	if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS) && (entry == 121661 || entry == 69791 || entry == 69792))
-		mask = UNIT_MASK_GUARDIAN;
+    if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS) && (entry == 121661 || entry == 69791 || entry == 69792))
+        mask = UNIT_MASK_GUARDIAN;
 
     uint32 phase = PHASEMASK_NORMAL;
     uint32 team = 0;
