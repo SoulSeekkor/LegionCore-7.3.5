@@ -33997,6 +33997,8 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
     stmt->setUInt8(1, GetActiveTalentGroup());
     if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
         _LoadActions(result);
+    else
+        m_actionButtons.clear();
 
     SendActionButtons(1);
     InitialPowers();
