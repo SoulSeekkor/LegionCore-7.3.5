@@ -8405,25 +8405,15 @@ int16 Player::GetSkillTempBonusValue(uint32 skill)
 
 void Player::SendActionButtons(uint32 state)
 {
-    /*
-        state can be 0, 1, 2
-        0 - Looks to be sent when initial action buttons get sent, however on Trinity we use 1 since 0 had some difficulties
-        1 - Used in any SMSG_ACTION_BUTTONS packet with button data on Trinity. Only used after spec swaps on retail.
-        2 - Clears the action bars client sided. This is sent during spec swap before unlearning and before sending the new buttons
-    */
-
     WorldPackets::Spells::UpdateActionButtons packet;
 
-    if (state != 2)
+    for (uint8 button = 0; button < MAX_ACTION_BUTTONS; ++button)
     {
-        for (uint8 button = 0; button < MAX_ACTION_BUTTONS; ++button)
-        {
-            ActionButtonList::const_iterator itr = m_actionButtons.find(button);
-            if (itr != m_actionButtons.end() && itr->second.uState != ACTIONBUTTON_DELETED)
-                packet.ActionButtons[button] = itr->second.packedData;
-            else
-                packet.ActionButtons[button] = 0;
-        }
+        ActionButtonList::const_iterator itr = m_actionButtons.find(button);
+        if (itr != m_actionButtons.end() && itr->second.uState != ACTIONBUTTON_DELETED)
+            packet.ActionButtons[button] = itr->second.packedData;
+        else
+            packet.ActionButtons[button] = 0;
     }
 
     packet.Reason = state;
