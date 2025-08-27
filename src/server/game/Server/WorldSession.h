@@ -2017,8 +2017,8 @@ class WorldSession
         void SetforceExit(bool force = true) { forceExit = force; }
         bool IsforceExit() { return forceExit; }
         
-		float GetPersonalXPRate() { return PersonalXPRate; }
-		void SetPersonalXPRate(float rate);
+        float GetPersonalXPRate() { return PersonalXPRate; }
+        void SetPersonalXPRate(float rate);
 
         void AddDelayedEvent(uint64 timeOffset, std::function<void()>&& function)
         {

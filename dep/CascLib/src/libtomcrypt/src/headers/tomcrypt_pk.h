@@ -202,8 +202,8 @@ typedef struct {
     /** Index into the ltc_ecc_sets[] for the parameters of this curve; if -1, then this key is using user supplied curve in dp */
     int idx;
 
-	/** pointer to domain parameters; either points to NIST curves (identified by idx >= 0) or user supplied curve */
-	const ltc_ecc_set_type *dp;
+    /** pointer to domain parameters; either points to NIST curves (identified by idx >= 0) or user supplied curve */
+    const ltc_ecc_set_type *dp;
 
     /** The public key */
     ecc_point pubkey;
@@ -436,11 +436,8 @@ int der_length_sequence(ltc_asn1_list *list, unsigned long inlen,
 /* SET */
 #define der_decode_set(in, inlen, list, outlen) der_decode_sequence_ex(in, inlen, list, outlen, 0)
 #define der_length_set der_length_sequence
-int der_encode_set(ltc_asn1_list *list, unsigned long inlen,
-                   unsigned char *out,  unsigned long *outlen);
-
-int der_encode_setof(ltc_asn1_list *list, unsigned long inlen,
-                     unsigned char *out,  unsigned long *outlen);
+int der_encode_set(ltc_asn1_list *list, unsigned long inlen, unsigned char *out,  unsigned long *outlen);
+int der_encode_setof(ltc_asn1_list *list, unsigned long inlen, unsigned char *out,  unsigned long *outlen);
                         
 /* VA list handy helpers with triplets of <type, size, data> */
 int der_encode_sequence_multi(unsigned char *out, unsigned long *outlen, ...);
@@ -453,10 +450,8 @@ void der_sequence_free(ltc_asn1_list *in);
 
 /* BOOLEAN */
 int der_length_boolean(unsigned long *outlen);
-int der_encode_boolean(int in, 
-                       unsigned char *out, unsigned long *outlen);
-int der_decode_boolean(const unsigned char *in, unsigned long inlen,
-                                       int *out);		       
+int der_encode_boolean(int in, unsigned char *out, unsigned long *outlen);
+int der_decode_boolean(const unsigned char *in, unsigned long inlen, int *out);
 /* INTEGER */
 int der_encode_integer(void *num, unsigned char *out, unsigned long *outlen);
 int der_decode_integer(const unsigned char *in, unsigned long inlen, void *num);

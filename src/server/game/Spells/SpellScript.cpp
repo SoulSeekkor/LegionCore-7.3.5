@@ -397,37 +397,37 @@ bool SpellScript::_Validate(SpellInfo const* entry)
     for (auto& itr : OnEffectLaunchTarget)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectLaunchTarget` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectLaunchTarget` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     for (auto& itr : OnEffectHit)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectHit` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectHit` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     for (auto& itr : OnEffectHitTarget)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectHitTarget` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectHitTarget` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     for (auto& itr : OnObjectAreaTargetSelect)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnObjectAreaTargetSelect` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnObjectAreaTargetSelect` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     for (auto& itr : OnObjectTargetSelect)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnObjectTargetSelect` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnObjectTargetSelect` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     for (auto& itr : OnEffectSuccessfulDispel)
     {
         if (!itr.GetAffectedEffectsMask(entry))
-			TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectSuccessfulDispel` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
+            TC_LOG_DEBUG(LOG_FILTER_TSCR, "Spell `%u` Effect `%s` of script `%s` did not match dbc effect data - handler bound to hook `OnEffectSuccessfulDispel` of SpellScript won't be executed", entry->Id, itr.ToString().c_str(), m_scriptName->c_str());
     }
 
     return _SpellScript::_Validate(entry);

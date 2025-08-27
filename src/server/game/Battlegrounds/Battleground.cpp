@@ -594,7 +594,7 @@ void Battleground::RewardReputationToTeam(uint32 factionIDAlliance, uint32 facti
     if (FactionEntry const* factionEntry = sFactionStore.LookupEntry(teamID == ALLIANCE ? factionIDAlliance : factionIDHorde))
     {
         for (auto const& itr : GetPlayers())
-		{
+        {
             if (Player* player = GetPlayerForTeam(teamID, itr, "RewardReputationToTeam"))
             {
                 if (!player)
@@ -606,7 +606,7 @@ void Battleground::RewardReputationToTeam(uint32 factionIDAlliance, uint32 facti
                 player->GetReputationMgr().ModifyReputation(factionEntry, reputation);
             }
         }
-	}
+    }
 }
 
 void Battleground::UpdateWorldState(uint32 variableID, uint32 value, bool hidden /*= false*/)

@@ -186,7 +186,7 @@ struct boss_ymiron_the_fallen_king : public BossAI
 
         //Heroic+
         if (spellId == SPELL_BANE && GetDifficultyID() != DIFFICULTY_NORMAL)
-			events.RescheduleEvent(EVENT_ARISE_FALLEN, 2000);
+            events.RescheduleEvent(EVENT_ARISE_FALLEN, 2000);
     }
 
     void SpellFinishCast(const SpellInfo* spell) override

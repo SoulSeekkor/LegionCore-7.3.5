@@ -791,7 +791,7 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_INS_BNET_ITEM_FAVORITE_APPEARANCE, "INSERT INTO account_item_favorite_appearances (battlenetAccountId, itemModifiedAppearanceId) VALUES (?, ?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_BNET_ITEM_FAVORITE_APPEARANCE, "DELETE FROM account_item_favorite_appearances WHERE battlenetAccountId = ? AND itemModifiedAppearanceId = ?", CONNECTION_ASYNC);
 
-    PrepareStatement(CHAR_SEL_ITEM_INSTANCE_ARTIFACT, "SELECT ap.itemEntry, a.xp, a.artifactAppearanceId, ap.artifactPowerId, ap.purchasedRank, a.itemGuid FROM	item_instance_artifact_powers ap LEFT JOIN item_instance_artifact a ON ap.itemEntry = a.itemEntry and ap.char_guid = a.char_guid where ap.char_guid = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_ITEM_INSTANCE_ARTIFACT, "SELECT ap.itemEntry, a.xp, a.artifactAppearanceId, ap.artifactPowerId, ap.purchasedRank, a.itemGuid FROM item_instance_artifact_powers ap LEFT JOIN item_instance_artifact a ON ap.itemEntry = a.itemEntry and ap.char_guid = a.char_guid where ap.char_guid = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_REP_ITEM_INSTANCE_ARTIFACT, "REPLACE INTO item_instance_artifact (itemGuid, xp, artifactAppearanceId, itemEntry, tier, char_guid, totalrank) VALUES (?, ?, ?, ?, ?, ?, ?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_ITEM_INSTANCE_ARTIFACT, "DELETE FROM item_instance_artifact WHERE itemGuid = ?", CONNECTION_ASYNC);
     PrepareStatement(CHAR_DEL_ITEM_INSTANCE_ARTIFACT_BY_OWNER, "DELETE iia FROM item_instance_artifact iia LEFT JOIN item_instance ii ON iia.itemGuid = ii.guid WHERE ii.owner_guid = ?", CONNECTION_ASYNC);

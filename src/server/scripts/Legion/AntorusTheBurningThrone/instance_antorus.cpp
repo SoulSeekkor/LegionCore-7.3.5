@@ -63,8 +63,8 @@ ObjectData const gobjectData[] =
 
 Position const dreadWingsPos[2]
 {
-    { -3290.76f,	9519.75f,	22.1289f },
-    { -3301.51f,	9595.35f,	36.3317f }
+    { -3290.76f, 9519.75f, 22.1289f },
+    { -3301.51f, 9595.35f, 36.3317f }
 };
 
 class instance_antorus : public InstanceMapScript

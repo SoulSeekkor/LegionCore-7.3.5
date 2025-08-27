@@ -1,9 +1,9 @@
 /*
-	httpget.c
+    httpget.c
 
-	gSOAP HTTP GET plugin.
+    gSOAP HTTP GET plugin.
 
-	See instructions below.
+    See instructions below.
 
 gSOAP XML Web services tools
 Copyright (C) 2000-2008, Robert van Engelen, Genivia Inc., All Rights Reserved.
@@ -45,95 +45,95 @@ This program is released under the GPL with the additional exemption that
 compiling, linking, and/or using OpenSSL is allowed.
 --------------------------------------------------------------------------------
 
-	Compile & link with stand-alone gSOAP server for HTTP GET support.
-	Compile & link with gSOAP clients for client-side HTTP GET requests.
+    Compile & link with stand-alone gSOAP server for HTTP GET support.
+    Compile & link with gSOAP clients for client-side HTTP GET requests.
 
-	Usage (server side):
+    Usage (server side):
 
-	struct soap soap;
-	soap_init(&soap);
-	soap_register_plugin_arg(&soap, http_get, http_get_handler);
-	...
-	... = soap_copy(&soap); // copies plugin too but not its data: plugin data is shared since fcopy is not set
-	...
-	soap_done(&soap); // detach plugin (calls plugin->fdelete)
+    struct soap soap;
+    soap_init(&soap);
+    soap_register_plugin_arg(&soap, http_get, http_get_handler);
+    ...
+    ... = soap_copy(&soap); // copies plugin too but not its data: plugin data is shared since fcopy is not set
+    ...
+    soap_done(&soap); // detach plugin (calls plugin->fdelete)
 
-	You need to define a HTTP GET handling function at the server-side:
+    You need to define a HTTP GET handling function at the server-side:
 
-	int http_get_handler(struct soap*)
+    int http_get_handler(struct soap*)
 
-	which will be called from the plugin upon an HTTP GET request.
-	The function should return an error code or SOAP_OK;
-	This function should produce a valid HTTP response, for example:
+    which will be called from the plugin upon an HTTP GET request.
+    The function should return an error code or SOAP_OK;
+    This function should produce a valid HTTP response, for example:
 
-	soap_response(soap, SOAP_HTML); // use this to return HTML ...
-	soap_response(soap, SOAP_OK); // ... or use this to return a SOAP message
-	...
-	soap_send(soap, "<HTML>...</HTML>"); // example HTML
-	...
-	soap_end_send(soap);
+    soap_response(soap, SOAP_HTML); // use this to return HTML ...
+    soap_response(soap, SOAP_OK); // ... or use this to return a SOAP message
+    ...
+    soap_send(soap, "<HTML>...</HTML>"); // example HTML
+    ...
+    soap_end_send(soap);
 
-	To get query string key-value pairs within a service routine, use:
+    To get query string key-value pairs within a service routine, use:
 
-	char *s;
-	s = query(soap);
-	while (s)
-	{ char *key = query(soap, &s);
-	  char *val = query(soap, &s);
-	  ...
-	}
+    char *s;
+    s = query(soap);
+    while (s)
+    { char *key = query(soap, &s);
+      char *val = query(soap, &s);
+      ...
+    }
 
-	This will garble soap->path, which contains the HTTP path of the form:
-	/path?query
-	where path and/or ?query may be absent. The path info is obtained from
-	the HTTP request URL: http://domain/path?query
-	The URL should not exceed the length of SOAP_TAGLEN. Adjust SOAP_TAGLEN
-	in stdsoap2.h if necessary.
+    This will garble soap->path, which contains the HTTP path of the form:
+    /path?query
+    where path and/or ?query may be absent. The path info is obtained from
+    the HTTP request URL: http://domain/path?query
+    The URL should not exceed the length of SOAP_TAGLEN. Adjust SOAP_TAGLEN
+    in stdsoap2.h if necessary.
 
-	Usage (client side):
+    Usage (client side):
 
-	For SOAP calls, declare a one-way response message in the header file,
-	for example:
-	int ns__methodResponse(... params ..., void);
-	The params will hold the return values returned by the server's SOAP
-	response message.
+    For SOAP calls, declare a one-way response message in the header file,
+    for example:
+    int ns__methodResponse(... params ..., void);
+    The params will hold the return values returned by the server's SOAP
+    response message.
 
-	Client code:
+    Client code:
 
-	struct soap soap;
-	soap_init(&soap);
-	soap_register_plugin(&soap, http_get); // register plugin
-	...
-	if (soap_get_connect(&soap, endpoint, action))
-	  ... connect error ...
+    struct soap soap;
+    soap_init(&soap);
+    soap_register_plugin(&soap, http_get); // register plugin
+    ...
+    if (soap_get_connect(&soap, endpoint, action))
+      ... connect error ...
         else if (soap_recv_ns__methodResponse(&soap, ... params ...))
-	  ... error ...
+      ... error ...
         else
-	  ... ok ...
+      ... ok ...
         soap_destroy(&soap);
         soap_end(&soap);
-	soap_done(&soap);
+    soap_done(&soap);
 
-	Note that the endpoint URL may contain a query string with key-value
-	pairs to pass to the server, e.g.: http://domain/path?key=val&key=val
+    Note that the endpoint URL may contain a query string with key-value
+    pairs to pass to the server, e.g.: http://domain/path?key=val&key=val
 
-	To use general HTTP GET, for example to retrieve an HTML document, use:
+    To use general HTTP GET, for example to retrieve an HTML document, use:
 
-	struct soap soap;
+    struct soap soap;
         char *buf = NULL;
-	size_t len;
-	soap_init(&soap);
-	soap_register_plugin(&soap, http_get); // register plugin
-	if (soap_get_connect(&soap, endpoint, action)
-	 || soap_begin_recv(&soap))
-	  ... connect/recv error ...
-	else
+    size_t len;
+    soap_init(&soap);
+    soap_register_plugin(&soap, http_get); // register plugin
+    if (soap_get_connect(&soap, endpoint, action)
+     || soap_begin_recv(&soap))
+      ... connect/recv error ...
+    else
           buf = soap_get_http_body(&soap, &len);
         soap_end_recv(&soap);
-	... process data in buf[0..len-1]
+    ... process data in buf[0..len-1]
         soap_destroy(&soap);
         soap_end(&soap);
-	soap_done(&soap);
+    soap_done(&soap);
 
         The soap_get_http_body() function above moves HTTP body content into a
         buffer.

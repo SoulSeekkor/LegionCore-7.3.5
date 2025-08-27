@@ -8142,48 +8142,48 @@ void SpellMgr::LoadSpellCustomAttr()
         spellInfo->Effects[EFFECT_2]->TargetA = TARGET_UNIT_CONE_ENEMY_24;
     });
 
-	// Fixed aura stack bugs like rejuvenation stacking instead of refreshing the buff etc
-	// TODO there might be more spells that stack so add more spells onto here if any are found
-	ApplySpellFix({ 1079,  // Rip
-					774,   // Rejuvenation
-					139,   // Renew
-					703,   // Garrote
-					1943,  // Rupture
-					603,   // Doom
-					32612, // Invisibility buff
-					66,    // Invisibility spell
-					136,   // Mend pet
-					1604,  // Dazed
-					1850   // Dash
-		}, [](SpellInfo* spellInfo)
-	{
-		spellInfo->GetAuraOptions()->ProcCharges = 0;
-		spellInfo->GetAuraOptions()->CumulativeAura = 0;
-	});
+    // Fixed aura stack bugs like rejuvenation stacking instead of refreshing the buff etc
+    // TODO there might be more spells that stack so add more spells onto here if any are found
+    ApplySpellFix({ 1079,  // Rip
+                    774,   // Rejuvenation
+                    139,   // Renew
+                    703,   // Garrote
+                    1943,  // Rupture
+                    603,   // Doom
+                    32612, // Invisibility buff
+                    66,    // Invisibility spell
+                    136,   // Mend pet
+                    1604,  // Dazed
+                    1850   // Dash
+        }, [](SpellInfo* spellInfo)
+    {
+        spellInfo->GetAuraOptions()->ProcCharges = 0;
+        spellInfo->GetAuraOptions()->CumulativeAura = 0;
+    });
 
-	//40 yards instead of 30 yards to match 198067
-	ApplySpellFix({ 188592, // Fire Elemental
-					118291, // Primal Fire Elemental
-					188616  // Earth Elemental
-		}, [](SpellInfo* spellInfo)
-		{
-			spellInfo->Misc.RangeEntry = sSpellRangeStore.LookupEntry(5);
-		});
+    //40 yards instead of 30 yards to match 198067
+    ApplySpellFix({ 188592, // Fire Elemental
+                    118291, // Primal Fire Elemental
+                    188616  // Earth Elemental
+        }, [](SpellInfo* spellInfo)
+        {
+            spellInfo->Misc.RangeEntry = sSpellRangeStore.LookupEntry(5);
+        });
 
-	// T18 Resto 4P lifebloom 2 targets
-	ApplySpellFix({ 188550 }, [](SpellInfo* spellInfo)
-		{
-			spellInfo->GetMisc()->MiscData.Attributes[5] &= ~SPELL_ATTR5_SINGLE_TARGET_SPELL;
-		});
+    // T18 Resto 4P lifebloom 2 targets
+    ApplySpellFix({ 188550 }, [](SpellInfo* spellInfo)
+        {
+            spellInfo->GetMisc()->MiscData.Attributes[5] &= ~SPELL_ATTR5_SINGLE_TARGET_SPELL;
+        });
 
-	// Fixed duration for frozen orb mage
-	/*ApplySpellFix({ 84721 }, [](SpellInfo* spellInfo)
-	{
-		spellInfo->Misc.Duration.Duration = 15 * IN_MILLISECONDS;
-		spellInfo->Misc.Duration.MaxDuration = 15 * IN_MILLISECONDS;
-		spellInfo->GetMisc()->Duration.Duration = 8;
-		spellInfo->GetMisc()->Duration.MaxDuration = 8;
-	});*/
+    // Fixed duration for frozen orb mage
+    /*ApplySpellFix({ 84721 }, [](SpellInfo* spellInfo)
+    {
+        spellInfo->Misc.Duration.Duration = 15 * IN_MILLISECONDS;
+        spellInfo->Misc.Duration.MaxDuration = 15 * IN_MILLISECONDS;
+        spellInfo->GetMisc()->Duration.Duration = 8;
+        spellInfo->GetMisc()->Duration.MaxDuration = 8;
+    });*/
 
     for (uint32 i = 0; i < GetSpellInfoStoreSize(); ++i)
     {

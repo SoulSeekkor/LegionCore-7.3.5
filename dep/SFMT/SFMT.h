@@ -56,70 +56,70 @@
 #define SFMT_N    348                  // Size of state vector
 #define SFMT_M    330                  // Position of intermediate feedback
 #define SFMT_SL1    5                  // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	  3                  // Left shift of W[0], *8, 128-bit words
+#define SFMT_SL2    3                  // Left shift of W[0], *8, 128-bit words
 #define SFMT_SR1    9                  // Right shift of W[M], 32-bit words
-#define SFMT_SR2	  3                  // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	  0xeffffffb,0xdfbebfff,0xbfbf7bef,0x9ffd7bff // AND mask
+#define SFMT_SR2    3                  // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xeffffffb,0xdfbebfff,0xbfbf7bef,0x9ffd7bff // AND mask
 #define SFMT_PARITY 1,0,0xa3ac4000,0xecc1327a   // Period certification vector
 
 #elif MEXP == 19937
 #define SFMT_N    156                  // Size of state vector
 #define SFMT_M    122                  // Position of intermediate feedback
 #define SFMT_SL1   18                  // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	  1                  // Left shift of W[0], *8, 128-bit words
+#define SFMT_SL2    1                  // Left shift of W[0], *8, 128-bit words
 #define SFMT_SR1   11                  // Right shift of W[M], 32-bit words
-#define SFMT_SR2	  1                  // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	  0xdfffffef,0xddfecb7f,0xbffaffff,0xbffffff6 // AND mask
+#define SFMT_SR2    1                  // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xdfffffef,0xddfecb7f,0xbffaffff,0xbffffff6 // AND mask
 #define SFMT_PARITY 1,0,0,0x13c9e684   // Period certification vector
 
 #elif MEXP == 11213
-#define SFMT_N    88                   // Size of state vector
-#define SFMT_M    68                   // Position of intermediate feedback
-#define SFMT_SL1	14                   // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	 3                   // Left shift of W[0], *8, 128-bit words
-#define SFMT_SR1	 7                   // Right shift of W[M], 32-bit words
-#define SFMT_SR2	 3                   // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	 0xeffff7fb,0xffffffef,0xdfdfbfff,0x7fffdbfd // AND mask
+#define SFMT_N     88                   // Size of state vector
+#define SFMT_M     68                   // Position of intermediate feedback
+#define SFMT_SL1   14                   // Left shift of W[N-1], 32-bit words
+#define SFMT_SL2    3                   // Left shift of W[0], *8, 128-bit words
+#define SFMT_SR1    7                   // Right shift of W[M], 32-bit words
+#define SFMT_SR2    3                   // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xeffff7fb,0xffffffef,0xdfdfbfff,0x7fffdbfd // AND mask
 #define SFMT_PARITY 1,0,0xe8148000,0xd0c7afa3 // Period certification vector
 
 #elif MEXP == 4253
-#define SFMT_N    34                   // Size of state vector
-#define SFMT_M    17                   // Position of intermediate feedback
-#define SFMT_SL1	20                   // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	 1                   // Left shift of W[0], *8, 128-bit words
-#define SFMT_SR1	 7                   // Right shift of W[M], 32-bit words
-#define SFMT_SR2	 1                   // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	 0x9f7bffff, 0x9fffff5f, 0x3efffffb, 0xfffff7bb // AND mask
+#define SFMT_N     34                   // Size of state vector
+#define SFMT_M     17                   // Position of intermediate feedback
+#define SFMT_SL1   20                   // Left shift of W[N-1], 32-bit words
+#define SFMT_SL2    1                   // Left shift of W[0], *8, 128-bit words
+#define SFMT_SR1    7                   // Right shift of W[M], 32-bit words
+#define SFMT_SR2    1                   // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0x9f7bffff, 0x9fffff5f, 0x3efffffb, 0xfffff7bb // AND mask
 #define SFMT_PARITY 0xa8000001, 0xaf5390a3, 0xb740b3f8, 0x6c11486d // Period certification vector
 
 #elif MEXP == 2281
-#define SFMT_N    18                   // Size of state vector
-#define SFMT_M    12                   // Position of intermediate feedback
-#define SFMT_SL1	19                   // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	 1                   // Left shift of W[0], *8, 128-bit words
-#define SFMT_SR1	 5                   // Right shift of W[M], 32-bit words
-#define SFMT_SR2	 1                   // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	 0xbff7ffbf, 0xfdfffffe, 0xf7ffef7f, 0xf2f7cbbf // AND mask
+#define SFMT_N     18                   // Size of state vector
+#define SFMT_M     12                   // Position of intermediate feedback
+#define SFMT_SL1   19                   // Left shift of W[N-1], 32-bit words
+#define SFMT_SL2    1                   // Left shift of W[0], *8, 128-bit words
+#define SFMT_SR1    5                   // Right shift of W[M], 32-bit words
+#define SFMT_SR2    1                   // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xbff7ffbf, 0xfdfffffe, 0xf7ffef7f, 0xf2f7cbbf // AND mask
 #define SFMT_PARITY 0x00000001, 0x00000000, 0x00000000, 0x41dfa600  // Period certification vector
 
 #elif MEXP == 1279
-#define SFMT_N    10                   // Size of state vector
-#define SFMT_M     7                   // Position of intermediate feedback
-#define SFMT_SL1	14                   // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	 3                   // Left shift of W[0], *8, 128-bit words
-#define SFMT_SR1	 5                   // Right shift of W[M], 32-bit words
-#define SFMT_SR2	 1                   // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	  0xf7fefffd, 0x7fefcfff, 0xaff3ef3f, 0xb5ffff7f  // AND mask
+#define SFMT_N     10                   // Size of state vector
+#define SFMT_M      7                   // Position of intermediate feedback
+#define SFMT_SL1   14                   // Left shift of W[N-1], 32-bit words
+#define SFMT_SL2    3                   // Left shift of W[0], *8, 128-bit words
+#define SFMT_SR1    5                   // Right shift of W[M], 32-bit words
+#define SFMT_SR2    1                   // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xf7fefffd, 0x7fefcfff, 0xaff3ef3f, 0xb5ffff7f  // AND mask
 #define SFMT_PARITY 0x00000001, 0x00000000, 0x00000000, 0x20000000  // Period certification vector
 
 #elif MEXP == 607
-#define SFMT_N     5                   // Size of state vector
-#define SFMT_M     2                   // Position of intermediate feedback
-#define SFMT_SL1	15                   // Left shift of W[N-1], 32-bit words
-#define SFMT_SL2	 3                   // Left shift of W[0], *8, 128-bit words
-#define SFMT_SR1	13                   // Right shift of W[M], 32-bit words
-#define SFMT_SR2	 3                   // Right shift of W[N-2], *8, 128-bit words
-#define SFMT_MASK	  0xfdff37ff, 0xef7f3f7d, 0xff777b7d, 0x7ff7fb2f  // AND mask
+#define SFMT_N      5                   // Size of state vector
+#define SFMT_M      2                   // Position of intermediate feedback
+#define SFMT_SL1   15                   // Left shift of W[N-1], 32-bit words
+#define SFMT_SL2    3                   // Left shift of W[0], *8, 128-bit words
+#define SFMT_SR1   13                   // Right shift of W[M], 32-bit words
+#define SFMT_SR2    3                   // Right shift of W[N-2], *8, 128-bit words
+#define SFMT_MASK   0xfdff37ff, 0xef7f3f7d, 0xff777b7d, 0x7ff7fb2f  // AND mask
 #define SFMT_PARITY 0x00000001, 0x00000000, 0x00000000, 0x5986f054  // Period certification vector
 #endif
 
@@ -165,17 +165,17 @@ public:
         RandomInit((int)(time(0)));
     }
 
-    void RandomInit(int seed)                     // Re-seed
+    void RandomInit(int seed)                // Re-seed
     {
         // Re-seed
-        uint32_t i;                         // Loop counter
-        uint32_t y = seed;                  // Temporary
-        uint32_t statesize = SFMT_N*4;      // Size of state vector
+        uint32_t i;                          // Loop counter
+        uint32_t y = seed;                   // Temporary
+        uint32_t statesize = SFMT_N*4;       // Size of state vector
 
         // Fill state vector with random numbers from seed
         uint32_t* s = (uint32_t*)&state;
         s[0] = y;
-        const uint32_t factor = 1812433253U;// Multiplication factor
+        const uint32_t factor = 1812433253U; // Multiplication factor
 
         for (i = 1; i < statesize; i++) {
             y = factor * (y ^ (y >> 30)) + i;
@@ -353,11 +353,11 @@ private:
         ix = 0;
     }
 
-    __m128i  mask;                                // AND mask
-    __m128i  state[SFMT_N];                       // State vector for SFMT generator
-    uint32_t ix;                                  // Index into state array
-    uint32_t LastInterval;                        // Last interval length for IRandom
-    uint32_t RLimit;                              // Rejection limit used by IRandom
+    __m128i  mask;                          // AND mask
+    __m128i  state[SFMT_N];                 // State vector for SFMT generator
+    uint32_t ix;                            // Index into state array
+    uint32_t LastInterval;                  // Last interval length for IRandom
+    uint32_t RLimit;                        // Rejection limit used by IRandom
 };
 
 #endif // SFMT_H

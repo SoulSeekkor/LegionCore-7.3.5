@@ -154,7 +154,7 @@ private:
     /** \copydoc clearCache */
     void _clearCache(const std::string& path);
 
-	/** \copydoc inZipfile */
+    /** \copydoc inZipfile */
     bool _inZipfile(const std::string& path) {
         std::string ignore;
         return inZipfile(path, ignore);
@@ -189,7 +189,7 @@ private:
         return ! isDirectory(path);
     }
     
-	/** \copydoc copyFile */
+    /** \copydoc copyFile */
     void _copyFile(const std::string& srcPath, const std::string& dstPath);
 
     /** \copydoc resolve */
@@ -260,7 +260,7 @@ public:
        If the path itself is a zipfile, returns false.
        
        \param zipfile The part of \a path that was the zipfile
-	   */
+       */
     static bool inZipfile(const std::string& path, std::string& zipfile) {
         mutex.lock();
         bool b = instance()._inZipfile(path, zipfile);
@@ -268,7 +268,7 @@ public:
         return b;
     }
 
-	/** Clears old cache entries so that exists() and list() will reflect recent changes to the file system.
+    /** Clears old cache entries so that exists() and list() will reflect recent changes to the file system.
        \param path Clear only \a path and its subdirectories ("" means clear the entire cache) */
     static void clearCache(const std::string& path = "") {
         mutex.lock();
@@ -277,7 +277,7 @@ public:
     }
 
     
-	/** Same as the C standard library fopen, but updates the file cache
+    /** Same as the C standard library fopen, but updates the file cache
     to acknowledge the new file on a write operation. */
     static FILE* fopen(const char* filename, const char* mode) {
         mutex.lock();
@@ -305,7 +305,7 @@ public:
     }
 
     
-	/**
+    /**
        \brief Delete this file. 
         No effect if \a path does not exist.
 
@@ -318,7 +318,7 @@ public:
     }
 
     
-	/** Returns true if \a path is a file that is a zipfile. Note that G3D requires zipfiles to have
+    /** Returns true if \a path is a file that is a zipfile. Note that G3D requires zipfiles to have
         some extension, although it is not required to be "zip" */
     static bool isZipfile(const std::string& path) {
         mutex.lock();
@@ -328,7 +328,7 @@ public:
     }
 
    
-	/** Set the cacheLifetime().
+    /** Set the cacheLifetime().
        \param t in seconds */
     void setCacheLifetime(float t) {
         mutex.lock();
@@ -336,7 +336,7 @@ public:
         mutex.unlock();
     }
 
-	/** A cache is used to optimize repeated calls.  A cache entry is considered
+    /** A cache is used to optimize repeated calls.  A cache entry is considered
         valid for this many seconds after it has been checked. */
     static float cacheLifetime() {
         mutex.lock();
@@ -346,7 +346,7 @@ public:
     }
 
     
-	/** Creates the directory named, including any subdirectories 
+    /** Creates the directory named, including any subdirectories 
         that do not already exist.
 
         The directory must not be inside a zipfile.
@@ -360,7 +360,7 @@ public:
     }
 
     
-	/** The current working directory (cwd).  Only ends in a slash if this is the root of the file system. */
+    /** The current working directory (cwd).  Only ends in a slash if this is the root of the file system. */
     static std::string currentDirectory() {
         mutex.lock();
         const std::string& s = instance()._currentDirectory();
@@ -369,7 +369,7 @@ public:
     }
 
     
-	/**
+    /**
     \param srcPath Must name a file.
     \param dstPath Must not contain a zipfile.
 
@@ -383,7 +383,7 @@ public:
 
     
 
-	/** Returns true if a node named \a f exists.
+    /** Returns true if a node named \a f exists.
 
         \param f If \a f contains wildcards, the function returns true if any file 
         matches those wildcards.  Wildcards may only appear in the base or ext, not the
@@ -412,7 +412,7 @@ public:
     }
 
     
-	/** Known bug: does not work inside zipfiles */
+    /** Known bug: does not work inside zipfiles */
     static bool isDirectory(const std::string& path) {
         mutex.lock();
         bool b = instance()._isDirectory(path);
@@ -421,7 +421,7 @@ public:
     }
 
     
-	/** Known bug: does not work inside zipfiles */
+    /** Known bug: does not work inside zipfiles */
     static bool isFile(const std::string& path) {
         mutex.lock();
         bool b = instance()._isFile(path);
@@ -430,7 +430,7 @@ public:
     }
 
     
-	/** Fully qualifies a filename.
+    /** Fully qualifies a filename.
 
         The filename may contain wildcards, in which case the wildcards will be preserved in the returned value.
 
@@ -445,7 +445,7 @@ public:
     }
 
     
-	/** Returns true if \a dst does not exist or \a src is newer than \a dst,
+    /** Returns true if \a dst does not exist or \a src is newer than \a dst,
         according to their time stamps.
        
         Known bug: does not work inside zipfiles.
@@ -458,7 +458,7 @@ public:
     }
 
     
-	/** Returns the length of the file in bytes, or -1 if the file could not be opened. */
+    /** Returns the length of the file in bytes, or -1 if the file could not be opened. */
     static int64 size(const std::string& path) {
         mutex.lock();
         int64 i = instance()._size(path);
@@ -467,7 +467,7 @@ public:
     }
 
     
-	/** Appends all nodes matching \a spec to the \a result array.
+    /** Appends all nodes matching \a spec to the \a result array.
 
       Wildcards can only appear to the right of the last slash in \a spec.
 
@@ -484,7 +484,7 @@ public:
     }
 
     
-	/** list() files */
+    /** list() files */
     static void getFiles(const std::string& spec, Array<std::string>& result, bool includeParentPath = false) {
         mutex.lock();
         instance()._getFiles(spec, result, includeParentPath);
@@ -492,7 +492,7 @@ public:
     }
 
     
-	/** list() directories */
+    /** list() directories */
     static void getDirectories(const std::string& spec, Array<std::string>& result, bool includeParentPath = false) {
         mutex.lock();
         instance()._getDirectories(spec, result, includeParentPath);

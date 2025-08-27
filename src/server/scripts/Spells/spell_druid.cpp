@@ -2033,12 +2033,12 @@ class spell_dru_swiftmend : public SpellScript
             plr->ModSpellChargeCooldown(GetSpellInfo()->Id, bp);
         }
 
-		// Extends lifebloom by 10 sec when having T18 Resto 4P bonus with Edraith, Bonds of Aglaya legion legendary
-		if (plr->HasAura(185397) && plr->HasAura(207943))
-			if (const SpellInfo* spellInfo = sSpellMgr->GetSpellInfo(188550))
-				if (Aura* aur = target->GetAura(spellInfo->Id, plr->GetGUID()))
-					if (AuraEffect const* aurEf = plr->GetAuraEffect(207943, EFFECT_0))
-						aur->SetDuration(aur->GetDuration() + aurEf->GetAmount() * IN_MILLISECONDS);
+        // Extends lifebloom by 10 sec when having T18 Resto 4P bonus with Edraith, Bonds of Aglaya legion legendary
+        if (plr->HasAura(185397) && plr->HasAura(207943))
+            if (const SpellInfo* spellInfo = sSpellMgr->GetSpellInfo(188550))
+                if (Aura* aur = target->GetAura(spellInfo->Id, plr->GetGUID()))
+                    if (AuraEffect const* aurEf = plr->GetAuraEffect(207943, EFFECT_0))
+                        aur->SetDuration(aur->GetDuration() + aurEf->GetAmount() * IN_MILLISECONDS);
     }
 
     void Register() override

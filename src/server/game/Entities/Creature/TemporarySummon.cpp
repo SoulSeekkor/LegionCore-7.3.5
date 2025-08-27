@@ -624,10 +624,10 @@ void Guardian::InitStats(uint32 duration)
     if (m_owner->IsPlayer() && HasUnitTypeMask(UNIT_MASK_CONTROLABLE_GUARDIAN))
         m_charmInfo->InitCharmCreateSpells();
 
-	if (GetEntry() != 100868)
-		SetReactState(REACT_AGGRESSIVE);
-	else
-		SetReactState(REACT_ATTACK_OFF);
+    if (GetEntry() != 100868)
+        SetReactState(REACT_AGGRESSIVE);
+    else
+        SetReactState(REACT_ATTACK_OFF);
 }
 
 void Guardian::InitSummon()

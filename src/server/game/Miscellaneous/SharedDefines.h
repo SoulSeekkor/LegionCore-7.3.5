@@ -332,10 +332,10 @@ enum Classes
 };
 
 constexpr auto CLASSMASK_ALL_PLAYABLE = 
-	((1 << (CLASS_WARRIOR - 1)) | (1 << (CLASS_PALADIN - 1)) | (1 << (CLASS_HUNTER - 1)) |
-	(1 << (CLASS_ROGUE - 1)) | (1 << (CLASS_PRIEST - 1)) | (1 << (CLASS_SHAMAN - 1)) |
-	(1 << (CLASS_MAGE - 1)) | (1 << (CLASS_WARLOCK - 1)) | (1 << (CLASS_DRUID - 1)) |
-	(1 << (CLASS_DEATH_KNIGHT - 1)) | (1 << (CLASS_MONK - 1)) | (1 << (CLASS_DEMON_HUNTER - 1)));
+    ((1 << (CLASS_WARRIOR - 1)) | (1 << (CLASS_PALADIN - 1)) | (1 << (CLASS_HUNTER - 1)) |
+    (1 << (CLASS_ROGUE - 1)) | (1 << (CLASS_PRIEST - 1)) | (1 << (CLASS_SHAMAN - 1)) |
+    (1 << (CLASS_MAGE - 1)) | (1 << (CLASS_WARLOCK - 1)) | (1 << (CLASS_DRUID - 1)) |
+    (1 << (CLASS_DEATH_KNIGHT - 1)) | (1 << (CLASS_MONK - 1)) | (1 << (CLASS_DEMON_HUNTER - 1)));
 
 // valid classes for creature_template.unit_class
 enum UnitClass
@@ -2228,12 +2228,12 @@ enum Mechanics
 
 // Used for spell 42292 Immune Movement Impairment and Loss of Control (0x49967ca6)
 constexpr auto IMMUNE_TO_MOVEMENT_IMPAIRMENT_AND_LOSS_CONTROL_MASK = (
-	(1 << MECHANIC_CHARM) | (1 << MECHANIC_DISORIENTED) | (1 << MECHANIC_FEAR) |
-	(1 << MECHANIC_ROOT) | (1 << MECHANIC_SLEEP) | (1 << MECHANIC_SNARE) |
-	(1 << MECHANIC_STUN) | (1 << MECHANIC_FREEZE) | (1 << MECHANIC_SILENCE) | (1 << MECHANIC_DISARM) | (1 << MECHANIC_INCAPACITATE) |
-	(1 << MECHANIC_POLYMORPH) | (1 << MECHANIC_BANISH) | (1 << MECHANIC_SHACKLE) |
-	(1 << MECHANIC_TURN) | (1 << MECHANIC_HORROR) | (1 << MECHANIC_DAZE) |
-	(1 << MECHANIC_SAPPED));
+    (1 << MECHANIC_CHARM) | (1 << MECHANIC_DISORIENTED) | (1 << MECHANIC_FEAR) |
+    (1 << MECHANIC_ROOT) | (1 << MECHANIC_SLEEP) | (1 << MECHANIC_SNARE) |
+    (1 << MECHANIC_STUN) | (1 << MECHANIC_FREEZE) | (1 << MECHANIC_SILENCE) | (1 << MECHANIC_DISARM) | (1 << MECHANIC_INCAPACITATE) |
+    (1 << MECHANIC_POLYMORPH) | (1 << MECHANIC_BANISH) | (1 << MECHANIC_SHACKLE) |
+    (1 << MECHANIC_TURN) | (1 << MECHANIC_HORROR) | (1 << MECHANIC_DAZE) |
+    (1 << MECHANIC_SAPPED));
 
 // Spell dispel type
 enum DispelType
@@ -6360,11 +6360,11 @@ enum Affixes : uint32
 };
 
 constexpr auto AFFIXES_ALL = 
-	((1 << Affixes::Overflowing) | (1 << Affixes::Skittish) | (1 << Affixes::Volcanic) |
-	(1 << Affixes::Necrotic) | (1 << Affixes::Teeming) | (1 << Affixes::Raging) |
-	(1 << Affixes::Bolstering) | (1 << Affixes::Sanguine) | (1 << Affixes::Tyrannical) |
-	(1 << Affixes::Fortified) | (1 << Affixes::Bursting) | (1 << Affixes::Grievous) |
-	(1 << Affixes::FelExplosives) | (1 << Affixes::Quaking) | (1 << Affixes::Relentless) | (1 << Affixes::Infested));
+    ((1 << Affixes::Overflowing) | (1 << Affixes::Skittish) | (1 << Affixes::Volcanic) |
+    (1 << Affixes::Necrotic) | (1 << Affixes::Teeming) | (1 << Affixes::Raging) |
+    (1 << Affixes::Bolstering) | (1 << Affixes::Sanguine) | (1 << Affixes::Tyrannical) |
+    (1 << Affixes::Fortified) | (1 << Affixes::Bursting) | (1 << Affixes::Grievous) |
+    (1 << Affixes::FelExplosives) | (1 << Affixes::Quaking) | (1 << Affixes::Relentless) | (1 << Affixes::Infested));
 
 static const int32 Reputation_Cap    =  42000;
 static const int32 Reputation_Bottom = -42000;

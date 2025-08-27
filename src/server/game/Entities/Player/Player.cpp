@@ -1646,45 +1646,45 @@ void Player::Update(uint32 p_time)
     {
         if (Map* map = GetMap())
         {
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
-			{
-				if (!HasPvpRulesEnabled())
-					EnablePvpRules(false);
-			}
-			else 
-			{
-				bool hasTemplate = HasAura(SPELL_PRINCIPLES_OF_WAR);
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
+            {
+                if (!HasPvpRulesEnabled())
+                    EnablePvpRules(false);
+            }
+            else 
+            {
+                bool hasTemplate = HasAura(SPELL_PRINCIPLES_OF_WAR);
 
-				if ((hasTemplate && !HasPvpStatsScalingEnabled()) || (!hasTemplate && HasPvpStatsScalingEnabled()))
-					sWorld->AddPvPMysticCount(); // for debug
+                if ((hasTemplate && !HasPvpStatsScalingEnabled()) || (!hasTemplate && HasPvpStatsScalingEnabled()))
+                    sWorld->AddPvPMysticCount(); // for debug
 
-				if (map->IsBattlegroundOrArena())
-				{
-					if (!HasPvpStatsScalingEnabled() || !HasPvpRulesEnabled() || !hasTemplate)
-					{
-						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
-						AddAura(SPELL_PRINCIPLES_OF_WAR, this);
-						EnablePvpRules(false);
-					}
-				}
-				else if (map->IsDungeon())
-				{
-					if (HasPvpStatsScalingEnabled())
-					{
-						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
-						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY);
-					}
-					if (HasPvpRulesEnabled())
-					{
-						RemoveAurasDueToSpell(SPELL_PVP_RULES_ENABLED);
-					}
-				}
-				else
-				{
-					if (HasAura(SPELL_PRINCIPLES_OF_WAR))
-						RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
-				}
-			}
+                if (map->IsBattlegroundOrArena())
+                {
+                    if (!HasPvpStatsScalingEnabled() || !HasPvpRulesEnabled() || !hasTemplate)
+                    {
+                        RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
+                        AddAura(SPELL_PRINCIPLES_OF_WAR, this);
+                        EnablePvpRules(false);
+                    }
+                }
+                else if (map->IsDungeon())
+                {
+                    if (HasPvpStatsScalingEnabled())
+                    {
+                        RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
+                        RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY);
+                    }
+                    if (HasPvpRulesEnabled())
+                    {
+                        RemoveAurasDueToSpell(SPELL_PVP_RULES_ENABLED);
+                    }
+                }
+                else
+                {
+                    if (HasAura(SPELL_PRINCIPLES_OF_WAR))
+                        RemoveAurasDueToSpell(SPELL_PRINCIPLES_OF_WAR);
+                }
+            }
         }
         
         m_pvpAuraCheckTimer = 10000;
@@ -4227,7 +4227,7 @@ void Player::EnablePvpRules(bool recalcItems /*= true*/)
 void Player::DisablePvpRules(bool recalcItems /*= true*/, bool checkZone/* = true*/)
 {
     if ((checkZone && IsAreaThatActivatesPvpTalents(GetCurrentAreaID())) || 
-		(sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110))
+        (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110))
         return;
 
     // for (std::pair<ObjectGuid, uint32> ArtIt : AllArtifacts)
@@ -9147,53 +9147,53 @@ bool Player::RewardHonor(Unit* victim, uint32 groupsize, int32 honor, bool pvpto
 
             m_saveKills = true;
         }
-		else if (sWorld->getBoolConfig(CONFIG_GAIN_HONOR_GUARD) && victim->ToCreature()->isGuard())
-		{
-			uint8 k_level = getLevel();
-			uint8 k_grey = Trinity::XP::GetGrayLevel(k_level);
-			uint8 v_level = victim->getLevel();
+        else if (sWorld->getBoolConfig(CONFIG_GAIN_HONOR_GUARD) && victim->ToCreature()->isGuard())
+        {
+            uint8 k_level = getLevel();
+            uint8 k_grey = Trinity::XP::GetGrayLevel(k_level);
+            uint8 v_level = victim->getLevel();
 
-			if (v_level <= k_grey)
-				return false;
+            if (v_level <= k_grey)
+                return false;
 
-			uint32 victim_title = 0;
-			victimGuid = ObjectGuid::Empty;
+            uint32 victim_title = 0;
+            victimGuid = ObjectGuid::Empty;
 
-			honor_f = ceil(Trinity::Honor::hk_honor_at_level_f(k_level) * (v_level - k_grey) / (k_level - k_grey));
+            honor_f = ceil(Trinity::Honor::hk_honor_at_level_f(k_level) * (v_level - k_grey) / (k_level - k_grey));
 
-			// count the number of playerkills in one day
-			ApplyModUInt32Value(PLAYER_FIELD_YESTERDAY_HONORABLE_KILLS, 1, true);
-			// and those in a lifetime
-			ApplyModUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS, 1, true);
-			UpdateAchievementCriteria(CRITERIA_TYPE_EARN_HONORABLE_KILL);
-			UpdateAchievementCriteria(CRITERIA_TYPE_HK_CLASS, victim->getClass());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HK_RACE, victim->getRace());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL_AT_AREA, GetAreaId());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL, 1, 0, 0, victim);
-		}
-		else if (sWorld->getBoolConfig(CONFIG_GAIN_HONOR_ELITE) && victim->ToCreature()->isElite())
-		{
-			uint8 k_level = getLevel();
-			uint8 k_grey = Trinity::XP::GetGrayLevel(k_level);
-			uint8 v_level = victim->getLevel();
+            // count the number of playerkills in one day
+            ApplyModUInt32Value(PLAYER_FIELD_YESTERDAY_HONORABLE_KILLS, 1, true);
+            // and those in a lifetime
+            ApplyModUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS, 1, true);
+            UpdateAchievementCriteria(CRITERIA_TYPE_EARN_HONORABLE_KILL);
+            UpdateAchievementCriteria(CRITERIA_TYPE_HK_CLASS, victim->getClass());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HK_RACE, victim->getRace());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL_AT_AREA, GetAreaId());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL, 1, 0, 0, victim);
+        }
+        else if (sWorld->getBoolConfig(CONFIG_GAIN_HONOR_ELITE) && victim->ToCreature()->isElite())
+        {
+            uint8 k_level = getLevel();
+            uint8 k_grey = Trinity::XP::GetGrayLevel(k_level);
+            uint8 v_level = victim->getLevel();
 
-			if (v_level <= k_grey)
-				return false;
+            if (v_level <= k_grey)
+                return false;
 
-			uint32 victim_title = 0;
-			victimGuid = ObjectGuid::Empty;
-			honor_f = ceil(Trinity::Honor::hk_honor_at_level_f(k_level) * (v_level - k_grey) / (k_level - k_grey));
-			// count the number of playerkills in one day
-			ApplyModUInt32Value(PLAYER_FIELD_YESTERDAY_HONORABLE_KILLS, 1, true);
+            uint32 victim_title = 0;
+            victimGuid = ObjectGuid::Empty;
+            honor_f = ceil(Trinity::Honor::hk_honor_at_level_f(k_level) * (v_level - k_grey) / (k_level - k_grey));
+            // count the number of playerkills in one day
+            ApplyModUInt32Value(PLAYER_FIELD_YESTERDAY_HONORABLE_KILLS, 1, true);
 
-			// and those in a lifetime
-			ApplyModUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS, 1, true);
-			UpdateAchievementCriteria(CRITERIA_TYPE_EARN_HONORABLE_KILL);
-			UpdateAchievementCriteria(CRITERIA_TYPE_HK_CLASS, victim->getClass());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HK_RACE, victim->getRace());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL_AT_AREA, GetAreaId());
-			UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL, 1, 0, 0, victim);
-		}
+            // and those in a lifetime
+            ApplyModUInt32Value(PLAYER_FIELD_LIFETIME_HONORABLE_KILLS, 1, true);
+            UpdateAchievementCriteria(CRITERIA_TYPE_EARN_HONORABLE_KILL);
+            UpdateAchievementCriteria(CRITERIA_TYPE_HK_CLASS, victim->getClass());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HK_RACE, victim->getRace());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL_AT_AREA, GetAreaId());
+            UpdateAchievementCriteria(CRITERIA_TYPE_HONORABLE_KILL, 1, 0, 0, victim);
+        }
         else
         {
             if (!victim->ToCreature()->isRacialLeader())
@@ -10106,18 +10106,18 @@ void Player::UpdateArea(uint32 newArea)
 
     UpdateAreaDependentAuras(newArea);
 
-	if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
-	{
-		if (!HasPvpRulesEnabled())
-			EnablePvpRules(false);
-	}
-	else
-	{
-		if (IsAreaThatActivatesPvpTalents(newArea))
-			EnablePvpRules(!InArena() && !InBattleground());
-		else
-			DisablePvpRules(true, false);
-	}
+    if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && getLevel() >= 110)
+    {
+        if (!HasPvpRulesEnabled())
+            EnablePvpRules(false);
+    }
+    else
+    {
+        if (IsAreaThatActivatesPvpTalents(newArea))
+            EnablePvpRules(!InArena() && !InBattleground());
+        else
+            DisablePvpRules(true, false);
+    }
 
     PrepareAreaQuest(newArea);
 
@@ -13220,8 +13220,8 @@ bool Player::HasToken(uint8 tokenType, uint32 count) const
     if (GetSession()->GetTokenBalance(tokenType) >= count)
         return true;
 
-	ChatHandler chH = ChatHandler(const_cast<Player*>(this));
-	chH.PSendSysMessage(20000, count);
+    ChatHandler chH = ChatHandler(const_cast<Player*>(this));
+    chH.PSendSysMessage(20000, count);
     return false;
 }
 
@@ -22559,7 +22559,7 @@ bool Player::LoadFromDB(ObjectGuid guid, SQLQueryHolder *holder)
         dmScore.selectedMorph = fieldDM[1].GetUInt32();
         Tokenizer buyed_morph(fieldDM[2].GetString(), ' ');
         for (char const* token : buyed_morph)
-			dmScore.buyedMorphs.insert(atol(token));
+            dmScore.buyedMorphs.insert(atol(token));
         
     }
     
@@ -32720,7 +32720,7 @@ void Player::StoreLootItem(uint8 lootSlot, Loot* loot)
     UpdateAchievementCriteria(CRITERIA_TYPE_LOOT_EPIC_ITEM, item->item.ItemID, item->count);
 
     //AddTrackingQuestIfNeeded(loot->LootSourceGuid);
-	sScriptMgr->OnLootItem(this, newitem, item->count);
+    sScriptMgr->OnLootItem(this, newitem, item->count);
 }
 
 uint8 Player::CalculateTalentsPoints() const
@@ -32908,8 +32908,8 @@ InventoryResult Player::CanEquipUniqueItem(ItemTemplate const* itemProto, uint8 
         uint32 quantity = limitEntry->Quantity;
         if (itemProto->GetLimitCategory() == 357)
         {
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_UNLIMITED_LEGION_LEGENDARIES))
-				return EQUIP_ERR_OK;
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_UNLIMITED_LEGION_LEGENDARIES))
+                return EQUIP_ERR_OK;
 
             if (Garrison* garr = const_cast<Player*>(this)->GetGarrisonPtr())
             {
@@ -32917,9 +32917,9 @@ InventoryResult Player::CanEquipUniqueItem(ItemTemplate const* itemProto, uint8 
                     ++quantity;
             }
 
-			auto equipLegendaryCount = sWorld->getIntConfig(CONFIG_PLAYER_LEGION_LEGENDARY_EQUIP_COUNT);
-			if (equipLegendaryCount > 0)
-				quantity += equipLegendaryCount;
+            auto equipLegendaryCount = sWorld->getIntConfig(CONFIG_PLAYER_LEGION_LEGENDARY_EQUIP_COUNT);
+            if (equipLegendaryCount > 0)
+                quantity += equipLegendaryCount;
         }
 
         if (limit_count > quantity)
@@ -33356,11 +33356,11 @@ bool Player::LearnPvpTalent(uint16 talentID)
         learnSpell(talentInfo->SpellID, true);
     }
 
-	// Remove Hunter's Wild Protector buff if pet is active and player has changed pvp talent
-	if(GetSpecializationId() == SPEC_HUNTER_BEASTMASTER && GetEffectiveLevel() >= 110)
-		if (!HasPvPTalent(204190))
-			if (Pet* pet = GetPet())
-				pet->RemoveAurasDueToSpell(204358);
+    // Remove Hunter's Wild Protector buff if pet is active and player has changed pvp talent
+    if(GetSpecializationId() == SPEC_HUNTER_BEASTMASTER && GetEffectiveLevel() >= 110)
+        if (!HasPvPTalent(204190))
+            if (Pet* pet = GetPet())
+                pet->RemoveAurasDueToSpell(204358);
 
     return true;
 }
@@ -37019,7 +37019,7 @@ void Player::CheckSeamlessTeleport(uint32 newZoneOrArea, bool isArea)
         }
     }
 
-	if (isArea && m_areaId != newZoneOrArea)
+    if (isArea && m_areaId != newZoneOrArea)
     {
         SeamlessTeleportData const* from = sObjectMgr->GetSeamlessTeleportArea(m_areaId);
         SeamlessTeleportData const* to = sObjectMgr->GetSeamlessTeleportArea(newZoneOrArea);
@@ -39013,10 +39013,10 @@ void Player::CreateChallengeKey(Item* item)
 
     item->SetUInt32Value(ITEM_FIELD_EXPIRATION, sWorld->getNextChallengeKeyReset() - time(nullptr));
 
-	if(sWorld->getIntConfig(CONFIG_WEIGHTED_MYTHIC_KEYSTONE))
-		item->SetModifier(ITEM_MODIFIER_CHALLENGE_ID, *Trinity::Containers::SelectRandomWeightedContainerElement(sDB2Manager.GetChallngeMaps(), sDB2Manager.GetChallngesWeight()));
-	else
-		item->SetModifier(ITEM_MODIFIER_CHALLENGE_ID, Trinity::Containers::SelectRandomContainerElement(sDB2Manager.GetChallngeMaps()));
+    if(sWorld->getIntConfig(CONFIG_WEIGHTED_MYTHIC_KEYSTONE))
+        item->SetModifier(ITEM_MODIFIER_CHALLENGE_ID, *Trinity::Containers::SelectRandomWeightedContainerElement(sDB2Manager.GetChallngeMaps(), sDB2Manager.GetChallngesWeight()));
+    else
+        item->SetModifier(ITEM_MODIFIER_CHALLENGE_ID, Trinity::Containers::SelectRandomContainerElement(sDB2Manager.GetChallngeMaps()));
 
     m_challengeKeyInfo.Affix = sWorld->getWorldState(WS_CHALLENGE_AFFIXE1_RESET_TIME);
     m_challengeKeyInfo.Affix1 = sWorld->getWorldState(WS_CHALLENGE_AFFIXE2_RESET_TIME);

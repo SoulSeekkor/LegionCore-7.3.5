@@ -819,30 +819,31 @@ void BattlegroundMgr::LoadPvpRewards()
     /*
     http://www.mmo-champion.com/content/6046-Oct-19-Hotfixes-7-1-PvP-Reward-Changes-Blue-Posts-BlizzCon-Virtual-Ticket-Hosts#71pvprewards
 
-    Activity	                        Honor	Artifact Power
-    Rated BG Win (First of the Day)	    600	    800
-    Rated BG Win	                    300	    400
+    Activity                            Honor      Artifact Power
+    Rated BG Win (First of the Day)     600        800
+    Rated BG Win                        300        400
 
-    Random BG Win (First of the Day)    300	    400
-    Random BG Win	                    150	    200
+    Random BG Win (First of the Day)    300        400
+    Random BG Win                       150        200
 
-    Skirmish Win (First of the Day)	    160	    100
-    Skirmish Win	                    80	    25
+    Skirmish Win (First of the Day)     160        100
+    Skirmish Win                        80         25
 
-    2v2 Win (First of the Day)	        200	    120
-    2v2 Win	                            100	    40
+    2v2 Win (First of the Day)          200        120
+    2v2 Win                             100        40
 
-    3v3 Win (First of the Day)	        200	    180
-    3v3 Wins	                        100	    60
+    3v3 Win (First of the Day)          200        180
+    3v3 Wins                            100        60
 
-    Last Week's Rating	Base Item Level	Appearance
-    0 - 1399	        840	            Gladiator
-    1400 - 1599	        850	            Gladiator
-    1600 - 1799	        860	            Gladiator
-    1800 - 1999	        865	            Gladiator
-    2000 - 2199	        870	            Elite
-    2200 - 2399	        875	            Elite
-    2400+	            880	            Elite
+
+    Last Week's Rating     Base Item Level    Appearance
+    0 - 1399               840                Gladiator
+    1400 - 1599            850                Gladiator
+    1600 - 1799            860                Gladiator
+    1800 - 1999            865                Gladiator
+    2000 - 2199            870                Elite
+    2200 - 2399            875                Elite
+    2400+                  880                Elite
     */
 
     uint32 oldMSTime = getMSTime();

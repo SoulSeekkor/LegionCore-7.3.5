@@ -266,11 +266,11 @@ struct boss_varimathras : BossAI
         {
             switch (eventId)
             {
-				case EVENT_DARK_FISSURE:
+                case EVENT_DARK_FISSURE:
                     DoCast(SPELL_DARK_FISSURE);
                     events.RescheduleEvent(EVENT_DARK_FISSURE, 30000);
                     events.RescheduleEvent(EVENT_MARKED_PREY, urandms(6, 8));
-					break;
+                    break;
                 case EVENT_MARKED_PREY:
                     Talk(SAY_MARKED_PREY);
                     DoCast(SPELL_MARKED_PREY_FILTER);

@@ -4442,10 +4442,10 @@ class spell_item_last_deck_of_nemelex_nobeh : public SpellScript
 
 enum AcridCatalystInjector
 {
-	SPELL_FERVOR_OF_THE_LEGION = 253261, // Haste
-	SPELL_BURTALITY_OF_THE_LEGION = 255742, // Critical
-	SPELL_MALICE_OF_THE_LEGION = 255744, // Mastery
-	SPELL_CYCLE_OF_THE_LEGION = 253260 // Haste, Mastery, and Critical
+    SPELL_FERVOR_OF_THE_LEGION      = 253261,  // Haste
+    SPELL_BURTALITY_OF_THE_LEGION   = 255742,  // Critical
+    SPELL_MALICE_OF_THE_LEGION      = 255744,  // Mastery
+    SPELL_CYCLE_OF_THE_LEGION       = 253260   // Haste, Mastery, and Critical
 };
 
 // Item - 151955: Acrid Catalyst Injector
@@ -4454,96 +4454,96 @@ template <uint32 CriticalSpellId, uint32 HasteSpellId, uint32 MasterySpellId>
 class spell_item_acrid_catalyst_injector : public SpellScriptLoader
 {
 public:
-	spell_item_acrid_catalyst_injector(char const* ScriptName) : SpellScriptLoader(ScriptName) { }
+    spell_item_acrid_catalyst_injector(char const* ScriptName) : SpellScriptLoader(ScriptName) { }
 
-	template <uint32 Critical, uint32 Haste, uint32 Mastery>
-	class spell_item_acrid_catalyst_injector_AuraScript : public AuraScript
-	{
-		PrepareAuraScript(spell_item_acrid_catalyst_injector_AuraScript);
+    template <uint32 Critical, uint32 Haste, uint32 Mastery>
+    class spell_item_acrid_catalyst_injector_AuraScript : public AuraScript
+    {
+        PrepareAuraScript(spell_item_acrid_catalyst_injector_AuraScript);
 
-		bool Validate(SpellInfo const* /*spellInfo*/) override
-		{
-			return ValidateSpellInfo(
-				{
-					Critical,
-					Haste,
-					Mastery
-				});
-		}
+        bool Validate(SpellInfo const* /*spellInfo*/) override
+        {
+            return ValidateSpellInfo(
+                {
+                    Critical,
+                    Haste,
+                    Mastery
+                });
+        }
 
-		void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
-		{
-			/*if (eventInfo.GetHitMask() & PROC_HIT_CRITICAL)
-			{*/
-			static std::vector<uint32> const triggeredSpells[1] =
-			{
-				{ Critical, Haste, Mastery }
-			};
+        void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+        {
+            /*if (eventInfo.GetHitMask() & PROC_HIT_CRITICAL)
+            {*/
+            static std::vector<uint32> const triggeredSpells[1] =
+            {
+                { Critical, Haste, Mastery }
+            };
 
-			//PreventDefaultAction();
-			if (Unit* caster = eventInfo.GetActor()) 
-			{
+            //PreventDefaultAction();
+            if (Unit* caster = eventInfo.GetActor()) 
+            {
 
-				if (Aura* aur = GetAura())
-				{
-					if (AuraEffect const* Eff = aur->GetTriggeredAuraEff())
-					{
-						Item* castItem = nullptr;
-						if (ObjectGuid castItemGUID = aur->GetCastItemGUID())
-						{
-							if (Player* player = caster->ToPlayer())
-								castItem = player->GetItemByGuid(castItemGUID);
-						}
+                if (Aura* aur = GetAura())
+                {
+                    if (AuraEffect const* Eff = aur->GetTriggeredAuraEff())
+                    {
+                        Item* castItem = nullptr;
+                        if (ObjectGuid castItemGUID = aur->GetCastItemGUID())
+                        {
+                            if (Player* player = caster->ToPlayer())
+                                castItem = player->GetItemByGuid(castItemGUID);
+                        }
 
-						std::vector<uint32> const& randomSpells = triggeredSpells[0];
-						if (randomSpells.empty())
-							return;
+                        std::vector<uint32> const& randomSpells = triggeredSpells[0];
+                        if (randomSpells.empty())
+                            return;
 
-						uint32 spellId = Trinity::Containers::SelectRandomContainerElement(randomSpells);
+                        uint32 spellId = Trinity::Containers::SelectRandomContainerElement(randomSpells);
 
-						//caster->CastSpell(caster, spellId, true, nullptr, aurEff);
+                        //caster->CastSpell(caster, spellId, true, nullptr, aurEff);
 
-						caster->CastSpell(caster, spellId, true, castItem, aurEff, caster->GetGUID());
-						//aur->SetDuration(6000);
+                        caster->CastSpell(caster, spellId, true, castItem, aurEff, caster->GetGUID());
+                        //aur->SetDuration(6000);
 
-						for (std::vector<uint32>::const_iterator it = randomSpells.begin(); it != randomSpells.end(); ++it)
-						{
-							if (caster->HasAura((*it)))
-							{
-								auto trinketAura = caster->GetAura((*it));
-								if (trinketAura->GetStackAmount() >= 5)
-								{
-									//caster->CastSpell(caster, SPELL_CYCLE_OF_THE_LEGION, true, nullptr, aurEff);
-									caster->CastSpell(caster, SPELL_CYCLE_OF_THE_LEGION, true, castItem, aurEff, caster->GetGUID());
-									caster->RemoveAura(Critical);
-									caster->RemoveAura(Haste);
-									caster->RemoveAura(Mastery);
-									break;
-								}
-							}
-						}
-					}
-				}
-
-
+                        for (std::vector<uint32>::const_iterator it = randomSpells.begin(); it != randomSpells.end(); ++it)
+                        {
+                            if (caster->HasAura((*it)))
+                            {
+                                auto trinketAura = caster->GetAura((*it));
+                                if (trinketAura->GetStackAmount() >= 5)
+                                {
+                                    //caster->CastSpell(caster, SPELL_CYCLE_OF_THE_LEGION, true, nullptr, aurEff);
+                                    caster->CastSpell(caster, SPELL_CYCLE_OF_THE_LEGION, true, castItem, aurEff, caster->GetGUID());
+                                    caster->RemoveAura(Critical);
+                                    caster->RemoveAura(Haste);
+                                    caster->RemoveAura(Mastery);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
 
 
 
-				//}
-			}
 
-		}
 
-		void Register() override
-		{
-			OnEffectProc += AuraEffectProcFn(spell_item_acrid_catalyst_injector_AuraScript::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
-		}
-	};
+                //}
+            }
 
-	AuraScript* GetAuraScript() const override
-	{
-		return new spell_item_acrid_catalyst_injector_AuraScript<CriticalSpellId, HasteSpellId, MasterySpellId>();
-	}
+        }
+
+        void Register() override
+        {
+            OnEffectProc += AuraEffectProcFn(spell_item_acrid_catalyst_injector_AuraScript::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
+        }
+    };
+
+    AuraScript* GetAuraScript() const override
+    {
+        return new spell_item_acrid_catalyst_injector_AuraScript<CriticalSpellId, HasteSpellId, MasterySpellId>();
+    }
 };
 
 void AddSC_item_spell_scripts()
@@ -4660,5 +4660,5 @@ void AddSC_item_spell_scripts()
     RegisterSpellScript(spell_item_toy_train_set_pulse);
     RegisterSpellScript(spell_item_last_deck_of_nemelex_nobeh);
 
-	new spell_item_acrid_catalyst_injector<SPELL_FERVOR_OF_THE_LEGION, SPELL_BURTALITY_OF_THE_LEGION, SPELL_MALICE_OF_THE_LEGION>("spell_item_acrid_catalyst_injector");
+    new spell_item_acrid_catalyst_injector<SPELL_FERVOR_OF_THE_LEGION, SPELL_BURTALITY_OF_THE_LEGION, SPELL_MALICE_OF_THE_LEGION>("spell_item_acrid_catalyst_injector");
 }

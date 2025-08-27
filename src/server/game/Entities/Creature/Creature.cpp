@@ -762,7 +762,7 @@ bool Creature::UpdateEntry(uint32 entry, uint32 team, const CreatureData* data)
     SetUInt32Value(UNIT_FIELD_FLAGS, unit_flags);
     SetUInt32Value(UNIT_FIELD_FLAGS_2, cInfo->unit_flags2);
     SetUInt32Value(UNIT_FIELD_FLAGS_3, unit_flags3);
-	
+    
     if (IsMirrorImage())
         new MirrorImageUpdate(this);
 

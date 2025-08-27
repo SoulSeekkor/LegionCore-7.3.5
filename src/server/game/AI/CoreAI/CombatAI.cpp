@@ -36,7 +36,7 @@ int AggressorAI::Permissible(const Creature* creature)
 
 void AggressorAI::InitializeAI()
 {
-	// What is the reason for this code?? It makes mob get stuck in place if they have creature spells with a range and is not blizzlike
+    // What is the reason for this code?? It makes mob get stuck in place if they have creature spells with a range and is not blizzlike
     /*for (auto& spell : *me->CreatureSpells)
     {
         if (SpellInfo const* sInfo = sSpellMgr->GetSpellInfo(spell.second.SpellID))

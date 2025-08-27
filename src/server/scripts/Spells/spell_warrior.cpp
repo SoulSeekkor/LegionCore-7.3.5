@@ -82,14 +82,14 @@ public:
 
                     plr->ApplySpellMod(spellInfo->Id, SPELLMOD_COST, bonusDmgPct);
 
-					bool ignoreCost = false;
+                    bool ignoreCost = false;
 
-					if (bonusDmgPct == 0)
-					{
-						bonusDmgPctConst = 300;
-						bonusDmgPct = 270;
-						ignoreCost = true;
-					}
+                    if (bonusDmgPct == 0)
+                    {
+                        bonusDmgPctConst = 300;
+                        bonusDmgPct = 270;
+                        ignoreCost = true;
+                    }
 
                     int32 coef = bonusDmgPctConst / bonusDmgPct;
                     int32 rage = caster->GetPower(POWER_RAGE);
@@ -104,11 +104,11 @@ public:
                         mod = bonusDmgPct * coef;
                     }
 
-					if (!ignoreCost)
-					{
-						amount += bonusDmgPct;
-						caster->m_powerCost[POWER_RAGE] = amount;
-					}
+                    if (!ignoreCost)
+                    {
+                        amount += bonusDmgPct;
+                        caster->m_powerCost[POWER_RAGE] = amount;
+                    }
                 }
             }
         }
@@ -553,7 +553,7 @@ class spell_warr_intercept : public SpellScriptLoader
 
                     if (caster->HasAura(223657)) // Safeguard
                         caster->CastSpell(target, 223658, true);
-                    if (caster->HasAura(199037)) // Leave No Man Behind	(PvP Talent)
+                    if (caster->HasAura(199037)) // Leave No Man Behind (PvP Talent)
                         caster->CastSpell(target, 199038, true);
                 }
                 else

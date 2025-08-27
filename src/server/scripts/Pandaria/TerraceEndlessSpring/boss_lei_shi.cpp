@@ -449,7 +449,7 @@ public:
             {
                 me->SetReactState(REACT_PASSIVE);
                 me->AddUnitMovementFlag(MOVEMENTFLAG_ROOT);
-				me->CastSpell(me, SPELL_GET_AWAY);
+                me->CastSpell(me, SPELL_GET_AWAY);
 
                 break;
             }

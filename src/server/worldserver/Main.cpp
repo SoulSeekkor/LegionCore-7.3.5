@@ -275,10 +275,10 @@ extern int main(int argc, char **argv)
         Log::instance(nullptr/*&_ioService*/);
     }
 
-	// original core loaded message
+    // original core loaded message
     TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon) ready...", GitRevision::GetFullVersion());
 
-	// custom core loaded script
+    // custom core loaded script
     sScriptMgr->OnStartup();
 
     if (sConfigMgr->GetBoolDefault("Segvcatch.Enable", false))

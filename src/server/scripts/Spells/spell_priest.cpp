@@ -1410,7 +1410,7 @@ class spell_pri_penance_cast : public SpellScriptLoader
                             return SPELL_FAILED_BAD_TARGETS;
                 return SPELL_CAST_OK;
             }
-			
+            
             void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 if (Player* _player = GetCaster()->ToPlayer())
@@ -1822,7 +1822,7 @@ class spell_pri_mind_flay : public AuraScript
             AuraRemoveMode removeMode = GetTargetApplication()->GetRemoveMode();
             if (removeMode == AURA_REMOVE_BY_EXPIRE)
             {
-                if (caster->HasAura(199445)) // Mind Trauma	(Honor Talent)
+                if (caster->HasAura(199445)) // Mind Trauma (Honor Talent)
                 {
                     caster->CastSpell(target, 247777, true);
                     if (Aura* aura = target->GetAura(247777, caster->GetGUID()))

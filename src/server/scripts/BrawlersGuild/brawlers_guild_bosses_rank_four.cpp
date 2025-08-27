@@ -125,7 +125,7 @@ public:
         
         void JustDied(Unit* who) override
         {
-			me->RemoveAllAreaObjects();
+            me->RemoveAllAreaObjects();
             summons.KillAll();
                                 
             if (!who)
@@ -386,7 +386,7 @@ public:
             if (Unit* owner = me->GetAnyOwner())
                 if (who->GetGUID() == owner->GetGUID())
                 {
-					_Reset();
+                    _Reset();
                     _LoseRound();
                 }  
         }
@@ -541,7 +541,7 @@ public:
             if (Unit* owner = me->GetAnyOwner())
                 if (who->GetGUID() == owner->GetGUID())
                 {
-					_Reset();
+                    _Reset();
                     _LoseRound();
                 }  
         }
@@ -651,7 +651,7 @@ public:
                        
         void JustDied(Unit* who) override
         {
-			_Reset();
+            _Reset();
             
             if (!who)
                 return;
@@ -667,7 +667,7 @@ public:
         
         void EnterEvadeMode() override
         {           
-			_Reset();
+            _Reset();
             if (me->GetAnyOwner() && me->GetAnyOwner()->IsPlayer())
             {
                 Player* player = me->GetAnyOwner()->ToPlayer();

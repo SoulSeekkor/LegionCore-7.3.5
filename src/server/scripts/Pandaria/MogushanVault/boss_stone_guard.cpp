@@ -564,7 +564,7 @@ class boss_generic_guardian : public CreatureScript
                                         std::list<Player*> tempPlayerList;
                                         GetPlayerListInGrid(playerList, me, 100.0f);
 
-										for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
+                                        for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                                             if ((*itr)->isAlive() && !(*itr)->HasAura(SPELL_JASPER_CHAINS))
                                                 tempPlayerList.push_back((*itr));
 
@@ -695,9 +695,9 @@ class spell_petrification : public SpellScriptLoader
                 std::list<Player*> playerList;
                 GetPlayerListInGrid(playerList, caster, 200.0f);
 
-				for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
+                for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                 {
-					Player* target = *itr;
+                    Player* target = *itr;
                     if (target->HasAura(SPELL_TOTALY_PETRIFIED))
                         continue;
 

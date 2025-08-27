@@ -857,20 +857,20 @@ uint32 Condition::GetSearcherTypeMaskForCondition()
 
 bool ConditionMgr::IsObjectMeetingSmartEventConditions(int64 entryOrGuid, uint32 eventId, uint32 sourceType, Unit* unit, WorldObject* baseObject) const
 {
-	SmartEventConditionContainer::const_iterator itr = SmartEventConditionStore.find(std::make_pair(entryOrGuid, sourceType));
-	if (itr != SmartEventConditionStore.end())
-	{
-		ConditionTypeContainer::const_iterator i = (*itr).second.find(eventId);
-		if (i != itr->second.end())
-		{
-			TC_LOG_DEBUG(LOG_FILTER_CONDITIONSYS, "condition", "GetConditionsForSmartEvent: found conditions for Smart Event entry or guid " SI64FMTD " eventId %u", entryOrGuid, eventId);
-			ConditionSourceInfo sourceInfo(unit, baseObject);
-			//SPP NEED FIX
-			//return IsObjectMeetToConditions(sourceInfo, i->second.end);
-			return true;
-		}
-	}
-	return true;
+    SmartEventConditionContainer::const_iterator itr = SmartEventConditionStore.find(std::make_pair(entryOrGuid, sourceType));
+    if (itr != SmartEventConditionStore.end())
+    {
+        ConditionTypeContainer::const_iterator i = (*itr).second.find(eventId);
+        if (i != itr->second.end())
+        {
+            TC_LOG_DEBUG(LOG_FILTER_CONDITIONSYS, "condition", "GetConditionsForSmartEvent: found conditions for Smart Event entry or guid " SI64FMTD " eventId %u", entryOrGuid, eventId);
+            ConditionSourceInfo sourceInfo(unit, baseObject);
+            //SPP NEED FIX
+            //return IsObjectMeetToConditions(sourceInfo, i->second.end);
+            return true;
+        }
+    }
+    return true;
 }
 
 bool Condition::isLoaded() const

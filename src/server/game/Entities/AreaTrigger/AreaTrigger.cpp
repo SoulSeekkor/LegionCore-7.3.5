@@ -1193,8 +1193,8 @@ void AreaTrigger::DoAction(Unit* unit, ActionInfo& action)
             _spline.VerticesPoints[1] = G3D::Vector3(GetPositionX(), GetPositionY(), GetPositionZ());
             _reachedDestination = true;
             InitSplines();
-			if(atInfo.spellId != 84714) // Fix for mage frozen orb appearing to long
-				SetDuration(_spline.TimeToTarget);
+            if(atInfo.spellId != 84714) // Fix for mage frozen orb appearing to long
+                SetDuration(_spline.TimeToTarget);
             break;
         }
         case AT_ACTION_TYPE_REMOVE_OWNED_AURA: // 17

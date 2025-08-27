@@ -337,7 +337,7 @@ static size_t CreateShortName(
         }
         else
         {
-			strcpy(szBuffer + nLength, "unk");
+            strcpy(szBuffer + nLength, "unk");
             nLength += 3;
         }
     }

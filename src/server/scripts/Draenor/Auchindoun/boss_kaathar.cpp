@@ -363,25 +363,25 @@ public:
 
                                 l_Tuulani->SummonCreature(BossNyami, g_PositionNyamiSpawn, TEMPSUMMON_MANUAL_DESPAWN);
 
-                                // Corpses		                          
+                                // Corpses
                                 for (int8 l_I = 0; l_I < 2; l_I++)                              /// Holy Wall, Object In MIddle
                                     l_Tuulani->SummonGameObject(GameobjectHolyWall, g_PositionWallInMiddleFromNyami.GetPositionX(), g_PositionWallInMiddleFromNyami.GetPositionY(), g_PositionWallInMiddleFromNyami.GetPositionZ(), g_PositionWallInMiddleFromNyami.GetOrientation(), 0, 0, 0, 0, 0);
 
                                 l_Tuulani->SummonCreature(CreatureSargereiDefender, g_PositionMagusAndDefenderHostile[1], TEMPSUMMON_DEAD_DESPAWN);
 
-                                // Hostile near Two corpses          		
+                                // Hostile near Two corpses
                                 l_Tuulani->SummonCreature(CreatureSargereiMagus, g_PositionMagusAndDefenderHostile[0], TEMPSUMMON_DEAD_DESPAWN);
 
-                                // Two defender		
+                                // Two defender
                                 for (int8 l_I = 0; l_I < 2; l_I++)
                                 {
                                     l_Tuulani->SummonCreature(CreatureSargereiDefender, g_PositionSargereiDefenders[l_I], TEMPSUMMON_DEAD_DESPAWN);
                                 }
 
-                                // Magus who control footmans                                  		
+                                // Magus who control footmans
                                 l_Tuulani->SummonCreature(CreatureSargereiMagus, g_PositionMagusp_WhoControlFootmans, TEMPSUMMON_DEAD_DESPAWN);
 
-                                // Twelve prisoners (cosmetic)		
+                                // Twelve prisoners (cosmetic)
                                 for (int8 l_I = 0; l_I < 11; l_I++)
                                 {
                                     if (Creature* l_Prisoner = l_Tuulani->SummonCreature(CreatureAucheniDefender, g_PositionCorpsesNearNyomi[l_I], TEMPSUMMON_DEAD_DESPAWN))

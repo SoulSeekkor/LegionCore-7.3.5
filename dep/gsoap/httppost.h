@@ -1,12 +1,12 @@
 /*
-	httppost.h
+    httppost.h
 
-	gSOAP HTTP POST plugin for non-SOAP payloads.
+    gSOAP HTTP POST plugin for non-SOAP payloads.
 
-	See httppost.c for instructions.
+    See httppost.c for instructions.
 
-	Revisions:
-	register multiple POST content handlers, each for a content type
+    Revisions:
+    register multiple POST content handlers, each for a content type
 
 gSOAP XML Web services tools
 Copyright (C) 2004-2009, Robert van Engelen, Genivia, Inc. All Rights Reserved.

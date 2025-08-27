@@ -1,9 +1,9 @@
 /*
-	httpget.h
+    httpget.h
 
-	gSOAP HTTP GET plugin.
+    gSOAP HTTP GET plugin.
 
-	See httpget.c for usage instructions.
+    See httpget.c for usage instructions.
 
 gSOAP XML Web services tools
 Copyright (C) 2000-2008, Robert van Engelen, Genivia Inc., All Rights Reserved.

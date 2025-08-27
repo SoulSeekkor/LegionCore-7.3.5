@@ -74,7 +74,7 @@ public:
         void OnApplyOrRemoveAura(uint32 spellId, AuraRemoveMode mode, bool apply)
         {
             if (spellId == SPELL_CALL_OF_EARTH && !apply)
-				summons.DespawnEntry(88106);
+                summons.DespawnEntry(88106);
         }
         
         void UpdateAI(uint32 diff)
@@ -386,32 +386,32 @@ public:
             
             if (uint32 eventId = events.ExecuteEvent())
             {
-				switch (eventId)
-				{
-				case EVENT_1:
-					DoCastVictim(SPELL_SHARP_BEAK);
-					events.RescheduleEvent(EVENT_1, 12000, EVENT_GROUP_GROUND);
-					break;
-				case EVENT_2:
-					DoCastVictim(SPELL_SOLAR_BREATH);
-					events.RescheduleEvent(EVENT_2, 29000, EVENT_GROUP_GROUND);
-					break;
-				case EVENT_3:
-				{
-					events.CancelEventGroup(EVENT_GROUP_GROUND);
+                switch (eventId)
+                {
+                case EVENT_1:
+                    DoCastVictim(SPELL_SHARP_BEAK);
+                    events.RescheduleEvent(EVENT_1, 12000, EVENT_GROUP_GROUND);
+                    break;
+                case EVENT_2:
+                    DoCastVictim(SPELL_SOLAR_BREATH);
+                    events.RescheduleEvent(EVENT_2, 29000, EVENT_GROUP_GROUND);
+                    break;
+                case EVENT_3:
+                {
+                    events.CancelEventGroup(EVENT_GROUP_GROUND);
 
-					me->SetCanFly(true);
-					me->SetDisableGravity(true);
-					me->SetByteFlag(UNIT_FIELD_BYTES_1, 3, UNIT_BYTE1_FLAG_ALWAYS_STAND | UNIT_BYTE1_FLAG_HOVER);
-					me->SetReactState(REACT_PASSIVE);
-					me->AttackStop();
-					Position pos;
-					pos.Relocate(me);
-					oldpos = pos;
-					pos.m_positionZ += 10.0f;
-					me->GetMotionMaster()->MovePoint(1, pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ());
-					break;
-				}
+                    me->SetCanFly(true);
+                    me->SetDisableGravity(true);
+                    me->SetByteFlag(UNIT_FIELD_BYTES_1, 3, UNIT_BYTE1_FLAG_ALWAYS_STAND | UNIT_BYTE1_FLAG_HOVER);
+                    me->SetReactState(REACT_PASSIVE);
+                    me->AttackStop();
+                    Position pos;
+                    pos.Relocate(me);
+                    oldpos = pos;
+                    pos.m_positionZ += 10.0f;
+                    me->GetMotionMaster()->MovePoint(1, pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ());
+                    break;
+                }
                     case EVENT_4:
                         DoCastVictim(SPELL_BLOOD_FEATHER);
                         break;
@@ -441,7 +441,7 @@ public:
         EventMap events;
         bool moveComplete;
         uint32 moveTimer;
-		ObjectGuid targetMove;
+        ObjectGuid targetMove;
 
         void Reset()
         {
@@ -605,8 +605,8 @@ public:
             
             if (uint32 eventId = events.ExecuteEvent())
             {
-				switch (eventId)
-				{
+                switch (eventId)
+                {
                     case EVENT_1:
                         DoCast(SPELL_MARK_OF_KAZZAR);
                         events.RescheduleEvent(EVENT_1, 10000);
@@ -650,7 +650,7 @@ public:
         
         bool moveComplete;
         uint32 moveTimer;
-		ObjectGuid targetMove;
+        ObjectGuid targetMove;
 
         
         void EnterCombat(Unit* unit)

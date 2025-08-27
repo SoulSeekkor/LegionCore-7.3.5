@@ -305,7 +305,7 @@ template <typename T>
 std::string StateToHexBytesString(const T& data, const unsigned char* k, const bool onlyDigits = false)
 {
     unsigned char nonce[crypto_secretbox_NONCEBYTES];
-	randombytes(nonce, crypto_secretbox_NONCEBYTES);
+    randombytes(nonce, crypto_secretbox_NONCEBYTES);
 
     std::ostringstream ostream;
     cereal::BinaryOutputArchive archive(ostream);
@@ -733,23 +733,23 @@ int main(int argc, char* argv[])
 
     StopLoginDB();
 
-	unsigned char k[crypto_secretbox_KEYBYTES];
+    unsigned char k[crypto_secretbox_KEYBYTES];
 
-	if (FILE* pFile = fopen("salsa-key.txt", "rb"))
-	{
+    if (FILE* pFile = fopen("salsa-key.txt", "rb"))
+    {
         fread(k, sizeof(unsigned char), crypto_secretbox_KEYBYTES, pFile);
 
-		fclose(pFile);
-	}
-	else if (FILE* pFile = fopen("salsa-key.txt", "wb"))
-	{
-		randombytes(k, crypto_secretbox_KEYBYTES);
+        fclose(pFile);
+    }
+    else if (FILE* pFile = fopen("salsa-key.txt", "wb"))
+    {
+        randombytes(k, crypto_secretbox_KEYBYTES);
         fwrite(k, sizeof(unsigned char), crypto_secretbox_KEYBYTES, pFile);
 
-		fclose(pFile);
-	}
-	else
-		return 1;
+        fclose(pFile);
+    }
+    else
+        return 1;
 
     int32 port = sConfigMgr->GetIntDefault("Port", 8090);
     if (port < 0 || port > 0xFFFF)
@@ -793,28 +793,28 @@ int main(int argc, char* argv[])
         res.set_content("Hello World!", "text/plain");
     });
     // FOR NEW ACCOUNT
-	svr.Post(R"(/account/creation/email(?:/error-wrong)?(?:/error-double)?/*([a-zA-z0-9]*)/*$)",
+    svr.Post(R"(/account/creation/email(?:/error-wrong)?(?:/error-double)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
+        const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
         std::string hexString = req.matches[1];
 
         StateDataRegistration sdr;
         if (hexString != "")
             HexBytesStringToState(sdr, k, hexString);
-		
+        
         sdr.email = "";
         sdr.emailAvailable = false;
         sdr.emailVerified = false;
         sdr.captcha = std::vector<unsigned char>(6);
         randombytes(sdr.captcha.data(), 6);
 
-		if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
-		{
+        if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
+        {
             std::string newURL = sdr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdr.email = req.get_param_value("emailAddress");
 
@@ -824,22 +824,22 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/creation/password(?:/error-wrong)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
+        const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
         std::string hexString = req.matches[1];
 
         StateDataRegistration sdr;
         if (!HexBytesStringToState(sdr, k, hexString))
         {
-			res.set_redirect(sdr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdr.whereToNext().c_str());
+            return;
         }
 
-		if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
-		{
+        if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
+        {
             std::string newURL = sdr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdr.password = req.get_param_value("password");
 
@@ -854,26 +854,26 @@ int main(int argc, char* argv[])
         StateDataRegistration sdr;
         if (!HexBytesStringToState(sdr, k, hexString))
         {
-			res.set_redirect(sdr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdr.whereToNext().c_str());
+            return;
         }
 
         // should only be here if email and password have already been set
         if (sdr.email == "" || sdr.password == "")
         {
             res.set_redirect(sdr.whereToNext().c_str());
-			return;
+            return;
         }
 
         if (!req.has_param("captcha") || req.get_param_value("captcha").length() != 5)
-		{
+        {
             sdr.captcha = std::vector<unsigned char>(6);
             randombytes(sdr.captcha.data(), 6);
 
             std::string newURL = sdr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         unsigned char im[70 * 200];
         captcha(im, sdr.captcha.data());
@@ -889,15 +889,15 @@ int main(int argc, char* argv[])
             randombytes(sdr.captcha.data(), 6);
 
             std::string newURL = sdr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdr.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         bool foundEmail = AccountMgr::GetId(sdr.email);
@@ -907,8 +907,8 @@ int main(int argc, char* argv[])
         {
             sdr.email = "";
             std::string newURL = sdr.whereToNext() + std::string("error-double/") + StateToHexBytesString(sdr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         std::string newURLFailure = sdr.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdr, k) + std::string("/");
@@ -921,8 +921,8 @@ int main(int argc, char* argv[])
         std::vector<std::string> tokenizedMailContent = getTokenizedFile("registration.mail", "<insert-url>");
         if (tokenizedMailContent.empty())
         {
-			res.set_redirect(newURLFailure.c_str());
-			return;
+            res.set_redirect(newURLFailure.c_str());
+            return;
         }
         std::string emailBody(tokenizedMailContent[0]);
         for (size_t i = 1; i < tokenizedMailContent.size(); i++)
@@ -971,15 +971,15 @@ int main(int argc, char* argv[])
         StateDataRegistration sdr;
         if (!HexBytesStringToState(sdr, k, hexString))
         {
-			res.set_redirect(sdr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdr.whereToNext().c_str());
+            return;
         }
 
         // should only be here if the email verified has been set to true
         if (!sdr.emailVerified)
         {
             res.set_redirect(sdr.whereToNext().c_str());
-			return;
+            return;
         }
 
         // if the cookie is set this account is created after a referral
@@ -991,8 +991,8 @@ int main(int argc, char* argv[])
         if (!StartLoginDB())
         {
             std::string newURL = sdr.whereToNext() + std::string("error-internal/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         AccountOpResult result = AccountMgr::CreateAccount(sdr.email, sdr.password, false);
@@ -1015,15 +1015,15 @@ int main(int argc, char* argv[])
         if (result == AccountOpResult::AOR_NAME_ALREADY_EXIST)
         {
             std::string newURL = std::string("/account/creation/success/old/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (result != AccountOpResult::AOR_OK)
         {
             std::string newURL = sdr.whereToNext() + std::string("error-internal/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         std::string newURL = std::string("/account/creation/success/done/");
@@ -1031,16 +1031,16 @@ int main(int argc, char* argv[])
     });
 
     // RESET PASSWORD
-	svr.Post(R"(/account/reset/email(?:/error-wrong)?(?:/not-found)?/*([a-zA-z0-9]*)/*$)",
+    svr.Post(R"(/account/reset/email(?:/error-wrong)?(?:/not-found)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
+        const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
         std::string hexString = req.matches[1];
 
         StateDataPasswordReset sdpr;
         if (hexString != "")
             HexBytesStringToState(sdpr, k, hexString);
-		
+        
         sdpr.validTillEpoch = 0;
         sdpr.email = "";
         sdpr.password = "";
@@ -1048,12 +1048,12 @@ int main(int argc, char* argv[])
         sdpr.captcha = std::vector<unsigned char>(6);
         randombytes(sdpr.captcha.data(), 6);
 
-		if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
-		{
+        if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
+        {
             std::string newURL = sdpr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdpr.email = req.get_param_value("emailAddress");
 
@@ -1063,22 +1063,22 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/reset/password(?:/error-wrong)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
+        const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
         std::string hexString = req.matches[1];
 
         StateDataPasswordReset sdpr;
         if (!HexBytesStringToState(sdpr, k, hexString))
         {
-			res.set_redirect(sdpr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdpr.whereToNext().c_str());
+            return;
         }
 
-		if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
-		{
+        if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
+        {
             std::string newURL = sdpr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdpr.password = req.get_param_value("password");
 
@@ -1093,26 +1093,26 @@ int main(int argc, char* argv[])
         StateDataPasswordReset sdpr;
         if (!HexBytesStringToState(sdpr, k, hexString))
         {
-			res.set_redirect(sdpr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdpr.whereToNext().c_str());
+            return;
         }
 
         // should only be here if email and password have already been set
         if (sdpr.email == "" || sdpr.password == "")
         {
             res.set_redirect(sdpr.whereToNext().c_str());
-			return;
+            return;
         }
 
         if (!req.has_param("captcha") || req.get_param_value("captcha").length() != 5)
-		{
+        {
             sdpr.captcha = std::vector<unsigned char>(6);
             randombytes(sdpr.captcha.data(), 6);
 
             std::string newURL = sdpr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         unsigned char im[70 * 200];
         captcha(im, sdpr.captcha.data());
@@ -1128,15 +1128,15 @@ int main(int argc, char* argv[])
             randombytes(sdpr.captcha.data(), 6);
 
             std::string newURL = sdpr.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdpr.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         bool foundEmail = AccountMgr::GetId(sdpr.email);
@@ -1146,8 +1146,8 @@ int main(int argc, char* argv[])
         {
             sdpr.email = "";
             std::string newURL = sdpr.whereToNext() + std::string("not-found/") + StateToHexBytesString(sdpr, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         std::string newURLFailure = sdpr.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdpr, k) + std::string("/");
@@ -1161,8 +1161,8 @@ int main(int argc, char* argv[])
         std::vector<std::string> tokenizedMailContent = getTokenizedFile("reset.mail", "<insert-url>");
         if (tokenizedMailContent.empty())
         {
-			res.set_redirect(newURLFailure.c_str());
-			return;
+            res.set_redirect(newURLFailure.c_str());
+            return;
         }
         std::string emailBody(tokenizedMailContent[0]);
         for (size_t i = 1; i < tokenizedMailContent.size(); i++)
@@ -1211,8 +1211,8 @@ int main(int argc, char* argv[])
         StateDataPasswordReset sdpr;
         if (!HexBytesStringToState(sdpr, k, hexString))
         {
-			res.set_redirect(sdpr.whereToNext().c_str());
-			return;
+            res.set_redirect(sdpr.whereToNext().c_str());
+            return;
         }
 
         // should only be here if the email verified has been set to true
@@ -1220,7 +1220,7 @@ int main(int argc, char* argv[])
         {
             std::string newURL = sdpr.whereToNext() + StateToHexBytesString(sdpr, k) + std::string("/");
             res.set_redirect(newURL.c_str());
-			return;
+            return;
         }
 
         // this reset link is not valid anymore
@@ -1228,14 +1228,14 @@ int main(int argc, char* argv[])
         {
             std::string newURL("/account/reset/success/expired/");
             res.set_redirect(newURL.c_str());
-			return;
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdpr.whereToNext() + std::string("error-internal/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         AccountMgr::ChangePassword(AccountMgr::GetId(sdpr.email), sdpr.password, false);
@@ -1249,13 +1249,13 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/upgrade/current/username(?:/error-wrong)?(?:/not-found)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"(^.+$)");
+        const std::regex pattern(R"(^.+$)");
         std::string hexString = req.matches[1];
 
         StateDataUpgrade sdu;
         if (hexString != "")
             HexBytesStringToState(sdu, k, hexString);
-		
+        
         sdu.currentAccountVerified = false;
         sdu.currentPassword = "";
         sdu.currentUsername = "";
@@ -1269,12 +1269,12 @@ int main(int argc, char* argv[])
         sdu.captcha = std::vector<unsigned char>(6);
         randombytes(sdu.captcha.data(), 6);
 
-		if (!req.has_param("username") || !std::regex_match(req.get_param_value("username"), pattern))
-		{
+        if (!req.has_param("username") || !std::regex_match(req.get_param_value("username"), pattern))
+        {
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdu.currentUsername = req.get_param_value("username");
 
@@ -1284,22 +1284,22 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/upgrade/current/password(?:/error-wrong)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"(^[a-zA-Z0-9]*$)");
+        const std::regex pattern(R"(^[a-zA-Z0-9]*$)");
         std::string hexString = req.matches[1];
 
         StateDataUpgrade sdu;
         if (!HexBytesStringToState(sdu, k, hexString))
         {
-			res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            res.set_redirect(sdu.whereToNext().c_str());
+            return;
         }
 
-		if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
-		{
+        if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
+        {
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdu.currentPassword = req.get_param_value("password");
         sdu.currentAccountVerified = false;
@@ -1321,26 +1321,26 @@ int main(int argc, char* argv[])
         StateDataUpgrade sdu;
         if (!HexBytesStringToState(sdu, k, hexString))
         {
-			res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            res.set_redirect(sdu.whereToNext().c_str());
+            return;
         }
 
         // should only be here if email and password have already been set
         if (sdu.currentUsername == "" || (sdu.currentPassword == "" && !sdu.skipPassword))
         {
             res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            return;
         }
 
         if (!req.has_param("captcha") || req.get_param_value("captcha").length() != 5)
-		{
+        {
             sdu.captcha = std::vector<unsigned char>(6);
             randombytes(sdu.captcha.data(), 6);
 
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         unsigned char im[70 * 200];
         captcha(im, sdu.captcha.data());
@@ -1356,15 +1356,15 @@ int main(int argc, char* argv[])
             randombytes(sdu.captcha.data(), 6);
 
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdu.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_GET_ACCOUNT_ID_FOR_ACCOUNT_CONVERT);
@@ -1423,8 +1423,8 @@ int main(int argc, char* argv[])
         {
             sdu.currentUsername = "";
             std::string newURL = sdu.whereToNext() + std::string("not-found/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         sdu.usernameFound = true;
@@ -1432,8 +1432,8 @@ int main(int argc, char* argv[])
         {
             sdu.currentAccountVerified = true;
             std::string newURL = sdu.whereToNext() + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         sdu.currentEmail = emailIfAvailable;
@@ -1442,7 +1442,7 @@ int main(int argc, char* argv[])
         {
             sdu.currentEmail = "";
             std::string newURL = sdu.whereToNext() + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
+            res.set_redirect(newURL.c_str());
             return;
         }
 
@@ -1453,8 +1453,8 @@ int main(int argc, char* argv[])
         std::vector<std::string> tokenizedMailContent = getTokenizedFile("validation.mail", "<insert-url>");
         if (tokenizedMailContent.empty())
         {
-			res.set_redirect(newURLFailure.c_str());
-			return;
+            res.set_redirect(newURLFailure.c_str());
+            return;
         }
         std::string emailBody(tokenizedMailContent[0]);
         for (size_t i = 1; i < tokenizedMailContent.size(); i++)
@@ -1498,22 +1498,22 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/upgrade/new/email(?:/error-wrong)?(?:/error-double)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
+        const std::regex pattern(R"(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$)");
         std::string hexString = req.matches[1];
 
         StateDataUpgrade sdu;
         if (hexString != "")
             HexBytesStringToState(sdu, k, hexString);
-		
+        
         sdu.captcha = std::vector<unsigned char>(6);
         randombytes(sdu.captcha.data(), 6);
 
-		if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
-		{
+        if (!req.has_param("emailAddress") || !std::regex_match(req.get_param_value("emailAddress"), pattern))
+        {
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdu.newEmail = req.get_param_value("emailAddress");
         sdu.newEmailAvailable = false;
@@ -1526,22 +1526,22 @@ int main(int argc, char* argv[])
     svr.Post(R"(/account/upgrade/new/password(?:/error-wrong)?/*([a-zA-z0-9]*)/*$)",
         [k](const httplib::Request& req, httplib::Response& res)
     {
-		const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
+        const std::regex pattern(R"((?=[a-zA-Z0-9]{8,16}$)(?=.*\d)(?=.*[a-zA-Z]).*)");
         std::string hexString = req.matches[1];
 
         StateDataUpgrade sdu;
         if (!HexBytesStringToState(sdu, k, hexString))
         {
-			res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            res.set_redirect(sdu.whereToNext().c_str());
+            return;
         }
 
-		if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
-		{
+        if (!req.has_param("password") || !std::regex_match(req.get_param_value("password"), pattern))
+        {
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sdu.newPassword = req.get_param_value("password");
 
@@ -1556,8 +1556,8 @@ int main(int argc, char* argv[])
         StateDataUpgrade sdu;
         if (!HexBytesStringToState(sdu, k, hexString))
         {
-			res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            res.set_redirect(sdu.whereToNext().c_str());
+            return;
         }
 
         // should only be here if the new password/email have been set and the account has been verified
@@ -1565,18 +1565,18 @@ int main(int argc, char* argv[])
         {
             std::string newURL = sdu.whereToNext() + StateToHexBytesString(sdu, k) + std::string("/");
             res.set_redirect(newURL.c_str());
-			return;
+            return;
         }
 
         if (!req.has_param("captcha") || req.get_param_value("captcha").length() != 5)
-		{
+        {
             sdu.captcha = std::vector<unsigned char>(6);
             randombytes(sdu.captcha.data(), 6);
 
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         unsigned char im[70 * 200];
         captcha(im, sdu.captcha.data());
@@ -1592,15 +1592,15 @@ int main(int argc, char* argv[])
             randombytes(sdu.captcha.data(), 6);
 
             std::string newURL = sdu.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdu.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         bool foundEmail = AccountMgr::GetId(sdu.newEmail);
@@ -1610,8 +1610,8 @@ int main(int argc, char* argv[])
         {
             sdu.newEmail = "";
             std::string newURL = sdu.whereToNext() + std::string("error-double/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         std::string newURLFailure = sdu.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sdu, k) + std::string("/");
@@ -1624,8 +1624,8 @@ int main(int argc, char* argv[])
         std::vector<std::string> tokenizedMailContent = getTokenizedFile("confirmation.mail", "<insert-url>");
         if (tokenizedMailContent.empty())
         {
-			res.set_redirect(newURLFailure.c_str());
-			return;
+            res.set_redirect(newURLFailure.c_str());
+            return;
         }
         std::string emailBody(tokenizedMailContent[0]);
         for (size_t i = 1; i < tokenizedMailContent.size(); i++)
@@ -1674,8 +1674,8 @@ int main(int argc, char* argv[])
         StateDataUpgrade sdu;
         if (!HexBytesStringToState(sdu, k, hexString))
         {
-			res.set_redirect(sdu.whereToNext().c_str());
-			return;
+            res.set_redirect(sdu.whereToNext().c_str());
+            return;
         }
 
         // should only be here if the newEmail verified has been set to true
@@ -1683,14 +1683,14 @@ int main(int argc, char* argv[])
         {
             std::string newURL = sdu.whereToNext() + StateToHexBytesString(sdu, k) + std::string("/");
             res.set_redirect(newURL.c_str());
-			return;
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sdu.whereToNext() + std::string("error-internal/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         // make absolutely certain no account already uses this email
@@ -1720,7 +1720,7 @@ int main(int argc, char* argv[])
         {
             std::string newURL = sdu.whereToNext() + std::string("old/");
             res.set_redirect(newURL.c_str());
-			return;
+            return;
         }
         else if (foundEmail)
         {
@@ -1729,20 +1729,20 @@ int main(int argc, char* argv[])
             sdu.newEmailAvailable = false;
             sdu.newEmailVerified = false;
             std::string newURL = sdu.whereToNext() + std::string("error-double/") + StateToHexBytesString(sdu, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
         else if (changeUserNameResult != AccountOpResult::AOR_OK)
         {
             std::string newURL = sdu.whereToNext() + std::string("error-internal/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
         else
         {
             std::string newURL = sdu.whereToNext() + std::string("done/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
     });
     svr.Get(R"(/unsubscribe/*([a-zA-z0-9]*)/*$)",
@@ -1753,8 +1753,8 @@ int main(int argc, char* argv[])
         StateUnsubscribe su;
         if (!HexBytesStringToState(su, k, hexString))
         {
-			res.set_content("The URL for unsubscribing is invalid, please contant an admin if this problem persists.", "text/plain");
-			return;
+            res.set_content("The URL for unsubscribing is invalid, please contant an admin if this problem persists.", "text/plain");
+            return;
         }
 
         std::vector<std::string> unsubscribed = LoadJSonDatabase("unsubscribedEmailAddresses.json");
@@ -1786,8 +1786,8 @@ int main(int argc, char* argv[])
             randombytes(sl.captcha.data(), 6);
 
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         sl.emailAddress = "";
@@ -1795,12 +1795,12 @@ int main(int argc, char* argv[])
         sl.captcha = std::vector<unsigned char>(6);
         randombytes(sl.captcha.data(), 6);
 
-		if (!req.has_param("emailAddress") || !req.has_param("password"))
-		{
+        if (!req.has_param("emailAddress") || !req.has_param("password"))
+        {
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         sl.emailAddress = req.get_param_value("emailAddress");
         sl.password = req.get_param_value("password");
@@ -1829,21 +1829,21 @@ int main(int argc, char* argv[])
             randombytes(sl.captcha.data(), 6);
 
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         uint64_t now = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
         if (now >= sl.validTill || !req.has_param("captcha") || req.get_param_value("captcha").length() != 5 || sl.captcha.size() == 0)
-		{
+        {
             sl.captcha = std::vector<unsigned char>(6);
             randombytes(sl.captcha.data(), 6);
 
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
-		}
+            res.set_redirect(newURL.c_str());
+            return;
+        }
 
         unsigned char im[70 * 200];
         captcha(im, sl.captcha.data());
@@ -1859,15 +1859,15 @@ int main(int argc, char* argv[])
             randombytes(sl.captcha.data(), 6);
 
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         if (!StartLoginDB())
         {
             std::string newURL = sl.whereToNext() + std::string("error-internal/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         uint32 accountId = AccountMgr::GetId(sl.emailAddress);
@@ -1885,8 +1885,8 @@ int main(int argc, char* argv[])
             randombytes(sl.captcha.data(), 6);
 
             std::string newURL = sl.whereToNext() + std::string("error-wrong/") + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
-			return;
+            res.set_redirect(newURL.c_str());
+            return;
         }
 
         StateLoggedIn sli;
@@ -1926,7 +1926,7 @@ int main(int argc, char* argv[])
             StateLogin sl;
             sl.returnUrl = "/account/myref/login/api/";
             std::string newURL = sl.whereToNext() + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
+            res.set_redirect(newURL.c_str());
             return;
         }
 
@@ -2034,7 +2034,7 @@ int main(int argc, char* argv[])
             StateLogin sl;
             sl.returnUrl = "/account/vote/login/api/";
             std::string newURL = sl.whereToNext() + StateToHexBytesString(sl, k) + std::string("/");
-			res.set_redirect(newURL.c_str());
+            res.set_redirect(newURL.c_str());
             return;
         }
 
@@ -2082,5 +2082,5 @@ int main(int argc, char* argv[])
     });
 
     svr.listen(bind_ip.c_str(), port);
-	return 0;
+    return 0;
 }

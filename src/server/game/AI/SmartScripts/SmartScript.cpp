@@ -3702,37 +3702,37 @@ void SmartScript::ProcessEvent(SmartScriptHolder& e, Unit* unit, uint32 var0, ui
             ProcessAction(e, unit, var0);
             break;
         }
-		case SMART_EVENT_DISTANCE_CREATURE:
-		{
-			if (!me)
-				return;
+        case SMART_EVENT_DISTANCE_CREATURE:
+        {
+            if (!me)
+                return;
 
-			Creature* creature = nullptr;
+            Creature* creature = nullptr;
 
-			if (e.event.distance.guid != 0)
-			{
-				creature = FindCreatureNear(me, e.event.distance.guid);
-				if (!creature)
-					return;
+            if (e.event.distance.guid != 0)
+            {
+                creature = FindCreatureNear(me, e.event.distance.guid);
+                if (!creature)
+                    return;
 
-				if (!me->IsInRange(creature, 0, static_cast<float>(e.event.distance.dist)))
-					return;
-			}
-			else if (e.event.distance.entry != 0)
-			{
-				std::list<Creature*> list;
-				me->GetCreatureListWithEntryInGrid(list, e.event.distance.entry, static_cast<float>(e.event.distance.dist));
+                if (!me->IsInRange(creature, 0, static_cast<float>(e.event.distance.dist)))
+                    return;
+            }
+            else if (e.event.distance.entry != 0)
+            {
+                std::list<Creature*> list;
+                me->GetCreatureListWithEntryInGrid(list, e.event.distance.entry, static_cast<float>(e.event.distance.dist));
 
-				if (!list.empty())
-					creature = list.front();
-			}
+                if (!list.empty())
+                    creature = list.front();
+            }
 
-			if (creature)
-				ProcessAction(e);
+            if (creature)
+                ProcessAction(e);
                 RecalcTimer(e, e.event.distance.repeat, e.event.distance.repeat);
 
-			break;
-		}
+            break;
+        }
         default:
             TC_LOG_ERROR(LOG_FILTER_SQL, "SmartScript::ProcessEvent: Unhandled Event type %u", e.GetEventType());
             break;
@@ -3741,14 +3741,14 @@ void SmartScript::ProcessEvent(SmartScriptHolder& e, Unit* unit, uint32 var0, ui
 
 void SmartScript::ProcessTimedAction(SmartScriptHolder& e, uint32 const& min, uint32 const& max, Unit* unit, uint32 var0, uint32 var1, bool bvar, const SpellInfo* spell, GameObject* gob, std::string const& varString)
 {
-	// We may want to execute action rarely and because of this if condition is not fulfilled the action will be rechecked in a long time
-	if (sConditionMgr->IsObjectMeetingSmartEventConditions(e.entryOrGuid, e.event_id, e.source_type, unit, GetBaseObject()))
-	{
-		ProcessAction(e, unit, var0, var1, bvar, spell, gob);
-		RecalcTimer(e, min, max);
-	}
-	else
-		RecalcTimer(e, std::min<uint32>(min, 5000), std::min<uint32>(min, 5000));
+    // We may want to execute action rarely and because of this if condition is not fulfilled the action will be rechecked in a long time
+    if (sConditionMgr->IsObjectMeetingSmartEventConditions(e.entryOrGuid, e.event_id, e.source_type, unit, GetBaseObject()))
+    {
+        ProcessAction(e, unit, var0, var1, bvar, spell, gob);
+        RecalcTimer(e, min, max);
+    }
+    else
+        RecalcTimer(e, std::min<uint32>(min, 5000), std::min<uint32>(min, 5000));
 }
 
 
@@ -3764,7 +3764,7 @@ void SmartScript::InitTimer(SmartScriptHolder& e)
         case SMART_EVENT_IC_LOS:
             RecalcTimer(e, e.event.minMaxRepeat.min, e.event.minMaxRepeat.max);
             break;
-		case SMART_EVENT_DISTANCE_CREATURE:
+        case SMART_EVENT_DISTANCE_CREATURE:
         default:
             e.active = true;
             break;

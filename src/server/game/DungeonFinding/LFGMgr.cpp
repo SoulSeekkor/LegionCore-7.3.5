@@ -2686,7 +2686,7 @@ LfgUpdateData LFGMgr::GetLfgStatus(ObjectGuid guid, uint32 queueId)
 
 bool LFGMgr::IsSeasonActive(uint32 dungeonId)
 {
-	switch (dungeonId)
+    switch (dungeonId)
     {
         case 285: // The Headless Horseman
             return IsHolidayActive(HOLIDAY_HALLOWS_END);

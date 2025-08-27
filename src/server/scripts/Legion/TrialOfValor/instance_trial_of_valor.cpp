@@ -124,7 +124,7 @@ public:
         }
 
         void OnGameObjectCreate(GameObject* go) override
-		{
+        {
             InstanceScript::OnGameObjectCreate(go);
 
             switch (go->GetEntry())
@@ -164,9 +164,9 @@ public:
                 runicBrandGUIDconteiner[go->GetEntry()] = go->GetGUID();
                 break;
             default:
-				break;
-			}
-		}
+                break;
+            }
+        }
 
         bool SetBossState(uint32 type, EncounterState state) override
         {
@@ -189,7 +189,7 @@ public:
                 break;
             }
             case DONE:
-			{
+            {
                 switch (type)
                 {
                 case Data::BossIDs::OdynID:
@@ -223,7 +223,7 @@ public:
                             if (auto odyn = instance->GetCreature(OdynGUID))
                                 odyn->CastSpell(player, 232466, false);
                     });
-					break;
+                    break;
                 case Data::BossIDs::HelyaID:
                     instance->SummonCreature(116760, Odyn);
                     instance->SummonCreature(116761, Hymdall);

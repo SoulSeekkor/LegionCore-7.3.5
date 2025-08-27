@@ -160,7 +160,7 @@ enum SMART_EVENT
     SMART_EVENT_ON_TAXIPATHTO            = 76,      // clicker (unit)
     SMART_EVENT_EVENTOBJECT_OFFTRIGGER   = 77,      // EventObject(0 any), CooldownMin, CooldownMax
     SMART_EVENT_ON_APPLY_OR_REMOVE_AURA  = 78,      // SpellId, Mode, ApplyOrRemove(1/0), Cooldown
-	SMART_EVENT_DISTANCE_CREATURE        = 79,      // guid, entry, distance, repeat
+    SMART_EVENT_DISTANCE_CREATURE        = 79,      // guid, entry, distance, repeat
 
     SMART_EVENT_END                      = 80
 };
@@ -408,13 +408,13 @@ struct SmartEvent
             uint32 id;
         } taxipathto;
 
-		struct
-		{
-			uint32 guid;
-			uint32 entry;
-			uint32 dist;
-			uint32 repeat;
-		} distance;
+        struct
+        {
+            uint32 guid;
+            uint32 entry;
+            uint32 dist;
+            uint32 repeat;
+        } distance;
 
     };
 };

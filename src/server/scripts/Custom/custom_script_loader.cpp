@@ -22,5 +22,5 @@ void AddSC_DungeonBalance();
 // void Add${NameOfDirectory}Scripts()
 void AddCustomScripts()
 {
-	AddSC_DungeonBalance();
+    AddSC_DungeonBalance();
 }

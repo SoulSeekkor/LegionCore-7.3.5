@@ -81,7 +81,7 @@ class TaskScheduler
 
     struct Compare
     {
-		bool operator()(TaskContainer const& left, TaskContainer const& right) const;
+        bool operator()(TaskContainer const& left, TaskContainer const& right) const;
     };
 
     class TaskQueue

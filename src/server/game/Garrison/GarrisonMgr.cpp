@@ -1224,8 +1224,8 @@ uint32 GarrShipment::selectShipment(Player* p) const
             {
                 QuestStatus status = p->GetQuestStatus(questReq);
 
-				if (status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_REWARDED)
-					return 0;
+                if (status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_REWARDED)
+                    return 0;
 
                 if (status != QUEST_STATUS_REWARDED)
                     continue;

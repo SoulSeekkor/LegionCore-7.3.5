@@ -84,7 +84,7 @@ public:
             if (me->GetEntry() != 70736)
                 return;
             
-			_Reset();
+            _Reset();
             
             if (!who)
                 return;
@@ -333,7 +333,7 @@ public:
                
         void JustDied(Unit* who) override
         {
-			_Reset();
+            _Reset();
             
             if (!who)
                 return;

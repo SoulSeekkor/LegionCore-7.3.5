@@ -503,7 +503,7 @@ public:
                     break;
                 case 114955:
                     DoCast(who, SPELL_HIGH_NOON);
-					events.RescheduleEvent(EVENT_7, 80000);
+                    events.RescheduleEvent(EVENT_7, 80000);
                     me->SetReactState(REACT_PASSIVE);
                     break;
                 case 114941:

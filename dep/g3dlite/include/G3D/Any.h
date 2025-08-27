@@ -409,7 +409,7 @@ public:
     #if defined(G3D_32Bit) || defined(_MSC_VER)
     /** NUMBER constructor */
     explicit Any(int64 x) : m_type(NUMBER), m_simpleValue((double)x), m_data(NULL) {}
-	#endif
+    #endif
 
     /** NUMBER constructor */
     explicit Any(long x);

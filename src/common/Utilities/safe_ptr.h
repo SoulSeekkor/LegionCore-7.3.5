@@ -74,9 +74,9 @@ namespace sf {
             template<typename some_type> friend struct slocked_safe_ptr;
             template<typename, typename, size_t, size_t> friend class lock_timed_transaction;
 #if (_WIN32 && _MSC_VER > 1900 || __clang__)
-			template<class mutex_type> friend class std::lock_guard;  // MSVS2013 or Clang 4.0
+            template<class mutex_type> friend class std::lock_guard;  // MSVS2013 or Clang 4.0
 #else
-			template<class... mutex_types> friend class std::lock_guard;  // C++17 or MSVS2015
+            template<class... mutex_types> friend class std::lock_guard;  // C++17 or MSVS2015
 #endif
 
 #ifdef SHARED_MTX    
@@ -195,61 +195,61 @@ namespace sf {
     };
     // ---------------------------------------------------------------
 
-	enum lock_count_t { lock_once, lock_infinity };
+    enum lock_count_t { lock_once, lock_infinity };
 
-	template<size_t lock_count, typename duration = std::chrono::nanoseconds,
-		size_t deadlock_timeout = 100000, size_t spin_iterations = 100>
-		class lock_timed_any {
-		std::vector<std::shared_ptr<void>> locks_ptr_vec;
-		bool success;
+    template<size_t lock_count, typename duration = std::chrono::nanoseconds,
+        size_t deadlock_timeout = 100000, size_t spin_iterations = 100>
+        class lock_timed_any {
+        std::vector<std::shared_ptr<void>> locks_ptr_vec;
+        bool success;
 
-		template<typename mtx_t>
-		std::unique_lock<mtx_t> try_lock_one(mtx_t &mtx) const {
-			std::unique_lock<mtx_t> lock(mtx, std::defer_lock_t());
-			for (size_t i = 0; i < spin_iterations; ++i) if (lock.try_lock()) return lock;
-			const std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
-			//while (!lock.try_lock_for(duration(deadlock_timeout)))    // only for timed mutexes
-			while (!lock.try_lock()) {
-				auto const time_remained = duration(deadlock_timeout) - std::chrono::duration_cast<duration>(std::chrono::steady_clock::now() - start_time);
-				if (time_remained <= duration(0))
-					break;
-				else
-					std::this_thread::sleep_for(time_remained);
-			}
-			return lock;
-		}
+        template<typename mtx_t>
+        std::unique_lock<mtx_t> try_lock_one(mtx_t &mtx) const {
+            std::unique_lock<mtx_t> lock(mtx, std::defer_lock_t());
+            for (size_t i = 0; i < spin_iterations; ++i) if (lock.try_lock()) return lock;
+            const std::chrono::steady_clock::time_point start_time = std::chrono::steady_clock::now();
+            //while (!lock.try_lock_for(duration(deadlock_timeout)))    // only for timed mutexes
+            while (!lock.try_lock()) {
+                auto const time_remained = duration(deadlock_timeout) - std::chrono::duration_cast<duration>(std::chrono::steady_clock::now() - start_time);
+                if (time_remained <= duration(0))
+                    break;
+                else
+                    std::this_thread::sleep_for(time_remained);
+            }
+            return lock;
+        }
 
-		template<typename mtx_t>
-		std::shared_ptr<std::unique_lock<mtx_t>> try_lock_ptr_one(mtx_t &mtx) const {
-			return std::make_shared<std::unique_lock<mtx_t>>(try_lock_one(mtx));
-		}
+        template<typename mtx_t>
+        std::shared_ptr<std::unique_lock<mtx_t>> try_lock_ptr_one(mtx_t &mtx) const {
+            return std::make_shared<std::unique_lock<mtx_t>>(try_lock_one(mtx));
+        }
 
-		public:
-			template<typename... Args>
-			lock_timed_any(Args& ...args) {
-				do {
-					success = true;
-					for (auto &lock_ptr : { try_lock_ptr_one(*args.mtx_ptr.get()) ... }) {
-						locks_ptr_vec.emplace_back(lock_ptr);
-						if (!lock_ptr->owns_lock()) {
-							success = false;
-							locks_ptr_vec.clear();
-							std::this_thread::sleep_for(duration(deadlock_timeout));
-							break;
-						}
-					}
-				} while (!success && lock_count == lock_count_t::lock_infinity);
-			}
+        public:
+            template<typename... Args>
+            lock_timed_any(Args& ...args) {
+                do {
+                    success = true;
+                    for (auto &lock_ptr : { try_lock_ptr_one(*args.mtx_ptr.get()) ... }) {
+                        locks_ptr_vec.emplace_back(lock_ptr);
+                        if (!lock_ptr->owns_lock()) {
+                            success = false;
+                            locks_ptr_vec.clear();
+                            std::this_thread::sleep_for(duration(deadlock_timeout));
+                            break;
+                        }
+                    }
+                } while (!success && lock_count == lock_count_t::lock_infinity);
+            }
 
-			explicit operator bool() const throw() { return success; }
-			lock_timed_any(lock_timed_any&& other) throw() : locks_ptr_vec(other.locks_ptr_vec) { }
-			lock_timed_any(const lock_timed_any&) = delete;
-			lock_timed_any& operator=(const lock_timed_any&) = delete;
-	};
+            explicit operator bool() const throw() { return success; }
+            lock_timed_any(lock_timed_any&& other) throw() : locks_ptr_vec(other.locks_ptr_vec) { }
+            lock_timed_any(const lock_timed_any&) = delete;
+            lock_timed_any& operator=(const lock_timed_any&) = delete;
+    };
 
-	using lock_timed_any_once = lock_timed_any<lock_count_t::lock_once>;
-	using lock_timed_any_infinity = lock_timed_any<lock_count_t::lock_infinity>;
-	// ---------------------------------------------------------------
+    using lock_timed_any_once = lock_timed_any<lock_count_t::lock_once>;
+    using lock_timed_any_infinity = lock_timed_any<lock_count_t::lock_infinity>;
+    // ---------------------------------------------------------------
 
     template<typename T>
     struct xlocked_safe_ptr {
@@ -293,20 +293,20 @@ namespace sf {
         std::atomic_flag lock_flag;
         int64_t recursive_counter;
 #if (_WIN32 && _MSC_VER < 1900)
-		typedef int64_t thread_id_t;
-		std::atomic<thread_id_t> owner_thread_id;
+        typedef int64_t thread_id_t;
+        std::atomic<thread_id_t> owner_thread_id;
         int64_t get_fast_this_thread_id() {
             static __declspec(thread) int64_t fast_this_thread_id = 0;  // MSVS 2013 thread_local partially supported - only POD
             if (fast_this_thread_id == 0) {
                 std::stringstream ss;
                 ss << std::this_thread::get_id();   // https://connect.microsoft.com/VisualStudio/feedback/details/1558211
                 fast_this_thread_id = std::stoll(ss.str());
-			}
+            }
             return fast_this_thread_id;
-		}
+        }
 #else
-		typedef std::thread::id thread_id_t;
-		std::atomic<std::thread::id> owner_thread_id;
+        typedef std::thread::id thread_id_t;
+        std::atomic<std::thread::id> owner_thread_id;
         std::thread::id get_fast_this_thread_id() { return std::this_thread::get_id(); }
 #endif
 
@@ -315,7 +315,7 @@ namespace sf {
 
         bool try_lock() {
             if (!lock_flag.test_and_set(std::memory_order_acquire)) {
-				owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
+                owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
             }
             else {
                 if (owner_thread_id.load(std::memory_order_acquire) != get_fast_this_thread_id())
@@ -335,7 +335,7 @@ namespace sf {
             assert(recursive_counter > 0);
 
             if (--recursive_counter == 0) {
-				owner_thread_id.store(thread_id_t(), std::memory_order_release);
+                owner_thread_id.store(thread_id_t(), std::memory_order_release);
                 lock_flag.clear(std::memory_order_release);
             }
         }
@@ -345,25 +345,25 @@ namespace sf {
     // contention free shared mutex (same-lock-type is recursive for X->X, X->S or S->S locks), but (S->X - is UB)
     template<unsigned contention_free_count = 36, bool shared_flag = false>
     class contention_free_shared_mutex {
-		std::atomic<bool> want_x_lock;
+        std::atomic<bool> want_x_lock;
         //struct cont_free_flag_t { alignas(std::hardware_destructive_interference_size) std::atomic<int> value; cont_free_flag_t() { value = 0; } }; // C++17
-		struct cont_free_flag_t { char tmp[60]; std::atomic<int> value; cont_free_flag_t() { value = 0; } };   // tmp[] to avoid false sharing
+        struct cont_free_flag_t { char tmp[60]; std::atomic<int> value; cont_free_flag_t() { value = 0; } };   // tmp[] to avoid false sharing
         typedef std::array<cont_free_flag_t, contention_free_count> array_slock_t;
         
-		const std::shared_ptr<array_slock_t> shared_locks_array_ptr;  // 0 - unregistred, 1 registred & free, 2... - busy
-		char avoid_falsesharing_1[64];
+        const std::shared_ptr<array_slock_t> shared_locks_array_ptr;  // 0 - unregistred, 1 registred & free, 2... - busy
+        char avoid_falsesharing_1[64];
 
         array_slock_t &shared_locks_array;
-		char avoid_falsesharing_2[64];
+        char avoid_falsesharing_2[64];
 
-		int recursive_xlock_count;
+        int recursive_xlock_count;
 
 
-		enum index_op_t { unregister_thread_op, get_index_op, register_thread_op };
+        enum index_op_t { unregister_thread_op, get_index_op, register_thread_op };
 
 #if (_WIN32 && _MSC_VER < 1900) // only for MSVS 2013
         typedef int64_t thread_id_t;
-		std::atomic<thread_id_t> owner_thread_id;
+        std::atomic<thread_id_t> owner_thread_id;
         std::array<int64_t, contention_free_count> register_thread_array;
         int64_t get_fast_this_thread_id() {
             static __declspec(thread) int64_t fast_this_thread_id = 0;  // MSVS 2013 thread_local partially supported - only POD
@@ -375,27 +375,27 @@ namespace sf {
             return fast_this_thread_id;
         }
 
-		int get_or_set_index(index_op_t index_op = get_index_op, int set_index = -1) {
-			if (index_op == get_index_op) {  // get index
-				auto const thread_id = get_fast_this_thread_id();
+        int get_or_set_index(index_op_t index_op = get_index_op, int set_index = -1) {
+            if (index_op == get_index_op) {  // get index
+                auto const thread_id = get_fast_this_thread_id();
 
-				for (size_t i = 0; i < register_thread_array.size(); ++i) {
-					if (register_thread_array[i] == thread_id) {
-						set_index = i;   // thread already registred                
-						break;
-					}
-				}
-			}
-			else if (index_op == register_thread_op) {  // register thread
-				register_thread_array[set_index] = get_fast_this_thread_id();
-			}
-			return set_index;
-		}
+                for (size_t i = 0; i < register_thread_array.size(); ++i) {
+                    if (register_thread_array[i] == thread_id) {
+                        set_index = i;   // thread already registred                
+                        break;
+                    }
+                }
+            }
+            else if (index_op == register_thread_op) {  // register thread
+                register_thread_array[set_index] = get_fast_this_thread_id();
+            }
+            return set_index;
+        }
 
 #else
-		typedef std::thread::id thread_id_t;
-		std::atomic<std::thread::id> owner_thread_id;
-		std::thread::id get_fast_this_thread_id() { return std::this_thread::get_id(); }
+        typedef std::thread::id thread_id_t;
+        std::atomic<std::thread::id> owner_thread_id;
+        std::thread::id get_fast_this_thread_id() { return std::this_thread::get_id(); }
 
         struct unregister_t {
             int thread_index;
@@ -437,7 +437,7 @@ namespace sf {
         public:
             contention_free_shared_mutex() :
                 shared_locks_array_ptr(std::make_shared<array_slock_t>()), shared_locks_array(*shared_locks_array_ptr), want_x_lock(false), recursive_xlock_count(0),
-				owner_thread_id(thread_id_t()) {}
+                owner_thread_id(thread_id_t()) {}
 
             ~contention_free_shared_mutex() {
                 for (auto &i : shared_locks_array) i.value = -1;
@@ -482,7 +482,7 @@ namespace sf {
                         while (want_x_lock.load(std::memory_order_seq_cst)) {
                             shared_locks_array[register_index].value.store(recursion_depth, std::memory_order_seq_cst);
                             for (volatile size_t i = 0; want_x_lock.load(std::memory_order_seq_cst); ++i) 
-								if (i % 100000 == 0) std::this_thread::yield();
+                                if (i % 100000 == 0) std::this_thread::yield();
                             shared_locks_array[register_index].value.store(recursion_depth + 1, std::memory_order_seq_cst);
                         }
                     }
@@ -490,13 +490,13 @@ namespace sf {
                     // (shared_locks_array[register_index] > 2)                                 // recursive shared lock
                 }
                 else {
-					if (owner_thread_id.load(std::memory_order_acquire) != get_fast_this_thread_id()) {
-						size_t i = 0;
-						for (bool flag = false; !want_x_lock.compare_exchange_weak(flag, true, std::memory_order_seq_cst); flag = false)
-							if (++i % 100000 == 0) std::this_thread::yield();
-						owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
-					}
-					++recursive_xlock_count;
+                    if (owner_thread_id.load(std::memory_order_acquire) != get_fast_this_thread_id()) {
+                        size_t i = 0;
+                        for (bool flag = false; !want_x_lock.compare_exchange_weak(flag, true, std::memory_order_seq_cst); flag = false)
+                            if (++i % 100000 == 0) std::this_thread::yield();
+                        owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
+                    }
+                    ++recursive_xlock_count;
                 }
             }
 
@@ -510,10 +510,10 @@ namespace sf {
                     shared_locks_array[register_index].value.store(recursion_depth - 1, std::memory_order_release);
                 }
                 else {
-					if (--recursive_xlock_count == 0) {
-						owner_thread_id.store(decltype(owner_thread_id)(), std::memory_order_release);
-						want_x_lock.store(false, std::memory_order_release);
-					}
+                    if (--recursive_xlock_count == 0) {
+                        owner_thread_id.store(decltype(owner_thread_id)(), std::memory_order_release);
+                        want_x_lock.store(false, std::memory_order_release);
+                    }
                 }
             }
 
@@ -523,26 +523,26 @@ namespace sf {
                 if (register_index >= 0)
                     assert(shared_locks_array[register_index].value.load(std::memory_order_acquire) == 1);
 
-				if (owner_thread_id.load(std::memory_order_acquire) != get_fast_this_thread_id()) {
-					size_t i = 0;
-					for (bool flag = false; !want_x_lock.compare_exchange_weak(flag, true, std::memory_order_seq_cst); flag = false)
-						if (++i % 1000000 == 0) std::this_thread::yield();
+                if (owner_thread_id.load(std::memory_order_acquire) != get_fast_this_thread_id()) {
+                    size_t i = 0;
+                    for (bool flag = false; !want_x_lock.compare_exchange_weak(flag, true, std::memory_order_seq_cst); flag = false)
+                        if (++i % 1000000 == 0) std::this_thread::yield();
 
-					owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
+                    owner_thread_id.store(get_fast_this_thread_id(), std::memory_order_release);
 
-					for (auto &i : shared_locks_array)
-						while (i.value.load(std::memory_order_seq_cst) > 1);
-				}
+                    for (auto &i : shared_locks_array)
+                        while (i.value.load(std::memory_order_seq_cst) > 1);
+                }
 
-				++recursive_xlock_count;
+                ++recursive_xlock_count;
             }
 
             void unlock() {
                 assert(recursive_xlock_count > 0);
-				if (--recursive_xlock_count == 0) {
-					owner_thread_id.store(decltype(owner_thread_id)(), std::memory_order_release);
-					want_x_lock.store(false, std::memory_order_release);
-				}
+                if (--recursive_xlock_count == 0) {
+                    owner_thread_id.store(decltype(owner_thread_id)(), std::memory_order_release);
+                    want_x_lock.store(false, std::memory_order_release);
+                }
             }
     };
 

@@ -687,13 +687,13 @@ bool ScriptedAI::CheckHomeDistToEvade(uint32 diff, float dist, float x, float y,
 
 void ScriptedAI::InitializeAI()
 {
-	if (PetStats const* pStats = sObjectMgr->GetPetStats(me->GetEntry()))
-	{
-		if(me->GetEntry() != 100868)
-			me->SetReactState(ReactStates(pStats->state));
-		else
-			me->SetReactState(REACT_ATTACK_OFF);
-	}
+    if (PetStats const* pStats = sObjectMgr->GetPetStats(me->GetEntry()))
+    {
+        if(me->GetEntry() != 100868)
+            me->SetReactState(ReactStates(pStats->state));
+        else
+            me->SetReactState(REACT_ATTACK_OFF);
+    }
 
     CreatureAI::InitializeAI();
 }

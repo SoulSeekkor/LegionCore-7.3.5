@@ -1267,20 +1267,20 @@ uint32 Unit::CalcStaggerDamage(uint32 damage, SpellSchoolMask damageSchoolMask, 
         bool hasFermentation = HasAura(205147);
         float bp2 = hasBonusHast ? 5.f : 0.f;
 
-		if (Player* plr = ToPlayer())
-		{
-			uint64 health = GetHealth(this);
-			if (plr->duel && damage >= health)
-			{
-				//Remove stagger damage when duel is finished
-				RemoveAurasDueToSpell(staggerBleed);
-				RemoveAurasDueToSpell(staggerGreen);
-				RemoveAurasDueToSpell(staggerYellow);
-				RemoveAurasDueToSpell(staggerRed);
-				RemoveAurasDueToSpell(fermentation);
-				return health - 1;
-			}
-		}
+        if (Player* plr = ToPlayer())
+        {
+            uint64 health = GetHealth(this);
+            if (plr->duel && damage >= health)
+            {
+                //Remove stagger damage when duel is finished
+                RemoveAurasDueToSpell(staggerBleed);
+                RemoveAurasDueToSpell(staggerGreen);
+                RemoveAurasDueToSpell(staggerYellow);
+                RemoveAurasDueToSpell(staggerRed);
+                RemoveAurasDueToSpell(fermentation);
+                return health - 1;
+            }
+        }
 
         if (spellInfo && spellInfo->Id == staggerBleed)
         {
@@ -7267,22 +7267,22 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
                 }
                 case 228695: // PvP Rules Enabled for Dummy
                 {
-					if (!sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME))
-						if (Player* plr = victim->ToPlayer())
-						{
-							if (plr->getLevel() >= 110)
-							{
-								if (plr->HasAura(SPELL_PRINCIPLES_OF_WAR))
-									return false;
+                    if (!sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME))
+                        if (Player* plr = victim->ToPlayer())
+                        {
+                            if (plr->getLevel() >= 110)
+                            {
+                                if (plr->HasAura(SPELL_PRINCIPLES_OF_WAR))
+                                    return false;
 
-								if (Aura* aura = plr->GetAura(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY))
-									aura->SetDuration(aura->GetMaxDuration());
-								else
-									plr->AddAura(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY, plr);
-								plr->EnablePvpRules(false);
-								return true;
-							}
-						}
+                                if (Aura* aura = plr->GetAura(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY))
+                                    aura->SetDuration(aura->GetMaxDuration());
+                                else
+                                    plr->AddAura(SPELL_PRINCIPLES_OF_WAR_FROM_DUMMY, plr);
+                                plr->EnablePvpRules(false);
+                                return true;
+                            }
+                        }
                     break;
                 }
                 case 228696: // Principles of War from Dummy
@@ -9024,7 +9024,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
         {
             switch (dummySpell->Id)
             {
-                case 212219: // Control is King	
+                case 212219: // Control is King
                 {
                     if (!procSpell->HasAura(SPELL_AURA_MOD_STUN) && !procSpell->HasAura(SPELL_AURA_MOD_SILENCE) && 
                         !procSpell->HasAura(SPELL_AURA_TRANSFORM) && !procSpell->HasAura(SPELL_AURA_STRANGULATE))
@@ -9259,22 +9259,22 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
                         float setbp = basepoints0 + aurEff->GetAmount();
                         aurEff->ChangeAmount(setbp);
 
-						if (Player* player = ToPlayer())
-						{
-							if (Pet* pet = player->GetPet())
-								if (AuraEffect* petAurEff = pet->GetAuraEffect(207033, EFFECT_0))
-								{
-									float petSetbp = basepoints0 + petAurEff->GetAmount();
-									petAurEff->ChangeAmount(petSetbp);
-								}
+                        if (Player* player = ToPlayer())
+                        {
+                            if (Pet* pet = player->GetPet())
+                                if (AuraEffect* petAurEff = pet->GetAuraEffect(207033, EFFECT_0))
+                                {
+                                    float petSetbp = basepoints0 + petAurEff->GetAmount();
+                                    petAurEff->ChangeAmount(petSetbp);
+                                }
 
-							if (Unit* hati = GetHati())
-								if (AuraEffect* petAurEff = hati->GetAuraEffect(207033, EFFECT_0))
-								{
-									float petSetbp = basepoints0 + petAurEff->GetAmount();
-									petAurEff->ChangeAmount(petSetbp);
-								}
-						}
+                            if (Unit* hati = GetHati())
+                                if (AuraEffect* petAurEff = hati->GetAuraEffect(207033, EFFECT_0))
+                                {
+                                    float petSetbp = basepoints0 + petAurEff->GetAmount();
+                                    petAurEff->ChangeAmount(petSetbp);
+                                }
+                        }
                     }
                     return false;
                 }
@@ -9920,15 +9920,15 @@ bool Unit::HandleDummyAuraProc(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect
 
                     basepoints0 = triggerAmount * 1000 / 10 * chiCost;
                     basepoints1 = triggerAmount * 75;
-					if (Aura* aura = GetAura(137639)) // Storm, Earth, and Fire
-					{
-						aura->SetDuration(aura->GetDuration() + basepoints0);
-						for (Unit::ControlList::iterator itr = m_Controlled.begin(); itr != m_Controlled.end(); ++itr)
-							if (Creature* creature = ObjectAccessor::GetCreatureOrPetOrVehicle(*this, *itr))
-								if (creature->GetEntry() == 69791 || creature->GetEntry() == 69792)
-									if (TempSummon* summon = creature->ToTempSummon())
-										summon->AddDuration(basepoints0);
-					}
+                    if (Aura* aura = GetAura(137639)) // Storm, Earth, and Fire
+                    {
+                        aura->SetDuration(aura->GetDuration() + basepoints0);
+                        for (Unit::ControlList::iterator itr = m_Controlled.begin(); itr != m_Controlled.end(); ++itr)
+                            if (Creature* creature = ObjectAccessor::GetCreatureOrPetOrVehicle(*this, *itr))
+                                if (creature->GetEntry() == 69791 || creature->GetEntry() == 69792)
+                                    if (TempSummon* summon = creature->ToTempSummon())
+                                        summon->AddDuration(basepoints0);
+                    }
 
                     if (Aura* aura = GetAura(152173)) // Serenity
                         aura->SetDuration(aura->GetDuration() + basepoints1);
@@ -11797,7 +11797,7 @@ void Unit::SetMinion(Minion *minion, bool apply)
         if (minion->HasUnitTypeMask(UNIT_MASK_CONTROLABLE_GUARDIAN))
             minion->SetOwnerGUID(GetGUID());
 
-		if ((minion->GetEntry() != 69792 && minion->GetEntry() != 69791) || sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+        if ((minion->GetEntry() != 69792 && minion->GetEntry() != 69791) || sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
             m_Controlled.insert(minion->GetGUID());
 
         if (IsPlayer())
@@ -13273,9 +13273,9 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                             }
                         }
 
-						if (victim)
-							if (HasAura(213553) && int32(victim->GetHealthPct()) >= 80) // Druid Initiation PvP Talent
-								crit_chance += 30;
+                        if (victim)
+                            if (HasAura(213553) && int32(victim->GetHealthPct()) >= 80) // Druid Initiation PvP Talent
+                                crit_chance += 30;
 
                         break;
                     }
@@ -13304,36 +13304,36 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                                 break;
                         }
 
-						if (victim)
-							if (HasAura(213547) && int32(victim->GetHealthPct()) >= 80) // Warlock Initiation PvP Talent
-								crit_chance += 30;
+                        if (victim)
+                            if (HasAura(213547) && int32(victim->GetHealthPct()) >= 80) // Warlock Initiation PvP Talent
+                                crit_chance += 30;
 
                         break;
                     }
-					case SPELLFAMILY_SHAMAN:
-					{
-						if (victim)
-							if (HasAura(213556) && int32(victim->GetHealthPct()) >= 80) // Shaman Initiation PvP Talent
-								crit_chance += 30;
+                    case SPELLFAMILY_SHAMAN:
+                    {
+                        if (victim)
+                            if (HasAura(213556) && int32(victim->GetHealthPct()) >= 80) // Shaman Initiation PvP Talent
+                                crit_chance += 30;
 
-						break;
-					}
-					case SPELLFAMILY_MAGE:
-					{
-						if (victim)
-							if (HasAura(213541) && int32(victim->GetHealthPct()) >= 80) // Mage Initiation PvP Talent
-								crit_chance += 30;
+                        break;
+                    }
+                    case SPELLFAMILY_MAGE:
+                    {
+                        if (victim)
+                            if (HasAura(213541) && int32(victim->GetHealthPct()) >= 80) // Mage Initiation PvP Talent
+                                crit_chance += 30;
 
-						break;
-					}
-					case SPELLFAMILY_PRIEST:
-					{
-						if (victim)
-							if (HasAura(213550) && int32(victim->GetHealthPct()) >= 80) // Priest Initiation PvP Talent
-								crit_chance += 30;
+                        break;
+                    }
+                    case SPELLFAMILY_PRIEST:
+                    {
+                        if (victim)
+                            if (HasAura(213550) && int32(victim->GetHealthPct()) >= 80) // Priest Initiation PvP Talent
+                                crit_chance += 30;
 
-						break;
-					}
+                        break;
+                    }
                 }
             }
             break;
@@ -13354,23 +13354,23 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                                 if (spell && (spell->GetCastedFromStealth() || HasAura(102543)))
                                     crit_chance *= 2.0f;
                                 break;
-							case 1822: // Fresh Wounds PVP Honor Talent Feral Spec
-								if(victim)
-									if (spell)
-										if (Aura* aura = GetAura(203224))
-											if (aura->GetCustomData() == 1)
-											{
-												crit_chance += 60;
-												aura->SetCustomData(0);
-											}
-								break;
+                            case 1822: // Fresh Wounds PVP Honor Talent Feral Spec
+                                if(victim)
+                                    if (spell)
+                                        if (Aura* aura = GetAura(203224))
+                                            if (aura->GetCustomData() == 1)
+                                            {
+                                                crit_chance += 60;
+                                                aura->SetCustomData(0);
+                                            }
+                                break;
                             default:
                                 break;
                         }
 
-						if (victim)
-							if (HasAura(213553) && int32(victim->GetHealthPct()) >= 80) // Druid Initiation PvP Talent
-								crit_chance += 30;
+                        if (victim)
+                            if (HasAura(213553) && int32(victim->GetHealthPct()) >= 80) // Druid Initiation PvP Talent
+                                crit_chance += 30;
 
                         break;
                     }
@@ -13445,9 +13445,9 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                                 crit_chance += aurEffPct->GetAmount();
                     break;
             }
-			if(victim)
-				if (HasAura(213539) && int32(victim->GetHealthPct()) >= 80) // Hunter Initiation PvP Talent
-					crit_chance += 30;
+            if(victim)
+                if (HasAura(213539) && int32(victim->GetHealthPct()) >= 80) // Hunter Initiation PvP Talent
+                    crit_chance += 30;
             if (victim)
                 crit_chance += GetUnitCriticalChance(attackType, victim);
             break;
@@ -14732,19 +14732,19 @@ void Unit::SetInCombatState(Unit* enemy, bool PvP)
     // if (PvP) // not need, if player kill target combat stop automatic
         SetCombatTimer(5000);
 
-		if (Player* player = ToPlayer())
-		{
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && player->getLevel() >= 110)
-			{
-				if (!player->HasPvpRulesEnabled())
-					player->EnablePvpRules(false);
-			}
-			else
-			{
-				if (PvP)
-					player->EnablePvpRules();
-			}
-		}
+        if (Player* player = ToPlayer())
+        {
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && player->getLevel() >= 110)
+            {
+                if (!player->HasPvpRulesEnabled())
+                    player->EnablePvpRules(false);
+            }
+            else
+            {
+                if (PvP)
+                    player->EnablePvpRules();
+            }
+        }
 
     if (isInCombat() || HasUnitState(UNIT_STATE_EVADE))
         return;

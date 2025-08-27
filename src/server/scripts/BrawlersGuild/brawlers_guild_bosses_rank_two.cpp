@@ -572,7 +572,7 @@ public:
                 return;
             }
             
-			_Reset();
+            _Reset();
             me->KillAllDelayedEvents();
             
             if (!who)

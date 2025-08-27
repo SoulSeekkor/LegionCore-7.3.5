@@ -459,7 +459,7 @@ struct boss_aggramar : BossAI
         {
             switch (eventId)
             {
-				case EVENT_COMBO:
+                case EVENT_COMBO:
                     if (comboCounter == 5)
                     {
                         DefaultEvents();
@@ -467,7 +467,7 @@ struct boss_aggramar : BossAI
                     }
                     me->CastSpell(me, GetCombatSpell());
                     events.RescheduleEvent(EVENT_COMBO, IsMythicRaid() ? 3500 : 5000);
-					break;
+                    break;
                 case EVENT_SCORCHING_BLAZE:
                     DoCast(SPELL_SCORCHING_BLAZE_FILTER);
                     events.RescheduleEvent(EVENT_SCORCHING_BLAZE, 6500);

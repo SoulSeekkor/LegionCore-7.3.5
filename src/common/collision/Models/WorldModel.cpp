@@ -586,7 +586,7 @@ namespace VMAP
             bool result = models[entry].intersectLine(ray, distance, pStopAtFirstHit);
             if (result)
             {
-				if (ignoreGroupWMOID.find(models[entry].GetWmoID()) == ignoreGroupWMOID.end())
+                if (ignoreGroupWMOID.find(models[entry].GetWmoID()) == ignoreGroupWMOID.end())
                     hit = true;
             }
             return hit;

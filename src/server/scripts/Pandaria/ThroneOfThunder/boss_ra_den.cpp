@@ -93,7 +93,7 @@ class boss_ra_den : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_LINGERING_ENERGIES);
                 me->RemoveAurasDueToSpell(SPELL_IMBUED_WITH_VITA);
                 me->RemoveAurasDueToSpell(SPELL_IMBUED_WITH_ANIMA);
-				me->RemoveAurasDueToSpell(SPELL_RUIN);
+                me->RemoveAurasDueToSpell(SPELL_RUIN);
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
                 if (instance)
                     instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_UNLEASHED_ANIMA);

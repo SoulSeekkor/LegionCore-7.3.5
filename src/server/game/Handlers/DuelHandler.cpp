@@ -50,18 +50,18 @@ void WorldSession::HandleDuelResponse(WorldPackets::Duel::DuelResponse& packet)
             _player->duel->state = DUEL_COUNTDOWN;
             dueler->duel->state = DUEL_COUNTDOWN;
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && _player->getLevel() >= 110 && dueler->getLevel() >= 110)
-			{
-				if (!_player->HasPvpRulesEnabled())
-					_player->EnablePvpRules(false);
-				if (!dueler->HasPvpRulesEnabled())
-					dueler->EnablePvpRules(false);
-			}
-			else
-			{
-				_player->EnablePvpRules();
-				dueler->EnablePvpRules();
-			}
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_ALLOW_PVP_TALENTS_ALL_THE_TIME) && _player->getLevel() >= 110 && dueler->getLevel() >= 110)
+            {
+                if (!_player->HasPvpRulesEnabled())
+                    _player->EnablePvpRules(false);
+                if (!dueler->HasPvpRulesEnabled())
+                    dueler->EnablePvpRules(false);
+            }
+            else
+            {
+                _player->EnablePvpRules();
+                dueler->EnablePvpRules();
+            }
         }
         else
         {

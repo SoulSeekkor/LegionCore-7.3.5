@@ -5,7 +5,7 @@
  ***************************************************************************/
 
 #ifndef _SEGVCATCH_H
-#define	_SEGVCATCH_H
+#define _SEGVCATCH_H
 
 /*! \brief segvcatch namespace
 
@@ -33,4 +33,4 @@ extern bool crash_ignore;
 
 }
 
-#endif	/* _SEGVCATCH_H */
+#endif /* _SEGVCATCH_H */

@@ -33,7 +33,7 @@ enum eNyamiSpells
     SpellArcaneBolt                 = 154235,
     SpellVoidChanneling             = 160677,
     SpellStrangulateState           = 78037,
-	SpellSpiritVisual				= 145945,
+    SpellSpiritVisual               = 145945,
 };
 
 enum eNyamiEvents

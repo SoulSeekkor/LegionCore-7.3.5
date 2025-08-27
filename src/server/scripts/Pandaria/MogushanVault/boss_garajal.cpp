@@ -319,9 +319,9 @@ class mob_spirit_totem : public CreatureScript
                 GetPlayerListInGrid(playerList, me, 5.0f);
 
                 uint8 count = 0;
-				for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
+                for (std::list<Player*>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                 {
-					Player* player = *itr;
+                    Player* player = *itr;
                     
                     if (player->HasAura(SPELL_FRAIL_SOUL))
                     {
@@ -478,7 +478,7 @@ class mob_soul_cutter : public CreatureScript
                 std::unordered_set<ObjectGuid> playerList;
                 me->GetMustBeVisibleForPlayersList(playerList);
 
-				for (std::unordered_set<ObjectGuid>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
+                for (std::unordered_set<ObjectGuid>::iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                 {
                     if (Player* player = ObjectAccessor::FindPlayer(*itr))
                     {

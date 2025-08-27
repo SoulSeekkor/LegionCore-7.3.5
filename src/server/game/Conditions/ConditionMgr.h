@@ -275,7 +275,7 @@ class ConditionMgr
         ConditionList GetConditionsForPhaseDefinition(uint32 zone, uint32 entry);
         ConditionList GetConditionsForAreaTriggerAction(uint32 areaTriggerId, uint32 actionId);
         ConditionList GetConditionsForItemLoot(uint32 creatureId, uint32 itemId);
-		bool IsObjectMeetingSmartEventConditions(int64 entryOrGuid, uint32 eventId, uint32 sourceType, Unit* unit, WorldObject* baseObject) const;
+        bool IsObjectMeetingSmartEventConditions(int64 entryOrGuid, uint32 eventId, uint32 sourceType, Unit* unit, WorldObject* baseObject) const;
         
         static bool IsPlayerMeetingCondition(Unit* unit, int32 conditionID, bool send = false);
         static bool IsPlayerMeetingCondition(Unit* unit, PlayerConditionEntry const* condition);

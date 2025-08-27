@@ -458,7 +458,7 @@ public:
                     case EVENT_RESET:
                         me->NearTeleportTo(me->GetHomePosition());
                         EnterEvadeMode();
-                    	break;
+                        break;
                 }
             }
             DoMeleeAttackIfReady();

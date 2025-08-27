@@ -98,7 +98,7 @@ public:
     static bool GetStartPosition(uint32 mapID, float& x, float& y, float& z, float& o, ObjectGuid OwnerGuid);
 
     void GenerateCurrentWeekAffixes();
-	void GenerateManualAffixes();
+    void GenerateManualAffixes();
     uint8 GetActiveAffixe();
 
     static uint32 GetLootTreeMod(int32& levelBonus, uint32& challengeLevel, Challenge* challenge = nullptr);

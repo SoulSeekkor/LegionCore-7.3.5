@@ -526,10 +526,10 @@ void Battlefield::SendWorldTextToTeam(uint32 broadcastID, ObjectGuid guid, uint3
         for (auto const& v : m_players[i])
             if (Player* _player = ObjectAccessor::FindPlayer(v))
                 if (sConditionMgr->IsPlayerMeetingCondition(_player, bct->ConditionID))
-				{
-					packet.Text = DB2Manager::GetBroadcastTextValue(bct, _player->GetSession()->GetSessionDbLocaleIndex());
-					_player->SendDirectMessage(packet.Write());
-				}
+                {
+                    packet.Text = DB2Manager::GetBroadcastTextValue(bct, _player->GetSession()->GetSessionDbLocaleIndex());
+                    _player->SendDirectMessage(packet.Write());
+                }
 }
 
 void Battlefield::SendUpdateWorldState(uint32 field, uint32 value)

@@ -4,9 +4,9 @@
 
 class CharacterService
 {
-	CharacterService() = default;
-	~CharacterService() = default;
-	
+    CharacterService() = default;
+    ~CharacterService() = default;
+    
 public:
     void SetRename(Player* player);
     void ChangeFaction(Player* player);
@@ -15,7 +15,7 @@ public:
     void Boost(Player* player);
     void RestoreDeletedCharacter(WorldSession* session);
 
-	static CharacterService* instance();
+    static CharacterService* instance();
 };
 
 #define sCharacterService CharacterService::instance()

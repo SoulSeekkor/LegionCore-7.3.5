@@ -1388,7 +1388,7 @@ struct WorldQuestInfo
 
 struct DeathMatchScore
 {
-	DeathMatchScore() : kills(0), deaths(0), damage(0), rating(0), matches(0), needSave(false), totalKills(0), selectedMorph(0){};
+    DeathMatchScore() : kills(0), deaths(0), damage(0), rating(0), matches(0), needSave(false), totalKills(0), selectedMorph(0){};
     uint32 kills;
     uint32 deaths;
     uint64 damage;

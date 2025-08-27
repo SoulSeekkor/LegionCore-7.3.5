@@ -139,11 +139,11 @@ class PoolMgr
         template<typename T>
         void SpawnPool(uint32 pool_id, uint64 db_guid_or_pool_id);
 
-		typedef std::unordered_map<uint32, PoolTemplateData>      PoolTemplateDataMap;
-		typedef std::unordered_map<uint32, PoolGroup<Creature>>   PoolGroupCreatureMap;
-		typedef std::unordered_map<uint32, PoolGroup<GameObject>> PoolGroupGameObjectMap;
-		typedef std::unordered_map<uint32, PoolGroup<Pool>>       PoolGroupPoolMap;
-		typedef std::unordered_map<uint32, PoolGroup<Quest>>      PoolGroupQuestMap;
+        typedef std::unordered_map<uint32, PoolTemplateData>      PoolTemplateDataMap;
+        typedef std::unordered_map<uint32, PoolGroup<Creature>>   PoolGroupCreatureMap;
+        typedef std::unordered_map<uint32, PoolGroup<GameObject>> PoolGroupGameObjectMap;
+        typedef std::unordered_map<uint32, PoolGroup<Pool>>       PoolGroupPoolMap;
+        typedef std::unordered_map<uint32, PoolGroup<Quest>>      PoolGroupQuestMap;
         typedef std::pair<uint64, uint32> SearchPair;
         typedef std::map<uint64, uint32> SearchMap;
 

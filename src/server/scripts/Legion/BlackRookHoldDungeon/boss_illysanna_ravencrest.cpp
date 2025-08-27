@@ -446,7 +446,7 @@ struct npc_illysanna_commandir : public ScriptedAI
     }        
 
     void EnterEvadeMode() override
-	{
+    {
         ScriptedAI::EnterEvadeMode();
         me->SetReactState(REACT_AGGRESSIVE);
     }

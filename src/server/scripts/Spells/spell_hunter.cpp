@@ -1662,14 +1662,14 @@ class spell_hun_hatis_bond : public SpellScriptLoader
                                 case 106550:
                                 case 106551:
                                     findHati = true;
-									if (creature->isAlive())
-									{
-										hati = creature;
-										if (Player* player = caster->ToPlayer())
-											if (Pet* pet = player->GetPet())
-												if (ReactStates reactState = pet->GetReactState())
-													hati->SetReactState(reactState);
-									}
+                                    if (creature->isAlive())
+                                    {
+                                        hati = creature;
+                                        if (Player* player = caster->ToPlayer())
+                                            if (Pet* pet = player->GetPet())
+                                                if (ReactStates reactState = pet->GetReactState())
+                                                    hati->SetReactState(reactState);
+                                    }
                                     break;
                                 default:
                                     findPet = true;
@@ -2357,30 +2357,30 @@ struct areatrigger_hun_windburst : public AreaTriggerAI
 class spell_hun_bestial_wrath : public SpellScriptLoader
 {
 public:
-	spell_hun_bestial_wrath() : SpellScriptLoader("spell_hun_bestial_wrath") { }
+    spell_hun_bestial_wrath() : SpellScriptLoader("spell_hun_bestial_wrath") { }
 
-	class spell_hun_bestial_wrath_SpellScript : public SpellScript
-	{
-		PrepareSpellScript(spell_hun_bestial_wrath_SpellScript)
+    class spell_hun_bestial_wrath_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_hun_bestial_wrath_SpellScript)
 
-			void HandleAfterCast()
-		{
-			if (Unit* caster = GetCaster())
-				if (caster->HasAura(197248)) // Master of Beasts
-					if (Unit* hati = caster->GetHati())
-						caster->CastSpell(hati, 207033, true);
-		}
+            void HandleAfterCast()
+        {
+            if (Unit* caster = GetCaster())
+                if (caster->HasAura(197248)) // Master of Beasts
+                    if (Unit* hati = caster->GetHati())
+                        caster->CastSpell(hati, 207033, true);
+        }
 
-		void Register() override
-		{
-			AfterCast += SpellCastFn(spell_hun_bestial_wrath_SpellScript::HandleAfterCast);
-		}
-	};
+        void Register() override
+        {
+            AfterCast += SpellCastFn(spell_hun_bestial_wrath_SpellScript::HandleAfterCast);
+        }
+    };
 
-	SpellScript* GetSpellScript() const override
-	{
-		return new spell_hun_bestial_wrath_SpellScript();
-	}
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_hun_bestial_wrath_SpellScript();
+    }
 };
 
 void AddSC_hunter_spell_scripts()
@@ -2426,5 +2426,5 @@ void AddSC_hunter_spell_scripts()
     RegisterAuraScript(spell_hun_eagles_bite);
     RegisterSpellScript(spell_hun_explosive_trap);
     RegisterAreaTriggerAI(areatrigger_hun_windburst);
-	new spell_hun_bestial_wrath();
+    new spell_hun_bestial_wrath();
 }

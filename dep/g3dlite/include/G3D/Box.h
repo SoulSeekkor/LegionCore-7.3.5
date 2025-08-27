@@ -107,7 +107,7 @@ public:
     /**
        \htmlonly
       <PRE>
-		
+        
 
       2--------3
      / :      /|
@@ -156,9 +156,9 @@ public:
      Returns the four corners of a face (0 <= f < 6).
      The corners are returned to form a clockwise quad facing outwards.
      
-	 
-	 
-	  +--------+
+     
+     
+      +--------+
      / :      /|
     /  :     / |
    +--------+  |
@@ -167,21 +167,21 @@ public:
    | /      | /
    |/       |/
    +--------+
-	
+    
   y  
   ^ 
   |
   |-->x
-z/	
-	Faces are in the following order:
-	0: -Z
-	1: X
-	2: Z
-	3: Y
-	4: -X
-	5: -Y
+z/    
+    Faces are in the following order:
+    0: -Z
+    1: X
+    2: Z
+    3: Y
+    4: -X
+    5: -Y
 
-	 */
+     */
     void getFaceCorners(
         int                 f,
         Vector3&            v0,

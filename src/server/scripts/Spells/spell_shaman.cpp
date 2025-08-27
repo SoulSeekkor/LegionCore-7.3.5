@@ -570,221 +570,221 @@ class spell_sha_lightning_bolt : public SpellScriptLoader
 /*class spell_sha_static_overload : public SpellScriptLoader
 {
 public:
-	spell_sha_static_overload() : SpellScriptLoader("spell_sha_static_overload") { }
+    spell_sha_static_overload() : SpellScriptLoader("spell_sha_static_overload") { }
 
-	class spell_sha_static_overload_SpellScript : public SpellScript
-	{
-		PrepareSpellScript(spell_sha_static_overload_SpellScript)
+    class spell_sha_static_overload_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_sha_static_overload_SpellScript)
 
-			void HandleDamage()
-		{
-			if (Unit * caster = GetCaster())
-			{
-				if (Unit * hitTarget = GetHitUnit())
-				{
-					if (Aura * aur = caster->GetAura(205495)) //Stormkeeper
-					{
-						if (caster->HasAura(205495))
-						{
-							if (aur->GetStackAmount() >= 2)
-							{
-								std::list<Unit*> targets;
-								hitTarget->GetAttackableUnitListInRange(targets, 10);
+            void HandleDamage()
+        {
+            if (Unit * caster = GetCaster())
+            {
+                if (Unit * hitTarget = GetHitUnit())
+                {
+                    if (Aura * aur = caster->GetAura(205495)) //Stormkeeper
+                    {
+                        if (caster->HasAura(205495))
+                        {
+                            if (aur->GetStackAmount() >= 2)
+                            {
+                                std::list<Unit*> targets;
+                                hitTarget->GetAttackableUnitListInRange(targets, 10);
 
-								for (auto target : targets)
-									if (target != hitTarget)
-									{
-										switch (GetSpellInfo()->Id)
-										{
-										case 188196:
-											caster->CastSpellDelay(target, 45284, true, 500);
-											break;
-										case 188443:
-											caster->CastSpellDelay(target, 45297, true, 500);
-											break;
-										case 114074:
-											caster->CastSpellDelay(target, 114738, true, 500);
-											break;
-										}
-									}
-							}
-						}
-					}
-				}
-			}
-		}
+                                for (auto target : targets)
+                                    if (target != hitTarget)
+                                    {
+                                        switch (GetSpellInfo()->Id)
+                                        {
+                                        case 188196:
+                                            caster->CastSpellDelay(target, 45284, true, 500);
+                                            break;
+                                        case 188443:
+                                            caster->CastSpellDelay(target, 45297, true, 500);
+                                            break;
+                                        case 114074:
+                                            caster->CastSpellDelay(target, 114738, true, 500);
+                                            break;
+                                        }
+                                    }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		void Register() override
-		{
-			AfterHit += SpellHitFn(spell_sha_static_overload_SpellScript::HandleDamage);
-		}
-	};
+        void Register() override
+        {
+            AfterHit += SpellHitFn(spell_sha_static_overload_SpellScript::HandleDamage);
+        }
+    };
 
-	SpellScript* GetSpellScript() const override
-	{
-		return new spell_sha_static_overload_SpellScript();
-	}
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_sha_static_overload_SpellScript();
+    }
 };*/
 
 // 188196 - Lightning bolt, 188443 - Chain Lightning, 114074 - Lava Beam
 class spell_sha_elemental_overload : public SpellScriptLoader
 {
 public:
-	spell_sha_elemental_overload() : SpellScriptLoader("spell_sha_elemental_overload") { }
+    spell_sha_elemental_overload() : SpellScriptLoader("spell_sha_elemental_overload") { }
 
-	class spell_sha_elemental_overload_SpellScript : public SpellScript
-	{
-		PrepareSpellScript(spell_sha_elemental_overload_SpellScript)
+    class spell_sha_elemental_overload_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_sha_elemental_overload_SpellScript)
 
-			void HandleDamage()
-		{
-			if (Unit * caster = GetCaster())
-			{
-				if (Unit * hitTarget = GetHitUnit())
-				{
-					if (Player * plr = caster->ToPlayer())
-					{
-						if (Unit * selectedUnit = plr->GetSelectedUnit())
-						{
-							if (const SpellInfo * spellInfo = GetSpellInfo())
-							{
-								if (selectedUnit != hitTarget || spellInfo->Id == 188196)
-								{
-									if (Aura * aur = caster->GetAura(205495)) //Stormkeeper
-									{
-										switch (spellInfo->Id)
-										{
-										case 188196:
-										{
-											if (aur->GetCharges() >= 2)
-											{
-												std::list<Unit*> targets;
-												hitTarget->GetAttackableUnitListInRange(targets, 10);
-												for (auto target : targets)
-													if (target != hitTarget)
-														caster->CastSpellDelay(target, 45284, true, 500);
-											}
-											break;
-										}
-										case 188443:
-										{
-											if (aur->GetCharges() >= 2)
-												caster->CastSpellDelay(hitTarget, 45297, true, 500);
-											else
-											{
-												float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
-												if (roll_chance_f(additionalOverloadChance))
-													caster->CastSpellDelay(hitTarget, 45297, true, 500);
-											}
-											break;
+            void HandleDamage()
+        {
+            if (Unit * caster = GetCaster())
+            {
+                if (Unit * hitTarget = GetHitUnit())
+                {
+                    if (Player * plr = caster->ToPlayer())
+                    {
+                        if (Unit * selectedUnit = plr->GetSelectedUnit())
+                        {
+                            if (const SpellInfo * spellInfo = GetSpellInfo())
+                            {
+                                if (selectedUnit != hitTarget || spellInfo->Id == 188196)
+                                {
+                                    if (Aura * aur = caster->GetAura(205495)) //Stormkeeper
+                                    {
+                                        switch (spellInfo->Id)
+                                        {
+                                        case 188196:
+                                        {
+                                            if (aur->GetCharges() >= 2)
+                                            {
+                                                std::list<Unit*> targets;
+                                                hitTarget->GetAttackableUnitListInRange(targets, 10);
+                                                for (auto target : targets)
+                                                    if (target != hitTarget)
+                                                        caster->CastSpellDelay(target, 45284, true, 500);
+                                            }
+                                            break;
+                                        }
+                                        case 188443:
+                                        {
+                                            if (aur->GetCharges() >= 2)
+                                                caster->CastSpellDelay(hitTarget, 45297, true, 500);
+                                            else
+                                            {
+                                                float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
+                                                if (roll_chance_f(additionalOverloadChance))
+                                                    caster->CastSpellDelay(hitTarget, 45297, true, 500);
+                                            }
+                                            break;
 
-										}
+                                        }
 
-										case 114074:
-										{
-											if (aur->GetCharges() >= 2)
-												caster->CastSpellDelay(hitTarget, 114738, true, 500);
-											else
-											{
-												float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
-												if (roll_chance_f(additionalOverloadChance))
-													caster->CastSpellDelay(hitTarget, 114738, true, 500);
-											}
-											break;
-										}
-										}
+                                        case 114074:
+                                        {
+                                            if (aur->GetCharges() >= 2)
+                                                caster->CastSpellDelay(hitTarget, 114738, true, 500);
+                                            else
+                                            {
+                                                float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
+                                                if (roll_chance_f(additionalOverloadChance))
+                                                    caster->CastSpellDelay(hitTarget, 114738, true, 500);
+                                            }
+                                            break;
+                                        }
+                                        }
 
-									}
-									else
-									{
-										float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
+                                    }
+                                    else
+                                    {
+                                        float additionalOverloadChance = (caster->GetFloatValue(PLAYER_FIELD_MASTERY) * 2.0f) / 3.0f;
 
-										if (roll_chance_f(additionalOverloadChance))
-										{
-											switch (spellInfo->Id)
-											{
-											case 188443:
-												caster->CastSpellDelay(hitTarget, 45297, true, 500);
-												break;
-											case 114074:
-												caster->CastSpellDelay(hitTarget, 114738, true, 500);
-												break;
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                                        if (roll_chance_f(additionalOverloadChance))
+                                        {
+                                            switch (spellInfo->Id)
+                                            {
+                                            case 188443:
+                                                caster->CastSpellDelay(hitTarget, 45297, true, 500);
+                                                break;
+                                            case 114074:
+                                                caster->CastSpellDelay(hitTarget, 114738, true, 500);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		void Register() override
-		{
-			AfterHit += SpellHitFn(spell_sha_elemental_overload_SpellScript::HandleDamage);
-		}
-	};
+        void Register() override
+        {
+            AfterHit += SpellHitFn(spell_sha_elemental_overload_SpellScript::HandleDamage);
+        }
+    };
 
-	SpellScript* GetSpellScript() const override
-	{
-		return new spell_sha_elemental_overload_SpellScript();
-	}
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_sha_elemental_overload_SpellScript();
+    }
 };
 
 // 188196 - Lightning Bolt, 45284 - Lightning Bolt Overload, 188443 - Chain Lightning, 45297 - Chain lightning Overload, 114074 - Lava Beam, 114738 - Lava Beam Overload
 class spell_sha_lightning_rod : public SpellScriptLoader
 {
 public:
-	spell_sha_lightning_rod() : SpellScriptLoader("spell_sha_lightning_rod") { }
+    spell_sha_lightning_rod() : SpellScriptLoader("spell_sha_lightning_rod") { }
 
-	class spell_sha_lightning_rod_SpellScript : public SpellScript
-	{
-		PrepareSpellScript(spell_sha_lightning_rod_SpellScript)
+    class spell_sha_lightning_rod_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_sha_lightning_rod_SpellScript)
 
-		void HandleDamage()
-		{
-			if (Unit* caster = GetCaster())
-			{
-				if (caster->HasAura(210689))
-				{
-					if (Unit* exTarget = GetExplTargetUnit())
-					{
-						if (Unit* hitTarget = GetHitUnit())
-						{
-							if (exTarget->GetGUID() == hitTarget->GetGUID())
-							{
-								if (uint32 dmg = GetHitDamage())
-								{
-									std::list<Unit*> targets;
-									std::vector<uint32> aura = { 197209 };
+        void HandleDamage()
+        {
+            if (Unit* caster = GetCaster())
+            {
+                if (caster->HasAura(210689))
+                {
+                    if (Unit* exTarget = GetExplTargetUnit())
+                    {
+                        if (Unit* hitTarget = GetHitUnit())
+                        {
+                            if (exTarget->GetGUID() == hitTarget->GetGUID())
+                            {
+                                if (uint32 dmg = GetHitDamage())
+                                {
+                                    std::list<Unit*> targets;
+                                    std::vector<uint32> aura = { 197209 };
 
-									caster->TargetsWhoHasMyAuras(targets, aura);
+                                    caster->TargetsWhoHasMyAuras(targets, aura);
 
-									for (auto target : targets)
-										if (AuraEffect* aurEff = target->GetAuraEffect(197209, EFFECT_0))
-										{
-											float calculatedDmg = CalculatePct(dmg, aurEff->GetAmount() * 2);
-											caster->CastCustomSpell(target, 197568, &calculatedDmg, nullptr, nullptr, true);
-										}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                                    for (auto target : targets)
+                                        if (AuraEffect* aurEff = target->GetAuraEffect(197209, EFFECT_0))
+                                        {
+                                            float calculatedDmg = CalculatePct(dmg, aurEff->GetAmount() * 2);
+                                            caster->CastCustomSpell(target, 197568, &calculatedDmg, nullptr, nullptr, true);
+                                        }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		void Register() override
-		{
-			AfterHit += SpellHitFn(spell_sha_lightning_rod_SpellScript::HandleDamage);
-		}
-	};
+        void Register() override
+        {
+            AfterHit += SpellHitFn(spell_sha_lightning_rod_SpellScript::HandleDamage);
+        }
+    };
 
-	SpellScript *GetSpellScript() const override
-	{
-		return new spell_sha_lightning_rod_SpellScript();
-	}
+    SpellScript *GetSpellScript() const override
+    {
+        return new spell_sha_lightning_rod_SpellScript();
+    }
 };
 
 // Healing Surge - 8004, Healing Wave - 77472, talent 200071 - Undulation
@@ -1611,18 +1611,18 @@ class spell_sha_hex : public AuraScript
                         PreventDefaultAction();
                         return;
                     }
-					else if(Unit* target = GetTarget())
-						attacker->CastCustomSpell(target, 197568, &dmg, nullptr, nullptr, true);
-					else 
-					{
-						std::list<Unit*> targets;
-						std::vector<uint32> aura = { 197209 };
+                    else if(Unit* target = GetTarget())
+                        attacker->CastCustomSpell(target, 197568, &dmg, nullptr, nullptr, true);
+                    else 
+                    {
+                        std::list<Unit*> targets;
+                        std::vector<uint32> aura = { 197209 };
 
-						attacker->TargetsWhoHasMyAuras(targets, aura);
+                        attacker->TargetsWhoHasMyAuras(targets, aura);
 
-						for (auto target : targets)
-							attacker->CastCustomSpell(target, 197568, &dmg, nullptr, nullptr, true);
-					}
+                        for (auto target : targets)
+                            attacker->CastCustomSpell(target, 197568, &dmg, nullptr, nullptr, true);
+                    }
                 }
             }
         }
@@ -1681,9 +1681,9 @@ void AddSC_shaman_spell_scripts()
     new spell_sha_flame_shock();
     new spell_sha_frost_shock();
     new spell_sha_lightning_bolt();
-	//new spell_sha_static_overload();
-	new spell_sha_elemental_overload();
-	new spell_sha_lightning_rod();
+    //new spell_sha_static_overload();
+    new spell_sha_elemental_overload();
+    new spell_sha_lightning_rod();
     new spell_sha_undulation();
     new spell_sha_earthen_shield();
     new spell_sha_recall_cloudburst_totem();

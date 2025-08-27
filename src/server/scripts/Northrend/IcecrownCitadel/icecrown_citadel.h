@@ -201,7 +201,7 @@ enum CreaturesIds
     NPC_GB_HIHG_CAPTAIN_JUSTIN_BARTLETT         = 37182,
     NPC_GB_HIGH_OVERLORD_SAURFANG_NOT_VISUAL    = 50004,
     NPC_GB_MURADIN_BRONZEBEARD_NOT_VISUAL       = 50006,
-    NPC_GB_SKYBREAKER_SORCERER				    = 37026,
+    NPC_GB_SKYBREAKER_SORCERER                  = 37026,
     NPC_GB_SKYBREAKER_SORCERERS                 = 37116,
     NPC_GB_KORKRON_REAVER                       = 37920,
     NPC_GB_KORKRON_REAVERS                      = 36957,
@@ -221,8 +221,8 @@ enum CreaturesIds
     NPC_GB_PORTAL                               = 37227,
     NPC_GB_GUNSHIP_HULL                         = 37547,
     NPC_KORKRON_INVOKER                         = 37033,
-    NPC_SPIRE_FROSTWYRM	                        = 37230,
-    NPC_GB_STARTER  	                        = 88011,
+    NPC_SPIRE_FROSTWYRM                         = 37230,
+    NPC_GB_STARTER                              = 88011,
 
     // Deathbringer Saurfang
     NPC_DEATHBRINGER_SAURFANG                   = 37813,

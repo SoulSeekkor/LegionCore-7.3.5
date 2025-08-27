@@ -1423,11 +1423,11 @@ return( lhs < rhs? true : false );
         resize(oldSize, false);
     }
 
-	/** Number of bytes used by the array object and the memory allocated for it's data pointer. Does *not*
-	  * include the memory of objects pointed to by objects in the data array */
-	size_t sizeInMemory() const {
-		return sizeof(Array<T>) + (sizeof(T) * numAllocated);
-	}
+    /** Number of bytes used by the array object and the memory allocated for it's data pointer. Does *not*
+      * include the memory of objects pointed to by objects in the data array */
+    size_t sizeInMemory() const {
+        return sizeof(Array<T>) + (sizeof(T) * numAllocated);
+    }
 
     /** Remove all NULL elements in linear time without affecting order of the other elements. */
     void removeNulls() {

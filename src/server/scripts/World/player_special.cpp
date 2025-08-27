@@ -854,8 +854,8 @@ public:
 
     void OnUpdate(Player* player, uint32 diff) override
     {
-		if (sWorld->getIntConfig(CONFIG_PLAYER_AFK_TIMEOUT) <= 0)
-			return;
+        if (sWorld->getIntConfig(CONFIG_PLAYER_AFK_TIMEOUT) <= 0)
+            return;
 
         if (!player->isAFK())
         {

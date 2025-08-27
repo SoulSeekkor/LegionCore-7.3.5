@@ -135,12 +135,12 @@ void BattlegroundDeathMatch::HandleKillPlayer(Player* victim, Player* killer)
 {
     // get strike kills for this player
     uint32 victim_kills = 0;
-	if (!strike.empty())
-	{
-		auto itr = strike.find(victim->GetGUID());
-		if (itr != strike.end())
-			std::swap(victim_kills, itr->second);
-	}
+    if (!strike.empty())
+    {
+        auto itr = strike.find(victim->GetGUID());
+        if (itr != strike.end())
+            std::swap(victim_kills, itr->second);
+    }
         
     victim->RemoveAura(SPELL_FOCUSED_ASSAULT);
     
@@ -170,15 +170,15 @@ void BattlegroundDeathMatch::HandleKillPlayer(Player* victim, Player* killer)
             SendSysMessageToAll(TEXT_KILLED_BY, victim, killer);
         
         // if fast strike, then announce about it
-		if (!temp_strike.empty())
-		{
-			auto itr = temp_strike.find(killer->GetGUID());
-			if (itr != temp_strike.end())
-			{
-				if (GetMSTimeDiffToNow(itr->second.second) < BASE_TIME_FOR_STRIKE) // time isn't up
-				{
-					switch (++(itr->second.first))
-					{
+        if (!temp_strike.empty())
+        {
+            auto itr = temp_strike.find(killer->GetGUID());
+            if (itr != temp_strike.end())
+            {
+                if (GetMSTimeDiffToNow(itr->second.second) < BASE_TIME_FOR_STRIKE) // time isn't up
+                {
+                    switch (++(itr->second.first))
+                    {
                         case 1: break;
                         case 2: SendSysMessageToAll(TEXT_DOUBLE_KILL, killer);  break;
                         case 3: SendSysMessageToAll(TEXT_TRIPLE_KILL, killer); SendDirectMessageToAll(TEXT_TRIPLE_KILL, killer); break;
@@ -187,48 +187,48 @@ void BattlegroundDeathMatch::HandleKillPlayer(Player* victim, Player* killer)
                             SendSysMessageToAll(TEXT_RAMPAGE, killer);
                             SendDirectMessageToAll(TEXT_RAMPAGE, killer);
                             break;
-					}
+                    }
                     itr->second.second = getMSTime();
-				}
-				else // time is up, let's start again
-				{
-					itr->second.first = 1;
-					itr->second.second = getMSTime();
-				}
-			}
-		}
+                }
+                else // time is up, let's start again
+                {
+                    itr->second.first = 1;
+                    itr->second.second = getMSTime();
+                }
+            }
+        }
             
         // if strike, then announce about it
         if (!strike.empty())
-		{
-			auto itr = strike.find(killer->GetGUID());
-			if (itr != strike.end())
-			{
-				if (++(itr->second) >= 3)
-				{
-					switch (itr->second)
-					{
-					    case 3: SendSysMessageToAll(TEXT_KILLING_SPREE, killer); break;
-					    case 4: SendSysMessageToAll(TEXT_DOMINATING, killer); SendDirectMessageToAll(TEXT_DOMINATING, killer); break;
-					    case 5: SendSysMessageToAll(TEXT_MEGA_KILL, killer); SendDirectMessageToAll(TEXT_MEGA_KILL, killer); break;
-					    case 6: SendSysMessageToAll(TEXT_UNSTOPPABLE, killer); SendDirectMessageToAll(TEXT_UNSTOPPABLE, killer); break;
-					    case 7: SendSysMessageToAll(TEXT_WICKED_SICK, killer); SendDirectMessageToAll(TEXT_WICKED_SICK, killer); break;
-					    case 8: SendSysMessageToAll(TEXT_MONSTER_KILL, killer); SendDirectMessageToAll(TEXT_MONSTER_KILL, killer); break;
-					    case 9: SendSysMessageToAll(TEXT_GOD_LIKE, killer); SendDirectMessageToAll(TEXT_GOD_LIKE, killer); break;
-					    case 10:
-						    SendSysMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
-						    SendDirectMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
-						    break;
-					    default: // > 10
-						    if (urand(1, 3) == 2)
-						    {
-							    SendSysMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
-							    SendDirectMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
-						    }
-						    break;
-					}
-				}
-			}
+        {
+            auto itr = strike.find(killer->GetGUID());
+            if (itr != strike.end())
+            {
+                if (++(itr->second) >= 3)
+                {
+                    switch (itr->second)
+                    {
+                        case 3: SendSysMessageToAll(TEXT_KILLING_SPREE, killer); break;
+                        case 4: SendSysMessageToAll(TEXT_DOMINATING, killer); SendDirectMessageToAll(TEXT_DOMINATING, killer); break;
+                        case 5: SendSysMessageToAll(TEXT_MEGA_KILL, killer); SendDirectMessageToAll(TEXT_MEGA_KILL, killer); break;
+                        case 6: SendSysMessageToAll(TEXT_UNSTOPPABLE, killer); SendDirectMessageToAll(TEXT_UNSTOPPABLE, killer); break;
+                        case 7: SendSysMessageToAll(TEXT_WICKED_SICK, killer); SendDirectMessageToAll(TEXT_WICKED_SICK, killer); break;
+                        case 8: SendSysMessageToAll(TEXT_MONSTER_KILL, killer); SendDirectMessageToAll(TEXT_MONSTER_KILL, killer); break;
+                        case 9: SendSysMessageToAll(TEXT_GOD_LIKE, killer); SendDirectMessageToAll(TEXT_GOD_LIKE, killer); break;
+                        case 10:
+                            SendSysMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
+                            SendDirectMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
+                            break;
+                        default: // > 10
+                            if (urand(1, 3) == 2)
+                            {
+                                SendSysMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
+                                SendDirectMessageToAll(TEXT_BEYOUND_GOD_LIKE, killer);
+                            }
+                            break;
+                    }
+                }
+            }
                 
             // add aura for increasing taken damage
             if (itr->second >= 5 && itr->second % 2 == 1) // only 5, 7, 9,.......
@@ -461,7 +461,7 @@ void BattlegroundDeathMatch::SendSysMessageToAll(uint32 textid, Player* first, P
         }
         else
         {
-			char str[500];
+            char str[500];
 
             if (!second)
                 snprintf(str, 500, sObjectMgr->GetTrinityString(textid, loc_idx), chH.GetNameLink(first).c_str());

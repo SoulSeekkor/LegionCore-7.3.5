@@ -135,8 +135,8 @@ public:
         uint32 entryId;
         Unit* owner;
         float oldHast;
-		bool jumpToTarget;
-		bool jumpToOwner;
+        bool jumpToTarget;
+        bool jumpToOwner;
 
         void InitializeAI() override
         {
@@ -145,8 +145,8 @@ public:
                 owner = tempSum->GetAnyOwner();
             entryId = me->GetEntry();
             oldHast = 0;
-			jumpToTarget = true;
-			jumpToOwner = true;
+            jumpToTarget = true;
+            jumpToOwner = true;
             me->SetReactState(REACT_HELPER);
         }
 
@@ -272,110 +272,110 @@ public:
             }
         }
 
-		void UpdateAI(uint32 diff) override
-		{
-			if (me->HasUnitState(UNIT_STATE_CASTING))
-				return;
+        void UpdateAI(uint32 diff) override
+        {
+            if (me->HasUnitState(UNIT_STATE_CASTING))
+                return;
 
-			/*if (Spell* spell = owner->GetCurrentSpell(CURRENT_CHANNELED_SPELL))
-				if (SpellInfo const* spellInfo = spell->GetSpellInfo())
-					if (spellInfo->Id == 117952)
-						if (Unit* target = me->getVictim())
-						{
-							me->SendMeleeAttackStop(target);
-							return;
-						} Need more knowledge how to prevent jade lightning from interrupting */
+            /*if (Spell* spell = owner->GetCurrentSpell(CURRENT_CHANNELED_SPELL))
+                if (SpellInfo const* spellInfo = spell->GetSpellInfo())
+                    if (spellInfo->Id == 117952)
+                        if (Unit* target = me->getVictim())
+                        {
+                            me->SendMeleeAttackStop(target);
+                            return;
+                        } Need more knowledge how to prevent jade lightning from interrupting */
 
-			Unit* target = nullptr;
+            Unit* target = nullptr;
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-			{
-				if (Unit* owner = me->GetOwner())
-				{
-					if (Player* player = owner->ToPlayer())
-					{
-						target = player->GetSelectedUnit();
-						if (!target)
-							target = owner->getAttackerForHelper();
-						if (!target)
-							target = me->GetTargetUnit();
-					}
-				}
-			}
-			else
-			{
-				target = me->GetTargetUnit();
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+            {
+                if (Unit* owner = me->GetOwner())
+                {
+                    if (Player* player = owner->ToPlayer())
+                    {
+                        target = player->GetSelectedUnit();
+                        if (!target)
+                            target = owner->getAttackerForHelper();
+                        if (!target)
+                            target = me->GetTargetUnit();
+                    }
+                }
+            }
+            else
+            {
+                target = me->GetTargetUnit();
 
-				if (!target)
-				{
-					if (Unit* owner = me->GetOwner())
-					{
-						target = owner->getAttackerForHelper();
-					}
-				}
+                if (!target)
+                {
+                    if (Unit* owner = me->GetOwner())
+                    {
+                        target = owner->getAttackerForHelper();
+                    }
+                }
 
-				if (!target)
-					jumpToSummoner(owner);
-			}
+                if (!target)
+                    jumpToSummoner(owner);
+            }
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-			{
-				if (!target)
-				{
-					jumpToSummoner(owner);
-					me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
-					return;
-				}
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+            {
+                if (!target)
+                {
+                    jumpToSummoner(owner);
+                    me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
+                    return;
+                }
 
-				if (target->IsFriendlyTo(me))
-					target = me->getAttackerForHelper();
-				if(target)
-					if (target->IsFriendlyTo(me))
-					{
-						jumpToSummoner(owner);
-						me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
-						return;
-					}
+                if (target->IsFriendlyTo(me))
+                    target = me->getAttackerForHelper();
+                if(target)
+                    if (target->IsFriendlyTo(me))
+                    {
+                        jumpToSummoner(owner);
+                        me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
+                        return;
+                    }
 
-				if (!target)
-				{
-					jumpToSummoner(owner);
-					me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
-					return;
-				}
-			}
+                if (!target)
+                {
+                    jumpToSummoner(owner);
+                    me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle());
+                    return;
+                }
+            }
 
-			jumpToEnemy(target);
+            jumpToEnemy(target);
 
-			AttackStart(target);
+            AttackStart(target);
 
-			DoMeleeAttackIfReady();
-		}
+            DoMeleeAttackIfReady();
+        }
 
-		void jumpToSummoner(Unit* target)
-		{
-			if (me->GetDistance(target) <= 35.0f && me->GetDistance(target) >= 10.0f && jumpToOwner)
-			{
-				me->CastSpell(target, 138104, true);
-				jumpToOwner = false;
-			}
-			else if (me->GetDistance(target) < 10.0f)
-			{
-				me->GetMotionMaster()->MoveFollow(target, PET_FOLLOW_DIST, me->GetFollowAngle());
-				jumpToOwner = true;
-			}
-		}
+        void jumpToSummoner(Unit* target)
+        {
+            if (me->GetDistance(target) <= 35.0f && me->GetDistance(target) >= 10.0f && jumpToOwner)
+            {
+                me->CastSpell(target, 138104, true);
+                jumpToOwner = false;
+            }
+            else if (me->GetDistance(target) < 10.0f)
+            {
+                me->GetMotionMaster()->MoveFollow(target, PET_FOLLOW_DIST, me->GetFollowAngle());
+                jumpToOwner = true;
+            }
+        }
 
-		void jumpToEnemy(Unit* target)
-		{
-			if (me->GetDistance(target) <= 35.0f && me->GetDistance(target) >= 10.0f && jumpToTarget)
-			{
-				me->CastSpell(target, 138104, true);
-				jumpToTarget = false;
-			}
-			else if (me->GetDistance(target) < 10.0f)
-				jumpToTarget = true;
-		}
+        void jumpToEnemy(Unit* target)
+        {
+            if (me->GetDistance(target) <= 35.0f && me->GetDistance(target) >= 10.0f && jumpToTarget)
+            {
+                me->CastSpell(target, 138104, true);
+                jumpToTarget = false;
+            }
+            else if (me->GetDistance(target) < 10.0f)
+                jumpToTarget = true;
+        }
     };
 
     ScriptedAI* GetAI(Creature* creature) const override
@@ -1463,69 +1463,69 @@ class npc_fel_guard : public CreatureScript
 
             if (delay >= 200)
             {
-				Unit* target = nullptr;
+                Unit* target = nullptr;
 
-				if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-				{
-					if (Unit* owner = me->GetOwner())
-					{
-						if (Player* player = owner->ToPlayer())
-						{
-							target = player->GetSelectedUnit();
-							if (!target)
-								target = owner->getAttackerForHelper();
-							if (!target)
-								target = me->GetTargetUnit();
-						}
-					}
-				}
-				else
-				{
-					target = me->GetTargetUnit();
+                if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                {
+                    if (Unit* owner = me->GetOwner())
+                    {
+                        if (Player* player = owner->ToPlayer())
+                        {
+                            target = player->GetSelectedUnit();
+                            if (!target)
+                                target = owner->getAttackerForHelper();
+                            if (!target)
+                                target = me->GetTargetUnit();
+                        }
+                    }
+                }
+                else
+                {
+                    target = me->GetTargetUnit();
 
-					if (!target)
-					{
-						if (Unit* owner = me->GetOwner())
-						{
-							target = owner->getAttackerForHelper();
-						}
-					}
-				}
+                    if (!target)
+                    {
+                        if (Unit* owner = me->GetOwner())
+                        {
+                            target = owner->getAttackerForHelper();
+                        }
+                    }
+                }
 
                 if (target)
                 {
-					if (!target->IsFriendlyTo(me))
-					{
-						AttackStart(target);
+                    if (!target->IsFriendlyTo(me))
+                    {
+                        AttackStart(target);
 
-						if (!me->HasCreatureSpellCooldown(89766))
-						{
-							me->CastSpell(target, 89766, false);
-							me->AddCreatureSpellCooldown(89766);
-						}
-						if (!me->HasCreatureSpellCooldown(30151))
-						{
-							me->CastSpell(target, 30151, false);
-							me->AddCreatureSpellCooldown(30151);
-						}
-						if (!me->HasCreatureSpellCooldown(89751))
-						{
-							int32 ener = me->GetPower(POWER_ENERGY);
+                        if (!me->HasCreatureSpellCooldown(89766))
+                        {
+                            me->CastSpell(target, 89766, false);
+                            me->AddCreatureSpellCooldown(89766);
+                        }
+                        if (!me->HasCreatureSpellCooldown(30151))
+                        {
+                            me->CastSpell(target, 30151, false);
+                            me->AddCreatureSpellCooldown(30151);
+                        }
+                        if (!me->HasCreatureSpellCooldown(89751))
+                        {
+                            int32 ener = me->GetPower(POWER_ENERGY);
 
-							if (ener >= 60 && ener < 120)
-							{
-								me->CastSpell(target, 89751, false);
-								me->AddCreatureSpellCooldown(89751);
-							}
-						}
+                            if (ener >= 60 && ener < 120)
+                            {
+                                me->CastSpell(target, 89751, false);
+                                me->AddCreatureSpellCooldown(89751);
+                            }
+                        }
 
-						if (!me->HasAuraType(SPELL_AURA_DISABLE_ATTACK_AND_CAST))
-							me->CastSpell(target, 30213, false);
-					}
-					else
-					{
-						AnyPetAI::UpdateAI(delay);
-					}
+                        if (!me->HasAuraType(SPELL_AURA_DISABLE_ATTACK_AND_CAST))
+                            me->CastSpell(target, 30213, false);
+                    }
+                    else
+                    {
+                        AnyPetAI::UpdateAI(delay);
+                    }
                 }
                 else
                 {
@@ -1586,43 +1586,43 @@ class npc_grimoire_imp : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
 
-					Unit* target = nullptr;
+                    Unit* target = nullptr;
 
-					if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-					{
-						if (Unit* owner = me->GetOwner())
-						{
-							if (Player* player = owner->ToPlayer())
-							{
-								target = player->GetSelectedUnit();
-								if (!target)
-									target = owner->getAttackerForHelper();
-								if (!target)
-									target = me->GetTargetUnit();
-							}
-						}
-					}
-					else
-					{
-						target = me->GetTargetUnit();
+                    if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                    {
+                        if (Unit* owner = me->GetOwner())
+                        {
+                            if (Player* player = owner->ToPlayer())
+                            {
+                                target = player->GetSelectedUnit();
+                                if (!target)
+                                    target = owner->getAttackerForHelper();
+                                if (!target)
+                                    target = me->GetTargetUnit();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        target = me->GetTargetUnit();
 
-						if (!target)
-						{
-							if (Unit* owner = me->GetOwner())
-							{
-								target = owner->getAttackerForHelper();
-							}
-						}
-					}
+                        if (!target)
+                        {
+                            if (Unit* owner = me->GetOwner())
+                            {
+                                target = owner->getAttackerForHelper();
+                            }
+                        }
+                    }
 
                     if (!target)
                         return;
 
-					if (target->IsFriendlyTo(me))
-						target = me->getAttackerForHelper();
+                    if (target->IsFriendlyTo(me))
+                        target = me->getAttackerForHelper();
 
-					if(!target)
-						return;
+                    if(!target)
+                        return;
 
                     if (!target->IsWithinLOSInMap(me) || target->GetDistance(me) > 35.f)
                     {
@@ -1630,11 +1630,11 @@ class npc_grimoire_imp : public CreatureScript
                         return;
                     }
 
-					if (me->GetPower(POWER_ENERGY) < 40)
-					{
-						me->StopMoving();
-						return;
-					}
+                    if (me->GetPower(POWER_ENERGY) < 40)
+                    {
+                        me->StopMoving();
+                        return;
+                    }
 
                     me->StopMoving();
                     me->CastSpell(target, 3110, false);
@@ -1677,43 +1677,43 @@ class npc_grimoire_succubus : public CreatureScript
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
 
-			Unit* target = nullptr;
+            Unit* target = nullptr;
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-			{
-				if (Unit* owner = me->GetOwner())
-				{
-					if (Player* player = owner->ToPlayer())
-					{
-						target = player->GetSelectedUnit();
-						if (!target)
-							target = owner->getAttackerForHelper();
-						if (!target)
-							target = me->GetTargetUnit();
-					}
-				}
-			}
-			else
-			{
-				target = me->GetTargetUnit();
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+            {
+                if (Unit* owner = me->GetOwner())
+                {
+                    if (Player* player = owner->ToPlayer())
+                    {
+                        target = player->GetSelectedUnit();
+                        if (!target)
+                            target = owner->getAttackerForHelper();
+                        if (!target)
+                            target = me->GetTargetUnit();
+                    }
+                }
+            }
+            else
+            {
+                target = me->GetTargetUnit();
 
-				if (!target)
-				{
-					if (Unit* owner = me->GetOwner())
-					{
-						target = owner->getAttackerForHelper();
-					}
-				}
-			}
+                if (!target)
+                {
+                    if (Unit* owner = me->GetOwner())
+                    {
+                        target = owner->getAttackerForHelper();
+                    }
+                }
+            }
 
             if (!target)
                 return;
 
-			if (target->IsFriendlyTo(me))
-				target = me->getAttackerForHelper();
+            if (target->IsFriendlyTo(me))
+                target = me->getAttackerForHelper();
 
-			if (!target)
-				return;
+            if (!target)
+                return;
 
             if (!seduction)
             {
@@ -1769,43 +1769,43 @@ class npc_grimoire_felhunter : public CreatureScript
         {
             delay -= diff;
 
-			Unit* target = nullptr;
+            Unit* target = nullptr;
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-			{
-				if (Unit* owner = me->GetOwner())
-				{
-					if (Player* player = owner->ToPlayer())
-					{
-						target = player->GetSelectedUnit();
-						if (!target)
-							target = owner->getAttackerForHelper();
-						if (!target)
-							target = me->GetTargetUnit();
-					}
-				}
-			}
-			else
-			{
-				target = me->GetTargetUnit();
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+            {
+                if (Unit* owner = me->GetOwner())
+                {
+                    if (Player* player = owner->ToPlayer())
+                    {
+                        target = player->GetSelectedUnit();
+                        if (!target)
+                            target = owner->getAttackerForHelper();
+                        if (!target)
+                            target = me->GetTargetUnit();
+                    }
+                }
+            }
+            else
+            {
+                target = me->GetTargetUnit();
 
-				if (!target)
-				{
-					if (Unit* owner = me->GetOwner())
-					{
-						target = owner->getAttackerForHelper();
-					}
-				}
-			}
+                if (!target)
+                {
+                    if (Unit* owner = me->GetOwner())
+                    {
+                        target = owner->getAttackerForHelper();
+                    }
+                }
+            }
 
             if (!target)
                 return;
 
-			if (target->IsFriendlyTo(me))
-				target = me->getAttackerForHelper();
+            if (target->IsFriendlyTo(me))
+                target = me->getAttackerForHelper();
 
-			if (!target)
-				return;
+            if (!target)
+                return;
 
             if (!spellLock)
             {
@@ -1854,43 +1854,43 @@ class npc_grimoire_voidwalker : public CreatureScript
         {
             delay -= diff;
 
-			Unit* target = nullptr;
+            Unit* target = nullptr;
 
-			if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-			{
-				if (Unit* owner = me->GetOwner())
-				{
-					if (Player* player = owner->ToPlayer())
-					{
-						target = player->GetSelectedUnit();
-						if(!target)
-							target = owner->getAttackerForHelper();
-						if (!target)
-							target = me->GetTargetUnit();
-					}
-				}
-			}
-			else
-			{
-				target = me->GetTargetUnit();
+            if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+            {
+                if (Unit* owner = me->GetOwner())
+                {
+                    if (Player* player = owner->ToPlayer())
+                    {
+                        target = player->GetSelectedUnit();
+                        if(!target)
+                            target = owner->getAttackerForHelper();
+                        if (!target)
+                            target = me->GetTargetUnit();
+                    }
+                }
+            }
+            else
+            {
+                target = me->GetTargetUnit();
 
-				if (!target)
-				{
-					if (Unit* owner = me->GetOwner())
-					{
-						target = owner->getAttackerForHelper();
-					}
-				}
-			}
+                if (!target)
+                {
+                    if (Unit* owner = me->GetOwner())
+                    {
+                        target = owner->getAttackerForHelper();
+                    }
+                }
+            }
 
             if (!target)
                 return;
 
-			if (target->IsFriendlyTo(me))
-				target = me->getAttackerForHelper();
+            if (target->IsFriendlyTo(me))
+                target = me->getAttackerForHelper();
 
-			if (!target)
-				return;
+            if (!target)
+                return;
 
             if (!suffering)
             {
@@ -4518,12 +4518,12 @@ class npc_wild_imp : public CreatureScript
         {
             npc_wild_impAI(Creature *creature) : ScriptedAI(creature)
             {
-				initReactState();
+                initReactState();
             }
 
             void Reset() override
             {
-				initReactState();
+                initReactState();
 
                 if (me->GetOwner())
                     if (me->GetOwner()->getVictim())
@@ -4532,16 +4532,16 @@ class npc_wild_imp : public CreatureScript
 
             void UpdateAI(uint32 diff) override
             {
-				if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-				{
-					if (me->GetReactState() != REACT_HELPER)
-						me->SetReactState(REACT_HELPER);
-				}
-				else
-				{
-					if (me->GetReactState() != REACT_AGGRESSIVE)
-						me->SetReactState(REACT_AGGRESSIVE);
-				}
+                if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                {
+                    if (me->GetReactState() != REACT_HELPER)
+                        me->SetReactState(REACT_HELPER);
+                }
+                else
+                {
+                    if (me->GetReactState() != REACT_AGGRESSIVE)
+                        me->SetReactState(REACT_AGGRESSIVE);
+                }
 
                 if (!me->GetOwner())
                     return;
@@ -4552,13 +4552,13 @@ class npc_wild_imp : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-				if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS) && me->getVictim())
+                if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS) && me->getVictim())
                 {
-					if (!me->getVictim()->IsWithinLOSInMap(me) || me->getVictim()->GetDistance(me) > 35.f)
-					{
-						Follow(me->getVictim());
-						return;
-					}
+                    if (!me->getVictim()->IsWithinLOSInMap(me) || me->getVictim()->GetDistance(me) > 35.f)
+                    {
+                        Follow(me->getVictim());
+                        return;
+                    }
                 }
 
                 if (me->getVictim() && me->getVictim()->HasCrowdControlAura(me))
@@ -4567,35 +4567,35 @@ class npc_wild_imp : public CreatureScript
                     return;
                 }
 
-				if ((me->getVictim() || me->GetOwner()->getAttackerForHelper()))
-				{
-					if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-						me->StopMoving();
-					me->CastSpell(me->getVictim() ? me->getVictim() : me->GetOwner()->getAttackerForHelper(), FIREBOLT, false);
-				}
+                if ((me->getVictim() || me->GetOwner()->getAttackerForHelper()))
+                {
+                    if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                        me->StopMoving();
+                    me->CastSpell(me->getVictim() ? me->getVictim() : me->GetOwner()->getAttackerForHelper(), FIREBOLT, false);
+                }
                 else if (Pet* pet = me->GetOwner()->ToPlayer()->GetPet())
                 {
-					if (pet->getAttackerForHelper())
-					{
-						if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-							me->StopMoving();
-						me->CastSpell(me->getVictim() ? me->getVictim() : pet->getAttackerForHelper(), FIREBOLT, false);
-					}
+                    if (pet->getAttackerForHelper())
+                    {
+                        if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                            me->StopMoving();
+                        me->CastSpell(me->getVictim() ? me->getVictim() : pet->getAttackerForHelper(), FIREBOLT, false);
+                    }
                 }
             }
 
-			void Follow(Unit* target)
-			{
-				me->GetMotionMaster()->MovePoint(0, target->GetPosition());
-			}
+            void Follow(Unit* target)
+            {
+                me->GetMotionMaster()->MovePoint(0, target->GetPosition());
+            }
 
-			void initReactState() 
-			{
-				if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
-					me->SetReactState(REACT_HELPER);
-				else
-					me->SetReactState(REACT_AGGRESSIVE);
-			}
+            void initReactState() 
+            {
+                if (sWorld->getBoolConfig(CONFIG_PLAYER_CONTROL_GUARDIAN_PETS))
+                    me->SetReactState(REACT_HELPER);
+                else
+                    me->SetReactState(REACT_AGGRESSIVE);
+            }
         };
 
         CreatureAI* GetAI(Creature* creature) const override

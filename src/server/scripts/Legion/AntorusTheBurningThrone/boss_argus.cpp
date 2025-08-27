@@ -526,9 +526,9 @@ struct boss_argus : BossAI
                 break;
             case SPELL_P3_ARCANE_DISSOLVE_OUT:
                 me->AddDelayedCombat(6000, [this]() -> void {
-					if (IsMythicRaid()) 
-						PrepareEventsPhaseFour(); 
-					});
+                    if (IsMythicRaid()) 
+                        PrepareEventsPhaseFour(); 
+                    });
                 break;
             case SPELL_P4_ARCANE_DISSOLVE_OUT:
                 me->SetAnimKitId(0);
@@ -721,10 +721,10 @@ struct boss_argus : BossAI
         {
             switch (eventId)
             {
-				case EVENT_SUM_SOULBLIGHT_ORB:
+                case EVENT_SUM_SOULBLIGHT_ORB:
                     DoCast(SPELL_SUM_SOULBLIGHT_ORB);
                     events.RescheduleEvent(EVENT_SUM_SOULBLIGHT_ORB, 25000);
-					break;
+                    break;
                 case EVENT_TORTURED_RAGE:
                     DoCast(SPELL_TORTURED_RAGE);
                     if (IsMythicRaid() && phase == PHASE_4)
@@ -1253,11 +1253,11 @@ struct npc_argus_constellar_designate : ScriptedAI
         {
             switch (eventId)
             {
-				case EVENT_1:
+                case EVENT_1:
                     if (auto target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100.0f, true))
                         DoCast(target, SPELL_STARBLAST);
                     events.RescheduleEvent(EVENT_1, 2000);
-					break;
+                    break;
                 case EVENT_2:
                     DoCast(SPELL_COSMIC_RAY_FILTER);
                     events.RescheduleEvent(EVENT_2, 18000); //unk

@@ -418,7 +418,7 @@ public:
         {
             // summons.KillAll(); // Crashed
             me->RemoveAllAreaObjects();
-			_LoseRound();
+            _LoseRound();
         }
         
         void KilledUnit(Unit* who) override

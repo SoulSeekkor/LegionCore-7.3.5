@@ -1,14 +1,14 @@
 /*
-	httppost.c
+    httppost.c
 
-	gSOAP HTTP POST plugin for non-SOAP payloads.
+    gSOAP HTTP POST plugin for non-SOAP payloads.
 
-	See instructions below.
+    See instructions below.
 
-	Revisions:
-	register multiple POST content handlers, each for a content type
+    Revisions:
+    register multiple POST content handlers, each for a content type
 
-	Note: multipart/related and multipart/form-data are already handled in gSOAP.
+    Note: multipart/related and multipart/form-data are already handled in gSOAP.
 
 gSOAP XML Web services tools
 Copyright (C) 2004-2005, Robert van Engelen, Genivia, Inc. All Rights Reserved.
@@ -49,91 +49,91 @@ This program is released under the GPL with the additional exemption that
 compiling, linking, and/or using OpenSSL is allowed.
 --------------------------------------------------------------------------------
 
-	Compile & link with stand-alone gSOAP server.
+    Compile & link with stand-alone gSOAP server.
 
-	Usage (server side):
+    Usage (server side):
 
-	Define a NULL-terminated array of type-handler pairs, each with a media
-	type and a the handler function:
+    Define a NULL-terminated array of type-handler pairs, each with a media
+    type and a the handler function:
 
-	struct http_post_handlers my_handlers[] =
-		{ { "image/jpg",  jpeg_handler },
-		  { "image/ *",   image_handler },
-		  { "text/html",  html_handler },
-		  { "text/ *",    text_handler },
-		  { "text/ *;*",  text_handler },
-		  { "POST",       generic_POST_handler },
-		  { "PUT",        generic_PUT_handler },
-		  { "DELETE",     generic_DELETE_handler },
-		  { NULL }
-		};
-	Note that '*' can be used as a wildcard and some media types may have
-	optional parameters (after ';').
+    struct http_post_handlers my_handlers[] =
+        { { "image/jpg",  jpeg_handler },
+          { "image/ *",   image_handler },
+          { "text/html",  html_handler },
+          { "text/ *",    text_handler },
+          { "text/ *;*",  text_handler },
+          { "POST",       generic_POST_handler },
+          { "PUT",        generic_PUT_handler },
+          { "DELETE",     generic_DELETE_handler },
+          { NULL }
+        };
+    Note that '*' can be used as a wildcard and some media types may have
+    optional parameters (after ';').
 
-	Register the plugin and the handlers:
+    Register the plugin and the handlers:
 
-	struct soap soap;
-	soap_init(&soap);
-	soap_register_plugin_arg(&soap, http_post, my_handlers);
-	...
-	... = soap_copy(&soap); // copies plugin too but not its data: plugin data is shared since fcopy is not set
-	...
-	soap_done(&soap); // detach plugin (calls plugin->fdelete)
+    struct soap soap;
+    soap_init(&soap);
+    soap_register_plugin_arg(&soap, http_post, my_handlers);
+    ...
+    ... = soap_copy(&soap); // copies plugin too but not its data: plugin data is shared since fcopy is not set
+    ...
+    soap_done(&soap); // detach plugin (calls plugin->fdelete)
 
-	A POST handler function is triggered by the media type in the
-	http_post_handlers table. Use http_copy_body() as below to retrieve
-	HTTP POST body data:
+    A POST handler function is triggered by the media type in the
+    http_post_handlers table. Use http_copy_body() as below to retrieve
+    HTTP POST body data:
 
-	int image_handler(struct soap *soap)
-	{ const char *buf;
-	  size_t len;
-	  // if necessary, check type in soap->http_content
-	  if (soap->http_content && !soap_tag_cmp(soap->http_content, "image/gif")
-	    return 404;
-	  if (!(buf = soap_get_http_body(soap, &len))
-	    return soap->error;
-	  soap_end_recv(soap);
-	  // ... process image in buf[0..len-1]
-	  // reply with empty HTTP OK response:
-	  return soap_send_empty_response(soap, SOAP_OK);
-	}
+    int image_handler(struct soap *soap)
+    { const char *buf;
+      size_t len;
+      // if necessary, check type in soap->http_content
+      if (soap->http_content && !soap_tag_cmp(soap->http_content, "image/gif")
+        return 404;
+      if (!(buf = soap_get_http_body(soap, &len))
+        return soap->error;
+      soap_end_recv(soap);
+      // ... process image in buf[0..len-1]
+      // reply with empty HTTP OK response:
+      return soap_send_empty_response(soap, SOAP_OK);
+    }
 
-	This function should also produce a valid HTTP response, for example:
+    This function should also produce a valid HTTP response, for example:
 
-	if (we want to return HTML)
-	  soap_response(soap, SOAP_HTML); // use this to return HTML...
-	else
-	{ soap->http_content = "image/jpeg"; // a jpeg image
-	  soap_response(soap, SOAP_FILE); // SOAP_FILE sets custom http content
-	}
-	...
-	soap_send(soap, "<HTML>...</HTML>"); // example HTML
-	...
-	soap_end_send(soap);
-	soap_closesock(soap);	// close, but keep open only with HTTP keep-alive
+    if (we want to return HTML)
+      soap_response(soap, SOAP_HTML); // use this to return HTML...
+    else
+    { soap->http_content = "image/jpeg"; // a jpeg image
+      soap_response(soap, SOAP_FILE); // SOAP_FILE sets custom http content
+    }
+    ...
+    soap_send(soap, "<HTML>...</HTML>"); // example HTML
+    ...
+    soap_end_send(soap);
+    soap_closesock(soap);    // close, but keep open only with HTTP keep-alive
 
-	The soap_send(soap, char*) and soap_send_raw(soap, char*, size_t) can
-	be used to return content from server.
+    The soap_send(soap, char*) and soap_send_raw(soap, char*, size_t) can
+    be used to return content from server.
 
-	Usage (client side):
+    Usage (client side):
 
-	char *buf;	// to hold the HTTP response body data
-	size_t len;
-	...
-	if (soap_post_connect(soap, "URL", "SOAP action or NULL", "media type")
-	 || soap_send(soap, ...)
-	 || soap_end_send(soap))
-	  ... error ...
-	if (soap_begin_recv(&soap)
-	 || soap_http_body(&soap, &buf, &len)
-	 || soap_end_recv(&soap))
-	  ... error ...
-	// ... use buf[0..len-1]
-	soap_closesock(soap);	// close, but keep open only with HTTP keep-alive
-	soap_end(soap);		// also deletes buf content
+    char *buf;    // to hold the HTTP response body data
+    size_t len;
+    ...
+    if (soap_post_connect(soap, "URL", "SOAP action or NULL", "media type")
+     || soap_send(soap, ...)
+     || soap_end_send(soap))
+      ... error ...
+    if (soap_begin_recv(&soap)
+     || soap_http_body(&soap, &buf, &len)
+     || soap_end_recv(&soap))
+      ... error ...
+    // ... use buf[0..len-1]
+    soap_closesock(soap);    // close, but keep open only with HTTP keep-alive
+    soap_end(soap);        // also deletes buf content
 
-	The soap_send(soap, char*) and soap_send_raw(soap, char*, size_t) can
-	be used to send content to the server as shown above.
+    The soap_send(soap, char*) and soap_send_raw(soap, char*, size_t) can
+    be used to send content to the server as shown above.
 
 */
 
@@ -275,7 +275,7 @@ int soap_http_body(struct soap *soap, char **buf, size_t *len)
       soap->labidx = soap->lablen;
       while (k--)
       { if ((c = soap_getchar(soap)) == (int)EOF)
-	  break;
+      break;
         *s++ = c;
       }
     } while (c != (int)EOF);
@@ -291,10 +291,10 @@ int soap_http_body(struct soap *soap, char **buf, size_t *len)
         size_t i;
         for (i = soap->length; i; i--)
         { soap_wchar c;
-	  if ((c = soap_getchar(soap)) == (int)EOF)
-	    return soap->error = SOAP_EOF;
-	  *t++ = c;
-	}
+      if ((c = soap_getchar(soap)) == (int)EOF)
+        return soap->error = SOAP_EOF;
+      *t++ = c;
+    }
         *t = '\0';
       }
     }
