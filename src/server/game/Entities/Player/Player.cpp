@@ -34005,7 +34005,7 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
         {
             ActionButtonList::const_iterator itr = m_actionButtons.find(button);
             if (itr != m_actionButtons.end())
-                if (!IsActionButtonDataValid(button, itr->second.GetAction(), itr->second.uType) && itr->second.uState != ACTIONBUTTON_DELETED)
+                if (!IsActionButtonDataValid(button, itr->second.GetAction(), itr->second.uType) || itr->second.uState == ACTIONBUTTON_DELETED)
                 {
                     removeActionButton(button);
                 }
