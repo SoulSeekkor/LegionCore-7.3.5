@@ -33993,7 +33993,7 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
     stmt->setUInt8(1, GetActiveTalentGroup());
     if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
     {
-        // Let client clear his current Actions
+        // Let client clear current Actions
         SendActionButtons(2);
         // m_actionButtons.clear() is called in the next _LoadActions
         _LoadActions(result);
@@ -34005,10 +34005,10 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
         {
             ActionButtonList::const_iterator itr = m_actionButtons.find(button);
             if (itr != m_actionButtons.end())
-                if (!IsActionButtonDataValid(button, itr->second.GetAction(), itr->second.uType) || itr->second.uState == ACTIONBUTTON_DELETED)
-                {
+                if (!IsActionButtonDataValid(button, itr->second.uAction, itr->second.uType) || itr->second.uState == ACTIONBUTTON_DELETED)
                     removeActionButton(button);
-                }
+                else
+                    addActionButton(button, itr->second.uAction, itr->second.uType, ACTIONBUTTON_NEW);
         }
     }
 
