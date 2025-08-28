@@ -3782,7 +3782,7 @@ class mop_air_balloon : public VehicleScript
 class mob_mandori_trigger : public CreatureScript
 {
 public:
-    mob_mandori_trigger() : CreatureScript("mob_mandori_triger") { }
+    mob_mandori_trigger() : CreatureScript("mob_mandori_trigger") { }
     
     CreatureAI* GetAI(Creature* creature) const
     {

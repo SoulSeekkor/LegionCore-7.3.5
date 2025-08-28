@@ -1608,7 +1608,7 @@ public:
 class spell_fallen_protectors_shadow_weakness_proc : public SpellScriptLoader
 {
 public:
-    spell_fallen_protectors_shadow_weakness_proc() : SpellScriptLoader("spell_fallen_protectors_shadow_weakness_prock") { }
+    spell_fallen_protectors_shadow_weakness_proc() : SpellScriptLoader("spell_fallen_protectors_shadow_weakness_proc") { }
 
     class spell_fallen_protectors_shadow_weakness_proc_AuraScript : public AuraScript
     {

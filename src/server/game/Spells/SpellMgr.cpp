@@ -2594,7 +2594,7 @@ void SpellMgr::LoadSpellScene()
     } while (result->NextRow());
 
     //                                       0           1             2          3
-    result = WorldDatabase.Query("SELECT MiscValue, trigerSpell, MonsterCredit, Event FROM spell_scene_event");
+    result = WorldDatabase.Query("SELECT MiscValue, TriggerSpell, MonsterCredit, Event FROM spell_scene_event");
     if (!result)
     {
         TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, ">> Loaded 0 visual spells. DB table `spell_scene_event` is empty.");
