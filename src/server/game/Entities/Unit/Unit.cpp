@@ -1686,7 +1686,7 @@ void Unit::CastSpell(SpellCastTargets const& targets, SpellInfo const* spellInfo
     }
 
     // TODO: this is a workaround - not needed anymore, but required for some scripts :(
-    //! by cyberbrest: i remove it as all prock spell by arrea with NeedsToBeTriggeredByCaster check are not work correct. ispesially new.
+    //! by cyberbrest: i remove it as all proc spell by arrea with NeedsToBeTriggeredByCaster check are not work correct. ispesially new.
     //! if u uncomment it - force originalcaster guid on HandlePeriodicTriggerSpellAuraTick
     //if (!originalCaster && triggeredByAura)
     //    originalCaster = triggeredByAura->GetCasterGUID();
@@ -1711,7 +1711,7 @@ void Unit::CastSpell(SpellCastTargets const& targets, SpellInfo const* spellInfo
     }
 
     // TODO: this is a workaround - not needed anymore, but required for some scripts :(
-    //! by cyberbrest: i remove it as all prock spell by arrea with NeedsToBeTriggeredByCaster check are not work correct. ispesially new.
+    //! by cyberbrest: i remove it as all proc spell by arrea with NeedsToBeTriggeredByCaster check are not work correct. ispesially new.
     //! if u uncomment it - force originalcaster guid on HandlePeriodicTriggerSpellAuraTick
     //if (!originalCaster && triggeredByAura)
     //    originalCaster = triggeredByAura->GetCasterGUID();
@@ -12862,7 +12862,7 @@ float Unit::GetProcStatsMultiplier(uint32 spellId) const
 {
     float mod = 1.f;
 
-    if (auto const* mTotalAuraList = GetAuraEffectsByType(SPELL_AURA_MOD_ITEM_STATS_AND_PROCK_BY_PCT_WITH_MASK))
+    if (auto const* mTotalAuraList = GetAuraEffectsByType(SPELL_AURA_MOD_ITEM_STATS_AND_PROC_BY_PCT_WITH_MASK))
     {
         for (auto const& auraEffect : *mTotalAuraList)
         {
@@ -17980,7 +17980,7 @@ void Unit::ProcDamageAndSpellFor(bool isVictim, Unit* target, uint32 procFlag, u
                     continue;
                 }
 
-                // Proc chain chack. Not handle proc from current effect in future prock from it.
+                // Proc chain chack. Not handle proc from current effect in future proc from it.
                 if (m_triggeredEffect.count(triggeredByAura))
                     continue;
 
@@ -19837,7 +19837,7 @@ bool Unit::SpellProcTriggered(Unit* victim, DamageInfo* dmgInfoProc, AuraEffect*
                     check = true;
                 }
                 break;
-                case SPELL_TRIGGER_CHECK_PROCK: //13
+                case SPELL_TRIGGER_CHECK_PROC: //13
                 {
                     if(!procSpell)
                     {
@@ -21648,16 +21648,16 @@ bool Unit::RollProcResult(Unit* victim, Aura* aura, WeaponAttackType attType, bo
         if (Player* plr = ToPlayer())
         {
             float spellRPPM = spellInfo->CalcProcPPM(this, aura->GetCasterLevel());
-            double cooldown = plr->GetRPPMSpellCooldownDelay(spellInfo->Id, castItemGUID); //base cap
-            bool procked = plr->GetRPPMProcChance(cooldown, spellRPPM, spellInfo, castItemGUID);
+            double cooldown = plr->GetRPPMSpellCooldownDelay(spellInfo->Id, castItemGUID); // base cap
+            bool procced = plr->GetRPPMProcChance(cooldown, spellRPPM, spellInfo, castItemGUID);
 
-            if (procked)
+            if (procced)
             {
                 plr->SetLastSuccessfulProc(spellInfo->Id, getPreciseTime(), castItemGUID);
                 plr->AddRPPMSpellCooldown(spellInfo->Id, castItemGUID, getPreciseTime() + cooldown);
             }
 
-            return procked;
+            return procced;
         }
     }
 

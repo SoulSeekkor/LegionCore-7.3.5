@@ -493,7 +493,7 @@ bool PhaseMgr::IsConditionTypeSupported(ConditionTypes const conditionType)
         case CONDITION_LEVEL:
         case CONDITION_AREA_EXPLORED:
         case CONDITION_SCENE_SEEN:
-        case CONDITION_SCENE_TRIGER_EVENT:
+        case CONDITION_SCENE_TRIGGER_EVENT:
         case CONDITION_QUEST_OBJECTIVE_DONE:
         case CONDITION_AREAID:
         case CONDITION_ZONEID:

@@ -2171,11 +2171,11 @@ class spell_monk_rising_sun_kick : public SpellScriptLoader
 
             void HandleOnHit()
             {
-                if (AuraEffect const* trigerEff = GetTriggeredAuraEff())
+                if (AuraEffect const* triggerEff = GetTriggeredAuraEff())
                 {
                     if (Unit* caster = GetCaster())
                     {
-                        SetHitDamage(CalculatePct(GetHitDamage(), trigerEff->GetAmount()));
+                        SetHitDamage(CalculatePct(GetHitDamage(), triggerEff->GetAmount()));
                     }
                 }
             }

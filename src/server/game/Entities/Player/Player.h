@@ -221,7 +221,7 @@ enum SceneEventStatus
 {
     SCENE_NONE          = 0,
     SCENE_LAUNCH        = 1,
-    SCENE_TRIGER        = 2,
+    SCENE_TRIGGER       = 2,
     SCENE_COMPLETE      = 3,
 };
 
@@ -3215,7 +3215,7 @@ class Player : public Unit, public GridObject<Player>
         void SendSpellScene(uint32 miscValue, SpellInfo const* spellInfo, bool apply, Position* pos);
         void SceneCompleted(uint32 sceneID);
         bool HasSceneStatus(uint32 sceneID, SceneEventStatus const& status) const;
-        void TrigerScene(uint32 instanceID, std::string const Event);
+        void TriggerScene(uint32 instanceID, std::string const Event);
 
         /*********************************************************/
         /***                  LFG SYSTEM                     ***/

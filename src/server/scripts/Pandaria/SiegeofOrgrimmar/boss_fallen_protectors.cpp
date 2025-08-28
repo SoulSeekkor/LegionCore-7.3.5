@@ -57,7 +57,7 @@ enum eSpells
     SPELL_CALAMITY                          = 143491, //Calamity
     SPELL_CALAMITY_DMG                      = 143493,
     SPELL_DARK_MEDITATION                   = 143546,
-    SPELL_DARK_MEDITATION_JUMP              = 143730, //Prock after jump 143546
+    SPELL_DARK_MEDITATION_JUMP              = 143730, //proc after jump 143546
     SPELL_DARK_MEDITATION_SHARE_HEALTH_P    = 143745, //
     SPELL_DARK_MEDITATION_SHARE_HEALTH      = 143723,
     //HM
@@ -79,7 +79,7 @@ enum eSpells
     SPELL_MARK_OF_ANGUISH_STUN              = 143840,
     SPELL_MARK_OF_ANGUISH_DAMAGE            = 144365,
     SPELL_MARK_OF_ANGUISH_GIVE_A_FRIEND     = 143842,
-    SPELL_SHADOW_WEAKNES_PROC               = 144079, //prock spell on hit or something else
+    SPELL_SHADOW_WEAKNES_PROC               = 144079, //proc spell on hit or something else
     SPELL_DEBILITATION                      = 147383, //Debilitation
     SPELL_SHADOW_WEAKNESS                   = 144176, //charges targetGUID: Full: 0x70000000695B52A Type: Player Low: 110474538 
     SPELL_SHADOW_WEAKNES_MASS               = 144081,
@@ -1365,13 +1365,13 @@ public:
 
         enum proc
         {
-            SPELL_PROCK = 143028,
+            SPELL_PROC = 143028,
         };
 
         void HandleOnHit()
         {
             if (GetCaster() && GetHitUnit())
-                GetCaster()->CastSpell(GetHitUnit(), SPELL_PROCK, false);
+                GetCaster()->CastSpell(GetHitUnit(), SPELL_PROC, false);
         }
 
         void Register() override
@@ -1465,7 +1465,7 @@ public:
 
     enum proc
     {
-        SPELL_PROCK = 143559,
+        SPELL_PROC = 143559,
     };
 
     class spell_dark_meditation_AuraScript : public AuraScript
@@ -1475,7 +1475,7 @@ public:
         void OnTick(AuraEffect const* aurEff)
         {
             if (GetCaster())
-                GetCaster()->CastSpell(GetCaster(), SPELL_PROCK, true);
+                GetCaster()->CastSpell(GetCaster(), SPELL_PROC, true);
         }
 
         void Register()
@@ -1605,14 +1605,14 @@ public:
 };
 
 //Shadow Weakness
-class spell_fallen_protectors_shadow_weakness_prock : public SpellScriptLoader
+class spell_fallen_protectors_shadow_weakness_proc : public SpellScriptLoader
 {
 public:
-    spell_fallen_protectors_shadow_weakness_prock() : SpellScriptLoader("spell_fallen_protectors_shadow_weakness_prock") { }
+    spell_fallen_protectors_shadow_weakness_proc() : SpellScriptLoader("spell_fallen_protectors_shadow_weakness_prock") { }
 
-    class spell_fallen_protectors_shadow_weakness_prock_AuraScript : public AuraScript
+    class spell_fallen_protectors_shadow_weakness_proc_AuraScript : public AuraScript
     {
-        PrepareAuraScript(spell_fallen_protectors_shadow_weakness_prock_AuraScript);
+        PrepareAuraScript(spell_fallen_protectors_shadow_weakness_proc_AuraScript);
 
         void OnProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
         {
@@ -1624,13 +1624,13 @@ public:
 
         void Register()
         {
-            OnEffectProc += AuraEffectProcFn(spell_fallen_protectors_shadow_weakness_prock_AuraScript::OnProc, EFFECT_0, SPELL_AURA_DUMMY);
+            OnEffectProc += AuraEffectProcFn(spell_fallen_protectors_shadow_weakness_proc_AuraScript::OnProc, EFFECT_0, SPELL_AURA_DUMMY);
         }
     };
 
     AuraScript* GetAuraScript() const
     {
-        return new spell_fallen_protectors_shadow_weakness_prock_AuraScript();
+        return new spell_fallen_protectors_shadow_weakness_proc_AuraScript();
     }
 };
 
@@ -1649,7 +1649,7 @@ public:
             if (GetTarget() && GetCaster())
             {
                 GetTarget()->CastSpell(GetTarget(), SPELL_MARK_OF_ANGUISH_DAMAGE, true, NULL, NULL, GetCaster()->GetGUID());
-                //By normal way should prock from our proc system... but where is caster and target is channel target... so this is custom prock reason.
+                //By normal way should proc from our proc system... but where is caster and target is channel target... so this is custom proc reason.
                 if (SpellInfo const* m_spellInfo = sSpellMgr->GetSpellInfo(SPELL_MARK_OF_ANGUISH_DAMAGE))
                 {
                     DamageInfo dmgInfoProc = DamageInfo(GetCaster(), GetTarget(), 1, m_spellInfo, SpellSchoolMask(m_spellInfo->GetMisc(GetTarget()->GetMap()->GetDifficultyID())->MiscData.SchoolMask), SPELL_DIRECT_DAMAGE, 0);
@@ -1834,7 +1834,7 @@ void AddSC_boss_fallen_protectors()
     new spell_fallen_protectors_shadow_word_bane();
     new spell_fallen_protectors_calamity();
     new spell_fallen_protectors_mark_of_anguish_select_first_target();
-    new spell_fallen_protectors_shadow_weakness_prock();
+    new spell_fallen_protectors_shadow_weakness_proc();
     new spell_fallen_protectors_mark_of_anguish();
     new spell_fallen_protectors_mark_of_anguish_transfer();
     new spell_fallen_protectors_inferno_strike();

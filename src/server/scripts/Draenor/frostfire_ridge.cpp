@@ -193,7 +193,7 @@ public:
 
     enum data
     {
-        NPC_TRIGER = 80578,
+        NPC_TRIGGER = 80578,
 
     };
     struct npc_q34462AI : public ScriptedAI
@@ -220,7 +220,7 @@ public:
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0);
             
             me->DespawnOrUnsummon(15000);            
-            if (Creature *cre = summoner->FindNearestCreature(NPC_TRIGER, 10.0f))
+            if (Creature *cre = summoner->FindNearestCreature(NPC_TRIGGER, 10.0f))
             {
                 if (Vehicle * ve = cre->GetVehicleKit())
                     if (Unit* pas = ve->GetPassenger(0))

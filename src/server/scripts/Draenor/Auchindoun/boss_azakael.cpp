@@ -23,7 +23,7 @@ enum eAzzakelSpells
     SpellFelLashDebuff               = 177120,
     SpellFelLashDebuffTwo            = 177121,
     SpellMalevilentCrush             = 153499,
-    SpellFelPoolAreatriger           = 153500, 
+    SpellFelPoolAreaTrigger          = 153500, 
     SpellFelPoolDebuffDmg            = 153616,
     SpellVisualFelBurst              = 169682,
     SpellFelSparkAreaTrigger         = 153725,
@@ -435,7 +435,7 @@ public:
             if (id == MovementAzzakelMalevolentCrash)
             {
                 me->SummonCreature(TriggerFelPool, *me, TEMPSUMMON_MANUAL_DESPAWN);
-                me->CastSpell(me, SpellFelPoolAreatriger);
+                me->CastSpell(me, SpellFelPoolAreaTrigger);
 
                 me->SetCanFly(false);
                 me->SetDisableGravity(false);

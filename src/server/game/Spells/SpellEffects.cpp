@@ -871,7 +871,7 @@ bool Spell::SpellDummyTriggered(SpellEffIndex effIndex)
                     check = true;
                 }
                 break;
-                case DUMMY_TRIGGER_CHECK_PROCK: //3
+                case DUMMY_TRIGGER_CHECK_PROC: //3
                 {
                     if(!triggerCaster || !triggerTarget)
                         break;

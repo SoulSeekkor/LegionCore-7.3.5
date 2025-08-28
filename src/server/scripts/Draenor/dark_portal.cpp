@@ -400,7 +400,7 @@ public:
             players.insert(who->GetGUID());
             sCreatureTextMgr->SendChat(me, 0, who->GetGUID());
 
-            // already trigered player for nearest
+            // already triggered player for nearest
             std::list<Creature*> creatureList;
             me->GetCreatureListWithEntryInGrid(creatureList, me->GetEntry(), 50);
             for (auto c : creatureList)
@@ -731,8 +731,8 @@ public:
 };
 
 //! enable phase_definitions for zone 7025 ID 18 phases - 3266 3394 3395 3396 3481 3693 3694 3712 3824 3833 3834 4006 4017 4150 4151 4200
-//! was done by spell 165867 withch prock with trigger and witch prock - 82238 with change phase. and by using condition CONDITION_SCENE_TRIGER_EVENT i did it.
-//! so. this script just like example for future possible scripting. But. I think. Blizz all has done by spell prock at triger scene.
+//! was done by spell 165867 withch proc with trigger and witch proc - 82238 with change phase. and by using condition CONDITION_SCENE_TRIGGER_EVENT i did it.
+//! so. this script just like example for future possible scripting. But. I think. Blizz all has done by spell proc at trigger scene.
 class sceneTrigger_q34425 : public SceneTriggerScript
 {
 public:

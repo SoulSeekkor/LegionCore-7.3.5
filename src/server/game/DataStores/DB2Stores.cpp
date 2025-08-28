@@ -3214,18 +3214,18 @@ SpellTargetRestrictionsEntry const* DB2Manager::GetSpellTargetRestrioctions(uint
     return nullptr;
 }
 
-uint32 DB2Manager::GetLearnSpell(uint32 trigerSpell)
+uint32 DB2Manager::GetLearnSpell(uint32 triggerSpell)
 {
-    RevertLearnSpellContainer::const_iterator itr = _revertLearnSpell.find(trigerSpell);
+    RevertLearnSpellContainer::const_iterator itr = _revertLearnSpell.find(triggerSpell);
     if (itr != _revertLearnSpell.end())
         return itr->second;
 
     return 0;
 }
 
-uint32 DB2Manager::GetSpellByTrigger(uint32 trigerSpell)
+uint32 DB2Manager::GetSpellByTrigger(uint32 triggerSpell)
 {
-    ReversTriggerSpellContainer::const_iterator itr = _reversTriggerSpellList.find(trigerSpell);
+    ReversTriggerSpellContainer::const_iterator itr = _reversTriggerSpellList.find(triggerSpell);
     if (itr != _reversTriggerSpellList.end())
         return itr->second;
 

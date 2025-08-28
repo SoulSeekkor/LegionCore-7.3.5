@@ -580,8 +580,8 @@ class Spell
 
         SpellValue* m_spellValue;
 
-        ObjectGuid m_originalCasterGUID;                        // real source of cast (aura caster/etc), used for spell targets selection
-                                                            // e.g. damage around area spell trigered by victim aura and damage enemies of aura caster
+        ObjectGuid m_originalCasterGUID;                    // real source of cast (aura caster/etc), used for spell targets selection
+                                                            // e.g. damage around area spell triggered by victim aura and damage enemies of aura caster
         Unit* m_originalCaster;                             // cached pointer for m_originalCaster, updated at Spell::UpdatePointers()
         Unit* m_originalTarget;
         ObjectGuid m_originalTargetGUID;

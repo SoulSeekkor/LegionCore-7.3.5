@@ -35,5 +35,5 @@ void WorldSession::HandleScenePlaybackComplete(WorldPackets::Scene::SceneInstanc
 void WorldSession::HandleSceneTriggerEvent(WorldPackets::Scene::SceneTriggerEvent& packet)
 {
     if(_player)
-        _player->TrigerScene(packet.SceneInstanceID, packet.Event);
+        _player->TriggerScene(packet.SceneInstanceID, packet.Event);
 }

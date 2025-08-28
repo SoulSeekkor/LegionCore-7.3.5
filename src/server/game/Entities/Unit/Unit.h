@@ -2067,7 +2067,7 @@ class Unit : public WorldObject
         void RemoveDynObject(uint32 spellId);
         void RemoveAllDynObjects();
 
-        // AreaTriger management
+        // AreaTrigger management
         void _RegisterAreaObject(AreaTrigger* dynObj);
         void _UnregisterAreaObject(AreaTrigger* dynObj);
         AreaTrigger* GetAreaObject(uint32 spellId);

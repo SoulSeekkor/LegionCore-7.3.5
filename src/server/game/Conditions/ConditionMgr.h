@@ -73,7 +73,7 @@ enum ConditionTypes
     CONDITION_AREA_EXPLORED         = 39,                   // AreaID
     CONDITION_SCENE_SEEN            = 40,                   // SceneID
     CONDITION_QUEST_OBJECTIVE_DONE  = 41,                   // QuestID          ObjectiveID    Count   
-    CONDITION_SCENE_TRIGER_EVENT    = 42,                   // SceneID
+    CONDITION_SCENE_TRIGGER_EVENT   = 42,                   // SceneID
     CONDITION_GARRRISON_BUILDING    = 43,                   // BuildType        Lvl
     CONDITION_SCENARION_STEP        = 44,                   // ScenarioID       stepID
     CONDITION_REALM_ACHIEVEMENT     = 45,                   // achievement_id   0              0                  true if realm achievement is complete

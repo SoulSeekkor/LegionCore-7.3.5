@@ -205,7 +205,7 @@ enum SpellTriggeredType
     SPELL_TRIGGER_PERC_MAX_MANA                 = 10,           // Percent from max mana
     SPELL_TRIGGER_PERC_BASE_MANA                = 11,           // Percent from base mana
     SPELL_TRIGGER_PERC_CUR_MANA                 = 12,           // Percent from curent mana
-    SPELL_TRIGGER_CHECK_PROCK                   = 13,           // Check proc from spell to trigger
+    SPELL_TRIGGER_CHECK_PROC                    = 13,           // Check proc from spell to trigger
     SPELL_TRIGGER_DUMMY                         = 14,           // spell to trigger without option for bp
     SPELL_TRIGGER_CAST_DEST                     = 15,           // spell to trigger without option for bp
     SPELL_TRIGGER_CHECK_DAMAGE                  = 16,           // spell to trigger if damage > amount
@@ -247,7 +247,7 @@ enum DummyTriggerType
     DUMMY_TRIGGER_BP                            = 0,            // set basepoint to spell from amount
     DUMMY_TRIGGER_BP_CUSTOM                     = 1,            // set basepoint to spell custom from BD
     DUMMY_TRIGGER_COOLDOWN                      = 2,            // Set cooldown for trigger spell
-    DUMMY_TRIGGER_CHECK_PROCK                   = 3,            // Check proc from spell to trigger
+    DUMMY_TRIGGER_CHECK_PROC                    = 3,            // Check proc from spell to trigger
     DUMMY_TRIGGER_DUMMY                         = 4,            // spell to trigger without option for bp
     DUMMY_TRIGGER_CAST_DEST                     = 5,            // spell to trigger without option for bp
     DUMMY_TRIGGER_CAST_OR_REMOVE                = 6,            // cast spell without option
@@ -858,7 +858,7 @@ struct SpellLinked
 struct SpellTalentLinked
 {
     int32 talent;
-    int32 triger;
+    int32 trigger;
     int32 type;
     int32 caster;
     int32 target;
@@ -1054,7 +1054,7 @@ struct SceneTriggerEvent
 {
     std::string Event;
     int32 MiscValue;
-    uint32 trigerSpell;
+    uint32 triggerSpell;
     uint32 MonsterCredit;
 };
 

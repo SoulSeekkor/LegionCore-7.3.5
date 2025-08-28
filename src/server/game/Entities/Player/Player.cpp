@@ -5325,18 +5325,18 @@ void Player::learnSpell(uint32 spell_id, bool dependent, uint32 fromSkill, bool 
             {
                 case 0: //remove or add auras
                 {
-                    if (i->triger < 0)
-                        target->RemoveAurasDueToSpell(-(i->triger));
+                    if (i->trigger < 0)
+                        target->RemoveAurasDueToSpell(-(i->trigger));
                     else
-                        caster->CastSpell(target, i->triger, true);
+                        caster->CastSpell(target, i->trigger, true);
                     break;
                 }
                 case 1: //remove or add spell
                 {
-                    if (i->triger < 0)
-                        removeSpell(-(i->triger));
+                    if (i->trigger < 0)
+                        removeSpell(-(i->trigger));
                     else
-                        learnSpell(i->triger, false);
+                        learnSpell(i->trigger, false);
                     break;
                 }
                 case 2: //remove pet
@@ -5355,7 +5355,7 @@ void Player::learnSpell(uint32 spell_id, bool dependent, uint32 fromSkill, bool 
                 }
                 case 4: // Remove summons
                 {
-                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->triger))
+                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->trigger))
                     {
                         for (int i = 0; i < MAX_SPELL_EFFECTS; ++i)
                         {
@@ -5372,7 +5372,7 @@ void Player::learnSpell(uint32 spell_id, bool dependent, uint32 fromSkill, bool 
                 }
                 case 5: //remove my aura
                 {
-                    RemoveMyAurasDueToSpell(abs(i->triger));
+                    RemoveMyAurasDueToSpell(abs(i->trigger));
                     break;
                 }
             }
@@ -5502,18 +5502,18 @@ void Player::removeSpell(uint32 spell_id, bool disabled, bool learn_low_rank, bo
             {
                 case 0: //remove or add auras
                 {
-                    if (i->triger < 0)
-                        target->RemoveAurasDueToSpell(-(i->triger));
+                    if (i->trigger < 0)
+                        target->RemoveAurasDueToSpell(-(i->trigger));
                     else
-                        caster->CastSpell(target, i->triger, true);
+                        caster->CastSpell(target, i->trigger, true);
                     break;
                 }
                 case 1: //remove or add spell
                 {
-                    if (i->triger < 0)
-                        removeSpell(-(i->triger));
+                    if (i->trigger < 0)
+                        removeSpell(-(i->trigger));
                     else
-                        learnSpell(i->triger, false);
+                        learnSpell(i->trigger, false);
                     break;
                 }
                 case 2: //remove pet
@@ -5532,7 +5532,7 @@ void Player::removeSpell(uint32 spell_id, bool disabled, bool learn_low_rank, bo
                 }
                 case 4: // Remove summons
                 {
-                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->triger))
+                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->trigger))
                     {
                         for (int i = 0; i < MAX_SPELL_EFFECTS; ++i)
                         {
@@ -5549,7 +5549,7 @@ void Player::removeSpell(uint32 spell_id, bool disabled, bool learn_low_rank, bo
                 }
                 case 5: //remove my aura
                 {
-                    RemoveMyAurasDueToSpell(abs(i->triger));
+                    RemoveMyAurasDueToSpell(abs(i->trigger));
                     break;
                 }
             }
@@ -33905,18 +33905,18 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
             {
                 case 0: //remove or add auras
                 {
-                    if (i->triger < 0)
-                        target->RemoveAurasDueToSpell(-(i->triger));
+                    if (i->trigger < 0)
+                        target->RemoveAurasDueToSpell(-(i->trigger));
                     else
-                        caster->CastSpell(target, i->triger, true);
+                        caster->CastSpell(target, i->trigger, true);
                     break;
                 }
                 case 1: //remove or add spell
                 {
-                    if (i->triger < 0)
-                        removeSpell(-(i->triger), false, true, false);
+                    if (i->trigger < 0)
+                        removeSpell(-(i->trigger), false, true, false);
                     else
-                        learnSpell(i->triger, false, 0, false);
+                        learnSpell(i->trigger, false, 0, false);
                     break;
                 }
                 case 2: //remove pet
@@ -33928,7 +33928,7 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
                 }
                 case 4: // Remove summons
                 {
-                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->triger))
+                    if (SpellInfo const* _spellInfo = sSpellMgr->GetSpellInfo(i->trigger))
                     {
                         for (int i = 0; i < MAX_SPELL_EFFECTS; ++i)
                         {
@@ -33945,7 +33945,7 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
                 }
                 case 5: //remove my aura
                 {
-                    RemoveMyAurasDueToSpell(abs(i->triger));
+                    RemoveMyAurasDueToSpell(abs(i->trigger));
                     break;
                 }
             }
@@ -34006,9 +34006,13 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
             ActionButtonList::const_iterator itr = m_actionButtons.find(button);
             if (itr != m_actionButtons.end())
                 if (!IsActionButtonDataValid(button, itr->second.uAction, itr->second.uType) || itr->second.uState == ACTIONBUTTON_DELETED)
+                {
                     removeActionButton(button);
+                }
                 else
+                {
                     addActionButton(button, itr->second.uAction, itr->second.uType, ACTIONBUTTON_NEW);
+                }
         }
     }
 
@@ -36521,8 +36525,8 @@ void Player::SceneCompleted(uint32 instance)
     if (data == m_sceneInstanceID.end())
         return;
 
-    // Triger some events at complete scene.
-    TrigerScene(instance, "complete");
+    // Trigger some events at complete scene.
+    TriggerScene(instance, "complete");
 
     m_sceneStatus[data->second] = SCENE_COMPLETE;
 
@@ -36554,12 +36558,12 @@ bool Player::HasSceneStatus(uint32 sceneID, SceneEventStatus const& status) cons
     return data->second >= status;
 }
 
-void Player::TrigerScene(uint32 instanceID, std::string const Event)
+void Player::TriggerScene(uint32 instanceID, std::string const Event)
 {
     auto data = m_sceneInstanceID.find(instanceID);
     if (data == m_sceneInstanceID.end())
     {
-        TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TrigerScene can't find instance Event: %s instance %u", Event.c_str(), instanceID);
+        TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TriggerScene can't find instance Event: %s instance %u", Event.c_str(), instanceID);
         return;
     }
 
@@ -36570,11 +36574,11 @@ void Player::TrigerScene(uint32 instanceID, std::string const Event)
     const std::vector<SceneTriggerEvent>* triggerEvent = sSpellMgr->GetSceneTriggerEvent(data->second);
     if (!triggerEvent)
     {
-        TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TrigerScene can't find SpellScene instance Event: %s instance %u Misc %u", Event.c_str(), instanceID, data->second);
+        TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TriggerScene can't find SpellScene instance Event: %s instance %u Misc %u", Event.c_str(), instanceID, data->second);
         return;
     }
 
-    m_sceneStatus[data->second] = SCENE_TRIGER;
+    m_sceneStatus[data->second] = SCENE_TRIGGER;
 
     for (std::vector<SceneTriggerEvent>::const_iterator itr = triggerEvent->begin(); itr != triggerEvent->end(); ++itr)
     {
@@ -36582,39 +36586,39 @@ void Player::TrigerScene(uint32 instanceID, std::string const Event)
         {
             if (Event == "Visual" || Event == "Clear")
             {
-                if (itr->trigerSpell)
+                if (itr->triggerSpell)
                 {
-                    if (Event == "Visual" && !HasAura(itr->trigerSpell))
-                        CastSpell(this, itr->trigerSpell, true);
-                    else if (Event == "Clear" && HasAura(itr->trigerSpell))
-                        RemoveAurasDueToSpell(itr->trigerSpell);
+                    if (Event == "Visual" && !HasAura(itr->triggerSpell))
+                        CastSpell(this, itr->triggerSpell, true);
+                    else if (Event == "Clear" && HasAura(itr->triggerSpell))
+                        RemoveAurasDueToSpell(itr->triggerSpell);
                 }
                 else
-                    TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TrigerScene unhandle Event: %s MiscValue %u", Event.c_str(), itr->MiscValue);
+                    TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TriggerScene unhandle Event: %s MiscValue %u", Event.c_str(), itr->MiscValue);
             }
             else
             {
-                bool prock = false;
-                if (itr->trigerSpell)
+                bool proc = false;
+                if (itr->triggerSpell)
                 {
-                    prock = true;
-                    CastSpell(this, itr->trigerSpell, true);
+                    proc = true;
+                    CastSpell(this, itr->triggerSpell, true);
                 }
 
                 if (itr->MonsterCredit)
                 {
-                    prock = true;
+                    proc = true;
                     KilledMonsterCredit(itr->MonsterCredit);
                 }
 
-                if (!prock)
-                    TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TrigerScene unhandle Event: %s MiscValue %u", Event.c_str(), itr->MiscValue);
+                if (!proc)
+                    TC_LOG_DEBUG(LOG_FILTER_PLAYER, " >> TriggerScene unhandle Event: %s MiscValue %u", Event.c_str(), itr->MiscValue);
             }
         }
         else if (itr->Event == Event)
         {
-            if (itr->trigerSpell)
-                CastSpell(this, itr->trigerSpell, true);
+            if (itr->triggerSpell)
+                CastSpell(this, itr->triggerSpell, true);
 
             if (itr->MonsterCredit)
                 KilledMonsterCredit(itr->MonsterCredit);

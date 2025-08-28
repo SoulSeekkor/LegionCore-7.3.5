@@ -785,13 +785,13 @@ struct boss_kargath_bladefist : public BossAI
                 if (!IsMythicRaid())
                     break;
 
-                std::list<Creature*> trigerList;
-                me->GetCreatureListWithEntryInGrid(trigerList, RavenousBloodmaw, 300.0f);
+                std::list<Creature*> triggerList;
+                me->GetCreatureListWithEntryInGrid(triggerList, RavenousBloodmaw, 300.0f);
 
-                if (trigerList.empty())
+                if (triggerList.empty())
                     break;
 
-                trigerList.remove_if([this](Creature* creature) -> bool
+                triggerList.remove_if([this](Creature* creature) -> bool
                 {
                     if (creature == nullptr || !creature->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE))
                         return true;
@@ -799,12 +799,12 @@ struct boss_kargath_bladefist : public BossAI
                     return false;
                 });
 
-                if (trigerList.empty())
+                if (triggerList.empty())
                     break;
 
-                Trinity::Containers::RandomResizeList(trigerList, 1);
+                Trinity::Containers::RandomResizeList(triggerList, 1);
 
-                for (Creature* ravenous : trigerList)
+                for (Creature* ravenous : triggerList)
                 {
                     if (ravenous->IsAIEnabled)
                         ravenous->AI()->DoAction(FreeRavenous);

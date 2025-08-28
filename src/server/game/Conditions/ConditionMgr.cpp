@@ -216,10 +216,10 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo)
                 condMeets = player->HasSceneStatus(ConditionValue1, SCENE_COMPLETE);
             break;
         }
-        case CONDITION_SCENE_TRIGER_EVENT:
+        case CONDITION_SCENE_TRIGGER_EVENT:
         {
             if (Player* player = object->ToPlayer())
-                condMeets = player->HasSceneStatus(ConditionValue1, SCENE_TRIGER);
+                condMeets = player->HasSceneStatus(ConditionValue1, SCENE_TRIGGER);
             break;
         }
         case CONDITION_GARRRISON_BUILDING:
@@ -819,7 +819,7 @@ uint32 Condition::GetSearcherTypeMaskForCondition()
             break;
         case CONDITION_AREA_EXPLORED:
         case CONDITION_SCENE_SEEN:
-        case CONDITION_SCENE_TRIGER_EVENT:
+        case CONDITION_SCENE_TRIGGER_EVENT:
         case CONDITION_QUEST_OBJECTIVE_DONE:
         case CONDITION_CLASS_HALL_ADVANCEMENT:
             mask |= GRID_MAP_TYPE_MASK_PLAYER;

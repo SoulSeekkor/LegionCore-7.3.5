@@ -279,7 +279,7 @@ pAuraEffectHandler AuraEffectHandler[TOTAL_AURAS]=
     &AuraEffect::HandleArenaPreparation,                          //215 SPELL_AURA_ARENA_PREPARATION
     &AuraEffect::HandleModCastingSpeed,                           //216 SPELL_AURA_HASTE_SPELLS
     &AuraEffect::HandleModMeleeSpeedPct,                          //217 SPELL_AURA_MOD_MELEE_HASTE_2
-    &AuraEffect::HandleNULL,                                      //218 SPELL_AURA_MOD_ITEM_STATS_AND_PROCK_BY_PCT_WITH_MASK
+    &AuraEffect::HandleNULL,                                      //218 SPELL_AURA_MOD_ITEM_STATS_AND_PROC_BY_PCT_WITH_MASK
     &AuraEffect::HandleNULL,                                      //219 SPELL_AURA_219
     &AuraEffect::HandleNULL,                                      //220 SPELL_AURA_220
     &AuraEffect::HandleNULL,                                      //221 SPELL_AURA_MOD_DETAUNT
@@ -7647,7 +7647,7 @@ void AuraEffect::HandlePeriodicTriggerSpellAuraTick(Unit* target, Unit* caster, 
             }
             // The Biggest Egg Ever: Mechachicken's Rocket Barrage Aura Effect
             case 71416:
-                // prock 71419 with this action.
+                // proc 71419 with this action.
                 target->PlayDistanceSound(23829);
                 target->HandleEmoteCommand(403);
                 break;

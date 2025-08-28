@@ -601,10 +601,10 @@ float spawn_coods[8][3] =
     {-8294.61f, 1493.67f, 44.6239f},
 };
 
-class VehicleTriger : public BasicEvent
+class VehicleTrigger : public BasicEvent
 {
     public:
-        explicit VehicleTriger(Unit *owner, uint32 spell) : _owner(owner), _spell(spell) { }
+        explicit VehicleTrigger(Unit *owner, uint32 spell) : _owner(owner), _spell(spell) { }
 
         bool Execute(uint64 /*currTime*/, uint32 /*diff*/) override
         {

@@ -720,7 +720,7 @@ bool SpellMgr::IsSpellProcEventCanTriggeredBy(SpellProcEventEntry const* spellPr
     // No extra req need
     uint32 procEvent_procEx = PROC_EX_NONE;
 
-    // check prockFlags for condition
+    // check procFlags for condition
     if ((procFlags & EventProcFlag) == 0)
         return false;
 
@@ -2376,18 +2376,18 @@ void SpellMgr::LoadTalentSpellLinked()
             continue;
         }
 
-        int32 triger = fields[1].GetInt32();
-        spellInfo = GetSpellInfo(abs(triger));
+        int32 trigger = fields[1].GetInt32();
+        spellInfo = GetSpellInfo(abs(trigger));
         if (!spellInfo)
         {
-            TC_LOG_ERROR(LOG_FILTER_SQL, "Spell %i listed in `spell_talent_linked_spell` does not exist", triger);
-            WorldDatabase.PExecute("DELETE FROM `spell_talent_linked_spell` WHERE spelllink = %i", triger);
+            TC_LOG_ERROR(LOG_FILTER_SQL, "Spell %i listed in `spell_talent_linked_spell` does not exist", trigger);
+            WorldDatabase.PExecute("DELETE FROM `spell_talent_linked_spell` WHERE spelllink = %i", trigger);
             continue;
         }
 
         SpellTalentLinked templink;
         templink.talent = talent;
-        templink.triger = triger;
+        templink.trigger = trigger;
         templink.type = fields[2].GetUInt8();
         templink.target = fields[3].GetUInt8();
         templink.caster = fields[4].GetUInt8();
@@ -2608,7 +2608,7 @@ void SpellMgr::LoadSpellScene()
 
         SceneTriggerEvent templink;
         templink.MiscValue = fields[ind++].GetInt32();
-        templink.trigerSpell = fields[ind++].GetInt32();
+        templink.triggerSpell = fields[ind++].GetInt32();
         templink.MonsterCredit = fields[ind++].GetInt32();
         templink.Event = fields[ind++].GetString();
 

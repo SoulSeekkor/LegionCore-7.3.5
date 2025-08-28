@@ -458,8 +458,8 @@ public:
     std::vector<SpecializationSpellsEntry const*> const* GetSpecializationSpells(uint32 specId);
     std::vector<SpellProcsPerMinuteModEntry const*> GetSpellProcsPerMinuteMods(uint32 spellprocsPerMinuteID) const;
     SpellTargetRestrictionsEntry const* GetSpellTargetRestrioctions(uint32 spellid, uint16 difficulty);
-    uint32 GetLearnSpell(uint32 trigerSpell);
-    uint32 GetSpellByTrigger(uint32 trigerSpell);
+    uint32 GetLearnSpell(uint32 triggerSpell);
+    uint32 GetSpellByTrigger(uint32 triggerSpell);
     SpellEffectEntry const* GetSpellEffectEntry(uint32 spellId, uint32 effect, uint8 difficulty);
     std::set<uint32> const* GetSpellCategory(uint32 category);
     std::vector<ItemSpecOverrideEntry const*> const* GetItemSpecOverrides(uint32 itemId) const;

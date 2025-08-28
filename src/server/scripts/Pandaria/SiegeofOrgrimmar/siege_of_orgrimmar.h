@@ -191,7 +191,7 @@ enum eCreatures
     NPC_SHA_OF_PRIDE_END_LADY_JAINA = 73598,
     NPC_SHA_OF_PRIDE_END_THERON     = 73605,
     NPC_PORTAL_TO_ORGRIMMAR         = 73536,
-    //controller 68553?? Sha Vortex triger 146034
+    //controller 68553?? Sha Vortex trigger 146034
 
     //Norushen
     NPC_NORUSHEN                        = 71967,
