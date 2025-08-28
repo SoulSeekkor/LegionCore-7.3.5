@@ -8442,20 +8442,20 @@ bool Player::IsActionButtonDataValid(uint8 button, uint32 action, uint8 type)
         case ACTION_BUTTON_SPELL:
             if (!sSpellMgr->GetSpellInfo(action))
             {
-                TC_LOG_ERROR(LOG_FILTER_PLAYER_LOADING, "Spell action %u not added into button %u for player %s: spell not exist", action, button, GetName());
+                TC_LOG_ERROR(LOG_FILTER_PLAYER_LOADING, "Spell action %u not added into button %u for player %s: spell does not exist", action, button, GetName());
                 return false;
             }
 
             if (!HasSpell(action))
             {
-                TC_LOG_DEBUG(LOG_FILTER_PLAYER_LOADING, "Player::IsActionButtonDataValid Spell action %u not added into button %u for player %s: player don't known this spell", action, button, GetName());
+                TC_LOG_DEBUG(LOG_FILTER_PLAYER_LOADING, "Player::IsActionButtonDataValid Spell action %u not added into button %u for player %s: player doesn't know this spell", action, button, GetName());
                 return false;
             }
             break;
         case ACTION_BUTTON_ITEM:
             if (!sObjectMgr->GetItemTemplate(action))
             {
-                TC_LOG_ERROR(LOG_FILTER_PLAYER_LOADING, "Item action %u not added into button %u for player %s: item not exist", action, button, GetName());
+                TC_LOG_ERROR(LOG_FILTER_PLAYER_LOADING, "Item action %u not added into button %u for player %s: item does not exist", action, button, GetName());
                 return false;
             }
             break;
@@ -33879,10 +33879,6 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
     //RemoveAllAuras(GetGUID(), NULL, false, true); // removes too many auras
     //ExitVehicle(); // should be impossible to switch specs from inside a vehicle..
 
-    // Let client clear his current Actions
-    SendActionButtons(2);
-    // m_actionButtons.clear() is called in the next _LoadActionButtons
-
     SendDirectMessage(WorldPackets::Spells::SendUnlearnSpells().Write());
 
     for (TalentEntry const* talentInfo : sTalentStore)
@@ -33996,9 +33992,23 @@ void Player::ActivateTalentGroup(ChrSpecializationEntry const* spec)
     stmt->setUInt64(0, GetGUIDLow());
     stmt->setUInt8(1, GetActiveTalentGroup());
     if (PreparedQueryResult result = CharacterDatabase.Query(stmt))
+    {
+        // Let client clear his current Actions
+        SendActionButtons(2);
+        // m_actionButtons.clear() is called in the next _LoadActions
         _LoadActions(result);
+    }
     else
-        m_actionButtons.clear();
+    {
+        // New spec we haven't switched to before, keep what we can for action buttons
+        for (uint8 button = 0; button < MAX_ACTION_BUTTONS; ++button)
+        {
+            if (!IsActionButtonDataValid(button, m_actionButtons[button].GetAction(), m_actionButtons[button].uType))
+            {
+                removeActionButton(button);
+            }
+        }
+    }
 
     SendActionButtons(1);
     InitialPowers();
