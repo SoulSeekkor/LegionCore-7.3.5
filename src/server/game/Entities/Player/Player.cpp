@@ -38466,12 +38466,12 @@ void Player::Clear()
         if (m_items[i])
             delete m_items[i];
 
-    //all mailed items should be deleted, also all mail should be deallocated
+    // all mailed items should be deleted, also all mail should be deallocated
     for (PlayerMails::iterator itr = m_mail.begin(); itr != m_mail.end(); ++itr)
         delete *itr;
 
     for (ItemMap::iterator iter = mMitems.begin(); iter != mMitems.end(); ++iter)
-        delete iter->second;                                //if item is duplicated... then server may crash ... but that item should be deallocated
+        delete iter->second;                                // if item is duplicated... then server may crash ... but that item should be deallocated
 
     delete PlayerTalkClass;
 
