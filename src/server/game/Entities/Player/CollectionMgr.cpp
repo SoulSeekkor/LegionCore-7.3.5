@@ -495,9 +495,8 @@ AppearanceErrors CollectionMgr::CanAddAppearance(ItemModifiedAppearanceEntry con
     if (!itemTemplate)
         return AppearanceErrors::INVALID_ITEM_TYPE;
 
-    // We want to know appearance unlock status regardless!
-    //if (_owner->CanUseItem(itemTemplate) != EQUIP_ERR_OK)
-        //return AppearanceErrors::INVALID_ITEM_TYPE;
+    if (_owner->CanUseItem(itemTemplate) != EQUIP_ERR_OK)
+        return AppearanceErrors::INVALID_ITEM_TYPE;
 
     if (itemTemplate->GetQuality() == ITEM_QUALITY_LEGENDARY)
         return AppearanceErrors::LEGENDARY;
