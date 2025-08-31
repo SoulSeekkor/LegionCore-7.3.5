@@ -63,7 +63,7 @@ public:
         };
         static std::vector<ChatCommand> commandTable =
         {
-            { "disable",                SEC_ADMINISTRATOR,     false,   NULL,                                           "", disableCommandTable }
+            { "disable",                SEC_ADMINISTRATOR,      false,  NULL,                                           "", disableCommandTable }
         };
         return commandTable;
     }
