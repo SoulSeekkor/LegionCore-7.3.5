@@ -125,29 +125,37 @@ void WorldSession::HandleBattlePetSetFlags(WorldPackets::BattlePet::SetFlags& pa
 
 void WorldSession::HandleCageBattlePet(WorldPackets::BattlePet::BattlePetGuidRead& packet)
 {
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() called");
+
     // ReSharper disable once CppUnreachableCode
     auto const& battlePet = _player->GetBattlePet(packet.BattlePetGUID);
     if (!battlePet)
         return;
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() checking CAGEABLE flag");
     if (!sDB2Manager.HasBattlePetSpeciesFlag(battlePet->Species, BATTLEPET_SPECIES_FLAG_CAGEABLE))
         return;
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() checking if can store item");
     ItemPosCountVec dest;
     if (_player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, BATTLE_PET_CAGE_ITEM_ID, 1) != EQUIP_ERR_OK)
         return;
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() retrieving stored new item");
     Item* item = _player->StoreNewItem(dest, BATTLE_PET_CAGE_ITEM_ID, true);
     if (!item)
         return;
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() setting item modifiers");
     item->SetModifier(ITEM_MODIFIER_BATTLE_PET_SPECIES_ID, battlePet->Species);
     item->SetModifier(ITEM_MODIFIER_BATTLE_PET_BREED_DATA, battlePet->Breed | battlePet->Quality << 24);
     item->SetModifier(ITEM_MODIFIER_BATTLE_PET_LEVEL, battlePet->Level);
     item->SetModifier(ITEM_MODIFIER_BATTLE_PET_DISPLAY_ID, battlePet->DisplayModelID);
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() sending new item");
     _player->SendNewItem(item, 1, true, true); // FIXME: "You create: ." - item name missing in chat
 
+    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "WorldSession::HandleCageBattlePet() removing battle pet");
     SendBattlePetDeleted(packet.BattlePetGUID);
     battlePet->Remove(nullptr);
     _player->_battlePets.erase(packet.BattlePetGUID);
