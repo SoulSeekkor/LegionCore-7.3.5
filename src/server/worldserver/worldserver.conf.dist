@@ -1184,6 +1184,13 @@ LevelReq.Mail = 1
 LevelGoldReq.Mail = 15
 
 #
+#   BattlePet.AllowCageAll
+#        Description: Setting this to 1 will allow all pets to be cageable from your journal.
+#        Default:     0
+
+BattlePet.AllowCageAll = 0
+
+#
 ###################################################################################################
 
 ###################################################################################################

@@ -130,8 +130,10 @@ void WorldSession::HandleCageBattlePet(WorldPackets::BattlePet::BattlePetGuidRea
     if (!battlePet)
         return;
 
-    if (!sDB2Manager.HasBattlePetSpeciesFlag(battlePet->Species, BATTLEPET_SPECIES_FLAG_CAGEABLE))
-        return;
+    // Check if cage all has been enabled in the config, if not then continue checking the species flag
+    if (!sWorld->getBoolConfig(CONFIG_BATTLEPET_ALLOWCAGEALL))
+        if (!sDB2Manager.HasBattlePetSpeciesFlag(battlePet->Species, BATTLEPET_SPECIES_FLAG_CAGEABLE))
+            return;
 
     ItemPosCountVec dest;
     if (_player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, BATTLE_PET_CAGE_ITEM_ID, 1) != EQUIP_ERR_OK)
