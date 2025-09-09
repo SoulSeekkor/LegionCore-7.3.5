@@ -330,7 +330,7 @@ class spell_sha_astral_recall : public SpellScriptLoader
                 if(!caster)
                     return;
 
-                if (caster->HasAura(147787)) //Glyph of Astral Fixation
+                if (caster->HasAura(147787)) // Glyph of Astral Fixation
                 {
                     if (Player::TeamForRace(caster->getRace()) == HORDE)
                         caster->CastSpell(caster, 147902, true);
