@@ -635,7 +635,8 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                 if (caster->IsPlayer() && caster->HasAura(123779))
                 {
                     if (AuraEffect* aurEff = caster->GetAuraEffect(123779, EFFECT_0))
-                        caster->SendSpellCreateVisual(aurEff->GetSpellInfo(), &pos);
+                        caster->CastSpell(caster, 123780, true, nullptr, aurEff, caster->GetGUID());
+                        //caster->SendSpellCreateVisual(aurEff->GetSpellInfo(), &pos);
                 }
 
                 return SPELL_CAST_OK;
