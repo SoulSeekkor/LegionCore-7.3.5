@@ -632,8 +632,11 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                     return SPELL_FAILED_OUT_OF_RANGE;
 
                 // Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
-                if (caster->HasAura(123779))
-                    caster->CastSpell(caster, 123780, true);
+                if (caster->IsPlayer() && caster->HasAura(123779))
+                {
+                    if (AuraEffect* aurEff = caster->GetAuraEffect(123779, EFFECT_0))
+                        caster->SendSpellCreateVisual(aurEff->GetSpellInfo(), &pos);
+                }
 
                 return SPELL_CAST_OK;
             }
