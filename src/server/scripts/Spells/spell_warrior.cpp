@@ -633,7 +633,7 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
 
                 // Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
                 if (caster->HasAura(123779))
-                    caster->CastSpell(target, 123780, true);
+                    caster->CastSpell(caster, 1706, true);
 
                 return SPELL_CAST_OK;
             }
