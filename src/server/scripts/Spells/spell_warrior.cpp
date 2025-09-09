@@ -369,56 +369,6 @@ class spell_war_intervene : public SpellScriptLoader
         }
 };
 
-// Warrior Charge - Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
-class spell_warr_blazing_trail : public SpellScriptLoader
-{
-public:
-    spell_warr_blazing_trail() : SpellScriptLoader("spell_warr_blazing_trail") {}
-
-    class spell_warr_blazing_trail_AuraScript : public AuraScript
-    {
-        PrepareAuraScript(spell_warr_blazing_trail_AuraScript);
-
-        Position savePos;
-        void OnTick(AuraEffect const* aurEff)
-        {
-            if (Unit* caster = GetCaster())
-            {
-                float distance = caster->GetDistance(savePos);
-                float angle = caster->GetAngle(&savePos);
-                if (uint32 count = uint32(distance))
-                {
-                    for (uint32 j = 1; j < count + 1; ++j)
-                    {
-                        uint32 distanceNext = j;
-                        float destx = caster->GetPositionX() + distanceNext * std::cos(angle);
-                        float desty = caster->GetPositionY() + distanceNext * std::sin(angle);
-                        savePos.Relocate(destx, desty, caster->GetPositionZ());
-                        caster->SendSpellCreateVisual(GetSpellInfo(), &savePos);
-                    }
-                }
-            }
-        }
-
-        void HandleApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
-        {
-            if (Unit* caster = GetCaster())
-                savePos.Relocate(caster->GetPositionX(), caster->GetPositionY(), caster->GetPositionZ());
-        }
-
-        void Register() override
-        {
-            OnEffectApply += AuraEffectApplyFn(spell_warr_blazing_trail_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL, AURA_EFFECT_HANDLE_REAL);
-            OnEffectPeriodic += AuraEffectPeriodicFn(spell_warr_blazing_trail_AuraScript::OnTick, EFFECT_0, SPELL_AURA_PERIODIC_TRIGGER_SPELL);
-        }
-    };
-
-    AuraScript* GetAuraScript() const override
-    {
-        return new spell_warr_blazing_trail_AuraScript();
-    }
-};
-
 // Warrior Charge Drop Fire Periodic - 126661
 class spell_warr_charge_drop_fire : public SpellScriptLoader
 {
@@ -680,6 +630,10 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                     return SPELL_FAILED_NOPATH;
                 if (_totalLength > (limit * 1.5f))
                     return SPELL_FAILED_OUT_OF_RANGE;
+
+                // Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
+                if (caster->HasAura(123779))
+                    caster->CastSpell(target, 123780, true);
 
                 return SPELL_CAST_OK;
             }
@@ -1209,7 +1163,6 @@ void AddSC_warrior_spell_scripts()
     new spell_warr_shield_block();
     new spell_warr_heroic_leap();
     new spell_war_intervene();
-    new spell_warr_blazing_trail();
     new spell_warr_charge_drop_fire();
     new spell_warr_execute();
     new spell_warr_fervor_of_battle();
