@@ -632,14 +632,15 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                     return SPELL_FAILED_OUT_OF_RANGE;
 
                 // Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
-                TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() called");
                 if (caster->IsPlayer() && caster->HasAura(123779))
                 {
-                    TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() Has aura!");
                     if (AuraEffect* aurEff = caster->GetAuraEffect(123779, EFFECT_0))
                     {
-                        TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() aura effect retrieved! Spell name of %s", aurEff->GetSpellInfo()->SpellName);
-                        caster->CastSpell(caster, aurEff->GetSpellInfo(), TRIGGERED_FULL_MASK, nullptr, aurEff, caster->GetGUID());
+                        if (SpellInfo const* spell = sSpellMgr->GetSpellInfo(123780))
+                        {
+                            TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() aura effect retrieved! Spell name of %s", aurEff->GetSpellInfo()->SpellName);
+                            caster->CastSpell(caster, spell, TRIGGERED_FULL_MASK, nullptr, aurEff, caster->GetGUID());
+                        }
                     }
                 }
 
