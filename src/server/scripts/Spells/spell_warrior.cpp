@@ -638,7 +638,7 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                     {
                         if (SpellInfo const* spell = sSpellMgr->GetSpellInfo(123780))
                         {
-                            TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() aura effect retrieved! Spell name of %s", aurEff->GetSpellInfo()->SpellName);
+                            TC_LOG_ERROR(LOG_FILTER_DUNGEONBALANCE, "Charge Check() aura effect retrieved! Spell name of %s", spell->SpellName);
                             caster->CastSpell(caster, spell, TRIGGERED_FULL_MASK, nullptr, aurEff, caster->GetGUID());
                         }
                     }
