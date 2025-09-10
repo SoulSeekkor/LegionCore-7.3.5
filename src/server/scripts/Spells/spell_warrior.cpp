@@ -634,8 +634,8 @@ class spell_warr_charge_check_cast : public SpellScriptLoader
                 // Glyph of the Blazing Trail - 123779 (casts 123780 - Blazing Trail)
                 if (caster->IsPlayer() && caster->HasAura(123779))
                 {
-                    if (SpellEntry const* spell = sSpellStore.LookupEntry(123780))
-                        caster->CastSpell(caster, spell->ID, TRIGGERED_FULL_MASK);
+                    if (AuraEffect* aurEff = caster->GetAuraEffect(123779, EFFECT_0))
+                        caster->CastSpell(caster, aurEff->GetSpellInfo(), TRIGGERED_FULL_MASK, nullptr, aurEff, caster->GetGUID());
                 }
 
                 return SPELL_CAST_OK;
