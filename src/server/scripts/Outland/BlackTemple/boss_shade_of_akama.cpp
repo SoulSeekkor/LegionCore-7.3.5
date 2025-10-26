@@ -116,7 +116,7 @@ public:
 
         void Reset() {}
         void JustDied(Unit* /*killer*/);
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void UpdateAI(uint32 /*diff*/) {}
@@ -152,7 +152,7 @@ public:
         }
 
         void JustDied(Unit* /*killer*/);
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void UpdateAI(uint32 diff)
@@ -632,7 +632,7 @@ public:
                 summons.Despawn(summon);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void BeginEvent(Player* player)
         {

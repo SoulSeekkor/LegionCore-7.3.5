@@ -81,10 +81,10 @@ struct boss_arch_druid_glaidalis : public BossAI
         instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_NIGHTFALL_DOT);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_GRIEVOUS_LEAP, 6000);
         events.RescheduleEvent(EVENT_PRIMAL_RAMPAGE, 14000);
         events.RescheduleEvent(EVENT_NIGHTFALL, 20000);

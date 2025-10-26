@@ -73,7 +73,7 @@ struct boss_encounter_ancient_protectors : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance->GetBossState(DATA_PROTECTORS) != IN_PROGRESS)
             instance->SetBossState(DATA_PROTECTORS, IN_PROGRESS);
@@ -115,9 +115,9 @@ public:
             DoCast(SPELL_WATER_COSMETIC_CHANNEL);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_ancient_protectors::EnterCombat(who);
+            boss_encounter_ancient_protectors::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             Talk(SAY_GOLA_AGGRO);
             events.RescheduleEvent(EVENT_WATER_BOLT, 0); 
@@ -232,9 +232,9 @@ public:
             DoCast(SPELL_NATURE_COSMETIC_CHANNEL);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_ancient_protectors::EnterCombat(who);
+            boss_encounter_ancient_protectors::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             events.RescheduleEvent(EVENT_NATURE_WRATH, 0);
             events.RescheduleEvent(EVENT_BRAMBLE_PATCH, 12000);
@@ -336,9 +336,9 @@ public:
             boss_encounter_ancient_protectors::Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_ancient_protectors::EnterCombat(who);
+            boss_encounter_ancient_protectors::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             events.RescheduleEvent(EVENT_RENDING_CHARGE, 6000);
             events.RescheduleEvent(EVENT_NOXIOUS_ERUPTION, 7000);

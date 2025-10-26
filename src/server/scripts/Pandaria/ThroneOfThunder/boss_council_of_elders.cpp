@@ -160,7 +160,7 @@ struct council_of_eldersAI : public ScriptedAI
         }
     }
 
-    void CouncilsEnterCombat()
+    void CouncilsJustEngagedWith()
     {
         for (int32 i = 0; i < 4; i++)
             if (Creature* council = me->GetCreature(*me, instance->GetGuidData(councilentry[i])))
@@ -319,9 +319,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            CouncilsEnterCombat();
+            CouncilsJustEngagedWith();
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             switch (me->GetEntry())
             {
@@ -628,7 +628,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -927,7 +927,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

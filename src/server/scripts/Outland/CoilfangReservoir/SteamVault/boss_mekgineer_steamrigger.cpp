@@ -92,7 +92,7 @@ public:
             Talk(2);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(1);
 
@@ -221,7 +221,7 @@ public:
             //react only if attacked
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {

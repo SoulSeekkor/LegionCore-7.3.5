@@ -77,7 +77,7 @@ public:
             me->setFaction(FACTION_HOSTILE);
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void DoNice()
         {
@@ -176,7 +176,7 @@ public:
         mob_infested_root_walkerAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/) override
         {
@@ -217,7 +217,7 @@ public:
                 player->AreaExploredOrEventHappens(10898);
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void MoveInLineOfSight(Unit* who) override
         {
@@ -264,7 +264,7 @@ public:
         mob_rotting_forest_ragerAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void DamageTaken(Unit* done_by, uint32 &damage, DamageEffectType /*dmgType*/) override
         {
@@ -303,7 +303,7 @@ public:
         mob_netherweb_victimAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
 
         void JustDied(Unit* killer) override
@@ -407,7 +407,7 @@ public:
                 me->setFaction(m_uiNormFaction);
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {

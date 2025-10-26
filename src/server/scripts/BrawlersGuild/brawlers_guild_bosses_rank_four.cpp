@@ -91,7 +91,7 @@ public:
                 AttackStart(me->GetAnyOwner());
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (Unit* unit = me->GetAnyOwner())
             if (Player* player = unit->ToPlayer())
@@ -304,7 +304,7 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_ID, 134851, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 60000);
             events.RescheduleEvent(EVENT_2, 10000);
@@ -474,7 +474,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (me->GetEntry() == 67488)
             {
@@ -643,7 +643,7 @@ public:
             me->CastSpell(me, SPELL_AURA_OF_ROT);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (Unit* owner = me->GetAnyOwner())
                 me->CastSpell(owner, SPELL_AURA_OF_ROT_TICK);

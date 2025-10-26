@@ -115,7 +115,7 @@ public:
                 instance->SetData(DATA_KRIKTHIR_THE_GATEWATCHER_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
             Summon();
@@ -388,7 +388,7 @@ public:
             uiInfectedBiteTimer = 4*IN_MILLISECONDS;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoCast(me, SPELL_ENRAGE, true);
         }

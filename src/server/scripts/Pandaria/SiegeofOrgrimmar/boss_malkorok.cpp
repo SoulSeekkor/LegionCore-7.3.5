@@ -179,7 +179,7 @@ class boss_malkorok : public CreatureScript
                 return true;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (instance)
                 {
@@ -189,7 +189,7 @@ class boss_malkorok : public CreatureScript
                         return;
                     }
                 }
-                _EnterCombat();
+                _JustEngagedWith();
                 Talk(SAY_PULL);
                 SetGasStateAndBuffPlayers(true);
                 powercheck = 1400;
@@ -616,7 +616,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -669,7 +669,7 @@ public:
 
         void Reset(){}
         
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -761,7 +761,7 @@ public:
             events.RescheduleEvent(EVENT_ESSENCE_OF_YSHAARJ, 4000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -822,7 +822,7 @@ public:
                 hit++;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

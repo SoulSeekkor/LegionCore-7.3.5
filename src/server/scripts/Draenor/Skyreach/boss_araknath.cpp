@@ -62,9 +62,9 @@ struct boss_araknath : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_MELE_ATTACK, 2000);
         events.RescheduleEvent(EVENT_SMASH, 6000);
@@ -183,7 +183,7 @@ struct npc_skyreach_arcanologist : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 8000);

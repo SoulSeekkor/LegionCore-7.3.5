@@ -35,7 +35,7 @@ struct boss_sha_of_violence : public BossAI
         summons.DespawnAll();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetBossState(DATA_SHA_VIOLENCE, IN_PROGRESS);

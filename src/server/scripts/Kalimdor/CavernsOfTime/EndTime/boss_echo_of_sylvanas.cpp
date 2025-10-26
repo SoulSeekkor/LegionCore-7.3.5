@@ -120,9 +120,9 @@ struct boss_echo_of_sylvanas : public BossAI
         });
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         events.ScheduleEvent(EVENT_UNHOLY_SHOT, urand(5000, 20000));
         events.ScheduleEvent(EVENT_SHRIEK_OF_THE_HIGHBORNE, urand(5000, 20000));
@@ -338,7 +338,7 @@ struct npc_echo_of_sylvanas_risen_ghoul : public ScriptedAI
         me->DespawnOrUnsummon(500);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoCast(me, SPELL_SEEPING_SHADOWS_DUMMY, true);
         events.ScheduleEvent(EVENT_MOVE_GHOUL, 2000);

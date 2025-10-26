@@ -126,7 +126,7 @@ public:
 
         void Reset() {}
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoScriptText(SAY_AGGRO1, me, NULL);
         }

@@ -184,7 +184,7 @@ public:
             instance->SetBossState(DATA_MAGMAW, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             events.RescheduleEvent(EVENT_BERSERK, 6 * MINUTE * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_MELEE_CHECK, 6000);

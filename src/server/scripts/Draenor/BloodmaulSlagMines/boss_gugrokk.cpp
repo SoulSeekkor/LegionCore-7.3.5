@@ -62,9 +62,9 @@ struct boss_gugrokk : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_1, 10 * IN_MILLISECONDS);
         events.RescheduleEvent(EVENT_3, urand(5, 7) * IN_MILLISECONDS);
@@ -277,7 +277,7 @@ struct npc_bloodmaul_unstable_slag : public ScriptedAI
         me->DespawnOrUnsummon(3 * IN_MILLISECONDS);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
     }

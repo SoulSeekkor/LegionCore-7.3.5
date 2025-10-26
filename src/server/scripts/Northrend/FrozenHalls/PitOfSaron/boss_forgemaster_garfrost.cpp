@@ -118,9 +118,9 @@ class boss_garfrost : public CreatureScript
                 _permafrostStack = 0;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 Talk(SAY_AGGRO);
                 DoCast(me, SPELL_PERMAFROST);
                 events.ScheduleEvent(EVENT_THROW_SARONITE, 7000);

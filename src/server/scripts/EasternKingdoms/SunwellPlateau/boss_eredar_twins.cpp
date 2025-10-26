@@ -133,7 +133,7 @@ public:
                 instance->SetData(DATA_EREDAR_TWINS_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat();
 
@@ -398,7 +398,7 @@ public:
                 instance->SetData(DATA_EREDAR_TWINS_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat();
 
@@ -687,7 +687,7 @@ public:
             KillTimer = 15000;
         }
 
-        void EnterCombat(Unit* /*who*/){}
+        void JustEngagedWith(Unit* /*who*/){}
 
         void SpellHitTarget(Unit* target, const SpellInfo* spell)
         {

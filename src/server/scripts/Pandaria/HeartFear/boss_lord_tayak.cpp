@@ -116,9 +116,9 @@ class boss_lord_tayak : public CreatureScript
                 instance->SetData(DATA_STORM_UNLEASHED, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 DoCast(me, SPELL_INTENSIFY, true);
                 events.ScheduleEvent(EVENT_ASSAULT,           urand(15000, 20000));
                 events.ScheduleEvent(EVENT_SUMMON_TEMPEST,    16000);

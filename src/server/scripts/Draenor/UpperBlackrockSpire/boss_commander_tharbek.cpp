@@ -89,9 +89,9 @@ struct boss_commander_tharbek : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_SUMMON, 2000);
         DoCast(SPELL_DIALOG_1);
@@ -317,7 +317,7 @@ struct npc_ironbarb_skyreaver : public ScriptedAI
             healthPct = 30;
     }
 
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
 
     void DamageTaken(Unit* /*attacker*/, uint32& /*damage*/, DamageEffectType /*dmgType*/) override
     {

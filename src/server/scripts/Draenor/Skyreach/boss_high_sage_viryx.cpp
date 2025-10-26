@@ -70,10 +70,10 @@ struct boss_high_sage_viryx : public BossAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_SOLAR_BURST, 8000);
         events.RescheduleEvent(EVENT_CAST_DOWN, 16000);
@@ -285,7 +285,7 @@ struct npc_skyreach_shield_construct : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 4000);
     }

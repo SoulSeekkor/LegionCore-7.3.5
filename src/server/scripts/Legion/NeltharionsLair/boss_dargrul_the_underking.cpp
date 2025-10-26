@@ -82,10 +82,10 @@ struct boss_dargrul_the_underking : public BossAI
         magmaTimer = 2000;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO); //Yes. TRY to take the hammer from me!
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_GAIN_ENERGY, true);
 
         if (GetDifficultyID() != DIFFICULTY_LFR && GetDifficultyID() != DIFFICULTY_NORMAL)
@@ -480,7 +480,7 @@ struct npc_emberhusk_dominator : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 500);
         events.RescheduleEvent(EVENT_2, urandms(10, 11));

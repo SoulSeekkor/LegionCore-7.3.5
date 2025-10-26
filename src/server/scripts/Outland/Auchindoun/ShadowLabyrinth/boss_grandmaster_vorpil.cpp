@@ -127,9 +127,9 @@ class boss_grandmaster_vorpil : public CreatureScript
                 Talk(SAY_DEATH);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.ScheduleEvent(EVENT_SHADOWBOLT_VOLLEY, urand(7000, 14000));
                 if (IsHeroic())
                     events.ScheduleEvent(EVENT_BANISH, 17000);
@@ -232,7 +232,7 @@ class npc_voidtraveler : public CreatureScript
                 _sacrificed = false;
             }
 
-            void EnterCombat(Unit* /*who*/) { }
+            void JustEngagedWith(Unit* /*who*/) { }
 
             void UpdateAI(uint32 diff)
             {

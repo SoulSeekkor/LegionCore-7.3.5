@@ -75,10 +75,10 @@ struct boss_nerzhul : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_MALEVOLENCE, 6000);
         events.RescheduleEvent(EVENT_OMEN_OF_DEATH, 10000);

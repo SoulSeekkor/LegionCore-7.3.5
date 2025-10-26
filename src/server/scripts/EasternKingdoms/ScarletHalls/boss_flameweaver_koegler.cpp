@@ -90,7 +90,7 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) 
+        void JustEngagedWith(Unit* /*who*/) 
         {
             Talk(SAY_AGGRO);
             events.CancelEvent(EVENT_INTRO);
@@ -99,7 +99,7 @@ public:
             events.RescheduleEvent(EVENT_FIREBALL_VOLLEY, 14000);
             events.RescheduleEvent(EVENT_TELEPORT, 30000);
             events.RescheduleEvent(EVENT_BOOK_BURNER, 22000);
-            _EnterCombat();
+            _JustEngagedWith();
         }
 
         void JustDied(Unit* /*killer*/)

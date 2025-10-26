@@ -99,9 +99,9 @@ public:
                 me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_BLINK_STRIKES_1, 15000);
             events.RescheduleEvent(EVENT_NETHER_VENOM, 26000);

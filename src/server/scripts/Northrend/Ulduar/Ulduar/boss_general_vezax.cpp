@@ -164,9 +164,9 @@ public:
                 }
         }
 
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoScriptText(SAY_AGGRO, me);
             DoCast(me, AURA_OF_DESPAIR);
             events.ScheduleEvent(EVENT_SHADOW_CRASH, 8000);

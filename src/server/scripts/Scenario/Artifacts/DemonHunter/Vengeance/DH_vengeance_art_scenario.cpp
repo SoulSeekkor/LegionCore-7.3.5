@@ -196,7 +196,7 @@ public:
                 }
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == NPC_SAERA)
                 who->CastSpell(who, 208388); // convers
@@ -286,7 +286,7 @@ public:
             summons.Summon(summon);
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (!firstattack)
             {
@@ -530,7 +530,7 @@ public:
             
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             // events
         }

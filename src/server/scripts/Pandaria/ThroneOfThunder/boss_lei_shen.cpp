@@ -59,9 +59,9 @@ class boss_lei_shen : public CreatureScript
                 me->SetReactState(REACT_DEFENSIVE);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.RescheduleEvent(EVENT_DECAPITATE,     30000);
                 events.RescheduleEvent(EVENT_LIGHTNING_WHIP, 40000);
                 events.RescheduleEvent(EVENT_STATIC_SHOCK,   50000);

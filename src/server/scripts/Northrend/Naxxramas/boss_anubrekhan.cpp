@@ -109,9 +109,9 @@ public:
             if (instance)
                 instance->DoStartTimedAchievement(CRITERIA_TIMED_TYPE_EVENT2, ACHIEV_TIMED_START_EVENT);
         }
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoScriptText(SAY_AGGRO, me);
             events.ScheduleEvent(EVENT_IMPALE, 10000 + rand()%10000);
             events.ScheduleEvent(EVENT_LOCUST, 90000);

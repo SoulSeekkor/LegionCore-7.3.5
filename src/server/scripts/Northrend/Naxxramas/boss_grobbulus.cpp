@@ -62,9 +62,9 @@ public:
             _Reset();
             uiSlimeStreamTimer = 3*IN_MILLISECONDS;
         }
-        void EnterCombat(Unit * /*who*/) override
+        void JustEngagedWith(Unit * /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.ScheduleEvent(EVENT_CLOUD, 15000);
             events.ScheduleEvent(EVENT_INJECT, 20000);
             events.ScheduleEvent(EVENT_SPRAY, 15000+rand()%15000); //not sure

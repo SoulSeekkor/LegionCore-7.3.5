@@ -239,7 +239,7 @@ public:
             CreatureAI::EnterEvadeMode();
         }
 
-        void EnterCombat(Unit* pWho)
+        void JustEngagedWith(Unit* pWho)
         {
             EnterPhaseIntro();
             if (Creature* onyxia = me->FindNearestCreature(NPC_ONYXIA, 150.0f))
@@ -249,7 +249,7 @@ public:
 
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
-            _EnterCombat();
+            _JustEngagedWith();
         }
 
         void JustDied(Unit* /*killer*/)
@@ -617,7 +617,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         }
 
-        void EnterCombat(Unit* pWho)
+        void JustEngagedWith(Unit* pWho)
         {
             if (Creature* nefarian = me->FindNearestCreature(NPC_NEFARIAN, 150.0f))
                 nefarian->SetInCombatWithZone();
@@ -824,7 +824,7 @@ public:
 
         uint32 timerHurlBone;
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             timerHurlBone = urand(4000, 9000);
             me->AddAura(SPELL_NO_REGEN, me);
@@ -883,7 +883,7 @@ public:
 
         EventMap events;
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->AddAura(SPELL_NOVA, me);
             me->SetReactState(REACT_PASSIVE);

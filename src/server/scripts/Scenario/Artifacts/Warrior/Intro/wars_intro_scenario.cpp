@@ -35,7 +35,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 12000); // 13736
             events.RescheduleEvent(EVENT_2, 6000); // 12 15708
@@ -302,7 +302,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 16000); // 196814
             events.RescheduleEvent(EVENT_2, 23000); // 17 196808
@@ -409,7 +409,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             convers = 789;
             events.RescheduleEvent(EVENT_1, 6000);

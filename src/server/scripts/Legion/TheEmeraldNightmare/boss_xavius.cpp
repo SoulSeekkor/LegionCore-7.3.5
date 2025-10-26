@@ -179,10 +179,10 @@ struct boss_xavius : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         ClearPlayerAuras();
         DoCast(me, SPELL_XAVIUS_ENERGIZE_PHASE_1, true);
         DoCast(me, SPELL_UNFATHOMABLE_REALITY, true);
@@ -625,7 +625,7 @@ struct npc_xavius_corruption_horror : public ScriptedAI
         DoZoneInCombat(me, 100.0f);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 9000);
         events.RescheduleEvent(EVENT_2, 14000);

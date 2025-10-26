@@ -50,9 +50,9 @@ public:
             Talk(SAY_DEATH);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_TAINTED_STONESKIN_TOTEM, 30000);
             events.RescheduleEvent(EVENT_TAINTED_EARTHGRAB_TOTEM, 20000);
             events.RescheduleEvent(EVENT_CORRUPTED_NOVA_TOTEM, 60000);
@@ -162,9 +162,9 @@ public:
             _JustDied();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_GRIEVOUS_WOUND, 10000);
             events.RescheduleEvent(EVENT_ENSNARING_MOSS, 20000);
             events.RescheduleEvent(EVENT_WATER_SPIT, 14000);
@@ -273,9 +273,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_ACID_SPRAY, 25000);
             events.RescheduleEvent(EVENT_CLEAVE, 9000);
             events.RescheduleEvent(EVENT_UPPERCUT, 20000);

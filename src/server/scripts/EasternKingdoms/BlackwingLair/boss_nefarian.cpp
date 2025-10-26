@@ -200,7 +200,7 @@ public:
 
         void BeginEvent(Player* target)
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             Talk(SAY_GAMESBEGIN_2);
 
@@ -415,7 +415,7 @@ public:
             canDespawn = true;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             events.RescheduleEvent(EVENT_SHADOWFLAME, 12000);
             events.RescheduleEvent(EVENT_FEAR, urand(25000, 35000));

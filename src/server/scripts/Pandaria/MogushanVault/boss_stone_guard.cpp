@@ -418,7 +418,7 @@ class boss_generic_guardian : public CreatureScript
                 events.RescheduleEvent(EVENT_MAIN_ATTACK, 10000);
             }
 
-            void EnterCombat(Unit* attacker) override
+            void JustEngagedWith(Unit* attacker) override
             {
                 if (Creature* controller = GetController())
                     controller->AI()->DoAction(ACTION_ENTER_COMBAT);
@@ -640,7 +640,7 @@ class mob_cobalt_mine : public CreatureScript
 
             void EnterEvadeMode() override {}
 
-            void EnterCombat(Unit* who) override {}
+            void JustEngagedWith(Unit* who) override {}
 
             void SpellHitTarget(Unit* target, SpellInfo const* spell) override
             {

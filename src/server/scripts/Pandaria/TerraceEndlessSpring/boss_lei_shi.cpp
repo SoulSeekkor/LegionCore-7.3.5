@@ -176,7 +176,7 @@ public:
                 events.ScheduleEvent(EVENT_SPRAY, 400);
             }
         }
-        void EnterCombat(Unit* attacker) override
+        void JustEngagedWith(Unit* attacker) override
         {
             if (pInstance)
             {

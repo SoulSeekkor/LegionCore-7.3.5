@@ -221,10 +221,10 @@ struct boss_tos_kiljaeden : BossAI
         Trinity::Containers::RandomResizeList(randList, 2);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         if (IsMythicRaid())
         {

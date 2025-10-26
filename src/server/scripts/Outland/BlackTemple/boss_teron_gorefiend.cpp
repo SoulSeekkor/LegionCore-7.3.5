@@ -70,7 +70,7 @@ public:
             TeronGUID.Clear();
         }
 
-        void EnterCombat(Unit* /*who*/) { }
+        void JustEngagedWith(Unit* /*who*/) { }
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
 
@@ -142,7 +142,7 @@ public:
             CheckTeronTimer = 5000;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* who)
         {
@@ -265,7 +265,7 @@ public:
             Done = false;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* who)
         {

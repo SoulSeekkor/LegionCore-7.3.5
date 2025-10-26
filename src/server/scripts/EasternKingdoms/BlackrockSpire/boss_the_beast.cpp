@@ -53,9 +53,9 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_FLAME_BREAK,     12 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_IMMOLATE,         3 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_TERRIFYING_ROAR, 23 * IN_MILLISECONDS);

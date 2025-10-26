@@ -124,10 +124,10 @@ struct boss_warlord_zaela : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         EntryCheckPredicate pred(NPC_EMBERSCALE_IRONFLIGHT);
         summons.DoAction(ACTION_DRAKE_INTRO, pred);
@@ -316,7 +316,7 @@ struct npc_emberscale_ironflight : public CreatureAI
         me->SetReactState(REACT_PASSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
 
     void DoAction(int32 const action) override
     {
@@ -412,7 +412,7 @@ struct npc_emberscale_matron : public ScriptedAI
         zaelaGUID.Clear();
     }
 
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
 
     void MovementInform(uint32 type, uint32 id) override
     {

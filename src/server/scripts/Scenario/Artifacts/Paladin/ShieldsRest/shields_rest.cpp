@@ -117,7 +117,7 @@ public:
                         events.RescheduleEvent(EVENT_1, 1000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (me->GetEntry() == NPC_CATO_PET)
             {
@@ -352,7 +352,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat();
             if (me->GetEntry() == NPC_DRAKE_SHAE)
@@ -553,7 +553,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.CancelEvent(EVENT_1);
             events.RescheduleEvent(EVENT_2, 2000);
@@ -723,7 +723,7 @@ public:
             events.RescheduleEvent(EVENT_3, 3000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //16:03
         {
             if (fightComplete)
@@ -916,7 +916,7 @@ public:
             switchTarget = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //16:16
         {
             events.RescheduleEvent(EVENT_2, 1000);

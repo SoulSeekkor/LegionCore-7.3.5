@@ -352,7 +352,7 @@ class boss_general_nazgrim : public CreatureScript
                 return true;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (instance)
                 {
@@ -363,7 +363,7 @@ class boss_general_nazgrim : public CreatureScript
                     }
                 }
                 Talk(SAY_PULL);
-                _EnterCombat();
+                _JustEngagedWith();
                 SetStance(0);
                 wavenum = 0;
                 checkvictim = 1500;
@@ -565,7 +565,7 @@ public:
             laststand = false;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 150.0f);
             DoCast(me, SPELL_IRONSTORM);
@@ -621,7 +621,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 150.0f);
             events.RescheduleEvent(EVENT_ARCANE_SHOCK, 5000);
@@ -823,7 +823,7 @@ public:
             summon.DespawnAll();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 150.0f);
             events.RescheduleEvent(EVENT_EARTH_SHIELD, 10000);
@@ -1043,7 +1043,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1100,7 +1100,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
         
@@ -1176,7 +1176,7 @@ public:
                     events.RescheduleEvent(EVENT_IN_POINT, urand(5000, 10000));
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

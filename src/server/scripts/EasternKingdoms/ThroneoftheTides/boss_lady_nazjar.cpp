@@ -144,7 +144,7 @@ struct boss_lady_nazjar : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_GEYSER, 11000);

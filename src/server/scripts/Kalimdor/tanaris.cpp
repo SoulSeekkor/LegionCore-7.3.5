@@ -156,7 +156,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void Reset() {}
 
         void UpdateAI(uint32 diff)
@@ -293,7 +293,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoScriptText(RAND(SAY_OOX_AGGRO1, SAY_OOX_AGGRO2), me);
         }

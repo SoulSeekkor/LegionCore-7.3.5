@@ -1092,7 +1092,7 @@ public:
             events.RescheduleEvent(EVENT_3, 2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CallAssistance();
         }
@@ -1177,7 +1177,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CallAssistance();
         }
@@ -1584,7 +1584,7 @@ public:
             SetEquipmentSlots(true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             DoZoneInCombat(me);
@@ -1708,7 +1708,7 @@ public:
             me->DespawnOrUnsummon(2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat(me);
 
@@ -1776,7 +1776,7 @@ public:
             me->DespawnOrUnsummon(2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat(me);
             Talk(0);
@@ -1846,7 +1846,7 @@ public:
             me->DespawnOrUnsummon(2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat(me);
             Talk(0);
@@ -1920,7 +1920,7 @@ public:
             me->DespawnOrUnsummon(2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat(me);
             Talk(0);
@@ -1993,7 +1993,7 @@ public:
             me->DespawnOrUnsummon(2 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat(me);
 
@@ -2382,7 +2382,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_2, 10 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_3, 5 * IN_MILLISECONDS);
@@ -2716,7 +2716,7 @@ public:
             AttackStart(attacker);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_EMPOWERED, 15 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_DARK_BITE, 10 * IN_MILLISECONDS);
@@ -2793,7 +2793,7 @@ public:
         void JustDied(Unit* /*killer*/) override
         { }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 15 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_2, 15 * IN_MILLISECONDS);
@@ -2898,7 +2898,7 @@ public:
             instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             instance->SetData(DATA_COMPLETE_SECOND_STAGE_SECOND_STEP, IN_PROGRESS);
 

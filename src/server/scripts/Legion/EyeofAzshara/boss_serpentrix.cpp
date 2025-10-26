@@ -76,9 +76,9 @@ struct boss_serpentrix : public BossAI
         checkVictimTimer = 2000;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_TOXIC_WOUND, 6000);
         events.RescheduleEvent(EVENT_POISON_SPIT, 11000);
@@ -264,7 +264,7 @@ struct npc_eye_of_azshara_stormwake_hydra : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(8, 10));
         events.RescheduleEvent(EVENT_2, urandms(18, 20));
@@ -331,7 +331,7 @@ struct npc_eye_of_azshara_cove_seagull : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         blindingPeckTimer = urandms(8, 10);
     }

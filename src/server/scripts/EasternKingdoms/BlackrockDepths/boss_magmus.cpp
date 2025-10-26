@@ -53,7 +53,7 @@ public:
             WarStomp_Timer =0;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void UpdateAI(uint32 diff)
         {

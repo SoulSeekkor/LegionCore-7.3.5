@@ -60,9 +60,9 @@ public:
             _JustDied();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             spiketimer = 5000;
             if (!me->HasAura(SPELL_RUSTING))
                 me->AddAura(SPELL_RUSTING, me);
@@ -125,7 +125,7 @@ class npc_bone_pile : public CreatureScript
             
             void EnterEvadeMode(){}
 
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
 
             void UpdateAI(uint32 diff){}
         };

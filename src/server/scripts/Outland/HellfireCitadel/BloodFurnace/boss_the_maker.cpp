@@ -65,9 +65,9 @@ class boss_the_maker : public CreatureScript
                 Knockdown_Timer = 10000;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 Talk(SAY_AGGRO);
             }
 

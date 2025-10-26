@@ -52,9 +52,9 @@ class boss_baron_geddon : public CreatureScript
         {
             boss_baron_geddonAI(Creature* creature) : BossAI(creature, BOSS_BARON_GEDDON) {}
 
-            void EnterCombat(Unit* victim) override
+            void JustEngagedWith(Unit* victim) override
             {
-                BossAI::EnterCombat(victim);
+                BossAI::JustEngagedWith(victim);
                 events.RescheduleEvent(EVENT_INFERNO, 45000);
                 events.RescheduleEvent(EVENT_IGNITE_MANA, 30000);
                 events.RescheduleEvent(EVENT_LIVING_BOMB, 35000);

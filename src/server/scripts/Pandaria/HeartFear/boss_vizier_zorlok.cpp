@@ -156,7 +156,7 @@ class boss_vizier_zorlok : public CreatureScript
                 }
             }
             
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 if (instance)
                     instance->SetBossState(DATA_VIZIER_ZORLOK, IN_PROGRESS);
@@ -412,7 +412,7 @@ class npc_gas_controller : public CreatureScript
             
             void EnterEvadeMode(){}
 
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
 
             void UpdateAI(uint32 diff)
             {

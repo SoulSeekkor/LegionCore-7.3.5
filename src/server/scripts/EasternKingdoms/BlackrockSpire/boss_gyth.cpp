@@ -71,9 +71,9 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_SUMMON_DRAGON_PACK, 3 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_SUMMON_ORC_PACK, 60 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_AGGRO, 60 * IN_MILLISECONDS);

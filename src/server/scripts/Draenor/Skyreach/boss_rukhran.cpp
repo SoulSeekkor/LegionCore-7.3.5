@@ -89,9 +89,9 @@ struct boss_rukhran : public BossAI
         me->SetPower(POWER_ENERGY, 0);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         DoCast(SPELL_ENERGIZE);
 

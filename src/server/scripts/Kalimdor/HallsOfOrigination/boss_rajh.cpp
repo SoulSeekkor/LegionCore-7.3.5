@@ -110,7 +110,7 @@ class boss_rajh : public CreatureScript
                 return achieve;
             }
 
-            void EnterCombat(Unit* /*Ent*/) override
+            void JustEngagedWith(Unit* /*Ent*/) override
             {
                 Talk(SAY_AGGRO);
                 

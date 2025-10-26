@@ -168,7 +168,7 @@ class boss_admiral_ripsnarl : public CreatureScript
                         (*itr)->RemoveAurasDueToSpell(SPELL_FOG_2);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 Talk(SAY_AGGRO);
 

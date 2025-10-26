@@ -59,7 +59,7 @@ public:
                 me->AddAura(71507, me); //aura for event
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == NPC_CENARION_HOLD_INFANTRY)
                 Talk(0, who->GetGUID());

@@ -119,7 +119,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 22000);
         }

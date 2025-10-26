@@ -74,11 +74,11 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //06:03
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_RESONANT_SLASH, 7000);   //06:10, 06:32, 06:44
             events.RescheduleEvent(EVENT_ARCANE_LOCKDOWN, 15000); //06:18, 06:52, 07:20
@@ -381,7 +381,7 @@ public:
     {
         npc_duskwatch_sentryAI(Creature* creature) : ScriptedAI(creature) {}
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             me->SetReactState(REACT_PASSIVE);
             DoCast(who, 209036);
@@ -462,7 +462,7 @@ public:
 
         void Reset() override {}
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void IsSummonedBy(Unit* summoner) override
         {

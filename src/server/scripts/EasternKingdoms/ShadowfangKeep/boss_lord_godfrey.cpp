@@ -75,7 +75,7 @@ class boss_lord_godfrey : public CreatureScript
                 DoCast(SPELL_PISTOLS_VISUAL_PASSIVE);
             }
                 
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 events.RescheduleEvent(EVENT_MORTAL_WOUND, 10000);
                 events.RescheduleEvent(EVENT_CURSED_BULLET, 15000);

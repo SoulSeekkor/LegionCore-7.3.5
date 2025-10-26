@@ -48,9 +48,9 @@ struct boss_saboteur_kiptilak : public BossAI
         WorldInFlamesEvents = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void JustReachedHome() override

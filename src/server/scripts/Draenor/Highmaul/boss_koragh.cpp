@@ -401,9 +401,9 @@ struct boss_koragh : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         Talk(Aggro);
 
@@ -669,7 +669,7 @@ struct npc_highmaul_breaker_of_fel : public ScriptedAI
         me->CastSpell(me, FelBreakerFelChannel, false);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventFelNova, 12 * IN_MILLISECONDS);
     }
@@ -742,7 +742,7 @@ struct npc_highmaul_breaker_of_fire : public ScriptedAI
         me->CastSpell(me, FelBreakerFireChannel, false);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventWildFlames, 4 * IN_MILLISECONDS);
     }
@@ -871,7 +871,7 @@ struct npc_highmaul_breaker_of_frost : public ScriptedAI
         me->CastSpell(me, FelBreakerFrostChannel, false);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventFrozenCore, 4 * IN_MILLISECONDS);
     }

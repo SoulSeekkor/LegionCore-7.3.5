@@ -175,7 +175,7 @@ Position Eyebeamtargetpos = { 5965.542f, 4512.609f, -2.433161f };
 
 enum CreatureText
 {
-    SAY_ENTERCOMBAT          = 1, //Узрите силу Бездны!                                    35336
+    SAY_JustEngagedWith          = 1, //Узрите силу Бездны!                                    35336
     SAY_KILL_PLAYER          = 2, //Наблюдайте за своей смертью.                           35345
     SAY_FORCE_OF_WILL        = 3, //Я слежу за вами…                                       35344
     SAY_COLORBLIND           = 4, //Туманы хранят много секретов, если знать, где искать…  35343
@@ -374,11 +374,11 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BRIGHT_LIGHT_P_T_AURA);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             phase = PHASE_NORMAL;
-            Talk(SAY_ENTERCOMBAT);
+            Talk(SAY_JustEngagedWith);
             checkvictim = 3000;
             enragetimer = 600000;
             events.RescheduleEvent(EVENT_HARD_STARE, 12000);
@@ -799,7 +799,7 @@ public:
             events.RescheduleEvent(EVENT_START_MOVE, 250);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -890,7 +890,7 @@ public:
             events.RescheduleEvent(EVENT_START_MOVE, 250);
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 
@@ -984,7 +984,7 @@ public:
             events.RescheduleEvent(EVENT_START_MOVE, 250);
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 
@@ -1566,7 +1566,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff)
         {
@@ -1625,7 +1625,7 @@ public:
             DoZoneInCombat(me, 100.0f);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

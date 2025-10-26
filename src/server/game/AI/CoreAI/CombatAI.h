@@ -36,7 +36,7 @@ class AggressorAI : public CreatureAI
         void Reset() override;
         void InitializeAI() override;
         void UpdateAI(uint32) override;
-        void EnterCombat(Unit* who) override;
+        void JustEngagedWith(Unit* who) override;
         void JustDied(Unit* killer) override;
         static int Permissible(const Creature*);
         void DoActionAI(uint32 diff, CreatureActionType type);
@@ -78,7 +78,7 @@ class CombatAI : public CreatureAI
 
         void InitializeAI();
         void Reset();
-        void EnterCombat(Unit* who);
+        void JustEngagedWith(Unit* who);
         void JustDied(Unit* killer);
         void UpdateAI(uint32 diff);
         static int Permissible(const Creature*);
@@ -94,7 +94,7 @@ class CasterAI : public CombatAI
         void InitializeAI();
         void AttackStart(Unit* victim) { AttackStartCaster(victim, m_attackDist); }
         void UpdateAI(uint32 diff);
-        void EnterCombat(Unit* /*who*/);
+        void JustEngagedWith(Unit* /*who*/);
     private:
         float m_attackDist;
 };

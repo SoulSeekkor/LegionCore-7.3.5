@@ -153,7 +153,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
                 _killMinchar = false;
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 me->setActive(true);
                 DoZoneInCombat();

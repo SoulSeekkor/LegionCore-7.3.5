@@ -95,9 +95,9 @@ public:
             BladeHitCount = 0;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_DRAGONREACH, 7000);
             events.RescheduleEvent(EVENT_SUMMON_HELPERS, 20000);
             events.RescheduleEvent(EVENT_HEROIC_LEAP, 40000);
@@ -231,7 +231,7 @@ public:
             DoCast(SPELL_HEAVY_ARMOR);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
         }
 

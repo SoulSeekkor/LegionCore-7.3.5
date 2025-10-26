@@ -102,9 +102,9 @@ public:
             });
         }
 
-        void EnterCombat(Unit* /*who*/) override //58:42
+        void JustEngagedWith(Unit* /*who*/) override //58:42
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DefaultEvents(PHASE_1);
         }
 
@@ -350,7 +350,7 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_CHECK_VICTIM, 1000);

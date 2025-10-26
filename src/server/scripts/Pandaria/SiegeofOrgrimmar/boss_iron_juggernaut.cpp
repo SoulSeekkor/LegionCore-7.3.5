@@ -144,10 +144,10 @@ class boss_iron_juggernaut : public CreatureScript
                 return true;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.Reset();
-                _EnterCombat();
+                _JustEngagedWith();
                 SendActionForAllPassenger(true);
                 PowerTimer = 1100;
                 checkvictim = 1500;
@@ -509,7 +509,7 @@ public:
             me->SetReactState(REACT_PASSIVE);
         }
         
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
         
         void UpdateAI(uint32 diff)
         {
@@ -631,7 +631,7 @@ public:
 
         void Reset(){}         
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
         
         void EnterEvadeMode(){}
         
@@ -666,7 +666,7 @@ public:
             events.RescheduleEvent(EVENT_ACTIVE_EXPLOSIVE_TAR, 2000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -712,7 +712,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -744,7 +744,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
         {

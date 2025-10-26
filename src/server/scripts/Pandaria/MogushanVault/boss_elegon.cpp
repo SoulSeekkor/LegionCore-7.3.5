@@ -159,9 +159,9 @@ class boss_elegon : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 me->SummonCreature(NPC_INVISIBLE_STALKER, me->GetPositionX(), me->GetPositionY(), 360.0f); //Buff Controller
                 me->SummonCreature(NPC_ENERGY_VORTEX_STALKER, me->GetPositionX(), me->GetPositionY(), 360.0f);
 
@@ -424,7 +424,7 @@ class npc_buff_controller : public CreatureScript
             
             void EnterEvadeMode() override {}
 
-            void EnterCombat(Unit* who) override {}
+            void JustEngagedWith(Unit* who) override {}
 
             void UpdateAI(uint32 diff) override
             {
@@ -469,7 +469,7 @@ class npc_celestial_protector : public CreatureScript
                 annihilation = false;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_ARCING_ENERGY, 12000);
             }

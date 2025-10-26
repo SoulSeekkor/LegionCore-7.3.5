@@ -1601,7 +1601,7 @@ class npc_vashjelan_siren : public CreatureScript
             Hatchiling(creatureList, killer);
         }
 
-        void EnterCombat(Unit* /*victim*/) override
+        void JustEngagedWith(Unit* /*victim*/) override
         {
             events.ScheduleEvent(EVENT_GENERIC_1, 3000);
             events.ScheduleEvent(EVENT_GENERIC_2, 4000);
@@ -1757,7 +1757,7 @@ class npc_faceless_of_the_deep : public CreatureScript
         }
 
 
-        void EnterCombat(Unit* /*victim*/) override
+        void JustEngagedWith(Unit* /*victim*/) override
         {
             me->SetCanFly(false);
             me->SetDisableGravity(false);
@@ -2413,7 +2413,7 @@ class npc_trade_prince_gallywix_final : public CreatureScript
             me->setFaction(14);
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             if (events.GetPhaseMask())
                 sCreatureTextMgr->SendChat(me, TEXT_GENERIC_3);

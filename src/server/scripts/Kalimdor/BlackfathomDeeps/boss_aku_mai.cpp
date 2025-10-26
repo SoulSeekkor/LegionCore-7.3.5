@@ -55,7 +55,7 @@ public:
                 instance->SetData(TYPE_AKU_MAI, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance)
                 instance->SetData(TYPE_AKU_MAI, IN_PROGRESS);

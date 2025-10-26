@@ -228,10 +228,10 @@ struct boss_elisande : BossAI
         killCDTimer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_LEAVE_NIGHTWELL_FILTER, true);
         DefaultEvents(true);
     }
@@ -259,13 +259,13 @@ struct boss_elisande : BossAI
         instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_CONFLEXIVE_BURST_AURA);
     }
 
-    void DefaultEvents(bool enterCombat)
+    void DefaultEvents(bool JustEngagedWith)
     {
         singularityCount = 0;
         arcaneticRingCount = 0;
         delphuricBeamCount = 0;
         echoOrbCount = 0;
-        uint32 modTime = enterCombat ? 0 : 10000;
+        uint32 modTime = JustEngagedWith ? 0 : 10000;
 
         if (IsLfrRaid())
         {

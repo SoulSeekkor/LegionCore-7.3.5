@@ -61,7 +61,7 @@ struct boss_encounter_skulloc : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance->GetBossState(DATA_SKULLOC) != IN_PROGRESS)
             instance->SetBossState(DATA_SKULLOC, IN_PROGRESS);
@@ -109,9 +109,9 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_skulloc::EnterCombat(who);
+            boss_encounter_skulloc::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             events.RescheduleEvent(EVENT_GRONN_SMASH, 30000);
 
@@ -253,9 +253,9 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_skulloc::EnterCombat(who);
+            boss_encounter_skulloc::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             events.RescheduleEvent(EVENT_SHATTERING_BLADE, 4000);
             events.RescheduleEvent(EVENT_BERSERKER_LEAP, 10000);
@@ -346,9 +346,9 @@ public:
             me->SetReactState(REACT_PASSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_encounter_skulloc::EnterCombat(who);
+            boss_encounter_skulloc::JustEngagedWith(who);
 
             if (!me->HasAura(SPELL_RIDE_VEHICLE))
                 if (auto turret = instance->instance->GetCreature(instance->GetGuidData(NPC_BLACKHAND_TURRET)))
@@ -401,7 +401,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_RAPID_FIRE, 0);
         }

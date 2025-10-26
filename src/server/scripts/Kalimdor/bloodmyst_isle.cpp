@@ -60,7 +60,7 @@ public:
 
         void Reset() {}
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void JustDied(Unit* killer)
         {
@@ -369,7 +369,7 @@ public:
             me->SetDisplayId(me->GetCreatureTemplate()->Modelid[1]);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             _events.ScheduleEvent(EVENT_UPPERCUT, 15 * IN_MILLISECONDS);
             _events.ScheduleEvent(EVENT_IMMOLATE, 10 * IN_MILLISECONDS);

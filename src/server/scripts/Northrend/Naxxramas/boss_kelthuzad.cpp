@@ -371,11 +371,11 @@ public:
                     instance->DoCompleteAchievement(RAID_MODE(ACHIEVEMENT_JUST_CANT_GET_ENOUGH_10, ACHIEVEMENT_JUST_CANT_GET_ENOUGH_25));
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->setFaction(uiFaction);
 
-            _EnterCombat();
+            _JustEngagedWith();
             FindGameObjects();
             for (uint8 i = 0; i <= 3; ++i)
             {
@@ -766,7 +766,7 @@ public:
         if (!pKelthuzadAI)
             return false;
 
-        //pKelthuzadAI->EnterCombat(pPlayer);
+        //pKelthuzadAI->JustEngagedWith(pPlayer);
         pKelthuzadAI->AttackStart(pPlayer);
 
         if (GameObject* trigger = instance->instance->GetGameObject(instance->GetGuidData(DATA_KELTHUZAD_TRIGGER)))

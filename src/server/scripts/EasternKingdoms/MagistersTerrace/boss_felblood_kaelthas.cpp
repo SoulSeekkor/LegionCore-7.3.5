@@ -185,7 +185,7 @@ public:
                 RemoveGravityLapse();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (!instance)
                 return;
@@ -471,7 +471,7 @@ public:
             DoCast(me, SPELL_FLAMESTRIKE2, true);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void UpdateAI(uint32 diff)
         {
@@ -519,7 +519,7 @@ public:
             FakeDeath = false;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void DamageTaken(Unit* /*killer*/, uint32 &damage, DamageEffectType dmgType)
         {
@@ -623,7 +623,7 @@ public:
             HatchTimer = 10000;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
 
         void UpdateAI(uint32 diff)
@@ -667,7 +667,7 @@ public:
             DoCast(me, SPELL_ARCANE_SPHERE_PASSIVE, true);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void UpdateAI(uint32 diff)
         {

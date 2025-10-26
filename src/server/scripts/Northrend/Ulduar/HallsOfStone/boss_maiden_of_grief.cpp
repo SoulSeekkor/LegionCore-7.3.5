@@ -92,7 +92,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_AGGRO, me);
 

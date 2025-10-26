@@ -307,7 +307,7 @@ public:
             talk = false;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(2);
             events.RescheduleEvent(EVENT_1, 3 * IN_MILLISECONDS);
@@ -398,7 +398,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CallForHelp(50.0f);
         }
@@ -435,7 +435,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 10 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_2, 6 * IN_MILLISECONDS);
@@ -498,7 +498,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         { }
 
         void JustDied(Unit* /*killer*/) override
@@ -580,7 +580,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             instance->SetData(DATA_ESSENCE_OF_ORDER_EVENT, IN_PROGRESS);
 
@@ -779,7 +779,7 @@ public:
             start = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         { }
 
         void DoAction(int32 const action) override
@@ -1122,7 +1122,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CallForHelp(50.0f);
         }
@@ -1194,7 +1194,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 5 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_2, 15 * IN_MILLISECONDS);
@@ -1251,7 +1251,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 15 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_2, 7 * IN_MILLISECONDS);

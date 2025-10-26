@@ -227,13 +227,13 @@ struct boss_high_botanist_telarn : BossAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (IsMythicRaid())
             return;
 
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_BERSERK, true);
         //DoCast(me, SPELL_SHARE_HEALTH, true);
         DoCast(me, SPELL_RECURSIVE_STRIKES, true);
@@ -538,7 +538,7 @@ struct npc_nh_solarist_telarn : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         //Talk(SAY_AGGRO);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -776,7 +776,7 @@ struct npc_nh_arcanist_telarn : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         //Talk(SAY_AGGRO);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -979,7 +979,7 @@ struct npc_nh_naturalist_telarn : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         //Talk(SAY_AGGRO);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -1156,7 +1156,7 @@ struct npc_telarn_duskwatch_weaver : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->HasAura(SPELL_ARCANE_CHANNEL))
             me->RemoveAurasDueToSpell(SPELL_ARCANE_CHANNEL);

@@ -44,7 +44,7 @@ struct npc_glintrok_scout : public ScriptedAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
         {

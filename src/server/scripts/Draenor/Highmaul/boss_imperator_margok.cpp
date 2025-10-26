@@ -385,9 +385,9 @@ struct boss_imperator_margok : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         Talk(Aggro);
 
@@ -1490,7 +1490,7 @@ struct npc_highmaul_arcane_aberration : public MS::AI::CosmeticAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 2);
     }
@@ -1913,7 +1913,7 @@ struct npc_highmaul_gorian_warmage : public ScriptedAI
             AttackStart(target);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 2);
 
@@ -2067,7 +2067,7 @@ struct npc_highmaul_gorian_reaver : public ScriptedAI
             AttackStart(target);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 2);
 

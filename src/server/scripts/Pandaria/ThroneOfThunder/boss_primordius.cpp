@@ -170,9 +170,9 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_MALFORMED_BLOOD);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_PULL);
             updatepower = 1000;
             enragetimer = 480000;
@@ -341,7 +341,7 @@ public:
             events.RescheduleEvent(EVENT_MOVE_TO_PRIMORDIUS, 1000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
         {
@@ -452,7 +452,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

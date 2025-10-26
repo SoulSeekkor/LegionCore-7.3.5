@@ -64,9 +64,9 @@ public:
 
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             if (me->HasAura(SPELL_FIRE_DUMMY))
                 me->RemoveAurasDueToSpell(SPELL_FIRE_DUMMY);
             incinerate = 3000;

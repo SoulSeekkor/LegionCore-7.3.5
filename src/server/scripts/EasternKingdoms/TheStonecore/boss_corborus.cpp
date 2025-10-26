@@ -51,7 +51,7 @@ struct boss_corborus : public BossAI
         summons.DespawnAll();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_DUMPENING_WAVE, 5000);
         events.RescheduleEvent(EVENT_CRYSTAL_BARRAGE, 7000);
@@ -180,7 +180,7 @@ struct npc_rock_borer : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_ROCK_BORE, 2000);
     }

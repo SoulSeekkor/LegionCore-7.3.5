@@ -37,9 +37,9 @@ struct boss_jinbak : public BossAI
         DoCast(120095);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_GROW, 4000);
         events.RescheduleEvent(EVENT_DETONATE, 35000);

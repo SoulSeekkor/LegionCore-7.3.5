@@ -114,7 +114,7 @@ public:
                 instance->SetData(DATA_SLAD_RAN_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_AGGRO, me);
 

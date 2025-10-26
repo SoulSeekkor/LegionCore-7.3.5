@@ -39,7 +39,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             switch(me->GetEntry())
             {

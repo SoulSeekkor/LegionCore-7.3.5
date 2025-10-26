@@ -112,7 +112,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             events.RescheduleEvent(EVENT_QUAKE, 5000 + rand()%5000);
         }
@@ -167,7 +167,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             events.RescheduleEvent(EVENT_FELL_FIREBALL, 1000);
         }
@@ -241,7 +241,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             events.RescheduleEvent(EVENT_MILL_FEAR, 10000);
             events.RescheduleEvent(EVENT_FROSTBOLT_VOLLEY, 7000 + rand()%10000);

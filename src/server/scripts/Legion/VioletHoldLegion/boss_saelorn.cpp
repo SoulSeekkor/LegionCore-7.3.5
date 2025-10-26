@@ -64,10 +64,10 @@ public:
             text = 1;            
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_VENOM_SPRAY, 3000);
             events.RescheduleEvent(EVENT_WEB_GRAB, 14000);

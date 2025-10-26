@@ -87,7 +87,7 @@ class boss_zanzil : public CreatureScript
                     //me->SummonCreature(NPC_ZANZIL_BERSERKER, berserkerPos[i]);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_VOODOO_BOLT, urand(3000, 5000));

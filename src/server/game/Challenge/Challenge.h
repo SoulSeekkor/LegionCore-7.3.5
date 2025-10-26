@@ -73,7 +73,7 @@ public:
     void OnCreatureCreateForScript(Creature* creature) override;
     void OnCreatureRemoveForScript(Creature* creature) override;
     void OnCreatureUpdateDifficulty(Creature* creature) override;
-    void EnterCombatForScript(Creature* creature, Unit* enemy) override;
+    void JustEngagedWithForScript(Creature* creature, Unit* enemy) override;
     void CreatureDiesForScript(Creature* creature, Unit* killer) override;
     void OnGameObjectCreateForScript(GameObject* /*go*/) override {}
     void OnGameObjectRemoveForScript(GameObject* /*go*/) override {}

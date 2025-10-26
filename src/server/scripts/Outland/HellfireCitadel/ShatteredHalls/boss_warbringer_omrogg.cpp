@@ -132,7 +132,7 @@ class mob_omrogg_heads : public CreatureScript
                 Death_Timer = 4000;
                 DeathYell = false;
             }
-            void EnterCombat(Unit* /*who*/) {}
+            void JustEngagedWith(Unit* /*who*/) {}
 
             void DoDeathYell()
             {
@@ -248,7 +248,7 @@ class boss_warbringer_omrogg : public CreatureScript
                 ThreatYell = true;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 me->SummonCreature(NPC_LEFT_HEAD, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_DEAD_DESPAWN, 0);
                 me->SummonCreature(NPC_RIGHT_HEAD, 0.0f, 0.0f, 0.0f, 0.0f, TEMPSUMMON_DEAD_DESPAWN, 0);

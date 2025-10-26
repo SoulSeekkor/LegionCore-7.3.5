@@ -65,10 +65,10 @@ struct boss_kyrak : public BossAI
             me->SummonCreature(NPC_DRAKONID_MONSTROSITY, drakonidSpawn[i]);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_FIXATION, 14000); //54:37
         events.RescheduleEvent(EVENT_VILEBLOOD, 10000);
@@ -159,7 +159,7 @@ struct npc_drakonid_monstrosity : public CreatureAI
 
     uint32 eruptionTimer;
 
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
 
     void Reset() override
     {

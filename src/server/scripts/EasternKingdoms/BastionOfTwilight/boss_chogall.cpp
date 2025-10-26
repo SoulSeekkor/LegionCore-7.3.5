@@ -243,7 +243,7 @@ class boss_chogall : public CreatureScript
                 summons.Despawn(summon);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 DoCorruption(CORRUPTION_CLEAR);
                 DoCorruption(CORRUPTION_INIT);

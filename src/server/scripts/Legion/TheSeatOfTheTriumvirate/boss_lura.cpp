@@ -111,9 +111,9 @@ public:
             shieldsbreaked = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override 
+        void JustEngagedWith(Unit* /*who*/) override 
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_BLAST, urand(10000, 18000));
             me->AddDelayedEvent(1500, [this] {
                 DoCast(SPELL_CALL);
@@ -440,7 +440,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, urand(5000,8000));
             events.RescheduleEvent(EVENT_2, urand(8000,10000));
@@ -565,7 +565,7 @@ public:
             summoner->CastSpell(me, SPELL_CHANNEL_ADD);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, urand(8000, 10000));
             events.RescheduleEvent(EVENT_2, urand(5000, 8000));
@@ -652,7 +652,7 @@ public:
             DoZoneInCombat();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_2, urand(5000, 8000));
         }

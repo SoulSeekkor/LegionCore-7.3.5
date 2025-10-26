@@ -205,7 +205,7 @@ class boss_professor_putricide : public CreatureScript
                     me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NOT_SELECTABLE);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (events.GetPhaseMask() & PHASE_MASK_NOT_SELF)
                     return;

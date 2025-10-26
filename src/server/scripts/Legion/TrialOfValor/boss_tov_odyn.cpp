@@ -177,7 +177,7 @@ namespace
     };
 }
 
-void EnterCombatEncounter(InstanceScript* instance)
+void JustEngagedWithEncounter(InstanceScript* instance)
 {
     if (!instance)
         return;
@@ -360,9 +360,9 @@ struct boss_tov_odyn : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void KilledUnit(Unit* victim) override
@@ -863,7 +863,7 @@ struct npc_tov_hymdall : ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoZoneInCombat();
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -886,7 +886,7 @@ struct npc_tov_hymdall : ScriptedAI
 
         if (instance->GetData(Data::DataMisc::OdynTestOfAges) != DONE)
         {
-            EnterCombatEncounter(instance);
+            JustEngagedWithEncounter(instance);
 
             if (auto Hyrja = instance->instance->GetCreature(instance->GetGuidData(Data::Creatures::Hyrja)))
                 if (auto player = me->FindNearestPlayer(300.0f, true))
@@ -1115,7 +1115,7 @@ struct npc_tov_hyrja : ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoZoneInCombat();
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);

@@ -211,7 +211,7 @@ class mob_tushui_trainee : public CreatureScript
                 events.RescheduleEvent(EVENT_2, 5000);
             }
 
-            void EnterCombat(Unit* unit)
+            void JustEngagedWith(Unit* unit)
             {
                 events.RescheduleEvent(EVENT_1, 5000);
                 events.CancelEvent(EVENT_2);
@@ -372,7 +372,7 @@ public:
         bool isInFalcon;
         bool fightEnd;
 
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0);
             events.RescheduleEvent(EVENT_JAOMIN_JUMP, 1000);
@@ -984,7 +984,7 @@ public:
         
         EventMap events;
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             events.RescheduleEvent(1, 3000);
             events.RescheduleEvent(2, 5000);
@@ -2583,7 +2583,7 @@ public:
             damage = 1;
         }
 
-        void EnterCombat(Unit* victim)
+        void JustEngagedWith(Unit* victim)
         {
             if (me->GetDistance(victim) > 10)
                 me->CastSpell(victim, SPELL_ROLL, true);
@@ -3161,7 +3161,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             return;
         }
@@ -4472,7 +4472,7 @@ public:
                 damage = 1;
         }
 
-        void EnterCombat(Unit* victim)
+        void JustEngagedWith(Unit* victim)
         {
             if (me->GetDistance(victim) > 10)
                 me->CastSpell(victim, SPELL_ROLL, true);
@@ -4998,7 +4998,7 @@ class npc_shen_healer : public CreatureScript
                 me->CastSpell(me, me->GetEntry() == NPC_HEALER_A ? SPELL_HEALER_A: SPELL_HEALER_H, true);
             }
 
-            void EnterCombat(Unit*)
+            void JustEngagedWith(Unit*)
             {
                 return;
             }

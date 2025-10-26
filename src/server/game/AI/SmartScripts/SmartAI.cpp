@@ -653,7 +653,7 @@ void SmartAI::OnStartQuest(Player* player, Quest const* quest)
     GetScript()->ProcessEventsFor(SMART_EVENT_QUEST_ACCEPTED, player, quest->GetQuestId());
 }
 
-void SmartAI::EnterCombat(Unit* enemy)
+void SmartAI::JustEngagedWith(Unit* enemy)
 {
     me->InterruptNonMeleeSpells(false); // must be before ProcessEvents
     GetScript()->ProcessEventsFor(SMART_EVENT_AGGRO, enemy);

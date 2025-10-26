@@ -65,10 +65,10 @@ struct boss_harbaron : public BossAI
         trashGUID.clear();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         me->SetReactState(REACT_AGGRESSIVE);
 
         events.RescheduleEvent(EVENT_COSMIC_SCYTHE, 4000);
@@ -304,7 +304,7 @@ struct npc_harbaron_shackled_servitor : public ScriptedAI
         DoCast(me, SPELL_SHACKLED_SERVITOR, true);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }
@@ -429,7 +429,7 @@ struct npc_mos_seacursed_swiftblade : public ScriptedAI
         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(3, 4));
         events.RescheduleEvent(EVENT_2, urandms(7, 9));

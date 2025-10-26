@@ -435,10 +435,10 @@ public:
                 at->Remove();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {            
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
   
             me->CastStop();
             me->RemoveAllAuras();
@@ -1572,9 +1572,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* ) override
+        void JustEngagedWith(Unit* ) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
         }
 
         void EnterEvadeMode() override
@@ -2000,7 +2000,7 @@ public:
             me->DespawnOrUnsummon(1000);
         }
 
-        void EnterCombat(Unit* ) override
+        void JustEngagedWith(Unit* ) override
         {
             switch(me->GetEntry())
             {
@@ -2175,7 +2175,7 @@ public:
             events.Reset();
             events.RescheduleEvent(EVENT_1, 100);
             timer_for_energy = 1000;
-            EnterCombat(nullptr);
+            JustEngagedWith(nullptr);
         }
         
         void JustDied(Unit* who) override
@@ -2183,7 +2183,7 @@ public:
             me->RemoveAurasDueToSpell(me->GetEntry() == NPC_EYE_OF_GULDAN ? SPELL_EYE_OF_GULDAN_PERIODIC : 221728);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoCast(me->GetEntry() == NPC_EYE_OF_GULDAN ? SPELL_EYE_OF_GULDAN_SPAWN : SPELL_EMPOWERED_EYE_OF_GULDAN_SPAWN);
             DoCast(SPELL_EYE_OF_GULDAN_SPAWN_1);

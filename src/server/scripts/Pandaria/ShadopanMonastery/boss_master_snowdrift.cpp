@@ -151,7 +151,7 @@ struct boss_master_snowdrift : public BossAI
         SetCanSeeEvenInPassiveMode(true);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SetBossState(DATA_MASTER_SNOWDRIFT, IN_PROGRESS);
         initDefaultEventsForPhase();

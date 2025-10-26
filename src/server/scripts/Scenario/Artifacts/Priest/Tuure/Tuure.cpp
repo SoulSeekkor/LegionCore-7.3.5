@@ -45,7 +45,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 4000);
             events.RescheduleEvent(EVENT_2, 9000);
@@ -298,7 +298,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == 106253)
             {
@@ -416,7 +416,7 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(1);
             point = 1;
@@ -528,7 +528,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 2000); //211185

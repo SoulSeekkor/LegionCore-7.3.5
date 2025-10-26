@@ -469,9 +469,9 @@ struct boss_star_augur_etraeus : BossAI
         conjunctionCount = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         me->SetAnimKitId(10447);
         me->RemoveAura(SpellPreCombatVisual);
         me->SetFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_NONE);
@@ -597,7 +597,7 @@ struct npc_star_augur_thing_that_should_not_be : ScriptedAI
         scheduler.Update(diff, std::bind(&ScriptedAI::DoMeleeAttackIfReady, this, SPELL_SCHOOL_MASK_NORMAL));
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         if (instance)
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 2);

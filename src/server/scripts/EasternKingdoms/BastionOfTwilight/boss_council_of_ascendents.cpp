@@ -310,7 +310,7 @@ class boss_feludius : public CreatureScript
                 _JustReachedHome();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (Creature* _ignacious = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_IGNACIOUS)))
                     if (!_ignacious->isInCombat())
@@ -539,7 +539,7 @@ class boss_ignacious : public CreatureScript
                 _JustReachedHome();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (Creature* _feludius = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_FELUDIUS)))
                     if (!_feludius->isInCombat())
@@ -829,7 +829,7 @@ class boss_arion : public CreatureScript
                 _JustReachedHome();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {                
             }
 
@@ -1031,7 +1031,7 @@ class boss_terrastra: public CreatureScript
                 _JustReachedHome();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
             }
 
@@ -1197,7 +1197,7 @@ class boss_elementium_monstrosity : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 Talk(SAY_MONSTROSITY_AGGRO);
                 DoCast(me, SPELL_CRYOGENIC_AURA);

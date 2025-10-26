@@ -150,7 +150,7 @@ public:
         }
         
         void EnterEvadeMode() override {}
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
                 
         void JustSummoned(Creature* summon) override
         {
@@ -252,7 +252,7 @@ public:
             events.Reset();   
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {           
             if (me->GetEntry() == 114944)
                 events.RescheduleEvent(EVENT_1, 4000);
@@ -318,7 +318,7 @@ public:
     {
         boss_brawguild_razorgrinAI(Creature* creature) : BrawlersBossAI(creature) {}
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         
         void KilledUnit(Unit* who) override
         {
@@ -419,7 +419,7 @@ public:
             count_adds++;
         }
         
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
         
         void EnterEvadeMode() override {}
                 
@@ -460,7 +460,7 @@ public:
             events.Reset();   
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {           
             events.RescheduleEvent(EVENT_1, 4000);
             events.RescheduleEvent(EVENT_2, urand(3000, 8000));
@@ -528,7 +528,7 @@ public:
             events.Reset();   
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (Unit* unit = me->GetAnyOwner())
                 if (Player* owner = unit->ToPlayer())

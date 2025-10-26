@@ -116,7 +116,7 @@ public:
 
         void AttackStart(Unit* who)
         {
-            if (instance)//can't use entercombat(), boss' dmg aura sets near players in combat, before entering the room's door
+            if (instance)//can't use JustEngagedWith(), boss' dmg aura sets near players in combat, before entering the room's door
                 instance->SetData(TYPE_BARON, IN_PROGRESS);
             ScriptedAI::AttackStart(who);
         }

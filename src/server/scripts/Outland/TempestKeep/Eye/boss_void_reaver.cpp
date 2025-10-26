@@ -71,10 +71,10 @@ struct boss_void_reaver : public BossAI
         _JustDied();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.ScheduleEvent(EVENT_POUNDING, 15000);
         events.ScheduleEvent(EVENT_ARCANE_ORB, 3000);

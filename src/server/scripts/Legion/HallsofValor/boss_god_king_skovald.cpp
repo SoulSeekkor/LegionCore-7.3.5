@@ -122,10 +122,10 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO); //Give up the aegis or die!
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_FELBLAZE_RUSH, 7000);
             events.RescheduleEvent(EVENT_SAVAGE_BLADE, 24000);
             DoCast(me, 202366, true); //Remove Odyn's Blessing - Speed buff
@@ -411,7 +411,7 @@ public:
                     DoCast(me, spellId, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, urand(24000, 27000)); // Call
             events.RescheduleEvent(EVENT_2, urand(16000, 18000)); // Dagger

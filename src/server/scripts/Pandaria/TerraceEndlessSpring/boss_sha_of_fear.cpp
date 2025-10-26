@@ -430,7 +430,7 @@ public:
                 pInstance->SetBossState(DATA_SHA_OF_FEAR, FAIL);
         }
 
-        void EnterCombat(Unit* attacker) override
+        void JustEngagedWith(Unit* attacker) override
         {
             if (pInstance)
             {
@@ -1082,7 +1082,7 @@ public:
 
             dreadshotting = false;
         }
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             events.ScheduleEvent(EVENT_DREAD_SPRAY, 20 * IN_MILLISECONDS);
             events.ScheduleEvent(EVENT_DEATH_BLOSSOM, 40 * IN_MILLISECONDS);

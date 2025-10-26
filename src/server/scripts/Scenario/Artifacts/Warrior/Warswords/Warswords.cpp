@@ -118,7 +118,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 7000); // 195574
@@ -276,7 +276,7 @@ public:
             count_adds = 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 7000); // 195574
             events.RescheduleEvent(EVENT_2, 10000); // 195575 23 + after 195996

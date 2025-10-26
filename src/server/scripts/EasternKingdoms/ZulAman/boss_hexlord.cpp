@@ -228,7 +228,7 @@ class boss_hex_lord_malacrass : public CreatureScript
                 me->SetByteValue(UNIT_FIELD_BYTES_2, 0, SHEATH_STATE_MELEE);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.RescheduleEvent(EVENT_SPIRIT_BOLTS, 10000);
                 events.RescheduleEvent(EVENT_DRAIN_POWER, 6000);

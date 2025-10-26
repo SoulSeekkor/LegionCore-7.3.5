@@ -69,11 +69,11 @@ public:
             timer = 13000;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //49:10
         {
             TalkandSendWhisperToAll(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_SHADOW_CRASH, 4000); //49:14, 49:26, 49:50, 50:03
             events.RescheduleEvent(EVENT_DOOM, 8000);         //49:18, 49:30, 49:38, 49:54, 50:06

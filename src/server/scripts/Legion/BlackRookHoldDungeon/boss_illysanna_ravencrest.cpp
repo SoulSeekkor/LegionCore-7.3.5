@@ -141,9 +141,9 @@ struct boss_illysanna_ravencrest : public BossAI
             DoCast(SPELL_CHRISTMAS_CAP);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         DefaultEvents();
         Talk(SAY_AGGRO);
     }
@@ -439,7 +439,7 @@ struct npc_illysanna_commandir : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_1, 8000);
         events.ScheduleEvent(EVENT_2, 12000);
@@ -493,7 +493,7 @@ struct npc_illysanna_trash_generic : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override {}        
+    void JustEngagedWith(Unit* /*who*/) override {}        
     
     void UpdateAI(uint32 diff) override
     {
@@ -551,7 +551,7 @@ struct npc_brh_wyrmtongue_scavenger : public ScriptedAI
         hyperactiveTimer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         SetAncientEvent(true);
     }
@@ -594,12 +594,12 @@ struct npc_brh_wyrmtongue_scavenger : public ScriptedAI
         }
     }
 
-    void SetAncientEvent(bool enterCombat = false)
+    void SetAncientEvent(bool JustEngagedWith = false)
     {
         switch (ancientEvent)
         {
             case 1:
-                if (!enterCombat)
+                if (!JustEngagedWith)
                     Talk(0);
                 me->StopAttack(true);
                 DoCast(me, SPELL_HYPERACTIVE_DUMMY, true);
@@ -610,7 +610,7 @@ struct npc_brh_wyrmtongue_scavenger : public ScriptedAI
                 indigestionTimer = 2000;
                 break;
             case 3:
-                if (!enterCombat)
+                if (!JustEngagedWith)
                     DoCast(me, SPELL_FRENZY_POTION, true);
                 break;
         }

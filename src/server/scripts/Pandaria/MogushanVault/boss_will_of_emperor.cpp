@@ -158,9 +158,9 @@ class npc_woi_controller : public CreatureScript
                pInstance->DoRemoveAurasDueToSpellOnPlayers(SPELL_FOCALISED_DEFENSE);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
-                //_EnterCombat();
+                //_JustEngagedWith();
                 DoZoneInCombat();
                 instance->SetBossState(DATA_WILL_OF_EMPEROR, IN_PROGRESS);
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_INSTANCE_START, me);
@@ -379,7 +379,7 @@ class boss_generic_imperator : public CreatureScript
                 listStrike = { 0, 1, 2, 3 };
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 DoCast(me, SPELL_ENERGIZE_REGEN, true);
 

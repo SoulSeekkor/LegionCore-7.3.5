@@ -93,9 +93,9 @@ struct boss_raigonn : public BossAI
         me->RemoveAurasDueToSpell(SPELL_BROKEN_CARAPACE_DAMAGE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_SUMMON_PROTECTORAT, urand(15000, 30000), 0, PHASE_WEAK_SPOT);
         events.RescheduleEvent(EVENT_SUMMON_ENGULFER, urand(15000, 30000), 0, PHASE_WEAK_SPOT);
         events.RescheduleEvent(EVENT_SUMMON_SWARM_BRINGER, urand(15000, 30000), 0, PHASE_WEAK_SPOT);

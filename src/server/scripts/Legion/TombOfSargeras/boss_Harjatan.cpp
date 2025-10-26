@@ -159,9 +159,9 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             Talk(SAY_AGGRO);
 
@@ -305,7 +305,7 @@ public:
                                     {
                                         if (!egg->isAlive())
                                             egg->Respawn(true);
-                                        egg->AI()->EnterCombat(me->getVictim());
+                                        egg->AI()->JustEngagedWith(me->getVictim());
                                         egg->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NOT_ATTACKABLE_1);
                                         egg->CastSpell(egg, SPELL_HARDENED_SHELL);
                                         egg->CastSpellDelay(egg, eggsCasts[color], false, 100);
@@ -316,7 +316,7 @@ public:
                                 {
                                     if (!egg->isAlive())
                                         egg->Respawn(true);
-                                    egg->AI()->EnterCombat(me->getVictim());
+                                    egg->AI()->JustEngagedWith(me->getVictim());
                                     egg->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NOT_ATTACKABLE_1);
                                     egg->CastSpell(egg, SPELL_HARDENED_SHELL);
                                     egg->CastSpellDelay(egg, eggsCasts[color], false, 100);
@@ -537,7 +537,7 @@ public:
             me->RemoveAura(241393);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_ELDER1, 6000); //wave
             events.RescheduleEvent(EVENT_ELDER2, 8000); //splash

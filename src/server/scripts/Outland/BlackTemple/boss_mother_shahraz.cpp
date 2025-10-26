@@ -127,7 +127,7 @@ public:
             Enraged = false;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance)
                 instance->SetData(DATA_MOTHERSHAHRAZEVENT, IN_PROGRESS);

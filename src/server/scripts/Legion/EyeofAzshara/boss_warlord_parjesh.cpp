@@ -93,10 +93,10 @@ public:
             enrage = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             DoCast(me, SPELL_ENERGIZE, true);
 
             events.RescheduleEvent(EVENT_CALL_REINFORC, 3500 + urand(0, 1000));
@@ -254,7 +254,7 @@ public:
         
         EventMap events;    
         
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 15000);
             events.RescheduleEvent(EVENT_2, 25000);

@@ -83,7 +83,7 @@ class boss_akilzon : public CreatureScript
                 memset(&Eagles, 0, sizeof(Eagles));
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.RescheduleEvent(EVENT_ELECTRICAL_STORM, 50000);
                 events.RescheduleEvent(EVENT_STATIC_DISRUPTION, 7000);
@@ -201,7 +201,7 @@ class npc_akilzon_soaring_eagle : public CreatureScript
                 events.Reset();
             }
             
-            void EnterCombat(Unit* who) 
+            void JustEngagedWith(Unit* who) 
             {
                 events.RescheduleEvent(EVENT_EAGLE_SWOOP, urand(100, 6000));
             }

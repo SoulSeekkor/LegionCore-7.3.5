@@ -69,7 +69,7 @@ public:
         Position pos;
         bool need_stop;
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 3000);
         }     
@@ -189,7 +189,7 @@ public:
             events.Reset();  
         }
         
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 4000);
@@ -315,7 +315,7 @@ public:
             events.Reset();  
         }
         
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 2000);
             events.RescheduleEvent(EVENT_2, 33000);
@@ -453,7 +453,7 @@ public:
                 me->SummonCreature(id, me->GetPositionX() + irand(-5, 5), me->GetPositionY() + irand(-5, 5), me->GetPositionZ(), me->GetOrientation());
         }
         
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
                 
         void JustDied(Unit* who) override
         {                                   
@@ -493,7 +493,7 @@ public:
             me->ApplySpellImmune(SPELL_MANICAL_LAUGH, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             switch(me->GetEntry())
             {

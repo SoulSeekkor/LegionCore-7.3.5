@@ -63,7 +63,7 @@ class boss_nalorakk : public CreatureScript
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_ATTACKABLE_1 | UNIT_FLAG_IMMUNE_TO_PC);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_BEARFORM, 30000);

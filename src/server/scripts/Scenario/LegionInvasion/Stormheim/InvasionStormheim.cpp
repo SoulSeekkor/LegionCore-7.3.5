@@ -106,7 +106,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 6000); // 242729
             events.RescheduleEvent(EVENT_2, 15000); // 235784 (start outro)

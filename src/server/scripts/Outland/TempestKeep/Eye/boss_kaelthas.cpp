@@ -864,7 +864,7 @@ struct boss_thaladred_the_darkener : public advisorbase_ai
         advisorbase_ai::Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         Talk(SAY_THALADRED_AGGRO);
         me->AddThreat(who, 5000000.0f);
@@ -950,7 +950,7 @@ struct boss_lord_sanguinar : public advisorbase_ai
         advisorbase_ai::Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_SANGUINAR_AGGRO);
     }
@@ -1035,7 +1035,7 @@ struct boss_grand_astromancer_capernian : public advisorbase_ai
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_CAPERNIAN_AGGRO);
     }
@@ -1131,7 +1131,7 @@ struct boss_master_engineer_telonicus : public advisorbase_ai
         advisorbase_ai::JustDied(killer);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_TELONICUS_AGGRO);
     }
@@ -1196,7 +1196,7 @@ struct npc_kael_flamestrike : public ScriptedAI
 
     void MoveInLineOfSight(Unit* /*who*/) override { }
 
-    void EnterCombat(Unit* /*who*/) override { }
+    void JustEngagedWith(Unit* /*who*/) override { }
 
     void UpdateAI(uint32 diff) override
     {

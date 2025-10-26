@@ -99,7 +99,7 @@ struct boss_lockmaw : public ScriptedAI
             instance->SetData(DATA_LOCKMAW, NOT_STARTED);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetData(DATA_LOCKMAW, IN_PROGRESS);
@@ -294,7 +294,7 @@ struct npc_augh_intro : public ScriptedAI
     InstanceScript* instance;
     bool Active;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (Active)
             Talk(0);
@@ -577,7 +577,7 @@ struct boss_augh : public ScriptedAI
             instance->SetData(DATA_AUGH, DONE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetData(DATA_AUGH, IN_PROGRESS);

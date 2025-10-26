@@ -181,14 +181,14 @@ public:
             Enraged = false;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance->GetBossState(BOSS_FLAMEGOR) != DONE)
             {
                 EnterEvadeMode();
                 return;
             }
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_SHIMMER, 0);
             events.RescheduleEvent(EVENT_BREATH_1, 30000);

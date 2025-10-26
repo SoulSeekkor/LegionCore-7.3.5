@@ -111,11 +111,11 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //41:14
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_VANISH, 7000); //41:21, 41:42 42:02
             events.RescheduleEvent(EVENT_COAT_CHECK, 30000); //41:44 42:20
@@ -212,7 +212,7 @@ public:
             DoCast(me, SPELL_DINNER_PARTY, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //41:14
         {
             DoCast(me, SPELL_DINNER_PARTY_AT, true);

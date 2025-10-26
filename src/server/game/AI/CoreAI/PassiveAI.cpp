@@ -71,7 +71,7 @@ void CritterAI::InitializeAI()
     });
 }
 
-void CritterAI::EnterCombat(Unit * who)
+void CritterAI::JustEngagedWith(Unit * who)
 {
     if (!me->HasUnitState(UNIT_STATE_FLEEING))
         me->GetMotionMaster()->MoveFleeing(who);
@@ -92,7 +92,7 @@ void CritterAI::EnterEvadeMode()
 
 void CritterAI::AttackedBy(Unit * who)
 {
-    EnterCombat(who);
+    JustEngagedWith(who);
 }
 
 void TriggerAI::IsSummonedBy(Unit* summoner)

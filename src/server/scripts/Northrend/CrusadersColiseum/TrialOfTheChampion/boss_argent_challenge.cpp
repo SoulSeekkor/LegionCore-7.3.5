@@ -205,7 +205,7 @@ public:
                             instance->DoUpdateAchievementCriteria(CRITERIA_TYPE_BE_SPELL_TARGET, SPELL_EADRIC_ACHIEVEMENT);
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             Talk(SAY_COMMON_AGGRO);
 
@@ -409,7 +409,7 @@ public:
                 me->RemoveAura(SPELL_SHIELD);
             }
         }
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             Talk(SAY_COMMON_AGGRO);
 
@@ -659,7 +659,7 @@ public:
                     instance->SetData(MINION_ENCOUNTER, FAIL);
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             if(InstanceScript* instance = me->GetInstanceScript())
                 if (instance->GetData(MINION_ENCOUNTER) != IN_PROGRESS)
@@ -736,7 +736,7 @@ public:
                     instance->SetData(MINION_ENCOUNTER, FAIL);
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             if(InstanceScript* instance = me->GetInstanceScript())
                 if (instance->GetData(MINION_ENCOUNTER) != IN_PROGRESS)
@@ -818,7 +818,7 @@ public:
                     instance->SetData(MINION_ENCOUNTER, FAIL);
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             if(InstanceScript* instance = me->GetInstanceScript())
                 if (instance->GetData(MINION_ENCOUNTER) != IN_PROGRESS)

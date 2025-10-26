@@ -308,7 +308,7 @@ public:
             instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 150.0f);
             CallOtherProtectors();
@@ -519,7 +519,7 @@ public:
                     (*itr)->RemoveFromWorld();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 150.0f);
             CallOtherProtectors();
@@ -729,7 +729,7 @@ public:
                     (*itr)->DespawnOrUnsummon();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoZoneInCombat(me, 150.0f);
             CallOtherProtectors();
@@ -1306,7 +1306,7 @@ public:
                 SplitDmg(damage);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (me->GetEntry())
             {

@@ -160,7 +160,7 @@ public:
             });
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             _introDone = true;
             DoCast(237716);
@@ -219,7 +219,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             ResummonAdds = false;
             events.RescheduleEvent(EVENT_1, 3000); // 234497

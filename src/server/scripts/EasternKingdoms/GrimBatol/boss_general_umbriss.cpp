@@ -59,9 +59,9 @@ struct boss_general_umbriss : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_ADDS, 30000);
         events.RescheduleEvent(EVENT_GROUND_SIEGE, 10000);
         events.RescheduleEvent(EVENT_BLEEDING_WOUND, 5000);
@@ -179,7 +179,7 @@ struct npc_malignant_trogg : public ScriptedAI
         DoCast(SPELL_MODGUD_MALICE);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         events.RescheduleEvent(EVENT_CLAW_PUNCTURE, 5000);
     }
@@ -224,7 +224,7 @@ struct npc_umbriss_trogg_dweller : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         events.RescheduleEvent(EVENT_CLAW_PUNCTURE, 5000);
     }

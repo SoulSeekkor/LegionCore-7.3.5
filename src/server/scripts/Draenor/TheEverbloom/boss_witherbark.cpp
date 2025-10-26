@@ -142,10 +142,10 @@ struct boss_witherbark : public BossAI
             me->SetPower(POWER_MANA, 25);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         Stage = STAGE_BATTLE;
 

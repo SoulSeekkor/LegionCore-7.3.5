@@ -63,9 +63,9 @@ class boss_magmadar : public CreatureScript
                 DoCast(me, SPELL_MAGMA_SPIT, true);
             }
 
-            void EnterCombat(Unit* victim) override
+            void JustEngagedWith(Unit* victim) override
             {
-                BossAI::EnterCombat(victim);
+                BossAI::JustEngagedWith(victim);
                 events.RescheduleEvent(EVENT_FRENZY, 30000);
                 events.RescheduleEvent(EVENT_PANIC, 20000);
                 events.RescheduleEvent(EVENT_LAVA_BOMB, 12000);

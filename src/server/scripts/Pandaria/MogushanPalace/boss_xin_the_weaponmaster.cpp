@@ -42,7 +42,7 @@ struct boss_xin_the_weaponmaster : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_RING_OF_FIRE, 3000);
         events.RescheduleEvent(EVENT_HEURT, urand(10000, 15000));

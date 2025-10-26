@@ -626,7 +626,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoZoneInCombat();
         }
@@ -926,7 +926,7 @@ public:
             summoned->SetLevel(me->getLevel());
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (instance)
             {

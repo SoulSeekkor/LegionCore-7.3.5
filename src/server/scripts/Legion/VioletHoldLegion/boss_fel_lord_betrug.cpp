@@ -90,11 +90,11 @@ public:
                 readyFight = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //18:37
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_CHAOTIC_ENGERY, 6000); //18:43, 18:56, 19:35, 19:46
             events.RescheduleEvent(EVENT_FEL_SLASH, 12000); //18:49, 19:05, 20:01

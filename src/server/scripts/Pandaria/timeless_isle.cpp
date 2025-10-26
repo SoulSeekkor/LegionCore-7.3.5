@@ -335,7 +335,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_FIRESTORM, 10000);
@@ -539,7 +539,7 @@ public:
             me->RemoveAllAuras();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_CHI_BARRAGE, 18000);
@@ -719,7 +719,7 @@ public:
             me->RemoveAllAuras();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_JADEFLAME_BUFFET, 20000);
@@ -924,7 +924,7 @@ public:
             me->RemoveAllAuras();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_MASSIVE_QUAKE, 45000);

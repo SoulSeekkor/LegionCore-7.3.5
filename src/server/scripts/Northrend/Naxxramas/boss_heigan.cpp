@@ -94,9 +94,9 @@ public:
                     instance->DoCompleteAchievement(RAID_MODE(ACHIEV_THE_SAFETY_DANCE_10, ACHIEV_THE_SAFETY_DANCE_25));
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoScriptText(SAY_AGGRO, me);
             EnterPhase(PHASE_FIGHT);
         }

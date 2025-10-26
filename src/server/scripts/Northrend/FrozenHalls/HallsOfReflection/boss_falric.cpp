@@ -71,7 +71,7 @@ public:
                 instance->SetBossState(DATA_FALRIC_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
             if (instance)

@@ -87,7 +87,7 @@ class boss_karsh_steelbender : public CreatureScript
                     instance->SetData(DATA_KARSH, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_CLEAVE, urand(5000, 7000));
                 events.RescheduleEvent(EVENT_HEAT_ARMOR, 1000);

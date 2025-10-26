@@ -99,10 +99,10 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BANISH_IN_TIME_TIMER);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             DefaultEvents();
         }
 
@@ -400,7 +400,7 @@ public:
         EventMap events;
         uint32 AddSum = 0;
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 30000); //193942
             if (me->GetEntry() == 98425)

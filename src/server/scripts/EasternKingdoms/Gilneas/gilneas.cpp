@@ -2378,7 +2378,7 @@ public:
         bool PlayerOn, KrennanOn;
 
         void AttackStart(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void EnterEvadeMode() override {}
 
         void Reset()override
@@ -2485,7 +2485,7 @@ public:
         uint32 SayTimer;
 
         void AttackStart(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void EnterEvadeMode() override {}
 
         void Reset() override
@@ -2705,7 +2705,7 @@ public:
         bool Run;
 
         void AttackStart(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void EnterEvadeMode() override {}
 
         void Reset() override
@@ -3017,7 +3017,7 @@ public:
         bool PlayerOn;
 
         void AttackStart(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void EnterEvadeMode() override {}
 
         void Reset() override

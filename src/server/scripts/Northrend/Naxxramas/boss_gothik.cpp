@@ -186,7 +186,7 @@ public:
             thirtyPercentReached = false;
         }
 
-        void EnterCombat(Unit * /*who*/) override
+        void JustEngagedWith(Unit * /*who*/) override
         {
             for (uint32 i = 0; i < POS_LIVE; ++i)
                 if (Creature *trigger = DoSummon(WORLD_TRIGGER, PosSummonLive[i]))
@@ -202,7 +202,7 @@ public:
                 return;
             }
 
-            _EnterCombat();
+            _JustEngagedWith();
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC|UNIT_FLAG_REMOVE_CLIENT_CONTROL);
             waveCount = 0;
             events.ScheduleEvent(EVENT_SUMMON, 30000);

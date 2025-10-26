@@ -80,9 +80,9 @@ struct boss_varimathras : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
 
         me->CastSpellDelay(me, SPELL_INTRO_CONV, true, 3000);

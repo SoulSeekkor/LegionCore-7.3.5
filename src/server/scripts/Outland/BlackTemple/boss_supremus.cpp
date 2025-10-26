@@ -117,7 +117,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance)
                 instance->SetData(DATA_SUPREMUSEVENT, IN_PROGRESS);
@@ -281,7 +281,7 @@ public:
         }
         uint32 wait;
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* /*who*/) {}
 

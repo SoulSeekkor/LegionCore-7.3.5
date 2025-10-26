@@ -50,7 +50,7 @@ public:
             Frenzy_Timer = 30000+rand()%15000;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             Talk(SAY_AGGRO);
         }

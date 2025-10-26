@@ -39,7 +39,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 3000);
         }
@@ -91,7 +91,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 1000);
         }
@@ -141,7 +141,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 4000);
             events.RescheduleEvent(EVENT_2, 7000);
@@ -532,7 +532,7 @@ public:
                 return;
 
             if (Unit* owner = me->GetAnyOwner())
-                summon->AI()->EnterCombat(owner); // some hack
+                summon->AI()->JustEngagedWith(owner); // some hack
 
             if (me->GetAnyOwner() && me->GetAnyOwner()->IsPlayer())
                 if (Player* player = me->GetAnyOwner()->ToPlayer())

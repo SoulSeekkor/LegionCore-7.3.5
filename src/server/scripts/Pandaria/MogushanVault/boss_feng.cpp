@@ -228,7 +228,7 @@ class boss_feng : public CreatureScript
                 return true;
             }
             
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (instance)
                 {
@@ -238,7 +238,7 @@ class boss_feng : public CreatureScript
                         return;
                     }
                 }
-                _EnterCombat();
+                _JustEngagedWith();
                 checkvictim = 1500;
 
                 me->SummonGameObject(GOB_INVERSION, 4027.3f, 1331.39f, 468.80f, 0, 0, 0, 0, 0, 604800);
@@ -595,7 +595,7 @@ class mob_lightning_fist : public CreatureScript
                 me->DespawnOrUnsummon();
             }
 
-            void EnterCombat(Unit* who) override {}
+            void JustEngagedWith(Unit* who) override {}
 
             void EnterEvadeMode() override {}
 

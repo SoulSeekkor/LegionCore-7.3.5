@@ -123,7 +123,7 @@ public:
             IntangiblePresence_Timer = 15000;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* who)
         {
@@ -270,7 +270,7 @@ public:
 
         void Reset() { }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* who)
         {

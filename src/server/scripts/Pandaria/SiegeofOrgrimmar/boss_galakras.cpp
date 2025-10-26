@@ -443,9 +443,9 @@ class boss_galakras : public CreatureScript
                     me->SummonCreature(NPC_SPIKE_MINE, MinePos[n]);
             }
             
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
             }
 
             void DoAction(int32 const action)
@@ -719,7 +719,7 @@ class npc_varian_or_lorthemar : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
             }
             
@@ -813,7 +813,7 @@ class npc_jaina_or_sylvana : public CreatureScript
                 instance->SetBossState(DATA_GALAKRAS, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_JAINAORSYLVANA_COMBAT_1, 1000);
                 events.RescheduleEvent(EVENT_JAINAORSYLVANA_COMBAT_2, 5000);
@@ -936,7 +936,7 @@ class npc_verees_or_aethas : public CreatureScript
                     DoCast(SPELL_ENABLE_UNIT_FRAME);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_VEREESORAETHAS_COMBAT_1, 1000);
                 events.RescheduleEvent(EVENT_VEREESORAETHAS_COMBAT_2, 5000);
@@ -1097,7 +1097,7 @@ class npc_demolitions : public CreatureScript
                 summoned->CastSpell(me, SPELL_EFFECTIVE_TEAM_A);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
             }
 
@@ -1459,7 +1459,7 @@ class npc_lieutenant_krugruk : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 Talk(SAY_KRUGRUK_0);
                 events.RescheduleEvent(EVENT_ARCING_SMASH_START, 12000);
@@ -1569,7 +1569,7 @@ class npc_master_cannoneer_dagryn : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 Talk(SAY_DAGRYN_0);
                 events.RescheduleEvent(EVENT_DAGRYN_SHOOT, 1000);
@@ -1762,7 +1762,7 @@ class npc_dragonmaw_proto_drake : public CreatureScript
 
             void Reset(){}
 
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
 
             void SpellHit(Unit* caster, SpellInfo const* spell)
             {
@@ -1855,7 +1855,7 @@ class npc_dragonmaw_grunt : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_THROW_AXE, 8000);
                 DoZoneInCombat(me, 30.0f);
@@ -1945,7 +1945,7 @@ class npc_dragonmaw_grunt_h : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_DRAGON_CLEAVE, 5000);
             }
@@ -2036,7 +2036,7 @@ class npc_dragonmaw_flameslinger : public CreatureScript
                     DoZoneInCombat(me, 150);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_FLAMESLINGER_ATTACK, 0);
                 DoZoneInCombat(me, 150);
@@ -2137,7 +2137,7 @@ class npc_dragonmaw_flagbearer : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_WAR_BANNER, 15000);
                 DoZoneInCombat(me, 30.0f);
@@ -2206,7 +2206,7 @@ class npc_dragonmaw_bonecrusher : public CreatureScript
                 count = 1;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_SHATTERING_ROAR, 9000);
                 events.RescheduleEvent(EVENT_FRACTURE, 51000);
@@ -2314,7 +2314,7 @@ class npc_dragonmaw_tidal_shaman : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_CHAIN_HEAL, 20000);
                 //events.RescheduleEvent(EVENT_TIDAL_WAVE, 5000);
@@ -2398,7 +2398,7 @@ class npc_high_enforcer_thranok : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_CRUSHER_CALL, 15000);
                 events.RescheduleEvent(EVENT_SHATTERING_CLEAVE, 5000);
@@ -2481,7 +2481,7 @@ class npc_korgra_the_snake : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_POISONTIPPED_BLADES, 12000);
                 events.RescheduleEvent(EVENT_POISON_CLOUD, 18000);
@@ -2564,7 +2564,7 @@ class npc_dragonmaw_ebon_stalker : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_SHADOW_STALK, 15000);
                 events.RescheduleEvent(EVENT_SHADOW_ASSAULT, 16000);

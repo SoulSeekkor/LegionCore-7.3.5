@@ -58,7 +58,7 @@ public:
         }
 
         void MoveInLineOfSight(Unit* /*who*/) {}
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void UpdateAI(uint32 diff)
         {
@@ -108,7 +108,7 @@ public:
 
         ObjectGuid PlayerGUID;
 
-        void EnterCombat(Unit* /*who*/){}
+        void JustEngagedWith(Unit* /*who*/){}
 
         void Reset()
         {

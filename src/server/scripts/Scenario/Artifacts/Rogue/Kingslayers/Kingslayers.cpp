@@ -377,7 +377,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 3000); // convers
             events.RescheduleEvent(EVENT_5, 27000); // 202839
@@ -569,7 +569,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 5000); // 15 218359 + 218356 + summon
             events.RescheduleEvent(EVENT_3, 25000);

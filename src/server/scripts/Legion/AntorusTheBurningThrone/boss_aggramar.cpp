@@ -167,9 +167,9 @@ struct boss_aggramar : BossAI
         phase = PHASE_1;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         DefaultEvents();
         

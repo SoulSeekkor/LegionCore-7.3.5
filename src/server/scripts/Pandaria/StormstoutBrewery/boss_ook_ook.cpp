@@ -27,9 +27,9 @@ struct boss_ook_ook : public BossAI
         groundtimer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         groundtimer = 5000;
     }
 

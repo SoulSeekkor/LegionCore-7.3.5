@@ -107,7 +107,7 @@ class boss_halazzi : public CreatureScript
                 DoCast(me, SPELL_TRANSFORM_LYNX, true);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
                 phase = 0;
@@ -280,7 +280,7 @@ class npc_halazzi_lynx : public CreatureScript
                 bDespawn = false;
             }
             
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_SHRED_ARMOR, urand(3000, 10000));
                 events.RescheduleEvent(EVENT_LYNX_FLURRY, urand(5000, 8000));
@@ -375,7 +375,7 @@ class npc_halazzi_lightning_totem : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_LIGHTNING, 1000);
             }

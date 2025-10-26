@@ -376,7 +376,7 @@ class boss_theralion : public CreatureScript
                 summons.Despawn(summon);
             }
             
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 instance->SetData(DATA_HEALTH_VALIONA_THERALION, me->GetMaxHealth());
                 //DoCast(me, SPELL_TWILIGHT_SHIFT_BUFF);
@@ -694,7 +694,7 @@ class boss_valiona : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 //DoCast(me, SPELL_TWILIGHT_SHIFT_BUFF);
                 /*if (Creature* _zone = me->SummonCreature(NPC_THERALION_FLIGHT_TARGET_STALKER,

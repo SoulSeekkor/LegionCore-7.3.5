@@ -78,7 +78,7 @@ class boss_ascendant_lord_obsidius : public CreatureScript
                 instance->SetData(DATA_ASCENDANT_LORD_OBSIDIUS, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 events.RescheduleEvent(EVENT_STONEBLOW, 6000);
                 events.RescheduleEvent(EVENT_TWILIGHT_CORRUPTION, 20000);
@@ -182,7 +182,7 @@ class npc_shadow_of_obsidius : public CreatureScript
                 DoCast(me, SPELL_SHADOW_OF_OBSIDIUS);
             }   
 
-            void EnterCombat(Unit* /*attacker*/) override
+            void JustEngagedWith(Unit* /*attacker*/) override
             {
                 me->RemoveAura(75054);
                 events.RescheduleEvent(EVENT_CREPUSCULAR_VEIL, 3900);

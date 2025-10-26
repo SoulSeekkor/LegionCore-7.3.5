@@ -69,9 +69,9 @@ class boss_dark_animus : public CreatureScript
                 me->SetReactState(REACT_DEFENSIVE);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.RescheduleEvent(EVENT_TOUCH_OF_THE_ANIMUS, 20000);
                 events.RescheduleEvent(EVENT_ANIMA_FONT, 26000);
                 events.RescheduleEvent(EVENT_INTERRUPTING_JOLT, 30000);
@@ -190,7 +190,7 @@ class npc_massive_anima_golem : public CreatureScript
                 me->SetReactState(REACT_DEFENSIVE);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (instance)
                     instance->SetBossState(DATA_DARK_ANIMUS, IN_PROGRESS);
@@ -251,7 +251,7 @@ class npc_large_anima_golem : public CreatureScript
 
             void Reset(){}
             
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
             
             void JustDied(Unit* /*killer*/){}
             
@@ -288,7 +288,7 @@ class npc_anima_golem : public CreatureScript
 
             void Reset(){}
             
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
             
             void JustDied(Unit* /*killer*/){}
             

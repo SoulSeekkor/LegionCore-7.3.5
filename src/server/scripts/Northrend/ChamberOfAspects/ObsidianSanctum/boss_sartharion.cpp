@@ -356,7 +356,7 @@ public:
                 instance->SetData(TYPE_SARTHARION_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_SARTHARION_AGGRO, me);
             DoZoneInCombat();
@@ -1002,7 +1002,7 @@ public:
             m_bHasPortalOpen = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_TENEBRON_AGGRO, me);
             DoZoneInCombat();
@@ -1097,7 +1097,7 @@ public:
             m_bHasPortalOpen = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_SHADRON_AGGRO, me);
             DoZoneInCombat();
@@ -1195,7 +1195,7 @@ public:
             m_bHasPortalOpen = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_VESPERON_AGGRO, me);
             DoZoneInCombat();

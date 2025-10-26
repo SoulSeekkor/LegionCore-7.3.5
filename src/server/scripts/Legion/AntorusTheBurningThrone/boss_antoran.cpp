@@ -537,7 +537,7 @@ struct boss_antoran_high_command_generic : ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 

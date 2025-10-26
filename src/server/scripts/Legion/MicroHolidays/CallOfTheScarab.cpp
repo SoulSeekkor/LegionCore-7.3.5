@@ -295,7 +295,7 @@ struct npc_sillithis_colossus : public ScriptedAI
         cast = 0;
     }
 
-    void EnterCombat(Unit* /*killer*/) override
+    void JustEngagedWith(Unit* /*killer*/) override
     {
         cast = 50000;
     }

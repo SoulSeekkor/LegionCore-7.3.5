@@ -235,7 +235,7 @@ public:
                 instance->SetData(DATA_LADYVASHJEVENT, IN_PROGRESS);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (instance)
             {
@@ -246,7 +246,7 @@ public:
                     if (Player* player = itr->getSource())
                         player->DestroyItemCount(31088, 1, true);
             }
-            StartEvent(); // this is EnterCombat(), so were are 100% in combat, start the event
+            StartEvent(); // this is JustEngagedWith(), so were are 100% in combat, start the event
 
             if (Phase != 2)
                 AttackStart(who);
@@ -584,7 +584,7 @@ public:
                 VashjGUID = instance->GetGuidData(DATA_LADYVASHJ);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* /*who*/) {}
 
@@ -661,7 +661,7 @@ public:
                     CAST_AI(boss_lady_vashj::boss_lady_vashjAI, vashj->AI())->EventTaintedElementalDeath();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             me->AddThreat(who, 0.1f);
         }

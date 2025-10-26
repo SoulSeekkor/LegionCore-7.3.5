@@ -46,7 +46,7 @@ struct boss_temple_vonjin : public ScriptedAI
     uint16 stack = 0;
     uint16 timer = 0;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         events.ScheduleEvent(EVENT_1, 5000);
@@ -242,7 +242,7 @@ struct boss_temple_lessar : public ScriptedAI
     EventMap events;
     SummonList summons;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         events.ScheduleEvent(EVENT_1, 5000);
@@ -418,7 +418,7 @@ struct boss_hex_lord_hadorn : public ScriptedAI
     bool reseted = false;
     bool ritual;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         phase = 1;
@@ -977,7 +977,7 @@ struct npc_event_summon_points_portal_initiator : public ScriptedAI
 
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
 
     }
@@ -1108,7 +1108,7 @@ struct npc_hexlord_hadorn_add : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         switch (me->GetEntry())
         {
@@ -2636,7 +2636,7 @@ struct boss_new_year_2019_atray : public ScriptedAI
     bool phase;
     bool ragephase;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         StartDefaultEvents(true, true);
     }
@@ -3162,7 +3162,7 @@ struct boss_new_year_2019_evala : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVALA_CHARGES, urand(28000, 33000));
         events.RescheduleEvent(EVALA_VOID_ZONE_PERIODIC, urand(18000, 22000));
@@ -3567,7 +3567,7 @@ struct npc_new_year_2019_evala_shard : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 3000);
     }
@@ -3638,7 +3638,7 @@ struct npc_new_year_2019_evala_frostmage : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 4000);
     }
@@ -3681,7 +3681,7 @@ struct npc_new_year_2019_evala_frostwarr : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 3000);
     }
@@ -5436,7 +5436,7 @@ public:
         }
     }
 
-    void OnEnterCombat(Player* player, Unit* /*target*/) override
+    void OnJustEngagedWith(Player* player, Unit* /*target*/) override
     {
         if (player->GetCurrentZoneID() == 65 && sGameEventMgr->IsActiveEvent(823))
         {

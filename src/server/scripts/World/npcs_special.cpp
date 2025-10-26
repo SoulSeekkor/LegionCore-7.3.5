@@ -604,7 +604,7 @@ class npc_chicken_cluck : public CreatureScript
                 me->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER);
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void UpdateAI(uint32 diff) override
             {
@@ -718,7 +718,7 @@ class npc_dancing_flames : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void ReceiveEmote(Player* player, uint32 emote) override
             {
@@ -942,7 +942,7 @@ class npc_doctor : public CreatureScript
 
             void UpdateAI(uint32 diff) override;
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
         };
 
         bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) override
@@ -1010,7 +1010,7 @@ class npc_injured_patient : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void MovementInform(uint32 type, uint32 id) override
             {
@@ -1207,7 +1207,7 @@ class npc_garments_of_quests : public CreatureScript
                 me->SetHealth(me->CountPctFromMaxHealth(70));
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void SpellHit(Unit* caster, SpellInfo const* Spell) override
             {
@@ -1389,7 +1389,7 @@ class npc_guardian : public CreatureScript
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
             }
 
@@ -2462,7 +2462,7 @@ class npc_steam_tonk : public CreatureScript
             npc_steam_tonkAI(Creature* creature) : ScriptedAI(creature) {}
 
             void Reset() override {}
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void OnPossess(bool apply)
             {
@@ -2506,7 +2506,7 @@ class npc_tonk_mine : public CreatureScript
                 ExplosionTimer = 3000;
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
             void AttackStart(Unit* /*who*/) override {}
             void MoveInLineOfSight(Unit* /*who*/) override {}
 
@@ -2851,7 +2851,7 @@ class npc_snake_trap : public CreatureScript
             uint32 SpellTimer;
             bool IsViper;
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void Reset() override
             {
@@ -2972,7 +2972,7 @@ class mob_mojo : public CreatureScript
                     me->GetMotionMaster()->MoveFollow(own, 0, 0);
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void UpdateAI(uint32 diff) override
             {
@@ -4102,7 +4102,7 @@ class npc_spring_rabbit : public CreatureScript
                     me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, PET_FOLLOW_ANGLE);
             }
 
-            void EnterCombat(Unit * /*who*/) override { }
+            void JustEngagedWith(Unit * /*who*/) override { }
 
             void DoAction(const int32 /*param*/) override
             {
@@ -4824,7 +4824,7 @@ class npc_spectral_guise : public CreatureScript
 
             void UpdateAI(uint32 diff) override {}
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void EnterEvadeMode() override {}
         };
@@ -6939,7 +6939,7 @@ struct npc_aria_sorrowheart : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     };
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
 

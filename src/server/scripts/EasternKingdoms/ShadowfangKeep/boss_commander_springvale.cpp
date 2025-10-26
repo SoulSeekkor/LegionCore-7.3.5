@@ -107,7 +107,7 @@ class boss_commander_springvale : public CreatureScript
                 _Reset();
             }
 
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 if (IsHeroic())
                     events.RescheduleEvent(EVENT_ADDS, 45000);
@@ -219,7 +219,7 @@ class npc_springvale_wailing_guardsman : public CreatureScript
                 events.Reset();
             }
             
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 events.RescheduleEvent(EVENT_MORTAL_STRIKE, 3000);
                 events.RescheduleEvent(EVENT_SCREAMS_OF_THE_PAST, urand(15000, 20000));    
@@ -285,7 +285,7 @@ class npc_springvale_tormented_officer : public CreatureScript
                 events.Reset();
             }
             
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 events.RescheduleEvent(EVENT_UNHOLY_EMPOWERMENT, 15000);
                 events.RescheduleEvent(EVENT_FORSAKEN_ABILITY, urand(10000, 30000));

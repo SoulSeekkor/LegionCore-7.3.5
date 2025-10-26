@@ -219,9 +219,9 @@ struct boss_hasabel : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         //me->CastSpell(me, SPELL_CLOSE_GATEWAYS, true);
         me->CastSpell(me, SPELL_ENERGIZE_PERIODIC, true);
@@ -715,7 +715,7 @@ struct npc_hasabel_guards : public ScriptedAI
         checkPlayersTimer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         switch (me->GetEntry())
         {

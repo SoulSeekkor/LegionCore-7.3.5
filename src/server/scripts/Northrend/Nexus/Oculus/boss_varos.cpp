@@ -81,9 +81,9 @@ class boss_varos : public CreatureScript
                 coreEnergizeOrientation = 0.0f;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
 
                 Talk(SAY_AGGRO);
             }

@@ -303,9 +303,9 @@ struct boss_argus : BossAI
             me->SummonCreature(pair.first, pair.second);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         DoCast(me, SPELL_P1_ENERGY_CONTROLLER, true);
         DefaultEvents();
@@ -947,7 +947,7 @@ struct npc_argus_titans_generic : ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* who) override {}
+    void JustEngagedWith(Unit* who) override {}
 
     void SpellFinishCast(const SpellInfo* spell) override
     {
@@ -1140,7 +1140,7 @@ struct npc_argus_constellar_designate : ScriptedAI
 
     EventMap events;
     bool specialAbility = false;
-    uint32 enterCombat = 0;
+    uint32 JustEngagedWith = 0;
     uint32 vulnerabilityID = 0;
 
     void IsSummonedBy(Unit* summoner) override
@@ -1150,7 +1150,7 @@ struct npc_argus_constellar_designate : ScriptedAI
         if (IsHeroicPlusRaid())
             DoCast(me, SPELL_IMPENDING_INEVITABILITY, true);
 
-        enterCombat = 5000;
+        JustEngagedWith = 5000;
     }
 
     void Reset() override {}
@@ -1226,11 +1226,11 @@ struct npc_argus_constellar_designate : ScriptedAI
 
     void UpdateAI(uint32 diff) override
     {
-        if (enterCombat)
+        if (JustEngagedWith)
         {
-            if (enterCombat <= diff)
+            if (JustEngagedWith <= diff)
             {
-                enterCombat = 0;
+                JustEngagedWith = 0;
                 me->CastSpell(me, SPELL_CONSTELLAR_COMBAT_CHECKER);
                 me->SetReactState(REACT_AGGRESSIVE);
 
@@ -1238,7 +1238,7 @@ struct npc_argus_constellar_designate : ScriptedAI
                 events.RescheduleEvent(EVENT_2, 9000);
             }
             else
-                enterCombat -= diff;
+                JustEngagedWith -= diff;
         }
 
         if (!UpdateVictim())

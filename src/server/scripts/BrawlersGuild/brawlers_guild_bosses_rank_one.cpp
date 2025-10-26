@@ -50,7 +50,7 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_INSTAKILL, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 25000);
         } 
@@ -135,7 +135,7 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_ID, SPELL_GRUMMKEPACK, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 4000); // throw
             events.RescheduleEvent(EVENT_2, 18000); // song
@@ -285,7 +285,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 12000); 
             events.RescheduleEvent(EVENT_2, urand(20000, 21000));
@@ -381,7 +381,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             switch(me->GetEntry())
             {

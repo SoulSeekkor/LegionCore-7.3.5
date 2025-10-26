@@ -204,9 +204,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override 
+        void JustEngagedWith(Unit* /*who*/) override 
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
             PetsCombat();
             events.RescheduleEvent(EVENT_TRAPS, 8000);
@@ -550,7 +550,7 @@ public:
             summons.Summon(summoned);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, urand(8000, 12000));
         }
@@ -620,7 +620,7 @@ public:
                 portal->AI()->DoAction(1);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, urand(8000, 12000));
             events.RescheduleEvent(EVENT_2, urand(13000, 16000));
@@ -776,7 +776,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_POUNCE, 1500);
             events.RescheduleEvent(EVENT_JUMPTO, 3000);
@@ -892,7 +892,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_SWOOP, 3000);
             if (instance)

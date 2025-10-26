@@ -278,7 +278,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(NPC_ARGENT_VAILIANT_TEXT_SAY_START, me);
         }
@@ -1018,7 +1018,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
         DoScriptText(NPC_ARGENT_CHAMPION_TEXT_SAY_START, me);
         }
@@ -1120,7 +1120,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit * /*who*/) override
+        void JustEngagedWith(Unit * /*who*/) override
         {
             if (Npc_Entry != NPC_ADVANCED_TARGET_DUMMY && Npc_Entry != NPC_TARGET_DUMMY)
                 return;

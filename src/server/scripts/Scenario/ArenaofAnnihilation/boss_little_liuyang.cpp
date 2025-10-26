@@ -64,9 +64,9 @@ public:
             events.RescheduleEvent(EVENT_POINT_HOME, 2000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_FIREBALL, 1000);
             events.RescheduleEvent(EVENT_FLAMELINE, 30000);
             //events.RescheduleEvent(EVENT_FLAME_WALL, 40000);

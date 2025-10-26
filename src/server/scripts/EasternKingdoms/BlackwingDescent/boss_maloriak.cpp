@@ -204,7 +204,7 @@ public:
             instance->SetData(DATA_MALORIAK_ABERRATIONS, 18);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             instance->DoResetAchievementCriteria(CRITERIA_TYPE_BE_SPELL_TARGET, CRITERIA_CONDITION_NO_SPELL_HIT, SPELL_CLEAR_ACHIEVEMENT);
             instance->DoResetAchievementCriteria(CRITERIA_TYPE_KILL_CREATURE, CRITERIA_CONDITION_NO_SPELL_HIT, SPELL_CLEAR_ACHIEVEMENT);
@@ -801,7 +801,7 @@ public:
             DoCast(SPELL_GROWN_CATALYST);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             //events.RescheduleEvent(EVENT_FIXATE, 5000);
             events.RescheduleEvent(EVENT_REND, 12000);
@@ -859,7 +859,7 @@ public:
         {
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_DARK_SLUDGE, urand(5000, 10000));
         }

@@ -363,7 +363,7 @@ struct npc_death_metal_knight : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoCast(SPELL_COLD_AS_ICE);
         events.RescheduleEvent(EVENT_BANSHEE_AT, 27000);

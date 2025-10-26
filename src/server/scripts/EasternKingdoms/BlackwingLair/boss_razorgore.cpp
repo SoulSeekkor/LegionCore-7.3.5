@@ -80,7 +80,7 @@ public:
             instance->SetData(DATA_EGG_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat();
             std::list<GameObject*> eggs;

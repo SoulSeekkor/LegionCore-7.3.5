@@ -248,7 +248,7 @@ class boss_tyrannus : public CreatureScript
                 return ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_RIMEFANG));
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 DoScriptText(SAY_AGGRO, me);
             }

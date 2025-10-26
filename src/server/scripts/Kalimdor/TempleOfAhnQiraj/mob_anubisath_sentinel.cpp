@@ -236,7 +236,7 @@ public:
             me->AddAura(id, me);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (gatherOthersWhenAggro)
                 GetOtherSentinels(who);

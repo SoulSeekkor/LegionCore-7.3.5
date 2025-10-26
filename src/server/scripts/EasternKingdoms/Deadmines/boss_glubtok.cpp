@@ -95,7 +95,7 @@ class boss_glubtok : public CreatureScript
                     Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 stage = 0;
                 Talk(SAY_AGGRO);

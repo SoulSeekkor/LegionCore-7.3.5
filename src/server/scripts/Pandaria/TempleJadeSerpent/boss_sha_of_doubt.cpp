@@ -106,7 +106,7 @@ struct boss_sha_of_doubt : public BossAI
         Talk(TALK_DEATH);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(TALK_AGGRO);
         events.RescheduleEvent(EVENT_WITHER_WILL, 5000);
@@ -211,7 +211,7 @@ class mob_figment_of_doubt : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
             }
 
-            void EnterCombat(Unit* u) override
+            void JustEngagedWith(Unit* u) override
             {
                 DoCast(SPELL_GATHERING_DOUBT);
                 events.RescheduleEvent(EVENT_GATHERING_DOUBT, 1000);

@@ -198,7 +198,7 @@ class npc_amanishi_tempest : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 events.RescheduleEvent(EVENT_THUNDERCLAP, urand(5000, 10000));
                 events.RescheduleEvent(EVENT_CHAIN_LIGHTNING, urand(6000, 12000));

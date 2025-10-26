@@ -84,10 +84,10 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_PULVERIZING_CUDGEL, 5000);
             events.RescheduleEvent(EVENT_HEAVE_CUDGEL, 14000);

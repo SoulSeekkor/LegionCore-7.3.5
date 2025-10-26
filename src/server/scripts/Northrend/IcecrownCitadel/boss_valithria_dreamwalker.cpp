@@ -311,7 +311,7 @@ class boss_valithria_dreamwalker : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*pWho*/) override
+            void JustEngagedWith(Unit* /*pWho*/) override
             {
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
             }
@@ -616,7 +616,7 @@ class npc_risen_archmage : public CreatureScript
                 m_uiVoidTimer = 30000;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
             }
 
@@ -685,7 +685,7 @@ class npc_blazing_skeleton : public CreatureScript
                 m_uiFireballTimer = 5000;
             }
 
-            void EnterCombat(Unit* /*who*/) override { }
+            void JustEngagedWith(Unit* /*who*/) override { }
 
             void KilledUnit(Unit* /*pVictim*/) override
             {
@@ -735,7 +735,7 @@ class npc_suppresser : public CreatureScript
                 instance = pCreature->GetInstanceScript();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 me->SetReactState(REACT_PASSIVE);
                 m_uiCheckTimer = 2500;
@@ -777,7 +777,7 @@ class npc_gluttonous_abomination : public CreatureScript
                 instance = pCreature->GetInstanceScript();
             }
 
-            void EnterCombat(Unit* /*who*/) override { }
+            void JustEngagedWith(Unit* /*who*/) override { }
 
             void Reset() override
             {
@@ -832,7 +832,7 @@ class npc_blistering_zombie : public CreatureScript
         {
             npc_blistering_zombieAI(Creature* pCreature) : ScriptedAI(pCreature) { }
 
-            void EnterCombat(Unit* /*who*/) override { }
+            void JustEngagedWith(Unit* /*who*/) override { }
 
             void Reset() override
             {

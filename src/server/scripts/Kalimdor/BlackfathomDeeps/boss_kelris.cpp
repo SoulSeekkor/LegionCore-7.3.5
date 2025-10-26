@@ -64,7 +64,7 @@ public:
                 instance->SetData(TYPE_KELRIS, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             Talk(SAY_AGGRO);
 

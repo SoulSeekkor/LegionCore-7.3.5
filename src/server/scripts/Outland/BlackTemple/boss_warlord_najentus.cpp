@@ -106,7 +106,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance)
                 instance->SetData(DATA_HIGHWARLORDNAJENTUSEVENT, IN_PROGRESS);

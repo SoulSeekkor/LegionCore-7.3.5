@@ -66,7 +66,7 @@ public:
             me->SetWalk(false);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 7000); // 203859
             events.RescheduleEvent(EVENT_2, 17000); // 203854
@@ -335,7 +335,7 @@ public:
                 DoCast(204593);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == 101882)
             {
@@ -533,7 +533,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 21000); // 204779
             events.RescheduleEvent(EVENT_2, 35000); // 204773  21

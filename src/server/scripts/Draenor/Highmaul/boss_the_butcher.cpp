@@ -219,9 +219,9 @@ struct boss_the_butcher : public BossAI
         m_MaggotSpawned.clear();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         me->CastSpell(me, Angry5PerTick, true);
 

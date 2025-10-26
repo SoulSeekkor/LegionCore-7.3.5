@@ -67,7 +67,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 6000); // 57846
             events.RescheduleEvent(EVENT_2, 18000); // 32736
@@ -347,7 +347,7 @@ public:
             stop_combat = false;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 7000); // 191883
             events.RescheduleEvent(EVENT_2, 14000); // 191885
@@ -408,7 +408,7 @@ public:
             if (Creature* targ = me->FindNearestCreature(96468, 70.0f, true))
             {
                 AttackStart(targ);
-                EnterCombat(targ);
+                JustEngagedWith(targ);
             }
         }
 

@@ -69,7 +69,7 @@ public:
             Initialize();
         }
 
-        void EnterCombat(Unit* /*who*/) { }
+        void JustEngagedWith(Unit* /*who*/) { }
 
         void SummonAdds(Unit* victim)
         {

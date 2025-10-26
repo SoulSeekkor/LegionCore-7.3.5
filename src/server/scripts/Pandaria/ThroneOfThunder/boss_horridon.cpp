@@ -103,7 +103,7 @@ enum sAction
     ACTION_SHAMAN_DISMAUNT   = 3,
     ACTION_RESET             = 4,
     ACTION_ACTIVE_GATE_EVENT = 5,
-    ACTION_ENTERCOMBAT       = 6,
+    ACTION_JustEngagedWith       = 6,
     ACTION_ATTACK_STOP       = 7,
     ACTION_CHARGE_TO_GATE    = 8,
     ACTION_STOP_GATE_EVENT   = 9,
@@ -350,9 +350,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             phase = PHASE_ONE;
             dinomNotKilled = true;
             ActiveOrOfflineGateEvent(true);
@@ -471,7 +471,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_BESTIAL_CRY, 5000);
         }
@@ -559,7 +559,7 @@ public:
             gatenum = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -655,13 +655,13 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_SULLITHUZ_STONEGAZER, farrakspawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_FARRAKI_WASTEWALKER, farrakdestpos[0], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 1: //Gurubashi
                                 if (Creature* add = me->SummonCreature(NPC_GURUBASHI_BLOODLORD, gurubashispawnpos[0], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add->AI()->SetData(DATA_SEND_DEST_POS, 0);
                                 if (Creature* badd = me->SummonCreature(NPC_GURUBASHI_VENOM_PRIEST, gurubashidestpos[urand(1, 2)], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 2: //Drakkari
                                 if (Creature* add = me->SummonCreature(NPC_RISEN_DRAKKARI_CHAMPION, drakkarispawnpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
@@ -669,7 +669,7 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_RISEN_DRAKKARI_WARRIOR, drakkarispawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_DRAKKARI_FROZEN_WARLORD, drakkaridestpos[0], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 3: //Amani
                                 if (Creature* add = me->SummonCreature(NPC_AMANISHI_FLAME_CASTER, amanispawnpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
@@ -677,7 +677,7 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_AMANISHI_PROTECTOR, amanispawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_AMANI_WARBEAR, amanidestpos[0], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             default:
                                 break;
@@ -701,17 +701,17 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_SULLITHUZ_STONEGAZER, farrakspawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_FARRAKI_WASTEWALKER, farrakdestpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 if (Creature* badd2 = me->SummonCreature(NPC_FARRAKI_WASTEWALKER, farrakdestpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd2->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd2->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 1: //Gurubashi
                                 if (Creature* add = me->SummonCreature(NPC_GURUBASHI_BLOODLORD, gurubashispawnpos[0], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add->AI()->SetData(DATA_SEND_DEST_POS, 0);
                                 if (Creature* badd = me->SummonCreature(NPC_GURUBASHI_VENOM_PRIEST, gurubashidestpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 if (Creature* badd2 = me->SummonCreature(NPC_GURUBASHI_VENOM_PRIEST, gurubashidestpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd2->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd2->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 2: //Drakkari
                                 if (Creature* add = me->SummonCreature(NPC_RISEN_DRAKKARI_CHAMPION, drakkarispawnpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
@@ -719,9 +719,9 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_RISEN_DRAKKARI_WARRIOR, drakkarispawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_DRAKKARI_FROZEN_WARLORD, drakkaridestpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 if (Creature* badd2 = me->SummonCreature(NPC_DRAKKARI_FROZEN_WARLORD, drakkaridestpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd2->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd2->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             case 3: //Amani
                                 if (Creature* add = me->SummonCreature(NPC_AMANISHI_FLAME_CASTER, amanispawnpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
@@ -729,9 +729,9 @@ public:
                                 if (Creature* add2 = me->SummonCreature(NPC_AMANISHI_PROTECTOR, amanispawnpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
                                     add2->AI()->SetData(DATA_SEND_DEST_POS, 2);
                                 if (Creature* badd = me->SummonCreature(NPC_AMANI_WARBEAR, amanidestpos[1], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd->AI()->DoAction(ACTION_JustEngagedWith);
                                 if (Creature* badd2 = me->SummonCreature(NPC_AMANI_WARBEAR, amanidestpos[2], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 2000))
-                                    badd2->AI()->DoAction(ACTION_ENTERCOMBAT);
+                                    badd2->AI()->DoAction(ACTION_JustEngagedWith);
                                 break;
                             default:
                                 break;
@@ -881,7 +881,7 @@ public:
         void IsSummonedBy(Unit* summoner)
         {
             if (me->GetEntry() == NPC_VENOMOUS_EFFUSION)
-                DoAction(ACTION_ENTERCOMBAT);
+                DoAction(ACTION_JustEngagedWith);
         }
 
         void SetData(uint32 type, uint32 data)
@@ -957,7 +957,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (me->GetEntry())
             {
@@ -1023,7 +1023,7 @@ public:
                 events.RescheduleEvent(EVENT_SUMMON_TOTEM, 20000);
                 events.RescheduleEvent(EVENT_HEX_OF_CONFUSION, 30000);
                 break;
-            case ACTION_ENTERCOMBAT:
+            case ACTION_JustEngagedWith:
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 me->SetReactState(REACT_AGGRESSIVE);
                 DoZoneInCombat(me, 100.0f);
@@ -1183,7 +1183,7 @@ public:
             done = false;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_DINO_MENDING, 5000);
         }
@@ -1269,7 +1269,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1311,7 +1311,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1352,7 +1352,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

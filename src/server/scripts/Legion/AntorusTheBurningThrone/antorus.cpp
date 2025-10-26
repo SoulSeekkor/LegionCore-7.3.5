@@ -14,7 +14,7 @@ struct npc_atbt_flamewear : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         events.RescheduleEvent(EVENT_1, 1500);
         events.RescheduleEvent(EVENT_2, 10000);

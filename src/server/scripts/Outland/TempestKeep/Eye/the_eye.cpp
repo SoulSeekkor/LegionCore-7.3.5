@@ -45,7 +45,7 @@ struct npc_crystalcore_devastator : public ScriptedAI
         Initialize();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
     }
 

@@ -103,12 +103,12 @@ struct boss_general_pavalak : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_BLADE_RUSH, 10000, EVENT_GROUP_COMBAT);
         events.RescheduleEvent(EVENT_TEMPEST, 15000, EVENT_GROUP_COMBAT);
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void DoAction(int32 const action) override

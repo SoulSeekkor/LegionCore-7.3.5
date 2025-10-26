@@ -457,9 +457,9 @@ struct boss_krosus : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(0);
         me->SetFlag(UNIT_FIELD_FLAGS_2, 0);
 

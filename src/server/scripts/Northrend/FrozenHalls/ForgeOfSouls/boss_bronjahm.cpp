@@ -95,7 +95,7 @@ class boss_bronjahm : public CreatureScript
                DoCast(me, SPELL_SOULSTORM_CHANNEL, true);
            }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 DoScriptText(SAY_AGGRO, me);
                 me->RemoveAurasDueToSpell(SPELL_SOULSTORM_CHANNEL);

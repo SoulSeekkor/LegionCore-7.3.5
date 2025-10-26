@@ -153,7 +153,7 @@ struct boss_liu_flameheart : public BossAI
             Talk(TALK_KILL_02);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(TALK_AGGRO_01);
         events.RescheduleEvent(EVENT_SERPENT_STRIKE, 5000);
@@ -344,7 +344,7 @@ struct boss_yu_lon : public BossAI
 {
     explicit boss_yu_lon(Creature* creature) : BossAI(creature, BOSS_YU_LON) {}
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_JADE_FIRE, 100);
     }
@@ -414,7 +414,7 @@ struct mob_minion_of_doubt : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);
@@ -458,7 +458,7 @@ struct mob_lesser_sha : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }

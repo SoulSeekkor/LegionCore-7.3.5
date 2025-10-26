@@ -150,11 +150,11 @@ public:
             Summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (instance)
                 instance->SetData(DATA_THELURKERBELOWEVENT, IN_PROGRESS);
-            Scripted_NoMovementAI::EnterCombat(who);
+            Scripted_NoMovementAI::JustEngagedWith(who);
         }
 
         void MoveInLineOfSight(Unit* who)

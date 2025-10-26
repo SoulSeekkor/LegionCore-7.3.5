@@ -122,10 +122,10 @@ struct boss_nythendra : public BossAI
             swarmCount = 3;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_CHECK_POWER, 5000);
         events.RescheduleEvent(EVENT_ALLOW_ROT_CAST, 1000);
@@ -138,11 +138,11 @@ struct boss_nythendra : public BossAI
         });
     }
 
-    void DefaultEvents(bool enterCombat)
+    void DefaultEvents(bool JustEngagedWith)
     {
-        events.RescheduleEvent(EVENT_ROT, enterCombat ? 6000 : 14000);
-        events.RescheduleEvent(EVENT_VOLATILE_ROT, enterCombat ? 24000 : 35000);
-        events.RescheduleEvent(EVENT_INFESTED_BREATH, (enterCombat ? urand(35, 40) : 47) * IN_MILLISECONDS);
+        events.RescheduleEvent(EVENT_ROT, JustEngagedWith ? 6000 : 14000);
+        events.RescheduleEvent(EVENT_VOLATILE_ROT, JustEngagedWith ? 24000 : 35000);
+        events.RescheduleEvent(EVENT_INFESTED_BREATH, (JustEngagedWith ? urand(35, 40) : 47) * IN_MILLISECONDS);
     }
 
     void EnterEvadeMode() override
@@ -319,7 +319,7 @@ struct npc_nythendra_gelatinized_decay : public ScriptedAI
         me->GetMotionMaster()->MoveRandom(15.0f);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);

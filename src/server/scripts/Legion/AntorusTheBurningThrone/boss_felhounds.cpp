@@ -131,9 +131,9 @@ struct boss_felhounds_encounters : public BossAI
         GroupB.clear();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         if (!IsMythicRaid())
             DoCast(me, SPELL_DESTROYER_BOON, true);
         DoCast(me, SPELL_DESTROYER_BOON_ALTER, true);
@@ -324,9 +324,9 @@ struct npc_felhounds_shatug : public boss_felhounds_encounters
         boss_felhounds_encounters::Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
-        boss_felhounds_encounters::EnterCombat(who);
+        boss_felhounds_encounters::JustEngagedWith(who);
 
         me->SetPower(me->getPowerType(), 86);
         events.RescheduleEvent(EVENT_CORRUPTING, 11000);
@@ -492,9 +492,9 @@ struct npc_felhounds_fharg : public boss_felhounds_encounters
         boss_felhounds_encounters::Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
-        boss_felhounds_encounters::EnterCombat(who);
+        boss_felhounds_encounters::JustEngagedWith(who);
 
         DoCast(me, SPELL_FHARG_START_LEAP, true);
         me->SetPower(me->getPowerType(), 62);

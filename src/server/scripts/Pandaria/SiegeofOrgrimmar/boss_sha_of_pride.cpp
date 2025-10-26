@@ -248,9 +248,9 @@ class boss_sha_of_pride : public CreatureScript
                     ZoneTalk(urand(TEXT_GENERIC_9, TEXT_GENERIC_10));
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
                 ZoneTalk(TEXT_GENERIC_1);
                 events.SetPhase(PHASE_BATTLE);
@@ -1131,7 +1131,7 @@ public:
             events.RescheduleEvent(EVENT_SPELL_RIFT_OF_CORRUPTION_AT, 2000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

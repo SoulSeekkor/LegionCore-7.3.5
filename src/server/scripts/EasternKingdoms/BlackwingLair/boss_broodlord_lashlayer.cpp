@@ -52,7 +52,7 @@ public:
     {
         boss_broodlordAI(Creature* creature) : BossAI(creature, BOSS_BROODLORD) { }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance->GetBossState(BOSS_VAELASTRAZ) != DONE)
             {
@@ -60,7 +60,7 @@ public:
                 return;
             }
 
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
 
             events.RescheduleEvent(EVENT_CLEAVE, 8000);

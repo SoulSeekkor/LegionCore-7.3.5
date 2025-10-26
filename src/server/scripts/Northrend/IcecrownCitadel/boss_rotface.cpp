@@ -106,7 +106,7 @@ class boss_rotface : public CreatureScript
                 infectionCooldown = 14000;
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 instance->SetBossState(DATA_ROTFACE, IN_PROGRESS);
                 me->setActive(true);

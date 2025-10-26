@@ -117,7 +117,7 @@ struct npc_baldrazar : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -304,7 +304,7 @@ struct npc_dreadbringer_valus : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -500,7 +500,7 @@ struct npc_vogrethar_the_defiled : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -685,7 +685,7 @@ struct npc_flamebringer_azrothel : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -874,7 +874,7 @@ struct npc_gorgoloth : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -1043,7 +1043,7 @@ struct npc_flameweaver_verathix : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -1225,7 +1225,7 @@ struct npc_velthrak_the_punisher : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -1432,7 +1432,7 @@ struct npc_mazgoroth : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -1621,7 +1621,7 @@ struct npc_malphazel_argus : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -1828,7 +1828,7 @@ struct npc_fel_lord_kazral : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -2014,7 +2014,7 @@ struct npc_harbinger_drelnathar : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -2187,7 +2187,7 @@ struct npc_flamecaller_vezrah : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -2356,7 +2356,7 @@ struct npc_dread_knight_zakgal : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126)
             DoCast(251896);
@@ -3000,7 +3000,7 @@ struct npc_felflame_invader : ScriptedAI
                 me->CastSpell(c, 252327, false);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         events.RescheduleEvent(EVENT_1, 2000);
@@ -3084,7 +3084,7 @@ struct npc_felflame_subjugator : ScriptedAI
             DoCast(252628);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         events.RescheduleEvent(EVENT_1, 2000);
@@ -3137,7 +3137,7 @@ struct npc_crazed_corruptor : ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetCurrentZoneID() == 9126 || me->GetCurrentZoneID() == 9295)
             DoCast(251896);
@@ -3233,7 +3233,7 @@ struct npc_magma_giant : ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 18000);
         events.RescheduleEvent(EVENT_2, 3000);

@@ -14708,7 +14708,7 @@ void Unit::CombatStart(Unit* target, bool initialAggro)
         target->SetInCombatWith(this);
         
         if (this->IsPlayer())
-            sScriptMgr->OnPlayerEnterCombat(this->ToPlayer(), target);
+            sScriptMgr->OnPlayerJustEngagedWith(this->ToPlayer(), target);
     }
 
     Unit* who = target->GetCharmerOrOwnerOrSelf();
@@ -14762,7 +14762,7 @@ void Unit::SetInCombatState(Unit* enemy, bool pvp)
         {
             if (IsAIEnabled)
             {
-                creature->AI()->EnterCombat(enemy);
+                creature->AI()->JustEngagedWith(enemy);
                 RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC); // unit has engaged in combat, remove immunity so players can fight back
             }
 
@@ -14770,7 +14770,7 @@ void Unit::SetInCombatState(Unit* enemy, bool pvp)
                 creature->GetFormation()->MemberAttackStart(creature, enemy);
 
             if (m_zoneScript)
-                m_zoneScript->EnterCombatForScript(creature, enemy);
+                m_zoneScript->JustEngagedWithForScript(creature, enemy);
         }
 
         if (!(creature->GetCreatureTemplate()->TypeFlags[0] & CREATURE_TYPEFLAGS_MOUNTED_COMBAT))

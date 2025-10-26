@@ -536,7 +536,7 @@ struct npc_artruis_Q12581 : public ScriptedAI
     bool hp30 = false;
     bool cankill = false;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         ResAdds();
@@ -713,7 +713,7 @@ struct npc_jaloot_Q12581 : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_1, urand(1000, 1500));
         events.ScheduleEvent(EVENT_2, urand(2500, 7500));
@@ -858,7 +858,7 @@ struct npc_zephik_Q12581 : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_1, urand(2000, 4500));
         events.ScheduleEvent(EVENT_2, urand(7500, 9500));

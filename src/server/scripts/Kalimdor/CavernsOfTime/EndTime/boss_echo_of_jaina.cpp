@@ -149,9 +149,9 @@ struct boss_echo_of_jaina : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
 
         events.ScheduleEvent(EVENT_BLINK, 30000);
@@ -263,7 +263,7 @@ struct npc_echo_of_jaina_flarecore : public ScriptedAI
             me->AddAura(SPELL_CHECK_PLAYER_DIST, me);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_CHECK_PLAYER, 500);
         events.ScheduleEvent(EVENT_EXPLODE, 10000);

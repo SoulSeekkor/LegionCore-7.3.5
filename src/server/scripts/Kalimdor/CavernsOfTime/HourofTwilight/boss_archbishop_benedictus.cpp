@@ -134,7 +134,7 @@ class boss_archbishop_benedictus : public CreatureScript
 
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 bPhase = false;
 

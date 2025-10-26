@@ -312,9 +312,9 @@ public:
                 me->SummonGameObject(194324, 2387.8076f, -53.4829f, 424.4779f, 3.0598f, 0, 0, 1, 1, 604800); //Static pos for chest
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
         
             for (uint32 i = 0; i < 150; ++i)
                 DoCast(me, SPELL_ATTUNED_TO_NATURE);
@@ -651,7 +651,7 @@ public:
             uiBrightleafFluxTimer = 0;
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             DoScriptText(SAY_BRIGHTLEAF_AGGRO, me);
         }
@@ -802,7 +802,7 @@ public:
             uiIronRootTimer = 8000;
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             DoScriptText(SAY_IRONBRANCH_AGGRO, me);
         }
@@ -927,7 +927,7 @@ public:
             uiPetrifiedBarkTimer = 35000;
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             DoScriptText(SAY_STONEBARK_AGGRO, me);
         }
@@ -1174,7 +1174,7 @@ public:
         uint32 uiSpawnPauseTimer;
         uint8 healthySporesSpawned;
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             DoCast(me, SPELL_CONSERVATORS_GRIP);
         }

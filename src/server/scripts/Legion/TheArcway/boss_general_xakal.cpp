@@ -64,11 +64,11 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //37:50(N) | 58:24(H)
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_FEL_FISSURE, 6000); //37:56
             events.RescheduleEvent(EVENT_SHADOW_SLASH, 13000); //38:03

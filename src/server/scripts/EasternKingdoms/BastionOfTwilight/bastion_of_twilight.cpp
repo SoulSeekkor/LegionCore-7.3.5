@@ -117,7 +117,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_SHADOW_BOLT, 1000);
             events.RescheduleEvent(EVENT_SHAPE_PORTAL, urand(10000, 15000));
@@ -174,7 +174,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_TWILIGHT_SHIFT, urand(5000, 15000));
         }
@@ -235,7 +235,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoCast(me, SPELL_SHADOW_MENDING);
             events.RescheduleEvent(EVENT_UMBRAL_FLAMES, urand(10000, 13000));

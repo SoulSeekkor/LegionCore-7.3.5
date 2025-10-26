@@ -102,9 +102,9 @@ struct boss_naraxas : public BossAI
             sum->SetReactState(REACT_PASSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_GAIN_ENERGY, true);
 
         events.RescheduleEvent(EVENT_RANCID_MAW, 8000);

@@ -1401,9 +1401,9 @@ void ScriptMgr::OnPlayerQuestReward(Player* player, Quest const* quest)
 {
     FOREACH_SCRIPT(PlayerScript)->OnQuestReward(player, quest);
 }
-void ScriptMgr::OnPlayerEnterCombat(Player* player, Unit* target)
+void ScriptMgr::OnPlayerJustEngagedWith(Player* player, Unit* target)
 {
-    FOREACH_SCRIPT(PlayerScript)->OnEnterCombat(player, target);
+    FOREACH_SCRIPT(PlayerScript)->OnJustEngagedWith(player, target);
 }
 // Guild
 void ScriptMgr::OnGuildAddMember(Guild* guild, Player* player, uint8& plRank)

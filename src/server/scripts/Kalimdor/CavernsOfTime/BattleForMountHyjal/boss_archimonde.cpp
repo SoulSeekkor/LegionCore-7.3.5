@@ -107,7 +107,7 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType dmgType)
         {
@@ -151,7 +151,7 @@ public:
         void Reset() { }
 
         void MoveInLineOfSight(Unit* /*who*/) {}
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType dmgType)
         {
@@ -193,7 +193,7 @@ public:
                 TargetGUID = who->GetGUID();
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void DamageTaken(Unit* /*done_by*/, uint32 &damage, DamageEffectType dmgType)
         {
@@ -301,7 +301,7 @@ public:
             IsChanneling = false;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->InterruptSpell(CURRENT_CHANNELED_SPELL);
             Talk(SAY_AGGRO);

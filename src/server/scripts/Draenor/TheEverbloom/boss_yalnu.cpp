@@ -99,9 +99,9 @@ struct boss_yalnu : public BossAI
         checkTimer = 2000;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         for (uint8 i = 0; i < 6; i++)
             me->SummonCreature(NPC_KIRIN_TOR_MAGE, magePos[i]);
@@ -279,7 +279,7 @@ struct npc_yalnu_kirin_tor_mage : public ScriptedAI
         summons.DespawnAll();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (me->GetEntry() == NPC_LADY_BAIHU)
             Talk(SAY_LADY_AGGRO);

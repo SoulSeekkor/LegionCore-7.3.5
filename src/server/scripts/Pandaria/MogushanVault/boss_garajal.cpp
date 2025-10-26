@@ -109,7 +109,7 @@ class boss_garajal : public CreatureScript
                 return true;
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (instance)
                 {
@@ -119,7 +119,7 @@ class boss_garajal : public CreatureScript
                         return;
                     }
                 }
-                _EnterCombat();
+                _JustEngagedWith();
                 checkvictim = 1500;
                 events.RescheduleEvent(EVENT_SECONDARY_ATTACK,      urand(5000, 10000));
                 events.RescheduleEvent(EVENT_SUMMON_TOTEM,          35000);

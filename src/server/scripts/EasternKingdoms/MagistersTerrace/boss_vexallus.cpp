@@ -107,7 +107,7 @@ public:
                 instance->SetData(DATA_VEXALLUS_EVENT, DONE);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             Talk(SAY_AGGRO);
 
@@ -217,7 +217,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void AttackStart(Unit* /*who*/) {}
     };

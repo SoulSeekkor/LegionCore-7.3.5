@@ -28,7 +28,7 @@ struct boss_gekkan : public BossAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_RECKLESS_INSPIRATION, 3000);
         Talk(TALK_AGGRO);
@@ -111,7 +111,7 @@ struct mob_glintrok_skulker : public ScriptedAI
         me->RemoveAllAuras();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         instance->SetData(DATA_GEKKAN_ADDS, 1);
@@ -160,7 +160,7 @@ struct mob_glintrok_ironhide : public ScriptedAI
         me->RemoveAllAuras();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         instance->SetData(DATA_GEKKAN_ADDS, 1);
@@ -214,7 +214,7 @@ struct mob_glintrok_oracle : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);
@@ -263,7 +263,7 @@ struct mob_glintrok_hexxer : public ScriptedAI
         me->RemoveAllAuras();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);

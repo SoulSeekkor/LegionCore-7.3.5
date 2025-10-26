@@ -78,7 +78,7 @@ public:
             Consecration_Timer = 8000;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             //This is not correct. Should taunt Thrall before engage in combat
             Talk(SAY_TAUNT);

@@ -98,7 +98,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (fm_Type == 0)
                 fm_Type = GetForgeMasterType();

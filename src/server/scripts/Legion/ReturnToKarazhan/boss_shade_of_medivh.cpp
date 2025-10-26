@@ -87,10 +87,10 @@ public:
             interruptRand = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             me->InterruptNonMeleeSpells(false);
             DoCast(me, SPELL_MANA_REGEN, true);
 

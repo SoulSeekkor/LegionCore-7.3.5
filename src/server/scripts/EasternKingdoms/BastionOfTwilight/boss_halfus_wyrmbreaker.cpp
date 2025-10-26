@@ -298,7 +298,7 @@ class boss_halfus_wyrmbreaker : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             { 
                 if (Creature* slatedrake = ObjectAccessor::GetCreature(*me, slatedrakeGuid))
                     if (!slatedrake->HasAura(SPELL_UNRESPONSIVE_DRAKE))
@@ -512,7 +512,7 @@ class npc_proto_behemoth : public CreatureScript
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (!instance)
                     return;

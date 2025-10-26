@@ -243,9 +243,9 @@ class boss_thok_the_bloodthirsty : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 enrage = 600000;
                 DoCast(me, SPELL_POWER_REGEN, true);
                 events.RescheduleEvent(EVENT_SHOCK_BLAST, 4000);
@@ -662,7 +662,7 @@ public:
 
         void Reset(){}
         
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             Talk(SAY_PULL);
             events.RescheduleEvent(EVENT_ENRAGE_KJ, 1000);
@@ -748,7 +748,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -804,7 +804,7 @@ public:
             events.RescheduleEvent(EVENT_CHECK_TPLAYER, 1000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -868,7 +868,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
         
         void UpdateAI(uint32 diff)
         {
@@ -907,7 +907,7 @@ public:
 
         void Reset(){}
         
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -941,7 +941,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1017,7 +1017,7 @@ public:
             me->SummonCreature(NPC_SHOCK_COLLAR, x, y, me->GetPositionZ());
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

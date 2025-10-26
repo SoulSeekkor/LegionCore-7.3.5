@@ -217,9 +217,9 @@ public:
                 DespawnCreaturesInArea(entry, me);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             if (m_Instance)
                 m_Instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -550,7 +550,7 @@ public:
             me->AddAura(SpellSpiritVisual, me);
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             events.RescheduleEvent(EventCrusaderStirke, 5 * IN_MILLISECONDS);
         }
@@ -618,7 +618,7 @@ public:
             m_RadiantDiff = 1 * IN_MILLISECONDS;
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             events.RescheduleEvent(EventRadiantFury, 8 * IN_MILLISECONDS);
             events.RescheduleEvent(EventArbitrerHammer, 14 * IN_MILLISECONDS);
@@ -733,7 +733,7 @@ public:
             me->AddAura(SpellSpiritVisual, me);
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             events.RescheduleEvent(EventArcaneBolt, 4 * IN_MILLISECONDS);
             events.RescheduleEvent(EventArcaneBomb, 12 * IN_MILLISECONDS);

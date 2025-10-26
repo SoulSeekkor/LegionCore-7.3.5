@@ -81,7 +81,7 @@ struct boss_grimrail_enforcers : public BossAI
         instance->SetData(DATA_G_ENFOR_DIED, 0);
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         instance->SetBossState(DATA_G_ENFORCERS, IN_PROGRESS);
 
@@ -120,9 +120,9 @@ public:
             boss_grimrail_enforcers::Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_grimrail_enforcers::EnterCombat(who);
+            boss_grimrail_enforcers::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
             events.RescheduleEvent(EVENT_FLAMING_SLASH, 4000);
@@ -200,9 +200,9 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_grimrail_enforcers::EnterCombat(who);
+            boss_grimrail_enforcers::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
             events.RescheduleEvent(EVENT_GUTSHOT, 0);
@@ -309,9 +309,9 @@ public:
             boss_grimrail_enforcers::Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_grimrail_enforcers::EnterCombat(who);
+            boss_grimrail_enforcers::JustEngagedWith(who);
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
             events.RescheduleEvent(EVENT_BLOOD_BOLT, 0);

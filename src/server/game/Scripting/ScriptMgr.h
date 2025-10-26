@@ -794,7 +794,7 @@ class PlayerScript : public ScriptObject
         
         virtual void OnQuestReward(Player* player, Quest const* quest) {}
 
-        virtual void OnEnterCombat(Player* player, Unit* target) {}
+        virtual void OnJustEngagedWith(Player* player, Unit* target) {}
         
         //After looting item
         virtual void OnLootItem(Player* player, Item* item, uint32 count) { }
@@ -1103,7 +1103,7 @@ class ScriptMgr
         void OnPlayerWhoListCall(Player* player, const std::set<ObjectGuid> & playersGuids);
         void OnPlayerSendMail(Player* player, std::string& subject, std::string& body, ObjectGuid receiverGuid);
         void OnPlayerQuestReward(Player* player, Quest const* quest);
-        void OnPlayerEnterCombat(Player* player, Unit* target);
+        void OnPlayerJustEngagedWith(Player* player, Unit* target);
         void OnLootItem(Player* player, Item* item, uint32 count);
         void OnCreateItem(Player* player, Item* item, uint32 count);
         void OnQuestRewardItem(Player* player, Item* item, uint32 count);

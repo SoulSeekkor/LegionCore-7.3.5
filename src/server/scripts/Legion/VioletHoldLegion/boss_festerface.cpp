@@ -81,11 +81,11 @@ public:
             me->SetPower(POWER_ENERGY, 0);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //39:33
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             bilekill = false;
             DoCast(me, SPELL_FESTERFACE_AGGRO, true);
 

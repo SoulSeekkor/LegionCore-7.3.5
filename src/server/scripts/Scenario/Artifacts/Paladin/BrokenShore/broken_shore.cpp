@@ -82,7 +82,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (me->GetEntry() == NPC_LORD_MAXWELL_TYROSUS)
             {
@@ -541,7 +541,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (me->GetEntry() == NPC_DARK_INQUISITOR)
                 return;
@@ -712,7 +712,7 @@ public:
             DoCast(me, SPELL_ZERUS_DRAIN_SOUL_VIS, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //13:37
         {
             me->SummonCreature(NPC_DEMON_PORTAL, demonPortalPos[0]);
@@ -884,7 +884,7 @@ public:
             fightEnd = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //21:26
         {
             events.RescheduleEvent(EVENT_5, 11000);

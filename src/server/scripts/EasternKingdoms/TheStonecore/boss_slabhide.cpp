@@ -43,9 +43,9 @@ struct boss_slabhide : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_FLY, 50000);
         events.RescheduleEvent(EVENT_SAND_BLAST, 10000);
         events.RescheduleEvent(EVENT_LAVA_FISSURE, urand(10000, 15000));

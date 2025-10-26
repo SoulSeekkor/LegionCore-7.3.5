@@ -52,9 +52,9 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_CRYSTALIZE,   20 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_MOTHERS_MILK, 10 * IN_MILLISECONDS);
         }

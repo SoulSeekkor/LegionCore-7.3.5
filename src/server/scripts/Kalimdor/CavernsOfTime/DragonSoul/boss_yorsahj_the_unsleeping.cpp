@@ -203,7 +203,7 @@ class boss_yorsahj_the_unsleeping: public CreatureScript
                 me->SetUInt32Value(UNIT_FIELD_EMOTE_STATE, 0);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (instance->GetBossState(DATA_MORCHOK) != DONE)
                 {

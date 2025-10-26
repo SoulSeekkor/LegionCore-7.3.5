@@ -106,7 +106,7 @@ public:
                 instance->SetData(DATA_HADRONOX_EVENT, DONE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (instance)
                 instance->SetData(DATA_HADRONOX_EVENT, IN_PROGRESS);

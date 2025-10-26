@@ -374,7 +374,7 @@ struct npc_highmaul_gorian_guardsman : public MS::AI::CosmeticAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventBloodyCleave, urand(4000, 7000));
         m_Events.RescheduleEvent(EventChainGrip, urand(3000, 8000));
@@ -470,7 +470,7 @@ struct npc_highmaul_night_twisted_devout : public MS::AI::CosmeticAI
             me->SetReactState(REACT_PASSIVE);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         if (me->HasReactState(REACT_PASSIVE))
         {
@@ -563,7 +563,7 @@ struct npc_highmaul_gorian_runemaster : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventRuneOfDestruction, urand(6000, 9000));
         m_Events.RescheduleEvent(EventRuneOfDisintegration, urand(9000, 12000));
@@ -625,7 +625,7 @@ struct npc_highmaul_gorian_enforcer : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventMeatGrinder, urand(6000, 8000));
     }
@@ -683,7 +683,7 @@ struct npc_highmaul_underbelly_vagrant : public MS::AI::CosmeticAI
         AddDelayedEvent(16 * IN_MILLISECONDS, [this]() -> void { me->CastSpell(me, SpellLooting, false); });
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventPilfer, urand(2000, 4000));
     }
@@ -739,7 +739,7 @@ struct npc_highmaul_gorian_sorcerer : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventArcaneForce, urand(6000, 8000));
         m_Events.RescheduleEvent(EventArcaneBolt, urand(7000, 10000));
@@ -796,7 +796,7 @@ struct npc_highmaul_night_twisted_brute : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         m_Events.RescheduleEvent(EventSurgeOfDarkness, urand(8000, 12000));
 
@@ -872,7 +872,7 @@ struct npc_highmaul_night_twisted_soothsayer : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventVoidStorm, urand(6000, 9000));
         m_Events.RescheduleEvent(EventVoidBolt, urand(4000, 7000));
@@ -929,7 +929,7 @@ struct npc_highmaul_void_aberration : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventVoidSoul, urand(8000, 12000));
     }
@@ -981,7 +981,7 @@ struct npc_highmaul_krush : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventBoarsRush, 5000);
     }
@@ -1085,7 +1085,7 @@ struct npc_highmaul_iron_flame_technician : public MS::AI::CosmeticAI
         });
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         if (m_IsCosmetic)
             return;
@@ -1236,7 +1236,7 @@ struct npc_highmaul_iron_warmaster : public MS::AI::CosmeticAI
         });
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         if (m_IsCosmetic)
             return;
@@ -1372,7 +1372,7 @@ struct npc_highmaul_iron_blood_mage : public MS::AI::CosmeticAI
         });
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventCorruptedBlood, urand(6000, 9000));
         m_Events.RescheduleEvent(EventBloodBolt, urand(4000, 7000));
@@ -1460,7 +1460,7 @@ struct npc_highmaul_night_twisted_ritualist : public MS::AI::CosmeticAI
         me->CastSpell(me, VoidChannel, true);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         me->RemoveAura(VoidChannel);
 
@@ -1548,7 +1548,7 @@ struct npc_highmaul_greater_void_aberration : public MS::AI::CosmeticAI
         });
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventCallOfTheVoid, urand(6000, 9000));
     }
@@ -1625,7 +1625,7 @@ struct npc_highmaul_highmaul_conscript : public MS::AI::CosmeticAI
         me->CastSpell(me, AtArms, true);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventRendingSlash, 5 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventShieldBlocking, 13 * IN_MILLISECONDS);
@@ -1763,7 +1763,7 @@ struct npc_highmaul_ogron_earthshaker : public MS::AI::CosmeticAI
         m_SlamCount = 0;
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventIntimidatingRoar, 6 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventEarthdevastatingSlam, 17 * IN_MILLISECONDS);
@@ -1891,7 +1891,7 @@ struct npc_highmaul_gorian_arcanist : public ScriptedAI
         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISARMED);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventArcaneBolt, 6 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventArcaneVolatility, 10 * IN_MILLISECONDS);
@@ -1989,7 +1989,7 @@ struct npc_highmaul_ogron_brute : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventDecimate, 6 * IN_MILLISECONDS);
     }
@@ -2270,7 +2270,7 @@ struct npc_highmaul_warden_thultok : public ScriptedAI
         me->SummonGameObject(Teleporter, teleporterSpawnPos, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventDestructiveForce, 5 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventArcaneResidue, 10 * IN_MILLISECONDS);
@@ -2334,7 +2334,7 @@ struct npc_highmaul_gorian_royal_guardsman : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventRampage, 10 * IN_MILLISECONDS);
     }
@@ -2439,7 +2439,7 @@ struct npc_highmaul_gorian_high_sorcerer : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventArcaneBlast, 5 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventNetherFont, 10 * IN_MILLISECONDS);
@@ -2516,7 +2516,7 @@ struct npc_highmaul_ogron_mauler : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventDeafeningRoar, 5 * IN_MILLISECONDS);
     }
@@ -2596,7 +2596,7 @@ struct npc_highmaul_guard_captain_thag : public MS::AI::CosmeticAI
         me->SetCanDualWield(false);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventBrutalCleave, 5 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventGroundStomp, 7 * IN_MILLISECONDS);
@@ -2682,7 +2682,7 @@ struct npc_highmaul_councilor_daglat : public MS::AI::CosmeticAI
         me->CastSpell(me, KneelCosmeticForced, true);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventArcaneDestruction, 1 * IN_MILLISECONDS);
     }
@@ -2765,7 +2765,7 @@ struct npc_highmaul_councilor_magknor : public MS::AI::CosmeticAI
         m_Summons.DespawnAll();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         me->CastSpell(me, ArcaneTorrentSummon, true);
 
@@ -2871,7 +2871,7 @@ struct npc_highmaul_councilor_gorluk : public MS::AI::CosmeticAI
         me->CastSpell(me, KneelCosmeticForced, true);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventPhantasmalWeapon, 7 * IN_MILLISECONDS);
     }
@@ -2961,7 +2961,7 @@ struct npc_highmaul_councilor_nouk : public MS::AI::CosmeticAI
         me->CastSpell(me, KneelCosmeticForced, true);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         me->CastSpell(me, TimeStop, false);
 
@@ -3033,7 +3033,7 @@ struct npc_highmaul_high_councilor_malgris : public MS::AI::CosmeticAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventUnstableTempest, 50);
     }

@@ -134,7 +134,7 @@ public:
             onTheRocks = true;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->SetInCombatWithZone();
             if(instance)

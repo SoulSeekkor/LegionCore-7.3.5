@@ -72,7 +72,7 @@ public:
                 Talk(4);
         }
 
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             Talk(5);
             checkdistance = 1500; 
@@ -191,7 +191,7 @@ class npc_bitter_thoughths : public CreatureScript
                 unsummon = 30000;
             }
 
-            void EnterCombat(Unit* who) override {}
+            void JustEngagedWith(Unit* who) override {}
 
             void EnterEvadeMode() override {}
 

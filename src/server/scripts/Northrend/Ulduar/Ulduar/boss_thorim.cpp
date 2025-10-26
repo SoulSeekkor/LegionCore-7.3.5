@@ -327,10 +327,10 @@ public:
             _JustDied();
         }
         
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
         
             // Spawn Thunder Orbs
             for(uint8 n = 0; n < 7; n++)
@@ -683,7 +683,7 @@ public:
             ChargeTimer = 8000;
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
             if (id == DARK_RUNE_WARBRINGER)
                 DoCast(me, SPELL_AURA_OF_CELERITY);
@@ -888,7 +888,7 @@ public:
             summons.Summon(summon);
         }
 
-        void EnterCombat(Unit* /*pWho*/) override {}
+        void JustEngagedWith(Unit* /*pWho*/) override {}
 
         void JustDied(Unit* /*victim*/) override
         {

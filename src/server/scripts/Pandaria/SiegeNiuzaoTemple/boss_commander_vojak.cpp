@@ -30,9 +30,9 @@ struct boss_commander_vojak : public BossAI
         bladetimer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         striketimer = 3000;
     }
 

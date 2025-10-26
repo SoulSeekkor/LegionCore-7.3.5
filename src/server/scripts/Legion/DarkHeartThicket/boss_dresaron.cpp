@@ -55,9 +55,9 @@ public:
             abomination = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_BREATH_OF_CORRUPTION, 7000);
             events.RescheduleEvent(EVENT_EARTHSHAKING_ROAR, 14000);

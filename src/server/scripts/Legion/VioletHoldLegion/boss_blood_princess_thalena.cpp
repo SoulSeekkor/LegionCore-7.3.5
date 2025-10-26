@@ -89,13 +89,13 @@ public:
                 me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         //30:22
         {
             Conversation* conversation = new Conversation;
             if (!conversation->CreateConversation(sObjectMgr->GetGenerator<HighGuid::Conversation>()->Generate(), 1231, who, NULL, *who))
                 delete conversation;
-            _EnterCombat();
+            _JustEngagedWith();
             DoCast(me, SPELL_SHROUD_OF_SORROW, true);
 
             events.RescheduleEvent(EVENT_VAMPYR_KISS, 6000); //30:28. Не повторяется.

@@ -67,7 +67,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 4000);
         }
@@ -150,7 +150,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 2000);
@@ -323,7 +323,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoCast(SPELL_SUMMON_PET);
             events.RescheduleEvent(EVENT_1, urand(6000, 7000)); 

@@ -114,7 +114,7 @@ class npc_torek : public CreatureScript
                 Completed = false;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
             }
 
@@ -228,7 +228,7 @@ class npc_ruul_snowhoof : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/) {}
+            void JustEngagedWith(Unit* /*who*/) {}
 
             void Reset()
             {
@@ -361,7 +361,7 @@ class npc_muglash : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 if (Player* player = GetPlayerForEscort())
                     if (HasEscortState(STATE_ESCORT_PAUSED))

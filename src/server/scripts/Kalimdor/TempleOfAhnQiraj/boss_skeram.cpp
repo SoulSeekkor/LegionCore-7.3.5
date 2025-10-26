@@ -104,7 +104,7 @@ public:
                 Talk(SAY_DEATH);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (IsImage || Images75)
                 return;

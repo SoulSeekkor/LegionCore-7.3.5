@@ -195,9 +195,9 @@ public:
             FailAchiv = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             //for (uint8 n = 0; n < 2; ++n)
                 //Harpoon[n] = me->SummonCreature(NPC_HARPOON, PosHarpoon[n], TEMPSUMMON_CORPSE_TIMED_DESPAWN, 0);
             me->SetSpeed(MOVE_FLIGHT, 3.0f, true);

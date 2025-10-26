@@ -49,9 +49,9 @@ public:
             Talk(SAY_DEATH);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.ScheduleEvent(EVENT_VOID_ZONE, urand(8000, 10000));
             events.ScheduleEvent(EVENT_SHADOW_NOVA, urand(10000, 12000));
             events.ScheduleEvent(EVENT_SEED_OF_CORRUPTION, urand(12000, 20000));

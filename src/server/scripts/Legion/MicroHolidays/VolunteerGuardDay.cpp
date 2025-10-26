@@ -66,7 +66,7 @@ struct npc_city_invader : public ScriptedAI
         AttackStart(owner);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         switch (randomClass)
         {

@@ -353,7 +353,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -571,7 +571,7 @@ public:
                     DoCast((*itr), SPELL_VENGEFUL_RAGE);            
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -660,7 +660,7 @@ public:
         }
 
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -744,7 +744,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -831,7 +831,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -909,7 +909,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -987,7 +987,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -1069,7 +1069,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -1203,7 +1203,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (!instance)
                 return;
@@ -1729,7 +1729,7 @@ public:
             me->DespawnOrUnsummon();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_FIERY_SLASH, urand(8000, 12000));
         }

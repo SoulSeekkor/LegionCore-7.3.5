@@ -71,7 +71,7 @@ class boss_baron_silverlaine : public CreatureScript
                 phase = 0;
             }
 
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_VEIL_OF_SHADOW, 12000);

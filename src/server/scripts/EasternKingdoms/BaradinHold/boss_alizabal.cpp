@@ -97,7 +97,7 @@ class boss_alizabal : public CreatureScript
                     events.RescheduleEvent(EVENT_BLADE_DANCE_AURA, 500);
             }
 
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 uiCharges = 0;
                 events.RescheduleEvent(EVENT_BERSERK, 300000);

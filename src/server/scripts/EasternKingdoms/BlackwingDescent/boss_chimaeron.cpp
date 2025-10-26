@@ -153,7 +153,7 @@ public:
                 uiVictims++;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (IsHeroic())
                 events.RescheduleEvent(EVENT_BERSERK, 7.5 * MINUTE * IN_MILLISECONDS);

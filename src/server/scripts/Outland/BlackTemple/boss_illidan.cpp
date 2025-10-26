@@ -391,7 +391,7 @@ public:
             GlaiveGUID.Clear();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoZoneInCombat();
         }
@@ -537,7 +537,7 @@ public:
                 Timer[EVENT_FLIGHT_SEQUENCE] = 1000;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->setActive(true);
             DoZoneInCombat();
@@ -1189,7 +1189,7 @@ public:
             me->SetVirtualItem(2, 45738);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void EnterEvadeMode() {}
 
@@ -1482,7 +1482,7 @@ public:
             me->CombatStop(true);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
 
         void MovementInform(uint32 MovementType, uint32 /*Data*/)
@@ -2063,7 +2063,7 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
         }
 
-        void EnterCombat(Unit* /*who*/){}
+        void JustEngagedWith(Unit* /*who*/){}
 
         void MoveInLineOfSight(Unit* who)
         {
@@ -2143,7 +2143,7 @@ public:
 
         ObjectGuid TargetGUID;
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoZoneInCombat();
         }
@@ -2238,7 +2238,7 @@ public:
             DoCast(me, SPELL_SHADOWFIEND_PASSIVE, true);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoZoneInCombat();
         }

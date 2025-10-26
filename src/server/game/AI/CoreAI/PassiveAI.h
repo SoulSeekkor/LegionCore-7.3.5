@@ -59,7 +59,7 @@ class NullCreatureAI : public CreatureAI
         void UpdateAI(uint32) {}
         void EnterEvadeMode() {}
         void OnCharmed(bool /*apply*/) {}
-        void EnterCombat(Unit* who) {}
+        void JustEngagedWith(Unit* who) {}
 
         static int Permissible(const Creature*) { return PERMIT_BASE_IDLE;  }
 };
@@ -70,7 +70,7 @@ class CritterAI : public PassiveAI
         explicit CritterAI(Creature* c) : PassiveAI(c) {}
 
         void InitializeAI() override;
-        void EnterCombat(Unit* who) override;
+        void JustEngagedWith(Unit* who) override;
         void DamageTaken(Unit* done_by, uint32& /*damage*/, DamageEffectType dmgType) override;
         void EnterEvadeMode() override;
         void AttackedBy(Unit* who) override;

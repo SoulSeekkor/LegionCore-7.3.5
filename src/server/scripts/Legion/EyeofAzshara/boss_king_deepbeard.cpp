@@ -73,10 +73,10 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_GROUND_SLAM, 7000);
             events.RescheduleEvent(EVENT_GASEOUS_BUBBLES, 11000);

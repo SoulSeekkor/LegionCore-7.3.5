@@ -194,7 +194,7 @@ void ReactorAI::JustDied(Unit* killer)
                     me->CastSpell(killer, spell.second.SpellID, true);
 }
 
-void ReactorAI::EnterCombat(Unit* who)
+void ReactorAI::JustEngagedWith(Unit* who)
 {
     AttackedBy(who);
 

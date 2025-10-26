@@ -87,7 +87,7 @@ class boss_doomlord_kazzak : public CreatureScript
                 Talk(SAY_INTRO);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
             }

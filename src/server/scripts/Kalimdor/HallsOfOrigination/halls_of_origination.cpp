@@ -118,7 +118,7 @@ class npc_air_warden : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_WIND_SNEAR, urand(2000, 6000));
                 DoZoneInCombat();
@@ -194,7 +194,7 @@ class npc_flame_warden : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_LAVA_ERUPTION, urand(4000, 7000));
                 events.ScheduleEvent(EVENT_RAGING_INFERNO, urand(10000, 12000));
@@ -274,7 +274,7 @@ class npc_water_warden : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_BUBBLE_BOUND, urand(10000, 15000));
                 DoZoneInCombat();
@@ -350,7 +350,7 @@ class npc_earth_warden : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_IMPALE, urand(6000, 10000));
                 events.ScheduleEvent(EVENT_ROCKWAVE, urand(12000, 15000));

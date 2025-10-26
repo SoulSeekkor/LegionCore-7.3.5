@@ -129,9 +129,9 @@ struct boss_alar : public BossAI
         me->setActive(false);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         me->SetDisableGravity(true); // after enterevademode will be set walk movement
         me->setActive(true);
     }
@@ -458,7 +458,7 @@ struct npc_ember_of_alar : public ScriptedAI
         Initialize();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoZoneInCombat();
     }
@@ -510,7 +510,7 @@ struct npc_flame_patch_alar : public ScriptedAI
 {
     explicit npc_flame_patch_alar(Creature* creature) : ScriptedAI(creature) {}
     void Reset() override { }
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
     void AttackStart(Unit* /*who*/) override {}
     void MoveInLineOfSight(Unit* /*who*/) override {}
 

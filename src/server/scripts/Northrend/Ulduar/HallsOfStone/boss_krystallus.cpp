@@ -91,7 +91,7 @@ public:
             if (instance)
                 instance->SetData(DATA_KRYSTALLUS_EVENT, NOT_STARTED);
         }
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_AGGRO, me);
 

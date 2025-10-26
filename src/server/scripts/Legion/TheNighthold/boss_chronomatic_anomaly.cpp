@@ -125,10 +125,10 @@ public:
             me->GetMotionMaster()->MovePath(9100413, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             SetAnomalySpeed();
             DoCast(me, SPELL_PASSAGE_OF_TIME, true);
             instance->DoCastSpellOnPlayers(SPELL_PASSAGE_OF_TIME);

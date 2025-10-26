@@ -142,9 +142,9 @@ class boss_lord_meljarak : public CreatureScript
                 DespawnPrison();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 DoCast(me, SPELL_WATCHFUL_EYE_1, true);
                 events.ScheduleEvent(EVENT_RAIN_BLADES, 50000); //19:05
                 events.ScheduleEvent(EVENT_WHIRLING_BLADE, 35000);
@@ -468,7 +468,7 @@ class npc_generic_soldier : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_HASTE);
             }
             
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 if (pInstance)
                 {
@@ -616,7 +616,7 @@ class npc_meljarak_wind_bomb : public CreatureScript
 
             void Reset() {}
             
-            void EnterCombat(Unit* attacker) {}
+            void JustEngagedWith(Unit* attacker) {}
 
             void IsSummonedBy(Unit* summoner)
             {
@@ -698,7 +698,7 @@ class npc_meljarak_amber_prison : public CreatureScript
                 me->DespawnOrUnsummon();
             }
 
-            void EnterCombat(Unit* attacker) {}
+            void JustEngagedWith(Unit* attacker) {}
 
             void UpdateAI(uint32 diff) {}
         };

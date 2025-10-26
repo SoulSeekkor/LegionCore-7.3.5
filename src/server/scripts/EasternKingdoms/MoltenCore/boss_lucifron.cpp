@@ -53,9 +53,9 @@ class boss_lucifron : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* victim)
+            void JustEngagedWith(Unit* victim)
             {
-                BossAI::EnterCombat(victim);
+                BossAI::JustEngagedWith(victim);
                 events.RescheduleEvent(EVENT_IMPENDING_DOOM, 10000);
                 events.RescheduleEvent(EVENT_LUCIFRON_CURSE, 20000);
                 events.RescheduleEvent(EVENT_SHADOW_SHOCK, 6000);

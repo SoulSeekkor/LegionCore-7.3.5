@@ -654,7 +654,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who) {}
+        void JustEngagedWith(Unit* who) {}
         void Reset() {}
 
         void JustDied(Unit* killer)
@@ -804,7 +804,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (urand(0, 2))
             {
@@ -1015,7 +1015,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (urand(0, 2))
             {
@@ -1138,7 +1138,7 @@ public:
     {
         npc_tobias_seecherAI(Creature* creature) : npc_escortAI(creature) {}
 
-        void EnterCombat(Unit* who) {}
+        void JustEngagedWith(Unit* who) {}
         void Reset() {}
 
         void JustDied(Unit* killer)

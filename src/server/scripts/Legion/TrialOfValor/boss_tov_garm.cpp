@@ -179,9 +179,9 @@ struct boss_garm : BossAI
         BossAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         StartEvents(PHASE_1);
         DoCast(SpellHelyatosis_AddPower);
 

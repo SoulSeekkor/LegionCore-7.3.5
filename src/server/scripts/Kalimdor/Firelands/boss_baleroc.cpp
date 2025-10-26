@@ -113,7 +113,7 @@ class boss_baleroc : public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_BLAZE_OF_GLORY);
             }
 
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 if (!instance->CheckRequiredBosses(DATA_BALEROC, me->GetEntry(), attacker->ToPlayer()))
                 {

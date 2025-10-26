@@ -158,7 +158,7 @@ public:
             return NULL;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
             DelayTimer = 0;

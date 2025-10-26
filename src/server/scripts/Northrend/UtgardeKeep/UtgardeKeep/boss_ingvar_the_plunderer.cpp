@@ -179,7 +179,7 @@ public:
             DoScriptText(YELL_AGGRO_2, me);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(YELL_AGGRO_1, me);
 
@@ -367,7 +367,7 @@ public:
 
         void AttackStart(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void UpdateAI(uint32 diff) override
         {
             if (uiResurectTimer)
@@ -444,7 +444,7 @@ public:
         }
         void AttackStart(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {

@@ -132,7 +132,7 @@ public:
             me->RemoveAura(SPELL_REGEN);
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, urand(8000, 9000)); //триггер на рандома SPELL_STALKER линк SPELL_JETSAM
             events.RescheduleEvent(EVENT_2, urand (16000, 19000)); // SPELL_BREAKSAM
@@ -266,7 +266,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
            // DoCast(SPELL_GUST_OF_WIND);
             events.RescheduleEvent(EVENT_1, urand(7000, 8000)); //SPELL_RENDING_WHIRL + 40
@@ -425,7 +425,7 @@ public:
             healthPct = 80;
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, urand(2000, 4000)); // SPELL_TAIL_LASH  скилл проверяет перед, а не зад. Должен зад
             events.RescheduleEvent(EVENT_2, urand(20000, 21000)); // SPELL_STORM_BREATH
@@ -654,7 +654,7 @@ public:
             me->RemoveAllAreaObjects();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, urand(15000, 16000)); // SPELL_FIRE_BOOM
             events.RescheduleEvent(EVENT_2, urand(25000, 26000)); // SPELL_EARTHSHAKE_STOMP
@@ -749,7 +749,7 @@ public:
             me->RemoveAllAreaObjects();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, urand(5000, 6000)); // SPELL_1 13
             events.RescheduleEvent(EVENT_2, urand(15000, 16000)); // SPELL_2 25
@@ -885,7 +885,7 @@ public:
             countclons=0;
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 18000);
             events.RescheduleEvent(EVENT_2, 24000);
@@ -1026,7 +1026,7 @@ public:
             me->RemoveAllAreaObjects();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 5000);
             events.RescheduleEvent(EVENT_2, 45000);
@@ -1108,7 +1108,7 @@ public:
             inphase = false;
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 6000);
             events.RescheduleEvent(EVENT_2, 11000);
@@ -1287,7 +1287,7 @@ public:
             timer_for_energy = 1000;
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             if (me->GetEntry() == NPC_CAPITAN || me->GetEntry() == NPC_YDORN)
                 events.RescheduleEvent(EVENT_1, urand(13000, 16000));
@@ -1486,7 +1486,7 @@ public:
             DoCast(SPELL_REMOVE_CHARM);
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 4000); // SPELL_FEL_GEYZER
             events.RescheduleEvent(EVENT_3, 7000); // SPELL_GASEOUS_BREATH
@@ -1598,7 +1598,7 @@ public:
             summons.DespawnAll();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 23000);
             events.RescheduleEvent(EVENT_2, 42000);
@@ -1731,7 +1731,7 @@ public:
             summons.DespawnAll();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 25000); // summons 233968
             events.RescheduleEvent(EVENT_2, 13000); // 241433
@@ -1845,7 +1845,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 23000); // 241458
             events.RescheduleEvent(EVENT_2, 35000); // 241518 (random)
@@ -1937,7 +1937,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 19000); // 233484
             events.RescheduleEvent(EVENT_2, 30000); // 233566
@@ -2000,7 +2000,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_1, 17000); // 234452
             events.RescheduleEvent(EVENT_2, 15000); // 233614

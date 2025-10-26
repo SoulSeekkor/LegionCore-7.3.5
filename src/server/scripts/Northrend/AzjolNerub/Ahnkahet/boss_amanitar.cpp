@@ -93,7 +93,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (instance)
                 instance->SetData(DATA_AMANITAR_EVENT, IN_PROGRESS);
@@ -196,7 +196,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void AttackStart(Unit* /*victim*/) override {}
 
         void UpdateAI(uint32 diff) override

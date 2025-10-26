@@ -140,7 +140,7 @@ class boss_helix_gearbreaker : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_STICKY_BOMB, 8000);
                 if (IsHeroic())
@@ -266,7 +266,7 @@ class npc_lumbering_oaf : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_CHARGE_OAF0, 10000);
             }
@@ -390,7 +390,7 @@ class npc_sticky_bomb : public CreatureScript
                 events.Reset();
             }
      
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_BOMB_READY, 6000);
                 events.RescheduleEvent(EVENT_BOMB_EXPLODE, 18000);
@@ -481,7 +481,7 @@ class npc_helix_crew : public CreatureScript
                 summons.Despawn(summon);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.RescheduleEvent(EVENT_STICKY_BOMB, 8000);
             }

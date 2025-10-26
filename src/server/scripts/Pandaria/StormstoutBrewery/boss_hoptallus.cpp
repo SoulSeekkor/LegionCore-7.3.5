@@ -45,9 +45,9 @@ struct boss_hoptallus : public BossAI
         summonadd = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         breathtimer = 13000;
         windtimer = 8000;
         summonadd = 10000;

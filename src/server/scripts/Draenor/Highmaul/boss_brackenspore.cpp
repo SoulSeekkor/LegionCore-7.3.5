@@ -308,9 +308,9 @@ struct boss_brackenspore : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         m_Events.RescheduleEvent(EventNecroticBreath, 30 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventBerserker, 600 * IN_MILLISECONDS);
@@ -716,7 +716,7 @@ struct npc_highmaul_spore_shooter : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventSporeShot, urand(100, 1500));
     }

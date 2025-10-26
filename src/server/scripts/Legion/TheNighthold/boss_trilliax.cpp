@@ -159,10 +159,10 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             DoCast(me, SPELL_ARCANE_SEEPAGE, true);
             DoCast(me, SPELL_FORM_CLEANER_DUMMY, true);
 

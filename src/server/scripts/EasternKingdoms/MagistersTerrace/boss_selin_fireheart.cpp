@@ -188,7 +188,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->SetPower(POWER_MANA, 0);
             Talk(SAY_AGGRO);
@@ -328,7 +328,7 @@ public:
         mob_fel_crystalAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() {}
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void UpdateAI(uint32 /*diff*/) {}

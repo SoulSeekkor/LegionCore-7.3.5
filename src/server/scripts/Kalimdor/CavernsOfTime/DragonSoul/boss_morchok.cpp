@@ -135,7 +135,7 @@ class boss_morchok: public CreatureScript
                 me->SetObjectScale(1.0f);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 Talk(SAY_AGGRO);
 

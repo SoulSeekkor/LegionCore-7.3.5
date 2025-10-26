@@ -249,7 +249,7 @@ void AggressorAI::JustDied(Unit* killer)
                     me->CastSpell(killer, spell.second.SpellID, true);
 }
 
-void AggressorAI::EnterCombat(Unit* who)
+void AggressorAI::JustEngagedWith(Unit* who)
 {
     if (me->isElite() || roll_chance_i(25)) // Prevent spamm text
         TalkAuto(TEXT_GROUP_COMBAT, who->GetGUID());
@@ -335,7 +335,7 @@ void CombatAI::JustDied(Unit* killer)
             me->CastSpell(killer, spell, true);
 }
 
-void CombatAI::EnterCombat(Unit* who)
+void CombatAI::JustEngagedWith(Unit* who)
 {
     for (auto& spell : spells)
     {
@@ -387,7 +387,7 @@ void CasterAI::InitializeAI()
         m_attackDist = MAGIC_RANGE;
 }
 
-void CasterAI::EnterCombat(Unit* who)
+void CasterAI::JustEngagedWith(Unit* who)
 {
     if (spells.empty())
         return;

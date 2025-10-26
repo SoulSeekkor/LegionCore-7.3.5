@@ -100,7 +100,7 @@ public:
             me->SetStandState(UNIT_STAND_STATE_SLEEP);
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* who)
         {
@@ -254,7 +254,7 @@ public:
             IsTreeEvent = false;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoScriptText(ATTACK_YELL, me, who);
         }
@@ -322,7 +322,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void MoveInLineOfSight(Unit* /*who*/) {}
 
@@ -396,7 +396,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoScriptText(SAY_AGGRO, me, who);
         }

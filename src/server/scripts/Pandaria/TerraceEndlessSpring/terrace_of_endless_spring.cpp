@@ -125,7 +125,7 @@ public:
                 pInstance->SetData(INTRO_DONE, 0);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             // Schedule Combat event here
             events.Reset();
@@ -277,7 +277,7 @@ public:
                 pInstance->SetData(INTRO_DONE, 0);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             // Schedule Combat event here
             events.Reset();

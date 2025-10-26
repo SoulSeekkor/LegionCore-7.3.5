@@ -1493,7 +1493,7 @@ struct npc_eonar_paraxis_inquisitor : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/)
+    void JustEngagedWith(Unit* /*who*/)
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 

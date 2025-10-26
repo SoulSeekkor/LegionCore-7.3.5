@@ -82,7 +82,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*attacker*/)
+        void JustEngagedWith(Unit* /*attacker*/)
         {
             events.Reset();
             events.ScheduleEvent(EVENT_CAST_CLEAVE, urand(3000, 5000));

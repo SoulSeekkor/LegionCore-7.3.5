@@ -163,9 +163,9 @@ struct boss_murozond : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         events.ScheduleEvent(EVENT_INFINITE_BREATH, urand(10000, 20000));
         events.ScheduleEvent(EVENT_TAIL_SWEEP, 10000);

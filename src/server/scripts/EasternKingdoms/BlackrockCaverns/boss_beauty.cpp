@@ -63,7 +63,7 @@ class boss_beauty : public CreatureScript
             instance->SetData(DATA_BEAUTY, NOT_STARTED);
         }
  
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_BERSERKER_CHARGE, 1000);
             events.RescheduleEvent(EVENT_FLAMEBREAK, 15000);

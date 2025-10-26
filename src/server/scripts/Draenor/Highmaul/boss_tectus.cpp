@@ -336,7 +336,7 @@ struct boss_tectus : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         if (!AllGardiansDead())
         {
@@ -345,7 +345,7 @@ struct boss_tectus : public BossAI
         }
 
         if (me->GetEntry() == Tectus)
-            _EnterCombat();
+            _JustEngagedWith();
 
         m_Events.RescheduleEvent(EventCrystallineBarrage, 5 * IN_MILLISECONDS);
         m_Events.RescheduleEvent(EventFracture, 8 * IN_MILLISECONDS);
@@ -949,7 +949,7 @@ struct npc_highmaul_rokka_and_lokk : public MS::AI::CosmeticAI
         return false;
     }
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         StartGuardians(me, attacker);
 
@@ -1092,7 +1092,7 @@ struct npc_highmaul_oro : public MS::AI::CosmeticAI
         return false;
     }
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         StartGuardians(me, attacker);
 
@@ -1253,7 +1253,7 @@ struct npc_highmaul_night_twisted_berserker : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         Talk(Aggro);
 
@@ -1337,7 +1337,7 @@ struct npc_highmaul_night_twisted_earthwarper : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         Talk(Aggro);
 

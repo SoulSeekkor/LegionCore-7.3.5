@@ -88,8 +88,8 @@ enum eEvents
     EVENT_CHEEP                   = 10,
     EVENT_TAKEOFF                 = 11,
     EVENT_TAKEOFF_2               = 12,
-    EVENT_ENTERCOMBAT             = 13,
-    EVENT_ENTERCOMBAT_2           = 14,
+    EVENT_JustEngagedWith             = 13,
+    EVENT_JustEngagedWith_2           = 14,
     EVENT_TO_PATROL               = 15,
     EVENT_MOVE_TO_DEST_POS        = 16,
     EVENT_LAY_EGG                 = 17,
@@ -156,9 +156,9 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_INFECTED_TALONS);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             checkmelee = 4000;
             events.RescheduleEvent(EVENT_ACTIVE_NEST, 1000);
             events.RescheduleEvent(EVENT_CHECK_PROGRESS, 4000);
@@ -369,7 +369,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -411,7 +411,7 @@ public:
                     {
                         for (GuidVector::const_iterator itr = _hatchlinglist.begin(); itr != _hatchlinglist.end(); itr++)
                             if (Creature* hatchling = me->GetCreature(*me, *itr))
-                                hatchling->AI()->SetData(DATA_ENTERCOMBAT, 0);
+                                hatchling->AI()->SetData(DATA_JustEngagedWith, 0);
                     }
                     else if (!_hatchlinglist.empty() && !_feedlist.empty()) //if have alive hatchling and feed
                     {
@@ -426,7 +426,7 @@ public:
                                         hatchling->AI()->SetGUID(feed->GetGUID(), 1);
                                 }
                                 else
-                                    hatchling->AI()->SetData(DATA_ENTERCOMBAT, 0);
+                                    hatchling->AI()->SetData(DATA_JustEngagedWith, 0);
                             }
                         }
                     }
@@ -519,7 +519,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}
     };
@@ -555,9 +555,9 @@ public:
             {
             case DATA_MORPH:
                 DoCast(me, SPELL_MORPH, true);
-                events.RescheduleEvent(EVENT_ENTERCOMBAT, 1000);
+                events.RescheduleEvent(EVENT_JustEngagedWith, 1000);
                 break;
-            case DATA_ENTERCOMBAT:
+            case DATA_JustEngagedWith:
                 if (Player* player = me->FindNearestPlayer(20.0f, true))
                 {
                     me->SetReactState(REACT_AGGRESSIVE);
@@ -619,7 +619,7 @@ public:
                     if (Creature* feed = me->GetCreature(*me, feedGuid))
                         DoCast(feed, SPELL_EAT_CHANNEL);
                     break;
-                case EVENT_ENTERCOMBAT:
+                case EVENT_JustEngagedWith:
                     me->SetReactState(REACT_AGGRESSIVE);
                     DoZoneInCombat(me, 20.0f);
                     events.RescheduleEvent(EVENT_CHEEP, 5000);
@@ -667,7 +667,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -710,7 +710,7 @@ public:
             me->DespawnOrUnsummon();
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}
     };
@@ -765,7 +765,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}
     };
@@ -823,19 +823,19 @@ public:
                 switch (pointId)
                 {
                 case 3:
-                    events.RescheduleEvent(EVENT_ENTERCOMBAT, 500);
+                    events.RescheduleEvent(EVENT_JustEngagedWith, 500);
                     break;
                 case 4:
                     events.RescheduleEvent(EVENT_MOVE_TO_DEST_POS, 500);
                     break;
                 case 5:
-                    events.RescheduleEvent(EVENT_ENTERCOMBAT, 500);
+                    events.RescheduleEvent(EVENT_JustEngagedWith, 500);
                     break;
                 case 6:
                     events.RescheduleEvent(EVENT_MOVE_TO_DEST_POS_2, 500);
                     break;
                 case 7:
-                    events.RescheduleEvent(EVENT_ENTERCOMBAT, 500);
+                    events.RescheduleEvent(EVENT_JustEngagedWith, 500);
                     break;
                 }
             }
@@ -873,7 +873,7 @@ public:
                         me->GetMotionMaster()->MoveJump(x, y, jikun->GetPositionZ() + 50.0f, 10.0f, 10.0f, 3);
                     }
                     break;
-                case EVENT_ENTERCOMBAT:
+                case EVENT_JustEngagedWith:
                     me->GetMotionMaster()->MoveIdle();
                     me->SetHomePosition(me->GetPosition());
                     DoZoneInCombat(me, 200.0f);
@@ -962,7 +962,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}
     };
@@ -1035,7 +1035,7 @@ public:
             me->GetMotionMaster()->MoveCharge(me->GetPositionX(), me->GetPositionY(), -28.29f, 20.0f, 1);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff)
         {
@@ -1097,7 +1097,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}
     };
@@ -1144,7 +1144,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff)
         {

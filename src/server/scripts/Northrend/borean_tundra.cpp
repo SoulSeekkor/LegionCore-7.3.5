@@ -86,7 +86,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {
@@ -360,7 +360,7 @@ public:
         mob_nerubar_victimAI(Creature* creature) : ScriptedAI(creature) {}
 
         void Reset() override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
 
         void JustDied(Unit* killer) override
@@ -597,7 +597,7 @@ public:
             go_caribouGUID.Clear();
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
 
         void JustDied(Unit* /*killer*/) override
@@ -1511,7 +1511,7 @@ public:
             bEnslaved = false;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->IsValidAttackTarget(who))
                 AttackStart(who);
@@ -1613,7 +1613,7 @@ public:
 
         DoMeleeAttackIfReady();
     }
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void SpellHit(Unit* unit, const SpellInfo* spell) override
         {
@@ -2097,7 +2097,7 @@ public:
             m_uiTimer = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void AttackStart(Unit* /*who*/) override {}
 

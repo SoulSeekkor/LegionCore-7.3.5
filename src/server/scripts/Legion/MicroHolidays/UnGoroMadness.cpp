@@ -17,7 +17,7 @@ struct npc_clutchmother_zavas : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 9000);
         events.RescheduleEvent(EVENT_2, 12000);
@@ -109,7 +109,7 @@ struct npc_giantfin : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 4000);
         events.RescheduleEvent(EVENT_2, 9000);
@@ -268,7 +268,7 @@ struct npc_sunkeeper_croesus : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 7000);
         events.RescheduleEvent(EVENT_2, 16000);
@@ -360,7 +360,7 @@ struct npc_skrox : public ScriptedAI
         SetCombatMovement(false);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 10000);
     }
@@ -463,7 +463,7 @@ struct npc_akaridal : public ScriptedAI
         DoCast(236170);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         me->RemoveAura(236170);
         me->SetAnimKitId(0);
@@ -545,7 +545,7 @@ struct npc_tyrantus : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 6000);
         events.RescheduleEvent(EVENT_2, 15000);
@@ -623,7 +623,7 @@ struct npc_dadanga : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 7000);
     }
@@ -703,7 +703,7 @@ struct npc_sherazin : public ScriptedAI
         timer = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         timer = 10000;
         events.RescheduleEvent(EVENT_1, 22000);
@@ -833,7 +833,7 @@ struct npc_queen_zavra : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 7000);
         events.RescheduleEvent(EVENT_2, 3000);
@@ -923,7 +923,7 @@ struct npc_tar_tyrant : public ScriptedAI
         DespawnAllSummons();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 9000);
         events.RescheduleEvent(EVENT_2, 12000);
@@ -1182,7 +1182,7 @@ struct npc_water_bubble_murloc : ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         timer = 100;
     }

@@ -47,7 +47,7 @@ class boss_wushoolay : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
             }
 

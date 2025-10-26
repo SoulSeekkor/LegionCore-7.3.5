@@ -53,9 +53,9 @@ class boss_gehennas : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* victim)
+            void JustEngagedWith(Unit* victim)
             {
-                BossAI::EnterCombat(victim);
+                BossAI::JustEngagedWith(victim);
                 events.RescheduleEvent(EVENT_GEHENNAS_CURSE, 12000);
                 events.RescheduleEvent(EVENT_RAIN_OF_FIRE, 10000);
                 events.RescheduleEvent(EVENT_SHADOW_BOLT, 6000);

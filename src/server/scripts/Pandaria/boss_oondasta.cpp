@@ -36,7 +36,7 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             DoZoneInCombat(me, 75.0f);
             events.RescheduleEvent(EVENT_CRUSH, 60000);

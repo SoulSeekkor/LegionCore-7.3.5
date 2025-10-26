@@ -241,7 +241,7 @@ public:
                 Talk(SAY_SLAY);
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (!instance->CheckRequiredBosses(BOSS_KOLOGARN, me->GetEntry(), who->ToPlayer()))
             {
@@ -250,7 +250,7 @@ public:
             }
 
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             
             RubbleCount = 0;
             Gripped = false;

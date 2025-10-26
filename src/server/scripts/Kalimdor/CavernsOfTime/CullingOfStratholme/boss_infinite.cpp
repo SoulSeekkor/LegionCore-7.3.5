@@ -59,7 +59,7 @@ public:
             uiBlightTimer = urand(5000,8000);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->Yell(SAY_CORRUPTOR_AGGRO, LANG_UNIVERSAL, ObjectGuid::Empty);
         }

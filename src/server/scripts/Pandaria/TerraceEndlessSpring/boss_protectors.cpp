@@ -321,7 +321,7 @@ public:
                 pInstance->SetBossState(DATA_PROTECTORS, FAIL);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             if (pInstance)
             {
@@ -619,7 +619,7 @@ public:
                 pInstance->SetBossState(DATA_PROTECTORS, FAIL);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             if (pInstance)
             {
@@ -918,7 +918,7 @@ public:
                 pInstance->SetBossState(DATA_PROTECTORS, FAIL);
         }
 
-        void EnterCombat(Unit* attacker)
+        void JustEngagedWith(Unit* attacker)
         {
             if (pInstance)
             {

@@ -92,10 +92,10 @@ struct boss_sadana_bloodfury : public BossAI
         me->SummonCreature(NPC_DARK_ECLIPSE, spiritPos[3]);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         me->RemoveAurasDueToSpell(SPELL_SHADOW_RITUAL_VISUAL);
         DoCast(SPELL_DARK_ECLIPSE_CHECK);

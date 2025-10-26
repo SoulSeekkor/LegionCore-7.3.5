@@ -149,7 +149,7 @@ public:
             uiMarkedDeathTimer = urand(5000, 7000);
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             DoCast(instance->GetData(DATA_TEAM) == ALLIANCE ? SPELL_RAISE_ARELAS : SPELL_RAISE_JAEREN);
             Talk(SAY_AGGRO);

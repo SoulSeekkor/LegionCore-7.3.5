@@ -563,7 +563,7 @@ class boss_the_lich_king : public CreatureScript
                     frostmourne->DespawnOrUnsummon();
             }
 
-            void EnterCombat(Unit* target) override
+            void JustEngagedWith(Unit* target) override
             {
                 me->setActive(true);
                 DoZoneInCombat();

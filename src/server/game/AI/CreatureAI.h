@@ -113,8 +113,8 @@ public:
     // Called for reaction at stopping attack at no attackers or targets
     virtual void EnterEvadeMode();
 
-    // Called for reaction at enter to combat if not in combat yet (enemy can be NULL)
-    virtual void EnterCombat(Unit* /*victim*/) {}
+    // Called for reaction when initially engaged - this will always happen _after_ JustEnteredCombat
+    virtual void JustEngagedWith(Unit* /*who*/) {}
 
     // Called when the creature is killed
     virtual void JustDied(Unit* /*killer*/) {}
@@ -146,7 +146,7 @@ public:
     // Called when on finish cast spell
     virtual void SpellFinishCast(SpellInfo const* /*spell*/) {}
 
-    // Called when the creature is target of hostile action: swing, hostile spell landed, fear/etc). It's can be BEFORE EnterCombat
+    // Called when the creature is target of hostile action: swing, hostile spell landed, fear/etc). It's can be BEFORE JustEngagedWith
     virtual void AttackedBy(Unit* attacker) {}
     virtual bool IsEscorted() { return false; }
 

@@ -73,9 +73,9 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_FIRENOVA,    6 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_FLAMEBUFFET, 3 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_PYROBLAST,  14 * IN_MILLISECONDS);

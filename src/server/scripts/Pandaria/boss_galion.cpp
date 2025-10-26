@@ -56,7 +56,7 @@ public:
         {
         }
 
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_STOMP, 50000);
             events.RescheduleEvent(EVENT_CANNON,25000);
@@ -131,7 +131,7 @@ class npc_galion : public CreatureScript
         {
             events.Reset();
         }
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             events.RescheduleEvent(EVENT_EMPALLING, 50000);
         }

@@ -83,9 +83,9 @@ struct boss_smashspite_the_hateful : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         felTimer = {25000, 18000, 14000, 8000};
         events.RescheduleEvent(EVENT_EARTHSHAKING_STOMP, 12000);

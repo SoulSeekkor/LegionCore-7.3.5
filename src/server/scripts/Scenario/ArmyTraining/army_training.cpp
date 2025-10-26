@@ -120,7 +120,7 @@ struct npc_army_training_minions : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         if(me->GetEntry() != NPC_BERSERK)
             events.RescheduleEvent(EVENT_1, (me->HasAura(SPELL_AURA_RAGE_MODE) ? urand(1000, 2000) : urand(3000, 4000)));

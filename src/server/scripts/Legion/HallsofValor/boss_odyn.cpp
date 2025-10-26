@@ -150,9 +150,9 @@ public:
                 }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             achievement = true;
             events.RescheduleEvent(EVENT_SPEAR_OF_LIGHT, 8000);
             events.RescheduleEvent(EVENT_RADIANT_TEMPEST, 24000);

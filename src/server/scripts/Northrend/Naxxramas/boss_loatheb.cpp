@@ -71,9 +71,9 @@ public:
             bSporeKilled = false;
         }
 
-        void EnterCombat(Unit * /*who*/) override
+        void JustEngagedWith(Unit * /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.ScheduleEvent(EVENT_AURA, 10000);
             events.ScheduleEvent(EVENT_BLOOM, 5000);
             events.ScheduleEvent(EVENT_DOOM, 120000);

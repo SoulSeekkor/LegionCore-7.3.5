@@ -48,7 +48,7 @@ public:
     {
         boss_brawguild_nibleahAI(Creature* creature) : BrawlersBossAI(creature) {}
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_1, 3000);
             events.RescheduleEvent(EVENT_2, 20000);
@@ -124,7 +124,7 @@ public:
     {
         boss_brawguild_serpentAI(Creature* creature) : BrawlersBossAI(creature) {}
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (Unit* unit = me->GetAnyOwner())
             {
@@ -251,7 +251,7 @@ public:
             });
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             switch(me->GetEntry())
             {
@@ -368,7 +368,7 @@ public:
             me->setRegeneratingHealth(false);
         }
         
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             phase = 0;
             events.RescheduleEvent(EVENT_1, 7000);

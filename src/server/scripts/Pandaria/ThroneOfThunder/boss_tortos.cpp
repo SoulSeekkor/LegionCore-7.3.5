@@ -125,9 +125,9 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             AddOrRemoveSpellKickShellOnPlayers(true);
             updatepower = 450;
             checkvictim = 1500;
@@ -394,7 +394,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoCast(me, SPELL_DRAIN_THE_WEAK, true);
         }
@@ -442,7 +442,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

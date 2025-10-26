@@ -113,9 +113,9 @@ class boss_unsok : public CreatureScript
                 me->RemoveAurasDueToSpell(122547); //scale
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.ScheduleEvent(EVENT_AMBER_SCALPEL, 10000); //31:47
                 events.ScheduleEvent(EVENT_PARASITIC_GROWTH, 35000);
                 events.ScheduleEvent(EVENT_RESHAPE_LIFE, 15000);
@@ -270,7 +270,7 @@ class npc_amber_monster : public CreatureScript
 
             void Reset() {}
             
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 events.ScheduleEvent(EVENT_MASSIVE_STOMP, 20000);
                 events.ScheduleEvent(EVENT_AMBER_EXPLOSION, 54000);

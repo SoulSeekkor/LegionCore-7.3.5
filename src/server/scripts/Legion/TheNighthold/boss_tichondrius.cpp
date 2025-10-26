@@ -136,10 +136,10 @@ struct boss_tichonrius : BossAI
         DoCast(me, SPELL_TICH_LIGHT, true);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_VAMPIRIC_AURA_AT, true);
 
         if (IsHeroicPlusRaid())

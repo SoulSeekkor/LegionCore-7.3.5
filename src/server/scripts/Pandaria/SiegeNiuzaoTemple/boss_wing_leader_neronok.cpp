@@ -168,13 +168,13 @@ struct boss_wing_leader_neronok : public BossAI
         me->SummonCreature(NPC_CHUM_KIU, 1851.226f, 5214.163f, 131.2519f, 4.03f);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_HAUL_BRICK, 1000, EVENT_GROUP_COMBAT);
         events.RescheduleEvent(EVENT_CAUSTIC_PITCH, 3000, EVENT_GROUP_COMBAT);
         events.RescheduleEvent(EVENT_QUICK_DRY_RESIN, 8000, EVENT_GROUP_COMBAT);
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void UpdateAI(uint32 diff) override

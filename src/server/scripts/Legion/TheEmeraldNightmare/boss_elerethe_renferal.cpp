@@ -221,9 +221,9 @@ struct boss_elerethe_renferal : public BossAI
         checkEvadeTimer = 2000;
     }
     
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         me->SetReactState(REACT_AGGRESSIVE);
         DoCast(me, SPELL_ENERGY_TRACKER_TRANSFORM, true);
         DoCast(me, SPELL_WEB_WRAPPED, true);
@@ -756,7 +756,7 @@ struct npc_en_venomous_spider : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(5, 6));
         me->SetReactState(REACT_AGGRESSIVE);
@@ -823,7 +823,7 @@ struct npc_en_nightmother : public ScriptedAI
         me->SetCanFly(false);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(4, 5));
         events.RescheduleEvent(EVENT_2, 15000);
@@ -894,7 +894,7 @@ struct npc_en_shadowfeather : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 35000);
         events.RescheduleEvent(EVENT_2, 4000);
@@ -961,7 +961,7 @@ struct npc_en_venomous_spiderling : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override {}
+    void JustEngagedWith(Unit* /*who*/) override {}
 
     void UpdateAI(uint32 diff) override
     {

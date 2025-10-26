@@ -134,7 +134,7 @@ struct boss_wase_mari : public BossAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         std::list<Creature*> searcher;
         GetCreatureListWithEntryInGrid(searcher, me, CREATURE_FOUTAIN_TRIGGER, 50.0f);
@@ -173,7 +173,7 @@ struct boss_wase_mari : public BossAI
         events.RescheduleEvent(EVENT_CALL_WATER, 8000);
         events.RescheduleEvent(EVENT_HYDROLANCE_START, TIMER_HYDROLANCE_START);
 
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void KilledUnit(Unit* victim) override

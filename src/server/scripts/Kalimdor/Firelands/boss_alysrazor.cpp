@@ -401,7 +401,7 @@ class boss_alysrazor : public CreatureScript
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
             }
 
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 RemoveEncounterAuras();
                 Talk(SAY_AGGRO);
@@ -834,7 +834,7 @@ class npc_alysrazor_fiery_vortex : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.ScheduleEvent(EVENT_HARSH_WIND, 5000);
             }
@@ -1494,7 +1494,7 @@ class npc_alysrazor_plump_lava_worm : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 DoCast(me, SPELL_LAVA_SPEW);
                 //events.ScheduleEvent(EVENT_ROTATE, 4000);
@@ -1577,7 +1577,7 @@ class npc_alysrazor_herald_of_the_burning_end : public CreatureScript
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE); 
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
                 DoCast(me, SPELL_RITUAL_OF_THE_FLAME, true);

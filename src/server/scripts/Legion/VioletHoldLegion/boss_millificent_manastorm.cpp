@@ -117,11 +117,11 @@ public:
             check = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //47:47
         {
             ZoneTalk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_FINGER_LASER, 6000); //47:53, 48:00, 48:09, 48:19, 48:27
             events.RescheduleEvent(EVENT_ELEMENTIUM_BOMB, 7000); //47:54, 48:15, 48:33, 48:51

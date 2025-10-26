@@ -173,7 +173,7 @@ struct boss_high_prophet_barim : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetData(DATA_HIGH_PROPHET_BARIM, IN_PROGRESS);
@@ -434,7 +434,7 @@ struct npc_blaze_of_the_heavens : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.SetPhase(PHASE_BLAZE);
         DoCast(SPELL_BLAZE_OF_THE_HEAVENS_PERIODIC);
@@ -635,7 +635,7 @@ struct npc_harbinger_of_darkness : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         if (!who)
             return;

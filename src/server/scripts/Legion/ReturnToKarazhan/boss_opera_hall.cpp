@@ -429,9 +429,9 @@ struct boss_opera_encounters : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void EnterEvadeMode() override
@@ -503,9 +503,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             events.RescheduleEvent(EVENT_WIK_GALINDRE_AGGRO_TALK, 3000);
             events.RescheduleEvent(EVENT_WIK_GALINDRE_FLASHY_BOLT, 1000);
@@ -655,9 +655,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
             Talk(SAY_ELFYRA_AGGRO);
 
             events.RescheduleEvent(EVENT_WIK_ELFYRA_DREARY_BOLT, 4000);
@@ -757,9 +757,9 @@ public:
             boss_opera_encounters::Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
             summons.DoZoneInCombat(NPC_GANG_RUFFIAN);
 
             Talk(SAY_TOE_AGGRO);
@@ -913,9 +913,9 @@ public:
                 me->SummonCreature(NPC_WASH_AWAY, operaSpawnPos[i]);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             EntryCheckPredicate pred(NPC_SHORELINE_TIDESPEAKER);
             summons.DoAction(ACTION_2, pred); //Go Fight
@@ -1056,9 +1056,9 @@ public:
             diedCountBB = 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             DoCast(me, SPELL_SPECTRAL_SERVICE, true);
             Talk(SAY_COGGLESTON_AGGRO);
@@ -1274,9 +1274,9 @@ public:
             DoCast(me, SPELL_CANDLE_HAT, true);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             events.RescheduleEvent(EVENT_LUMINORE_BURNING_BLAZE, 2000);
             events.RescheduleEvent(EVENT_LUMINORE_HEAT_WAVE, 30000);
@@ -1360,9 +1360,9 @@ public:
             DoCast(me, SPELL_MAID_ATTIRE, true);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             DoCast(me, SPELL_SEVERE_DUSTING, true);
 
@@ -1451,9 +1451,9 @@ public:
             DoCast(me, SPELL_CAULDRON_DRESSING, true);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            boss_opera_encounters::EnterCombat(who);
+            boss_opera_encounters::JustEngagedWith(who);
 
             events.RescheduleEvent(EVENT_CAULDRON_SOUP_SPRAY, 1000);
             events.RescheduleEvent(EVENT_CAULDRON_LEFTOVERS, 8000);
@@ -1543,7 +1543,7 @@ public:
 
         void Reset() override {}
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == NPC_GANG_RUFFIAN)
                 events.RescheduleEvent(EVENT_1, urand(5,8) * IN_MILLISECONDS);

@@ -1633,9 +1633,9 @@ class npc_storm_caller : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_STORM_WEAPON);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 me->AddAura(SPELL_STORM_WEAPON, me);
                 events.RescheduleEvent(EVENT_STORM_ENERGY, urand(15000, 20000));
             }
@@ -1692,9 +1692,9 @@ class npc_stormbringer : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_STORMCLOUD);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 DoCast(me, SPELL_STORMCLOUD);
                 events.RescheduleEvent(EVENT_CHAIN_LIGHTNIG, urand(15000, 20000));
             }
@@ -1767,7 +1767,7 @@ class npc_teleporter : public CreatureScript
             
             void EnterEvadeMode(){}
 
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
 
             void UpdateAI(uint32 diff){}
         };

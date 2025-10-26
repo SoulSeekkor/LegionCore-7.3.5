@@ -109,11 +109,11 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
             DelayTalk(4, SAY_AGGRO_2);
-            _EnterCombat();
+            _JustEngagedWith();
 
             DefaultEvent(PHASE_1);
         }

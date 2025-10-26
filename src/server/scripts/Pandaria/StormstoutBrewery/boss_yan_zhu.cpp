@@ -73,9 +73,9 @@ struct boss_yan_zhu : public BossAI
         BossAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         AOEdmg = 2000;
 
         if (me->HasAura(SPELL_BUBBLING_BREW))

@@ -336,9 +336,9 @@ public:
             DoScriptText(SAY_DEATH[id], me);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             if (id == HORSEMEN_BARON)
                 DoScriptText(SAY_BARON_AGGRO, me);

@@ -181,9 +181,9 @@ public:
             burningSlagCounter = 0;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_1, 1 * IN_MILLISECONDS);
         }

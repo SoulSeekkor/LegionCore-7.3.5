@@ -101,9 +101,9 @@ public:
             magmas = 0;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_1, 3 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_4, 2 * IN_MILLISECONDS);
@@ -279,9 +279,9 @@ public:
             events.RescheduleEvent(EVENT_7, 7 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_5, 5 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_6, 12 * IN_MILLISECONDS);
@@ -385,7 +385,7 @@ public:
             events.RescheduleEvent(EVENT_9, 6 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
             events.RescheduleEvent(EVENT_8, 3 * IN_MILLISECONDS);
@@ -464,7 +464,7 @@ public:
             events.RescheduleEvent(EVENT_12, 15 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
@@ -550,7 +550,7 @@ public:
             events.RescheduleEvent(EVENT_13, 12 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             me->SetInCombatWithZone();
 

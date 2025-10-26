@@ -192,11 +192,11 @@ public:
                 instance->DoStopTimedAchievement(CRITERIA_TIMED_TYPE_EVENT2, ACHIEV_TIMED_START_EVENT);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoScriptText(SAY_AGGRO, me);
 
-            _EnterCombat();
+            _JustEngagedWith();
             
             uiEnrageTimer = 600000;
             events.SetPhase(1);

@@ -79,11 +79,11 @@ public:
             _stacked = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //49:53
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_FESTERING_RIP,    3000);  //49:56, 50:13
             events.RescheduleEvent(EVENT_NIGHTMARE_BOLT,   9000);  //50:02, 50:19
             events.RescheduleEvent(EVENT_FEED_ON_THE_WEAK, 14000); //50:07, 51:01, 51:30, 52:00

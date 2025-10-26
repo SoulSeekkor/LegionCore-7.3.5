@@ -446,7 +446,7 @@ class npc_roling_friends_guard : public CreatureScript
             //AI should work all time. in original mode id't disabled
         }
 
-        void EnterCombat(Unit* /*victim*/) override
+        void JustEngagedWith(Unit* /*victim*/) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_AGGRO);
         }
@@ -654,7 +654,7 @@ class npc_bilgewater_buccaneer_click : public CreatureScript
                 }
             }
             
-            void EnterCombat(Unit* who) override {}
+            void JustEngagedWith(Unit* who) override {}
 
             void UpdateAI(uint32 diff) override {}
         };

@@ -40,7 +40,7 @@ struct boss_taran_zhu : public BossAI
         me->AddAura(SPELL_CORRUPTED, me);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetBossState(DATA_TARAN_ZHU, IN_PROGRESS);

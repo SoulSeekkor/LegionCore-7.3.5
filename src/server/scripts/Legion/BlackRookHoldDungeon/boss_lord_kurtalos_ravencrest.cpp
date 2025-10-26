@@ -123,12 +123,12 @@ struct boss_latosius : public BossAI
         me->SummonCreature(NPC_KURTALOS, 3191.72f, 7423.69f, 270.462f, 0.57f);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance->GetData(DATA_KURTALOS_STATE) != PHASE_1)
             return;
 
-        _EnterCombat();
+        _JustEngagedWith();
         if (auto kurtalos = me->FindNearestCreature(NPC_KURTALOS, 30.0f))
             kurtalos->AI()->DoZoneInCombat(kurtalos, 100.0f);
 
@@ -353,7 +353,7 @@ struct npc_kurtalos_ravencrest : public ScriptedAI
         secondPhase = false;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO); //Fiends, you shall never have our world!
 

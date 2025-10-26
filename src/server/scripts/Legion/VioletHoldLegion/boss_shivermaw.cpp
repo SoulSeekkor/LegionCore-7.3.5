@@ -71,10 +71,10 @@ public:
                 me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //49:22
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_FROST_BREATH, 5000); //49:27, 49:53, 50:28
             events.RescheduleEvent(EVENT_RELENTLESS_STORM, 9000); //49:31, 49:45, 50:32, 50:46, 51:33, 51:47

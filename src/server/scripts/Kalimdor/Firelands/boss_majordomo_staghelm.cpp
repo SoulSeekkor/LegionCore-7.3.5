@@ -122,7 +122,7 @@ class boss_majordomo_staghelm : public CreatureScript
                 _changePhaseNum = 0;
             }
 
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 if (!instance->CheckRequiredBosses(DATA_STAGHELM, me->GetEntry(), attacker->ToPlayer()))
                 {

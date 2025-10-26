@@ -240,7 +240,7 @@ struct boss_twin_ogron_pol : public BossAI
         }
     }
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         Talk(Aggro);
 
@@ -256,7 +256,7 @@ struct boss_twin_ogron_pol : public BossAI
         if (Creature* other = me->FindNearestCreature(Phemos, 150.0f))
             me->AddAura(VenomshadeCopyDmgAura, other);
 
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void KilledUnit(Unit* killed) override
@@ -662,7 +662,7 @@ struct boss_twin_ogron_phemos : public BossAI
         m_TrashsMobs.erase(guid);
     }
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         Talk(Aggro);
 
@@ -678,7 +678,7 @@ struct boss_twin_ogron_phemos : public BossAI
         if (Creature* other = me->FindNearestCreature(Pol, 150.0f))
             me->AddAura(VenomshadeCopyDmgAura, other);
 
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void KilledUnit(Unit* killed) override

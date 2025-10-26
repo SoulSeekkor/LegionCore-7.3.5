@@ -88,7 +88,7 @@ class boss_elder_nadox : public CreatureScript
                     instance->SetData(DATA_ELDER_NADOX_EVENT, NOT_STARTED);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 Talk(SAY_AGGRO);
 
@@ -232,7 +232,7 @@ class mob_ahnkahar_nerubian : public CreatureScript
                         Nadox->AI()->DoAction(ACTION_AHNKAHAR_GUARDIAN_DEAD);
             }
 
-            void EnterCombat(Unit* /*who*/) override {}
+            void JustEngagedWith(Unit* /*who*/) override {}
 
             void UpdateAI(uint32 diff) override
             {
@@ -278,7 +278,7 @@ public:
             creature->UpdateAllStats();
         }
         void Reset() override {}
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void AttackStart(Unit* /*victim*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
         void UpdateAI(uint32 /*diff*/) override {}

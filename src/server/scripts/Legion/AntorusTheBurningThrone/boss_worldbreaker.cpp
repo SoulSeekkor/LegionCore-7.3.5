@@ -143,23 +143,23 @@ struct boss_worldbreaker : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
 
         DefaultEvents(true);
     }
 
-    void DefaultEvents(bool enterCombat = false)
+    void DefaultEvents(bool JustEngagedWith = false)
     {
-        if (!enterCombat)
+        if (!JustEngagedWith)
             me->SetReactState(REACT_AGGRESSIVE, 2000);
 
         if (IsMythicRaid() || healthPct)
-            events.RescheduleEvent(EVENT_ANNIHILATOR_OR_DECIMATOR, enterCombat ? 8500 : 12000);
+            events.RescheduleEvent(EVENT_ANNIHILATOR_OR_DECIMATOR, JustEngagedWith ? 8500 : 12000);
 
-        events.RescheduleEvent(EVENT_FEL_BOMBARDMENT, enterCombat ? 9500 : 14000);
+        events.RescheduleEvent(EVENT_FEL_BOMBARDMENT, JustEngagedWith ? 9500 : 14000);
         events.RescheduleEvent(EVENT_CHECK_NEAREST_PLAYER, 6000);
     }
 
@@ -751,7 +751,7 @@ struct npc_atbt_annihilator : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         events.RescheduleEvent(EVENT_1, 21000);
     }

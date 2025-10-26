@@ -346,7 +346,7 @@ struct npc_master_cheng_q31840 : public ScriptedAI
         }
     }
 
-    void OnEnterCombat(Player* player, Unit* /*target*/)
+    void OnJustEngagedWith(Player* player, Unit* /*target*/)
     {
         timer = urand(3000, 6000);
     }

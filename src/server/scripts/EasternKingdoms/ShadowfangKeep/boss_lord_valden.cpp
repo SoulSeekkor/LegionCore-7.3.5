@@ -79,7 +79,7 @@ class boss_lord_valden : public CreatureScript
                 bRed = false;
             }
             
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 if (IsHeroic())
                 {

@@ -228,7 +228,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoScriptText(SAY_STEELBREAKER_AGGRO, me);
             DoZoneInCombat();
@@ -362,7 +362,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoScriptText(SAY_MOLGEIM_AGGRO, me);
             DoZoneInCombat();
@@ -652,7 +652,7 @@ public:
             }
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoScriptText(SAY_BRUNDIR_AGGRO, me);
             DoZoneInCombat();

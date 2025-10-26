@@ -115,10 +115,10 @@ struct boss_the_amalgam_of_souls : public BossAI
         return 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO); //Consume! Devour!
-        _EnterCombat();
+        _JustEngagedWith();
         DefaultEvents();
     }
 

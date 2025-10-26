@@ -81,10 +81,10 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_DARKSTRIKES, 16000);
             events.RescheduleEvent(EVENT_SWOOP, 22000);
@@ -336,7 +336,7 @@ public:
         bool phaseSecond;
         bool phaseThree;
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->RemoveAurasDueToSpell(200888);
             me->RemoveAurasDueToSpell(204879);

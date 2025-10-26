@@ -47,7 +47,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 5000); // 215689
             events.RescheduleEvent(EVENT_2, 8000); // 210371
@@ -328,7 +328,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 5000); // 215689
             events.RescheduleEvent(EVENT_2, 8000); // 210371
@@ -464,7 +464,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 5000); // 215689
             events.RescheduleEvent(EVENT_2, 8000); // 210371
@@ -634,7 +634,7 @@ public:
             outroDone = false;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 30000); // 215797
             events.RescheduleEvent(EVENT_2, 2500); //  215690
@@ -729,7 +729,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 4500); // 212290
             events.RescheduleEvent(EVENT_2, 9300); // 210369

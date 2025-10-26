@@ -281,7 +281,7 @@ public:
             dayhealth = me->GetMaxHealth() - me->GetHealth();
         }
 
-        void EnterCombat(Unit* attacker) override
+        void JustEngagedWith(Unit* attacker) override
         {
             if (pInstance)
             {

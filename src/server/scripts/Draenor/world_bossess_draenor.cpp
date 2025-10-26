@@ -56,7 +56,7 @@ public:
             summons.DespawnAll();
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             events.RescheduleEvent(EVENT_1, 18000);
             events.RescheduleEvent(EVENT_2, 10000);
@@ -136,7 +136,7 @@ public:
             summons.DespawnAll();
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             events.RescheduleEvent(EVENT_1, 16000);
             events.RescheduleEvent(EVENT_2, 36000);
@@ -235,7 +235,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             events.RescheduleEvent(EVENT_1, 4000);
         }
@@ -321,7 +321,7 @@ public:
             healthPct = 98;
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             me->SetDisableGravity(false);
             me->RemoveByteFlag(UNIT_FIELD_BYTES_1, 3,  UNIT_BYTE1_FLAG_ALWAYS_STAND | UNIT_BYTE1_FLAG_HOVER);
@@ -448,7 +448,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
         }
 
@@ -574,7 +574,7 @@ public:
             healthPct = 66;
         }
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
             events.RescheduleEvent(EVENT_1, 10000);
             events.RescheduleEvent(EVENT_2, 23000);
@@ -653,7 +653,7 @@ public:
         ObjectGuid targetMove;
 
         
-        void EnterCombat(Unit* unit)
+        void JustEngagedWith(Unit* unit)
         {
         }
 

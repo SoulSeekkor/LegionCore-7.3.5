@@ -135,9 +135,9 @@ public:
             DespawnSummons(MOB_VAPOR_TRAIL);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_BERSERK, 600000);
             DoCast(me, AURA_SUNWELL_RADIANCE, true);
             DoCast(me, AURA_NOXIOUS_FUMES, true);
@@ -513,7 +513,7 @@ public:
             me->SetSpeed(MOVE_RUN, 0.8f);
         }
         void Reset() {}
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoZoneInCombat();
             //DoCast(me, SPELL_VAPOR_FORCE, true); core bug
@@ -548,7 +548,7 @@ public:
             me->SetFloatValue(UNIT_FIELD_BOUNDING_RADIUS, 0.01f); // core bug
         }
         void Reset() {}
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
         void AttackStart(Unit* /*who*/) {}
         void MoveInLineOfSight(Unit* /*who*/) {}
         void UpdateAI(uint32 /*diff*/) {}

@@ -105,7 +105,7 @@ public:
             me->CastSpell(me, SPELL_DRAIN_ESSENCE_CHANNELING, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CastStop();
             me->GetMotionMaster()->MoveChase(me->getVictim());

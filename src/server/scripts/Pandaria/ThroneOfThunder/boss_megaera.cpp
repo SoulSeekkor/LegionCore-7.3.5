@@ -146,7 +146,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* /*victim*/)
+        void JustEngagedWith(Unit* /*victim*/)
         {
             instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
         }
@@ -204,7 +204,7 @@ struct megaera_headAI : public ScriptedAI
     }
     InstanceScript* instance;
 
-    void MegaeraHeadEnterCombat()
+    void MegaeraHeadJustEngagedWith()
     {
         for (uint8 i = 0; i < 6; i++)
             if (Creature* megaerahead = me->GetCreature(*me, instance->GetGuidData(megaeraheads[i])))
@@ -258,9 +258,9 @@ public:
             done = false;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            MegaeraHeadEnterCombat();
+            MegaeraHeadJustEngagedWith();
             switch (me->GetEntry())
             {
             case NPC_FLAMING_HEAD_MELEE:
@@ -788,7 +788,7 @@ public:
             despawn = 60000;
         }
 
-        void EnterCombat(Unit* /*victim*/){}
+        void JustEngagedWith(Unit* /*victim*/){}
 
         void EnterEvadeMode() {}
 
@@ -839,7 +839,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* /*victim*/){}
+        void JustEngagedWith(Unit* /*victim*/){}
 
         void EnterEvadeMode(){}
 
@@ -898,7 +898,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* /*victim*/) override {}
+        void JustEngagedWith(Unit* /*victim*/) override {}
 
         void EnterEvadeMode() override {}
 
@@ -969,7 +969,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* /*victim*/){}
+        void JustEngagedWith(Unit* /*victim*/){}
 
         void EnterEvadeMode(){}
 

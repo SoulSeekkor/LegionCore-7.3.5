@@ -76,10 +76,10 @@ public:
             EmpZombi = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) 
+        void JustEngagedWith(Unit* /*who*/) 
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_SPIRIT_GALE, 0);
             events.RescheduleEvent(EVENT_FALLEN_CRUSADER, 8000);
             events.RescheduleEvent(EVENT_EVICT_SOUL, 25000);

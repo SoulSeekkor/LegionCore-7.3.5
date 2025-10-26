@@ -174,7 +174,7 @@ struct boss_ming_the_cunning : public BossAI
         instance->SetData(TYPE_WIPE_FIRST_BOSS, 0);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         talk = false;
         Talk(TALK_AGGRO);
@@ -304,7 +304,7 @@ struct mob_whirling_dervish : public ScriptedAI
     EventMap events;
     InstanceScript* instance;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }
@@ -478,7 +478,7 @@ struct boss_kuai_the_brute : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         talk = false;
         Talk(TALK_AGGRO_);
@@ -572,7 +572,7 @@ struct mob_mu_shiba : public ScriptedAI
         DoCast(155085);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }
@@ -634,7 +634,7 @@ struct boss_haiyan_the_unstoppable : public BossAI
 
     bool talk;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(TALK_AGGRO__);
         events.RescheduleEvent(EVENT_TRAUMATIC_BLOW, 3000);

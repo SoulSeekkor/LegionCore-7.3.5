@@ -74,10 +74,10 @@ public:
             me->RemoveAllAreaObjects();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             DefaultEvents(1);
             flyphase = false;

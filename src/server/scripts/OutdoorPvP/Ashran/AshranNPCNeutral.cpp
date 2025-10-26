@@ -161,7 +161,7 @@ public:
                 me->setFaction(12); ///< Alliance
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             Talk(TalkAggro);
 
@@ -464,7 +464,7 @@ public:
             me->ResetPlayerDamageReq();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_InFight = true;
 
@@ -705,7 +705,7 @@ public:
             me->CastSpell(me, AshranLaneMobScalingAura, true);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventCrushingLeap, 10000);
             m_Events.ScheduleEvent(EventBoomingShout, 5000);
@@ -873,7 +873,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventSplittingBreath, 5000);
             m_Events.ScheduleEvent(EventPiercingChomp, 8000);
@@ -977,7 +977,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventShadowClaws, 5000);
         }
@@ -1070,7 +1070,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventLavaBurst, 2000);
             m_Events.ScheduleEvent(EventVolcanicActivity, 8000);
@@ -1209,7 +1209,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventCranky, 1000);
         }
@@ -1293,7 +1293,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventLavaBurstVolley, 3000);
             m_Events.ScheduleEvent(EventVolcanicGround, 8000);
@@ -1409,7 +1409,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventDarknessWithin, 2000);
             m_Events.ScheduleEvent(EventShadowFigurines, 10000);
@@ -1552,7 +1552,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventEarthSmash, 1000);
         }

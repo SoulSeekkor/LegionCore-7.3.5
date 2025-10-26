@@ -178,7 +178,7 @@ class boss_grand_warlock_nethekurse : public CreatureScript
                     ScriptedAI::MoveInLineOfSight(who);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
             }
@@ -310,7 +310,7 @@ class mob_fel_orc_convert : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 if (instance)
                 {
@@ -380,7 +380,7 @@ class mob_lesser_shadow_fissure : public CreatureScript
             void Reset() { }
             void MoveInLineOfSight(Unit* /*who*/) {}
             void AttackStart(Unit* /*who*/) {}
-            void EnterCombat(Unit* /*who*/) {}
+            void JustEngagedWith(Unit* /*who*/) {}
         };
 
         CreatureAI* GetAI(Creature* creature) const

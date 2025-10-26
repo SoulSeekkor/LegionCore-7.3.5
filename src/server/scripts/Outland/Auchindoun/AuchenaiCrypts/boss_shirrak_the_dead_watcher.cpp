@@ -73,7 +73,7 @@ public:
             FocusedTargetGUID.Clear();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         { }
 
         void JustSummoned(Creature* summoned)
@@ -184,7 +184,7 @@ public:
             fiery1 = fiery2 = true;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         { }
 
         void UpdateAI(uint32 diff)

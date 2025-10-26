@@ -81,7 +81,7 @@ struct boss_isiset : public BossAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
 
@@ -265,7 +265,7 @@ struct npc_isiset_astral_rain : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_ASTRAL_RAIN, urand(5000, 15000));
         events.ScheduleEvent(EVENT_ENTER_COMBAT, 2000);
@@ -333,7 +333,7 @@ struct npc_isiset_celestial_call : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_CELESTIAL_CALL, urand(5000, 15000));
         events.ScheduleEvent(EVENT_ENTER_COMBAT, 2000);
@@ -401,7 +401,7 @@ struct npc_isiset_veil_of_sky : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_VEIL_OF_SKY, urand(5000, 15000));
         events.ScheduleEvent(EVENT_ENTER_COMBAT, 2000);
@@ -467,7 +467,7 @@ struct npc_isiset_astral_familiar : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_ARCANE_BARRAGE, urand(3000, 7000));
     }

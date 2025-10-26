@@ -76,9 +76,9 @@ struct boss_ragewing_untamed : public BossAI
         engulfing = false;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         BattleFlyEvents();
     }
 

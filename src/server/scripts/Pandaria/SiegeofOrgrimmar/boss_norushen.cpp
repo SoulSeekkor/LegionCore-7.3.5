@@ -446,9 +446,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             me->AddAura(SPELL_ICY_FEAR, me);
             ApplyOrRemoveBar(true);
             events.RescheduleEvent(EVENT_CHECK_VICTIM, 2000);
@@ -645,7 +645,7 @@ public:
 
         void EnterEvadeMode() override {}
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
@@ -729,7 +729,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff){}     
     };
@@ -894,7 +894,7 @@ public:
             SPELL_STEALTH_AND_INVISIBILITY_DETECT = 141048,
         };
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_TEAR_REALITY, 8500);
         }
@@ -1008,7 +1008,7 @@ public:
             me->SetPower(POWER_ENERGY, 100);
         }
         
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_1, 5000);
         }
@@ -1172,7 +1172,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_PIERCING_CORRUPTION, 14000);
             events.RescheduleEvent(EVENT_TITANIC_SMASH, 16000);
@@ -1311,7 +1311,7 @@ public:
             attack = 3000;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_SPELL_DISHEARTENING_LAUGH, 12000);
             events.RescheduleEvent(EVENT_SPELL_LINGERING_CORRUPTION, 14000);
@@ -1531,7 +1531,7 @@ public:
                 me->RemoveAurasDueToSpell(SPELL_PROTECTORS_EXHAUSTED);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_2, 1500);
         }
@@ -1598,7 +1598,7 @@ public:
             //    summoner->ToPlayer()->SendEncounterUnitForPlayer(ENCOUNTER_FRAME_ENGAGE, me);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_2, 5000);
         }

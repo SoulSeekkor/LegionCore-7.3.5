@@ -280,11 +280,11 @@ public:
 
                 float attackRadius = me->GetAttackDistance(who) / 10;
                 if (me->IsWithinDistInMap(who, attackRadius) && me->IsWithinLOSInMap(who))
-                    EnterCombat(who);
+                    JustEngagedWith(who);
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(YELL_INTRO1);
             DoCast(me, SPELL_BUBBLE_VISUAL);

@@ -298,7 +298,7 @@ class npc_dragon_soul_ancient_water_lord : public CreatureScript
                 events.ScheduleEvent(EVENT_EMOTE_CHANNEL_VIS, 1000);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 me->SetUInt32Value(UNIT_FIELD_EMOTE_STATE, 0);
                 events.ScheduleEvent(EVENT_FLOOD, urand(8000, 12000));
@@ -379,7 +379,7 @@ class npc_dragon_soul_earthen_destroyer : public CreatureScript
                 events.ScheduleEvent(EVENT_EMOTE_CHANNEL_VIS, 1000);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 me->SetUInt32Value(UNIT_FIELD_EMOTE_STATE, 0);
                 events.ScheduleEvent(EVENT_BOULDER_SMASH, urand(3000, 5000));
@@ -462,7 +462,7 @@ class npc_dragon_soul_earthen_soldier : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_SHADOW_BOLT, urand(3000, 5000));
                 events.ScheduleEvent(EVENT_TWILIGHT_CORRUPTION, urand(6000, 7000));
@@ -543,7 +543,7 @@ class npc_dragon_soul_twilight_siege_captain : public CreatureScript
                     DoCast(SPELL_TWILIGHT_PORTAL_BEAM);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 me->InterruptNonMeleeSpells(true);
                 events.ScheduleEvent(EVENT_TWILIGHT_VOLLEY, urand(3000, 5000));
@@ -617,7 +617,7 @@ class npc_dragon_soul_twilight_portal : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_CHECK_PLAYERS, 5000);
             }
@@ -675,7 +675,7 @@ class npc_dragon_soul_crimson_globule : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_SEARING_BLOOD, urand(7000, 14000));
             }
@@ -735,7 +735,7 @@ class npc_dragon_soul_acidic_globule : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_DIGESTIVE_ACID, urand(7000, 14000));
             }
@@ -795,7 +795,7 @@ class npc_dragon_soul_dark_globule : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_PSYCHIC_SLICE, urand(7000, 14000));
             }
@@ -855,7 +855,7 @@ class npc_dragon_soul_shadowed_globule : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_DEEP_CORRUPTION, urand(12000, 24000));
             }
@@ -916,7 +916,7 @@ class npc_dragon_soul_cobalt_globule : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_MANA_VOID, 3000);
             }
@@ -975,7 +975,7 @@ class npc_dragon_soul_flail_of_gorath : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_SLUDGE_SPEW, urand(2000, 4000));
                 events.ScheduleEvent(EVENT_TENTACLE_TOSS, 10000);
@@ -1044,7 +1044,7 @@ class npc_dragon_soul_claw_of_gorath : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_OOZE_SPIT, 5000);
                 events.ScheduleEvent(EVENT_TENTACLE_TOSS, 10000);
@@ -1146,7 +1146,7 @@ class npc_dragon_soul_eye_of_gorath : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_SHADOW_GAZE, urand(3000, 5000));
             }
@@ -1858,7 +1858,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                 me->CastSpell(me, SPELL_TEMPERAMENT);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (me->GetReactState() == REACT_PASSIVE)
                 {
@@ -1869,7 +1869,7 @@ class npc_dragon_soul_twilight_assaulter : public CreatureScript
                     return;
                 }
 
-                ScriptedAI::EnterCombat(who);
+                ScriptedAI::JustEngagedWith(who);
 
                 if (wasChanneling)
                     accessor->CleanTwilightAssaulterAssaultLane(horizontal, lane);

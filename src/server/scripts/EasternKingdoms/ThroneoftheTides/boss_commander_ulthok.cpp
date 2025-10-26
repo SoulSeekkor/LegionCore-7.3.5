@@ -55,11 +55,11 @@ struct boss_commander_ulthok : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(0);
         Talk(1);
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_DARK_FISSURE, urand(5000, 8000));
         events.RescheduleEvent(EVENT_ENRAGE, urand(20000, 25000));
         events.RescheduleEvent(EVENT_CURSE_OF_FATIGUE, urand(9000, 15000));

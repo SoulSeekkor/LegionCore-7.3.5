@@ -81,7 +81,7 @@ public:
 
         }
 
-        void EnterCombat(Unit* unit) override
+        void JustEngagedWith(Unit* unit) override
         {
             DoZoneInCombat(me, 75.0f);
             DoCast(me, SPELL_STATIC_SHIELD, true);
@@ -181,7 +181,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*unit*/) override
+        void JustEngagedWith(Unit* /*unit*/) override
         { }
 
         void JustDied(Unit* /*killer*/) override

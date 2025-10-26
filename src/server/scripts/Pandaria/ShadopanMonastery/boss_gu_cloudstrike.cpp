@@ -95,7 +95,7 @@ struct boss_gu_cloudstrike : public BossAI
         summons.Summon(summoned);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_INVOKE_LIGHTNING, urand(5000, 10000));
 

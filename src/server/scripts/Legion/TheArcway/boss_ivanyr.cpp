@@ -86,10 +86,10 @@ public:
             CheckTimer = 1000;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO); //Stay back! It's mine!
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_VOLATILE_MAGIC, 8000);
             events.RescheduleEvent(EVENT_OVERCHARGE_MANA, 28000);

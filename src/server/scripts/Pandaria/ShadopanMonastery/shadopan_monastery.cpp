@@ -194,7 +194,7 @@ struct npc_shadopan_hatred : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*victim*/) override
+    void JustEngagedWith(Unit* /*victim*/) override
     {
         DoZoneInCombat();
     }

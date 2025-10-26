@@ -90,10 +90,10 @@ struct boss_archmage_sol : public BossAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         DoCast(me, SPELL_THOUGHT_CHRYSALIS, true);
         DoCast(me, SPELL_LIVING_ORGANISM, true);

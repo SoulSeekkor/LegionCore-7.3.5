@@ -145,7 +145,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 12000); // Clons 209231 and talk 
@@ -320,7 +320,7 @@ public:
             summons.DespawnAll();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 8000); // 194519 
             events.RescheduleEvent(EVENT_2, 11000);
@@ -444,7 +444,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 42000);
             events.RescheduleEvent(EVENT_2, 11000);

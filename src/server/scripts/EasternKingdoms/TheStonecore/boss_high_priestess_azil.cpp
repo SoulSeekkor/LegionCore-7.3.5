@@ -94,7 +94,7 @@ struct boss_high_priestess_azil : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         me->GetMotionMaster()->MoveJump(jumpPos, 10.0f, 10.0f);
@@ -104,7 +104,7 @@ struct boss_high_priestess_azil : public BossAI
         events.RescheduleEvent(EVENT_CURSE_OF_BLOOD, urand(5000, 8000));
         events.RescheduleEvent(EVENT_GRAVITY_WELL, urand(3000, 5000));
         events.RescheduleEvent(EVENT_ADDS_SUMMON, urand(10000, 15000));
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void SpellHit(Unit* /*caster*/, const SpellInfo* spell) override

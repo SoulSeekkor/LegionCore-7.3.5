@@ -66,10 +66,10 @@ public:
                 me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //01:41
         {
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_MANDIBLE_STRIKE, 8000);    //01:49, 02:20, 02:43
             events.RescheduleEvent(EVENT_IMPALE, 18000);            //01:59, 02:22

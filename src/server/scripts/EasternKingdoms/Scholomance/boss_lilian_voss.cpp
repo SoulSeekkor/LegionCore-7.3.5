@@ -54,9 +54,9 @@ public:
            shiv = 0; 
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             grasp = 15000;
             shiv = 10000;
         }
@@ -132,7 +132,7 @@ class npc_dark_blaze : public CreatureScript
 
             void EnterEvadeMode(){}
 
-            void EnterCombat(Unit* who){}
+            void JustEngagedWith(Unit* who){}
 
             void UpdateAI(uint32 diff)
             {

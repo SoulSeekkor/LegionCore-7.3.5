@@ -220,9 +220,9 @@ struct generic_halionAI : public BossAI
 {
     generic_halionAI(Creature* creature, uint32 bossId) : BossAI(creature, bossId), _canEvade(false) { }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         me->AddAura(SPELL_TWILIGHT_PRECISION, me);
         _canEvade = false;
         events.ScheduleEvent(EVENT_CLEAVE, urand(8000, 10000));
@@ -323,14 +323,14 @@ class boss_halion : public CreatureScript
                     generic_halionAI::EnterEvadeMode();
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 Talk(SAY_AGGRO);
 
                 events.Reset();
                 events.SetPhase(PHASE_ONE);
 
-                generic_halionAI::EnterCombat(who);
+                generic_halionAI::JustEngagedWith(who);
 
                 instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me, 1);
                 instance->SetBossState(DATA_HALION, IN_PROGRESS);
@@ -477,12 +477,12 @@ class boss_twilight_halion : public CreatureScript
                 me->SetReactState(REACT_AGGRESSIVE);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 events.Reset();
                 events.SetPhase(PHASE_TWO);
 
-                generic_halionAI::EnterCombat(who);
+                generic_halionAI::JustEngagedWith(who);
 
                 events.ScheduleEvent(EVENT_SOUL_CONSUMPTION, 20000);
 
@@ -618,7 +618,7 @@ class npc_halion_controller : public CreatureScript
                 DoCast(me, SPELL_CLEAR_DEBUFFS);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 _twilightDamageTaken = 0;
                 _materialDamageTaken = 0;
@@ -1227,7 +1227,7 @@ class npc_living_ember : public CreatureScript
                 _hasEnraged = false;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 _enrageTimer = 20000;
                 _hasEnraged = false;

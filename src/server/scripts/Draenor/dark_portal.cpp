@@ -80,7 +80,7 @@ struct arena_friendly_classAI : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*victim*/) override
+    void JustEngagedWith(Unit* /*victim*/) override
     {
         events.RescheduleEvent(EVENT_COMBAT_SPELL_1, 5000);
         events.RescheduleEvent(EVENT_COMBAT_SAVAGERY, 1000);
@@ -1110,7 +1110,7 @@ public:
             ScriptedAI::EnterEvadeMode();
         }
 
-        void EnterCombat(Unit* /*victim*/) override
+        void JustEngagedWith(Unit* /*victim*/) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0, ObjectGuid::Empty);
             events.RescheduleEvent(EVENT_COMBAT_SPELL_1, 5000);

@@ -127,7 +127,7 @@ class boss_jindo_the_godbreaker : public CreatureScript
                 me->SetCanFly(false);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
                 bTwoPhase = false;
@@ -323,7 +323,7 @@ class npc_jindo_gurubashi_spirit : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_BODY_SLAM, 12000);
                 events.RescheduleEvent(EVENT_FRENZY, 7000);
@@ -438,7 +438,7 @@ class npc_jindo_chains_of_hakkar : public CreatureScript
                 me->SetReactState(REACT_PASSIVE);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 DoZoneInCombat(me, 300.0f);
             }

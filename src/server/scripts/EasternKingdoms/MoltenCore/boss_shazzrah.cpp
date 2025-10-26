@@ -56,9 +56,9 @@ class boss_shazzrah : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* target)
+            void JustEngagedWith(Unit* target)
             {
-                BossAI::EnterCombat(target);
+                BossAI::JustEngagedWith(target);
                 events.RescheduleEvent(EVENT_ARCANE_EXPLOSION, 6000);
                 events.RescheduleEvent(EVENT_SHAZZRAH_CURSE, 10000);
                 events.RescheduleEvent(EVENT_MAGIC_GROUNDING, 24000);

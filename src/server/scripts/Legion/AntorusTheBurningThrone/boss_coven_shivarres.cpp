@@ -490,7 +490,7 @@ struct boss_coven_shivarres_generic : ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
@@ -522,7 +522,7 @@ struct boss_coven_shivarres_generic : ScriptedAI
 
     void JustDied(Unit* killer) override {}
 
-    void DefaultEvents(bool enterCombat = false)
+    void DefaultEvents(bool JustEngagedWith = false)
     {
         switch (me->GetEntry())
         {
@@ -532,7 +532,7 @@ struct boss_coven_shivarres_generic : ScriptedAI
                     events.RescheduleEvent(EVENT_STORM_OF_DARKNESS, 29000);
                 break;
             case NPC_NOURA:
-                if (enterCombat)
+                if (JustEngagedWith)
                     Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_FIERY_STRIKE, 11000);
                 events.RescheduleEvent(EVENT_WHIRLING_SABER, 8500);

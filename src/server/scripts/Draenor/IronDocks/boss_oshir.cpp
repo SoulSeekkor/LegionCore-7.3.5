@@ -78,9 +78,9 @@ struct boss_oshir : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_HAMSTRING, 4000);
         events.RescheduleEvent(EVENT_JUMP_TO_CAGE, 17000);
         events.RescheduleEvent(EVENT_TIME_FEED, 36000);

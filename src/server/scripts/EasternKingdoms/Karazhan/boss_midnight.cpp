@@ -89,7 +89,7 @@ public:
             ResetTimer = 2000;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void KilledUnit(Unit* /*victim*/) override
         {
@@ -142,7 +142,7 @@ public:
             me->SetVisible(true);
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void KilledUnit(Unit* /*victim*/) override
         {

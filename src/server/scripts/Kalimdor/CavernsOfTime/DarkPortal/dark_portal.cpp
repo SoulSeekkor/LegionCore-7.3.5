@@ -355,7 +355,7 @@ public:
             else mWaveId = 1;
 
         }
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void DoSummonAtRift(uint32 creature_entry)
         {

@@ -189,7 +189,7 @@ class InstanceScript : public ZoneScript
         virtual void OnCreatureCreateForScript(Creature* creature) override;
         virtual void OnCreatureRemoveForScript(Creature* creature) override;
         virtual void OnCreatureUpdateDifficulty(Creature* creature) override;
-        virtual void EnterCombatForScript(Creature* creature, Unit* enemy) override;
+        virtual void JustEngagedWithForScript(Creature* creature, Unit* enemy) override;
         virtual void CreatureDiesForScript(Creature* creature, Unit* killer) override;
         virtual void OnGameObjectCreateForScript(GameObject* go) override;
         virtual void OnGameObjectRemoveForScript(GameObject* go) override;

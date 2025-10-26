@@ -81,7 +81,7 @@ public:
         }
     }
 
-    void TwinsEnterCombat(InstanceScript* instance, Creature* caller, uint32 callerEntry)
+    void TwinsJustEngagedWith(InstanceScript* instance, Creature* caller, uint32 callerEntry)
     {
         if (instance && caller)
         {
@@ -177,9 +177,9 @@ class boss_twin_consorts : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                TwinsEnterCombat(instance, me, me->GetEntry());
+                TwinsJustEngagedWith(instance, me, me->GetEntry());
                 switch (me->GetEntry())
                 {
                 case NPC_LULIN:

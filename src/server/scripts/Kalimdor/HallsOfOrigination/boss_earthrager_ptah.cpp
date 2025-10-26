@@ -84,7 +84,7 @@ struct boss_earthrager_ptah : public BossAI
         phase = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
 
@@ -193,7 +193,7 @@ struct npc_ptah_dustbone_horror : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_SMASH, urand(2000, 8000));
     }

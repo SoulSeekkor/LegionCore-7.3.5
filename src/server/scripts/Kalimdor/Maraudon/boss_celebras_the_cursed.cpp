@@ -66,7 +66,7 @@ public:
             Initialize();
         }
 
-        void EnterCombat(Unit* /*who*/) { }
+        void JustEngagedWith(Unit* /*who*/) { }
 
         void JustDied(Unit* /*killer*/)
         {

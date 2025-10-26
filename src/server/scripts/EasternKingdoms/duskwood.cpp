@@ -95,7 +95,7 @@ public:
             CreatureOfNightmare_Timer = 30000;
             KillCount = 0;
         }
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             Talk(YELL_TWILIGHTCORRUPTOR_AGGRO);
         }

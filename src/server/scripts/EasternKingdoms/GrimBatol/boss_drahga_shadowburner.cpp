@@ -115,9 +115,9 @@ struct boss_drahga_shadowburner : public BossAI
         summons.Despawn(summon);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_BURNING_SHADOWBOLT, urand(2000, 5000));
         events.RescheduleEvent(EVENT_INVOCATION_OF_FLAME, 10000);
@@ -227,7 +227,7 @@ struct npc_drahga_valiona : public ScriptedAI
         me->GetMotionMaster()->MovePoint(1001, drahgavalionaPos[1]);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_VALIONAS_FLAME, urand(10000, 15000));
         events.RescheduleEvent(EVENT_SHREDDING_SWIPE, urand(8000, 10000));

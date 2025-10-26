@@ -190,7 +190,7 @@ public:
 
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoScriptText(SAY_ATTACKED, me, who);
         }

@@ -335,9 +335,9 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_PULL);
             checkvictim = 1000;
             berserk = 600000;
@@ -721,7 +721,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
         
@@ -831,7 +831,7 @@ public:
             landing = 0;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_OVERLOAD, 6000);
             events.RescheduleEvent(EVENT_DEATH_FROM_ABOVE, 18000);
@@ -952,7 +952,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 
@@ -1005,7 +1005,7 @@ public:
                         if (Unit* blackfuse = me->ToTempSummon()->GetSummoner())
                             for (uint8 n = 0; n < 2; n++)
                                 if (Creature* mine = blackfuse->SummonCreature(NPC_BLACKFUSE_CRAWLER_MINE, me->GetPositionX() + n * 2, me->GetPositionY(), me->GetPositionZ(), 0.0f, TEMPSUMMON_CORPSE_TIMED_DESPAWN, 1000))
-                                    mine->AI()->SetData(DATA_CRAWLER_MINE_ENTERCOMBAT, 0);
+                                    mine->AI()->SetData(DATA_CRAWLER_MINE_JustEngagedWith, 0);
                 me->DespawnOrUnsummon();
                 break;
             default:
@@ -1017,7 +1017,7 @@ public:
         {
             switch (type)
             {
-            case DATA_CRAWLER_MINE_ENTERCOMBAT:
+            case DATA_CRAWLER_MINE_JustEngagedWith:
             {
                 uint32 mod = 0;
                 switch (data)
@@ -1522,7 +1522,7 @@ public:
             num = 0;
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 

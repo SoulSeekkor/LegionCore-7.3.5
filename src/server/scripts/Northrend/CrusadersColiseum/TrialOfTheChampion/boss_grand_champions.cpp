@@ -180,7 +180,7 @@ struct npc_mounted_championAI : ScriptedAI
         return 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         DoCastSpellShield();
         /*
@@ -365,11 +365,11 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (isInMountedGauntlet())
             {
-                npc_mounted_championAI::EnterCombat(who);
+                npc_mounted_championAI::JustEngagedWith(who);
                 return;
             }
 
@@ -526,11 +526,11 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (isInMountedGauntlet())
             {
-                npc_mounted_championAI::EnterCombat(who);
+                npc_mounted_championAI::JustEngagedWith(who);
                 return;
             }
 
@@ -639,11 +639,11 @@ public:
             me->RemoveUnitMovementFlag(MOVEMENTFLAG_WALKING);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (isInMountedGauntlet())
             {
-                npc_mounted_championAI::EnterCombat(who);
+                npc_mounted_championAI::JustEngagedWith(who);
                 return;
             }
 
@@ -873,11 +873,11 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (isInMountedGauntlet())
             {
-                npc_mounted_championAI::EnterCombat(who);
+                npc_mounted_championAI::JustEngagedWith(who);
                 return;
             }
 
@@ -1070,11 +1070,11 @@ public:
             return 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (isInMountedGauntlet())
             {
-                npc_mounted_championAI::EnterCombat(who);
+                npc_mounted_championAI::JustEngagedWith(who);
                 return;
             }
 

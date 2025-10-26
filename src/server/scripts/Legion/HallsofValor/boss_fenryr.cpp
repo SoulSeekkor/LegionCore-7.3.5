@@ -113,10 +113,10 @@ public:
             me->SetHealth(me->CountPctFromMaxHealth(60));
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //43:41(N) | 34:01(H)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             me->SetReactState(REACT_AGGRESSIVE);
             events.RescheduleEvent(EVENT_UNNERVING_HOWL, 3000); //43:44, 44:23, 45:02, 45:38
             events.RescheduleEvent(EVENT_RAVENOUS_LEAP, 28000); //44:09, 44:49, 45:26
@@ -257,7 +257,7 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_RAVENOUS_LEAP_DOT);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             DoZoneInCombat();
             events.RescheduleEvent(EVENT_UNNERVING_HOWL, 7000);

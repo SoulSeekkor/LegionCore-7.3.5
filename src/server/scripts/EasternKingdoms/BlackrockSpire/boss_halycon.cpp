@@ -56,9 +56,9 @@ public:
             Summoned = false;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_CROWD_PUMMEL, 8 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_MIGHTY_BLOW, 14 * IN_MILLISECONDS);
         }

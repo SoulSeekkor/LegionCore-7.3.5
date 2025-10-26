@@ -113,9 +113,9 @@ struct boss_striker_gadok : public BossAI
         move = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_PREY_TIME, 10000);
         events.RescheduleEvent(EVENT_IMPALING_STRIKE, 19000);
     }

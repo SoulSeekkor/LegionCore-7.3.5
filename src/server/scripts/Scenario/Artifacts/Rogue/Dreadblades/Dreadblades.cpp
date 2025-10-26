@@ -186,7 +186,7 @@ public:
             healthPct = 90;
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(1);
             healthPct = 90;
@@ -389,7 +389,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(1);
             events.RescheduleEvent(EVENT_1, 1000);
@@ -603,7 +603,7 @@ public:
             outro = false;
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 10000);

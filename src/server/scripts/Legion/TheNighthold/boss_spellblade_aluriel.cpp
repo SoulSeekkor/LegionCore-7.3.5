@@ -160,10 +160,10 @@ public:
             me->GetMotionMaster()->MovePath(9100417, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             DefaultEvents(SPELL_ICY_ENCHANTMENT);
         }
 

@@ -275,9 +275,9 @@ struct boss_helya_tov : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         StartEvents(PHASE_1);
         _checkEvadeTimer = 1500;
     }
@@ -1234,7 +1234,7 @@ struct npc_grimelord : ScriptedAI
         instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
@@ -1320,7 +1320,7 @@ struct npc_night_watch_mariner : ScriptedAI
         me->SetMaxPower(POWER_ENERGY, 100);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
@@ -1413,7 +1413,7 @@ struct npc_decaying_minion : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 8000);
     }
@@ -1548,7 +1548,7 @@ struct npc_gripping_tentacle : ScriptedAI
         instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
     }
@@ -1572,7 +1572,7 @@ struct npc_striking_tentacle : ScriptedAI
         DoZoneInCombat();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         me->AddDelayedEvent(1000, [=]() -> void
         {

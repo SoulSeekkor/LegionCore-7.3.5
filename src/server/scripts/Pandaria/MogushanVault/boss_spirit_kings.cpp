@@ -149,7 +149,7 @@ class boss_spirit_kings_controler : public CreatureScript
                 }
             }
             
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (pInstance)
                 {
@@ -402,7 +402,7 @@ class boss_spirit_kings : public CreatureScript
                     return pInstance->instance->GetCreature(pInstance->GetGuidData(NPC_SPIRIT_GUID_CONTROLER)); else return NULL;
             }
 
-            void EnterCombat(Unit* attacker) override
+            void JustEngagedWith(Unit* attacker) override
             {
                 switch (me->GetEntry())
                 {

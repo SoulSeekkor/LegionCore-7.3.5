@@ -555,9 +555,9 @@ public:
                 Talk(VigilantKaatherKill);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             ActivateDoors();
 
             if (me->GetMap() && me->GetMap()->IsHeroic())

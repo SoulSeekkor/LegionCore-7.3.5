@@ -233,7 +233,7 @@ class boss_warmaster_blackhorn: public CreatureScript
                 deck = true;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 uiWave = 0;
                 drakeDied = 0;
@@ -1374,7 +1374,7 @@ class npc_warmaster_blackhorn_skyfire: public CreatureScript
                     instance->SendEncounterUnit(ENCOUNTER_FRAME_DISENGAGE, me);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 if (instance)
                     instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);

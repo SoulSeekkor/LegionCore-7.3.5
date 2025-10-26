@@ -62,9 +62,9 @@ public:
             gravitytimer = 0;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             rapiditytimer = 5000;
             gravitytimer = 12000; 
         }

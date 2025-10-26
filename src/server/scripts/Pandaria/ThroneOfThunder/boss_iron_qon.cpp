@@ -105,7 +105,7 @@ class boss_iron_qon : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 me->AddAura(SPELL_RISING_ANGER, me);
                 events.RescheduleEvent(EVENT_FIST_SMASH, 15000);
@@ -277,7 +277,7 @@ class npc_iron_qon_maunt : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (instance && me->GetEntry() == NPC_ROSHAK) //First maunt
                 {

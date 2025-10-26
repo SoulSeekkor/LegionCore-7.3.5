@@ -47,7 +47,7 @@ class boss_renataki : public CreatureScript
             {
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
             }
 

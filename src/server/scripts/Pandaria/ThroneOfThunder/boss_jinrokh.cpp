@@ -144,9 +144,9 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_STATIC_BURST, 12000);
             events.RescheduleEvent(EVENT_LIGHTNING_BALL, 25000);
             events.RescheduleEvent(EVENT_THUNDERING_THROW, 30000);
@@ -433,7 +433,7 @@ public:
             events.RescheduleEvent(EVENT_SEARCH_PLAYERS, 2000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

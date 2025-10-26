@@ -89,10 +89,10 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             DoCast(me, SPELL_EMPOWERMENT_TRACKER, true);
 
             if (auto olmyr = me->GetCreature(*me, defGUID[0]))
@@ -312,7 +312,7 @@ public:
             }
         }
         
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_2, 30000);

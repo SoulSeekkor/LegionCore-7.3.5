@@ -220,7 +220,7 @@ struct npc_night_hold_celestial_acolyte : ScriptedAI
         DoMeleeAttackIfReady();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         scheduler
             .Schedule(Seconds(3), [this](TaskContext context)
@@ -262,7 +262,7 @@ struct npc_night_hold_astrologer_jarin : ScriptedAI
         DoMeleeAttackIfReady();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         scheduler
             .Schedule(Seconds(3), [this](TaskContext context)
@@ -316,7 +316,7 @@ struct npc_night_hold_chaos_mage_beleron : ScriptedAI
         SpellEmpowering_2 = 222200,
     };
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         me->CastStop();
         me->RemoveAura(SpellEmpowering);
@@ -425,7 +425,7 @@ struct npc_night_hold_summoner_xiv : ScriptedAI
         SpellEmpowering_2 = 222200,
     };
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         me->CastStop();
         me->RemoveAura(SpellEmpowering);
@@ -531,7 +531,7 @@ struct npc_night_hold_felweaver_pharamere : ScriptedAI
         SpellEmpowering_2 = 222200,
     };
 
-    void EnterCombat(Unit* attacker) override
+    void JustEngagedWith(Unit* attacker) override
     {
         me->CastStop();
         me->RemoveAura(SpellEmpowering);

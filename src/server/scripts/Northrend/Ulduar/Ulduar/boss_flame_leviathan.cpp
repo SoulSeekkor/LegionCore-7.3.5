@@ -270,9 +270,9 @@ public:
             _shutdown = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoScriptText(SAY_AGGRO, me);
             me->SetReactState(REACT_AGGRESSIVE);
             events.ScheduleEvent(EVENT_PURSUE, 5000);

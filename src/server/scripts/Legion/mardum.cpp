@@ -652,7 +652,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0);
             events.RescheduleEvent(EVENT_1, 2000);
@@ -1187,7 +1187,7 @@ public:
                 TyrannaGuid = Tyranna->GetGUID();
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             if (victim->GetTypeId() != TYPEID_PLAYER)
                 return;
@@ -1292,7 +1292,7 @@ public:
             
         };
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0, victim->GetGUID());
             events.RescheduleEvent(EVENT_1, 7000);
@@ -1598,7 +1598,7 @@ public:
                 gob->SetPhaseMask(1, true);  // invis
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0, victim->GetGUID());
             if(GameObject* gob = me->FindNearestGameObject(GO, 100.0f))
@@ -1711,7 +1711,7 @@ public:
             DoZoneInCombat(summon, 30.0f);
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             events.RescheduleEvent(EVENT_1, 8000);
             events.RescheduleEvent(EVENT_4, 10000);
@@ -2557,7 +2557,7 @@ public:
         {
             events.Reset();
         }
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == 96501)
             {

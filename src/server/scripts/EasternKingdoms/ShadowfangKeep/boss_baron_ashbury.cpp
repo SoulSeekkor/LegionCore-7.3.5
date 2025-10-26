@@ -76,7 +76,7 @@ class boss_baron_ashbury : public CreatureScript
                 bHeal = false;
             }
 
-            void EnterCombat(Unit* pWho)
+            void JustEngagedWith(Unit* pWho)
             {
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_PAIN_AND_SUFFERING, urand(8000, 9000));

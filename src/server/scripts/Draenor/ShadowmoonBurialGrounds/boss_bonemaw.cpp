@@ -68,9 +68,9 @@ struct boss_bonemaw : public BossAI
         sumAdds = false;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_FETID_SPIT, 5000);
         events.RescheduleEvent(EVENT_CORPSE_BREATH, 4000); //41:30
@@ -187,7 +187,7 @@ struct npc_bonemaw_carrion_worm : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_FETID_SPIT, 5000);
         events.RescheduleEvent(EVENT_BODY_SLAM, 14000);

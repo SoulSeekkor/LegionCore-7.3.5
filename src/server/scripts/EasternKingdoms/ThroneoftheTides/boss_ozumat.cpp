@@ -436,7 +436,7 @@ struct npc_vicious_mindslasher : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (IsHeroic())
             events.RescheduleEvent(EVENT_VEIL_OF_SHADOW, urand(10000, 15000));
@@ -510,7 +510,7 @@ struct npc_unyielding_behemoth : public ScriptedAI
                 neptulon->AI()->Talk(SAY_KILL);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_BLIGHT_SPRAY, urand(8000, 12000));
     }

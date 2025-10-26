@@ -376,7 +376,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(EventMindShear, 8 * IN_MILLISECONDS);
             events.RescheduleEvent(EventBendWill, 18 * IN_MILLISECONDS);
@@ -462,7 +462,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             events.RescheduleEvent(eSargereiClericEvents::EventVoidShell, 15 * IN_MILLISECONDS);
         }
@@ -548,7 +548,7 @@ public:
             me->AddAura(eSargereiRitualistSpells::SpellDarkFire, me);
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             me->CastStop();
             me->RemoveAllAuras();
@@ -629,7 +629,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eAuchindounEvents::EventSeverTendom, 5 * IN_MILLISECONDS);
         }
@@ -713,7 +713,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eSpiritTenderEvents::EventVoidMending, 10 * IN_MILLISECONDS);
             events.RescheduleEvent(eSpiritTenderEvents::EventVoidShift, 16 * IN_MILLISECONDS);
@@ -802,7 +802,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eSargereiHopiliteEvents::EventShieldBash, urand(8 * IN_MILLISECONDS, 12 * IN_MILLISECONDS));
             events.RescheduleEvent(eSargereiHopiliteEvents::EventVoidStrikes, 18 * IN_MILLISECONDS);
@@ -898,7 +898,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eSargereiDefenderEvents::EventAvengersShield, urand(10 * IN_MILLISECONDS, 16 * IN_MILLISECONDS));
             events.RescheduleEvent(eSargereiDefenderEvents::EventCrusaderStirke, urand(5 * IN_MILLISECONDS, 9 * IN_MILLISECONDS));
@@ -1012,7 +1012,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             me->RemoveAura(eSargereiMagusSpells::SpellArcaneChanneling);
             events.RescheduleEvent(eSargereiMagusEvents::EventArcaneBomb, 13 * IN_MILLISECONDS);
@@ -1109,7 +1109,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eSoulPriestEvents::EventPsychicTerrors, 15 * IN_MILLISECONDS);
             events.RescheduleEvent(eSoulPriestEvents::EventShadowWordPainSoulPriest, urand(8 * IN_MILLISECONDS, 10 * IN_MILLISECONDS));
@@ -1193,7 +1193,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eWardenEvents::EventWardenChain, 5 * IN_MILLISECONDS);
             events.RescheduleEvent(eWardenEvents::EventWardenHammer, urand(12 * IN_MILLISECONDS, 16 * IN_MILLISECONDS));
@@ -1273,7 +1273,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eFelborneAbyssalEvents::EventFixate, urand(16 * IN_MILLISECONDS, 20 * IN_MILLISECONDS));
         }
@@ -1377,7 +1377,7 @@ public:
             me->CastSpell(me, eCacklingPyromaniacSpells::SpellAbyssalVisual);
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eCacklingPyromaniacEvents::EventFelBlast, 6 * IN_MILLISECONDS);
         }
@@ -1537,7 +1537,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* atacker) override
+        void JustEngagedWith(Unit* atacker) override
         {
             events.RescheduleEvent(eFelguardEvents::EventFelStomp, 10 * IN_MILLISECONDS);
         }

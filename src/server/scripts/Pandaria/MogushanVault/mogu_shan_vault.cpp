@@ -68,7 +68,7 @@ class mob_cursed_mogu_sculpture : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* attacker) override
+            void JustEngagedWith(Unit* attacker) override
             {
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE);
                 me->RemoveAurasDueToSpell(120661);
@@ -175,7 +175,7 @@ class mob_enormous_stone_quilen : public CreatureScript
                 nextMovementTimer = 500;
             }
 
-            void EnterCombat(Unit* attacker) override
+            void JustEngagedWith(Unit* attacker) override
             {
                 me->SetWalk(false);
                 //me->AddAura(SPELL_PETRIFICATION, me);

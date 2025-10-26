@@ -95,9 +95,9 @@ struct boss_orebender_gorashan : public BossAI
         healthPct = 75;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         me->SummonCreature(NPC_LIGHTNING_FIELD, goroshanAdds[7]);
 

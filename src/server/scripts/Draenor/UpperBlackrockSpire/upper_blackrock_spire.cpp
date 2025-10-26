@@ -108,7 +108,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*attacker*/) override
+        void JustEngagedWith(Unit* /*attacker*/) override
         {
             Movement::MoveSplineInit init(*me);
             init.Stop();
@@ -369,7 +369,7 @@ public:
             charging = false;
         }
 
-        void EnterCombat(Unit*) override
+        void JustEngagedWith(Unit*) override
         {
             events.RescheduleEvent(EVENT_FIERY_CHARGE, 8000);
             events.RescheduleEvent(EVENT_FLAME_ERUPTION, 15000);

@@ -40,9 +40,9 @@ struct boss_ozruk : public BossAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         DoCast(92428);
         events.RescheduleEvent(EVENT_BULWARK, 6000);

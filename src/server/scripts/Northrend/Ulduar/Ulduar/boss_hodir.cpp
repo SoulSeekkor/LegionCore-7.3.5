@@ -202,9 +202,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*pWho*/) override
+        void JustEngagedWith(Unit* /*pWho*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoScriptText(SAY_AGGRO, me);
             me->SetReactState(REACT_AGGRESSIVE);
             DoCast(me, SPELL_BITING_COLD, true);

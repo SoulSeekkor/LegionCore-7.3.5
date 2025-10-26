@@ -371,7 +371,7 @@ class boss_algalon_the_observer : public CreatureScript
                 }
             }
             
-            void EnterCombat(Unit* /*target*/) override
+            void JustEngagedWith(Unit* /*target*/) override
             {
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_IMMUNE_TO_NPC);
                 instance->SetBossState(BOSS_ALGALON, IN_PROGRESS);
@@ -395,7 +395,7 @@ class boss_algalon_the_observer : public CreatureScript
                 me->SetReactState(REACT_DEFENSIVE);
                 me->SetSheath(SHEATH_STATE_MELEE);
                 Talk(SAY_ALGALON_AGGRO);
-                _EnterCombat();
+                _JustEngagedWith();
                 me->setActive(true);
                 DoZoneInCombat();
                 events.ScheduleEvent(EVENT_QUANTUM_STRIKE, 3500);

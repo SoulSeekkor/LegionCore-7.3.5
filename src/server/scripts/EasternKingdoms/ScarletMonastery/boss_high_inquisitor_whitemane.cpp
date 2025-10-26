@@ -119,10 +119,10 @@ public:
             me->SummonCreature(NPC_DURAND, 747.96f, 605.97f, 15.07f, -0.04f);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_WH_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             events.RescheduleEvent(EVENT_HOLYSMITE, 5000);
             events.RescheduleEvent(EVENT_POWERWORDSHIELD, 26000);
@@ -280,7 +280,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_D_AGGRO);
             events.RescheduleEvent(EVENT_FLASH_OF_STEEL, 10000);

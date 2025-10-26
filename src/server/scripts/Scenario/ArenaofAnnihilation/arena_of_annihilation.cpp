@@ -178,9 +178,9 @@ public:
             events.RescheduleEvent(EVENT_POINT_HOME, 2000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_SPEED_JINJA, 8000);
             events.RescheduleEvent(EVENT_THROW, 2000);
         }
@@ -271,9 +271,9 @@ public:
             events.RescheduleEvent(EVENT_POINT_HOME, 2000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_NIMBUS, 20000);
             events.RescheduleEvent(EVENT_FLYING_KICK, 10000);
             events.RescheduleEvent(EVENT_CYCLONE_KICK, 16000);
@@ -413,9 +413,9 @@ public:
             events.RescheduleEvent(EVENT_POINT_HOME, 2000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_CRASHING_SLASH, 4000);
             events.RescheduleEvent(EVENT_WHIRLPOOL, 54000);
         }

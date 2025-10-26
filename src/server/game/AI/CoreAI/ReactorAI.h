@@ -38,7 +38,7 @@ class ReactorAI : public CreatureAI
         void InitializeAI() override;
         void UpdateAI(uint32) override;
         static int Permissible(const Creature*);
-        void EnterCombat(Unit* who) override;
+        void JustEngagedWith(Unit* who) override;
         void JustDied(Unit* killer) override;
 
         void AddClientVisibility(ObjectGuid guid) override;

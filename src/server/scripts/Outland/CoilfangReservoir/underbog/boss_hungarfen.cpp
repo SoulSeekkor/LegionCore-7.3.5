@@ -56,7 +56,7 @@ public:
             AcidGeyser_Timer = 10000;
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
         }
 
@@ -133,7 +133,7 @@ public:
 
         void AttackStart(Unit* /*who*/) {}
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void UpdateAI(uint32 diff)
         {

@@ -90,9 +90,9 @@ class boss_garalon : public CreatureScript
                 instance->DoRemoveAurasDueToSpellOnPlayers(122835);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 DoCast(SPELL_PHEROMONES);
                 events.ScheduleEvent(EVENT_CHECK_VICTIM, 2000);
                 events.ScheduleEvent(EVENT_FURIOUS_SWIPE, 10000);
@@ -255,7 +255,7 @@ class npc_garalons_leg : public CreatureScript
                 fakeDeath = false;
             }
 
-            void EnterCombat(Unit* who) {}
+            void JustEngagedWith(Unit* who) {}
 
             void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
             {
@@ -329,7 +329,7 @@ class npc_garalon_crusher : public CreatureScript
 
             void Reset() {}
 
-            void EnterCombat(Unit* who) {}
+            void JustEngagedWith(Unit* who) {}
 
             void UpdateAI(uint32 diff) {}
         };
@@ -364,7 +364,7 @@ class npc_pheromone_trail : public CreatureScript
                 DoCast(me, SPELL_PHEROMONE_TRAIL);
             }
 
-            void EnterCombat(Unit* who) {}
+            void JustEngagedWith(Unit* who) {}
 
             void SpellHit(Unit* /*attacker*/, const SpellInfo* spell)
             {

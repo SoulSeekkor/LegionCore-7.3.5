@@ -68,7 +68,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISARMED);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             Talk(TalkAggro);
 
@@ -770,7 +770,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->CastSpell(me, SpellMoltenArmor, true);
 
@@ -864,7 +864,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->CastSpell(me, SpellFelArmor, true);
 
@@ -989,7 +989,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             Position l_Pos;
             me->GetPosition(&l_Pos);
@@ -1148,7 +1148,7 @@ public:
             me->CastSpell(me, SpellDevotionAura, true);
         }
 
-        void EnterCombat(Unit* p_Attacker) override
+        void JustEngagedWith(Unit* p_Attacker) override
         {
             me->CastSpell(me, SpellDevotionAura, true);
             me->CastSpell(p_Attacker, SpellNet, true);
@@ -1455,7 +1455,7 @@ public:
             m_CosmeticEvent.ScheduleEvent(SearchTarget, 1 * IN_MILLISECONDS);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             m_Events.ScheduleEvent(EventShoot, 1 * IN_MILLISECONDS);
             m_Events.ScheduleEvent(EventKillShot, 1 * IN_MILLISECONDS);
@@ -1622,7 +1622,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -1774,7 +1774,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -1925,7 +1925,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -2057,7 +2057,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -2213,7 +2213,7 @@ public:
             me->SetCanDualWield(false);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -2350,7 +2350,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -2502,7 +2502,7 @@ public:
             me->SetCanDualWield(false);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -2618,7 +2618,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -2730,7 +2730,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -2834,7 +2834,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -2945,7 +2945,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -3103,7 +3103,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);
@@ -3258,7 +3258,7 @@ public:
             m_Events.Reset();
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->SetHomePosition(*me);
 
@@ -3398,7 +3398,7 @@ public:
             me->Mount(MountID);
         }
 
-        void EnterCombat(Unit* /*p_Attacker*/) override
+        void JustEngagedWith(Unit* /*p_Attacker*/) override
         {
             me->Mount(0);
             me->SetHomePosition(*me);

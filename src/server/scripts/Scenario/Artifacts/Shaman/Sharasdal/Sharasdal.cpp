@@ -44,7 +44,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 4000); // 209912
             events.RescheduleEvent(EVENT_2, 34000); // 209913
@@ -315,7 +315,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 5000); // 209904
             events.RescheduleEvent(EVENT_2, 13000); // 209895
@@ -528,7 +528,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 10000); // 51876
             events.RescheduleEvent(EVENT_2, 11000); // 209914
@@ -657,7 +657,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 18000); // 209748 с m_Functions
             events.RescheduleEvent(EVENT_2, 20000); // 209764 на рандома. Через спелл хит 209755, который делает рывок и 209757
@@ -747,7 +747,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 2500); // 209919
             events.RescheduleEvent(EVENT_2, 16000); // 209707

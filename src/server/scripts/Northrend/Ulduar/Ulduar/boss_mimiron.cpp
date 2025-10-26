@@ -307,9 +307,9 @@ public:
             return MimironHardMode;
         }
 
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
             phase = PHASE_INTRO;
             CheckIsWipe = 1500;
@@ -827,7 +827,7 @@ public:
                 }
         }
 
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
             if (MimironHardMode)
             {
@@ -1080,7 +1080,7 @@ public:
                     }
         }
 
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
             if (MimironHardMode)
             {
@@ -1321,7 +1321,7 @@ public:
                     }
         }
 
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
             if (MimironHardMode)
                 DoCast(me, SPELL_EMERGENCY_MODE);

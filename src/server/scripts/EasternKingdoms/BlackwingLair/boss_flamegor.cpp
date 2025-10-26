@@ -48,14 +48,14 @@ public:
     {
         boss_flamegorAI(Creature* creature) : BossAI(creature, BOSS_FLAMEGOR) { }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance->GetBossState(BOSS_BROODLORD) != DONE)
             {
                 EnterEvadeMode();
                 return;
             }
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_SHADOWFLAME, urand(10000, 20000));
             events.RescheduleEvent(EVENT_WINGBUFFET, 30000);

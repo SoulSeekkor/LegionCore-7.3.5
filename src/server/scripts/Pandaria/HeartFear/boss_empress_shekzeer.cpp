@@ -142,9 +142,9 @@ class boss_empress_shekzeer : public CreatureScript
                     value = 1;
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.SetPhase(PHASE_ONE);
                 phase = PHASE_ONE;
                 events.ScheduleEvent(EVENT_CHECK_POWER, 1000);
@@ -366,7 +366,7 @@ class npc_generic_royal_sentinel : public CreatureScript
 
             void Reset(){}
             
-            void EnterCombat(Unit* attacker)
+            void JustEngagedWith(Unit* attacker)
             {
                 switch (me->GetEntry())
                 {

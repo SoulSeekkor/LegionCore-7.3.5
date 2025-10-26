@@ -153,9 +153,9 @@ struct boss_kingaroth : BossAI
         me->SummonCreature(NPC_APOCALYPSE_BLAST_STALKER, summonPos[10]);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         DoCast(me, SPELL_ENERGIZE_PERIODIC, true);
         DefaultEvents(true);
@@ -163,9 +163,9 @@ struct boss_kingaroth : BossAI
         DoActionSummon(NPC_INCINERATOR_STALKER, ACTION_1); //Cast AT
     }
 
-    void DefaultEvents(bool enterCombat = false)
+    void DefaultEvents(bool JustEngagedWith = false)
     {
-        if (enterCombat)
+        if (JustEngagedWith)
         {
             events.RescheduleEvent(EVENT_FORGING_STRIKE, 6000);
             events.RescheduleEvent(EVENT_REVERBERATING_STRIKE, 14000);

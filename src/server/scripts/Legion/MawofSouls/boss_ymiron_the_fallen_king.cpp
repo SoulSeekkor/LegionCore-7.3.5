@@ -108,10 +108,10 @@ struct boss_ymiron_the_fallen_king : public BossAI
         addskilled = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_POWER, true);
         events.RescheduleEvent(EVENT_SCREAMS_OF_DEAD, 6000);
         events.RescheduleEvent(EVENT_WINDS_OF_NORTHREND, 16000);
@@ -459,7 +459,7 @@ struct npc_ymiron_cursed_falke : public ScriptedAI
             flyEvent = true;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         me->RemoveAurasDueToSpell(SPELL_STATE);
     }
@@ -531,7 +531,7 @@ struct npc_ymiron_seacursed_slaver : public ScriptedAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         _events.RescheduleEvent(EVENT_FRACTURE, 4000);
         //_events.RescheduleEvent(EVENT_BARBED, 6000); //Crash
@@ -682,7 +682,7 @@ struct npc_mos_seacursed_soulkeeper : public ScriptedAI
         me->SetReactState(REACT_AGGRESSIVE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(3, 4));
         events.RescheduleEvent(EVENT_2, urandms(9, 10));
@@ -742,7 +742,7 @@ struct npc_mos_runecarver_slave : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(1, 2));
         events.RescheduleEvent(EVENT_2, urandms(9, 10));

@@ -117,7 +117,7 @@ class boss_mandokir : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_DECAPITATE, 7000);

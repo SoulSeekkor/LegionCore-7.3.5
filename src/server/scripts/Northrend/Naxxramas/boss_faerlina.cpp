@@ -71,9 +71,9 @@ class boss_faerlina : public CreatureScript
             {}
 
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 DoScriptText(RAND(SAY_AGGRO_1, SAY_AGGRO_2, SAY_AGGRO_3, SAY_AGGRO_4), me);
                 events.ScheduleEvent(EVENT_POISON, urand(10000, 15000));
                 events.ScheduleEvent(EVENT_FIRE, urand(6000, 18000));
@@ -208,7 +208,7 @@ class mob_faerlina_add : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_FIREBALL, 3000);
             }

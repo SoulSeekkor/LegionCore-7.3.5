@@ -138,9 +138,9 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_VOID_REALM_2);
         } 
 
-        void EnterCombat(Unit* /*who*/) override 
+        void JustEngagedWith(Unit* /*who*/) override 
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_NULL_PALM, 11000);
             events.RescheduleEvent(EVENT_DECIMATE, 18000);
@@ -448,7 +448,7 @@ public:
             DoCast(summoner, SPELL_VOID_CONTAINMENT, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             events.RescheduleEvent(EVENT_NB, urand(10000,15000));
             events.RescheduleEvent(EVENT_FIELD, 20000);

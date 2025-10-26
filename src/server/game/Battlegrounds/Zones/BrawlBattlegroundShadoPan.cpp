@@ -294,7 +294,7 @@ struct npc_bg_shado_pan_boss : ScriptedAI
     void Reset() override  {} // do nothing
     void EnterEvadeMode() override  {} // do nothing
 
-    void EnterCombat(Unit* ) override
+    void JustEngagedWith(Unit* ) override
     {
         events.ScheduleEvent(EVENT_BRUTAL_SLASH, 3000);
         events.ScheduleEvent(EVENT_STORM, 8000);

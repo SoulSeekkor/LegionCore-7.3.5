@@ -128,7 +128,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoScriptText(SAY_ATTACKED_1, me, who);
         }

@@ -229,7 +229,7 @@ class npc_end_time_infinite_warden : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 events.ScheduleEvent(EVENT_VOID_SHIELD, urand(10000, 20000));
                 events.ScheduleEvent(EVENT_VOID_STRIKE, urand(5000, 10000));
@@ -291,7 +291,7 @@ class npc_end_time_infinite_suppressor : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
 
                 events.ScheduleEvent(EVENT_ARCANE_WAVE, 1000);

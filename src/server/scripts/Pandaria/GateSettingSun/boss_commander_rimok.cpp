@@ -46,9 +46,9 @@ struct boss_commander_rimok : public BossAI
         DespawnAllSummons();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         SummonCreatures();
         events.RescheduleEvent(EVENT_FRENZIED_ASSAULT, urand(5000, 10000));
         events.RescheduleEvent(EVENT_VISCOUS_FLUID, urand(10000, 15000));

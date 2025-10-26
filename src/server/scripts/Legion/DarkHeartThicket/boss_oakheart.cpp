@@ -62,10 +62,10 @@ public:
                 me->GetVehicleKit()->RemoveAllPassengers();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_SHATTERED_EARTH, 6000);
             events.RescheduleEvent(EVENT_STRANGLING_ROOTS, 14000);
             events.RescheduleEvent(EVENT_NIGHTMARE_BREATH, 22000);

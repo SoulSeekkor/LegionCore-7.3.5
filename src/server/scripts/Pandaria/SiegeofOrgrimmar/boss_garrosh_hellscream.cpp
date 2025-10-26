@@ -337,7 +337,7 @@ uint32 transformvisual[4] =
 enum CreatureText
 {
     //Real
-    SAY_ENTERCOMBAT                 = 1,//Я, Гаррош, сын Грома, покажу вам, что значит быть Адским Криком! 38064
+    SAY_JustEngagedWith                 = 1,//Я, Гаррош, сын Грома, покажу вам, что значит быть Адским Криком! 38064
     SAY_HELLSCREAM_WARSONG          = 2,//Умрите с честью! 38075
     SAY_SUMMON_WOLF_RIDER           = 3,//Исцелите наши раны! 38072
     SAY_START_LAUNCH_IRON_STAR      = 4,//Узрите силу оружия Истинной Орды! 38068
@@ -439,12 +439,12 @@ class boss_garrosh_hellscream : public CreatureScript
                     me->SummonCreature(NPC_KORKRON_IRON_STAR, ironstarspawnpos[n]);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (!me->ToTempSummon())
                 {
-                    _EnterCombat();
-                    Talk(SAY_ENTERCOMBAT);
+                    _JustEngagedWith();
+                    Talk(SAY_JustEngagedWith);
                     checkevade = 1000;
                     SpawnIronStar();
                     phase = PHASE_ONE;
@@ -1181,7 +1181,7 @@ public:
                 me->DespawnOrUnsummon(2000);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (me->GetEntry())
             {
@@ -1382,7 +1382,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1437,7 +1437,7 @@ public:
             events.RescheduleEvent(EVENT_ACTIVE, 3000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1573,7 +1573,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1642,7 +1642,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1725,7 +1725,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 
@@ -1806,7 +1806,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1848,7 +1848,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1914,7 +1914,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1952,7 +1952,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1982,7 +1982,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

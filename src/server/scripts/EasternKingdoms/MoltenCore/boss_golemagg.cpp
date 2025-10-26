@@ -67,9 +67,9 @@ class boss_golemagg : public CreatureScript
                 DoCast(me, SPELL_MAGMASPLASH, true);
             }
 
-            void EnterCombat(Unit* victim) override
+            void JustEngagedWith(Unit* victim) override
             {
-                BossAI::EnterCombat(victim);
+                BossAI::JustEngagedWith(victim);
                 events.RescheduleEvent(EVENT_PYROBLAST, 7000);
             }
 

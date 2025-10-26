@@ -32,7 +32,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 4000); // 234473 + 17
             events.RescheduleEvent(EVENT_2, 8000); // 234446 + 15
@@ -112,7 +112,7 @@ public:
             events.Reset();
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_1, 12000); // 234694 + 23
             events.RescheduleEvent(EVENT_2, 16000); // 235048 + 16 (todo)

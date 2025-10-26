@@ -328,7 +328,7 @@ public:
             DoCast(me, SPELL_AURA_VISUAL_FS, true);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -424,7 +424,7 @@ public:
             summons.Summon(sum);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -529,7 +529,7 @@ public:
             summons.Summon(sum);
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             DoZoneInCombat(me, 300.0f);
             switch (me->GetEntry())
@@ -1317,7 +1317,7 @@ public:
             SetHungerTarget();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_FEED, 5000);
         }
@@ -1434,7 +1434,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1481,7 +1481,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1649,7 +1649,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1689,7 +1689,7 @@ public:
                 damage = 0;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

@@ -84,7 +84,7 @@ class boss_trollgore : public CreatureScript
                 _consumptionJunction = true;
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
                 if (who->IsPlayer())
                     _OnCombat();
@@ -92,7 +92,7 @@ class boss_trollgore : public CreatureScript
 
             void _OnCombat()
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 Talk(SAY_AGGRO);
 
                 events.ScheduleEvent(EVENT_CONSUME, 15000);

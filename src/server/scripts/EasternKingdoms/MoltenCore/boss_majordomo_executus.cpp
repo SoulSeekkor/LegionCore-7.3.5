@@ -84,9 +84,9 @@ class boss_majordomo : public CreatureScript
                     Talk(SAY_SLAY);
             }
 
-            void EnterCombat(Unit* who) override
+            void JustEngagedWith(Unit* who) override
             {
-                BossAI::EnterCombat(who);
+                BossAI::JustEngagedWith(who);
                 Talk(SAY_AGGRO);
                 events.RescheduleEvent(EVENT_MAGIC_REFLECTION, 30000);
                 events.RescheduleEvent(EVENT_DAMAGE_REFLECTION, 15000);

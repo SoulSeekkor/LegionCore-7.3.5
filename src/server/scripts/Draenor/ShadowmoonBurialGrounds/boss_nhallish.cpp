@@ -89,10 +89,10 @@ struct boss_nhallish : public BossAI
         checkTimer = 1000;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_VOID_BLAST, 12000);
         events.RescheduleEvent(EVENT_PLANAR_SHIFT, 24000);

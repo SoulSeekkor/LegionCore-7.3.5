@@ -310,7 +310,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -562,7 +562,7 @@ public:
             mspoilGuid.Clear();
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void JustSummoned(Creature* sum) override
         {
@@ -834,7 +834,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void OnSpellClick(Unit* clicker)
         {
@@ -967,7 +967,7 @@ public:
             spawn = 1500;
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             switch (me->GetEntry())
             {
@@ -1416,7 +1416,7 @@ public:
             return ang;
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1500,7 +1500,7 @@ public:
                 events.RescheduleEvent(EVENT_ACTIVE, 3000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1560,7 +1560,7 @@ public:
             me->DespawnOrUnsummon();
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

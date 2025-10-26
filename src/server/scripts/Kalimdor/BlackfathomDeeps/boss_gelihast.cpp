@@ -52,7 +52,7 @@ public:
                 instance->SetData(TYPE_GELIHAST, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             if (instance)
                 instance->SetData(TYPE_GELIHAST, IN_PROGRESS);

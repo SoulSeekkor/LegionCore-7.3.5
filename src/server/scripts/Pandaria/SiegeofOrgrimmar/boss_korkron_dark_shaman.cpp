@@ -252,7 +252,7 @@ public:
             instance->SetData(DATA_CHECK_KDS_RESET_IS_DONE, 0);
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (instance)
                 instance->SetBossState(DATA_KORKRON_D_SHAMAN, IN_PROGRESS);
@@ -667,7 +667,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             if (instance)
             {
@@ -777,7 +777,7 @@ public:
             events.RescheduleEvent(EVENT_SUMMON_TORNADO, 12000);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -830,7 +830,7 @@ public:
             me->GetMotionMaster()->MoveCharge(x, y, me->GetPositionZ(), 3.0f);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -964,7 +964,7 @@ public:
 
         void Reset(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1027,7 +1027,7 @@ public:
                 DoCast(me, SPELL_RESISTANCE_TOTEM_SUM);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1080,7 +1080,7 @@ public:
                     kardris->SummonCreature(NPC_FALLING_ASH, x, y, z);
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 
@@ -1126,7 +1126,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void EnterEvadeMode(){}
 

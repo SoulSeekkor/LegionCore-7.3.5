@@ -48,7 +48,7 @@ struct boss_altairus : public BossAI
         _twisternum = 0;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_CHILLING_BREATH, urand(5000, 10000));
         events.ScheduleEvent(EVENT_CALL_OF_WIND, 2000);

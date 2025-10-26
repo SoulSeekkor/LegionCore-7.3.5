@@ -367,7 +367,7 @@ public:
             SetCombatMovement(false);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CastSpell(me, 229572);
             me->CastSpell(me, 229470);

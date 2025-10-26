@@ -89,7 +89,7 @@ struct boss_setesh : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         events.ScheduleEvent(EVENT_CHAOS_BOLT, 10000);
@@ -308,7 +308,7 @@ struct npc_setesh_void_seeker : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (urand(0, 1))
             events.ScheduleEvent(EVENT_ANTI_MAGIC_PRISON, urand(3000, 5000));

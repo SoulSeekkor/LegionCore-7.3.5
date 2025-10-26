@@ -82,7 +82,7 @@ class SmartAI : public CreatureAI
         void JustReachedHome() override;
 
         // Called for reaction at enter to combat if not in combat yet (enemy can be NULL)
-        void EnterCombat(Unit* enemy) override;
+        void JustEngagedWith(Unit* enemy) override;
 
         // Called for reaction at stopping attack at no attackers or targets
         void EnterEvadeMode() override;

@@ -133,7 +133,7 @@ class boss_temple_guardian_anhuur : public CreatureScript
                 Talk(SAY_DEATH);
             }
 
-            void EnterCombat(Unit* /*Ent*/) override
+            void JustEngagedWith(Unit* /*Ent*/) override
             {
                 events.ScheduleEvent(EVENT_DIVINE_RECKONING, urand(3000, 10000));
                 events.ScheduleEvent(EVENT_SEARING_FLAME, urand(2000, 7000));
@@ -280,7 +280,7 @@ class npc_pit_snake : public CreatureScript
                 events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 events.ScheduleEvent(EVENT_POISON_TIPPED_FANGS, urand(2000, 8000));
             }

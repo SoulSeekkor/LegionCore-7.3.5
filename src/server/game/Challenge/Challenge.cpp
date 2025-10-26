@@ -174,7 +174,7 @@ void Challenge::OnCreatureUpdateDifficulty(Creature* creature)
 
 void Challenge::OnCreatureRemoveForScript(Creature* /*creature*/) { }
 
-void Challenge::EnterCombatForScript(Creature* creature, Unit* /*enemy*/)
+void Challenge::JustEngagedWithForScript(Creature* creature, Unit* /*enemy*/)
 {
     if (!creature || creature->isTrigger() || creature->IsControlledByPlayer())
         return;

@@ -71,9 +71,9 @@ public:
             events.RescheduleEvent(EVENT_POINT_HOME, 2000);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_STONE_SPIN, 16000);
             events.RescheduleEvent(EVENT_CRUSHING_BITE, 9000);
         }

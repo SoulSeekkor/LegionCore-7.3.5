@@ -44,10 +44,10 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             //Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
             //events.RescheduleEvent(EVENT_, ); //
         }
 

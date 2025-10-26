@@ -395,9 +395,9 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             me->CastStop();
             me->RemoveAllAuras();
             Talk(TERONGOR_AGGRO_01);
@@ -689,7 +689,7 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             me->CastStop();
             me->RemoveAllAuras();
@@ -793,7 +793,7 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             me->CastStop();
             me->RemoveAllAuras();
@@ -876,7 +876,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             events.RescheduleEvent(EventWrathcleave, 10 * IN_MILLISECONDS);
             events.RescheduleEvent(EventWrathstorm, urand(14 * IN_MILLISECONDS, 16 * IN_MILLISECONDS));
@@ -967,7 +967,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*atacker*/) override
+        void JustEngagedWith(Unit* /*atacker*/) override
         {
             me->CastStop();
             me->RemoveAllAuras();

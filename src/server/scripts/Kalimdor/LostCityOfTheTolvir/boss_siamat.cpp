@@ -118,7 +118,7 @@ struct boss_siamat : public ScriptedAI
         me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
         events.SetPhase(PHASE_DEFLECTING_WINDS);
@@ -281,7 +281,7 @@ struct npc_servant_of_siamat : public ScriptedAI
         LightningCharge = false;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
         events.ScheduleEvent(EVENT_THUNDER_CRASH, 1000);

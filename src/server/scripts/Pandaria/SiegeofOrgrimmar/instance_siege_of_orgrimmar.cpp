@@ -1847,7 +1847,7 @@ public:
                     {
                         for (uint8 m = 0; m < crawlermineGuids.size(); m++)
                             if (Creature* cm = instance->GetCreature(crawlermineGuids[m]))
-                                cm->AI()->SetData(DATA_CRAWLER_MINE_ENTERCOMBAT, uint32(m));
+                                cm->AI()->SetData(DATA_CRAWLER_MINE_JustEngagedWith, uint32(m));
                         crawlermineGuids.clear();
                         crawlerminenum = instance->Is25ManRaid() ? 7 : 3;
                     }

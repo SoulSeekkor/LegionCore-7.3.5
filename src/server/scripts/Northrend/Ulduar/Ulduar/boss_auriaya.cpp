@@ -114,7 +114,7 @@ public:
             me->SetReactState(REACT_AGGRESSIVE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (!instance->CheckRequiredBosses(BOSS_AURIAYA, me->GetEntry(), who->ToPlayer()))
             {
@@ -122,7 +122,7 @@ public:
                 return;
             }
 
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
             SentryDead = false;
             LivesCount = 0;

@@ -74,7 +74,7 @@ public:
             instance->DoCastSpellOnPlayers(62043);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Phase = 1;
             events.RescheduleEvent(EVENT_BIGADD, 5000);

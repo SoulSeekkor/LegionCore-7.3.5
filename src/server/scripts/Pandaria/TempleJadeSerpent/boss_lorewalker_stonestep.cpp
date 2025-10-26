@@ -493,9 +493,9 @@ struct mob_zao : public BossAI
         _Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void JustDied(Unit* /*killer*/) override
@@ -599,7 +599,7 @@ struct mob_haunting_sha : public BossAI
         me->setFaction(14);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 1000);
     }
@@ -678,9 +678,9 @@ struct mob_strife : public BossAI
         hasBeenHit = true;
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_1, 1000);
     }
 
@@ -785,9 +785,9 @@ struct mob_peril : public BossAI
         hasBeenHit = true;
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_1, 1000);
     }
 
@@ -871,7 +871,7 @@ struct mob_nodding_tiger : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }
@@ -905,7 +905,7 @@ struct mob_golden_beetle : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);
@@ -953,7 +953,7 @@ struct mob_jiang_xiang : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
         events.RescheduleEvent(EVENT_2, 4000);
@@ -994,7 +994,7 @@ struct mob_songbird_queen : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         events.RescheduleEvent(EVENT_1, 2000);
     }
@@ -1028,7 +1028,7 @@ struct mob_talking_fish : public ScriptedAI
 
     EventMap events;
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(urand(0, 3));
         events.RescheduleEvent(EVENT_1, 2000);

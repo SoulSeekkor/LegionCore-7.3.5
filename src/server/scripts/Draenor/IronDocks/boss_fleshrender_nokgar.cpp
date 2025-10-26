@@ -78,11 +78,11 @@ struct boss_fleshrender_nokgar : public BossAI
         DoCast(SPELL_SUMMON_DREADFANG);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         first = true;
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
 
         events.RescheduleEvent(EVENT_RECKLESS_PROVOCATION, 34000);
         events.RescheduleEvent(EVENT_BURNING_ARROWS, 16000);
@@ -209,7 +209,7 @@ struct npc_dreadfang : public ScriptedAI
         DoCast(164024);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         EnterEvadeModeOwner();
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);

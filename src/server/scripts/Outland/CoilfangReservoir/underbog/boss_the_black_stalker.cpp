@@ -74,7 +74,7 @@ public:
             Striders.clear();
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void JustSummoned(Creature* summon)
         {

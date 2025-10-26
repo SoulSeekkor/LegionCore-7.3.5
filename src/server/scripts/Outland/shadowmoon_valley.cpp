@@ -1074,7 +1074,7 @@ public:
             DoSummon(NPC_COILSKAR_ASSASSIN, me, 15.0f, 5000, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             //don't always use
             if (rand()%5)
@@ -1245,7 +1245,7 @@ public:
             me->SetTarget(ObjectGuid::Empty);
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void HandleAnimation()
         {
@@ -1433,7 +1433,7 @@ public:
             EventStarted = true;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
         void AttackStart(Unit* /*who*/) override {}
 
@@ -1562,7 +1562,7 @@ public:
             Timers = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void JustDied(Unit* /*killer*/) override
         {
@@ -1826,7 +1826,7 @@ public:
 
         void Reset() override {}
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void JustDied(Unit* /*killer*/) override
         {

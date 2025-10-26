@@ -54,9 +54,9 @@ public:
             //DoCast(me, SPELL_ICEARMOR, true);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_CURSE_OF_BLOOD, 2 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_HEX,     8 * IN_MILLISECONDS);
             events.RescheduleEvent(EVENT_CLEAVE, 14 * IN_MILLISECONDS);

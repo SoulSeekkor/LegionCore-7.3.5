@@ -140,7 +140,7 @@ class boss_omnotron : public CreatureScript
             ObjectGuid m_uiGuids[4];
             uint8 current;
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (!instance)
                     return;
@@ -328,7 +328,7 @@ class boss_arcanotron : public CreatureScript
                 instance->SetData(DATA_HEALTH_OMNOTRON_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 if (Creature* omnotron = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_OMNOTRON)))
                     DoZoneInCombat(omnotron);
@@ -542,7 +542,7 @@ class boss_electron : public CreatureScript
                 instance->SetData(DATA_HEALTH_OMNOTRON_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_LIGHTNING_CONDUCTOR, 10000);
                 events.RescheduleEvent(EVENT_ELECTRICAL_DISCHARGE, 6000);
@@ -725,7 +725,7 @@ class boss_magmatron : public CreatureScript
                 instance->SetData(DATA_HEALTH_OMNOTRON_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_INSENERATION_SECURITY_MISSURE, 10000);
                 //events.RescheduleEvent(EVENT_ACQUIRING_TARGET, 25000);
@@ -933,7 +933,7 @@ class boss_toxitron : public CreatureScript
                 instance->SetData(DATA_HEALTH_OMNOTRON_SHARED, me->GetHealth() > damage ? me->GetHealth() - damage : 0);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 events.RescheduleEvent(EVENT_CHEMICAL_BOMB, 10000);
                 events.RescheduleEvent(EVENT_POISON_PROTOCOL, 20000);

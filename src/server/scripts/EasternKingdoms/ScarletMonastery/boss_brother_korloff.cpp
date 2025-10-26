@@ -85,9 +85,9 @@ public:
                 me->SummonCreature(NPC_TRAINING_DUMMY, dummyPos[i]);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
             events.RescheduleEvent(EVENT_FLYING_KICK, 10000);
             events.RescheduleEvent(EVENT_BLAZING_FISTS, 20000);

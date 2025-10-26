@@ -105,9 +105,9 @@ class boss_ra_den : public CreatureScript
                 dmg = 0;
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 checkpower = 1000;
                 events.RescheduleEvent(EVENT_MATERIALS_OF_CREATION, 12000);
                 events.RescheduleEvent(EVENT_SUMMON, 20000);
@@ -434,7 +434,7 @@ class npc_sanguine_horror : public CreatureScript
                     AttackStart(pl);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 DoZoneInCombat(me, 100.0f);
                 events.RescheduleEvent(EVENT_SANGUINE_VOLLEY, 3000);
@@ -491,7 +491,7 @@ class npc_crackling_stalker : public CreatureScript
                     AttackStart(pl);
             }
 
-            void EnterCombat(Unit* who)
+            void JustEngagedWith(Unit* who)
             {
                 DoZoneInCombat(me, 100.0f);
                 events.RescheduleEvent(EVENT_CRACKLE, 10000);

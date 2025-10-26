@@ -97,10 +97,10 @@ public:
             monsoonCount = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_CRACKLING_THUNDER, 4000);
             events.RescheduleEvent(EVENT_STATIC_NOVA, 11000);

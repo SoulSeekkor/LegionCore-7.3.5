@@ -56,7 +56,7 @@ class ZoneScript
         virtual void OnCreatureCreateForScript(Creature* /*creature*/) {}
         virtual void OnCreatureRemoveForScript(Creature* /*creature*/) {}
         virtual void OnCreatureUpdateDifficulty(Creature* /*creature*/) {}
-        virtual void EnterCombatForScript(Creature* /*creature*/, Unit* /*enemy*/) {}
+        virtual void JustEngagedWithForScript(Creature* /*creature*/, Unit* /*enemy*/) {}
         virtual void CreatureDiesForScript(Creature* /*creature*/, Unit* /*killer*/) {}
         virtual void OnGameObjectCreateForScript(GameObject* /*go*/) {}
         virtual void OnGameObjectRemoveForScript(GameObject* /*go*/) {}

@@ -178,7 +178,7 @@ class boss_janalai : public CreatureScript
                 Talk(SAY_KILL);
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
                 bEnraged = false;
                 Talk(SAY_AGGRO);
@@ -477,7 +477,7 @@ class npc_janalai_hatchling : public CreatureScript
                 //me->SetUnitMovementFlags(MOVEMENTFLAG_DISABLE_GRAVITY);
             }
 
-            void EnterCombat(Unit* /*who*/) 
+            void JustEngagedWith(Unit* /*who*/) 
             {
                 events.RescheduleEvent(EVENT_FLAMEBUFFET, urand(7000, 15000));
             }

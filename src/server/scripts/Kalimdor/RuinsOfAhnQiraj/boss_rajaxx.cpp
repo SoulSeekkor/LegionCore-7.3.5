@@ -81,9 +81,9 @@ class boss_rajaxx : public CreatureScript
                 _JustDied();
             }
 
-            void EnterCombat(Unit* /*victim*/)
+            void JustEngagedWith(Unit* /*victim*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
             }
 
             void UpdateAI(uint32 diff)

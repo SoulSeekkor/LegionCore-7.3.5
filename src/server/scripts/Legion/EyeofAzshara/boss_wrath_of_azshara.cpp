@@ -120,10 +120,10 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_FROST_RESONANCE);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             DoCast(me, SPELL_TIDAL_WAVE_PERIODIC_1, true);
             DoCast(me, SPELL_LIGHTNING_STRIKES_1, true);
@@ -356,7 +356,7 @@ public:
             DoCast(me, SPELL_TEMPEST_ATTUNEMENT, true);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             me->CastStop();
             events.RescheduleEvent(EVENT_1, 6000);

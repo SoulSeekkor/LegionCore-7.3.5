@@ -395,9 +395,9 @@ public:
             summons.Summon(sum);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             berserk = 600000;
             if (Creature* pp = me->GetCreature(*me, instance->GetGuidData(NPC_PUDDLE_POINT)))
                 pp->CastSpell(pp, SPELL_SEEPING_SHA_AT, true);
@@ -707,7 +707,7 @@ public:
 
         void EnterEvadeMode(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType)
         {
@@ -780,7 +780,7 @@ public:
 
         void EnterEvadeMode() override {}
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void DamageTaken(Unit* attacker, uint32 &damage, DamageEffectType dmgType) override
         {
@@ -862,7 +862,7 @@ public:
 
         void EnterEvadeMode(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void UpdateAI(uint32 diff)
         {
@@ -970,7 +970,7 @@ public:
         
         void EnterEvadeMode(){}
         
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
         
         void UpdateAI(uint32 diff)
         {
@@ -1059,7 +1059,7 @@ public:
 
         void EnterEvadeMode(){}
 
-        void EnterCombat(Unit* who){}
+        void JustEngagedWith(Unit* who){}
 
         void SendSlow(uint8 val)
         {
@@ -1219,7 +1219,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who) override {}
+        void JustEngagedWith(Unit* who) override {}
 
         void EnterEvadeMode() override {}
 

@@ -142,9 +142,9 @@ struct boss_erudax : public BossAI
         summons.Despawn(summon);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
         me->SummonCreature(NPC_FACELESS_PORTAL_STALKER, erudaxportalPos, TEMPSUMMON_MANUAL_DESPAWN);
         events.RescheduleEvent(EVENT_SHADOW_GALE, urand(25000, 26000));
@@ -272,7 +272,7 @@ struct npc_erudax_faceless_corruptor : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
         events.RescheduleEvent(EVENT_UMBRAL_MENDING, urand(15000, 20000));

@@ -91,7 +91,7 @@ public:
             }
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == 92782)
                 events.RescheduleEvent(EVENT_1, 15000); // 200992
@@ -232,7 +232,7 @@ public:
             }
         }
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (me->GetEntry() == 92990)
             {
@@ -501,7 +501,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_SPELLCLICK);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             return;
         }
@@ -557,7 +557,7 @@ public:
             CREDIT = 106254,                   
         };
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0, victim->GetGUID());
 
@@ -823,7 +823,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             Talk(0);
             events.RescheduleEvent(EVENT_1, 45000);

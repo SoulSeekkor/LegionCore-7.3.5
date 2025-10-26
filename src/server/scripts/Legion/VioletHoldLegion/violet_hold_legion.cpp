@@ -371,7 +371,7 @@ public:
 
         void Reset() override {}
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             events.RescheduleEvent(EVENT_6, urand(12000, 17000)); //205046
             events.RescheduleEvent(EVENT_7, 30000); //204962
@@ -512,7 +512,7 @@ public:
 
         void Reset() override {}
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             if (who->GetTypeId() != TYPEID_PLAYER)
                 return;

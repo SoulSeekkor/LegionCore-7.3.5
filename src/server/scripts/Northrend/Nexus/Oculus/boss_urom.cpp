@@ -123,9 +123,9 @@ class boss_urom : public CreatureScript
                 timeBombTimer = urand(20000, 25000);
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
-                _EnterCombat();
+                _JustEngagedWith();
 
                 StartAttack();
             }

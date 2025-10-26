@@ -143,7 +143,7 @@ class boss_vanessa_vancleef : public CreatureScript
                     Reset();
             }
 
-            void EnterCombat(Unit* /*who*/)  override
+            void JustEngagedWith(Unit* /*who*/)  override
             {
                 Talk(SAY_AGGRO);
                 DoCast(SPELL_VANESSA_ACHIEVEMENT);

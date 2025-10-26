@@ -112,7 +112,7 @@ class boss_isle_of_conquest : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_RAGE);
             }
 
-            void EnterCombat(Unit * who) override
+            void JustEngagedWith(Unit * who) override
             {
                 if (!me->IsWithinLOSInMap(who))
                     EnterEvadeMode();

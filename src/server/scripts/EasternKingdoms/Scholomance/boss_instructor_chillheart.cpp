@@ -79,9 +79,9 @@ public:
             _JustDied();
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             touchtimer = 5000;
             wrathtimer = 8000;
             wracktimer = 12000;

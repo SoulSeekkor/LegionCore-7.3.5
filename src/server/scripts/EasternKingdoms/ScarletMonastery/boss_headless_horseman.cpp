@@ -369,7 +369,7 @@ struct boss_headless_horseman : public ScriptedAI
         ++id;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance)
             instance->SetData(DATA_HORSEMAN_EVENT, IN_PROGRESS);

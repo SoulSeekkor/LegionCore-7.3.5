@@ -103,7 +103,7 @@ struct boss_erunak_stonespeaker : public ScriptedAI
                         me->InterruptSpell(CURRENT_GENERIC_SPELL);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_EARTH_SHARDS, 8000);
         events.RescheduleEvent(EVENT_EMBERSTRIKE, 11000);
@@ -210,9 +210,9 @@ struct boss_mindbender_ghursha : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_ENSLAVE, 13000);
         events.RescheduleEvent(EVENT_ABSORB_MAGIC, 20000);
         events.RescheduleEvent(EVENT_MIND_FOG, urand(6000, 12000));

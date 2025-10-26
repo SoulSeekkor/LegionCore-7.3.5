@@ -489,7 +489,7 @@ class boss_sara : public CreatureScript
             }
         }
         
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
             if (!instance->CheckRequiredBosses(BOSS_YOGGSARON, me->GetEntry(), who->ToPlayer()))
             {
@@ -580,7 +580,7 @@ class boss_sara : public CreatureScript
                     {
                         case 1:
                             // Close door
-                            _EnterCombat();
+                            _JustEngagedWith();
                             uiStep = 2;
                             break;
                         default:
@@ -768,7 +768,7 @@ class boss_yoggsaron : public CreatureScript
             me->LowerPlayerDamageReq(me->GetMaxHealth());
         }
         
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
             if (!instance->CheckRequiredBosses(BOSS_YOGGSARON, me->GetEntry(), who->ToPlayer()))
             {
@@ -776,7 +776,7 @@ class boss_yoggsaron : public CreatureScript
                 return;
             }
 
-            _EnterCombat();
+            _JustEngagedWith();
             
             if (instance)
             {
@@ -1101,9 +1101,9 @@ class boss_brain_yoggsaron : public CreatureScript
             }
         }
         
-        void EnterCombat(Unit *who) override
+        void JustEngagedWith(Unit *who) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
         }
 
         void DamageTaken(Unit* /*attacker*/, uint32& damage, DamageEffectType dmgType) override

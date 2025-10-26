@@ -264,7 +264,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* who)
+        void JustEngagedWith(Unit* who)
         {
             events.RescheduleEvent(EVENT_MODULATION, urand(7000, 10000));
             events.RescheduleEvent(EVENT_NEXT_SPELL, 5000);

@@ -1205,10 +1205,10 @@ void InstanceScript::OnCreatureUpdateDifficulty(Creature* creature)
         _challenge->OnCreatureUpdateDifficulty(creature);
 }
 
-void InstanceScript::EnterCombatForScript(Creature* creature, Unit* enemy)
+void InstanceScript::JustEngagedWithForScript(Creature* creature, Unit* enemy)
 {
     if (_challenge)
-        _challenge->EnterCombatForScript(creature, enemy);
+        _challenge->JustEngagedWithForScript(creature, enemy);
 }
 
 void InstanceScript::CreatureDiesForScript(Creature* creature, Unit* killer)

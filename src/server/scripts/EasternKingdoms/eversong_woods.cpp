@@ -163,7 +163,7 @@ public:
           }
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {
@@ -312,7 +312,7 @@ public:
                 paladinGuid[i].Clear();
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void UpdateAI(uint32 diff) override
         {
@@ -474,7 +474,7 @@ public:
             Summon = false;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
 
         void JustSummoned(Creature* summoned) override
         {

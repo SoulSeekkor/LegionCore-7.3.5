@@ -51,9 +51,9 @@ public:
             instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_UNSTABLE_MANA);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             DoCast(me, SPELL_MANA_DEVOURER_ENERGIZE, true);
 
             events.RescheduleEvent(EVENT_ARCANE_BOMB, 8000);

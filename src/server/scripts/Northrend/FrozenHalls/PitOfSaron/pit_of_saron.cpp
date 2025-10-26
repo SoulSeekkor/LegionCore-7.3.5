@@ -59,7 +59,7 @@ class mob_ymirjar_flamebearer : public CreatureScript
                 _events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 _events.ScheduleEvent(EVENT_FIREBALL, 4000);
                 _events.ScheduleEvent(EVENT_TACTICAL_BLINK, 15000);
@@ -125,7 +125,7 @@ class mob_iceborn_protodrake : public CreatureScript
                 _frostBreathCooldown = 5000;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 _vehicle->RemoveAllPassengers();
             }
@@ -173,7 +173,7 @@ class mob_wrathbone_laborer : public CreatureScript
                 _events.Reset();
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 _events.ScheduleEvent(EVENT_BLINDING_DIRT, 8000);
                 _events.ScheduleEvent(EVENT_PUNCTURE_WOUND, 9000);

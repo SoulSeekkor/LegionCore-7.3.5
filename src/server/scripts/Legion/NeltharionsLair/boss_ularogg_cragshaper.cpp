@@ -71,10 +71,10 @@ struct boss_ularogg_cragshaper : public BossAI
         me->RemoveAurasDueToSpell(SPELL_STANCE_MOUNTAIN_TICK);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO); //Pay attention, Navarogg. I want you to see your heroes die.
-        _EnterCombat();
+        _JustEngagedWith();
         DefaultEvent(true);
 
         if (intro)
@@ -86,12 +86,12 @@ struct boss_ularogg_cragshaper : public BossAI
         }
     }
 
-    void DefaultEvent(bool enterCombat)
+    void DefaultEvent(bool JustEngagedWith)
     {
         events.RescheduleEvent(EVENT_SUNDER, 8000);
         events.RescheduleEvent(EVENT_STRIKE_MOUNTAIN, 16000);
         events.RescheduleEvent(EVENT_BELLOW_DEEPS_1, 20000);
-        events.RescheduleEvent(EVENT_STANCE_MOUNTAIN_1, enterCombat ? 50000 : 120000);
+        events.RescheduleEvent(EVENT_STANCE_MOUNTAIN_1, JustEngagedWith ? 50000 : 120000);
     }
 
     void JustDied(Unit* /*killer*/) override
@@ -360,7 +360,7 @@ struct npc_nl_understone_drummer : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (Creature* drums = me->FindNearestCreature(92387, 40.0f, true))
         {

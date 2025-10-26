@@ -86,11 +86,11 @@ public:
             _Reset();
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         //48:11
         {
             Talk(SAY_AGGRO);
-            _EnterCombat();
+            _JustEngagedWith();
 
             events.RescheduleEvent(EVENT_PIERCING_GALE, 6000); //48:17, 48:37, 48:56
             events.RescheduleEvent(EVENT_SLICING_MAELSTROM, 11000); //48:22, 48:43, 49:01
@@ -314,7 +314,7 @@ public:
 
         void Reset() override {}
         
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             Talk(2);
             me->SetDisplayId(66917);

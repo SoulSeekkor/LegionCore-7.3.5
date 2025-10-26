@@ -47,7 +47,7 @@ public:
             Spirit_Timer = 24000;
         }
 
-        void EnterCombat(Unit* /*who*/) {}
+        void JustEngagedWith(Unit* /*who*/) {}
 
         void SummonSpirits(Unit* victim)
         {

@@ -108,7 +108,7 @@ struct boss_mistress_alluradel : public ScriptedAI
         DoCast(SPELL_SADIST);
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_HEART_BREAKER, 4000);
@@ -190,7 +190,7 @@ struct boss_pit_lor_vilemus : public ScriptedAI
         me->RemoveAllAuras();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_FEL_BREATH, 20000);
@@ -253,7 +253,7 @@ struct boss_occularus : public ScriptedAI
         me->RemoveAllAreaObjects();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_SEARING_GAZE, 7000);
@@ -349,7 +349,7 @@ struct boss_inquisitor_meto : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_REAP, 8000);
@@ -437,7 +437,7 @@ struct boss_sotanathor : public ScriptedAI
         ScriptedAI::EnterEvadeMode();
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         events.RescheduleEvent(EVENT_SOUL_CLEAVE, 17000);
@@ -544,7 +544,7 @@ struct boss_matron_folnuna : public ScriptedAI
         slimbering = false;
     }
 
-    void EnterCombat(Unit* /*unit*/) override
+    void JustEngagedWith(Unit* /*unit*/) override
     {
         Talk(SAY_AGGRO);
         DoCast(SPELL_NAUSEA);

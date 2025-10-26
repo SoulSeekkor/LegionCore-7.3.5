@@ -78,13 +78,13 @@ public:
             randDrakePos = 0;
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (encounterComplete)
                 return;
 
             Talk(SAY_AGGRO); //I will be the judge now.
-            _EnterCombat();
+            _JustEngagedWith();
             events.RescheduleEvent(EVENT_HORN_OF_VALOR, 6000);
             events.RescheduleEvent(EVENT_DANCING_BLADE, 15000);
             events.RescheduleEvent(EVENT_BLOODLETTING_SWEEP, 20000);

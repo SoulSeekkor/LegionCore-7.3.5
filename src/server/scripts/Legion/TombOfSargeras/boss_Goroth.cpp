@@ -96,9 +96,9 @@ struct boss_goroth : BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         DoCast(me, SPELL_GOROTH_ENERGIZE, true);
         events.RescheduleEvent(EVENT_BURNING_ARMOR, 10000);
@@ -443,7 +443,7 @@ struct npc_goroth_brimstone_infernal : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
     }

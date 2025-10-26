@@ -86,7 +86,7 @@ struct boss_asaad : public BossAI
         bField = false;
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.ScheduleEvent(EVENT_SUMMON_STAR, urand(10000, 20000));
         events.ScheduleEvent(EVENT_CHAIN_LIGHTNING, urand(5000, 10000));

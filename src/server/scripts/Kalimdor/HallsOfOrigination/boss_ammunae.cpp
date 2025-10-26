@@ -95,7 +95,7 @@ struct boss_ammunae : public BossAI
         Talk(SAY_DEATH);
     }
 
-    void EnterCombat(Unit* /*Ent*/) override
+    void JustEngagedWith(Unit* /*Ent*/) override
     {
         Talk(SAY_AGGRO);
 

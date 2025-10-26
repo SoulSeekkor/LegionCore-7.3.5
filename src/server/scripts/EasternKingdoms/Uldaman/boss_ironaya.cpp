@@ -50,7 +50,7 @@ class boss_ironaya : public CreatureScript
                 bHasCastedWstomp = false;
             }
 
-            void EnterCombat(Unit* /*who*/) override
+            void JustEngagedWith(Unit* /*who*/) override
             {
                 Talk(0);
             }

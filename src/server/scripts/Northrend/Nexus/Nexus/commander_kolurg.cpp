@@ -33,9 +33,9 @@ public:
     {
         boss_nexus_kolurgAI(Creature* creature) : BossAI(creature, DATA_COMMANDER) { }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(SAY_AGGRO);
             me->RemoveAurasDueToSpell(SPELL_FROZEN_PRISON);
             DoCast(me, SPELL_BATTLE_SHOUT);

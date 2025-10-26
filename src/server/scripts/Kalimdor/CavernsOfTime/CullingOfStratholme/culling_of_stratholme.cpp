@@ -443,7 +443,7 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
             DoCast(me, SPELL_ARTHAS_AURA);
         }

@@ -162,13 +162,13 @@ public:
             }
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             Talk(SAY_AGGRO_1);
             events.RescheduleEvent(EVENT_AGGRO, 5000);
             events.RescheduleEvent(EVENT_PIERCING_THROW, 12000);
             events.RescheduleEvent(EVENT_DEATH_BLOSSOM, 18000);
-            _EnterCombat();
+            _JustEngagedWith();
         }
 
         void EnterEvadeMode() override

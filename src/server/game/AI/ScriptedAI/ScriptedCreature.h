@@ -175,7 +175,7 @@ struct ScriptedAI : public CreatureAI
     void Reset() {}
 
     //Called at creature aggro either by MoveInLOS or Attack Start
-    void EnterCombat(Unit* /*victim*/) {}
+    void JustEngagedWith(Unit* /*victim*/) {}
 
     // *************
     //AI Helper Functions
@@ -359,7 +359,7 @@ public:
     virtual void ScheduleTasks() {}
 
     void Reset() override;
-    void EnterCombat(Unit* /*who*/) override;
+    void JustEngagedWith(Unit* /*who*/) override;
     void JustDied(Unit* /*killer*/) override;
     void JustReachedHome() override;
 
@@ -368,7 +368,7 @@ public:
 
 protected:
     void _Reset();
-    void _EnterCombat();
+    void _JustEngagedWith();
     void _JustDied();
     void _JustReachedHome();
 
@@ -415,12 +415,12 @@ class WorldBossAI : public ScriptedAI
         virtual void ExecuteEvent(uint32 const /*eventId*/) { }
 
         void Reset() { _Reset(); }
-        void EnterCombat(Unit* /*who*/) { _EnterCombat(); }
+        void JustEngagedWith(Unit* /*who*/) { _JustEngagedWith(); }
         void JustDied(Unit* /*killer*/) { _JustDied(); }
 
     protected:
         void _Reset();
-        void _EnterCombat();
+        void _JustEngagedWith();
         void _JustDied();
 
         EventMap events;

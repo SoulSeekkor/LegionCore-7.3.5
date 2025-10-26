@@ -114,7 +114,7 @@ public:
                 instance->SetData(DATA_PRINCE_TALDARAM_EVENT, NOT_STARTED);
         }
 
-        void EnterCombat(Unit* /*who*/) override
+        void JustEngagedWith(Unit* /*who*/) override
         {
             if (instance)
                 instance->SetData(DATA_PRINCE_TALDARAM_EVENT, IN_PROGRESS);
@@ -354,7 +354,7 @@ public:
             uiDespawnTimer = 10*IN_MILLISECONDS;
         }
 
-        void EnterCombat(Unit* /*who*/) override {}
+        void JustEngagedWith(Unit* /*who*/) override {}
         void MoveInLineOfSight(Unit* /*who*/) override {}
 
         void JustDied(Unit* /*killer*/) override

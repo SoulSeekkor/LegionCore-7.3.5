@@ -75,9 +75,9 @@ class boss_gatewatcher_gyrokill : public CreatureScript
                 }
             }
 
-            void EnterCombat(Unit* /*who*/)
+            void JustEngagedWith(Unit* /*who*/)
             {
-                _EnterCombat();
+                _JustEngagedWith();
                 events.ScheduleEvent(EVENT_STREAM_OF_MACHINE_FLUID, 10000);
                 events.ScheduleEvent(EVENT_SAW_BLADE, 20000);
                 events.ScheduleEvent(EVENT_SHADOW_POWER, 25000);

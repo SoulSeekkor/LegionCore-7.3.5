@@ -852,7 +852,7 @@ public:
             Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             firstcast = true;
             below_1 = false;
@@ -1038,7 +1038,7 @@ public:
             DoCast(224906);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             DoCast(224910);
             events.ScheduleEvent(EVENT_1, 7000); // 224907
@@ -1607,7 +1607,7 @@ public:
             damage = 0;
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             switch (me->GetEntry())
             {
@@ -1742,7 +1742,7 @@ public:
             me->ClearUnitState(UNIT_STATE_EVADE);
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             switch (me->GetEntry())
             {
@@ -1939,7 +1939,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* victim) override
+        void JustEngagedWith(Unit* victim) override
         {
             sCreatureTextMgr->SendChat(me, TEXT_GENERIC_0);
             DoCast(225099);
@@ -2979,7 +2979,7 @@ public:
             events.Reset();
         }
 
-        void EnterCombat(Unit* who) override
+        void JustEngagedWith(Unit* who) override
         {
             switch (me->GetEntry())
             {

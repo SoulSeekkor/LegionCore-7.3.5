@@ -66,10 +66,10 @@ struct boss_rokmora : public BossAI
         me->SetPower(POWER_MANA, 0);        
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO); //Rok SMASH!
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_GAIN_ENERGY, true);
 
         events.RescheduleEvent(EVENT_RAZOR_SHARDS, 30000);
@@ -223,7 +223,7 @@ struct npc_nl_tarspitter_lurker : public ScriptedAI
         me->CastSpell(me, 226385, true);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(6, 7));
     }
@@ -289,7 +289,7 @@ struct npc_nl_vileshard_hulk : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, 7000);
         events.RescheduleEvent(EVENT_2, 9000);

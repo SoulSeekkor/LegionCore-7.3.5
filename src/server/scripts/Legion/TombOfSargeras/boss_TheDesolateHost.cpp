@@ -420,7 +420,7 @@ struct npc_tos_engine_of_souls : ScriptedAI
         DoCast(me, SPELL_SHARED_HEALTH, true);
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         Talk(SAY_ENGINE_AGGRO);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -537,7 +537,7 @@ struct npc_tos_soul_queen_dejahna : ScriptedAI
         DoCast(me, SPELL_SHARED_HEALTH, true);
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         Talk(SAY_QUEEN_AGGRO);
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
@@ -710,7 +710,7 @@ struct npc_tos_desolate_host : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         instance->SendEncounterUnit(ENCOUNTER_FRAME_ENGAGE, me);
 
@@ -885,7 +885,7 @@ struct npc_tos_reanimated_templar : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         events.RescheduleEvent(EVENT_1, 12000);
 
@@ -990,7 +990,7 @@ struct npc_tos_ghastly_bonewarden : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         events.RescheduleEvent(EVENT_1, 4000);
 
@@ -1103,7 +1103,7 @@ struct npc_tos_fallen_priestess : ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         events.RescheduleEvent(EVENT_1, 4000);
         events.RescheduleEvent(EVENT_2, 14000);
@@ -1208,7 +1208,7 @@ struct npc_tos_soul_residue : ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* who) override
+    void JustEngagedWith(Unit* who) override
     {
         rotTimer = 2000;
         fixateTimer = 1000;

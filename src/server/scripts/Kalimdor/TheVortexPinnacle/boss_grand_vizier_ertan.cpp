@@ -62,7 +62,7 @@ struct boss_grand_vizier_ertan : public BossAI
         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_NOT_SELECTABLE);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         for (uint8 i = 0; i < 8; i++)
         {
@@ -82,7 +82,7 @@ struct boss_grand_vizier_ertan : public BossAI
 
         Talk(SAY_AGGRO);
         DoZoneInCombat();
-        _EnterCombat();
+        _JustEngagedWith();
     }
 
     void KilledUnit(Unit* victim) override

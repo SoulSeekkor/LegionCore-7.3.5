@@ -338,9 +338,9 @@ struct boss_kargath_bladefist : public BossAI
             Talk(Slay);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
 
         Talk(Aggro);
 
@@ -1030,7 +1030,7 @@ struct npc_highmaul_vulgor : public ScriptedAI
         me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_NON_ATTACKABLE);
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         Talk(Aggro);
 
@@ -1260,7 +1260,7 @@ struct npc_highmaul_bladespire_sorcerer : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventMoltenBomb, 5000);
         m_Events.RescheduleEvent(EventFlameBolt, 2000);
@@ -1352,7 +1352,7 @@ struct npc_highmaul_somldering_stoneguard : public ScriptedAI
         m_Events.Reset();
     }
 
-    void EnterCombat(Unit* /*attacker*/) override
+    void JustEngagedWith(Unit* /*attacker*/) override
     {
         m_Events.RescheduleEvent(EventCleave, 2000);
     }

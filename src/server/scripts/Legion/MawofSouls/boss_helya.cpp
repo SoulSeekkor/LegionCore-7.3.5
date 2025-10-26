@@ -312,10 +312,10 @@ struct boss_helya : public BossAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         Talk(SAY_AGGRO);
-        _EnterCombat();
+        _JustEngagedWith();
         events.RescheduleEvent(EVENT_TAINT_SEA, 0);
         events.RescheduleEvent(EVENT_SUM_DESTRUCTOR_TENTACLE, 26000);
         events.RescheduleEvent(EVENT_SUM_PIERCING_TENTACLE, piercingTentacleTimer);
@@ -848,7 +848,7 @@ struct npc_helya_tentacle : public ScriptedAI
 
     void Reset() override {}
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         if (instance && instance->GetBossState(DATA_HELYA) != IN_PROGRESS)
             if (auto helya = instance->instance->GetCreature(instance->GetGuidData(DATA_HELYA)))
@@ -1103,7 +1103,7 @@ struct npc_skyal : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_SUMMON_1, 1000);
         events.RescheduleEvent(EVENT_SUMMON_2, 10000);
@@ -1185,7 +1185,7 @@ struct npc_mos_seacursed_mistmender : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(1, 2));
         events.RescheduleEvent(EVENT_2, 1000);
@@ -1253,7 +1253,7 @@ struct npc_mos_helarjar_mistcaller : public ScriptedAI
         events.Reset();
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         events.RescheduleEvent(EVENT_1, urandms(1, 2));
         events.RescheduleEvent(EVENT_2, urandms(5, 6));

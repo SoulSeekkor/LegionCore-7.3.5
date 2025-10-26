@@ -69,9 +69,9 @@ public:
             DoCast(me, SPELL_DUAL_WIELD, true);
         }
 
-        void EnterCombat(Unit* /*who*/)
+        void JustEngagedWith(Unit* /*who*/)
         {
-            _EnterCombat();
+            _JustEngagedWith();
             Talk(YELL_AGGRO);
             events.RescheduleEvent(EVENT_SLASH,                11000);
             events.RescheduleEvent(EVENT_STOMP,                30000);

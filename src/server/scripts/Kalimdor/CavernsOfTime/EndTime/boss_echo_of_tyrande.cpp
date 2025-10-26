@@ -189,9 +189,9 @@ struct boss_echo_of_tyrande : public BossAI
                     me->InterruptSpell(CURRENT_GENERIC_SPELL);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
-        _EnterCombat();
+        _JustEngagedWith();
         Talk(SAY_AGGRO);
 
         phase = 0;

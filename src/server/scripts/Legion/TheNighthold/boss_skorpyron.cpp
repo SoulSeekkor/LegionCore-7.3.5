@@ -106,9 +106,9 @@ struct boss_skorpyron : BossAI
         colorMod = BLUE_MODE;
     }
 
-    void EnterCombat(Unit* /*who*/) override //37:22
+    void JustEngagedWith(Unit* /*who*/) override //37:22
     {
-        _EnterCombat();
+        _JustEngagedWith();
         DoCast(me, SPELL_ENERGIZE, true);
         DoCast(me, SPELL_EXOSKELETON, true);
         CallScorpions(true, 0);
@@ -426,7 +426,7 @@ struct npc_skorpyron_generic_scorp : public ScriptedAI
         DoCast(me, SPELL_SHROUDED, true);
     }
 
-    void EnterCombat(Unit* /*who*/) override
+    void JustEngagedWith(Unit* /*who*/) override
     {
         switch (me->GetEntry())
         {
