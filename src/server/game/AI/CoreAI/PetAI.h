@@ -60,6 +60,8 @@ private:
     void HandleReturnMovement();
     void DoAttack(Unit* target, bool chase);
     bool CanAttack(Unit* target);
+    // Quick access to set all flags to FALSE
+    void ClearCharmInfoFlags();
 };
 #endif
 

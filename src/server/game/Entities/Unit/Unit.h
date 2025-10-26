@@ -25,7 +25,6 @@
 #include "FollowerReference.h"
 #include "FollowerRefManager.h"
 #include "FunctionProcessor.h"
-#include "HostileRefManager.h"
 #include "MotionMaster.h"
 #include "Object.h"
 #include "SharedDefines.h"

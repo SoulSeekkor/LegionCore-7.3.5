@@ -599,10 +599,22 @@ class Creature : public Unit, public GridObject<Creature>, public MapObject
         bool CanShared()  const { return GetCreatureTemplate()->QuestPersonalLoot; }
         bool IsIgnoreLos() const { return GetCreatureTemplate()->IgnoreLos; }
 
+        Unit* SelectVictim();
+
         void SetReactState(ReactStates st, uint32 delay = 0);
         ReactStates GetReactState();
         bool HasReactState(ReactStates state) const;
         void InitializeReactState();
+
+        using Unit::IsImmuneToAll;
+        using Unit::SetImmuneToAll;
+        void SetImmuneToAll(bool apply) override { Unit::SetImmuneToAll(apply, HasReactState(REACT_PASSIVE)); }
+        using Unit::IsImmuneToPC;
+        using Unit::SetImmuneToPC;
+        void SetImmuneToPC(bool apply) override { Unit::SetImmuneToPC(apply, HasReactState(REACT_PASSIVE)); }
+        using Unit::IsImmuneToNPC;
+        using Unit::SetImmuneToNPC;
+        void SetImmuneToNPC(bool apply) override { Unit::SetImmuneToNPC(apply, HasReactState(REACT_PASSIVE)); }
 
         ///// TODO RENAME THIS!!!!!
         bool isCanTrainingOf(Player* player, bool msg) const;
@@ -814,8 +826,6 @@ class Creature : public Unit, public GridObject<Creature>, public MapObject
         CreatureGroup* GetFormation() {return m_formation;}
         void SetFormation(CreatureGroup* formation) {m_formation = formation;}
 
-        Unit* SelectVictim();
-
         void SetDisableReputationGain(bool disable) { DisableReputationGain = disable; }
         bool IsReputationGainDisabled() { return DisableReputationGain; }
         bool IsDamageEnoughForLootingAndReward() const { return m_PlayerDamageReq > 0; }
@@ -889,6 +899,9 @@ class Creature : public Unit, public GridObject<Creature>, public MapObject
         uint8 m_callAssistanceText;
 
         bool DistanceCheck() override;
+
+        void AtEnterCombat() override;
+        void AtExitCombat() override;
 
     protected:
         bool m_onVehicleAccessory;

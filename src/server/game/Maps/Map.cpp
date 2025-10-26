@@ -1070,7 +1070,7 @@ void Map::Update(const uint32 t_diff)
 
             WorldSession* session = player->GetSession();
             m_currentSession = session;
-            if (!session || session->PlayerLoading() || session->PlayerLogout()) // Prevent update if player not in map fulling
+            if (!session || session->PlayerLoading() || session->PlayerLogout()) // Prevent update if player not in map fully
                 continue;
 
             if (player->IsChangeMap() || player->GetMap() != this || session->GetMap() != this)
@@ -1374,6 +1374,8 @@ void Map::RemovePlayerFromMap(Player* player, bool remove)
 
     if (InstanceScript* data_s = player->GetInstanceScript())
         data_s->OnPlayerLeaveForScript(player);
+
+    player->CombatStop();
 
     player->RemoveFromWorld();
     if (!remove)

@@ -1591,6 +1591,8 @@ bool Pet::Create(ObjectGuid::LowType const& guidlow, Map* map, uint32 phaseMask,
 
     SetSheath(SHEATH_STATE_MELEE);
 
+    GetThreatManager().Initialize();
+
     return true;
 }
 

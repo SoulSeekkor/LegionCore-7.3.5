@@ -104,7 +104,6 @@ void PetAI::_stopAttack()
         me->GetMotionMaster()->Clear();
         me->GetMotionMaster()->MoveIdle();
         me->CombatStop();
-        me->getHostileRefManager().deleteReferences();
         return;
     }
 
@@ -509,6 +508,8 @@ void PetAI::HandleReturnMovement()
             }
         }
     }
+
+    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PET_IN_COMBAT); // on player pets, this flag indicates that we're actively going after a target - we're returning, so remove it
 }
 
 void PetAI::DoAttack(Unit* target, bool chase)
@@ -521,6 +522,31 @@ void PetAI::DoAttack(Unit* target, bool chase)
     // The following conditions are true if chase == true
     // (Follow && (Aggressive || Defensive))
     // ((Stay || Follow) && (Passive && player clicked attack))
+
+    if (me->Attack(target, true))
+    {
+        me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PET_IN_COMBAT); // on player pets, this flag indicates we're actively going after a target - that's what we're doing, so set it
+        // Play sound to let the player know the pet is attacking something it picked on its own
+        if (me->HasReactState(REACT_AGGRESSIVE) && !me->GetCharmInfo()->IsCommandAttack())
+            me->SendPetAIReaction(me->GetGUID());
+
+        if (chase)
+        {
+            bool oldCmdAttack = me->GetCharmInfo()->IsCommandAttack(); // This needs to be reset after other flags are cleared
+            ClearCharmInfoFlags();
+            me->GetCharmInfo()->SetIsCommandAttack(oldCmdAttack); // For passive pets commanded to attack so they will use spells
+            me->GetMotionMaster()->Clear();
+            me->GetMotionMaster()->MoveChase(target, me->GetAttackDist() - 0.5f);
+        }
+        else // (Stay && ((Aggressive || Defensive) && In Melee Range)))
+        {
+            ClearCharmInfoFlags();
+            me->GetCharmInfo()->SetIsAtStay(true);
+            me->GetMotionMaster()->Clear();
+            me->GetMotionMaster()->MoveIdle();
+        }
+    }
+
 
     if (chase)
     {
@@ -647,4 +673,17 @@ void PetAI::ReceiveEmote(Player* player, uint32 emote)
                 me->HandleEmoteCommand(EMOTE_ONESHOT_OMNICAST_GHOUL);
             break;
         }
+}
+
+void PetAI::ClearCharmInfoFlags()
+{
+    CharmInfo* ci = me->GetCharmInfo();
+    if (ci)
+    {
+        ci->SetIsAtStay(false);
+        ci->SetIsCommandAttack(false);
+        ci->SetIsCommandFollow(false);
+        ci->SetIsFollowing(false);
+        ci->SetIsReturning(false);
+    }
 }

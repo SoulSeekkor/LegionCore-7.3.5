@@ -706,7 +706,6 @@ void Battleground::EndBattleground(uint32 winner)
         else
         {
             player->CombatStop();
-            player->getHostileRefManager().deleteReferences();
         }
 
         uint32 team = itr.second.Team;

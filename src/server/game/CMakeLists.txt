@@ -22,7 +22,7 @@ GroupSources(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(game
   ${PRIVATE_SOURCES}
-)
+ "Combat/CombatManager.cpp")
 
 CollectIncludeDirectories(
   ${CMAKE_CURRENT_SOURCE_DIR}
