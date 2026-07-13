@@ -13,7 +13,7 @@
 #                     It must be the same in bnetserver.conf and in worldserver.conf. 
 #
 #   Available builds: 26124, 26365, 26654, 26822, 26899, 26972
-#            Default: 26124
+#            Default: 26365
 
 Game.Build.Version = 26365
 
@@ -52,7 +52,7 @@ DataDir = "../data"
 #    LogsDir
 #        Description: Logs directory setting.
 #        Important:   LogsDir needs to be quoted, as the string might contain space characters.
-#                     Logs directory must exists, or log file creation will be disabled.
+#                     Logs directory must exist, or log file creation will be disabled.
 #        Default:     "../logs"
 
 LogsDir = "../logs"
@@ -85,7 +85,7 @@ WorldDatabaseInfo     = "127.0.0.1;3306;root;admin;legioncore_world"
 #    CharacterDatabase.WorkerThreads
 #    HotfixDatabase.WorkerThreads
 #    WorldDatabase.WorkerThreads
-#        Description: The amount of worker threads spawned to handle asynchronous (delayed) MySQL
+#        Description: The number of worker threads spawned to handle asynchronous (delayed) MySQL
 #                     statements. Each worker thread is mirrored with its own connection to the
 #                     MySQL server and their own thread on the MySQL server.
 #        Default:     1 - (LoginDatabase.WorkerThreads)
@@ -103,7 +103,7 @@ WorldDatabase.WorkerThreads     = 1
 #    CharacterDatabase.SynchThreads
 #    HotfixDatabase.SynchThreads
 #    WorldDatabase.SynchThreads
-#        Description: The amount of MySQL connections spawned to handle.
+#        Description: The number of MySQL connections spawned to handle.
 #        Default:     1 - (LoginDatabase.WorkerThreads)
 #                     1 - (CharacterDatabase.WorkerThreads)
 #                     1 - (HotfixDatabase.WorkerThreads)
@@ -418,7 +418,7 @@ DetectPosCollision = 1
 
 #
 #    TargetPosRecalculateRange
-#        Description: Max distance from movement target point (+moving unit size) and targeted
+#        Description: Maximum distance from movement target point (+moving unit size) and targeted
 #                     object (+size) after that new target movement point calculated.
 #        Range:       0.5-5.0
 #        Default:     1.5
@@ -661,7 +661,7 @@ MinPetName = 2
 
 #
 #    MaxWhoListReturns
-#        Description: Set the max number of players returned in the /who list and interface.
+#        Description: Set the maximum number of players returned in the /who list and interface.
 #        Default:     49 - (stable)
 
 MaxWhoListReturns = 49
@@ -1114,14 +1114,14 @@ DBC.EnforceItemAttributes = 1
 
 #
 #   AccountInstancesPerHour
-#        Description: Controls the max amount of different instances player can enter within hour
+#        Description: Controls the maximum number of individual instances player can enter per hour.
 #        Default:     5
 
 AccountInstancesPerHour = 5
 
 #
 #   MaxAccountsOnline
-#        Description: Maximum number of account that can be online concurrently, additional logins
+#        Description: Maximum number of accounts that can be online concurrently, additional logins
 #                     will be placed in a queue till a spot becomes available.
 #        Default:     1000
 
@@ -1446,6 +1446,15 @@ AllowTwoSide.Interaction.Guild = 0
 #
 #    AllowTwoSide.Interaction.Auction
 #        Description: Allow auctions between factions.
+#                     This results in all auctions being handled as if placed in the neutral
+#                     auction house and will intentionally lock access to the Horde and Alliance AH.
+#                     Deposit fee and auction cut values will be taken from neutral auction house.
+#                     If used in combination with the AH-Bot, settings should be set for neutral
+#                     auction house only.
+#
+#                     Warning: changing this in production results in players losing access to their
+#                     already placed auctions in the faction houses - these auctions will expire after
+#                     their regular timings.
 #        Default:     0 - (Disabled)
 #                     1 - (Enabled)
 
@@ -2852,7 +2861,7 @@ AuctionHouseBot.Buyer.ChanceFactor = 2
 
 #
 #    AuctionHouseBot.Buyer.Baseprice.QUALITY
-#       Description: Base sell prices in copper for non priced items for each quality.
+#       Description: Base sell prices in copper for non-priced items for each quality.
 #                    The default values are based on average item prices of each quality.
 #       Defaults:    Gray   3504
 #                    White  5429
@@ -3013,18 +3022,18 @@ DungeonBalance.PlayerChangeNotify = 1
 #                          w - (Overwrite)
 #
 
-Appender.Console  =1,1,2,1 1 9 10 3 8
-Appender.World    =2,1,2,World.log,w
-Appender.Pdump    =2,1,0,Pdump.log,w
-Appender.Errors   =2,5,0,Errors.log,w
-Appender.DBErrors =2,5,0,DBErrors.log,w
+Appender.Console  = 1,1,2,1 1 9 10 3 8
+Appender.World    = 2,1,2,World.log,w
+Appender.Pdump    = 2,1,0,Pdump.log,w
+Appender.Errors   = 2,5,0,Errors.log,w
+Appender.DBErrors = 2,5,0,DBErrors.log,w
 
 #    Appenders
 #        Description: List of Appenders to read from config
 #                     (Using spaces as separator).
 #        Default:     "Console World Errors DBErrors"
 
-Appenders=Console World Pdump Errors DBErrors
+Appenders = Console World Pdump Errors DBErrors
 
 #  Logger config values: Given a logger "name"
 #    Logger.name
@@ -3102,58 +3111,58 @@ Appenders=Console World Pdump Errors DBErrors
 #                     (Using spaces as separator).
 #
 
-Logger.GENERAL             = 0,0,Console World Errors
-Logger.UNITS               = 1,0,Console World Errors
-Logger.PETS                = 2,0,Console World Errors
-Logger.VEHICLES            = 3,0,Console World Errors
-Logger.TSCR                = 4,0,Console World Errors
-Logger.DATABASE_AI         = 5,0,Console World Errors
-Logger.MAPSCRIPTS          = 6,0,Console World Errors
-Logger.NETWORKIO           = 7,0,Console World Errors
-Logger.SPELLS_AURAS        = 8,0,Console World Errors
-Logger.ACHIEVEMENTSYS      = 9,0,Console World Errors
-Logger.CONDITIONSYS        = 10,0,Console World Errors
-Logger.POOLSYS             = 11,0,Console World Errors
-Logger.AUCTIONHOUSE        = 12,0,Console World Errors
-Logger.BATTLEGROUND        = 13,0,Console World Errors
-Logger.OUTDOORPVP          = 14,0,Console World Errors
-Logger.CHATSYS             = 15,0,Console World Errors
-Logger.LFG                 = 16,0,Console World Errors
-Logger.MAPS                = 17,0,Console World Errors
-Logger.PLAYER              = 18,0,Console World Errors
-Logger.PLAYER_LOADING      = 19,0,Console World Errors
-Logger.PLAYER_ITEMS        = 20,0,Console World Errors
-Logger.PLAYER_SKILLS       = 21,0,Console World Errors
-Logger.PLAYER_CHATLOG      = 22,0,Console World Errors
-Logger.LOOT                = 23,0,Console World Errors
-Logger.GUILD               = 24,0,Console World Errors
-Logger.TRANSPORTS          = 25,0,Console World Errors
-Logger.SQL                 = 26,5,Console World DBErrors
-Logger.GMCOMMAND           = 27,0,Console World Errors
-Logger.REMOTECOMMAND       = 28,0,Console World Errors
-Logger.WARDEN              = 29,0,Console World Errors
-Logger.WORLDSERVER         = 31,3,Console World Errors
-Logger.GAMEEVENTS          = 32,0,Console World Errors
-Logger.CALENDAR            = 33,0,Console World Errors
-Logger.CHARACTER           = 34,0,Console World Errors
-Logger.SQL_DRIVER          = 36,5,Console World Errors
-Logger.SQL_DEV             = 37,5,Console World Errors
-Logger.PLAYER_DUMP         = 38,3,Pdump
-Logger.BATTLEFIELD         = 39,0,Console World Errors
-Logger.SERVER_LOADING      = 40,3,Console World Errors
-Logger.OPCODES             = 41,0,Console World Errors
-Logger.PROC                = 48,0,Console World Errors
-Logger.DONATE              = 50,0,Console World Errors
-Logger.BATTLEPET           = 51,0,Console World Errors
-Logger.PROTOBUF            = 52,0,Console World Errors
-Logger.AREATRIGGER         = 53,0,Console World Errors
-Logger.GOLD                = 54,0,Console World Errors
-Logger.WORLD_QUEST         = 55,0,Console World Errors
-Logger.CHALLENGE           = 56,0,Console World Errors
-Logger.PATH_GENERATOR      = 58,0,Console World Errors
-Logger.MMAPS               = 59,0,Console World Errors
-Logger.VMAPS               = 60,0,Console World Errors
-Logger.DUNGEONBALANCE      = 61,5,Console World Errors
+Logger.GENERAL        = 0,0,Console World Errors
+Logger.UNITS          = 1,0,Console World Errors
+Logger.PETS           = 2,0,Console World Errors
+Logger.VEHICLES       = 3,0,Console World Errors
+Logger.TSCR           = 4,0,Console World Errors
+Logger.DATABASE_AI    = 5,0,Console World Errors
+Logger.MAPSCRIPTS     = 6,0,Console World Errors
+Logger.NETWORKIO      = 7,0,Console World Errors
+Logger.SPELLS_AURAS   = 8,0,Console World Errors
+Logger.ACHIEVEMENTSYS = 9,0,Console World Errors
+Logger.CONDITIONSYS   = 10,0,Console World Errors
+Logger.POOLSYS        = 11,0,Console World Errors
+Logger.AUCTIONHOUSE   = 12,0,Console World Errors
+Logger.BATTLEGROUND   = 13,0,Console World Errors
+Logger.OUTDOORPVP     = 14,0,Console World Errors
+Logger.CHATSYS        = 15,0,Console World Errors
+Logger.LFG            = 16,0,Console World Errors
+Logger.MAPS           = 17,0,Console World Errors
+Logger.PLAYER         = 18,0,Console World Errors
+Logger.PLAYER_LOADING = 19,0,Console World Errors
+Logger.PLAYER_ITEMS   = 20,0,Console World Errors
+Logger.PLAYER_SKILLS  = 21,0,Console World Errors
+Logger.PLAYER_CHATLOG = 22,0,Console World Errors
+Logger.LOOT           = 23,0,Console World Errors
+Logger.GUILD          = 24,0,Console World Errors
+Logger.TRANSPORTS     = 25,0,Console World Errors
+Logger.SQL            = 26,5,Console World DBErrors
+Logger.GMCOMMAND      = 27,0,Console World Errors
+Logger.REMOTECOMMAND  = 28,0,Console World Errors
+Logger.WARDEN         = 29,0,Console World Errors
+Logger.WORLDSERVER    = 31,3,Console World Errors
+Logger.GAMEEVENTS     = 32,0,Console World Errors
+Logger.CALENDAR       = 33,0,Console World Errors
+Logger.CHARACTER      = 34,0,Console World Errors
+Logger.SQL_DRIVER     = 36,5,Console World Errors
+Logger.SQL_DEV        = 37,5,Console World Errors
+Logger.PLAYER_DUMP    = 38,3,Pdump
+Logger.BATTLEFIELD    = 39,0,Console World Errors
+Logger.SERVER_LOADING = 40,3,Console World Errors
+Logger.OPCODES        = 41,0,Console World Errors
+Logger.PROC           = 48,0,Console World Errors
+Logger.DONATE         = 50,0,Console World Errors
+Logger.BATTLEPET      = 51,0,Console World Errors
+Logger.PROTOBUF       = 52,0,Console World Errors
+Logger.AREATRIGGER    = 53,0,Console World Errors
+Logger.GOLD           = 54,0,Console World Errors
+Logger.WORLD_QUEST    = 55,0,Console World Errors
+Logger.CHALLENGE      = 56,0,Console World Errors
+Logger.PATH_GENERATOR = 58,0,Console World Errors
+Logger.MMAPS          = 59,0,Console World Errors
+Logger.VMAPS          = 60,0,Console World Errors
+Logger.DUNGEONBALANCE = 61,5,Console World Errors
 
 #
 #    Loggers
@@ -3161,7 +3170,7 @@ Logger.DUNGEONBALANCE      = 61,5,Console World Errors
 #                     (Using spaces as separator).
 #        Default:     "GENERAL UNITS PETS VEHICLES TSCR DATABASE_AI MAPSCRIPTS NETWORKIO SPELLS_AURAS ACHIEVEMENTSYS CONDITIONSYS POOLSYS AUCTIONHOUSE BATTLEGROUND OUTDOORPVP CHATSYS LFG MAPS PLAYER PLAYER_LOADING PLAYER_ITEMS PLAYER_SKILLS PLAYER_CHATLOG LOOT GUILD TRANSPORTS SQL GMCOMMAND REMOTECOMMAND WARDEN WORLDSERVER GAMEEVENTS CALENDAR CHARACTER SQL_DRIVER SQL_DEV PLAYER_DUMP BATTLEFIELD SERVER_LOADING OPCODES PROC DONATE BATTLEPET PROTOBUF AREATRIGGER GOLD WORLD_QUEST CHALLENGE PATH_GENERATOR MMAPS VMAPS DUNGEONBALANCE"
 
-Loggers=GENERAL UNITS PETS VEHICLES TSCR DATABASE_AI MAPSCRIPTS NETWORKIO SPELLS_AURAS ACHIEVEMENTSYS CONDITIONSYS POOLSYS AUCTIONHOUSE BATTLEGROUND OUTDOORPVP CHATSYS LFG MAPS PLAYER PLAYER_LOADING PLAYER_ITEMS PLAYER_SKILLS PLAYER_CHATLOG LOOT GUILD TRANSPORTS SQL GMCOMMAND REMOTECOMMAND WARDEN WORLDSERVER GAMEEVENTS CALENDAR CHARACTER SQL_DRIVER SQL_DEV PLAYER_DUMP BATTLEFIELD SERVER_LOADING OPCODES PROC DONATE BATTLEPET PROTOBUF AREATRIGGER GOLD WORLD_QUEST CHALLENGE PATH_GENERATOR MMAPS VMAPS DUNGEONBALANCE
+Loggers = GENERAL UNITS PETS VEHICLES TSCR DATABASE_AI MAPSCRIPTS NETWORKIO SPELLS_AURAS ACHIEVEMENTSYS CONDITIONSYS POOLSYS AUCTIONHOUSE BATTLEGROUND OUTDOORPVP CHATSYS LFG MAPS PLAYER PLAYER_LOADING PLAYER_ITEMS PLAYER_SKILLS PLAYER_CHATLOG LOOT GUILD TRANSPORTS SQL GMCOMMAND REMOTECOMMAND WARDEN WORLDSERVER GAMEEVENTS CALENDAR CHARACTER SQL_DRIVER SQL_DEV PLAYER_DUMP BATTLEFIELD SERVER_LOADING OPCODES PROC DONATE BATTLEPET PROTOBUF AREATRIGGER GOLD WORLD_QUEST CHALLENGE PATH_GENERATOR MMAPS VMAPS DUNGEONBALANCE
 
 #
 #    QuestPOI.DisableErrors

@@ -13,9 +13,9 @@
 #                     It must be the same in bnetserver.conf and in worldserver.conf. 
 #
 #   Available builds: 26124, 26365, 26654, 26822, 26899, 26972
-#            Default: 26124
+#            Default: 26365
 
-Game.Build.Version = 26972
+Game.Build.Version = 26365
 
 #
 ###################################################################################################
@@ -26,7 +26,7 @@ Game.Build.Version = 26972
 #    LogsDir
 #        Description: Logs directory setting.
 #        Important:   LogsDir needs to be quoted, as the string might contain space characters.
-#                     Logs directory must exists, or log file creation will be disabled.
+#                     Logs directory must exist, or log file creation will be disabled.
 #        Default:     "./Data/Logs"
 
 LogsDir = "./Data/Logs"
@@ -58,8 +58,8 @@ BattlenetPort = 1119
 #
 
 LoginREST.Port = 8081
-LoginREST.ExternalAddress=127.0.0.1
-LoginREST.LocalAddress=127.0.0.1
+LoginREST.ExternalAddress = 127.0.0.1
+LoginREST.LocalAddress = 127.0.0.1
 
 #
 #
@@ -82,7 +82,8 @@ UseProcessors = 0
 #
 #    ProcessPriority
 #        Description: Process priority setting for Windows and Linux based systems.
-#        Details:     On Linux, a nice value of -15 is used. (requires superuser). On Windows, process is set to HIGH class.
+#        Details:     On Linux, a nice value of -15 is used (requires superuser).
+#                     On Windows, process is set to HIGH class.
 #        Default:     0 - (Normal)
 #                     1 - (High)
 
@@ -151,8 +152,9 @@ LoginDatabaseInfo = "127.0.0.1;3306;root;admin;legioncore_auth"
 
 #
 #    LoginDatabase.WorkerThreads
-#        Description: The amount of worker threads spawned to handle asynchronous (delayed) MySQL
+#        Description: The number of worker threads spawned to handle asynchronous (delayed) MySQL
 #                     statements. Each worker thread is mirrored with its own connection to the
+#                     MySQL server and their own thread on the MySQL server.
 #        Default:     1
 
 LoginDatabase.WorkerThreads = 1
@@ -221,15 +223,15 @@ LoginDatabase.WorkerThreads = 1
 #                          w - (Overwrite)
 #
 
-Appender.Console =1,1,2,1 1 9 10 3 8
-Appender.Bnet    =2,1,3,Bnet.log,w
+Appender.Console = 1,1,2,1 1 9 10 3 8
+Appender.Bnet    = 2,1,3,Bnet.log,w
 
 #    Appenders
 #        Description: List of Appenders to read from config
 #                     (Using spaces as separator).
 #        Default:     "Console Bnet"
 
-Appenders=Console Bnet
+Appenders = Console Bnet
 
 #  Logger config values: Given a logger "name"
 #    Logger.name
@@ -261,14 +263,14 @@ Appenders=Console Bnet
 #                     (Using spaces as separator).
 #
 
-Logger.GENERAL             = 0, 5,Console Bnet
-Logger.NETWORKIO           = 7, 5,Console Bnet
-Logger.SQL                 = 26,5,Console Bnet
-Logger.SQL_DRIVER          = 36,5,Console Bnet
-Logger.SQL_DEV             = 37,5,Console Bnet
-Logger.REALMLIST           = 44,3,Console Bnet
-Logger.BATTLENET           = 45,3,Console Bnet
-Logger.BNET_SESSION        = 47,3,Console Bnet
+Logger.GENERAL      = 0, 5,Console Bnet
+Logger.NETWORKIO    = 7, 5,Console Bnet
+Logger.SQL          = 26,5,Console Bnet
+Logger.SQL_DRIVER   = 36,5,Console Bnet
+Logger.SQL_DEV      = 37,5,Console Bnet
+Logger.REALMLIST    = 44,3,Console Bnet
+Logger.BATTLENET    = 45,3,Console Bnet
+Logger.BNET_SESSION = 47,3,Console Bnet
 
 #
 #    Loggers
@@ -276,8 +278,7 @@ Logger.BNET_SESSION        = 47,3,Console Bnet
 #                     (Using spaces as separator).
 #        Default:     "GENERAL NETWORKIO SQL SQL_DRIVER SQL_DEV REALMLIST BATTLENET BNET_SESSION"
 
-Loggers=GENERAL NETWORKIO SQL SQL_DRIVER SQL_DEV REALMLIST BATTLENET BNET_SESSION
+Loggers = GENERAL NETWORKIO SQL SQL_DRIVER SQL_DEV REALMLIST BATTLENET BNET_SESSION
 
 #
 ###################################################################################################
-
