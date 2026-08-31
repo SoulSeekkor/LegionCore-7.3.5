@@ -1,0 +1,16 @@
+{
+  "version": 4,
+  "configurePresets": [
+    {
+      "name": "MyCustomPreset",
+      "displayName": "My Project Configure Preset",
+      "description": "Sets custom environment variables.",
+      "environment": {
+        "BOOST_ROOT": "c:\\local\\boost_1_65_1",
+        "OPENSSL_INCLUDE_DIR": "C:\\local\\openssl_1.1.1w\\x64\\include"
+      },
+      "generator": "Ninja"
+      // ... other configuration options
+    }
+  ]
+}
